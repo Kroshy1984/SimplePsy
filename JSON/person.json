@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Клиент",
+  "additionalProperties": false,
+  "properties": {
+    "clientType": {
+      "type": "string",
+      "description": "Тип клиента",
+      "enum": [
+            "Взрослый",
+            "Ребенок",
+            "Пара или семья"
+          ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Имя",
+      "maxLength": 255,
+      "pattern": "^[A-Z]+*[a-z]$"
+    },
+    "surname": {
+      "type": "string",
+      "description": "Фамилия",
+      "maxLength": 255,
+      "pattern": "^[A-Z]+*[a-z]$"
+    },
+    "middleName": {
+      "type": "string",
+      "description": "Отчество",
+      "maxLength": 255,
+      "pattern": "^[A-Z]+*[a-z]$"
+    },
+    "contact": {
+      "$ref": "#/definitions/contact_type"
+    },
+    "listOfDocs": {
+      "$ref": "#/definitions/docs_type"
+    }
+  },
+  "required": [
+    "name",
+    "surname",
+    "address",
+    "listOfDocs"
+  ],
+  "definitions": {
+    "contact_type": {
+      "type": "object",
+      "description": "Адрес клиента",
+      "additionalProperties": false,
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Страна",
+          "enum": [
+            "Россия",
+            "Украина",
+            "Белорусь"
+          ]
+        },
+        "city": {
+          "type": "string",
+          "description": "Город"
+        },
+        "addressLine": {
+          "type": "string",
+          "description": "адресная строка"
+        }
+      }
+    },
+    "docs_type": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 255,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Название",
+            "enum": [
+              "Паспорт",
+              "Водительские права"
+            ]
+          },
+          "number": {
+            "type": "string",
+            "description": "Номер"
+          },
+          "serial": {
+            "type": "string",
+            "description": "Серия"
+          }
+        },
+        "required": [
+          "name",
+          "number",
+          "serial"
+        ]
+      }
+    }
+  }
+}
