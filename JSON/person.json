@@ -50,22 +50,17 @@
       "description": "Адрес клиента",
       "additionalProperties": false,
       "properties": {
-        "country": {
+        "phone": {
           "type": "string",
-          "description": "Страна",
-          "enum": [
-            "Россия",
-            "Украина",
-            "Белорусь"
-          ]
+          "description": "Номер телефона",
+          "maxLength": 12,
+          "pattern": "^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$"
         },
-        "city": {
+       "email": {
           "type": "string",
-          "description": "Город"
-        },
-        "addressLine": {
-          "type": "string",
-          "description": "адресная строка"
+          "description": "электронная почта",
+          "maxLength": 320,
+          "pattern": "^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"
         }
       }
     },
