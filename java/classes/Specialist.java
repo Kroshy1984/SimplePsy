@@ -7,25 +7,22 @@ public class Specialist {
     private final String id;
     private final String name;
     private final String surname;
+    private final String specialization;
     private String status;
-    private String specialization;
     private List<String> certificates;
     private List<String> contacts;
     private int workExperience;
     private double rating;
 
-    public Specialist(String id, String name, String surname) {
+    public Specialist(String id, String name, String surname, String specialization) {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.specialization = specialization;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
     }
 
     public void setCertificates(List<String> certificates) {
