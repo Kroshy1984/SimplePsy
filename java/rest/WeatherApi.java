@@ -5,11 +5,19 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.SQLException;
 import java.util.Map;
 
 public class WeatherApi {
 
+    /**
+     * Базовый URL запроса
+     */
     private final String base;
+
+    /**
+     * API ключ для доступа к функцианалу сервиса
+     */
     private final String apiKey;
 
     public WeatherApi(String base, String apiKey) {
@@ -34,6 +42,14 @@ public class WeatherApi {
         return base + "/" + resource + "." + fmt + "?" + query;
     }
 
+    /**
+     * Подробную информацию о возможных запросах
+     * можно найти на <a href="https://www.weatherapi.com/docs">сайте документации</a>
+     *
+     * @param resource интересуемый нас функционал сервиса
+     * @param fmt формат ответа (JSON/XML)
+     * @param params параметры запроса (q, day, aqi, ...)
+     */
     public void sendRequest(String resource, String fmt, Map<String, String> params)
             throws IOException, InterruptedException {
         String query = constructQuery(params);

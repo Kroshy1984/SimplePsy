@@ -7,8 +7,8 @@ import java.util.Map;
 public class PsyApp {
 
     public static void main(String[] args) {
-        String baseUrl = "http://api.weatherapi.com/v1";
-        String apiKey = "3e00ce72746340598f371039230203";
+        String baseUrl = "http://api.weatherapi.com/v1"; //протокол + хост + версия апи
+        String apiKey = "3e00ce72746340598f371039230203"; //задаем апи ключ
 
         WeatherApi api = new WeatherApi(baseUrl, apiKey);
 
