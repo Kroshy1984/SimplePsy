@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Specialist {
 
-    private final String id;
-    private final String name;
-    private final String surname;
-    private final String specialization;
-    private String status;
-    private List<String> certificates;
-    private List<String> contacts;
-    private int workExperience;
-    private double rating;
+    private final String id; // идентификатор
+    private final String name;// имя
+    private final String surname;//фамилия
+    private final String specialization;// специализация
+    private String status; //статус
+    private List<String> certificates;//наличие сертификатов
+    private List<String> contacts;//контакты
+    private int workExperience;//опыт
+    private double rating;//rating
 
     public Specialist(String id, String name, String surname, String specialization) {
         this.id = id;
