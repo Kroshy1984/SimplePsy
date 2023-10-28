@@ -1,4 +1,4 @@
-package specialist;
+package classes.specialist;
 
 import java.time.LocalDate;
 
@@ -8,10 +8,10 @@ public class Certificate {
     private final LocalDate date; //дата вручения
     private final String theme; //тема
 
-    public Certificate(String number, LocalDate date, String specialization) {
+    public Certificate(String number, LocalDate date, String theme) {
         this.number = number;
         this.date = date;
-        this.theme = specialization;
+        this.theme = theme;
     }
 
     private String getNumber() {
@@ -22,7 +22,7 @@ public class Certificate {
         return date;
     }
 
-    private String getSpecialization() {
+    private String getTheme() {
         return theme;
     }
 }
