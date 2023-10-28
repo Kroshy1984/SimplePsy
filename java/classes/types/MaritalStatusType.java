@@ -1,5 +1,5 @@
 
-package classes.client.types;
+package classes.types;
 
 
 public enum MaritalStatusType{

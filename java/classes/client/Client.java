@@ -1,6 +1,8 @@
-
 package classes.client;
 
+import classes.Contact;
+import classes.Doc;
+import classes.types.*;
 
 public class Client{
 

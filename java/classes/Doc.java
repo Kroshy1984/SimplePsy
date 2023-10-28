@@ -1,6 +1,6 @@
+package classes;
 
-package classes.client;
-
+import classes.types.NameDocType;
 
 public class Doc{
 
