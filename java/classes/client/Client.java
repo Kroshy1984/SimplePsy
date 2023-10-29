@@ -1,6 +1,8 @@
 
 package classes.client;
-
+import classes.Problem;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Client{
 
@@ -28,6 +30,8 @@ public class Client{
     private GenderType genderType;
     private MaritalStatusType maritalStatusType;
 
+    private Set<Problem> problems = new HashSet<>();
+
     public Client(String name, String surname, String address, Doc doc){
     
         setName(name);
@@ -35,6 +39,14 @@ public class Client{
         setMeetingAddres(address);
         setDoc(doc);
         
+    }
+
+    public Set<Problem> getProblems() {
+        return this.problems;
+    }
+
+    public void setProblems(Set<Problem> problems) {
+        this.problems = problems;
     }
 
     public String getId() {
