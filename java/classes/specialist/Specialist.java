@@ -134,6 +134,7 @@ public class Specialist {
 
     public void removeClient(Client client) {
         clients.remove(client);
+        client.setSpecialist(null);
     }
 
     public void showClients() {
