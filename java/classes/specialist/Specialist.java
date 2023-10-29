@@ -129,6 +129,7 @@ public class Specialist {
 
     public void addClient(Client client) {
         clients.add(client);
+        client.setSpecialist(this);
     }
 
     public void removeClient(Client client) {
