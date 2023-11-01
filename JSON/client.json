@@ -129,7 +129,7 @@
   "definitions": {
     "contact_type": {
       "type": "object",
-      "description": "Адрес клиента",
+      "description": "Контакт клиента",
       "additionalProperties": false,
       "properties": {
         "phone": {
