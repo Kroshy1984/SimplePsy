@@ -26,7 +26,7 @@ public class create {
                 "primeryInvoice character varying(100)," +
                 "finantialConditions character varying(100)," +
                 "recomendations character varying(100)--," +
-                "--doctor_name character varying(100) REFERENCES doctor(...)," +
+                "--doc character varying(100) REFERENCES doc(...)," +
                 "--contact character varying(100) REFERENCES contact(...)," +
                 "--prefer_time character varying(100) REFERENCES time(...)," +
                 "--status_type character varying(100) REFERENCES types(...)," +
