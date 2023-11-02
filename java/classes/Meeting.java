@@ -1,81 +1,165 @@
-package classes;
-import java.time.LocalDate;
-import java.time.LocalTime;
+package classes.Meeting;
+
+import java.time.LocalDateTime;
+
 public class Meeting {
+    private LocalDateTime lastMeetingDateTime;
+    private LocalDateTime nextMeetingDateTime;
+    private String meetingFormat;
+    private String clientRequest;
+    private String therapistState;
+    private String topicsDiscussed;
+    private String clientInsights;
+    private String clientEmotions;
+    private String therapistEmotions;
+    private String therapistUnexpressedEmotions;
+    private String techniquesAndMethods;
+    private String obstaclesAndResistance;
+    private String therapistStateAfterSession;
+    private String planForNextSession;
+    private String difficultiesAndSupervisionTopics;
+    private boolean postponed;
+    private boolean countertransference;
 
-    private LocalDate date;
-    private LocalTime time;
-    private LocalTime duration;
-    private String format;
-    private String platform;
-    private String address;
-    private int price;
-
-    public Meeting(LocalDate date, LocalTime time, LocalTime duration, String format, String platform, String address, int price){
-        this.date = date;
-        this.time = time;
-        this.duration = duration;
-        this.price = price;
-        this.format = format;
-        if(this.format.equals("online"))
-            setPlatform(platform);
-        if(this.format.equals("offline"))
-            setAddress(address);
+    public Meeting(LocalDateTime lastMeetingDateTime, LocalDateTime nextMeetingDateTime, String meetingFormat) {
+        this.lastMeetingDateTime = lastMeetingDateTime;
+        this.nextMeetingDateTime = nextMeetingDateTime;
+        this.meetingFormat = meetingFormat;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getLastMeetingDateTime() {
+        return lastMeetingDateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setLastMeetingDateTime(LocalDateTime lastMeetingDateTime) {
+        this.lastMeetingDateTime = lastMeetingDateTime;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public LocalDateTime getNextMeetingDateTime() {
+        return nextMeetingDateTime;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setNextMeetingDateTime(LocalDateTime nextMeetingDateTime) {
+        this.nextMeetingDateTime = nextMeetingDateTime;
     }
 
-    public LocalTime getDuration() {
-        return duration;
+    public String getMeetingFormat() {
+        return meetingFormat;
     }
 
-    public void setDuration(LocalTime duration) {
-        this.duration = duration;
+    public void setMeetingFormat(String meetingFormat) {
+        this.meetingFormat = meetingFormat;
     }
 
-    public String getFormat() {
-        return format;
+    public String getClientRequest() {
+        return clientRequest;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
+    public void setClientRequest(String clientRequest) {
+        this.clientRequest = clientRequest;
     }
 
-    public int getPrice() {
-        return price;
+    public String getTherapistState() {
+        return therapistState;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setTherapistState(String therapistState) {
+        this.therapistState = therapistState;
     }
 
-    public String getPlatform() {
-        return platform;
+    public String getTopicsDiscussed() {
+        return topicsDiscussed;
     }
 
-    public void setPlatform(String platform) {
-        this.platform = platform;
+    public void setTopicsDiscussed(String topicsDiscussed) {
+        this.topicsDiscussed = topicsDiscussed;
     }
 
-    public String getAddress() {
-        return address;
+    public String getClientInsights() {
+        return clientInsights;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setClientInsights(String clientInsights) {
+        this.clientInsights = clientInsights;
+    }
+
+    public String getClientEmotions() {
+        return clientEmotions;
+    }
+
+    public void setClientEmotions(String clientEmotions) {
+        this.clientEmotions = clientEmotions;
+    }
+
+    public String getTherapistEmotions() {
+        return therapistEmotions;
+    }
+
+    public void setTherapistEmotions(String therapistEmotions) {
+        this.therapistEmotions = therapistEmotions;
+    }
+
+    public String getTherapistUnexpressedEmotions() {
+        return therapistUnexpressedEmotions;
+    }
+
+    public void setTherapistUnexpressedEmotions(String therapistUnexpressedEmotions) {
+        this.therapistUnexpressedEmotions = therapistUnexpressedEmotions;
+    }
+
+    public String getTechniquesAndMethods() {
+        return techniquesAndMethods;
+    }
+
+    public void setTechniquesAndMethods(String techniquesAndMethods) {
+        this.techniquesAndMethods = techniquesAndMethods;
+    }
+
+    public String getObstaclesAndResistance() {
+        return obstaclesAndResistance;
+    }
+
+    public void setObstaclesAndResistance(String obstaclesAndResistance) {
+        this.obstaclesAndResistance = obstaclesAndResistance;
+    }
+
+    public String getTherapistStateAfterSession() {
+        return therapistStateAfterSession;
+    }
+
+    public void setTherapistStateAfterSession(String therapistStateAfterSession) {
+        this.therapistStateAfterSession = therapistStateAfterSession;
+    }
+
+    public String getPlanForNextSession() {
+        return planForNextSession;
+    }
+
+    public void setPlanForNextSession(String planForNextSession) {
+        this.planForNextSession = planForNextSession;
+    }
+
+    public String getDifficultiesAndSupervisionTopics() {
+        return difficultiesAndSupervisionTopics;
+    }
+
+    public void setDifficultiesAndSupervisionTopics(String difficultiesAndSupervisionTopics) {
+        this.difficultiesAndSupervisionTopics = difficultiesAndSupervisionTopics;
+    }
+
+    public boolean isPostponed() {
+        return postponed;
+    }
+
+    public void setPostponed(boolean postponed) {
+        this.postponed = postponed;
+    }
+
+    public boolean isCountertransference() {
+        return countertransference;
+    }
+
+    public void setCountertransference(boolean countertransference) {
+        this.countertransference = countertransference;
     }
 }
