@@ -1,8 +1,13 @@
-
 package classes.client;
+
 import classes.Problem;
 import java.util.Set;
 import java.util.HashSet;
+
+import classes.Contact;
+import classes.Doc;
+import classes.specialist.Specialist;
+import classes.types.*;
 
 public class Client{
 
@@ -23,6 +28,7 @@ public class Client{
     private Doc doc;
     private Contact contact;
     private PreferTime preferTime;
+    private Specialist specialist;
 
     private StatusType statusType;
     private ClientType clientType;
@@ -212,6 +218,14 @@ public class Client{
     
         this.preferTime = preferTime;
         
+    }
+
+    public Specialist getSpecialist() {
+        return specialist;
+    }
+
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
     }
 
     public StatusType getStatusType() {

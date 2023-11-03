@@ -1,9 +1,9 @@
 package classes.Patient;
 
-import classes.client.Contact;
-import classes.client.Doc;
+import classes.Contact;
+import classes.Doc;
 import classes.client.PreferTime;
-import classes.client.types.*;
+import classes.types.*;
 
 public class Patient {
 
