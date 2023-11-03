@@ -4,8 +4,8 @@ package classes;
 
 public class Contact {
 
-    String phone;
-    String email;
+    private String phone;
+    private String email;
 
     public String getPhone() {
         return phone;
