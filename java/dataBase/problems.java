@@ -13,7 +13,7 @@ public class problems {
                 " CLIENT character varying(100) NOT NULL," +
                 " CLIENT_NAME character varying(100) NOT NULL, " +
                 " PROBLEM_DESCRIPTION character varying(100) NOT NULL" +
-                "--doctor_name character varying(100) REFERENCES doctor(...), " +
+                "--document_name character varying(100) REFERENCES document(...), " +
                 "--contact character varying(100) REFERENCES contact(...), " +
                 "--prefer_time character varying(100) REFERENCES time(...), " +
                 "--status_type character varying(100) REFERENCES types(...), " +
