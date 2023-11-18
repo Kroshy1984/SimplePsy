@@ -1,3 +1,5 @@
+package dataBase;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -6,7 +8,7 @@ public final class PsyDB {
     /**
      * URL-Адрес БД
      */
-    public static final String URL = "";
+    public static String URL = "";
 
     private PsyDB() {
 
