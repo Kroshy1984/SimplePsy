@@ -10,7 +10,7 @@ public class InsertProblem {
 
         Connection connection;
         Statement statement;
-        String create_problem_table = "INSERT INTO PROBLEMS (CLIENT, CLIENT_NAME, PROBLEM_DESCRIPTION) VALUES (?, ?, ?)";
+        String Insert_Into_Problems = "INSERT INTO PROBLEMS (CLIENT, CLIENT_NAME, PROBLEM_DESCRIPTION) VALUES (?, ?, ?)";
         try {
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException throwables) {
