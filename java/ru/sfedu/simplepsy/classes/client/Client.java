@@ -1,13 +1,13 @@
 package ru.sfedu.simplepsy.classes.client;
 
-import classes.Problem;
 import java.util.Set;
 import java.util.HashSet;
 
-import classes.Contact;
-import classes.Doc;
-import classes.specialist.Specialist;
-import classes.types.*;
+import ru.sfedu.simplepsy.classes.Problem;
+import ru.sfedu.simplepsy.classes.Contact;
+import ru.sfedu.simplepsy.classes.Doc;
+import ru.sfedu.simplepsy.classes.specialist.Specialist;
+import ru.sfedu.simplepsy.classes.types.*;
 
 public class Client{
 

@@ -1,6 +1,6 @@
 package ru.sfedu.simplepsy.classes;
 
-import classes.types.NameDocType;
+import ru.sfedu.simplepsy.classes.types.NameDocType;
 
 public class Doc{
 
