@@ -31,6 +31,7 @@ class DataProviderMeeting{
 			difficultiesAndSupervisionTopics text,
 			postponed boolean,
 			countertransference boolean,
+      meeting_status ENUM('scheduled', 'completed'), // Статус встречи "запланирована" или "завершена"
 			FOREIGN KEY (problem_id) REFERENCES problems(id),
 			FOREIGN KEY (client_id) REFERENCES clients(id)
 		)""";
