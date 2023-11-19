@@ -28,7 +28,8 @@ class DataProviderMeeting{
     			planForNextSession text,
     			difficultiesAndSupervisionTopics text,
     			postponed boolean,
-    			countertransference boolean
+    			countertransference boolean,
+    			meeting_status ENUM('scheduled', 'completed'), // Статус встречи "запланирована" или "завершена"
 		)""";
 
 		try{
