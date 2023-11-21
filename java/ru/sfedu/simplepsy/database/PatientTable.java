@@ -40,7 +40,9 @@ public class PatientTable{
                 "marital_status_type character varying(100)," + // Столбец marital_status_type, тип данных - character varying(100)
                 "FOREIGN KEY (doc_id) REFERENCES doctors(id)," + // Внешний ключ doc_id, ссылается на столбец id таблицы doctors
                 "FOREIGN KEY (contact_id) REFERENCES contacts(id)," + // Внешний ключ contact_id, ссылается на столбец id таблицы contacts
-                "FOREIGN KEY (prefer_time_id) REFERENCES prefer_times(id)" + // Внешний ключ prefer_time_id, ссылается на столбец id таблицы prefer_times
+                "FOREIGN KEY (prefer_time_id) REFERENCES prefer_times(id)," + // Внешний ключ prefer_time_id, ссылается на столбец id таблицы prefer_times
+                "patient_status ENUM('active', 'sleeping')" + // Статус пациента "активный" или "спящий"
+                "therapy_results character varying(100)," +
                 ")";
 
         try  {
