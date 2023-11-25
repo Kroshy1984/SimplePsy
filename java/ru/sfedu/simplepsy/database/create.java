@@ -28,6 +28,7 @@ public class create {
                 "client_status ENUM('active', 'sleeping')," +
                 "therapy_results character varying(100)," +
                 "recomendations character varying(100)--," +
+                "survey_completed BOOLEAN" +
                 "--doc character varying(100) REFERENCES doc(...)," +
                 "--contact character varying(100) REFERENCES contact(...)," +
                 "--prefer_time character varying(100) REFERENCES time(...)," +

@@ -8,8 +8,10 @@ import classes.Contact;
 import classes.Doc;
 import classes.specialist.Specialist;
 import classes.types.*;
+import ru.sfedu.simplepsy.classes.Observable;
+import ru.sfedu.simplepsy.classes.Observer;
 
-public class Client{
+public class Client implements Observable {
 
     private String id;
     private String name;
@@ -35,6 +37,8 @@ public class Client{
     private SourceType sourceType;
     private GenderType genderType;
     private MaritalStatusType maritalStatusType;
+    private boolean surveyCompleted;
+    private Observer observer;
 
     private Set<Problem> problems = new HashSet<>();
 
@@ -282,5 +286,22 @@ public class Client{
         this.maritalStatusType = maritalStatusType;
         
     }
+
+    public void setSurveyCompleted(boolean surveyCompleted) {
+        this.surveyCompleted = surveyCompleted;
+        if(this.surveyCompleted == true)
+        notifyObservers();
+    }
+
+    @Override
+    public void setObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyObservers() {
+            this.observer.update();
+            this.surveyCompleted = false;
+        }
     
 }
