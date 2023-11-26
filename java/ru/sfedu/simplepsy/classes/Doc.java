@@ -1,50 +1,46 @@
 package ru.sfedu.simplepsy.classes;
 
 import ru.sfedu.simplepsy.classes.types.NameDocType;
+import classes.client.Client;
 
-public class Doc{
+public class Problem {
 
-    private NameDocType docType;
-    private String number;
-    private String serial;
+    //OneToMany Example
+    private Client client;
+    private String clientName; // имя клиента
+    private String problemDescription; // описание проблемы
 
-    public Doc(NameDocType docType, String number, String serial){
-        setDocType(docType);
-        setNumber(number);
-        setSerial(serial);
+    // конструктор класса
+    public Problem(String clientName, String problemDescription) {
+        this.clientName = clientName;
+        this.problemDescription = problemDescription;
+    }
+    // геттеры и сеттеры для доступа к приватным полям
+    public Client getClient() {
+        return this.client;
+    }
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    public String getClientName() {
+        return clientName;
     }
 
-    public NameDocType getDocType() {
-    
-        return docType;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public void setDocType(NameDocType docType) {
-    
-        this.docType = docType;
-        
+    public String getProblemDescription() {
+        return problemDescription;
     }
 
-    public String getNumber() {
-    
-        return number;
+    public void setProblemDescription(String problemDescription) {
+        this.problemDescription = problemDescription;
     }
 
-    public void setNumber(String number) {
-    
-        this.number = number;
-        
+    // переопределение метода toString() для удобного вывода информации о проблеме
+    @Override
+    public String toString() {
+        return "Клиент: " + clientName + "\nПроблема: " + problemDescription;
     }
-
-    public String getSerial() {
-    
-        return serial;
-    }
-
-    public void setSerial(String serial) {
-    
-        this.serial = serial;
-        
-    }
-    
 }
