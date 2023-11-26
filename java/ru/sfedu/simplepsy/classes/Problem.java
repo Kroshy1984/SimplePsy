@@ -1,6 +1,6 @@
 package ru.sfedu.simplepsy.classes;
 
-import classes.client.Client;
+import ru.sfedu.simplepsy.classes.client.Client;
 
 public class Problem {
 
