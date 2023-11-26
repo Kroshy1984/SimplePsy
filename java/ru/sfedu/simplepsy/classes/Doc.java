@@ -1,5 +1,6 @@
 package ru.sfedu.simplepsy.classes;
 
+import ru.sfedu.simplepsy.classes.types.NameDocType;
 import classes.client.Client;
 
 public class Problem {

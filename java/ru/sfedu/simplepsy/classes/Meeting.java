@@ -1,10 +1,14 @@
 package ru.sfedu.simplepsy.classes;
 
+import ru.sfedu.simplepsy.classes.client.Client;
+
 import java.time.LocalDateTime;
 
 public class Meeting {
     private LocalDateTime lastMeetingDateTime;
     private LocalDateTime nextMeetingDateTime;
+    private Problem problem;
+    private final Client client;
     private String meetingFormat;
     private String clientRequest;
     private String therapistState;
@@ -21,10 +25,28 @@ public class Meeting {
     private boolean postponed;
     private boolean countertransference;
 
-    public Meeting(LocalDateTime lastMeetingDateTime, LocalDateTime nextMeetingDateTime, String meetingFormat) {
+    public Meeting(Client client,
+                   Problem problem,
+                   LocalDateTime lastMeetingDateTime,
+                   LocalDateTime nextMeetingDateTime,
+                   String meetingFormat) {
+        this.client = client;
+        this.problem = problem;
         this.lastMeetingDateTime = lastMeetingDateTime;
         this.nextMeetingDateTime = nextMeetingDateTime;
         this.meetingFormat = meetingFormat;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Problem getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
     }
 
     public LocalDateTime getLastMeetingDateTime() {

@@ -3,10 +3,10 @@ package ru.sfedu.simplepsy.classes.specialist;
 import java.util.ArrayList;
 import java.util.List;
 
-import classes.Contact;
-import classes.Doc;
-import classes.client.Client;
-import classes.types.*;
+import ru.sfedu.simplepsy.classes.Contact;
+import ru.sfedu.simplepsy.classes.Doc;
+import ru.sfedu.simplepsy.classes.client.Client;
+import ru.sfedu.simplepsy.classes.types.*;
 
 public class Specialist {
 

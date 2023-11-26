@@ -5,6 +5,7 @@ import ru.sfedu.simplepsy.classes.client.Client;
 public class Problem {
 
     //OneToMany Example
+    private String id;
     private Client client;
     private String clientName; // имя клиента
     private String problemDescription; // описание проблемы
@@ -15,6 +16,12 @@ public class Problem {
         this.problemDescription = problemDescription;
     }
     // геттеры и сеттеры для доступа к приватным полям
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
     public Client getClient() {
         return this.client;
     }

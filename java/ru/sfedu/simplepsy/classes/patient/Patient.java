@@ -1,9 +1,9 @@
 package ru.sfedu.simplepsy.classes.patient;
 
-import classes.Contact;
-import classes.Doc;
-import classes.client.PreferTime;
-import classes.types.*;
+import ru.sfedu.simplepsy.classes.Contact;
+import ru.sfedu.simplepsy.classes.Doc;
+import ru.sfedu.simplepsy.classes.client.PreferTime;
+import ru.sfedu.simplepsy.classes.types.*;
 
 public class Patient {
 
