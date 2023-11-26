@@ -12,8 +12,8 @@ class DataProviderMeeting{
 
 		CREATE TABLE meetings (
 			id integer CONSTRAINT primary_key PRIMARY KEY,
-			problem_id int,
-			client_id int,
+			problem_id integer,
+			client_id integer,
 			lastMeetingDateTime timestamp,
 			nextMeetingDateTime timestamp,
 			meetingFormat varchar(128),
