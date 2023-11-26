@@ -10,7 +10,12 @@ public class InsertProblem {
 
         Connection connection;
         Statement statement;
-        String Insert_Into_Problems = "INSERT INTO PROBLEMS (CLIENT, CLIENT_NAME, PROBLEM_DESCRIPTION) VALUES (?, ?, ?)";
+
+        String customerid = '';
+        String customer_name = ''; 
+        String problem_description = '';
+        
+        String Insert_Into_Problems = "INSERT INTO PROBLEMS (CLIENT, CLIENT_NAME, PROBLEM_DESCRIPTION) VALUES ('" + customerid + "', '" + customer_name + "', '" + problem_description + "')";
         try {
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException throwables) {
