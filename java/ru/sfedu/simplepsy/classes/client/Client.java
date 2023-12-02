@@ -9,7 +9,7 @@ import ru.sfedu.simplepsy.classes.Doc;
 import ru.sfedu.simplepsy.classes.specialist.Specialist;
 import ru.sfedu.simplepsy.classes.types.*;
 
-public class Client{
+public class Client implements Observable {
 
     private String id;
     private String name;
@@ -36,6 +36,9 @@ public class Client{
     private GenderType genderType;
     private MaritalStatusType maritalStatusType;
 
+    private boolean surveyCompleted;
+
+    private Observer observer;
     private Set<Problem> problems = new HashSet<>();
 
     public Client(String name, String surname, String address, Doc doc){
@@ -281,6 +284,23 @@ public class Client{
 
         this.maritalStatusType = maritalStatusType;
 
+    }
+
+    public void setSurveyCompleted(boolean surveyCompleted) {
+        this.surveyCompleted = surveyCompleted;
+        if(this.surveyCompleted == true)
+            notifyObservers();
+    }
+
+    @Override
+    public void setObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyObservers() {
+        this.observer.update();
+        this.surveyCompleted = false;
     }
 
 }
