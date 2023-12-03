@@ -8,7 +8,7 @@ import ru.sfedu.simplepsy.classes.Doc;
 import ru.sfedu.simplepsy.classes.client.Client;
 import ru.sfedu.simplepsy.classes.types.*;
 
-public class Specialist {
+public class Specialist implements Observer {
 
     private final String id; //идентификатор
     private final String name; //имя
@@ -141,5 +141,10 @@ public class Specialist {
         for (Client client : clients) {
             System.out.println(client);
         }
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Психолог " + name + " " + surname + " " + middleName + ": Получены новые результаты анкетирования!");
     }
 }
