@@ -27,7 +27,8 @@ public class create {
                 "finantialConditions character varying(100)," +
                 "client_status ENUM('active', 'sleeping')," +
                 "therapy_results character varying(100)," +
-                "recomendations character varying(100)--," +
+                "recomendations character varying(100)" +
+                "pseudonym character varying(100)--," +
                 "--doc character varying(100) REFERENCES doc(...)," +
                 "--contact character varying(100) REFERENCES contact(...)," +
                 "--prefer_time character varying(100) REFERENCES time(...)," +
