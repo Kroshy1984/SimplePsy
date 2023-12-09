@@ -13,11 +13,11 @@ public class MeetingManager {
      * @param client клиент
      * @param problem проблема
      */
-    public static void createMeeting (Client client,
-                                      Problem problem,
-                                      LocalDateTime lastMeetingDateTime,
-                                      LocalDateTime nextMeetingDateTime,
-                                      String meetingFormat) {
+    public static void createMeeting(Client client,
+                                     Problem problem,
+                                     LocalDateTime lastMeetingDateTime,
+                                     LocalDateTime nextMeetingDateTime,
+                                     String meetingFormat) {
         // Подключение к базе данных
         String url = "jdbc:your_database_url";
         String username = "your_username";
