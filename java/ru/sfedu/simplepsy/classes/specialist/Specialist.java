@@ -10,22 +10,22 @@ import ru.sfedu.simplepsy.classes.types.*;
 
 public class Specialist {
 
-    private final String id; //идентификатор
-    private final String name; //имя
-    private final String surname; //фамилия
-    private final String middleName; //отчество
+    private final String id; // идентификатор
+    private final String name; // имя
+    private final String surname; // фамилия
+    private final String middleName; // отчество
 
-    private String birthDay; //день рождения
-    private String techniques; //техники (подходы к работе)
-    private List<Client> clients; //массив клиентов
-    private List<Certificate> certificates; //cертификаты
-    private Doc docs; //документы
-    private Contact contacts; //контакты
-    private GenderType genderType; //пол
-    private SpecializationType specializationType; //специализация
+    private String birthDay; // день рождения
+    private String techniques; // техники (подходы к работе)
+    private List<Client> clients; // массив клиентов
+    private List<Certificate> certificates; // cертификаты
+    private Doc docs; // документы
+    private Contact contacts; // контакты
+    private GenderType genderType; // пол
+    private SpecializationType specializationType; // специализация
 
-    private int workExperience; //стаж работы
-    private double rating; //rating
+    private int workExperience; // стаж работы
+    private double rating; // rating
 
     public Specialist(String id, String name, String surname, String middleName) {
         this.id = id;
