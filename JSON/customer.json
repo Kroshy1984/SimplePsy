@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Заказчик",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "идентификатор заказчика"
+    },
+    "status": {
+      "type": "string",
+      "description": "статус",
+      "enum": [
+        "лид",
+        "клиент"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Имя",
+      "maxLength": 255,
+      "pattern": "^[А-Я]+*[а-я]$"
+    },
+    "contact": {
+      "$ref": "#/definitions/contact_type"
+    }
+  },
+  "required": [
+    "name",
+    "id",
+    "status",
+    "contact"
+  ],
+  "definitions": {
+    "contact_type": {
+      "type": "object",
+      "description": "Контакт клиента",
+      "additionalProperties": false,
+      "properties": {
+        "phone": {
+          "type": "string",
+          "description": "Номер телефона",
+          "maxLength": 12
+        },
+        "email": {
+          "type": "string",
+          "description": "электронная почта",
+          "maxLength": 320
+        },
+        "tg": {
+          "type": "string",
+          "description": "Телеграмм",
+          "maxLength": 320
+        }
+      }
+    }
+  }
+}
