@@ -17,7 +17,7 @@ public final class PsyDB {
     /**
      * Устанавливает соединение с базой данных
      *
-     * @param username Имя пользователя
+     * @param username Имя пользователя бубубубубубубубубубубуббу
      * @param password Пароль пользователя
      * @return Соединение
      * @throws ClassNotFoundException драйвер postgresql не установлен
