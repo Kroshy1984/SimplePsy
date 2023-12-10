@@ -5,38 +5,29 @@ import ru.sfedu.simplepsy.classes.Problem;
 import ru.sfedu.simplepsy.classes.types.StatusType;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Customer {
 
-    private UUID id; // идентификатор
+    private String id; // идентификатор
     private StatusType statusType; // статус
     private String name; // имя
     private Contact contact; // контакт
     private String comment; // комментарий
     private ArrayList<Problem> problems = new ArrayList<>(); // проблемы
 
-    public Customer(UUID id, StatusType statusType, String name, Contact contact) {
+    public Customer(String id, String name, StatusType statusType, Contact contact) {
         this.id = id;
-        this.statusType = statusType;
         this.name = name;
+        this.statusType = statusType;
         this.contact = contact;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public StatusType getStatusType() {
-        return statusType;
-    }
-
-    public void setStatusType(StatusType statusType) {
-        this.statusType = statusType;
     }
 
     public String getName() {
@@ -45,6 +36,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public StatusType getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(StatusType statusType) {
+        this.statusType = statusType;
     }
 
     public Contact getContact() {
