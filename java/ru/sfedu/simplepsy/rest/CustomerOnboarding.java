@@ -4,10 +4,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CustomerOnboarding {
     public static void main(String[] args) {
@@ -60,7 +57,7 @@ public class CustomerOnboarding {
             System.out.println("Ошибка: " + e.getMessage());
         }
 
-        boolean customerExists = checkIfCustomerExists(customerName, customerEmail);
+        boolean customerExists = checkIfCustomerExists(customerPhone, customerName);
 
         if (customerExists) {
             // Заказчик уже существует, выполнение соответствующих действий
@@ -68,7 +65,7 @@ public class CustomerOnboarding {
 
         } else {
             // Заказчик не существует, добавление новой записи
-            boolean success = insertCustomer(customerName, customerEmail);
+            boolean success = insertCustomer(customerPhone, customerName);
 
             if (success) {
                 // Запись данных в таблицу прошла успешно
