@@ -79,7 +79,7 @@ public class CustomerOnboarding {
         }
     }
 
-    private static boolean checkIfCustomerExists(String name, String email) {
+    private static boolean checkIfCustomerExists(String phone, String name) {
         // Формирование SQL запроса для проверки существования заказчика
         String sql = "SELECT COUNT(*) FROM customers WHERE name = ? AND email = ?";
 
@@ -91,8 +91,8 @@ public class CustomerOnboarding {
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             // Установка параметров запроса
-            statement.setString(1, name);
-            statement.setString(2, email);
+            statement.setString(1, phone);
+            statement.setString(2, name);
 
             // Выполнение запроса и получение результата
             ResultSet resultSet = statement.executeQuery();
@@ -110,7 +110,7 @@ public class CustomerOnboarding {
         return false;
     }
 
-    private static boolean insertCustomer(String name, String email) {
+    private static boolean insertCustomer(String phone, String name) {
         // Формирование SQL запроса для добавления заказчика
         String sql = "INSERT INTO customers (name, email) VALUES (?, ?)";
 
@@ -122,8 +122,8 @@ public class CustomerOnboarding {
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             // Установка параметров запроса
-            statement.setString(1, name);
-            statement.setString(2, email);
+            statement.setString(1, phone);
+            statement.setString(2, name);
 
             // Выполнение запроса
             int rowsInserted = statement.executeUpdate();
