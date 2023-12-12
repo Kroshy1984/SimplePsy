@@ -1,11 +1,4 @@
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://93.95.97.176:5432/psy_db
-    username: psy_app
-    password: 123
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
-server:
-  port: 8080
+  data:
+    mongodb:
+      uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
