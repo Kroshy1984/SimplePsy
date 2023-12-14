@@ -73,20 +73,23 @@ paths:
                 $ref: '#/components/schemas/customer'          
         '405':
           description: Invalid input
-  /customer/id:
+  /customer/{id}:
     delete:
       tags:
         - customer
       summary: Удаляем заказчика из базы
       description: Удаляем заказчика из базы
       operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Successful operation
-          content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/customer'          
         '405':
           description: Invalid input
  
