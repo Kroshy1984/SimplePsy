@@ -24,6 +24,36 @@ tags:
   - name: user
     description: Operations about user
 paths:
+  /customer/Search/{name}||{contact}:
+    get:
+      tags:
+        - customer
+      summary: поиск заказчика в базе
+      description: ищем данные закапзчика
+      operationId: searchCustomer
+      parameters:
+        - name: name
+          in: path
+          description:  имя клиента
+          required: true
+          schema:
+            type: string
+        - name: contact
+          in: path
+          description:  имя клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Клиент нашелся
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'          
+        '404':
+          description: Нет такого клиента в базе
+
   /customer:
     put:
       tags:
