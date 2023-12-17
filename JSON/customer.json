@@ -24,6 +24,12 @@
     },
     "contact": {
       "$ref": "#/definitions/contact_type"
+    },
+    "dateOfFirstContact":{
+      "type":"string",
+      "description":"Дата первого контакта",
+      "maxLength":10,
+      "format":"date"
     }
   },
   "required": [
