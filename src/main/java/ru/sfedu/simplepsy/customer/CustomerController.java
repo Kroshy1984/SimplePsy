@@ -1,40 +1,26 @@
 package ru.sfedu.simplepsy.customer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/SimplePsy/V1/customer")
 public class CustomerController {
 
-    @PostMapping("/new")
-    public ResponseEntity<String> createResource(@RequestBody String requestPayload) {
-        // Логика для обработки POST запроса
-        return new ResponseEntity<>("Resource created", HttpStatus.CREATED);
-    }
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/")
-    public ResponseEntity<String> getResource() {
-        // Логика для обработки GET запроса
-        return new ResponseEntity<>("Resource retrieved", HttpStatus.OK);
+    @ResponseStatus(HttpStatus.FOUND)
+    public Customer getResource(@RequestParam("name") String name, @RequestParam("contact") String contact) {
+        return customerService.getCustomer(name, contact);
     }
 
-//    @PutMapping("/endpoint")
-//    public ResponseEntity<String> updateResource(@RequestBody String requestPayload) {
-//        // Логика для обработки PUT запроса
-//        return new ResponseEntity<>("Resource updated", HttpStatus.OK);
-//    }
-//
-//    @PatchMapping("/endpoint")
-//    public ResponseEntity<String> partialUpdateResource(@RequestBody String requestPayload) {
-//        // Логика для обработки PATCH запроса
-//        return new ResponseEntity<>("Resource partially updated", HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/endpoint")
-//    public ResponseEntity<String> deleteResource() {
-//        // Логика для обработки DELETE запроса
-//        return new ResponseEntity<>("Resource deleted", HttpStatus.OK);
-//    }
+    @PostMapping("/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Customer createResource(@RequestBody Customer customer) {
+        return customerService.saveCustomer(customer);
+    }
+
 }
