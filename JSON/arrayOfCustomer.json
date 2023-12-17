@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "description": "список заказчиков",
+  "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customer":{
+              "$ref": "#/definitions/customer_type"
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      },
+   "definitions": {
+     "customer_type":{
+  "type": "object",
+  "description": "Заказчик",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "идентификатор заказчика"
+    },
+    "status": {
+      "type": "string",
+      "description": "статус",
+      "enum": [
+        "лид",
+        "клиент"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Имя",
+      "maxLength": 255
+    },
+    "contact": {
+      "$ref": "#/definitions/contact_type"
+    },
+    "dateOfFirstContact":{
+      "type":"string",
+      "description":"Дата первого контакта",
+      "maxLength":10,
+      "format":"date"
+    }
+  },
+  "required": [
+    "name",
+    "id",
+    "status",
+    "contact"
+  ]},
+    "contact_type": {
+      "type": "object",
+      "description": "Контакт клиента",
+      "additionalProperties": false,
+      "properties": {
+        "phone": {
+          "type": "string",
+          "description": "Номер телефона",
+          "maxLength": 12
+        },
+        "email": {
+          "type": "string",
+          "description": "электронная почта",
+          "maxLength": 320
+        },
+        "tg": {
+          "type": "string",
+          "description": "Телеграмм",
+          "maxLength": 320
+        }
+      }
+    }
+  }}
