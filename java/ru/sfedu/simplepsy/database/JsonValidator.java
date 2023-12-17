@@ -1,5 +1,4 @@
-package java.dataBase;
-
+package ru.sfedu.simplepsy.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,8 +7,10 @@ import java.sql.SQLException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonSchema;
-import com.fasterxml.jackson.databind.node.JsonSchemaFactory;
+import com.github.fge.jsonschema.core.exceptions.ProcessingException;
+import com.github.fge.jsonschema.main.JsonSchema;
+import com.github.fge.jsonschema.main.JsonSchemaFactory;
+
 
 public class JsonValidator {
 
@@ -31,7 +32,20 @@ public class JsonValidator {
 
             if (rs.next())
             {
-                String schema = rs.getString("schema");
+                String schema =  "{ \"$schema\": \"http://json-schema.org/draft-07/schema#\", " +
+                    "\"type\": \"object\", " +
+                    "\"description\": \"Заказчик\", " +
+                    "\"additionalProperties\": false, " +
+                    "\"properties\": { \"id\": { \"type\": \"string\", \"description\": \"идентификатор заказчика\" }, " +
+                    "\"status\": { \"type\": \"string\", \"description\": \"статус\", \"enum\": [ \"лид\", \"клиент\" ] }, " +
+                    "\"name\": { \"type\": \"string\", \"description\": \"Имя\", \"maxLength\": 255, \"pattern\": \"^[А-Я]+*[а-я]$\" }, " +
+                    "\"contact\": { \"$ref\": \"#/definitions/contact_type\" } }, " +
+                    "\"required\": [ \"name\", \"id\", \"status\", \"contact\" ], " +
+                    "\"definitions\": { \"contact_type\": { \"type\": \"object\", \"description\": \"Контакт клиента\", " +
+                    "\"additionalProperties\": false, \"properties\": " +
+                    "{ \"phone\": { \"type\": \"string\", \"description\": \"Номер телефона\", \"maxLength\": 12 }, " +
+                    "\"email\": { \"type\": \"string\", \"description\": \"электронная почта\", \"maxLength\": 320 }, " +
+                    "\"tg\": { \"type\": \"string\", \"description\": \"Телеграмм\", \"maxLength\": 320 } } } } }";
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode schemaNode = mapper.readTree(schema);
                 JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
