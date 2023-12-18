@@ -12,9 +12,12 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/")
-    @ResponseStatus(HttpStatus.FOUND)
-    public Customer getResource(@RequestParam("name") String name, @RequestParam("contact") String contact) {
-        return customerService.getCustomer(name, contact);
+    public Customer getResource(@RequestParam(name = "name", required = false) String name,
+                                @RequestParam(name = "contact", required = false) String contact) {
+
+        if(name != null && contact == null) return customerService.getCustomerByName(name);
+        if(name == null && contact != null) return customerService.getCustomerByContact(contact);
+        else return customerService.getCustomerByNameAndContact(name, contact);
     }
 
     @PostMapping("/new")
