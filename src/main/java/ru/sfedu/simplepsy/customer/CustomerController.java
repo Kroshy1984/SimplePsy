@@ -23,4 +23,17 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
+    @DeleteMapping("/{id}")
+    public boolean deleteResource(@PathVariable("id") String id) {
+        customerService.deleteCustomer(id);
+        return true;
+    }
+
+    @PutMapping("/")
+    public boolean updateResource(@RequestBody Customer customer) {
+        customerService.updateCustomer(customer);
+        return true;
+    }
+
+
 }

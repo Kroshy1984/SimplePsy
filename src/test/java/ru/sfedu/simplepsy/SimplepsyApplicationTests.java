@@ -1,5 +1,6 @@
 package ru.sfedu.simplepsy;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,8 +16,23 @@ class SimplepsyApplicationTests {
 
 	@Test
 	void contextLoads() {
-//		System.out.println(customerService.getCustomer("Николай", "71234567890"));
-//		System.out.println(customerService.saveCustomer(new Customer("Абоба", "клиент", new Contact("79996669966", null, null))));
+	}
+
+	@Test
+	void sampleCRUDTest() {
+		Customer customer = new Customer("Тест", "клиент", new Contact("79001270000", null, null));
+
+		Customer savedCustomer = customerService.saveCustomer(customer);
+
+		Contact newContact = savedCustomer.getContact();
+		newContact.setTg("@IWillBeDeleted");
+		savedCustomer.setContact(newContact);
+		Customer updatedCustomer = customerService.updateCustomer(savedCustomer);
+
+		customerService.getCustomer(updatedCustomer.getName(), updatedCustomer.getContact().getPhone());
+		customerService.getCustomer(updatedCustomer.getName(), updatedCustomer.getContact().getTg());
+
+		customerService.deleteCustomer(updatedCustomer.getId());
 	}
 
 }

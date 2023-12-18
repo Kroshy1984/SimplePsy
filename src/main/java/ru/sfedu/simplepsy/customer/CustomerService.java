@@ -20,4 +20,19 @@ public class CustomerService {
         return customerRepository.insert(customer);
     }
 
+    public void deleteCustomer(String id) {
+        if (customerRepository.findById(id).isEmpty()) {
+            throw new NotFoundException("Customer with id " + id + " not found.");
+        }
+        customerRepository.deleteById(id);
+    }
+
+    public Customer updateCustomer(Customer customer) {
+        String id = customer.getId();
+        if (customerRepository.findById(id).isEmpty()) {
+            throw new NotFoundException("Customer with id " + id + " not found.");
+        }
+        return customerRepository.save(customer);
+    }
+
 }
