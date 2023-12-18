@@ -8,6 +8,7 @@ import ru.sfedu.simplepsy.customer.Contact;
 import ru.sfedu.simplepsy.customer.Customer;
 import ru.sfedu.simplepsy.customer.CustomerService;
 
+
 @SpringBootTest
 class SimplepsyApplicationTests {
 
@@ -19,20 +20,29 @@ class SimplepsyApplicationTests {
 	}
 
 	@Test
-	void sampleCRUDTest() {
-		Customer customer = new Customer("Тест", "клиент", new Contact("79001270000", null, null));
+	void getListOfCustomers() {
+		String name = "getListOfCustomers";
+		String status = "клиент";
+		String phone = "test number";
+		String mail = "test@gmail.com";
+		String tg = "@tg";
 
-		Customer savedCustomer = customerService.saveCustomer(customer);
+		Customer saved1 = customerService.saveCustomer(new Customer(name, status, new Contact(phone, mail, tg)));
+		Customer saved2 = customerService.saveCustomer(new Customer(name, status, new Contact(phone, mail, tg)));
+		Customer saved3 = customerService.saveCustomer(new Customer(name, status, new Contact(phone, mail, tg)));
 
-		Contact newContact = savedCustomer.getContact();
-		newContact.setTg("@IWillBeDeleted");
-		savedCustomer.setContact(newContact);
-		Customer updatedCustomer = customerService.updateCustomer(savedCustomer);
+        Assertions.assertEquals(3, customerService.getCustomers(name, null).size());
+		Assertions.assertEquals(3, customerService.getCustomers(null, phone).size());
+		Assertions.assertEquals(3, customerService.getCustomers(null, mail).size());
+		Assertions.assertEquals(3, customerService.getCustomers(null, tg).size());
+		Assertions.assertEquals(3, customerService.getCustomers(name, phone).size());
+		Assertions.assertEquals(3, customerService.getCustomers(name, mail).size());
+		Assertions.assertEquals(3, customerService.getCustomers(name, tg).size());
 
-		customerService.getCustomer(updatedCustomer.getName(), updatedCustomer.getContact().getPhone());
-		customerService.getCustomer(updatedCustomer.getName(), updatedCustomer.getContact().getTg());
+		customerService.deleteCustomer(saved1.getId());
+		customerService.deleteCustomer(saved2.getId());
+		customerService.deleteCustomer(saved3.getId());
 
-		customerService.deleteCustomer(updatedCustomer.getId());
 	}
 
 }
