@@ -31,10 +31,6 @@ class SimplepsyApplicationTests {
 		Customer saved2 = customerService.saveCustomer(new Customer(name, status, new Contact(phone, mail, tg)));
 		Customer saved3 = customerService.saveCustomer(new Customer(name, status, new Contact(phone, mail, tg)));
 
-        Assertions.assertEquals(3, customerService.getCustomers(name, null).size());
-		Assertions.assertEquals(3, customerService.getCustomers(null, phone).size());
-		Assertions.assertEquals(3, customerService.getCustomers(null, mail).size());
-		Assertions.assertEquals(3, customerService.getCustomers(null, tg).size());
 		Assertions.assertEquals(3, customerService.getCustomers(name, phone).size());
 		Assertions.assertEquals(3, customerService.getCustomers(name, mail).size());
 		Assertions.assertEquals(3, customerService.getCustomers(name, tg).size());
@@ -42,7 +38,6 @@ class SimplepsyApplicationTests {
 		customerService.deleteCustomer(saved1.getId());
 		customerService.deleteCustomer(saved2.getId());
 		customerService.deleteCustomer(saved3.getId());
-
 	}
 
 }

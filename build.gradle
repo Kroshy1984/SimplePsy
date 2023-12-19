@@ -16,15 +16,29 @@ repositories {
 }
 
 dependencies {
+
+	//MVC
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//MongoDB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	//Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 //	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 //	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 //	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 //	testImplementation 'org.testcontainers:junit-jupiter'
 //	testImplementation 'org.testcontainers:mongodb'
-//	testImplementation 'org.testcontainers:postgresql'
 }
 
 tasks.named('test') {
