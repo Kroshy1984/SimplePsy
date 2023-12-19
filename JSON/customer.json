@@ -1,44 +1,69 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "description": "Заказчик",
-  "additionalProperties": false,
+  "description": "список заказчиков",
   "properties": {
-    "id": {
-      "type": "string",
-      "description": "идентификатор заказчика"
-    },
-    "status": {
-      "type": "string",
-      "description": "статус",
-      "enum": [
-        "лид",
-        "клиент"
-      ]
-    },
-    "name": {
-      "type": "string",
-      "description": "Имя",
-      "maxLength": 255,
-      "pattern": "^[А-Я]+*[а-я]$"
-    },
-    "contact": {
-      "$ref": "#/definitions/contact_type"
-    },
-    "dateOfFirstContact":{
-      "type":"string",
-      "description":"Дата первого контакта",
-      "maxLength":10,
-      "format":"date"
+    "listOfCustomers": {
+      "type": "array",
+      "description": "список заказчиков",
+      "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customer": {
+            "$ref": "#/definitions/customer_type"
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      }
     }
   },
-  "required": [
-    "name",
-    "id",
-    "status",
-    "contact"
-  ],
   "definitions": {
+    "customer_type": {
+      "type": "object",
+      "description": "Заказчик",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "идентификатор заказчика",
+          "pattern":"[0-9]{3}",
+          "minLength":3
+        },
+        "status": {
+          "type": "string",
+          "description": "статус",
+          "enum": [
+            "лид",
+            "клиент"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Имя",
+          "maxLength": 255
+        },
+        "contact": {
+          "$ref": "#/definitions/contact_type"
+        },
+        "dateOfFirstContact": {
+          "type": "string",
+          "description": "Дата первого контакта",
+          "maxLength": 10,
+          "pattern":"^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "status",
+        "contact"
+      ]
+    },
     "contact_type": {
       "type": "object",
       "description": "Контакт клиента",
@@ -47,17 +72,20 @@
         "phone": {
           "type": "string",
           "description": "Номер телефона",
-          "maxLength": 12
+          "maxLength": 12,
+          "pattern":"^[0-9]$"
         },
         "email": {
           "type": "string",
           "description": "электронная почта",
-          "maxLength": 320
+          "maxLength": 320,
+          "pattern":"^@[a-zA-Z_]+?[a-zA-Z]{2,3}$"
         },
         "tg": {
           "type": "string",
           "description": "Телеграмм",
-          "maxLength": 320
+          "maxLength": 320,
+          "pattern":"^@[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*.*$"
         }
       }
     }
