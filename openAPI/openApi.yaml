@@ -50,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/customer'          
+                $ref: '#/components/schemas/listOfCustomer'          
         '404':
           description: Нет такого клиента в базе
 
@@ -125,6 +125,19 @@ paths:
  
 components:
   schemas:
+    listOfCustomer:
+      type: array
+      description: список заказчиков
+      additionalProperties: false
+      minItems: 1
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          customer: 
+            "$ref": "#/components/schemas/customer"
+      required:
+      - customer
     customer:
       type: object
       properties:
