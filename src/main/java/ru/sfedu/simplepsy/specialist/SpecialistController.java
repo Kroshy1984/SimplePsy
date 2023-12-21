@@ -14,7 +14,7 @@ public class SpecialistController {
     @GetMapping("/login")
     public String loginPage()
     {
-        return "qwe";
+        return "login.html";
     }
 
     @PostMapping("/new")
