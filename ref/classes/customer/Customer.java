@@ -12,22 +12,12 @@ public class Customer {
     private StatusType statusType; // статус
     private String name; // имя
     private Contact contact; // контакт
-    private String comment; // комментарий
-    private ArrayList<Problem> problems = new ArrayList<>(); // проблемы
 
-    public Customer(String id, String name, StatusType statusType, Contact contact) {
-        this.id = id;
+    public Customer(String name, String id, StatusType statusType, Contact contact) {
         this.name = name;
+        this.id = id;
         this.statusType = statusType;
         this.contact = contact;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -36,6 +26,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public StatusType getStatusType() {
@@ -52,21 +50,5 @@ public class Customer {
 
     public void setContact(Contact contact) {
         this.contact = contact;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public ArrayList<Problem> getProblems() {
-        return problems;
-    }
-
-    public void setProblems(ArrayList<Problem> problems) {
-        this.problems = problems;
     }
 }
