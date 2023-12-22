@@ -1,0 +1,93 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+fieldset {
+    border: none;
+}
+
+fieldset input {
+    height: 35px
+}
+
+.profile-container {
+    text-align: center;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+
+    /* Добавленные стили для центрирования */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profile-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#profile-image {
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 30%;
+}
+
+.button-container {
+    position: relative;
+    top: 440px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#submit {
+    position: absolute;
+    top: 80%;
+    left: 70%;
+}
+
+.contacts fieldset {
+    display: inline-grid;
+    column-gap: 40px;
+    row-gap: 20px;
+    grid-template-columns: auto auto auto;
+    justify-items: start;
+}
+
+form span {
+    position: relative;
+    bottom: 95px;
+    right: 260px;
+}
+
+input {
+    border: 1px solid #E2E6F3;
+    border-radius: 15px;
+}
+
+input[type="submit"] {
+    padding: 20px 50px;
+    background-color: #D9D9D9;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input:hover {
+    background-color: #c2c2c2;
+}
