@@ -13,40 +13,41 @@
     <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
 </header>
 <div>
-    <form>
+    <form method="post" th:action="@{/SimplePsy/V1/specialist/customer-card/save}" th:object="${customer}">
+        <input th:value="${customer.getId()}" th:name="customerId" hidden="hidden">
         <fieldset>
             <label for="name">Имя</label>
-            <input type="text" id="name" name="name" placeholder="Имя">
+            <input th:value="${customer.getName()}" type="text" id="name" name="name" placeholder="Имя">
             <label for="status">Статус</label>
-            <input type="text" id="status" name="status" placeholder="Статус">
-            <label for="registration-date">Дата регистрации</label>
-            <input type="date" id="registration-date" name="registration-date" placeholder="Дата регистрации">
+            <input  th:value="${customer.getStatus()}" type="text" id="status" name="status" placeholder="Статус">
+            <label  for="registration-date">Дата регистрации</label>
+            <input   type="date" id="registration-date" name="registration-date" placeholder="Дата регистрации">
         </fieldset>
-    </form>
 </div>
 <div class="profile-container">
     <div class="contacts">
-        <form>
+
             <span>Контакты</span>
             <fieldset>
                 <img class="icon" id="phone-icon" alt="Фото трубки" src="https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png">
                 <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" placeholder="Номер телефона">
+                <input th:value="${customer.getContact().getPhone()}" type="tel" id="phone" name="contact.phone" placeholder="Номер телефона">
                 <img class="icon" id="email-icon" alt="Фото e-mail" src="https://www.freeiconspng.com/thumbs/email-icon/email-icon--clipart-best-22.png">
                 <label for="email">Электронная почта</label>
-                <input type="email" id="email" name="email" placeholder="E-mail">
+                <input th:value="${customer.getContact().getEmail()}" type="email" id="email" name="contact.email" placeholder="E-mail">
                 <img class="icon" id="telegram-icon" alt="Фото телеграм" src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3201902/telegram-icon-md.png">
                 <label for="telegram">Телеграм</label>
-                <input type="text" id="telegram" name="telegram" placeholder="Ник телеграм">
+                <input th:value="${customer.getContact().getTg()}" type="text" id="telegram" name="contact.tg" placeholder="Ник телеграм">
             </fieldset>
-        </form>
+
     </div>
-    <img id="profile-image" alt="Фото профиля" src="https://hips.hearstapps.com/hmg-prod/images/gettyimages-850161690.jpg">
+    <img id="profile-image" alt="Фото профиля" th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}">
 </div>
 <div class="button-container">
     <input type="submit" id="edit" value="Редактировать">
     <input type="submit" id="save" value="Сохранить">
     <input type="submit" id="delete" value="Удалить">
 </div>
+</form>
 </body>
 </html>

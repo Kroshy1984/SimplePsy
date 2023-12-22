@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.sfedu.simplepsy.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -22,6 +23,23 @@ public class CustomerService {
         return customers;
     }
 
+    public List<Customer> getAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        if (customers.isEmpty()) {
+            throw new NotFoundException("No customers in db");
+        }
+        return customers;
+    }
+
+    public Customer findById(String id) {
+        Optional<Customer> customer = customerRepository.findById(id);
+        if (customer.isEmpty()) {
+            throw new NotFoundException(
+                    String.format("Customer not found with id %s", id)
+            );
+        }
+        return customer.get();
+    }
 //    public Customer getCustomerByNameAndContact(String name, String contact) {
 //        return customerRepository
 //                .findByNameAndSomeContact(name, contact)
