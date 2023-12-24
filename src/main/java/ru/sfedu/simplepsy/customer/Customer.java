@@ -24,7 +24,7 @@ public class Customer {
     private String description;
     private byte[] avatar;
     private LocalDate dateOfFirstCall;
-    private LocalDate dateOfRegistration;
+   // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
     public Customer() {
     }
 
@@ -48,14 +48,6 @@ public class Customer {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.dateOfFirstCall = LocalDate.parse(dateOfFirstCall, formatter);
         this.avatar = avatar.getBytes();
-    }
-
-    public String getDateOfRegistration() {
-        return dateOfRegistration.toString();
-    }
-
-    public void setDateOfRegistration(LocalDate dateOfRegistration) {
-        this.dateOfRegistration = dateOfRegistration;
     }
 
     public String getId() {

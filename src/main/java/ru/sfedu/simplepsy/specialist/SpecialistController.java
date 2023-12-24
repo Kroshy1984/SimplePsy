@@ -44,7 +44,7 @@ public class SpecialistController {
     {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        return "customers_list";
+        return "customer-list";
     }
     @GetMapping("/customer-avatar/{customerId}")
     public ResponseEntity<byte[]> getCustomerAvatar(@PathVariable String customerId) {

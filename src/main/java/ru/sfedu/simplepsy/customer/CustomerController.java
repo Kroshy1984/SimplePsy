@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -49,8 +47,6 @@ public class CustomerController {
                                    @RequestParam("dateOfFirstCall") String dateOfFirstCall,
                                    @RequestParam("avatar") MultipartFile avatar) throws IOException {
         Contact contact = new Contact(contactPhone, contactEmail, contactTg);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = LocalDate.parse(dateOfFirstCall, formatter);
         Customer customer = new Customer(name, status, contact, dateOfFirstCall, avatar);
         return customerService.saveCustomer(customer);
     }
