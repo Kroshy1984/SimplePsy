@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" th:href="@{/customer-list.css}">
+    <title>Customer list</title>
+</head>
+<body>
+<header>
+    <h1>СПИСОК ЗАКАЗЧИКОВ</h1>
+</header>
+<div class="profile-container">
+    <table>
+        <tr>
+            <td colspan="2">Имя</td>
+            <td>Дата первого звонка</td>
+            <td>Status</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><img id="profile-image" alt="Customer pic" src="https://www.onthisday.com/images/people/jason-statham.jpg?w=360"></td>
+            <td>
+                <div class="customer-info">
+                    <div class="name">Devon Lane</div>
+                    <div class="description">Description</div>
+                </div>
+            </td>
+            <td>12/06/2020</td>
+            <td>CLIENT</td>
+            <td><input class="remove" type="image" alt="Recycle bin pic" src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png"></td>
+        </tr>
+    </table>
+</div>
+<form>
+    <div class="button-container">
+        <input type="submit" id="show" value="Посмотреть карточку">
+        <input type="submit" id="delete" value="Удалить">
+        <input type="submit" id="edit" value="Редактировать">
+        <input type="submit" id="add" value="Добавить">
+    </div>
+</form>
+</body>
+</html>
