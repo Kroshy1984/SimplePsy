@@ -13,7 +13,7 @@
     <h1>СПИСОК ЗАКАЗЧИКОВ</h1>
 </header>
 <div class="profile-container">
-    <form>
+
         <table>
             <tr>
                 <td colspan="2">Имя</td>
@@ -24,7 +24,7 @@
         </table>
         <table th:each="customer:${customers}">
             <tr th:data-card-id="${customer.getId()}">
-
+                <td><input type="radio" id="item2" name="selectedItem" th:value="${customer.getId()}"></td>
                 <td><img id="profile-image" alt="Customer pic"
                          th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>
                 <td>
@@ -33,9 +33,8 @@
                         <div class="description">Description</div>
                     </div>
                 </td>
-                <td th:value="${customer.getDateOfFirstCall()}">12/06/2020</td>
-                <td th:value="${customer.getStatus()}">CLIENT</td>
-                <td><a th:href=" @{'/SimplePsy/V1/specialist/customer-card/' + ${customer.getId()}}">&#128065</a></td>
+                <td th:text="${customer.getContact().getEmail()}"></td>
+                <td th:text="${customer.getStatus()}"></td>
                 <td><input class="remove" type="image" alt="Recycle bin pic"
                            src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png"></td>
             </tr>
@@ -43,17 +42,69 @@
 </div>
 
 <div class="button-container">
-    <input type="submit" id="show" value="Посмотреть карточку">
-    <input type="submit" id="delete" value="Удалить">
+    <button onclick="viewSelectedCard()">Посмотреть картоку</button>
+    <button onclick="deleteSelectedCard()">Удалить</button>
     <input type="submit" id="edit" value="Редактировать">
     <input type="submit" id="add" value="Добавить">
 </div>
-</form>
+
 </body>
 </html>
 
 <script>
-    function redirectToLink(link) {
-        window.location.href = link;
+    function viewSelectedCard() {
+
+        var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
+
+
+        if (selectedRadioButton) {
+
+            var selectedCardId = selectedRadioButton.value;
+
+
+            var viewUrl = '/SimplePsy/V1/specialist/customer-card/' + selectedCardId;
+
+
+            window.location.href = viewUrl;
+        } else {
+            alert('Выберите карточку перед нажатием "Посмотреть".');
+        }
+    }
+    function deleteSelectedCard()
+    {
+        var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
+
+        if (selectedRadioButton) {
+
+            var selectedCardId = selectedRadioButton.value;
+
+            var url = '/SimplePsy/V1/customer/' + selectedCardId;
+
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json', // Указывайте тип контента, если это необходимо
+                    // Дополнительные заголовки, если необходимо
+                },
+                // body: JSON.stringify({/* данные, если нужно */}), // Добавьте тело запроса, если необходимо
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Обработка успешного ответа
+                    console.log('DELETE request successful', data);
+                })
+                .catch(error => {
+                    // Обработка ошибки
+                    console.error('DELETE request failed', error);
+                });
+
+        } else {
+            alert('Выберите карточку перед нажатием "Посмотреть".');
+        }
     }
 </script>
