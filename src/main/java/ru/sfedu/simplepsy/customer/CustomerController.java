@@ -51,11 +51,13 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
+    @PostMapping
     @DeleteMapping("/{id}")
     public boolean deleteResource(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);
         return true;
     }
+
 
     @PutMapping("/")
     public Customer updateResource(@RequestBody Customer customer) {

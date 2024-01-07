@@ -76,4 +76,9 @@ public class SpecialistController {
         Customer cust = customerService.updateCustomer(customer);
         return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerId;
     }
+    @GetMapping("/questionnaire")
+    public String questionnaire()
+    {
+        return "questionnaire";
+    }
 }
