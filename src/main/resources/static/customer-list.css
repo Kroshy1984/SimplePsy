@@ -83,6 +83,7 @@ input:hover {
     background-color: #c2c2c2;
 }
 
+/*
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
     position: absolute;
@@ -134,4 +135,4 @@ input:hover {
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
-}
+}*/

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" th:src="@{/js/questionnaire.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/questionnaire.css}">
     <title>Questionnaire</title>
 </head>
@@ -38,24 +39,5 @@
         </div>
     </div>
 </div>
-<script>
-    let selectedAnswers = [];
-
-    function selectAnswer(questionNumber, answer) {
-        selectedAnswers[questionNumber - 1] = answer;
-        markSelected(questionNumber);
-    }
-
-    function markSelected(questionNumber) {
-        const buttons = document.querySelectorAll(`.question:nth-child(${questionNumber}) .answer`);
-        buttons.forEach((button, index) => {
-            if (selectedAnswers[questionNumber - 1] === button.innerText.toLowerCase()) {
-                button.classList.add("selected");
-            } else {
-                button.classList.remove("selected");
-            }
-        });
-    }
-</script>
 </body>
 </html>
