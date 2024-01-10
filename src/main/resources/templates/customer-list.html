@@ -44,7 +44,7 @@
 <div class="button-container">
     <button onclick="viewSelectedCard()">Посмотреть картоку</button>
     <button onclick="deleteSelectedCard()">Удалить</button>
-    <input type="submit" id="edit" value="Редактировать">
+    <input onclick="showButtons()" type="submit" id="edit" value="Редактировать">
     <input type="submit" id="add" value="Добавить">
 </div>
 
@@ -52,6 +52,7 @@
 </html>
 
 <script>
+
     function viewSelectedCard() {
 
         var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');

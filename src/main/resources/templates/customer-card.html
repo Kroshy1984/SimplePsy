@@ -17,37 +17,62 @@
         <input th:value="${customer.getId()}" th:name="customerId" hidden="hidden">
         <fieldset>
             <label for="name">Имя</label>
-            <input th:value="${customer.getName()}" type="text" id="name" name="name" placeholder="Имя">
+            <input th:value="${customer.getName()}" type="text" id="name" name="name" placeholder="Имя" disabled>
             <label for="status">Статус</label>
-            <input  th:value="${customer.getStatus()}" type="text" id="status" name="status" placeholder="Статус">
-            <label  for="registration-date">Дата регистрации</label>
-            <input   type="date" id="registration-date" name="registration-date" placeholder="Дата регистрации">
+            <input th:value="${customer.getStatus()}" type="text" id="status" name="status" placeholder="Статус" disabled>
+            <label for="registration-date">Дата регистрации</label>
+            <input type="date" id="registration-date" name="registration-date" placeholder="Дата регистрации" disabled>
         </fieldset>
 </div>
 <div class="profile-container">
     <div class="contacts">
 
-            <span>Контакты</span>
-            <fieldset>
-                <img class="icon" id="phone-icon" alt="Фото трубки" src="https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png">
-                <label for="phone">Телефон</label>
-                <input th:value="${customer.getContact().getPhone()}" type="tel" id="phone" name="contact.phone" placeholder="Номер телефона">
-                <img class="icon" id="email-icon" alt="Фото e-mail" src="https://www.freeiconspng.com/thumbs/email-icon/email-icon--clipart-best-22.png">
-                <label for="email">Электронная почта</label>
-                <input th:value="${customer.getContact().getEmail()}" type="email" id="email" name="contact.email" placeholder="E-mail">
-                <img class="icon" id="telegram-icon" alt="Фото телеграм" src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3201902/telegram-icon-md.png">
-                <label for="telegram">Телеграм</label>
-                <input th:value="${customer.getContact().getTg()}" type="text" id="telegram" name="contact.tg" placeholder="Ник телеграм">
-            </fieldset>
+        <span>Контакты</span>
+        <fieldset>
+            <img class="icon" id="phone-icon" alt="Фото трубки"
+                 src="https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png">
+            <label for="phone">Телефон</label>
+            <input th:value="${customer.getContact().getPhone()}" type="tel" id="phone" name="contact.phone"
+                   placeholder="Номер телефона" disabled>
+            <img class="icon" id="email-icon" alt="Фото e-mail"
+                 src="https://www.freeiconspng.com/thumbs/email-icon/email-icon--clipart-best-22.png">
+            <label for="email">Электронная почта</label>
+            <input th:value="${customer.getContact().getEmail()}" type="email" id="email" name="contact.email"
+                   placeholder="E-mail" disabled>
+            <img class="icon" id="telegram-icon" alt="Фото телеграм"
+                 src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3201902/telegram-icon-md.png">
+            <label for="telegram">Телеграм</label>
+            <input th:value="${customer.getContact().getTg()}" type="text" id="telegram" name="contact.tg"
+                   placeholder="Ник телеграм" disabled>
+        </fieldset>
 
     </div>
-    <img id="profile-image" alt="Фото профиля" th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}">
+    <img id="profile-image" alt="Фото профиля"
+         th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}">
 </div>
 <div class="button-container">
-    <input type="submit" id="edit" value="Редактировать">
-    <input type="submit" id="save" value="Сохранить">
-    <input type="submit" id="delete" value="Удалить">
+    <input type="button" id="edit" value="Редактировать" onclick="showButtons()">
+    <input name="save" type="submit" id="save" value="Сохранить" style="display: none;">
+    <input name="delete" type="submit" id="delete" value="Удалить" style="display: none;">
 </div>
 </form>
+<script>
+    function showButtons() {
+        // Находим элементы, которые нужно изменить
+        var inputsToEnable = document.querySelectorAll('.profile-container input[disabled]');
+        var saveButton = document.getElementById('save');
+        var deleteButton = document.getElementById('delete');
+
+        // Убираем атрибут disabled у всех найденных элементов
+        inputsToEnable.forEach(function (input) {
+            input.removeAttribute('disabled');
+        });
+
+        // Показываем кнопки
+        saveButton.style.display = 'inline-block';
+        deleteButton.style.display = 'inline-block';
+    }
+</script>
+
 </body>
 </html>

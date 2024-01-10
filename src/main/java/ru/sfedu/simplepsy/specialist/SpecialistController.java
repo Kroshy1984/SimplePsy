@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsy.customer.Customer;
 import ru.sfedu.simplepsy.customer.CustomerService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -80,5 +81,10 @@ public class SpecialistController {
     public String questionnaire()
     {
         return "questionnaire";
+    }
+    @PostMapping("/saveAnswers")
+    public String saveAnswers(@RequestBody String[] answers) {
+        System.out.println("Received answers: " + Arrays.toString(answers));
+        return "redirect:/SimplePsy/V1/specialist/questionnaire";
     }
 }
