@@ -14,8 +14,8 @@
 </header>
 <div>
     <form method="post" th:action="@{/SimplePsy/V1/specialist/customer-card/save}" th:object="${customer}">
-        <input th:value="${customer.getId()}" th:name="customerId" hidden="hidden">
-        <fieldset>
+        <input th:value="${customer.getId()}" th:name="customerId" id="customerIdInput" hidden="hidden">
+        <fieldset class="set">
             <label for="name">Имя</label>
             <input th:value="${customer.getName()}" type="text" id="name" name="name" placeholder="Имя" disabled>
             <label for="status">Статус</label>
@@ -53,13 +53,14 @@
 <div class="button-container">
     <input type="button" id="edit" value="Редактировать" onclick="showButtons()">
     <input name="save" type="submit" id="save" value="Сохранить" style="display: none;">
-    <input name="delete" type="submit" id="delete" value="Удалить" style="display: none;">
+    <input name="delete" type="button" id="delete" value="Удалить" style="display: none;" onclick="deleteCard()">
 </div>
 </form>
 <script>
     function showButtons() {
         // Находим элементы, которые нужно изменить
         var inputsToEnable = document.querySelectorAll('.profile-container input[disabled]');
+        var inputsFieldSetToEnable = document.querySelectorAll('.set input[disabled]');
         var saveButton = document.getElementById('save');
         var deleteButton = document.getElementById('delete');
 
@@ -67,10 +68,37 @@
         inputsToEnable.forEach(function (input) {
             input.removeAttribute('disabled');
         });
-
+        inputsFieldSetToEnable.forEach(function (input) {
+            input.removeAttribute('disabled');
+        });
         // Показываем кнопки
         saveButton.style.display = 'inline-block';
         deleteButton.style.display = 'inline-block';
+    }
+    function deleteCard()
+    {
+        var id = document.getElementById("customerIdInput").value;
+        var url = 'http://localhost:8080/SimplePsy/V1/specialist/' + id;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('DELETE request successful', data);
+            })
+            .catch(error => {
+                console.error('DELETE request failed', error);
+            });
+
     }
 </script>
 </body>

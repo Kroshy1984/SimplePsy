@@ -87,4 +87,9 @@ public class SpecialistController {
         System.out.println("Received answers: " + Arrays.toString(answers));
         return "redirect:/SimplePsy/V1/specialist/questionnaire";
     }
+    @DeleteMapping("/{id}")
+    public String deleteResource(@PathVariable("id") String id) {
+        customerService.deleteCustomer(id);
+        return "redirect:/SimplePsy/V1/specialist/customers";
+    }
 }

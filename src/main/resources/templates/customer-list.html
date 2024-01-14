@@ -78,7 +78,7 @@
 
             var selectedCardId = selectedRadioButton.value;
 
-            var url = '/SimplePsy/V1/customer/' + selectedCardId;
+            var url = 'http://localhost:8080/SimplePsy/V1/specialist/' + selectedCardId;
 
             fetch(url, {
                 method: 'DELETE',
@@ -86,7 +86,7 @@
                     'Content-Type': 'application/json', // Указывайте тип контента, если это необходимо
                     // Дополнительные заголовки, если необходимо
                 },
-                // body: JSON.stringify({/* данные, если нужно */}), // Добавьте тело запроса, если необходимо
+                 body: JSON.stringify({selectedCardId}),
             })
                 .then(response => {
                     if (!response.ok) {
