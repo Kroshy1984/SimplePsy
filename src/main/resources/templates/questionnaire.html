@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" th:src="@{/js/questionnaire.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/questionnaire.css}">
     <title>Questionnaire</title>
 </head>
@@ -37,42 +38,7 @@
             <button class="answer no" onclick="selectAnswer(4, 'no')">No</button>
         </div>
     </div>
-    <button onclick="saveAnswers()">Сохранить ответы</button>
+    <button class="save" onclick="saveAnswers()">Сохранить ответы</button>
 </div>
-<script>
-    let selectedAnswers = [];
-
-    function selectAnswer(questionNumber, answer) {
-        selectedAnswers[questionNumber - 1] = answer;
-        markSelected(questionNumber);
-    }
-
-    function markSelected(questionNumber) {
-        const buttons = document.querySelectorAll(`.question:nth-of-type(${questionNumber}) .answer`);
-        buttons.forEach((button, index) => {
-            if (selectedAnswers[questionNumber - 1] === button.innerText.toLowerCase()) {
-                button.classList.add("selected");
-            } else {
-                button.classList.remove("selected");
-            }
-        });
-    }
-    function saveAnswers() {
-        fetch('http://localhost:8080/SimplePsy/V1/specialist/saveAnswers', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedAnswers),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-</script>
 </body>
 </html>

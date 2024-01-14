@@ -15,3 +15,20 @@ function markSelected(questionNumber) {
         }
     });
 }
+
+function saveAnswers() {
+    fetch('http://localhost:8080/SimplePsy/V1/specialist/saveAnswers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedAnswers),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
