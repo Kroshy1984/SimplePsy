@@ -4,9 +4,9 @@
   "description": "Психолог",
   "additionalProperties": false,
   "properties": {
-    "id":{
-      "type":"string",
-      "description":"идентификатор психолог"
+    "id": {
+      "type": "string",
+      "description": "идентификатор психолог"
     },
     "name": {
       "type": "string",
@@ -26,6 +26,13 @@
       "maxLength": 255,
       "pattern": "^[А-Я]+*[а-я]$"
     },
+    "sessions": {
+      "$ref": "#/definitions/session_type"
+    },
+    "notification": {
+      "$ref": "#/definitions/session_type"
+    }
+  },
   "required": [
     "name",
     "surname",
