@@ -26,8 +26,8 @@
       "maxLength": 255,
       "pattern": "^[А-Я]+*[а-я]$"
     },
-    "sessions": {
-      "$ref": "#/definitions/session_type"
+    "calendar": {
+      "$ref": "#/definitions/calendar_type"
     },
     "notification": {
       "$ref": "#/definitions/session_type"
@@ -37,5 +37,59 @@
     "name",
     "surname",
     "id"
-  ]
+  ],
+  "definitions": {
+    "calendar_type": {
+      "description": "список встреч",
+      "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "meeting": {
+            "$ref": "#/definitions/meeting_type"
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      }
+    },
+    "meeting_type": {
+      "meeting_type": {
+        "type": "object",
+        "description": "Календарь",
+        "additionalProperties": false,
+        "properties": {
+          "clients": {
+            "$ref": "#/definitions/clientsOnSession_type"
+          },
+          "typeOfClients": {
+            "type": "string",
+            "description": "Тип клиента на встрече",
+            "enum": [
+              "Взрослый",
+              "Ребенок",
+              "Пара"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "description": "Дата встречи",
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "description": "Время встречи",
+            "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+          }
+        },
+        "required": [
+          "clients",
+          "typeOfClients"
+        ]
+      }
+    }
+  }
 }
