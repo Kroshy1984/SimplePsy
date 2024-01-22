@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.specialist;
+package ru.sfedu.simplepsycustomer.simplepsy.specialist;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

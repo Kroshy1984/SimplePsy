@@ -1,12 +1,12 @@
-package ru.sfedu.simplepsy;
+package ru.sfedu.simplepsycustomer.simplepsy;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.sfedu.simplepsy.customer.Contact;
-import ru.sfedu.simplepsy.customer.Customer;
-import ru.sfedu.simplepsy.customer.CustomerService;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.Contact;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.Customer;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.CustomerService;
 
 
 @SpringBootTest

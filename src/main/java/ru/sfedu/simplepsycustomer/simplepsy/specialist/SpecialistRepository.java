@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.specialist;
+package ru.sfedu.simplepsycustomer.simplepsy.specialist;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

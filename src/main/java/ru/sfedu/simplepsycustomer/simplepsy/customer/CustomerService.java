@@ -1,8 +1,8 @@
-package ru.sfedu.simplepsy.customer;
+package ru.sfedu.simplepsycustomer.simplepsy.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sfedu.simplepsy.exception.NotFoundException;
+import ru.sfedu.simplepsycustomer.simplepsy.exception.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;

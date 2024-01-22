@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy;
+package ru.sfedu.simplepsycustomer.simplepsy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

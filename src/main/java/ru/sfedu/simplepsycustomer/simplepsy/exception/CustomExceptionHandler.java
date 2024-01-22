@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.exception;
+package ru.sfedu.simplepsycustomer.simplepsy.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

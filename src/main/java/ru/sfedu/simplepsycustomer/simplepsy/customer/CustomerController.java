@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.customer;
+package ru.sfedu.simplepsycustomer.simplepsy.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

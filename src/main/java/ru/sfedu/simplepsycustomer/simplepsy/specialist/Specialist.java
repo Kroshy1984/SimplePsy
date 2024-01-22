@@ -1,10 +1,10 @@
-package ru.sfedu.simplepsy.specialist;
+package ru.sfedu.simplepsycustomer.simplepsy.specialist;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import ru.sfedu.simplepsy.customer.Contact;
-import ru.sfedu.simplepsy.customer.Customer;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.Contact;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.Customer;
 
 import java.util.List;
 

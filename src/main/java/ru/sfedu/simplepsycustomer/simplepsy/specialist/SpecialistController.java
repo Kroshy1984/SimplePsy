@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.specialist;
+package ru.sfedu.simplepsycustomer.simplepsy.specialist;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsy.customer.Customer;
-import ru.sfedu.simplepsy.customer.CustomerService;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.Customer;
+import ru.sfedu.simplepsycustomer.simplepsy.customer.CustomerService;
 
 import java.util.Arrays;
 import java.util.List;

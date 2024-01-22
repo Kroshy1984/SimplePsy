@@ -3,7 +3,6 @@ package ru.sfedu.simplepsy.classes.patient;
 import ru.sfedu.simplepsy.classes.Contact;
 import ru.sfedu.simplepsy.classes.Doc;
 import ru.sfedu.simplepsy.classes.client.PreferTime;
-import ru.sfedu.simplepsy.classes.types.*;
 
 public class Patient {
 

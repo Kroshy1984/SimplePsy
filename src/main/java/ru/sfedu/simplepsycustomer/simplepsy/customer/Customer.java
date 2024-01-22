@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.customer;
+package ru.sfedu.simplepsycustomer.simplepsy.customer;
 
 import lombok.Builder;
 import org.springframework.data.annotation.Id;
