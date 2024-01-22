@@ -30,16 +30,18 @@
       "$ref": "#/definitions/calendar_type"
     },
     "notification": {
-      "$ref": "#/definitions/session_type"
+      "$ref": "#/definitions/notification_type"
     }
   },
   "required": [
     "name",
     "surname",
-    "id"
+    "id",
+    "calendar"
   ],
   "definitions": {
     "calendar_type": {
+      "type":"array",
       "description": "список встреч",
       "additionalProperties": false,
       "minItems": 1,
@@ -56,40 +58,41 @@
         ]
       }
     },
+    "notification_type": {
+      "type": "string"
+    },
     "meeting_type": {
-      "meeting_type": {
-        "type": "object",
-        "description": "Календарь",
-        "additionalProperties": false,
-        "properties": {
-          "clients": {
-            "$ref": "#/definitions/clientsOnSession_type"
-          },
-          "typeOfClients": {
-            "type": "string",
-            "description": "Тип клиента на встрече",
-            "enum": [
-              "Взрослый",
-              "Ребенок",
-              "Пара"
-            ]
-          },
-          "date": {
-            "type": "string",
-            "description": "Дата встречи",
-            "format": "date"
-          },
-          "time": {
-            "type": "string",
-            "description": "Время встречи",
-            "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
-          }
+      "type": "object",
+      "description": "Календарь",
+      "additionalProperties": false,
+      "properties": {
+        "clients": {
+          "$ref": "#/definitions/clientsOnSession_type"
         },
-        "required": [
-          "clients",
-          "typeOfClients"
-        ]
-      }
+        "typeOfClients": {
+          "type": "string",
+          "description": "Тип клиента на встрече",
+          "enum": [
+            "Взрослый",
+            "Ребенок",
+            "Пара"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "description": "Дата встречи",
+          "format": "date"
+        },
+        "time": {
+          "type": "string",
+          "description": "Время встречи",
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+        }
+      },
+      "required": [
+        "clients",
+        "typeOfClients"
+      ]
     }
   }
 }
