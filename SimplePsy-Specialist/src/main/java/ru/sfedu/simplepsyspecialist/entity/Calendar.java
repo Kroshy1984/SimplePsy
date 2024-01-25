@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsycustomer.simplepsyspecialist.simplepsyspecialist.specialist;
+package ru.sfedu.simplepsyspecialist.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

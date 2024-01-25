@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsycustomer.simplepsyspecialist.simplepsyspecialist.specialist;
+package ru.sfedu.simplepsyspecialist.entity;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

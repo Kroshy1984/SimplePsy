@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/signup.css}">
+    <script type="text/javascript" th:src="@{/js/signup.js}"></script>
+</head>
+<body>
+<h1>Registration Form</h1>
+<div>
+    Уже Есть аккаунт? <a th:href="@{/SimplePsySpecialist/V1/specialist/login}">Войти</a>
+</div>
+<form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsySpecialist/V1/specialist/new}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:name="name" th:field="*{name}" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:name="surname" th:field="*{surname}" required>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" th:name="email" th:field="*{email}" required>
+
+    <label for="password">Password:</label>
+    <input type="text" id="password" th:name="password" th:field="*{password}" required>
+
+<!--    <label for="confirmPassword">Confirm Password:</label>-->
+<!--    <input type="password" id="confirmPassword" name="confirmPassword" required>-->
+
+    <button type="submit">Register</button>
+</form>
+<script src="script.js"></script>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 5px;
+        background-color: #007BFF;
+        color: #ffffff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</html>

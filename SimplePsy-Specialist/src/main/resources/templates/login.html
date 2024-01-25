@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsySpecialist/V1/specialist/login}" method="post">
+    <label for="firstName">Email:</label>
+    <input type="text" id="firstName" th:name="email" th:field="*{email}" required>
+
+    <label for="lastName">Password:</label>
+    <input type="text" id="lastName" th:name="password" th:field="*{password}" required>
+
+    <!--    <label for="confirmPassword">Confirm Password:</label>-->
+    <!--    <input type="password" id="confirmPassword" name="confirmPassword" required>-->
+
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>
