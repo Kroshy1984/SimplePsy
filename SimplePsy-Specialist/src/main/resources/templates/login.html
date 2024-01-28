@@ -8,12 +8,13 @@
     <title>Document</title>
 </head>
 <body>
+<a th:href="@{/SimplePsySpecialist/V1/specialist/signup}">Создать новый аккаунт</a>
 <form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsySpecialist/V1/specialist/login}" method="post">
     <label for="firstName">Email:</label>
-    <input type="text" id="firstName" th:name="email" th:field="*{email}" required>
+    <input type="text" id="firstName" th:name="username" required>
 
     <label for="lastName">Password:</label>
-    <input type="text" id="lastName" th:name="password" th:field="*{password}" required>
+    <input type="text" id="lastName" th:name="password" required>
 
     <!--    <label for="confirmPassword">Confirm Password:</label>-->
     <!--    <input type="password" id="confirmPassword" name="confirmPassword" required>-->

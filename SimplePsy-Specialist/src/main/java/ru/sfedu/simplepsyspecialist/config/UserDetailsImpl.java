@@ -1,7 +1,5 @@
 package ru.sfedu.simplepsyspecialist.config;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,27 +11,28 @@ import java.util.List;
 /**
  * UserDetailsImpl implementing the UserDetails interface
  */
-@Getter @Setter
 public class UserDetailsImpl implements UserDetails {
     private String id;
-    private String email;
-    private String surname;
+    private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    public UserDetailsImpl(String id, String email, String surname, String password, Collection<? extends GrantedAuthority> authorities) {
+
+    public UserDetailsImpl() {
+    }
+
+    public UserDetailsImpl(String id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.email = email;
-        this.surname = surname;
+        this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
+
     public static UserDetailsImpl build(Specialist specialist)
     {
         List<GrantedAuthority> authorityList = List.of(new SimpleGrantedAuthority(specialist.getSpecialistRole().name()));
         return new UserDetailsImpl(
                 specialist.getId(),
-                specialist.getEmail(),
-                specialist.getSurname(),
+                specialist.getUsername(),
                 specialist.getPassword(),
                 authorityList);
     }
@@ -49,7 +48,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
@@ -70,5 +69,26 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }

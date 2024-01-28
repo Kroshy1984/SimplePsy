@@ -40,16 +40,25 @@ public class SpecialistController {
     @PostMapping("/login")
     public String login(@ModelAttribute("specialist") Specialist specialist)
     {
+        System.out.println(specialist.getUsername());
+        System.out.println(specialist.getPassword());
         specialistService.authorizeSpecialist(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
-
-    @PostMapping("/new")
+//@PostMapping("/login")
+//public String login(@ModelAttribute("specialist") Specialist specialist)
+//{
+//    System.out.println(specialist.getEmail());
+//    System.out.println(specialist.getPassword());
+//    specialistService.authorizeSpecialist(specialist);
+//    return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+//}
+    @PostMapping("/signup")
     public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist)
     {
         System.out.println(specialist.getName());
         System.out.println(specialist.getSurname());
-        System.out.println(specialist.getEmail());
+        System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.registerNewSpecialist(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";

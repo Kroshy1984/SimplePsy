@@ -19,7 +19,7 @@ public class Specialist {
     private String id;
 
     @NotBlank
-    private String email;
+    private String username;
 
     @NotBlank
     @Length(max = 255)
@@ -49,10 +49,15 @@ public class Specialist {
 //    private List<ClientEntry> clients;
 
 
-    public Specialist(String name, String surname, String email, String password) {
+    public Specialist(String name, String surname, String username, String password) {
         this.name = name;
         this.surname = surname;
-        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Specialist(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -123,11 +128,11 @@ public class Specialist {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
