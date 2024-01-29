@@ -1,5 +1,2 @@
-rootProject.name = 'SimplePsy'
+rootProject.name = 'scoring'
 include ':SimplePsy-Specialist', ':scoring'
-
-
-
