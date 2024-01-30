@@ -8,6 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-Здесь должен быть календарь
+<form id="registrationForm"  th:action="@{/SimplePsySpecialist/V1/specialist/calendar}" method="post">
+
+    <input id="email" th:name="start_date" placeholder="E-mail">
+
+    <label for="password">Пароль *</label>
+    <input id="password" th:name="end_date" placeholder="Пароль">
+
+    <button type="submit">Войти</button>
+</form>
 </body>
 </html>

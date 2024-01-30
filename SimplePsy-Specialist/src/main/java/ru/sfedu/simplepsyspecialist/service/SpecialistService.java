@@ -2,6 +2,7 @@ package ru.sfedu.simplepsyspecialist.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
 import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
@@ -59,5 +60,48 @@ public class SpecialistService {
     }
     public Specialist findById(String id) {
         return specialistRepository.findById(id).orElse(null);
+    }
+
+    /*public SpecialistService(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
+    }*/
+
+    public void sendRequestToSession(String specialistId, String startDate, String endDate) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8082").build();
+        String url = "SimplePsyCalendar/V1/calendar/search"; // Укажите ваш конечный точку API
+        webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("specialist_id", specialistId)
+                        .queryParam("start_date", startDate)
+                        .queryParam("end_date", endDate)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .subscribe(responseBody -> {
+                    // Обработка ответа, если необходимо
+                    System.out.println("Response: " + responseBody);
+                });
+    }
+
+    public void sendRequestToCalendar(String specialistId, String startDate, String endDate) {
+        System.out.println(specialistId);
+        System.out.println(startDate);
+        System.out.println(endDate);
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8082").build();
+        String url = "/SimplePsyCalendar/V1/calendar/search";
+        webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("specialist_id", specialistId)
+                        .queryParam("start_date", startDate)
+                        .queryParam("end_date", endDate)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .subscribe(responseBody -> {
+                    // Обработка ответа, если необходимо
+                    System.out.println("Response: " + responseBody);
+                });
     }
 }

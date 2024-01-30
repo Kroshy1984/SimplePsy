@@ -68,4 +68,23 @@ public class SpecialistController {
     public String calendar() {
         return "calendar";
     }
+
+    /*@PostMapping("/search")
+    public void handleGetRequest(
+            @RequestParam("specialist_id") String specialist_id,
+            @RequestParam("start_date") String start_date,
+            @RequestParam("end_date") String end_date) {
+        specialistService.sendRequestToSession(specialist_id, start_date, end_date);
+    }*/
+
+    @PostMapping("/calendar")
+    public void sendDates(
+            @RequestParam("start_date") String startDate,
+            @RequestParam("end_date") String endDate
+    )
+    {
+        System.out.println(startDate);
+        System.out.println(endDate);
+        specialistService.sendRequestToCalendar("65af431d9b7b25354b377d6a", startDate, endDate);
+    }
 }

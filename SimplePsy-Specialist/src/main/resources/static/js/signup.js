@@ -1,9 +1,6 @@
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
@@ -12,7 +9,16 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         return;
     }
 
-    // TODO: Implement server-side validation and data storage.
-
     alert('Registration successful.');
 });
+
+// Allowing user to see/hide password
+function ShowPassword() {
+    var password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}

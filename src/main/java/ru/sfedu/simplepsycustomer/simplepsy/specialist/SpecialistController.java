@@ -18,7 +18,6 @@ import java.util.List;
 @RequestMapping("/SimplePsy/V1/specialist")
 public class SpecialistController {
 
-
     SpecialistService specialistService;
 
     CustomerService customerService;
@@ -48,6 +47,7 @@ public class SpecialistController {
         model.addAttribute("customers", customers);
         return "customer-list";
     }
+
     @GetMapping("/customer-avatar/{customerId}")
     public ResponseEntity<byte[]> getCustomerAvatar(@PathVariable String customerId) {
         Customer customer = customerService.findById(customerId);
@@ -65,6 +65,7 @@ public class SpecialistController {
         model.addAttribute("customer", customer);
         return "customer-card";
     }
+
     @PostMapping("/customer-card/save")
     public String saveNewCustomerCard(@ModelAttribute("customer") Customer customer,
                                       @RequestParam String customerId,
@@ -77,16 +78,19 @@ public class SpecialistController {
         Customer cust = customerService.updateCustomer(customer);
         return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerId;
     }
+
     @GetMapping("/questionnaire")
     public String questionnaire()
     {
         return "questionnaire";
     }
+
     @PostMapping("/saveAnswers")
     public String saveAnswers(@RequestBody String[] answers) {
         System.out.println("Received answers: " + Arrays.toString(answers));
         return "redirect:/SimplePsy/V1/specialist/questionnaire";
     }
+
     @DeleteMapping("/{id}")
     public String deleteResource(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);
