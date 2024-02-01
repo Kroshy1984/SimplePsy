@@ -1,6 +1,9 @@
 package ru.sfedu.calendar;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,8 +28,9 @@ public class CalendarController {
         calendarService.sendRequestToSession(specialist_id, start_date, end_date);
     }
 
-    @PostMapping("/result")
-    public void sendResultToSpecialist(@RequestParam List<Object> sessionList) {
+    @GetMapping("/result")
+    public void sendResultToSpecialist(@RequestParam("sessionList") List<Object> sessionList) {
+        System.out.println("got the sessionList " + sessionList.get(0));
         calendarService.sendResultToSpecialist(sessionList);
     }
 }

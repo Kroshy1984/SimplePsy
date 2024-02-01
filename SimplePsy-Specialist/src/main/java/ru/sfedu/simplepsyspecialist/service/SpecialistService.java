@@ -65,7 +65,10 @@ public class SpecialistService {
     /*public SpecialistService(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
     }*/
-
+    public Specialist findByUsername(String username)
+    {
+        return specialistRepository.findByUsername(username).orElseThrow(() -> new SpecialistNotFoundException("User with username " + username + " not found"));
+    }
     public void sendRequestToSession(String specialistId, String startDate, String endDate) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8082").build();
         String url = "SimplePsyCalendar/V1/calendar/search"; // Укажите ваш конечный точку API
@@ -85,6 +88,7 @@ public class SpecialistService {
     }
 
     public void sendRequestToCalendar(String specialistId, String startDate, String endDate) {
+        System.out.println("sending request to the calendar");
         System.out.println(specialistId);
         System.out.println(startDate);
         System.out.println(endDate);

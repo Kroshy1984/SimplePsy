@@ -23,8 +23,9 @@ public class SessionService {
     }
 
     public void sendResultToCalendar(List<Object> sessionList) {
-        WebClient webClient = WebClient.builder().baseUrl("https://localhost:8082").build();
-        String url = "/SimplePsyCalendar/V1/calendar"; // Укажите вашу конечную точку API
+        System.out.println("sending result to the calendar");
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8082").build();
+        String url = "/SimplePsyCalendar/V1/calendar/result";
         webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -33,8 +34,8 @@ public class SessionService {
                 .retrieve()
                 .bodyToMono(String.class)
                 .subscribe(responseBody -> {
-                    // Обработка ответа, если необходимо
                     System.out.println("Response: " + responseBody);
                 });
     }
+
 }
