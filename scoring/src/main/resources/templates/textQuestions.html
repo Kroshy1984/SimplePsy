@@ -5,17 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/textQuestions.css}">
+    <title>Text Questions</title>
 </head>
 <body>
-
-    <div th:each="question, questionIndex : ${questions}">
-        <label th:text="${question}"></label>
-        <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'"/>
+    <div class="page-content">
+        <div class="form-container">
+            <div th:each="question, questionIndex : ${questions}">
+                <label th:text="${question}"></label>
+                <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'"/>
+            </div>
+            <div class="button-container">
+                <button onclick="sendData()">Подтвердить</button>
+            </div>
+        </div>
     </div>
-
-    <button onclick="sendData()">Submit</button>
-
 </body>
 <script>
     function sendData() {

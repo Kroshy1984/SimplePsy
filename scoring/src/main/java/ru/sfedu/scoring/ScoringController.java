@@ -40,7 +40,7 @@ public class ScoringController {
     @GetMapping("/checkboxQuestions")
     public String checkboxQuestions(Model model) {
         model.addAttribute("questions", Scoring.getCheckboxQuestions());
-        return "checkBoxQuestions";
+        return "checkboxQuestions";
     }
     @PostMapping("/checkboxQuestions")
     public String getCheckboxQuestions(@RequestBody String[] answers) {

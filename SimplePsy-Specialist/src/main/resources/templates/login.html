@@ -10,11 +10,6 @@
             width: 360px;
         }
 
-        .login {
-            text-align: center;
-            padding-bottom: 15px;
-        }
-
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -33,6 +28,7 @@
         }
 
         a {
+            display: block;
             color: rgb(220, 185, 255);
         }
 
@@ -49,8 +45,7 @@
 
         input[type="checkbox"] {
             width: auto;
-            margin-bottom: 10px;
-            padding: 7px;
+            margin-bottom: 15px;
         }
 
         input {
@@ -92,16 +87,16 @@
 
     <div class="checkbox-element">
         <input type="checkbox" id="remember-password" name="remember-password">
-        <label for="remember-password">Запомнить пароль</label> <a th:href="@{/SimplePsySpecialist/V1/specialist/changepass}">Забыли пароль?</a>
+        <label for="remember-password">Запомнить пароль</label>
+        <a th:href="@{/SimplePsySpecialist/V1/specialist/changepass}">Забыли пароль?</a>
     </div>
     <!--    <label for="confirmPassword">Confirm Password:</label>-->
     <!--    <input type="password" id="confirmPassword" name="confirmPassword" required>-->
 
     <button type="submit">Войти</button>
     <p>Нет аккаунта в понятной практике?</p>
-    <a th:href="@{/SimplePsySpecialist/V1/specialist/signup}">Зарегестрироваться</a>
+    <a th:href="@{/SimplePsySpecialist/V1/specialist/signup}">Зарегистрироваться</a>
 </form>
-
 </div>
 </body>
 </html>
