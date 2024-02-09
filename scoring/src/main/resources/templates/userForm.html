@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div th:each="question, questionIndex : ${questions}">
+        <label th:text="${question}"></label>
+        <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" />
+    </div>
+    <button onclick="sendData()">Submit</button>
+</body>
+<script>
+    function sendData() {
+        const answers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
+        const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/userForm';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(answers)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        window.location.href =
+            'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestion'
+
+    }
+
+</script>
+</html>

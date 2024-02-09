@@ -1,4 +1,4 @@
-package ru.sfedu.scoring.scoring;
+package ru.sfedu.scoring;
 
 public interface ScoringRepository {
 }

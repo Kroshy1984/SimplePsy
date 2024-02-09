@@ -9,6 +9,7 @@ import java.util.List;
 public class CalendarService {
     public void sendRequestToSession(String specialistId, String startDate, String endDate) {
         System.out.println("sending request to the session");
+
         System.out.println(specialistId);
         System.out.println(startDate);
         System.out.println(endDate);

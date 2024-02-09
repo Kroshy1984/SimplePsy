@@ -21,16 +21,10 @@ repositories {
 }
 
 dependencies {
-	implementation 'ru.sfedu.simplepsy-specialist:0.0.1-SNAPSHOT'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.0.Final'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation project(path: ':')
-	implementation project(path: ':')
-	implementation project(path: ':')
-	implementation project(path: ':')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.2.0'

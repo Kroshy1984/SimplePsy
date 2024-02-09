@@ -107,5 +107,6 @@ public class SpecialistService {
                     // Обработка ответа, если необходимо
                     System.out.println("Response: " + responseBody);
                 });
+
     }
 }

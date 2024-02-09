@@ -45,6 +45,7 @@ public class SpecialistController {
         specialistService.authorizeSpecialist(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
+   
 //@PostMapping("/login")
 //public String login(@ModelAttribute("specialist") Specialist specialist)
 //{
