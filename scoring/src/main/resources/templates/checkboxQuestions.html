@@ -5,25 +5,33 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" th:href="@{/checkboxQuestions.css}">
     <title>CheckboxQuestions</title>
 </head>
 <body>
-    <div class="page-content">
-        <div class="form-container">
-            <div th:each="question, questionIndex : ${questions}">
-                <label th:text="${question}"></label>
-                <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" />
-            </div>
-            <div class="button-container">
-                <button onclick="sendData()">Подтвердить</button>
-            </div>
+<div class="page-content">
+    <div class="form-container">
+        <div th:each="question, questionIndex : ${questions}">
+            <label th:text="${question}"></label>
+            <input type="checkbox" name="answers[${questionIndex.index}]" value="Да"> Да
+            <input type="checkbox" name="answers[${questionIndex.index}]" value="Нет"> Нет
+        </div>
+        <div class="button-container">
+            <button onclick="sendData()">Подтвердить</button>
         </div>
     </div>
+</div>
 </body>
 <script>
     function sendData() {
-        const answers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
+        const answers = {};
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
+            const index = input.getAttribute('name').replace('answers[', '').replace(']', '');
+            const value = input.value;
+            if (!answers[index]) {
+                answers[index] = [];
+            }
+            answers[index].push(value);
+        });
         const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/checkboxQuestions';
 
         fetch(url, {
@@ -40,10 +48,7 @@
             .catch(error => {
                 console.error('Error:', error);
             });
-        window.location.href =
-            'http://localhost:8084/SimplePsyScoring/V1/scoring/done'
-
+        window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
     }
-
 </script>
 </html>

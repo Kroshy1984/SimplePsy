@@ -17,16 +17,16 @@ public class SessionController {
     }
 
     @GetMapping("/search")
-    public void handleGetRequest(
+    public List<Object> handleGetRequest(
+            @RequestParam("specialist_id") String specialist_id,
             @RequestParam("start_date") String start_date,
-            @RequestParam("end_date") String end_date,
-            @RequestParam("client_id") String client_id) {
+            @RequestParam("end_date") String end_date) {
+        System.out.println(specialist_id);
         System.out.println(start_date);
         System.out.println(end_date);
-        System.out.println(client_id);
-        List<Object> sessions  = Collections.singletonList(sessionService.findByDate(start_date, end_date, client_id));
+        List<Object> sessions  = Collections.singletonList(sessionService.findByDate(start_date, end_date, specialist_id));
         System.out.println("got the first session: " + sessions.get(0));
-        sessionService.sendResultToCalendar(sessions);
+        return sessions;
     }
 
     @PostMapping("/new")
@@ -36,9 +36,4 @@ public class SessionController {
         sessionService.createSession(specialist_id, date);
     }
 
-    @PostMapping("/result")
-    public void handlePostRequest(
-            @RequestParam List<Object> sessionList) {
-        sessionService.sendResultToCalendar(sessionList);
-    }
 }
