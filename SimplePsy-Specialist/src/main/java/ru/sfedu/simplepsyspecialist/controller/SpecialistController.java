@@ -3,6 +3,8 @@ package ru.sfedu.simplepsyspecialist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -79,13 +81,17 @@ public class SpecialistController {
     }*/
 
     @PostMapping("/calendar")
-    public void sendDates(
+    public String sendDates(
+            @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam("start_date") String startDate,
             @RequestParam("end_date") String endDate
     )
     {
         System.out.println(startDate);
         System.out.println(endDate);
-        specialistService.sendRequestToCalendar("65af431d9b7b25354b377d6a", startDate, endDate);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        String specialist_id = specialist.getId();
+        specialistService.sendRequestToSession(specialist_id, startDate, endDate);
+        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 }

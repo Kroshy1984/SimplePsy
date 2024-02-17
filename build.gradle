@@ -11,10 +11,12 @@ java {
 	sourceCompatibility = '17'
 }
 
-repositories {
-	mavenCentral()
+allprojects {
+	repositories {
+		google()
+		mavenCentral()
+	}
 }
-
 dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 //	implementation 'org.springframework.boot:spring-boot-starter-validation'
