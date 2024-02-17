@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/userForm.css}">
     <title>User Form</title>
 </head>
@@ -16,34 +17,9 @@
                 <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" />
             </div>
             <div class="button-container">
-                <button onclick="sendData()">Подтвердить</button>
+                <button onclick="collectUserFormAnswers()">Далее</button>
             </div>
         </div>
     </div>
 </body>
-<script>
-    function sendData() {
-        const answers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
-        const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/userForm';
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(answers)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        window.location.href =
-            'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestion'
-
-    }
-
-</script>
 </html>

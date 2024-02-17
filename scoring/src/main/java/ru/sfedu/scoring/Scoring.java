@@ -1,5 +1,6 @@
 package ru.sfedu.scoring;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -8,12 +9,25 @@ import java.util.List;
 @Document("Scoring")
 public class Scoring {
     private String id;
-    
+
+    @Transient
     private static List<String> textQuestions;
+    @Transient
     private static List<String> checkboxQuestions;
+    @Transient
     private static List<String> userData;
-    public static List<String> getUserData()
-    {
+    public List<String> answers = new ArrayList<>();
+    public String clientId;
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
+
+    public static List<String> getUserData() {
         userData = new ArrayList<>();
         userData.add("Ваше Имя:");
         userData.add("Возраст:");

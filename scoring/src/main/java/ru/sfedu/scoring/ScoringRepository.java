@@ -1,4 +1,6 @@
 package ru.sfedu.scoring;
 
-public interface ScoringRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface ScoringRepository extends MongoRepository<Scoring, String> {
 }
