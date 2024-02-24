@@ -11,16 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/emails")
 public class EmailController {
     private EmailService emailService;
+
     @Autowired
-    public EmailController(EmailService emailService)
-    {
+    public EmailController(EmailService emailService) {
         this.emailService = emailService;
     }
+
     @PostMapping("/text")
-    public ResponseEntity<String> sendTextEmail(@RequestParam("to") String to) {
-        emailService.sendTextEmail(to);
+    public ResponseEntity<String> sendTextEmail(@RequestParam("email") String email,
+                                                @RequestParam("name") String name) {
+        System.out.println(String.format("got email %s and name", email, name));
+        emailService.sendTextEmail(email, name);
         return ResponseEntity.ok("Success");
     }
+
 
 //    @PostMapping("/html")
 //    fun sendHtmlEmail(@RequestBody request: MultipleReceiverRequest) {

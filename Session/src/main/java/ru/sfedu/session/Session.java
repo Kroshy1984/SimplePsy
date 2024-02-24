@@ -1,5 +1,6 @@
 package ru.sfedu.session;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -14,10 +15,12 @@ public class Session {
 
     @NotBlank
     @Pattern(regexp = "^[а-яА-ЯёЁ]+\\s[0-9]{2}/[0-9]{2}/[0-9]{4}$")
+    @JsonProperty("date")
     private String date;
 
     @NotBlank
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    @JsonProperty("time")
     private String time;
 
     @NotBlank
@@ -25,6 +28,7 @@ public class Session {
     private String typeOfClients;
     private String timeOfMeeting;
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    @JsonProperty("specialist_id")
     private String clientId;
 
     public Session() {

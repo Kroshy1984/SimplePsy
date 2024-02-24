@@ -1,5 +1,6 @@
 package ru.sfedu.session;
 
+import com.google.gson.JsonArray;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -28,7 +29,15 @@ public class SessionController {
         System.out.println("got the first session: " + sessions.get(0));
         return sessions;
     }
-
+    @GetMapping("/searchAll")
+    public JsonArray searchAllSessions(
+            @RequestParam("specialist_id") String specialist_id) {
+        System.out.println(specialist_id);
+        JsonArray sessions  = sessionService.findAllBySpecialistId(specialist_id);
+        System.out.println("Sending JsonArray sessions back to the notification from" +
+                "SessionController in method searchAllSessions: " + sessions);
+        return sessions;
+    }
     @PostMapping("/new")
     public void handlePostRequest(
             @RequestParam("specialist_id") String specialist_id,

@@ -36,6 +36,8 @@ public class Specialist {
     @Pattern(regexp = "^[А-Я]+^[а-я]$")
     private String middleName;
 
+    private String email;
+
     private SpecialistRole specialistRole = SpecialistRole.USER_ROLE;
 
     @DBRef

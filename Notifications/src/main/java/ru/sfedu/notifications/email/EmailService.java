@@ -18,12 +18,13 @@ class EmailService {
     private String senderEmail;
 
 
-    public void sendTextEmail(String receiver) {
+    public void sendTextEmail(String email, String name) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(senderEmail);
-        message.setTo(receiver);
-        message.setSubject("Тестовое письмо");
-        message.setText("На связи");
+        message.setTo(email);
+        message.setSubject("Здравствуйте, " + name);
+        message.setText("Ваш аккаунт был успешно создан");
+        System.out.println("Sending email to the " + name);
         javaMailSender.send(message);
     }
 }

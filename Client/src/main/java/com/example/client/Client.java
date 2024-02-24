@@ -1,14 +1,16 @@
 package com.example.client;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Client")
 public class Client {
-    @Id
+
     String id;
     String name;
     String surname;
+    int age;
+    String phoneNumber;
+    String email;
     MaritalStatus maritalStatus;
 
     TypeOfClient typeOfClient;
@@ -62,5 +64,29 @@ public class Client {
 
     public void setTypeOfClient(TypeOfClient typeOfClient) {
         this.typeOfClient = typeOfClient;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

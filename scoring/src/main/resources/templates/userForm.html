@@ -10,16 +10,68 @@
     <title>User Form</title>
 </head>
 <body>
-    <div class="page-content">
-        <div class="form-container">
-            <div th:each="question, questionIndex : ${questions}">
-                <label th:text="${question}"></label>
-                <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" />
-            </div>
-            <div class="button-container">
-                <button onclick="collectUserFormAnswers()">Далее</button>
-            </div>
+<div class="page-content">
+    <div class="form-container">
+
+        <label th:text="${questions[0]}"></label>
+        <input id="name" type="text" th:name="'answers[' + ${0} + ']'" pattern="[А-Яа-яЁё]*" title="Пожалуйста, введите только кириллицу" required /><!-- имя-->
+
+
+        <label th:text="${questions[1]}"></label>
+        <input id="surname" type="text" th:name="'answers[' + ${1} + ']'"pattern="[А-Яа-яЁё]*" title="Пожалуйста, введите только кириллицу" required/> <!-- фамилия-->
+
+
+        <label th:text="${questions[2]}"></label> <!-- возраст-->
+        <input id="age" type="text" th:name="'answers[' + ${2} + ']'" pattern="[1-9]*" title="Пожалуйста, для указания возраста используйте только арабские цифры" required/>
+
+
+        <label th:text="${questions[3]}"></label>
+        <input id="phone" type="text" th:name="'answers[' + ${3} + ']'"/> <!-- номер телефона-->
+
+
+        <label th:text="${questions[4]}"></label> <!-- почта-->
+        <input id="email" type="text" th:name="'answers[' + ${4} + ']'" required/> <!--  потом указать тип email -->
+
+        <label th:text="${questions[5]}"></label> <!-- семейное положение-->
+        <select id="maritalStatusInput" th:name="'answers[' + ${5} + ']'" required>
+            <option value="">Выберите семейное положение</option>
+            <option value="вариант1">Холост</option>
+            <option value="вариант2">Женат/замужем</option>
+        </select>
+        <div class="button-container">
+            <button id="submitButton" onclick="collectUserFormAnswers()">Далее</button>
         </div>
     </div>
+</div>
+    <script>
+        function checkFields() {
+            //проверяет заполнены ли поля(trim убирает пробелы)
+            let name = document.getElementById("name").value.trim();
+            let surname = document.getElementById("surname").value.trim();
+            let age = document.getElementById("age").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let email = document.getElementById("email").value.trim();
+
+            //checkValidity проверяет соответствует ли ввод patter(вроде бы)
+            let nameInput = document.getElementById("name").checkValidity();
+            let surnameInput = document.getElementById("surname").checkValidity();
+            let ageInput = document.getElementById("age").checkValidity();
+            return name !== "" && surname !== "" && age !== "" && phone !== "" && email !== "" && nameInput && surnameInput && ageInput;
+        }
+
+
+        function checkFormValidity() {
+            //тут если форма валидна то тогда кнопка перехода будет доступна
+            let submitButton = document.getElementById("submitButton");
+            submitButton.disabled = !checkFields();
+        }
+
+        // после заполнения каждого из полей вызывается обработчик чтобы проверить валидность формы
+        document.getElementById("name").addEventListener("input", checkFormValidity);
+        document.getElementById("surname").addEventListener("input", checkFormValidity);
+        document.getElementById("age").addEventListener("input", checkFormValidity);
+        document.getElementById("phone").addEventListener("input", checkFormValidity);
+        document.getElementById("email").addEventListener("input", checkFormValidity);
+    </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ let textAnswers = JSON.parse(localStorage.getItem('textAnswers'));
 let checkboxAnswers = JSON.parse(localStorage.getItem('checkboxAnswers'));
 
 function collectUserFormAnswers() {
-    userFormAnswers = Array.from(document.querySelectorAll('input[type="text"]:checked')).map(input => input.value);
+    userFormAnswers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
     localStorage.setItem('userFormAnswers', JSON.stringify(userFormAnswers));
     window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestions';
 }

@@ -30,8 +30,8 @@ public class Scoring {
     public static List<String> getUserData() {
         userData = new ArrayList<>();
         userData.add("Ваше Имя:");
+        userData.add("Ваша фамилия:");
         userData.add("Возраст:");
-        userData.add("Род занятий/профессия:");
         userData.add("Телефон:");
         userData.add("E-mail:");
         userData.add("Семейное положение:");
