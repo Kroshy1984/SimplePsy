@@ -45,12 +45,6 @@ public class SpecialistService {
 
         if(passwordEncoder.matches(s.getPassword(), specialist.getPassword()))
         {
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(
-//                            specialist.getEmail(),
-//                            specialist.getPassword()
-//                    ));
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
             return specialist;
         }
         else
