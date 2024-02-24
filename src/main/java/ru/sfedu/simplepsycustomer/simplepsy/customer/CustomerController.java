@@ -15,15 +15,6 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-//    @GetMapping("/")
-//    public Customer getResource(@RequestParam(name = "name", required = false) String name,
-//                                @RequestParam(name = "contact", required = false) String contact) {
-//
-//        if(name != null && contact == null) return customerService.getCustomerByName(name);
-//        if(name == null && contact != null) return customerService.getCustomerByContact(contact);
-//        else return customerService.getCustomerByNameAndContact(name, contact);
-//    }
-
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.FOUND)
     public List<Customer> getResource(@RequestParam(name = "name", required = false) String name,
@@ -37,6 +28,7 @@ public class CustomerController {
     public Customer createResource(@RequestBody Customer customer) {
         return customerService.saveCustomer(customer);
     }
+
     @PostMapping("/new-customer")
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createCustomer(@RequestParam("name") String name,
@@ -58,11 +50,9 @@ public class CustomerController {
         return true;
     }
 
-
     @PutMapping("/")
     public Customer updateResource(@RequestBody Customer customer) {
         return customerService.updateCustomer(customer);
     }
-
 
 }
