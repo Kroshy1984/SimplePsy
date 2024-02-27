@@ -28,6 +28,10 @@ input {
     border-radius: 10px;
 }
 
+select {
+    margin-bottom: 20px;
+}
+
 button {
     width: 70%;
     padding: 10px;
