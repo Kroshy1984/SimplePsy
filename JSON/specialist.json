@@ -26,21 +26,18 @@
       "maxLength": 255,
       "pattern": "^[А-Я]+*[а-я]$"
     },
-    "calendar": {
+    "customers":{
       "$ref": "#/definitions/calendar_type"
     },
     "notification": {
       "$ref": "#/definitions/notification_type"
-    },
-    "clients": {
-      "$ref": "#/definitions/clients_type"
     }
   },
   "required": [
     "name",
     "surname",
     "id",
-    "calendar"
+    "customers"
   ],
   "definitions": {
     "calendar_type": {
@@ -236,8 +233,8 @@
             "женат/замужем"
           ]
         },
-        "customer": {
-          "$ref": "#/definitions/customer_type"
+        "calendar":{
+          "$ref": "#/definitions/calendar_type"
         }
       },
       "required": [
@@ -383,13 +380,73 @@
           "description": "Дата первого контакта",
           "maxLength": 10,
           "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+        } ,
+        "problems":{
+          "$ref": "#/definitions/problems_type"
         }
       },
       "required": [
         "name",
         "id",
         "status",
-        "contact"
+        "contact",
+        "problems"
+      ]
+    },
+    "problems_type": {
+      "type": "array",
+      "description": "список проблем заказчика",
+      "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "problem": {
+            "$ref": "#/definitions/problem_type"
+          }
+        },
+        "required": [
+          "problem"
+        ]
+      }
+    },
+    "problem":{
+      "type": "object",
+      "description": "Проблема",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "идентификатор проблемы",
+          "pattern": "[0-9]{3}",
+          "minLength": 3
+        },
+        "status": {
+          "type": "string",
+          "description": "статус",
+          "enum": [
+            "решена",
+            "не решена"
+          ]
+        },
+        "dateOfFirstContact": {
+          "type": "string",
+          "description": "Дата первого контакта",
+          "maxLength": 10,
+          "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+        } ,
+        "clients":{
+          "$ref": "#/definitions/clients_type"
+        },
+        "descriptionOfProblem":{
+          "type":"string",
+          "description":"Описание проблемы"
+        }
+      },
+      "required": [
+        "id",
+        "status"
       ]
     }
   }
