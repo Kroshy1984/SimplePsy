@@ -26,7 +26,7 @@
       "maxLength": 255,
       "pattern": "^[А-Я]+*[а-я]$"
     },
-    "customers":{
+    "customers": {
       "$ref": "#/definitions/calendar_type"
     },
     "notification": {
@@ -233,7 +233,7 @@
             "женат/замужем"
           ]
         },
-        "calendar":{
+        "calendar": {
           "$ref": "#/definitions/calendar_type"
         }
       },
@@ -380,8 +380,8 @@
           "description": "Дата первого контакта",
           "maxLength": 10,
           "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
-        } ,
-        "problems":{
+        },
+        "problems": {
           "$ref": "#/definitions/problems_type"
         }
       },
@@ -411,7 +411,7 @@
         ]
       }
     },
-    "problem":{
+    "problem_type": {
       "type": "object",
       "description": "Проблема",
       "additionalProperties": false,
@@ -435,19 +435,64 @@
           "description": "Дата первого контакта",
           "maxLength": 10,
           "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
-        } ,
-        "clients":{
+        },
+        "clients": {
           "$ref": "#/definitions/clients_type"
         },
-        "descriptionOfProblem":{
-          "type":"string",
-          "description":"Описание проблемы"
+        "descriptionOfProblem": {
+          "type": "string",
+          "description": "Описание проблемы"
+        },
+        "scoring": {
+          "$ref": "#/definitions/scoring_type"
         }
       },
       "required": [
         "id",
-        "status"
+        "status",
+        "scoring"
       ]
+    },
+    "scoring_type": {
+      "type": "array",
+      "description": "Ответы на анкету",
+      "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "answer": {
+            "type": "object",
+            "description": "Ответ на вопрос",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "идентификатор ответа",
+                "pattern": "[0-9]{3}",
+                "minLength": 3
+              },
+              "question": {
+                "type": "string",
+                "description": "Вопрос"
+              },
+              "answer": {
+                "type": "string",
+                "description": "ответ"
+              }
+            },
+            "required": [
+              "id",
+              "question",
+              "answer"
+            ]
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      }
     }
   }
 }
