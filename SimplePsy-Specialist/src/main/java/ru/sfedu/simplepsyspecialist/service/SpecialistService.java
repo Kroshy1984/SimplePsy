@@ -14,13 +14,11 @@ import java.util.Optional;
 @Service
 public class SpecialistService {
 
-
     SpecialistRepository specialistRepository;
     BCryptPasswordEncoder passwordEncoder;
 
     public SpecialistService(SpecialistRepository specialistRepository) {
         this.specialistRepository = specialistRepository;
-
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -36,6 +34,7 @@ public class SpecialistService {
 
         return specialistRepository.save(specialist);
     }
+
     public Specialist authorizeSpecialist(Specialist s)
     {
 
@@ -52,13 +51,16 @@ public class SpecialistService {
             throw new NotFoundException("incorrect password");
         }
     }
+
     public Specialist findById(String id) {
         return specialistRepository.findById(id).orElse(null);
     }
+
     public Specialist findByUsername(String username)
     {
         return specialistRepository.findByUsername(username).orElseThrow(() -> new SpecialistNotFoundException("User with username " + username + " not found"));
     }
+
     public void sendRequestToSession(String specialistId, String startDate, String endDate) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8083").build();
         String url = "/SimplePsySession/V1/session/search";

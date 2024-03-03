@@ -1,6 +1,7 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -8,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
@@ -17,6 +21,7 @@ public class SpecialistController {
 
     @Autowired
     SpecialistService specialistService;
+
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public ResponseEntity<Specialist> getSpecialist(@PathVariable String id) {
@@ -33,12 +38,14 @@ public class SpecialistController {
         model.addAttribute("specialist", new Specialist());
         return "signup";
     }
+
     @GetMapping("/login")
     public String loginForm(Model model)
     {
         model.addAttribute("specialist", new Specialist());
         return "login";
     }
+
     @PostMapping("/login")
     public String login(@ModelAttribute("specialist") Specialist specialist)
     {
@@ -56,6 +63,7 @@ public class SpecialistController {
 //    specialistService.authorizeSpecialist(specialist);
 //    return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
 //}
+
     @PostMapping("/signup")
     public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist)
     {
@@ -92,6 +100,26 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         String specialist_id = specialist.getId();
         specialistService.sendRequestToSession(specialist_id, startDate, endDate);
+        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+    }
+
+    @GetMapping("/session")
+    public String sessionForm(Model model) {
+        model.addAttribute("session", new Session());
+        return "session";
+    }
+
+    @PostMapping("/session")
+    public String createNewSession(@AuthenticationPrincipal UserDetails userDetails,
+                                   @RequestParam("email") String email,
+                                   @RequestParam("problem") String problem,
+                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        System.out.println(email);
+        System.out.println(problem);
+        System.out.println(date);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        String specialist_id = specialist.getId();
+/*        specialistService.sendRequestToSession(specialist_id, );*/
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 }
