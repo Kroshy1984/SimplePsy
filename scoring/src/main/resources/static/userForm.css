@@ -49,3 +49,14 @@ button:hover {
 .button-container {
     text-align: center;
 }
+
+.error {
+    border: 2px solid red;
+}
+
+.error-message {
+    margin-bottom: 20px;
+    color: red;
+    font-size: 12px;
+    display: none;
+}

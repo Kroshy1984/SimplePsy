@@ -13,50 +13,130 @@
 <div class="page-content">
     <div class="form-container">
 
+        <!-- имя-->
         <label th:text="${questions[0]}"></label>
-        <input id="name" type="text" th:name="'answers[' + ${0} + ']'" pattern="[А-Яа-яЁё]*" title="Пожалуйста, введите только кириллицу" required /><!-- имя-->
+        <input id="name" type="text" th:name="'answers[' + ${0} + ']'" pattern="[А-Яа-яЁё]*" required />
+        <div class="error-message"></div>
 
-
+        <!-- фамилия-->
         <label th:text="${questions[1]}"></label>
-        <input id="surname" type="text" th:name="'answers[' + ${1} + ']'" pattern="[А-Яа-яЁё]*" title="Пожалуйста, введите только кириллицу" required/> <!-- фамилия-->
+        <input id="surname" type="text" th:name="'answers[' + ${1} + ']'" pattern="[А-Яа-яЁё]*" required/>
+        <div class="error-message"></div>
 
+        <!-- возраст-->
+        <label th:text="${questions[2]}"></label>
+        <input id="age" type="text" th:name="'answers[' + ${2} + ']'" pattern="[0-9]*" required/>
+        <div class="error-message"></div>
 
-        <label th:text="${questions[2]}"></label> <!-- возраст-->
-        <input id="age" type="text" th:name="'answers[' + ${2} + ']'" pattern="[1-9]*" title="Пожалуйста, для указания возраста используйте только арабские цифры" required/>
-
-
+        <!-- номер телефона-->
         <label th:text="${questions[3]}"></label>
-        <input id="phone" type="text" th:name="'answers[' + ${3} + ']'"/> <!-- номер телефона-->
+        <input id="phone" type="text" th:name="'answers[' + ${3} + ']'"/>
+        <div class="error-message"></div>
 
+        <!-- почта-->
+        <label th:text="${questions[4]}"></label>
+        <input id="email" type="email" th:name="'answers[' + ${4} + ']'" required/>
+        <div class="error-message"></div>
 
-        <label th:text="${questions[4]}"></label> <!-- почта-->
-        <input id="email" type="text" th:name="'answers[' + ${4} + ']'" required/> <!--  потом указать тип email -->
-
-        <label th:text="${questions[5]}"></label> <!-- семейное положение-->
+        <!-- семейное положение-->
+        <label th:text="${questions[5]}"></label>
         <select id="maritalStatusInput" th:name="'answers[' + ${5} + ']'" required>
             <option value="">Выберите семейное положение</option>
             <option value="вариант1">Холост</option>
             <option value="вариант2">Женат/замужем</option>
         </select>
+        <div class="error-message"></div>
+
         <div class="button-container">
             <button id="submitButton" onclick="collectUserFormAnswers()" disabled>Далее</button>
         </div>
     </div>
 </div>
     <script>
-        function checkFields() {
-            // Проверяет, заполнены ли поля (trim убирает пробелы)
-            let name = document.getElementById("name").value.trim();
-            let surname = document.getElementById("surname").value.trim();
-            let age = document.getElementById("age").value.trim();
-            let phone = document.getElementById("phone").value.trim();
-            let email = document.getElementById("email").value.trim();
+        function checkTextInput(input) {
+            let question = input.value.trim();
+            let pattern = /^[А-Яа-яЁё]*$/;
+            let errorDiv = input.nextElementSibling;
 
-            // checkValidity проверяет, соответствует ли ввод pattern
-            let nameInput = document.getElementById("name").checkValidity();
-            let surnameInput = document.getElementById("surname").checkValidity();
-            let ageInput = document.getElementById("age").checkValidity();
-            return name !== "" && surname !== "" && age !== "" && phone !== "" && email !== "" && nameInput && surnameInput && ageInput;
+            if (question.match(pattern)) {
+                input.classList.remove('error');
+                errorDiv.style.display = 'none';
+            } else {
+                input.classList.add('error');
+                errorDiv.innerText = "Пожалуйста, используйте только буквы русского алфавита";
+                errorDiv.style.display = 'block';
+            }
+
+            checkFormValidity();
+        }
+
+        // Функция для проверки ввода возраста
+        function checkAgeInput(input) {
+            let age = input.value.trim();
+            let pattern = /^[0-9]*$/;
+            let errorDiv = input.nextElementSibling;
+
+            if (age.match(pattern)) {
+                input.classList.remove('error');
+                errorDiv.style.display = 'none';
+            } else {
+                input.classList.add('error');
+                errorDiv.innerText = "Пожалуйста, используйте только цифры для указания возраста";
+                errorDiv.style.display = 'block';
+            }
+
+            checkFormValidity();
+        }
+
+        function checkPhoneInput(input) {
+            let phone = input.value.trim();
+            let pattern = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+            let errorDiv = input.nextElementSibling;
+
+            if (phone.match(pattern)) {
+                input.classList.remove('error');
+                errorDiv.style.display = 'none';
+            } else {
+                input.classList.add('error');
+                errorDiv.innerText = "Пожалуйста, используйте правильный формат номера телефона (+7XXXXXXXXXX)";
+                errorDiv.style.display = 'block';
+            }
+
+            checkFormValidity();
+        }
+
+        function checkEmailInput(input) {
+            let phone = input.value.trim();
+            let pattern = /^[\w.%+-]+@[\w.-]+\.[A-Z]{2,}$/i;
+            let errorDiv = input.nextElementSibling;
+
+            if (phone.match(pattern)) {
+                input.classList.remove('error');
+                errorDiv.style.display = 'none';
+            } else {
+                input.classList.add('error');
+                errorDiv.innerText = "Пожалуйста, используйте правильный формат e-mail";
+                errorDiv.style.display = 'block';
+            }
+
+            checkFormValidity();
+        }
+
+        function checkMaritalStatusInput(input) {
+            // TODO: Проверка для выбора семейного положения
+        }
+
+        function checkFields() {
+            let textInputs = document.querySelectorAll('input');
+            let allFieldsValid = true;
+
+            textInputs.forEach(function(input) {
+                if (input.classList.contains('error') || !input.checkValidity()) {
+                    allFieldsValid = false;
+                }
+            });
+
+            return allFieldsValid;
         }
 
         function checkFormValidity() {
@@ -66,11 +146,28 @@
         }
 
         // После заполнения каждого из полей вызывается обработчик, чтобы проверить валидность формы
-        document.getElementById("name").addEventListener("input", checkFormValidity);
-        document.getElementById("surname").addEventListener("input", checkFormValidity);
-        document.getElementById("age").addEventListener("input", checkFormValidity);
-        document.getElementById("phone").addEventListener("input", checkFormValidity);
-        document.getElementById("email").addEventListener("input", checkFormValidity);
+        document.querySelectorAll('input[type=text]').forEach(function(input) {
+            input.addEventListener("input", function() {
+                checkTextInput(input);
+                checkFormValidity();
+            })
+        });
+
+        document.getElementById("age").addEventListener("input", function() {
+            checkAgeInput(this);
+        });
+
+        document.getElementById("phone").addEventListener("input", function() {
+            checkPhoneInput(this);
+        });
+
+        document.getElementById("email").addEventListener("input", function() {
+            checkEmailInput(this);
+        });
+
+        document.getElementById("maritalStatusInput").addEventListener("input", function() {
+            checkMaritalStatusInput(this);
+        });
     </script>
 </body>
 </html>
