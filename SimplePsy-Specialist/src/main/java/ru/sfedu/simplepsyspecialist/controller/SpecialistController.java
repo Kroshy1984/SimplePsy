@@ -13,7 +13,7 @@ import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
@@ -113,13 +113,18 @@ public class SpecialistController {
     public String createNewSession(@AuthenticationPrincipal UserDetails userDetails,
                                    @RequestParam("email") String email,
                                    @RequestParam("problem") String problem,
-                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         System.out.println(email);
         System.out.println(problem);
         System.out.println(date);
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         String specialist_id = specialist.getId();
-/*        specialistService.sendRequestToSession(specialist_id, );*/
+        specialistService.createNewSession(email, specialist_id, problem, date);
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+    }
+    @GetMapping("/formed_calendar")
+    public String formed_calendar()
+    {
+        return "formed_calendar";
     }
 }

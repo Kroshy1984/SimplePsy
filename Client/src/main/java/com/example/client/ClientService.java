@@ -15,4 +15,8 @@ public class ClientService {
     public Client save(Client client) {
         return clientRepository.save(client);
     }
+
+    public Client findByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
 }

@@ -1,11 +1,12 @@
 package ru.sfedu.session;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
 
 @Document("Session")
 public class Session {
@@ -14,56 +15,27 @@ public class Session {
     private String id;
 
     @NotBlank
-    @Pattern(regexp = "^[а-яА-ЯёЁ]+\\s[0-9]{2}/[0-9]{2}/[0-9]{4}$")
-    @JsonProperty("date")
-    private String date;
+    private LocalDateTime date;
 
-    @NotBlank
-    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    @JsonProperty("time")
-    private String time;
+    private String problem;
 
-    @NotBlank
-    @Size(min = 1, max = 255)
-    private String typeOfClients;
-    private String timeOfMeeting;
+
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    @JsonProperty("specialist_id")
+    private String specialistId;
+
+    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
     private String clientId;
-
     public Session() {
     }
 
-    public String getDate() {
-        return date;
+
+
+    public String getSpecialistId() {
+        return specialistId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getTypeOfClients() {
-        return typeOfClients;
-    }
-
-    public void setTypeOfClients(String typeOfClients) {
-        this.typeOfClients = typeOfClients;
-    }
-
-    public String getTimeOfMeeting() {
-        return timeOfMeeting;
-    }
-
-    public void setTimeOfMeeting(String timeOfMeeting) {
-        this.timeOfMeeting = timeOfMeeting;
+    public void setSpecialistId(String specialistId) {
+        this.specialistId = specialistId;
     }
 
     public String getClientId() {
@@ -74,8 +46,36 @@ public class Session {
         this.clientId = clientId;
     }
 
-    public Session(String client_id, String date) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
         this.date = date;
-        this.clientId = client_id;
+    }
+
+    public String getProblem() {
+        return problem;
+    }
+
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
+
+
+    public Session(LocalDateTime date, String problem, String specialistId, String clientId) {
+        this.date = date;
+        this.problem = problem;
+        this.specialistId = specialistId;
+        this.clientId = clientId;
     }
 }

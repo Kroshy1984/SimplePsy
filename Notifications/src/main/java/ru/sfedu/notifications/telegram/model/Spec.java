@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 
 @Document("Specialist")
 public class Spec {
-
     @Id
+    private String id;
     private long chatId;
 
-    private String userName;
+    private String username;
 
     private String firstName;
 
@@ -20,6 +20,14 @@ public class Spec {
 
     private String email;
     private Timestamp registeredAt;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Timestamp getRegisteredAt() {
         return registeredAt;
@@ -53,12 +61,12 @@ public class Spec {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

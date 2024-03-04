@@ -3,7 +3,7 @@ package ru.sfedu.notifications.telegram.model;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface SpecRepository extends MongoRepository<Spec, Long> {
+public interface SpecRepository extends MongoRepository<Spec, String> {
 
-    Spec findByEmail(String email);
+    Spec findByUsername(String email);
 }
