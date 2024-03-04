@@ -14,7 +14,9 @@
         <div class="form-container">
             <div th:each="question, questionIndex : ${questions}">
                 <label th:text="${question}"></label>
-                <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" pattern="[А-Яа-яЁё]*" required/>
+                <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" pattern="[А-Яа-яЁё]*"
+                       oninput="checkInput(this)" required/>
+                <div class="error-message"></div>
             </div>
             <div class="button-container">
                 <button onclick="openUserFormPage()">Назад</button>
@@ -24,15 +26,29 @@
     </div>
 </body>
 <script>
+    function checkInput(input) {
+        let question = input.value.trim();
+        let pattern = /^[А-Яа-яЁё\s.,!\-?]*$/;
+        let errorDiv = input.nextElementSibling;
+
+        if (question.match(pattern)) {
+            input.classList.remove('error');
+            errorDiv.style.display = 'none';
+        } else {
+            input.classList.add('error');
+            errorDiv.innerText = "Пожалуйста, используйте только буквы русского алфавита";
+            errorDiv.style.display = 'block';
+        }
+
+        checkFormValidity();
+    }
+
     function checkFields() {
         let textInputs = document.querySelectorAll('input[type="text"]');
         let allFieldsValid = true;
 
         textInputs.forEach(function(input) {
-            let question = input.value.trim();
-            let questionInput = input.checkValidity();
-
-            if (!question || !questionInput) {
+            if (input.classList.contains('error') || !input.checkValidity()) {
                 allFieldsValid = false;
             }
         });
@@ -48,7 +64,10 @@
 
     // После заполнения каждого из полей вызывается обработчик, чтобы проверить валидность формы
     document.querySelectorAll('input[type="text"]').forEach(function(input) {
-        input.addEventListener("input", checkFormValidity);
+        input.addEventListener("input", function() {
+            checkInput(input);
+            checkFormValidity();
+        });
     });
 </script>
 </html>

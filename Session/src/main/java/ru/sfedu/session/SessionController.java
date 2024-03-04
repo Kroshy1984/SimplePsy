@@ -25,7 +25,7 @@ public class SessionController {
         System.out.println(specialist_id);
         System.out.println(start_date);
         System.out.println(end_date);
-        List<Object> sessions  = Collections.singletonList(sessionService.findByDate(start_date, end_date, specialist_id));
+        List<Object> sessions = Collections.singletonList(sessionService.findByDate(start_date, end_date, specialist_id));
         System.out.println("got the first session: " + sessions.get(0));
         return sessions;
     }
