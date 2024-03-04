@@ -1,4 +1,4 @@
-package ru.sfedu.scoring.scoring;
+package ru.sfedu.scoring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

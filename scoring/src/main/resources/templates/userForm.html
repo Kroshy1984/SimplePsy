@@ -18,7 +18,7 @@
 
 
         <label th:text="${questions[1]}"></label>
-        <input id="surname" type="text" th:name="'answers[' + ${1} + ']'"pattern="[А-Яа-яЁё]*" title="Пожалуйста, введите только кириллицу" required/> <!-- фамилия-->
+        <input id="surname" type="text" th:name="'answers[' + ${1} + ']'" pattern="[А-Яа-яЁё]*" title="Пожалуйста, введите только кириллицу" required/> <!-- фамилия-->
 
 
         <label th:text="${questions[2]}"></label> <!-- возраст-->
@@ -39,34 +39,33 @@
             <option value="вариант2">Женат/замужем</option>
         </select>
         <div class="button-container">
-            <button id="submitButton" onclick="collectUserFormAnswers()">Далее</button>
+            <button id="submitButton" onclick="collectUserFormAnswers()" disabled>Далее</button>
         </div>
     </div>
 </div>
     <script>
         function checkFields() {
-            //проверяет заполнены ли поля(trim убирает пробелы)
+            // Проверяет, заполнены ли поля (trim убирает пробелы)
             let name = document.getElementById("name").value.trim();
             let surname = document.getElementById("surname").value.trim();
             let age = document.getElementById("age").value.trim();
             let phone = document.getElementById("phone").value.trim();
             let email = document.getElementById("email").value.trim();
 
-            //checkValidity проверяет соответствует ли ввод patter(вроде бы)
+            // checkValidity проверяет, соответствует ли ввод pattern
             let nameInput = document.getElementById("name").checkValidity();
             let surnameInput = document.getElementById("surname").checkValidity();
             let ageInput = document.getElementById("age").checkValidity();
             return name !== "" && surname !== "" && age !== "" && phone !== "" && email !== "" && nameInput && surnameInput && ageInput;
         }
 
-
         function checkFormValidity() {
-            //тут если форма валидна то тогда кнопка перехода будет доступна
+            // Если форма валидна, то кнопка перехода будет доступна
             let submitButton = document.getElementById("submitButton");
             submitButton.disabled = !checkFields();
         }
 
-        // после заполнения каждого из полей вызывается обработчик чтобы проверить валидность формы
+        // После заполнения каждого из полей вызывается обработчик, чтобы проверить валидность формы
         document.getElementById("name").addEventListener("input", checkFormValidity);
         document.getElementById("surname").addEventListener("input", checkFormValidity);
         document.getElementById("age").addEventListener("input", checkFormValidity);

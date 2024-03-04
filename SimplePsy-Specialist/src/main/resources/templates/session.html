@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>New Session</title>
+<link rel="stylesheet" type="text/css" th:href="@{/session.css}">
+<script>
+  document.getElementById('sessionForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('New session was created');
+  });
+</script>
+<!--<style>
+  .page-content {
+    width: 360px;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  h1 {
+    color: #C79CF2;
+    text-align: center;
+    font-size: 25px;
+  }
+
+  a {
+    color: rgb(220, 185, 255);
+  }
+
+  form {
+    background-color: #ffffff;
+    padding: 5px 40px 40px 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+
+  button {
+    width: 70%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .button-container {
+    text-align: center;
+  }
+</style>-->
+</head>
+<body>
+<div class="page-content">
+  <form id="sessionForm" th:action="@{/SimplePsySpecialist/V1/specialist/session}" method="post">
+    <h1>Назначить новую встречу</h1>
+
+    <label for="email">E-mail *</label>
+    <input type="email" id="email" th:name="email" placeholder="E-mail" required>
+
+    <label for="problem">Problem *</label>
+    <input type="text" id="problem" th:name="problem" placeholder="Problem" required>
+
+    <label for="date">Date *</label>
+    <input type="date" id="date" th:name="date" placeholder="01.01.1970" required>
+
+    <div class="button-container"><button type="submit">Подтвердить</button></div>
+  </form>
+</div>
+</body>
+</html>
