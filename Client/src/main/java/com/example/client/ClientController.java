@@ -34,4 +34,18 @@ public class ClientController {
         System.out.println(result.toString());
         return ResponseEntity.ok("Successfully created or updated client");
     }
+
+    @GetMapping("/findByEmail")
+    public ResponseEntity<String> findClientByEmail(@RequestParam("clientEmail") String email)
+    {
+        Client client = clientService.findByEmail(email);
+        if(client == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Client with email " + email + " not found");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(client.id);
+        }
+    }
 }
