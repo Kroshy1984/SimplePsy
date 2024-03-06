@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/calendar.css}">
+</head>
+<body>
+<div class="page-content">
+    <form id="registrationForm"  th:action="@{/SimplePsySpecialist/V1/specialist/calendar}" method="post">
+        <h1>Поиск встреч по дате</h1>
+        <label for="start_date">От</label>
+        <input type="text" id="start_date" th:name="start_date">
+
+        <label for="end_date">До</label>
+        <input type="text" id="end_date" th:name="end_date">
+
+        <div class="button-container"><button type="submit">Найти</button></div>
+    </form>
+</div>
+</body>
+
+</html>

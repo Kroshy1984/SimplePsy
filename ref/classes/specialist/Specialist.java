@@ -7,7 +7,6 @@ import ru.sfedu.simplepsy.classes.Contact;
 import ru.sfedu.simplepsy.classes.Doc;
 import ru.sfedu.simplepsy.classes.Observer;
 import ru.sfedu.simplepsy.classes.client.Client;
-import ru.sfedu.simplepsy.classes.types.*;
 
 public class Specialist implements Observer {
 

@@ -1,1 +1,5 @@
 rootProject.name = 'SimplePsy'
+include ':SimplePsy-Specialist', ':scoring', ':Session', ':Calendar'
+
+
+

@@ -7,7 +7,6 @@ import ru.sfedu.simplepsy.classes.Problem;
 import ru.sfedu.simplepsy.classes.Contact;
 import ru.sfedu.simplepsy.classes.Doc;
 import ru.sfedu.simplepsy.classes.specialist.Specialist;
-import ru.sfedu.simplepsy.classes.types.*;
 
 public class Client implements Observable {
 

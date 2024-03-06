@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/textQuestions.css}">
+    <title>Text Questions</title>
+</head>
+<body>
+    <div class="page-content">
+        <div class="form-container">
+            <div th:each="question, questionIndex : ${questions}">
+                <label th:text="${question}"></label>
+                <input type="text" th:name="'answers[' + ${questionIndex.index} + ']'" pattern="[А-Яа-яЁё]*" required/>
+            </div>
+            <div class="button-container">
+                <button onclick="openUserFormPage()">Назад</button>
+                <button id="submitButton" onclick="collectTextAnswers()" disabled>Далее</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function checkFields() {
+        let textInputs = document.querySelectorAll('input[type="text"]');
+        let allFieldsValid = true;
+
+        textInputs.forEach(function(input) {
+            let question = input.value.trim();
+            let questionInput = input.checkValidity();
+
+            if (!question || !questionInput) {
+                allFieldsValid = false;
+            }
+        });
+
+        return allFieldsValid;
+    }
+
+    function checkFormValidity() {
+        // Если форма валидна, то кнопка перехода будет доступна
+        let submitButton = document.getElementById("submitButton");
+        submitButton.disabled = !checkFields();
+    }
+
+    // После заполнения каждого из полей вызывается обработчик, чтобы проверить валидность формы
+    document.querySelectorAll('input[type="text"]').forEach(function(input) {
+        input.addEventListener("input", checkFormValidity);
+    });
+</script>
+</html>

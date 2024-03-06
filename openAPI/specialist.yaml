@@ -1,0 +1,674 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: тут мы будем описывать психолога для проекта "Понятная практика"
+  contact:
+    email: raznomazovvm@gmail.com
+  version: 0.0.1
+externalDocs:
+  description: про наш проект можно почитать тут
+  url: https://github.com/Kroshy1984/SimplePsy/wiki/%D0%9F%D0%BE%D0%BD%D1%8F%D1%82%D0%BD%D0%B0%D1%8F-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0
+servers:
+  - url: http://93.95.97.176:8080/SimplePsy/V1/
+tags:
+  - name: specialist
+    description: Непосредственно психолог
+    externalDocs:
+      description: Find out more
+      url: https://github.com/Kroshy1984/SimplePsy/wiki/%D0%97%D0%B0%D0%BA%D0%B0%D0%B7%D1%87%D0%B8%D0%BA
+paths:
+  /specialist/info/{id}:
+    get:
+      tags:
+        - specialist
+      summary: Передача во фронт инфо о специалисте
+      description: ищем данные специалиста
+      operationId: getInfo
+      parameters:
+        - name: id
+          in: path
+          description:  логин клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Клиент нашелся
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '404':
+          description: Нет такого психолог в базе
+  /specialist/new:
+    post:
+      tags:
+        - specialist
+      summary: Заводим нового психолога
+      description: Заводим нового психолога по id
+      operationId: newSpecialist
+      requestBody:
+        description: Заводим нового психолога
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/specialist'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
+  /specialist/{id}:
+    delete:
+      tags:
+        - specialist
+      summary: Удаляем психолога из базы
+      description: Удаляем психолога из базы
+      operationId: deleteSpecialist
+      parameters:
+        - name: id
+          in: path
+          description: ID of specialist to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '405':
+          description: Invalid input
+    post:
+      tags:
+        - specialist
+      summary: Обновляем психолога
+      description: Обновляем психолога по id
+      operationId: updateSpecialist
+      parameters:
+        - name: id
+          in: path
+          description:  идентификатор психолога
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Заводим нового психолога
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/specialist'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
+  /specialist/calendar/{id}:
+    get:
+      tags:
+        - specialist
+      summary: Передача во фронт инфо о календаре специалиста
+      description: ищем данные специалиста
+      operationId: getCalendar
+      parameters:
+        - name: id
+          in: path
+          description:  логин клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Клиент нашелся
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '404':
+          description: Нет такого психолог в базе
+    post:
+        tags:
+          - specialist
+        summary: Заводим новую встречу психолога
+        description: Заводим новую встречу психолога по id
+        operationId: newMeeting
+        parameters:
+          - name: id
+            in: path
+            description:  логин клиента
+            required: true
+            schema:
+              type: string
+        requestBody:
+          description: Заводим новую встречу психолога
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/specialist'
+          required: true
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/specialist'          
+          '400':
+            description: Invalid ID supplied
+          '405':
+            description: Validation exception
+  /specialist/problems/{id}:
+    get:
+      tags:
+        - specialist
+      summary: Передача во фронт инфо о проблемах специалиста
+      description: ищем данные о проблемах специалиста
+      operationId: getProblems
+      parameters:
+        - name: id
+          in: path
+          description:  логин клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Проблемы нашлись
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '404':
+          description: Нет такого психолог в базе
+    post:
+      tags:
+        - specialist
+      summary: Заводим новую проблему психолога
+      description: Заводим новую проблему психолога по id
+      operationId: newProblem
+      parameters:
+        - name: id
+          in: path
+          description:  логин клиента
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Заводим новую проблему психолога
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/specialist'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
+  /specialist/customers/{id}:
+     get:
+      tags:
+        - specialist
+      summary: Передача во фронт инфо о заказчиках специалиста
+      description: ищем данные о заказчиках специалиста
+      operationId: getCustomerss
+      parameters:
+        - name: id
+          in: path
+          description:  логин клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Заказчики нашлись
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '404':
+          description: Нет такого психолога в базе
+     post:
+      tags:
+        - specialist
+      summary: Заводим новую заказчика психолога
+      description: Заводим нового закзачика психолога по id
+      operationId: newCustomer
+      parameters:
+        - name: id
+          in: path
+          description:  логин писхолога
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Заводим нового заказчика психолога
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/specialist'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
+  /specialist/scoring/{id}:
+     get:
+      tags:
+        - specialist
+      summary: Передача во фронт инфо о скорингах специалиста
+      description: ищем данные о скорингах специалиста
+      operationId: getScoring
+      parameters:
+        - name: id
+          in: path
+          description:  логин клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Заказчики нашлись
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '404':
+          description: Нет такого психолога в базе
+components:
+  schemas:
+    specialist:
+      type: object
+      description: Психолог
+      properties:
+        id:
+          type: string
+          description: идентификатор психолог
+        name:
+          type: string
+          description: Имя
+          maxLength: 255
+        surname:
+          type: string
+          description: Фамилия
+          maxLength: 255
+        middleName:
+          type: string
+          description: Отчество
+          maxLength: 255
+        customers:
+          "$ref": "#/components/schemas/calendar_type"
+        notification:
+          "$ref": "#/components/schemas/notification_type"
+      required:
+      - name
+      - surname
+      - id
+      - customers
+    calendar_type:
+          type: array
+          description: список встреч
+          additionalProperties: false
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              meeting:
+                "$ref": "#/components/schemas/meeting_type"
+            required:
+            - customer
+    notification_type:
+          type: string
+    meeting_type:
+          type: object
+          description: Календарь
+          additionalProperties: false
+          properties:
+            clients:
+              "$ref": "#/components/schemas/clients_type"
+            typeOfClients:
+              type: string
+              description: Тип клиента на встрече
+              enum:
+              - Взрослый
+              - Ребенок
+              - Пара
+            date:
+              type: string
+              description: Дата встречи
+              format: date
+            time:
+              type: string
+              description: Время встречи
+              pattern: "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+          required:
+          - clients
+          - typeOfClients
+    clients_type:
+          type: array
+          description: список клиентов
+          additionalProperties: false
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              client:
+                "$ref": "#/components/schemas/client_type"
+            required:
+            - customer
+    client_type:
+          type: object
+          description: Клиент
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: идентификатор клиента
+            status:
+              type: string
+              description: статус
+              enum:
+              - проспект
+              - клиент
+            clientType:
+              type: string
+              description: Тип клиента
+              enum:
+              - Взрослый
+              - Ребенок
+              - Пара или семья
+            name:
+              type: string
+              description: Имя
+              maxLength: 255
+            surname:
+              type: string
+              description: Фамилия
+              maxLength: 255
+            middleName:
+              type: string
+              description: Отчество
+              maxLength: 255
+            contact:
+              "$ref": "#/components/schemas/contact_type"
+            source:
+              type: string
+              enum:
+              - Viber
+              - vk
+              - WhatsApp
+              - Telegramm
+              - facebook
+              description: Источник обращения через который клиент обратился к психологу
+                (например, мессенджер, социальная сеть, агрегатор)
+              maxLength: 255
+            dateOfFirstContact:
+              type: string
+              description: Дата первого обращения
+              format: date
+            preferMeetingFormat:
+              type: string
+              description: Предпочитаемый формат встречи
+              enum:
+              - online
+              - offline
+            interactionPlatform:
+              type: string
+              description: Для онлайн выбрать/указать площадку взаимодействия
+              maxLength: 255
+            meetingAddres:
+              type: string
+              description: Для оффлайн выбрать адрес проведения встречи (интеграция с картами)
+              maxLength: 255
+            primeryInvoice:
+              type: string
+              description: Первичный/изначальный запрос клиента на терапию (поле для заполнения)
+              maxLength: 512
+            preferTime:
+              "$ref": "#/components/schemas/preferTime_type"
+            finantialConditions:
+              type: string
+              description: финансовые условия
+              maxLength: 512
+            gender:
+              type: string
+              description: пол
+              enum:
+              - male
+              - female
+            birthDay:
+              type: string
+              description: Дата рождения
+              format: date
+            recomendations:
+              type: string
+              description: Коллегиальные рекомендации
+              maxLength: 255
+            maritalStatus:
+              type: string
+              description: семейное положение
+              enum:
+              - холост/ не замужем
+              - женат/замужем
+            calendar:
+              "$ref": "#/components/schemas/calendar_type"
+          required:
+          - name
+          - surname
+          - address
+          - listOfDocs
+    contact_type:
+          type: object
+          description: Контакт клиента
+          additionalProperties: false
+          properties:
+            phone:
+              type: string
+              description: Номер телефона
+              maxLength: 12
+            email:
+              type: string
+              description: электронная почта
+              maxLength: 320
+            tg:
+              type: string
+              description: Телеграмм
+              maxLength: 320
+    docs_type:
+          type: array
+          minItems: 1
+          maxItems: 255
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              name:
+                type: string
+                description: Название
+                enum:
+                - Паспорт
+                - Водительские права
+              number:
+                type: string
+                description: Номер
+              serial:
+                type: string
+                description: Серия
+            required:
+            - name
+            - number
+            - serial
+    preferTime_type:
+          title: Generated schema for Root
+          type: object
+          properties:
+            preferTime:
+              type: array
+              items:
+                type: object
+                properties:
+                  dayOfWeek:
+                    type: object
+                    properties:
+                      day:
+                        type: string
+                        enum:
+                        - пн
+                        - вт
+                        - cp
+                        - чт
+                        - пт
+                        - сб
+                        - вс
+                      startTime:
+                        type: string
+                        pattern: "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+                      finishDate:
+                        type: string
+                        pattern: "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+                    required:
+                    - day
+                    - startTime
+                    - finishDate
+                required:
+                - dayOfWeek
+          required:
+          - preferTime
+    customer_type:
+          type: object
+          description: Заказчик
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: идентификатор заказчика
+              pattern: "[0-9]{3}"
+              minLength: 3
+            status:
+              type: string
+              description: статус
+              enum:
+              - лид
+              - клиент
+            name:
+              type: string
+              description: Имя
+              maxLength: 255
+            contact:
+              "$ref": "#/components/schemas/contact_type"
+            dateOfFirstContact:
+              type: string
+              description: Дата первого контакта
+              maxLength: 10
+              pattern: "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+            problems:
+              "$ref": "#/components/schemas/problems_type"
+          required:
+          - name
+          - id
+          - status
+          - contact
+          - problems
+    problems_type:
+          type: array
+          description: список проблем заказчика
+          additionalProperties: false
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              problem:
+                "$ref": "#/components/schemas/problem_type"
+            required:
+            - problem
+    problem_type:
+          type: object
+          description: Проблема
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: идентификатор проблемы
+              pattern: "[0-9]{3}"
+              minLength: 3
+            status:
+              type: string
+              description: статус
+              enum:
+              - решена
+              - не решена
+            dateOfFirstContact:
+              type: string
+              description: Дата первого контакта
+              maxLength: 10
+              pattern: "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+            clients:
+              "$ref": "#/components/schemas/clients_type"
+            descriptionOfProblem:
+              type: string
+              description: Описание проблемы
+            scoring:
+              "$ref": "#/components/schemas/scoring_type"
+          required:
+          - id
+          - status
+          - scoring
+    scoring_type:
+          type: array
+          description: Ответы на анкету
+          additionalProperties: false
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              answer:
+                type: object
+                description: Ответ на вопрос
+                additionalProperties: false
+                properties:
+                  id:
+                    type: string
+                    description: идентификатор ответа
+                    pattern: "[0-9]{3}"
+                    minLength: 3
+                  question:
+                    type: string
+                    description: Вопрос
+                  answer:
+                    type: string
+                    description: ответ
+                required:
+                - id
+                - question
+                - answer
+            required:
+            - customer

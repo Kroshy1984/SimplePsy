@@ -1,23 +1,26 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.0'
+	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'ru.sfedu'
+group = 'ru.sfedu.simplepsycustomer'
 version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
 }
 
-repositories {
-	mavenCentral()
+allprojects {
+	repositories {
+		google()
+		mavenCentral()
+	}
 }
-
 dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 //	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'

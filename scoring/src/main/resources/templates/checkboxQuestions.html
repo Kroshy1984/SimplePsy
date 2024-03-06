@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/checkboxQuestions.css}">
+    <title>Checkbox Questions</title>
+</head>
+<body>
+    <div class="page-content">
+        <div class="form-container">
+            <div th:each="question, questionIndex : ${questions}">
+                <input type="checkbox" id="answer" th:value="${question}" th:name="'answers[' + ${questionIndex.index} + ']'">
+                <label for="answer" th:text="${question}"></label>
+            </div>
+            <div class="button-container">
+                <button onclick="openTextQuestionsPage()">Назад</button>
+                <button onclick="sendData()">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

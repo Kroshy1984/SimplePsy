@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Registration Form</title>
+<link rel="stylesheet" type="text/css" th:href="@{/signup.css}">
+<script type="text/javascript" th:src="@{/js/signup.js}"></script>
+<style>
+    .page-content {
+        width: 360px;
+    }
+
+    .login {
+        text-align: center;
+        padding-bottom: 15px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        color: #C79CF2;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    a {
+        color: rgb(220, 185, 255);
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 5px 40px 40px 40px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox-element {
+        padding-bottom: 15px;
+    }
+
+    input[type="checkbox"] {
+        width: auto;
+        margin-bottom: 10px;
+        padding: 7px;
+    }
+
+    input {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 7px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    button {
+        width: 70%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .button-container {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div class="page-content">
+    <form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsySpecialist/V1/specialist/signup}" method="post">
+        <h1>Регистрация в Понятной практике</h1>
+        <div class="login">Уже есть аккаунт? <a th:href="@{/SimplePsySpecialist/V1/specialist/login}">Войти</a></div>
+
+        <label for="firstName">Имя *</label>
+        <input type="text" id="firstName" th:name="name" th:field="*{name}" placeholder="Имя" required>
+
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" th:name="username" th:field="*{username}" placeholder="E-mail" required>
+
+        <label for="password">Пароль *</label>
+        <input type="password" id="password" th:name="password" th:field="*{password}" placeholder="Пароль" required>
+
+        <label for="confirmPassword">Подтверждение пароля *</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Подтверждение пароля" required>
+
+        <div class="checkbox-element">
+            <input type="checkbox" id="remember-password" name="remember-password">
+            <label for="remember-password">Запомнить пароль</label>
+        </div>
+
+        <div class="checkbox-element">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">Я даю согласие на обработку хранение контактной информации</label>
+        </div>
+
+        <div class="button-container"><button type="submit">Зарегистрироваться</button></div>
+    </form>
+</div>
+</body>
+</html>
