@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
+server:
+  port: 8080
