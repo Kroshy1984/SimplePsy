@@ -30,7 +30,7 @@ public class SpecialistController {
     @GetMapping("/login")
     public String loginPage()
     {
-        return "login";
+        return "home";
     }
 
     @PostMapping("/new")

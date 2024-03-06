@@ -1,17 +1,27 @@
-package ru.sfedu.simplepsycustomer.simplepsy.customer;
+package ru.sfedu.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sfedu.simplepsycustomer.simplepsy.exception.NotFoundException;
+import ru.sfedu.customer.dto.CustomerDTO;
+import ru.sfedu.customer.dto.CustomerDTORepository;
+import ru.sfedu.customer.exception.NotFoundException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerService {
 
-    @Autowired
+
     private CustomerRepository customerRepository;
+    private CustomerDTORepository customerDTORepository;
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository,
+                           CustomerDTORepository customerDTORepository) {
+        this.customerRepository = customerRepository;
+        this.customerDTORepository = customerDTORepository;
+    }
 
     public List<Customer> getCustomers(String name, String someContact) {
         List<Customer> customers = customerRepository.findAllByNameAndSomeContact(name, someContact);
@@ -23,8 +33,8 @@ public class CustomerService {
         return customers;
     }
 
-    public List<Customer> getAllCustomers() {
-        List<Customer> customers = customerRepository.findAll();
+    public List<CustomerDTO> getAllCustomers() throws IOException {
+        List<CustomerDTO> customers = customerDTORepository.findAll();
         if (customers.isEmpty()) {
             throw new NotFoundException("No customers in db");
         }
@@ -47,7 +57,7 @@ public class CustomerService {
 
     public void deleteCustomer(String id) {
         if (customerRepository.findById(id).isEmpty()) {
-            throw new NotFoundException("Customer with id " + id + " not found.");
+            throw new NotFoundException("Customer with id " + id + "hasn't been found");
         }
         customerRepository.deleteById(id);
     }

@@ -1,4 +1,4 @@
-package ru.sfedu.customer;
+package ru.sfedu.simplepsyspecialist.dto;
 
 public class Contact {
 

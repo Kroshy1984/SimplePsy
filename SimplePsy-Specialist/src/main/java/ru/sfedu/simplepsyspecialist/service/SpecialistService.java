@@ -1,11 +1,15 @@
 package ru.sfedu.simplepsyspecialist.service;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
+import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
 import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
@@ -13,6 +17,7 @@ import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -138,5 +143,37 @@ public class SpecialistService {
 //            throw new NotFoundException("Client with email " + clientEmail + "not found");
 //        }
 
+    }
+
+    public List<CustomerDTO> getAllCustomers() {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsyCustomer/V1/customer/getAllCustomers";
+        Mono<ResponseEntity<List<CustomerDTO>>> response = webClient.get()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<List<CustomerDTO>>() {});
+
+        List<CustomerDTO> result = response.block().getBody();
+
+        System.out.println("got the result: " + result.toString());
+        System.out.println("Customer's list names");
+        for (CustomerDTO customer : result) {
+            System.out.println(customer.getName());
+        }
+        return result;
+    }
+
+    public void deleteCustomer(String id) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsyCustomer/V1/customer/{id}";
+        String result =  webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        System.out.println("The result of deleting the customer");
     }
 }
