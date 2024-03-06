@@ -74,7 +74,7 @@
         // Функция для проверки ввода возраста
         function checkAgeInput(input) {
             let age = input.value.trim();
-            let pattern = /^[0-9]*$/;
+            let pattern = /^\d{1,2}$/;
             let errorDiv = input.nextElementSibling;
 
             if (age.match(pattern)) {
