@@ -57,7 +57,7 @@ public class SpecialistService {
         }
         else
         {
-            throw new NotFoundException("incorrect password");
+            throw new NotFoundException("Didn't match passwords");
         }
     }
 
