@@ -34,8 +34,9 @@
         <div class="error-message"></div>
 
         <!-- почта-->
+        <!-- не менять на type="email"-->
         <label th:text="${questions[4]}"></label>
-        <input id="email" type="email" th:name="'answers[' + ${4} + ']'" required/>
+        <input id="email" type="text" th:name="'answers[' + ${4} + ']'" required/>
         <div class="error-message"></div>
 
         <!-- семейное положение-->

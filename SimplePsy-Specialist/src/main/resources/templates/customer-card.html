@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" th:src="@{/js/customer-card.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/customer-card.css}">
+    <title>Customer card</title>
+</head>
+<body>
+<header>
+    <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
+</header>
+<div>
+    <form method="post" th:action="@{/SimplePsy/V1/specialist/customer-card/save}" th:object="${customer}">
+        <input th:value="${customer.getId()}" th:name="customerId" id="customerIdInput" hidden="hidden">
+        <fieldset class="set">
+            <label for="name">Имя</label>
+            <input th:value="${customer.getName()}" type="text" id="name" name="name" placeholder="Имя" disabled>
+            <label for="status">Статус</label>
+            <input th:value="${customer.getStatus()}" type="text" id="status" name="status" placeholder="Статус" disabled>
+            <label for="registration-date">Дата регистрации</label>
+            <input type="date" id="registration-date" name="registration-date" placeholder="Дата регистрации" disabled>
+        </fieldset>
+</div>
+<div class="profile-container">
+    <div class="contacts">
+
+        <span>Контакты</span>
+        <fieldset>
+            <img class="icon" id="phone-icon" alt="Фото трубки"
+                 src="https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png">
+            <label for="phone">Телефон</label>
+            <input th:value="${customer.getContact().getPhone()}" type="tel" id="phone" name="contact.phone"
+                   placeholder="Номер телефона" disabled>
+            <img class="icon" id="email-icon" alt="Фото e-mail"
+                 src="https://www.freeiconspng.com/thumbs/email-icon/email-icon--clipart-best-22.png">
+            <label for="email">Электронная почта</label>
+            <input th:value="${customer.getContact().getEmail()}" type="email" id="email" name="contact.email"
+                   placeholder="E-mail" disabled>
+            <img class="icon" id="telegram-icon" alt="Фото телеграм"
+                 src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3201902/telegram-icon-md.png">
+            <label for="telegram">Телеграм</label>
+            <input th:value="${customer.getContact().getTg()}" type="text" id="telegram" name="contact.tg"
+                   placeholder="Ник телеграм" disabled>
+        </fieldset>
+
+    </div>
+    <img id="profile-image" alt="Фото профиля"
+         th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}">
+</div>
+<div class="button-container">
+    <input type="button" id="edit" value="Редактировать" onclick="showButtons()">
+    <input name="save" type="submit" id="save" value="Сохранить" style="display: none;">
+    <input name="delete" type="button" id="delete" value="Удалить" style="display: none;" onclick="deleteCard()">
+</div>
+</form>
+</body>
+</html>
