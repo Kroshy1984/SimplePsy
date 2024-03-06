@@ -1,5 +1,6 @@
 rootProject.name = 'SimplePsy'
 include ':SimplePsy-Specialist', ':scoring', ':Session', ':Calendar'
-
-
+include 'src:main:Customer'
+findProject(':src:main:Customer')?.name = 'Customer'
+include 'untitled'
 

@@ -9,11 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
@@ -126,5 +129,51 @@ public class SpecialistController {
     public String formed_calendar()
     {
         return "formed_calendar";
+    }
+    @GetMapping("/customers")
+    public String getCustomersList(Model model)
+    {
+        List<CustomerDTO> customers = specialistService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return "customer-list";
+    }
+
+//    @GetMapping("/customer-avatar/{customerId}")
+//    public ResponseEntity<byte[]> getCustomerAvatar(@PathVariable String customerId) {
+//        Customer customer = customerService.findById(customerId);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_PNG);
+//        return new ResponseEntity<>(customer.getAvatar(), headers, HttpStatus.OK);
+//    }
+//    @PostMapping("/customer-card/save")
+//    public String saveNewCustomerCard(@ModelAttribute("customer") Customer customer,
+//                                      @RequestParam String customerId,
+//                                      Model model)
+//    {
+//        customer.setId(customerId);
+//        // это строка затычка. Нужно продумать как передавать
+//        // фото для аватара из шаблона
+//        customer.setByteAvatar(customerService.findById(customerId).getAvatar());
+//        Customer cust = customerService.updateCustomer(customer);
+//        return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerId;
+//    }
+
+    @GetMapping("/questionnaire")
+    public String questionnaire()
+    {
+        return "questionnaire";
+    }
+
+    @PostMapping("/saveAnswers")
+    public String saveAnswers(@RequestBody String[] answers) {
+        System.out.println("Received answers: " + Arrays.toString(answers));
+        return "redirect:/SimplePsy/V1/specialist/questionnaire";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteResource(@PathVariable("id") String id) {
+        specialistService.deleteCustomer(id);
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
 }

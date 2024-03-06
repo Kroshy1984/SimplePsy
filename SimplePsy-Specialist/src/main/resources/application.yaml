@@ -4,3 +4,13 @@ spring:
       uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
 server:
   port: 8081
+
+  spring:
+    output:
+      ansi:
+        enabled: always
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true

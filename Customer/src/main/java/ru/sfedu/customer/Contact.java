@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsycustomer.simplepsy.customer;
+package ru.sfedu.customer;
 
 public class Contact {
 
