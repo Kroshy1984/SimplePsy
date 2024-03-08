@@ -1,9 +1,11 @@
-package ru.sfedu.simplepsycustomer.simplepsy.customer;
+package ru.sfedu.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.sfedu.customer.dto.CustomerDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +14,13 @@ import java.util.List;
 @RequestMapping("/SimplePsy/V1/customer")
 public class CustomerController {
 
-    @Autowired
+
     private CustomerService customerService;
+
+    @Autowired
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.FOUND)
@@ -55,4 +62,14 @@ public class CustomerController {
         return customerService.updateCustomer(customer);
     }
 
+    @GetMapping("/getAllCustomers")
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers()
+    {
+        return ResponseEntity.ok(customerService.getAllCustomers());
+    }
+    @GetMapping("/getCustomerById")
+    public ResponseEntity<CustomerDTO> getCustomerById(@RequestParam("customerId") String customerId)
+    {
+        return ResponseEntity.ok(customerService.findById(customerId));
+    }
 }

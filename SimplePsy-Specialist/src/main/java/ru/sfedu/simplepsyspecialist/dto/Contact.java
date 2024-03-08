@@ -1,21 +1,11 @@
-package ru.sfedu.customer;
+package ru.sfedu.simplepsyspecialist.dto;
 
 public class Contact {
-
     private String phone;
 
     private String email;
 
     private String tg;
-
-    public Contact() {
-    }
-
-    public Contact(String phone, String email, String tg) {
-        this.phone = phone;
-        this.email = email;
-        this.tg = tg;
-    }
 
     public String getPhone() {
         return phone;
@@ -39,14 +29,5 @@ public class Contact {
 
     public void setTg(String tg) {
         this.tg = tg;
-    }
-
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", tg='" + tg + '\'' +
-                '}';
     }
 }

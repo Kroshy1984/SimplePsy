@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsycustomer.simplepsy.customer;
+package ru.sfedu.customer;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

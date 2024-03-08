@@ -9,11 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
@@ -126,5 +128,20 @@ public class SpecialistController {
     public String formed_calendar()
     {
         return "formed_calendar";
+    }
+
+    @GetMapping("/customers")
+    public String getCustomersList(Model model)
+    {
+        List<CustomerDTO> customers = specialistService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return "customer-list";
+    }
+    @GetMapping("/customer-card/{customerId}")
+    public String getCustomerCard(@PathVariable String customerId, Model model)
+    {
+        CustomerDTO customer = specialistService.findCustomerById(customerId);
+        model.addAttribute("customer", customer);
+        return "customer-card";
     }
 }

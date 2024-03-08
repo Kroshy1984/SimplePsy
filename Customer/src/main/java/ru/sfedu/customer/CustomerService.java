@@ -1,17 +1,23 @@
-package ru.sfedu.simplepsycustomer.simplepsy.customer;
+package ru.sfedu.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sfedu.customer.dto.CustomerDTO;
+import ru.sfedu.customer.dto.CustomerMapper;
 import ru.sfedu.simplepsycustomer.simplepsy.exception.NotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
 
-    @Autowired
+
     private CustomerRepository customerRepository;
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public List<Customer> getCustomers(String name, String someContact) {
         List<Customer> customers = customerRepository.findAllByNameAndSomeContact(name, someContact);
@@ -23,22 +29,42 @@ public class CustomerService {
         return customers;
     }
 
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDTO> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
+        System.out.println("List of customers names:");
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println(customers.get(i));
+        }
+        CustomerDTO customerDT = CustomerMapper.INSTANCE.customerToCustomerDTO(customers.get(0));
+        System.out.println("customerDTO name: " + customerDT.getName());
         if (customers.isEmpty()) {
             throw new NotFoundException("No customers in db");
         }
-        return customers;
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        System.out.println("sending full list of customers to specialist");
+        for (int i = 0; i < customers.size(); i++) {
+            CustomerDTO customerDTO = CustomerMapper.INSTANCE.customerToCustomerDTO(customers.get(i));
+            customerDTOList.add(customerDTO);
+            System.out.println(customers.get(i).getName());
+        }
+
+        return customerDTOList;
     }
 
-    public Customer findById(String id) {
-        Optional<Customer> customer = customerRepository.findById(id);
-        if (customer.isEmpty()) {
+    public CustomerDTO findById(String id) {
+        Customer customer = customerRepository.findById(id).get();
+        if (customer == null) {
             throw new NotFoundException(
                     String.format("Customer not found with id %s", id)
             );
         }
-        return customer.get();
+        else
+        {
+            System.out.println(String.format("Found the customer with id and name:\n%s: %s",
+                    customer.getId(), customer.getName()));
+        }
+        CustomerDTO customerDTO = CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+        return customerDTO;
     }
 
     public Customer saveCustomer(Customer customer) {
