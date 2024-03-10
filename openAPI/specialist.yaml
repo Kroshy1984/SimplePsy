@@ -274,7 +274,7 @@ paths:
   /specialist/customer/search:
       post:
         tags:
-          -specialist
+          - specialist
         summary: Ищем звонившего в базе
         description: Ищем заказчика в базе
         operationId: searchCustomer
