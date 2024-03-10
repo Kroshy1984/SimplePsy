@@ -27,7 +27,7 @@
       "pattern": "^[А-Я]+*[а-я]$"
     },
     "customers": {
-      "$ref": "#/definitions/calendar_type"
+      "$ref": "#/definitions/customers_type"
     },
     "notification": {
       "$ref": "#/definitions/notification_type"
@@ -108,7 +108,7 @@
           }
         },
         "required": [
-          "customer"
+          "client"
         ]
       }
     },
@@ -347,6 +347,24 @@
       "required": [
         "preferTime"
       ]
+    },
+    "customers_type": {
+      "type": "array",
+      "description": "список заказчиков",
+      "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "client": {
+            "$ref": "#/definitions/customer_type"
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      }
     },
     "customer_type": {
       "type": "object",
