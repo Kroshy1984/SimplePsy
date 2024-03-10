@@ -246,19 +246,13 @@ paths:
                 $ref: '#/components/schemas/specialist'          
         '404':
           description: Нет такого психолога в базе
+  /specialist/customers/new:        
      post:
       tags:
         - specialist
-      summary: Заводим новую заказчика психолога
+      summary: Заводим нового заказчика психолога
       description: Заводим нового закзачика психолога по id
       operationId: newCustomer
-      parameters:
-        - name: id
-          in: path
-          description:  логин писхолога
-          required: true
-          schema:
-            type: string
       requestBody:
         description: Заводим нового заказчика психолога
         content:
@@ -322,7 +316,7 @@ components:
           description: Отчество
           maxLength: 255
         customers:
-          "$ref": "#/components/schemas/calendar_type"
+          "$ref": "#/components/schemas/customers_type"
         notification:
           "$ref": "#/components/schemas/notification_type"
       required:
@@ -342,7 +336,7 @@ components:
               meeting:
                 "$ref": "#/components/schemas/meeting_type"
             required:
-            - customer
+            - meeting
     notification_type:
           type: string
     meeting_type:
@@ -561,6 +555,19 @@ components:
                 - dayOfWeek
           required:
           - preferTime
+    customers_type:
+          type: array
+          description: список заказчиков
+          additionalProperties: false
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              customer: 
+                "$ref": "#/components/schemas/customer_type"
+            required: 
+            - customer
     customer_type:
           type: object
           description: Заказчик
