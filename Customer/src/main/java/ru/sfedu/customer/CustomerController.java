@@ -30,16 +30,10 @@ public class CustomerController {
         return customerService.getCustomers(name, contact);
     }
 
-    @PostMapping("/new")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Customer createResource(@RequestBody Customer customer) {
-        return customerService.saveCustomer(customer);
-    }
-
     @PostMapping("/new-customer")
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createCustomer(@RequestParam("name") String name,
-                                   @RequestParam("status") String status,
+                                   @RequestParam("status") Status status,
                                    @RequestParam("contactPhone") String contactPhone,
                                    @RequestParam("contactEmail") String contactEmail,
                                    @RequestParam("contactTg") String contactTg,
@@ -50,14 +44,24 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
-    @PostMapping
+    @PostMapping("/new")
+    public ResponseEntity<String> newCustomer(@RequestBody CustomerDTO customer)
+    {
+        System.out.println("Got the new customer:\n" +customer.getName());
+        System.out.println(customer.getStatus());
+        System.out.println(customer.getContact().getEmail());
+        System.out.println(customer.getName());
+        customerService.saveCustomer(customer);
+        return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
+    }
+
     @DeleteMapping("/{id}")
     public boolean deleteResource(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);
         return true;
     }
 
-    @PutMapping("/")
+    @PutMapping("/update")
     public Customer updateResource(@RequestBody Customer customer) {
         return customerService.updateCustomer(customer);
     }
@@ -72,4 +76,11 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
+    @DeleteMapping("/deleteCustomerById")
+    public ResponseEntity<String> deleteCustomerById(@RequestParam("customerId") String customerId)
+    {
+        customerService.deleteCustomer(customerId);
+        return ResponseEntity.ok("Customer successfully deleted");
+    }
+
 }

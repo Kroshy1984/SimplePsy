@@ -5,7 +5,13 @@ public class CustomerDTO {
 
     private String id;
     private String name;
+    private String status;
     private Contact contact;
+
+    public CustomerDTO(String name, Contact contact) {
+        this.name = name;
+        this.contact = contact;
+    }
 
     public String getId() {
         return id;
@@ -29,5 +35,13 @@ public class CustomerDTO {
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

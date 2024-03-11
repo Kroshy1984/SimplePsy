@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
@@ -179,5 +180,36 @@ public class SpecialistService {
         CustomerDTO customerDTO = response.block().getBody();
         System.out.println("Got the customer with name: " + customerDTO.getName());
         return customerDTO;
+    }
+
+    public void deleteCustomerById(String customerId) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/deleteCustomerById";
+        Mono<ResponseEntity<String>> response = webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class);
+
+        String result = response.block().getBody();
+        System.out.println("The result of deleting the customer with id: "
+                + customerId + " - " + result);
+    }
+
+    public CustomerDTO saveCustomer(CustomerDTO customer) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/new";
+        ResponseEntity<String> response = webClient.post()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(customer))
+                .retrieve()
+                .toEntity(String.class).block();
+        ;
+        System.out.println("The result of creating a new customer:\n" + response.getBody());
+        return null;
     }
 }

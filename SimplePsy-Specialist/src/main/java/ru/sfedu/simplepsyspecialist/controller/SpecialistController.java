@@ -144,4 +144,20 @@ public class SpecialistController {
         model.addAttribute("customer", customer);
         return "customer-card";
     }
+    @DeleteMapping("/{id}")
+    public String deleteResource(@PathVariable("id") String id) {
+        specialistService.deleteCustomerById(id);
+        return "redirect:/SimplePsy/V1/specialist/customers";
+    }
+
+    @PostMapping("/customers/new")
+    public ResponseEntity<String> newCustomer(@RequestBody CustomerDTO customer)
+    {
+        System.out.println("Got the new customer:\n" +customer.getName());
+        System.out.println(customer.getStatus());
+        System.out.println(customer.getContact().getEmail());
+        System.out.println(customer.getName());
+        specialistService.saveCustomer(customer);
+        return ResponseEntity.ok("Customer " + customer.getName() + " successfully saved");
+    }
 }

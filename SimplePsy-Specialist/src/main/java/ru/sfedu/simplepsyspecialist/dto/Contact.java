@@ -7,6 +7,12 @@ public class Contact {
 
     private String tg;
 
+    public Contact(String phone, String email, String tg) {
+        this.phone = phone;
+        this.email = email;
+        this.tg = tg;
+    }
+
     public String getPhone() {
         return phone;
     }

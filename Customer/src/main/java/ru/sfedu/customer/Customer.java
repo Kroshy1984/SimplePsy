@@ -17,7 +17,7 @@ public class Customer {
 
     private String name;
 
-    private String status;
+    private Status status;
 
     private Contact contact;
     private String description;
@@ -27,20 +27,20 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String status, Contact contact) {
+    public Customer(String name, Status status, Contact contact) {
         this.name = name;
         this.status = status;
         this.contact = contact;
     }
 
-    public Customer(String name, String status, Contact contact, String dateOfFirstCall) {
+    public Customer(String name, Status status, Contact contact, String dateOfFirstCall) {
         this.name = name;
         this.status = status;
         this.contact = contact;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.dateOfFirstCall = LocalDate.parse(dateOfFirstCall, formatter);
     }
-    public Customer(String name, String status, Contact contact, String dateOfFirstCall, MultipartFile avatar) throws IOException {
+    public Customer(String name, Status status, Contact contact, String dateOfFirstCall, MultipartFile avatar) throws IOException {
         this.name = name;
         this.status = status;
         this.contact = contact;
@@ -65,11 +65,11 @@ public class Customer {
         this.name = name;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
