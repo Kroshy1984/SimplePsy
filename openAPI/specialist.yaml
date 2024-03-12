@@ -613,6 +613,14 @@ components:
               type: string
               description: Имя
               maxLength: 255
+            surname:
+              type: string
+              description: Фамилия
+              maxLength: 255
+            midlename:
+              type: string
+              description: Отчество
+              maxLength: 255
             contact:
               "$ref": "#/components/schemas/contact_type"
             dateOfFirstContact:
