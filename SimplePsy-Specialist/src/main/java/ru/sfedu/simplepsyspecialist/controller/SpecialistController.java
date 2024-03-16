@@ -119,8 +119,11 @@ public class SpecialistController {
         System.out.println(problem);
         System.out.println(date);
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        System.out.println("Specialist found!");
         String specialist_id = specialist.getId();
+        System.out.println(specialist_id);
         specialistService.createNewSession(email, specialist_id, problem, date);
+        System.out.println("Session was created");
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 

@@ -68,6 +68,7 @@ public class SpecialistService {
 
     public Specialist findByUsername(String username)
     {
+        System.out.println("Finding...");
         return specialistRepository.findByUsername(username).orElseThrow(() -> new SpecialistNotFoundException("User with username " + username + " not found"));
     }
 
@@ -89,6 +90,7 @@ public class SpecialistService {
     public void createNewSession(String clientEmail, String specialistId, String problem, LocalDateTime date)
     {
         String clientId = findClientByEmail(clientEmail);
+        System.out.println("Client was found");
         if(clientId.isEmpty())
         {
             throw new NotFoundException("Client with email " + clientEmail + "not found\n can not create new session");
@@ -111,6 +113,7 @@ public class SpecialistService {
     }
     public String findClientByEmail(String clientEmail) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086").build();
+        System.out.println("WebClient");
         String url = "/SimplePsyClient/V1/client/findByEmail";
         String result = webClient.get()
                 .uri(uriBuilder -> uriBuilder
