@@ -100,11 +100,10 @@ public class SpecialistController {
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
-    //    @GetMapping("/session")
-//    public String sessionForm(Model model) {
-//        model.addAttribute("session", new Session());
-//        return "session";
-//    }
+        @GetMapping("/session")
+    public String sessionForm(Model model) {
+        return "session";
+    }
     @GetMapping("/sessions")
     public String sessionForm(@RequestParam("specialistId") String specialistId) {
         specialistService.getAllSessions(specialistId);

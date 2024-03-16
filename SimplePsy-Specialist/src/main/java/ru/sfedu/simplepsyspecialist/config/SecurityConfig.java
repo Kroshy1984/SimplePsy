@@ -36,17 +36,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .requestMatchers("/**").permitAll() // Разрешить доступ ко всем страницам
-                .and()
-                .csrf(csrf -> csrf.disable());
-//        httpSecurity.authorizeHttpRequests((request) -> request
-//                        .requestMatchers("/SimplePsySpecialist/V1/specialist/signup").permitAll()
-//                        .anyRequest().authenticated()).
-//                formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
-//                        .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/calendar")
-//                        .permitAll())
-//                .logout((logout) -> logout.permitAll());
+        httpSecurity.authorizeHttpRequests((request) -> request
+                        .requestMatchers("/SimplePsySpecialist/V1/specialist/signup").permitAll()
+                        .anyRequest().authenticated()).
+                formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
+                        .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/calendar")
+                        .permitAll())
+                .logout((logout) -> logout.permitAll());
         return httpSecurity.build();
     }
 

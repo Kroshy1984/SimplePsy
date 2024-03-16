@@ -38,6 +38,7 @@ public class ClientController {
     @GetMapping("/findByEmail")
     public ResponseEntity<String> findClientByEmail(@RequestParam("clientEmail") String email)
     {
+        System.out.println("received client's email");
         Client client = clientService.findByEmail(email);
         if(client == null)
         {
