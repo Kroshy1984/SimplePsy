@@ -212,4 +212,18 @@ public class SpecialistService {
         System.out.println("The result of creating a new customer:\n" + response.getBody());
         return null;
     }
+
+    public void getAllSessions(String specialistId) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8083").build();
+        String url = "/SimplePsySession/V1/session/searchAll";
+        Object result =  webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("specialist_id", specialistId)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        System.out.println("got the result: " + result.toString());
+    }
 }
