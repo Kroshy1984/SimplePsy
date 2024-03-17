@@ -1,6 +1,5 @@
 package ru.sfedu.simplepsycustomer.simplepsy.specialist;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -57,7 +56,6 @@ public class SpecialistController {
         return new ResponseEntity<>(customer.getAvatar(), headers, HttpStatus.OK);
     }
 
-    @Cacheable
     @GetMapping("/customer-card/{customerId}")
     public String getCustomerCard(@PathVariable String customerId, Model model)
     {

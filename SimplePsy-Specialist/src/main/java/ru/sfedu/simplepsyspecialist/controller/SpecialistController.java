@@ -9,11 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.Session;
+import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
@@ -40,21 +41,19 @@ public class SpecialistController {
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model)
-    {
+    public String loginForm(Model model) {
         model.addAttribute("specialist", new Specialist());
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("specialist") Specialist specialist)
-    {
+    public String login(@ModelAttribute("specialist") Specialist specialist) {
         System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.authorizeSpecialist(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
-   
+
 //@PostMapping("/login")
 //public String login(@ModelAttribute("specialist") Specialist specialist)
 //{
@@ -65,8 +64,7 @@ public class SpecialistController {
 //}
 
     @PostMapping("/signup")
-    public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist)
-    {
+    public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist) {
         System.out.println(specialist.getName());
         System.out.println(specialist.getSurname());
         System.out.println(specialist.getUsername());
@@ -93,8 +91,7 @@ public class SpecialistController {
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam("start_date") String startDate,
             @RequestParam("end_date") String endDate
-    )
-    {
+    ) {
         System.out.println(startDate);
         System.out.println(endDate);
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
@@ -103,10 +100,14 @@ public class SpecialistController {
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
-    @GetMapping("/session")
+        @GetMapping("/session")
     public String sessionForm(Model model) {
-        model.addAttribute("session", new Session());
         return "session";
+    }
+    @GetMapping("/sessions")
+    public String sessionForm(@RequestParam("specialistId") String specialistId) {
+        specialistService.getAllSessions(specialistId);
+        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
     @PostMapping("/session")
@@ -118,13 +119,46 @@ public class SpecialistController {
         System.out.println(problem);
         System.out.println(date);
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        System.out.println("Specialist found!");
         String specialist_id = specialist.getId();
+        System.out.println(specialist_id);
         specialistService.createNewSession(email, specialist_id, problem, date);
+        System.out.println("Session was created");
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
+
     @GetMapping("/formed_calendar")
-    public String formed_calendar()
-    {
+    public String formed_calendar() {
         return "formed_calendar";
+    }
+
+    @GetMapping("/customers")
+    public String getCustomersList(Model model) {
+        List<CustomerDTO> customers = specialistService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return "customer-list";
+    }
+
+    @GetMapping("/customer-card/{customerId}")
+    public String getCustomerCard(@PathVariable String customerId, Model model) {
+        CustomerDTO customer = specialistService.findCustomerById(customerId);
+        model.addAttribute("customer", customer);
+        return "customer-card";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteResource(@PathVariable("id") String id) {
+        specialistService.deleteCustomerById(id);
+        return "redirect:/SimplePsy/V1/specialist/customers";
+    }
+
+    @PostMapping("/customers/new")
+    public ResponseEntity<String> newCustomer(@RequestBody CustomerDTO customer) {
+        System.out.println("Got the new customer:\n" + customer.getName());
+        System.out.println(customer.getStatus());
+        System.out.println(customer.getContact().getEmail());
+        System.out.println(customer.getName());
+        specialistService.saveCustomer(customer);
+        return ResponseEntity.ok("Customer " + customer.getName() + " successfully saved");
     }
 }

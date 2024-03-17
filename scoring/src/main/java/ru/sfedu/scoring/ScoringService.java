@@ -31,6 +31,7 @@ public class ScoringService {
     public void createNewClient(List<String> client) {
         System.out.println("Client params: ");
         client.stream().forEach(System.out::println);
+        System.out.println(client.get(4));
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086/SimplePsyClient/V1/client/new").build();
 
         Mono<ResponseEntity<String>> result = webClient.post()

@@ -1,11 +1,16 @@
 package ru.sfedu.simplepsyspecialist.service;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
+import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
 import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
@@ -13,6 +18,7 @@ import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,7 +58,7 @@ public class SpecialistService {
         }
         else
         {
-            throw new NotFoundException("incorrect password");
+            throw new NotFoundException("Wrong password");
         }
     }
 
@@ -62,6 +68,7 @@ public class SpecialistService {
 
     public Specialist findByUsername(String username)
     {
+        System.out.println("Finding...");
         return specialistRepository.findByUsername(username).orElseThrow(() -> new SpecialistNotFoundException("User with username " + username + " not found"));
     }
 
@@ -83,6 +90,7 @@ public class SpecialistService {
     public void createNewSession(String clientEmail, String specialistId, String problem, LocalDateTime date)
     {
         String clientId = findClientByEmail(clientEmail);
+        System.out.println("Client was found");
         if(clientId.isEmpty())
         {
             throw new NotFoundException("Client with email " + clientEmail + "not found\n can not create new session");
@@ -105,6 +113,7 @@ public class SpecialistService {
     }
     public String findClientByEmail(String clientEmail) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086").build();
+        System.out.println("WebClient");
         String url = "/SimplePsyClient/V1/client/findByEmail";
         String result = webClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -138,5 +147,86 @@ public class SpecialistService {
 //            throw new NotFoundException("Client with email " + clientEmail + "not found");
 //        }
 
+    }
+
+    public List<CustomerDTO> getAllCustomers() {
+
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/getAllCustomers";
+        Mono<ResponseEntity<List<CustomerDTO>>> response = webClient.get()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<List<CustomerDTO>>() {});
+
+        List<CustomerDTO> customers = response.block().getBody();
+
+        System.out.println("List of customers names:");
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println(customers.get(i).getName());
+        }
+        return customers;
+    }
+
+    public CustomerDTO findCustomerById(String customerId) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/getCustomerById";
+        Mono<ResponseEntity<CustomerDTO>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<CustomerDTO>() {});
+
+        CustomerDTO customerDTO = response.block().getBody();
+        System.out.println("Got the customer with name: " + customerDTO.getName());
+        return customerDTO;
+    }
+
+    public void deleteCustomerById(String customerId) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/deleteCustomerById";
+        Mono<ResponseEntity<String>> response = webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class);
+
+        String result = response.block().getBody();
+        System.out.println("The result of deleting the customer with id: "
+                + customerId + " - " + result);
+    }
+
+    public CustomerDTO saveCustomer(CustomerDTO customer) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/new";
+        ResponseEntity<String> response = webClient.post()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(customer))
+                .retrieve()
+                .toEntity(String.class).block();
+        ;
+        System.out.println("The result of creating a new customer:\n" + response.getBody());
+        return null;
+    }
+
+    public void getAllSessions(String specialistId) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8083").build();
+        String url = "/SimplePsySession/V1/session/searchAll";
+        Object result =  webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("specialist_id", specialistId)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        System.out.println("got the result: " + result.toString());
     }
 }
