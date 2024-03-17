@@ -169,6 +169,31 @@ paths:
             description: Invalid ID supplied
           '405':
             description: Validation exception
+  /specialist/problems/new:
+    post:
+      tags:
+        - specialist
+      summary: Заведение новой новой проблемы
+      description: Заведение новой проблемы
+      operationId: newProblem
+      requestBody:
+        description: Заводим новую проблему
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/specialist'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
   /specialist/problems/{id}:
     get:
       tags:
@@ -246,19 +271,13 @@ paths:
                 $ref: '#/components/schemas/specialist'          
         '404':
           description: Нет такого психолога в базе
+  /specialist/customers/new:
      post:
       tags:
         - specialist
-      summary: Заводим новую заказчика психолога
+      summary: Заводим нового заказчика психолога
       description: Заводим нового закзачика психолога по id
       operationId: newCustomer
-      parameters:
-        - name: id
-          in: path
-          description:  логин писхолога
-          required: true
-          schema:
-            type: string
       requestBody:
         description: Заводим нового заказчика психолога
         content:
@@ -277,6 +296,31 @@ paths:
           description: Invalid ID supplied
         '405':
           description: Validation exception
+  /specialist/customer/search:
+      post:
+        tags:
+          - specialist
+        summary: Ищем звонившего в базе
+        description: Ищем заказчика в базе
+        operationId: searchCustomer
+        requestBody:
+          description: Ищем заказчика в базе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'
+          required: true
+        responses:
+          '200':
+              description: Successful operation
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/specialist'          
+          '400':
+              description: Invalid ID supplied
+          '405':
+              description: Validation exception
   /specialist/scoring/{id}:
      get:
       tags:
@@ -322,7 +366,7 @@ components:
           description: Отчество
           maxLength: 255
         customers:
-          "$ref": "#/components/schemas/calendar_type"
+          "$ref": "#/components/schemas/customers_type"
         notification:
           "$ref": "#/components/schemas/notification_type"
       required:
@@ -342,7 +386,7 @@ components:
               meeting:
                 "$ref": "#/components/schemas/meeting_type"
             required:
-            - customer
+            - meeting
     notification_type:
           type: string
     meeting_type:
@@ -561,6 +605,19 @@ components:
                 - dayOfWeek
           required:
           - preferTime
+    customers_type:
+          type: array
+          description: список заказчиков
+          additionalProperties: false
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              customer: 
+                "$ref": "#/components/schemas/customer_type"
+            required: 
+            - customer
     customer_type:
           type: object
           description: Заказчик
@@ -580,6 +637,14 @@ components:
             name:
               type: string
               description: Имя
+              maxLength: 255
+            surname:
+              type: string
+              description: Фамилия
+              maxLength: 255
+            midlename:
+              type: string
+              description: Отчество
               maxLength: 255
             contact:
               "$ref": "#/components/schemas/contact_type"
@@ -625,6 +690,7 @@ components:
               enum:
               - решена
               - не решена
+              - новая
             dateOfFirstContact:
               type: string
               description: Дата первого контакта

@@ -27,7 +27,7 @@
       "pattern": "^[А-Я]+*[а-я]$"
     },
     "customers": {
-      "$ref": "#/definitions/calendar_type"
+      "$ref": "#/definitions/customers_type"
     },
     "notification": {
       "$ref": "#/definitions/notification_type"
@@ -108,7 +108,7 @@
           }
         },
         "required": [
-          "customer"
+          "client"
         ]
       }
     },
@@ -348,6 +348,24 @@
         "preferTime"
       ]
     },
+    "customers_type": {
+      "type": "array",
+      "description": "список заказчиков",
+      "additionalProperties": false,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "client": {
+            "$ref": "#/definitions/customer_type"
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      }
+    },
     "customer_type": {
       "type": "object",
       "description": "Заказчик",
@@ -370,6 +388,16 @@
         "name": {
           "type": "string",
           "description": "Имя",
+          "maxLength": 255
+        },
+        "surname": {
+          "type": "string",
+          "description": "Фамилия",
+          "maxLength": 255
+        },
+        "midlename": {
+          "type": "string",
+          "description": "Отчество",
           "maxLength": 255
         },
         "contact": {
@@ -427,7 +455,8 @@
           "description": "статус",
           "enum": [
             "решена",
-            "не решена"
+            "не решена",
+            "новая"
           ]
         },
         "dateOfFirstContact": {

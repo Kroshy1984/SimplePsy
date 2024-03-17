@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: Customer
   data:
     mongodb:
       uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
