@@ -690,6 +690,7 @@ components:
               enum:
               - решена
               - не решена
+              - новая
             dateOfFirstContact:
               type: string
               description: Дата первого контакта
