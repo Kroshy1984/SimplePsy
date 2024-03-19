@@ -494,7 +494,9 @@
         "dateOfFillingIn": {
           "type": "string",
           "description": "дата заполнения анкеты",
-          "format": "date"
+          "format": "date",
+          "maxLength": 10,
+          "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
         },
         "url": {
           "type": "string",
