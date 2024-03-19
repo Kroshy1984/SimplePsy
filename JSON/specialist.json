@@ -473,7 +473,7 @@
           "description": "Описание проблемы"
         },
         "scoring": {
-          "$ref": "#/definitions/scoring_type"
+          "$ref": "#/definitions/questionnaire_type"
         }
       },
       "required": [
@@ -481,6 +481,29 @@
         "status",
         "scoring"
       ]
+    },
+    "questionare_type": {
+      "type": "object",
+      "description": "Анкета",
+      "additionalProperties": false,
+      "properties": {
+        "idQestionnaire": {
+          "type": "string",
+          "description": "Идентификатор анкеты"
+        },
+        "dateOfFillingIn": {
+          "type": "string",
+          "description": "дата заполнения анкеты",
+          "format": "date"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL"
+        },
+        "scoring": {
+          "$ref": "#/definitions/scoring_type"
+        }
+      }
     },
     "scoring_type": {
       "type": "array",
