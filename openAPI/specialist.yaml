@@ -217,37 +217,6 @@ paths:
                 $ref: '#/components/schemas/specialist'          
         '404':
           description: Нет такого психолог в базе
-    post:
-      tags:
-        - specialist
-      summary: Заводим новую проблему психолога
-      description: Заводим новую проблему психолога по id
-      operationId: newProblem
-      parameters:
-        - name: id
-          in: path
-          description:  логин клиента
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Заводим новую проблему психолога
-        content:
-          application/json:
-            schema:
-               $ref: '#/components/schemas/specialist'
-        required: true
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/specialist'          
-        '400':
-          description: Invalid ID supplied
-        '405':
-          description: Validation exception
   /specialist/customers/{id}:
      get:
       tags:
@@ -344,6 +313,31 @@ paths:
                 $ref: '#/components/schemas/specialist'          
         '404':
           description: Нет такого психолога в базе
+  /specialist/scoring/new:
+     post:
+      tags:
+        - specialist
+      summary: Заводим запрос на новый скоринг по проблеме
+      description: Заводим запрос на новый скоринг по проблеме
+      operationId: newScoring
+      requestBody:
+        description: Заводим запрос на новый скоринг по проблеме
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/specialist'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/specialist'          
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
 components:
   schemas:
     specialist:
@@ -702,11 +696,30 @@ components:
               type: string
               description: Описание проблемы
             scoring:
-              "$ref": "#/components/schemas/scoring_type"
+              "$ref": "#/components/schemas/questionare_type"
           required:
           - id
           - status
           - scoring
+    questionare_type:
+      type: object
+      description: Анкета,
+      additionalProperties: false
+      properties: 
+        idQestionnaire:
+          type: string
+          description: Идентификатор анкеты
+        dateOfFillingIn:
+          type: string
+          description: дата заполнения анкеты
+          format: date
+          maxLength: 10
+          pattern: "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+        url: 
+          type: string
+          description: "URL"
+        scoring:
+          "$ref": "#/components/schemas/scoring_type"
     scoring_type:
           type: array
           description: Ответы на анкету
