@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" th:href="@{/client-form.css}">
+    <title>Client form</title>
+</head>
+<body>
+<div class="page-content">
+    <form id="registrationForm" th:action="@{/SimplePsySpecialist/V1/specialist/client-form}" method="post">
+        <h1>Новый клиент</h1>
+        <label for="name">Имя *</label>
+        <input type="text" id="name" placeholder="Имя" required>
+
+        <label for="surname">Фамилия *</label>
+        <input type="text" id="surname" placeholder="Фамилия" required>
+
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" placeholder="E-mail" required>
+
+        <label for="phoneNumber">Номер телефона</label>
+        <input type="number" id="phoneNumber" placeholder="Номер телефона">
+
+        <label for="telegram">Телеграм</label>
+        <input type="text" id="telegram" placeholder="Телеграм">
+
+        <label for="dateOfBirth">Дата рождения *</label>
+        <input type="date" id="dateOfBirth" placeholder="Дата рождения" required>
+
+        <label for="gender">Пол *</label>
+        <select id="gender" required>
+            <option value="">Не указано</option>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
+
+        <label for="problem">Проблема *</label>
+        <textarea id="problem" placeholder="Проблема" required></textarea>
+
+        <button type="submit">Подтвердить</button>
+    </form>
+</div>
+</body>
+</html>

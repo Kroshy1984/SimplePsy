@@ -100,10 +100,11 @@ public class SpecialistController {
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
-        @GetMapping("/session")
+    @GetMapping("/session")
     public String sessionForm(Model model) {
         return "session";
     }
+
     @GetMapping("/sessions")
     public String sessionForm(@RequestParam("specialistId") String specialistId) {
         specialistService.getAllSessions(specialistId);
@@ -160,5 +161,10 @@ public class SpecialistController {
         System.out.println(customer.getName());
         specialistService.saveCustomer(customer);
         return ResponseEntity.ok("Customer " + customer.getName() + " successfully saved");
+    }
+
+    @GetMapping("/client-form")
+    public String clientForm() {
+        return "client-form";
     }
 }
