@@ -121,14 +121,6 @@
           "type": "string",
           "description": "идентификатор клиента"
         },
-        "status": {
-          "type": "string",
-          "description": "статус",
-          "enum": [
-            "проспект",
-            "клиент"
-          ]
-        },
         "clientType": {
           "type": "string",
           "description": "Тип клиента",
