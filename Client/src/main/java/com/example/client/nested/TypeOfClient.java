@@ -1,4 +1,4 @@
-package com.example.client;
+package com.example.client.nested;
 
 public enum TypeOfClient {
     ADULT,

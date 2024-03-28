@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/SimplePsySession/V1/session")
-
 public class SessionController {
 
     SessionService sessionService;

@@ -26,9 +26,9 @@ public class ClientController {
         Client client = new Client();
         client.setName(object.get(0));
         client.setSurname(object.get(1));
-        client.setAge(Integer.parseInt(object.get(2)));
-        client.setPhoneNumber(object.get(3));
-        client.setEmail(object.get(4));
+        //client.setAge(Integer.parseInt(object.get(2)));
+        client.contact.setPhone(object.get(3));
+        client.contact.setEmail(object.get(4));
         System.out.println(client.toString());
         Client result = clientService.save(client);
         System.out.println(result.toString());
@@ -48,5 +48,11 @@ public class ClientController {
         else {
             return ResponseEntity.status(HttpStatus.OK).body(client.id);
         }
+    }
+    @PostMapping("/new")
+    public ResponseEntity<String> newClient(@RequestBody Client client)
+    {
+        clientService.save(client);
+        return ResponseEntity.ok("Client successfully created");
     }
 }

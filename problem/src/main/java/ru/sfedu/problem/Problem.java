@@ -22,7 +22,6 @@ public class Problem {
 
     public Problem() {
     }
-    // геттеры, сеттеры и конструкторы
 
     public String getId() {
         return id;

@@ -1,19 +1,34 @@
 package com.example.client;
 
+import com.example.client.nested.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document("Client")
 public class Client {
 
     String id;
+    TypeOfClient typeOfClient;
     String name;
     String surname;
-    int age;
-    String phoneNumber;
-    String email;
+    String middleName;
+    Contact contact;
+    Source source;
+    LocalDate dateOfFirstContact;
+    PreferMeetingFormat preferMeetingFormat;
+    String interactionPlatform;
+    String meetingAddress;
+    String primaryInvoice;
+    PreferTime preferTime;
+    String financialConditions;
+    Gender gender;
+    LocalDate birthDay;
+    String recommendations;
     MaritalStatus maritalStatus;
-
-    TypeOfClient typeOfClient;
+    List<String> problems;
 
     public Client() {
     }
@@ -66,27 +81,119 @@ public class Client {
         this.typeOfClient = typeOfClient;
     }
 
-    public int getAge() {
-        return age;
+    public Source getSource() {
+        return source;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setSource(Source source) {
+        this.source = source;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public PreferMeetingFormat getPreferMeetingFormat() {
+        return preferMeetingFormat;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPreferMeetingFormat(PreferMeetingFormat preferMeetingFormat) {
+        this.preferMeetingFormat = preferMeetingFormat;
     }
 
-    public String getEmail() {
-        return email;
+    public String getInteractionPlatform() {
+        return interactionPlatform;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setInteractionPlatform(String interactionPlatform) {
+        this.interactionPlatform = interactionPlatform;
+    }
+
+    public String getMeetingAddress() {
+        return meetingAddress;
+    }
+
+    public void setMeetingAddress(String meetingAddress) {
+        this.meetingAddress = meetingAddress;
+    }
+
+    public String getPrimaryInvoice() {
+        return primaryInvoice;
+    }
+
+    public void setPrimaryInvoice(String primaryInvoice) {
+        this.primaryInvoice = primaryInvoice;
+    }
+
+    public String getFinancialConditions() {
+        return financialConditions;
+    }
+
+    public void setFinancialConditions(String financialConditions) {
+        this.financialConditions = financialConditions;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public String getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(String recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public PreferTime getPreferTime() {
+        return preferTime;
+    }
+
+    public void setPreferTime(PreferTime preferTime) {
+        this.preferTime = preferTime;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public LocalDate getDateOfFirstContact() {
+        return dateOfFirstContact;
+    }
+
+    public void setDateOfFirstContact(LocalDate dateOfFirstContact) {
+        this.dateOfFirstContact = dateOfFirstContact;
+    }
+
+    public LocalDate getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public List<String> getProblems() {
+        return problems;
+    }
+
+    public void addProblem(String problemId) {
+        if(this.problems == null)
+        {
+            problems = new ArrayList<>();
+        }
+        problems.add(problemId);
     }
 }

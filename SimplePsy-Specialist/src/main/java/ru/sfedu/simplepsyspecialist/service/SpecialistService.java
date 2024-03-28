@@ -198,7 +198,7 @@ public class SpecialistService {
                 .toEntity(String.class);
 
         String result = response.block().getBody();
-        System.out.println("The result of deleting the customer with id: "
+        System.out.println("The result of deleting customer with id: "
                 + customerId + " - " + result);
     }
 
@@ -211,7 +211,7 @@ public class SpecialistService {
                 .body(BodyInserters.fromValue(customer))
                 .retrieve()
                 .toEntity(String.class).block();
-        ;
+
         System.out.println("The result of creating a new customer:\n" + response.getBody());
         return null;
     }

@@ -14,7 +14,7 @@ public class ProblemService {
         this.problemRepository = problemRepository;
     }
 
-    public void saveProblem(Problem problem) {
-        problemRepository.save(problem);
+    public Problem saveProblem(Problem problem) {
+        return problemRepository.save(problem);
     }
 }
