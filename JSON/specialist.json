@@ -43,6 +43,18 @@
     "customers"
   ],
   "definitions": {
+    "calendar_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "meetings": {
+          "$ref": "#/definitions/list_of_meetings_type"
+        },
+        "notes": {
+          "$ref": "#/definitions/list_of_notes_type"
+        }
+      }
+    },
     "list_of_notes": {
       "type": "array",
       "description": "список напоминаний",
@@ -400,7 +412,7 @@
           }
         },
         "required": [
-          "customer"
+          "client"
         ]
       }
     },
@@ -520,7 +532,7 @@
         "scoring"
       ]
     },
-    "questionare_type": {
+    "questionnaire_type": {
       "type": "object",
       "description": "Анкета",
       "additionalProperties": false,
