@@ -48,14 +48,14 @@
       "additionalProperties": false,
       "properties": {
         "meetings": {
-          "$ref": "#/definitions/list_of_meetings_type"
+          "$ref": "#/definitions/list_of_meeting_type"
         },
         "notes": {
           "$ref": "#/definitions/list_of_notes_type"
         }
       }
     },
-    "list_of_notes": {
+    "list_of_notes_type": {
       "type": "array",
       "description": "список напоминаний",
       "additionalProperties": false,
