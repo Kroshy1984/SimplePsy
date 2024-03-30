@@ -11,10 +11,7 @@ public class ClientDTO {
     private String gender;
     private Contact contact;
 
-    public ClientDTO(String name, Contact contact) {
-        this.name = name;
-        this.contact = contact;
-    }
+    public ClientDTO() {}
 
     public String getName() {
         return name;

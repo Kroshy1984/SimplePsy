@@ -23,6 +23,7 @@ public class Customer {
     private String description;
     private byte[] avatar;
     private LocalDate dateOfFirstCall;
+    private String problemId;
    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
     public Customer() {
     }
@@ -109,6 +110,15 @@ public class Customer {
     {
         this.avatar = avatar;
     }
+
+    public String getProblemId() {
+        return problemId;
+    }
+
+    public void setProblemId(String problemId) {
+        this.problemId = problemId;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

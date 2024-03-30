@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/SimplePsy/V1/customer")
+//@RequestMapping("/SimplePsy/V1/customer")
 public class CustomerController {
 
     @Autowired

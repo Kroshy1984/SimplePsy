@@ -1,6 +1,6 @@
-package ru.sfedu.simplepsy.customer.dto;
+package ru.sfedu.customer.dto;
 
-import ru.sfedu.simplepsy.customer.document.Customer;
+import ru.sfedu.customer.Customer;
 
 import java.util.Set;
 

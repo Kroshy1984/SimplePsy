@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.customer.dto.CustomerDTO;
+import ru.sfedu.customer.dto.CustomersSearch;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/SimplePsy/V1/customer")
 public class CustomerController {
-
 
     private CustomerService customerService;
 
@@ -48,9 +48,9 @@ public class CustomerController {
     public ResponseEntity<String> newCustomer(@RequestBody CustomerDTO customer)
     {
         System.out.println("Got the new customer:\n" +customer.getName());
-        System.out.println(customer.getStatus());
         System.out.println(customer.getContact().getEmail());
         System.out.println(customer.getName());
+        System.out.println(customer.getProblemId());
         customerService.saveCustomer(customer);
         return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
     }
@@ -71,16 +71,33 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
+
     @GetMapping("/getCustomerById")
     public ResponseEntity<CustomerDTO> getCustomerById(@RequestParam("customerId") String customerId)
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
+
     @DeleteMapping("/deleteCustomerById")
     public ResponseEntity<String> deleteCustomerById(@RequestParam("customerId") String customerId)
     {
         customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer successfully deleted");
+    }
+
+    @GetMapping("/search2")
+    public CustomersSearch searchCustomers(@RequestBody CustomersSearch customersSearch) {
+        return customerService.searchCustomers(customersSearch.getSpecialistId(), customersSearch.getCustomers());
+    }
+
+    @GetMapping("/create2")
+    public CustomersSearch createCustomers(@RequestBody CustomersSearch customersSearch) {
+        return customerService.createCustomers(customersSearch.getSpecialistId(), customersSearch.getCustomers());
+    }
+
+    @GetMapping("/update-status")
+    public void createCustomers(@RequestParam String customerId) {
+        customerService.updateStatus(customerId);
     }
 
 }

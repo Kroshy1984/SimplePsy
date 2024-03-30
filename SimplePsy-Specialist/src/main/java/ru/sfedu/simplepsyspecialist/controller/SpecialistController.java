@@ -9,10 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -154,18 +156,31 @@ public class SpecialistController {
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> newCustomer(@RequestBody CustomerDTO customer) {
-        System.out.println("Got the new customer:\n" + customer.getName());
-        System.out.println(customer.getStatus());
-        System.out.println(customer.getContact().getEmail());
-        System.out.println(customer.getName());
-        specialistService.saveCustomer(customer);
-        return ResponseEntity.ok("Customer " + customer.getName() + " successfully saved");
+    public ResponseEntity<String> newCustomer(@RequestParam("name") String name,
+                                              @RequestParam("surname") String surname,
+                                              @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
+                                              @RequestParam("gender") String gender,
+                                              @RequestParam("contact.phone") String phone,
+                                              @RequestParam("contact.email") String email,
+                                              @RequestParam("contact.tg") String tg,
+                                              @RequestParam("problem") String problem) {
+        System.out.println("Got the new customer:\n" + name);
+        System.out.println(surname);
+        System.out.println(dateOfBirth);
+        System.out.println(gender);
+        System.out.println(phone);
+        System.out.println(email);
+        System.out.println(tg);
+        System.out.println(problem);
+        Contact contact = new Contact(phone, email, tg);
+        specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        return ResponseEntity.ok("Customer " + name + " successfully saved");
     }
 
-    @GetMapping("/client-form")
-    public String clientForm() {
-        return "client-form";
+    @GetMapping("/customer-form")
+    public String clientForm(Model model) {
+        model.addAttribute("customerDTO", new CustomerDTO());
+        return "customer-form";
     }
 
 

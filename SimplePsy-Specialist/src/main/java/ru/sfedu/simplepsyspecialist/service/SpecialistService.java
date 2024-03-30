@@ -202,9 +202,27 @@ public class SpecialistService {
                 + customerId + " - " + result);
     }
 
-    public CustomerDTO saveCustomer(CustomerDTO customer) {
+    public String saveProblem(String problem) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8087").build();
+        String url = "/SimplePsyProblem/V1/problem/new";
+        ResponseEntity<String> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problem", problem)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+        System.out.println("The result of creating a new problem:\n" + response.getBody());
+        return response.getBody();
+    }
+
+    public CustomerDTO saveCustomer(CustomerDTO customer, String problem) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/new";
+        String problemId = saveProblem(problem);
+        customer.setProblemId(problemId);
+        System.out.println("Specialist CustomerDTO" + customer.getProblemId());
         ResponseEntity<String> response = webClient.post()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)
