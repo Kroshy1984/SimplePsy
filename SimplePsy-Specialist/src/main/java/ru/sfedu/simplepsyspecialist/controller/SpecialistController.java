@@ -106,9 +106,9 @@ public class SpecialistController {
     }
 
     @GetMapping("/sessions")
-    public String sessionForm(@RequestParam("specialistId") String specialistId) {
-        specialistService.getAllSessions(specialistId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+    public ResponseEntity<String> sessionForm(@RequestParam("specialistId") String specialistId) {
+        return ResponseEntity.ok(specialistService.getAllSessions(specialistId).toString());
+//        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
     @PostMapping("/session")

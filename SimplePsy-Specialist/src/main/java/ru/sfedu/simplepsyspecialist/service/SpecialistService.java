@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
 import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
@@ -216,17 +217,24 @@ public class SpecialistService {
         return null;
     }
 
-    public void getAllSessions(String specialistId) {
+    public List<SessionDTO> getAllSessions(String specialistId) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8083").build();
-        String url = "/SimplePsySession/V1/session/searchAll";
-        Object result =  webClient.get()
+        String url = "/SimplePsySession/V1/session/calendar";
+        ResponseEntity<List<SessionDTO>> result =  webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
-                        .queryParam("specialist_id", specialistId)
+                        .queryParam("specialistId", specialistId)
                         .build())
                 .retrieve()
-                .bodyToMono(String.class)
-                .block();
+                        .toEntityList(SessionDTO.class)
+                                .block();
         System.out.println("got the result: " + result.toString());
+        for (int i = 0; i < result.getBody().size(); i++) {
+            System.out.println(result.getBody().get(i).getDate().toString());
+            System.out.println(result.getBody().get(i).getClientDTO().getName());
+            System.out.println(result.getBody().get(i).getClientDTO().getSurname());
+            System.out.println(result.getBody().get(i).getClientDTO().getDateOfBirth());
+        }
+        return result.getBody();
     }
 }

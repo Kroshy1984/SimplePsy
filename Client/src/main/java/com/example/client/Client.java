@@ -41,6 +41,13 @@ public class Client {
         this.typeOfClient = typeOfClient;
     }
 
+    public Client(String id, String name, String surname, Contact contact) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.contact = contact;
+    }
+
     public String getId() {
         return id;
     }
