@@ -3,6 +3,7 @@ package ru.sfedu.session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.session.dto.SessionDTO;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -52,6 +53,14 @@ public class SessionController {
         System.out.println("date: " + date);
         sessionService.createSession(clientId, specialistId, problem, date);
         return ResponseEntity.ok("Session successfully created");
+    }
+    @GetMapping("/calendar")
+    public ResponseEntity<List<SessionDTO>> getCalendarBySpecialistId(
+            @RequestParam("specialistId") String specialistId) {
+        System.out.println(specialistId);
+        List<SessionDTO> sessions  = sessionService.getAllBySpecialistId(specialistId);
+
+        return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
 
 }

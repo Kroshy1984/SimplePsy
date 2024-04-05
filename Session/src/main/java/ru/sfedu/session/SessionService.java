@@ -1,6 +1,10 @@
 package ru.sfedu.session;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import ru.sfedu.session.dto.ClientDTO;
+import ru.sfedu.session.dto.SessionDTO;
+import ru.sfedu.session.dto.SessionMapper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,4 +40,30 @@ public class SessionService {
         sessionRepository.save(session);
     }
 
+    public List<SessionDTO> getAllBySpecialistId(String specialistId) {
+        List<Session> sessions = sessionRepository.findAllBySpecialistId(specialistId).get();
+        List<SessionDTO> sessionDTOS = new ArrayList<>();
+        for (int i = 0; i < sessions.size(); i++) {
+            SessionDTO sessionDTO = SessionMapper.INSTANCE.sessionToSessionDTO(sessions.get(i));
+            sessionDTO.setClientDTO(getClientById(sessions.get(i).getClientId()));
+            sessionDTOS.add(sessionDTO);
+        }
+        return sessionDTOS;
+    }
+    public ClientDTO getClientById(String clientId)
+    {
+        System.out.println("ClientDTO id: " + clientId);
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086").build();
+        String url = "/SimplePsyClient/V1/client/findById";
+        ClientDTO result =  webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("clientId", clientId)
+                        .build())
+                .retrieve()
+                .bodyToMono(ClientDTO.class)
+                .block();
+        System.out.println("got the client: " + result.getName());
+        return result;
+    }
 }

@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsyspecialist.entity;
+package ru.sfedu.session.dto;
 
 public enum TypeOfClients {
     ADULT,
