@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sessions</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Day</th>
+        <th>Sessions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Перебираем дни недели -->
+    <tr th:each="meet : ${meetingsByDay}">
+        <td>
+            <!-- Перебираем сессии для текущего дня -->
+            <div th:each="meeting : ${meet.getValue()}">
+                <!-- Выводим информацию о сессии -->
+                <div>
+                    <span th:text="${meeting.getDate()}"></span>
+                    <span th:text="${meeting.getClientDTO().name}"></span>
+                    <span th:text="${meeting.getClientDTO().surname}"></span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

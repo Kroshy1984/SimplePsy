@@ -18,6 +18,8 @@ repositories {
 dependencies {
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.0.Final'
 	testImplementation 'org.mockito:mockito-core:3.11.2'
+	implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 	implementation 'com.google.code.gson:gson:2.8.9'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'

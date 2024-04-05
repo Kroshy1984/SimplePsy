@@ -33,4 +33,9 @@ public class CalendarController {
         System.out.println("got the sessionList " + sessionList.get(0));
         calendarService.sendResultToSpecialist(sessionList);
     }
+//    @GetMapping("/calendar")
+//    public ResponseEntity<> findAll(String specialistId)
+//    {
+//        calendarService.getAllSessionsBySpecialistId(specialistId);
+//    }
 }

@@ -9,12 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -108,9 +106,16 @@ public class SpecialistController {
     }
 
     @GetMapping("/sessions")
-    public String sessionForm(@RequestParam("specialistId") String specialistId) {
-        specialistService.getAllSessions(specialistId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+    public String sessionForm(@RequestParam("specialistId") String specialistId, Model model) {
+        List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialistId);
+
+        // Группируем сессии по дням недели
+        Map<DayOfWeek, List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
+        // Передаем данные в шаблон
+        model.addAttribute("meetingsByDay", meetingsByDay);
+
+        return "sessions";
+//        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
     @PostMapping("/session")
