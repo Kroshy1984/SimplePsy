@@ -1,9 +1,8 @@
-package ru.sfedu.session.dto;
+package ru.sfedu.problem.dto;
 
 public class ClientDTO {
     String name;
     String surname;
-    TypeOfClients typeOfClients;
     Contact contact;
 
     public ClientDTO() {
@@ -31,13 +30,5 @@ public class ClientDTO {
 
     public void setContact(Contact contact) {
         this.contact = contact;
-    }
-
-    public TypeOfClients getTypeOfClients() {
-        return typeOfClients;
-    }
-
-    public void setTypeOfClients(TypeOfClients typeOfClients) {
-        this.typeOfClients = typeOfClients;
     }
 }

@@ -18,9 +18,13 @@ import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
 import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SpecialistService {
@@ -236,5 +240,17 @@ public class SpecialistService {
             System.out.println(result.getBody().get(i).getClientDTO().getDateOfBirth());
         }
         return result.getBody();
+    }
+    public Map<DayOfWeek, List<SessionDTO>> groupSessionsByDay(List<SessionDTO> sessions) {
+
+        Map<DayOfWeek, List<SessionDTO>> sessionsByDay = new EnumMap<>(DayOfWeek.class);
+
+        // Группирование сессий по дням недели
+        sessionsByDay = sessions.stream()
+                .collect(Collectors.groupingBy(session -> session.getDate().getDayOfWeek()));
+        for (int i = 0; i < sessions.size(); i++) {
+            System.out.println(sessions.get(i).getDate().getDayOfWeek());
+        }
+        return sessionsByDay;
     }
 }

@@ -1,4 +1,5 @@
 package ru.sfedu.problem;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +14,8 @@ public class Problem {
 
     private String descriptionOfProblem;
     private LocalDateTime dateOfFirstContact;
+
+    private String clientId;
 
     public Problem(Status status, String descriptionOfProblem, LocalDateTime dateOfFirstContact) {
         this.status = status;
@@ -53,5 +56,13 @@ public class Problem {
 
     public void setDateOfFirstContact(LocalDateTime dateOfFirstContact) {
         this.dateOfFirstContact = dateOfFirstContact;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }
