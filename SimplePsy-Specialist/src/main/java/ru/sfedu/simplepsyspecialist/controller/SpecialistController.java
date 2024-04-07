@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -109,13 +112,31 @@ public class SpecialistController {
     public String sessionForm(@RequestParam("specialistId") String specialistId, Model model) {
         List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialistId);
 
-        // Группируем сессии по дням недели
-        Map<DayOfWeek, List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
-        // Передаем данные в шаблон
-        model.addAttribute("meetingsByDay", meetingsByDay);
+        List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
+        List<SessionDTO> meetingsByMonday = meetingsByDay.get(0);
+        System.out.println(meetingsByMonday.size());
+        List<SessionDTO> meetingsByDayTuesday = meetingsByDay.get(1);
+        System.out.println(meetingsByDayTuesday.size());
+        List<SessionDTO> meetingsByDayWednesday = meetingsByDay.get(2);
+        System.out.println(meetingsByDayWednesday.size());
+        List<SessionDTO> meetingsByDayThursday = meetingsByDay.get(3);
+        System.out.println(meetingsByDayThursday.size());
+        List<SessionDTO> meetingsByDayFriday = meetingsByDay.get(4);
+        System.out.println(meetingsByDayFriday.size());
+        List<SessionDTO> meetingsByDaySaturday = meetingsByDay.get(5);
+        System.out.println(meetingsByDaySaturday.size());
+        List<SessionDTO> meetingsByDaySunDay = meetingsByDay.get(6);
+        System.out.println(meetingsByDaySunDay.size());
+        model.addAttribute("meetingsByMonday", meetingsByMonday);
+        model.addAttribute("meetingsByDayTuesday", meetingsByDayTuesday);
+        model.addAttribute("meetingsByDayWednesday", meetingsByDayWednesday);
+        model.addAttribute("meetingsByDayThursday", meetingsByDayThursday);
+        model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
+        model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
+        model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
+
 
         return "sessions";
-//        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
     @PostMapping("/session")
