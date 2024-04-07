@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" th:href="@{/customer-form.css}">
+    <title>Customer form</title>
+</head>
+<body>
+<div class="page-content">
+    <form id="registrationForm" th:object="${customerDTO}" th:action="@{/SimplePsySpecialist/V1/specialist/customers/new}" method="post">
+        <h1>Новый заказчик</h1>
+        <label for="name">Имя *</label>
+        <input type="text" id="name" placeholder="Имя" th:name="name" required>
+
+        <label for="surname">Фамилия *</label>
+        <input type="text" id="surname" placeholder="Фамилия" th:name="surname" required>
+
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" placeholder="E-mail" th:name="contact.email" required>
+
+        <label for="phoneNumber">Номер телефона</label>
+        <input type="tel" id="phoneNumber" placeholder="Номер телефона" th:name="contact.phone">
+
+        <label for="telegram">Телеграм</label>
+        <input type="text" id="telegram" placeholder="Телеграм" th:name="contact.tg">
+
+        <label for="dateOfBirth">Дата рождения *</label>
+        <input type="date" id="dateOfBirth" placeholder="Дата рождения" th:name="dateOfBirth" required>
+
+        <label for="gender">Пол *</label>
+        <select id="gender" th:name="gender" required>
+            <option value="">Не указано</option>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
+
+        <label for="problem">Проблема *</label>
+        <textarea id="problem" placeholder="Проблема" th:name="problem" required></textarea>
+
+        <button type="submit">Подтвердить</button>
+    </form>
+</div>
+</body>
+</html>

@@ -7,8 +7,8 @@ public class CustomerDTO {
 
     private String id;
     private String name;
-    private String status;
     private Contact contact;
+    private String problemId;
 
     public String getId() {
         return id;
@@ -34,11 +34,11 @@ public class CustomerDTO {
         this.contact = contact;
     }
 
-    public String getStatus() {
-        return status;
+    public String getProblemId() {
+        return problemId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setProblemId(String problemId) {
+        this.problemId = problemId;
     }
 }

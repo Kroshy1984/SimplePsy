@@ -27,7 +27,7 @@
             <tr th:data-card-id="${customer.getId()}">
                 <td><input type="radio" id="item2" name="selectedItem" th:value="${customer.getId()}"></td>
                 <td><img id="profile-image" alt="Customer pic"
-                         th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>
+                         th:src=" @{'/SimplePsySpecialist/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>
                 <td>
                     <div class="customer-info">
                         <div th:text="${customer.getName()}" class="name">Devon Lane</div>
@@ -44,7 +44,7 @@
 <div class="button-container">
     <button onclick="viewSelectedCard()">Посмотреть карточку</button>
     <button onclick="deleteSelectedCard()">Удалить</button>
-    <input type="submit" id="add" value="Добавить">
+    <button onclick="addNewCustomer()">Добавить</button>
 </div>
 
 </body>

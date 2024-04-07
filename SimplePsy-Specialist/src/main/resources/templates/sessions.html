@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sessions</title>
+    <meta charset="UTF-8">
+</head>
+<style>
+    .week-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .day-column {
+        flex: 1 1 0px;
+        margin: 10px;
+    }
+
+    .day-column p {
+        margin-top: 0;
+    }
+
+    .session-item {
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .session-item p {
+        margin: 0;
+    }
+
+    .session-item.date {
+        font-weight: bold;
+    }
+
+    .session-item.name {
+        text-transform: capitalize;
+    }
+
+    .session-item.surname {
+        text-transform: capitalize;
+    }
+</style>
+<body>
+<div class="week-container">
+
+    <div class="day-column">
+        <p>Monday</p>
+        <div th:each="monday : ${meetingsByMonday}">
+            <div class="session-item">
+            <p class="date" th:text="${monday.getDate()}"></p>
+            <p class="name" th:text="${monday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${monday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-column">
+        <p>Tuesday</p>
+        <div th:each="tuesday : ${meetingsByDayTuesday}">
+            <div class="session-item">
+            <p class="date" th:text="${tuesday.getDate()}"></p>
+            <p class="name" th:text="${tuesday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${tuesday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-column">
+        <p>Wednesday</p>
+        <div th:each="wednesday : ${meetingsByDayWednesday}">
+            <div class="session-item">
+            <p class="date" th:text="${wednesday.getDate()}"></p>
+            <p class="name" th:text="${wednesday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${wednesday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-column">
+        <p>Thursday</p>
+        <div th:each="thursday : ${meetingsByDayThursday}">
+            <div class="session-item">
+            <p class="date" th:text="${thursday.getDate()}"></p>
+            <p class="name" th:text="${thursday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${thursday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-column">
+        <p>Friday</p>
+        <div th:each="friday : ${meetingsByDayFriday}">
+            <div class="session-item">
+            <p class="date" th:text="${friday.getDate()}"></p>
+            <p class="name" th:text="${friday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${friday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-column">
+        <p>Saturday</p>
+        <div th:each="saturday : ${meetingsByDaySaturday}">
+            <div class="session-item">
+            <p class="date" th:text="${saturday.getDate()}"></p>
+            <p class="name" th:text="${saturday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${saturday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-column">
+        <p>Sunday</p>
+        <div th:each="sunday : ${meetingsByDaySunDay}">
+            <div class="session-item">
+            <p class="date" th:text="${sunday.getDate()}"></p>
+            <p class="name" th:text="${sunday.getClientDTO().name}"></p>
+            <p class="surname" th:text="${sunday.getClientDTO().surname}"></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

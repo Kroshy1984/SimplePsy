@@ -17,7 +17,7 @@ public class Scoring {
     @Transient
     private static List<String> userData;
     public List<String> answers = new ArrayList<>();
-    public String clientId;
+    public String customerId;
 
     public List<String> getAnswers() {
         return answers;
@@ -71,7 +71,7 @@ public class Scoring {
         checkboxQuestions.add("Проблемы в общении");
         checkboxQuestions.add("Рабочие вопросы и профориентация");
         checkboxQuestions.add("Трудные эмоции и чувства");
-        checkboxQuestions.add("Замечаете ли вы за собой навязчивые мысли, ритуалы");
+        checkboxQuestions.add("Навязчивые мысли, ритуалы");
         checkboxQuestions.add("Повышенная утомляемость");
         checkboxQuestions.add("Нервное напряжение и возбудимость");
         checkboxQuestions.add("Недовольство собственной жизнью и желание ее изменить");

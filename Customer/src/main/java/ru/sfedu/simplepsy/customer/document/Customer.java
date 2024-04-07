@@ -1,6 +1,5 @@
 package ru.sfedu.simplepsy.customer.document;
 
-import lombok.Builder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Builder
 @Document("customer")
 public class Customer {
 

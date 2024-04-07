@@ -1,5 +1,5 @@
 rootProject.name = 'SimplePsy'
-include ':SimplePsy-Specialist', ':scoring', ':Session', ':Calendar', ':Customer'
+include ':SimplePsy-Specialist', ':scoring', ':Session', ':Calendar', ':Customer', ':Client', ':problem'
 
 
 

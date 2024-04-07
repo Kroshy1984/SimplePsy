@@ -16,10 +16,11 @@ function showButtons() {
     saveButton.style.display = 'inline-block';
     deleteButton.style.display = 'inline-block';
 }
+
 function deleteCard()
 {
     var id = document.getElementById("customerIdInput").value;
-    var url = 'http://localhost:8080/SimplePsy/V1/specialist/' + id;
+    var url = 'http://localhost:8080/SimplePsy/V1/customer/' + id;
     fetch(url, {
         method: 'DELETE',
         headers: {
@@ -40,4 +41,12 @@ function deleteCard()
             console.error('DELETE request failed', error);
         });
 
+}
+
+// TODO: Сделать кнопку отправки уведомления на почту заказчика на скоринг
+function copyUrl() {
+    var id = document.getElementById("customerIdInput").value;
+    var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/' + id;
+
+    navigator.clipboard.writeText(url).then(() => alert("Ссылка скопирована"));
 }

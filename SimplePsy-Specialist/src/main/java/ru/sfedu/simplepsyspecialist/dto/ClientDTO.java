@@ -8,13 +8,10 @@ public class ClientDTO {
     private String surname;
     private LocalDate dateOfBirth;
     private String problemId;
-    private String gender;
+    private TypeOfClients typeOfClients;
     private Contact contact;
 
-    public ClientDTO(String name, Contact contact) {
-        this.name = name;
-        this.contact = contact;
-    }
+    public ClientDTO() {}
 
     public String getName() {
         return name;
@@ -48,12 +45,12 @@ public class ClientDTO {
         this.problemId = problemId;
     }
 
-    public String getGender() {
-        return gender;
+    public TypeOfClients getTypeOfClients() {
+        return typeOfClients;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setTypeOfClients(String TypeOfClients) {
+        this.typeOfClients = typeOfClients;
     }
 
     public Contact getContact() {

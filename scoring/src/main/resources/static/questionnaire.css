@@ -19,10 +19,16 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input {
+input[type="text"] {
     width: 100%;
     margin-bottom: 20px;
     padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
 }

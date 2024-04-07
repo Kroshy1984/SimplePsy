@@ -9,12 +9,6 @@ function collectUserFormAnswers() {
     window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestions';
 }
 
-function collectTextAnswers() {
-    textAnswers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
-    localStorage.setItem('textAnswers', JSON.stringify(textAnswers));
-    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/checkboxQuestions';
-}
-
 function openUserFormPage() {
     window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/userForm';
 }
@@ -24,16 +18,19 @@ function openTextQuestionsPage() {
 }
 
 function sendData() {
+    // From textQuestions
+    textAnswers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
+    localStorage.setItem('textAnswers', JSON.stringify(textAnswers));
+
+    // From checkboxQuestions
     checkboxAnswers = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
     localStorage.setItem('checkboxAnswers', JSON.stringify(checkboxAnswers));
 
-    // Очищаем localStorage после отправки данных, если нужно
-    // localStorage.removeItem('userFormAnswers');
-    // localStorage.removeItem('textAnswers');
-    // localStorage.removeItem('checkboxAnswers');
-
-    let newArray = [].concat(userFormAnswers, textAnswers, checkboxAnswers);
+    let newArray = [].concat(textAnswers, checkboxAnswers);
     const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers';
+
+    localStorage.removeItem('textAnswers');
+    localStorage.removeItem('checkboxAnswers');
 
     fetch(url, {
         method: 'POST',
@@ -50,4 +47,31 @@ function sendData() {
             console.error('Error:', error);
         });
     window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
+}
+
+function checkInput(input) {
+    let question = input.value.trim();
+    let pattern = /^[А-Яа-яЁё\s.,!\-?]*$/;
+    let errorDiv = input.nextElementSibling;
+
+    if (question.match(pattern)) {
+        input.classList.remove('error');
+        errorDiv.style.display = 'none';
+    } else {
+        input.classList.add('error');
+        errorDiv.innerText = "Пожалуйста, используйте только буквы русского алфавита";
+        errorDiv.style.display = 'block';
+    }
+
+    checkFormValidity();
+}
+
+function showCheckboxQuestions() {
+    document.getElementById('textQuestions').style.display = 'none';
+    document.getElementById('checkboxQuestions').style.display = 'block';
+}
+
+function showTextQuestions() {
+    document.getElementById('checkboxQuestions').style.display = 'none';
+    document.getElementById('textQuestions').style.display = 'block';
 }

@@ -11,13 +11,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
 import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
 import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -198,35 +201,84 @@ public class SpecialistService {
                 .toEntity(String.class);
 
         String result = response.block().getBody();
-        System.out.println("The result of deleting the customer with id: "
+        System.out.println("The result of deleting customer with id: "
                 + customerId + " - " + result);
     }
 
-    public CustomerDTO saveCustomer(CustomerDTO customer) {
+    public String saveProblem(String problem) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8087").build();
+        String url = "/SimplePsyProblem/V1/problem/new";
+        ResponseEntity<String> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problem", problem)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+        System.out.println("The result of creating a new problem:\n" + response.getBody());
+        return response.getBody();
+    }
+
+    public CustomerDTO saveCustomer(CustomerDTO customer, String problem) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/new";
+        String problemId = saveProblem(problem);
+        customer.setProblemId(problemId);
+        System.out.println("Specialist CustomerDTO" + customer.getProblemId());
         ResponseEntity<String> response = webClient.post()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(customer))
                 .retrieve()
                 .toEntity(String.class).block();
-        ;
+
         System.out.println("The result of creating a new customer:\n" + response.getBody());
         return null;
     }
 
-    public void getAllSessions(String specialistId) {
+    public List<SessionDTO> getAllSessions(String specialistId) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8083").build();
-        String url = "/SimplePsySession/V1/session/searchAll";
-        Object result =  webClient.get()
+        String url = "/SimplePsySession/V1/session/calendar";
+        ResponseEntity<List<SessionDTO>> result =  webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
-                        .queryParam("specialist_id", specialistId)
+                        .queryParam("specialistId", specialistId)
                         .build())
                 .retrieve()
-                .bodyToMono(String.class)
-                .block();
+                        .toEntityList(SessionDTO.class)
+                                .block();
         System.out.println("got the result: " + result.toString());
+        for (int i = 0; i < result.getBody().size(); i++) {
+            System.out.println(result.getBody().get(i).getDate().toString());
+            System.out.println(result.getBody().get(i).getClientDTO().getName());
+            System.out.println(result.getBody().get(i).getClientDTO().getSurname());
+            System.out.println(result.getBody().get(i).getClientDTO().getDateOfBirth());
+        }
+        return result.getBody();
+    }
+    public  List<List<SessionDTO>> groupSessionsByDay(List<SessionDTO> sessions) {
+        System.out.println("into groupSessionsByDay method");
+        List<List<SessionDTO>> sessionsByDayOfWeek = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            sessionsByDayOfWeek.add(new ArrayList<>());
+        }
+
+        // Проходимся по каждой сессии и добавляем ее в соответствующий список
+        for (SessionDTO session : sessions) {
+            DayOfWeek dayOfWeek = session.getDate().getDayOfWeek();
+            int dayIndex = dayOfWeek.getValue() % 7; // Индекс дня недели (0 - Понедельник, ..., 6 - Воскресенье)
+            sessionsByDayOfWeek.get(dayIndex).add(session);
+        }
+        System.out.println("sessionsByDayOfWeek.size(): " + sessionsByDayOfWeek.size());
+        for (int i = 0; i < sessionsByDayOfWeek.size(); i++) {
+            List<SessionDTO> sessionDTOS = sessionsByDayOfWeek.get(i);
+            System.out.println("sessionDTOS.size(): " + sessionDTOS.size());
+            for (int j = 0; j < sessionDTOS.size(); j++) {
+                System.out.println("Date of session: " + sessionDTOS.get(j).getDate());
+                System.out.println("Client name " + sessionDTOS.get(j).getClientDTO().getName());
+            }
+        }
+        return sessionsByDayOfWeek;
     }
 }
