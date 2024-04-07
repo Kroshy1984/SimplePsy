@@ -20,11 +20,9 @@ import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.EnumMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class SpecialistService {
@@ -259,16 +257,28 @@ public class SpecialistService {
         }
         return result.getBody();
     }
-    public Map<DayOfWeek, List<SessionDTO>> groupSessionsByDay(List<SessionDTO> sessions) {
-
-        Map<DayOfWeek, List<SessionDTO>> sessionsByDay = new EnumMap<>(DayOfWeek.class);
-
-        // Группирование сессий по дням недели
-        sessionsByDay = sessions.stream()
-                .collect(Collectors.groupingBy(session -> session.getDate().getDayOfWeek()));
-        for (int i = 0; i < sessions.size(); i++) {
-            System.out.println(sessions.get(i).getDate().getDayOfWeek());
+    public  List<List<SessionDTO>> groupSessionsByDay(List<SessionDTO> sessions) {
+        System.out.println("into groupSessionsByDay method");
+        List<List<SessionDTO>> sessionsByDayOfWeek = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            sessionsByDayOfWeek.add(new ArrayList<>());
         }
-        return sessionsByDay;
+
+        // Проходимся по каждой сессии и добавляем ее в соответствующий список
+        for (SessionDTO session : sessions) {
+            DayOfWeek dayOfWeek = session.getDate().getDayOfWeek();
+            int dayIndex = dayOfWeek.getValue() % 7; // Индекс дня недели (0 - Понедельник, ..., 6 - Воскресенье)
+            sessionsByDayOfWeek.get(dayIndex).add(session);
+        }
+        System.out.println("sessionsByDayOfWeek.size(): " + sessionsByDayOfWeek.size());
+        for (int i = 0; i < sessionsByDayOfWeek.size(); i++) {
+            List<SessionDTO> sessionDTOS = sessionsByDayOfWeek.get(i);
+            System.out.println("sessionDTOS.size(): " + sessionDTOS.size());
+            for (int j = 0; j < sessionDTOS.size(); j++) {
+                System.out.println("Date of session: " + sessionDTOS.get(j).getDate());
+                System.out.println("Client name " + sessionDTOS.get(j).getClientDTO().getName());
+            }
+        }
+        return sessionsByDayOfWeek;
     }
 }
