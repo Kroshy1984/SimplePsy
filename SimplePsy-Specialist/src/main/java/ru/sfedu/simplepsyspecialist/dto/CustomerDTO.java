@@ -1,12 +1,10 @@
 package ru.sfedu.simplepsyspecialist.dto;
 
-
 import java.time.LocalDate;
 
 public class CustomerDTO {
 
     private String id;
-    private String status;
     private String name;
     private String surname;
     private LocalDate dateOfBirth;
@@ -30,14 +28,6 @@ public class CustomerDTO {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getName() {

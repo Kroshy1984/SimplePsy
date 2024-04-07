@@ -73,12 +73,15 @@ public class CustomerService {
         System.out.println("saving customer " + customer.getName());
         return customerRepository.insert(customer);
     }
+
     public Customer saveCustomer(CustomerDTO customerDTO) {
         Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
+        customer.setStatus(Status.LEAD);
         System.out.println("Customer CustomerDTO" + customer.getProblemId());
         System.out.println("saving customer " + customer.getName());
         return customerRepository.save(customer);
     }
+
     public void deleteCustomer(String id) {
         if (customerRepository.findById(id).isEmpty()) {
             throw new NotFoundException("Customer with id " + id + " not found.");

@@ -7,7 +7,6 @@ public class CustomerDTO {
 
     private String id;
     private String name;
-    private String status;
     private Contact contact;
     private String problemId;
 
@@ -33,14 +32,6 @@ public class CustomerDTO {
 
     public void setContact(Contact contact) {
         this.contact = contact;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getProblemId() {

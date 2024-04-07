@@ -16,6 +16,7 @@ function viewSelectedCard() {
         alert('Выберите карточку перед нажатием "Посмотреть".');
     }
 }
+
 function deleteSelectedCard()
 {
     var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
@@ -24,7 +25,7 @@ function deleteSelectedCard()
 
         var selectedCardId = selectedRadioButton.value;
 
-        var url = 'http://localhost:8080/SimplePsy/V1/specialist/' + selectedCardId;
+        var url = 'http://localhost:8080/SimplePsy/V1/customer/' + selectedCardId;
 
         fetch(url, {
             method: 'DELETE',
@@ -52,4 +53,8 @@ function deleteSelectedCard()
     } else {
         alert('Выберите карточку перед нажатием "Посмотреть".');
     }
+}
+
+function addNewCustomer() {
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer-form';
 }

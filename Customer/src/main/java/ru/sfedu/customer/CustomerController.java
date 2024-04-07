@@ -11,6 +11,7 @@ import ru.sfedu.customer.dto.CustomersSearch;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/SimplePsy/V1/customer")
 public class CustomerController {

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,10 +20,11 @@ public class ScoringService {
 
     public Scoring save(List<String> answers) {
         Scoring scoring = new Scoring();
-        List<String> clientsParams = new ArrayList<>();
+        /*List<String> clientsParams = new ArrayList<>();
         clientsParams.addAll(answers.subList(0, 6));
-        createNewClient(clientsParams);
+        createNewClient(clientsParams);*/
         scoring.setAnswers(answers);
+        System.out.println("Ответы: " + scoring.getAnswers());
         return scoringRepository.save(scoring);
     }
 

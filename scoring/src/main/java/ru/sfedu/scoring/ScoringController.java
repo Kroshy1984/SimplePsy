@@ -3,13 +3,9 @@ package ru.sfedu.scoring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -31,25 +27,27 @@ public class ScoringController {
         return "userForm";
     }
 
-    @GetMapping("/textQuestions")
-    public String textQuestions(Model model)
-    {
-        model.addAttribute("questions", Scoring.getTextQuestions());
-        return "textQuestions";
-    }
-
-    @GetMapping("/checkboxQuestions")
+    /*@GetMapping("/checkboxQuestions")
     public String checkboxQuestions(Model model) {
-        model.addAttribute("questions", Scoring.getCheckboxQuestions());
+        model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
         return "checkboxQuestions";
-    }
+    }*/
 
     @PostMapping("/saveAnswers")
-    public String getCheckboxQuestions(@RequestBody String[] answers) {
+    public String saveAnswers(@RequestBody String[] answers) {
+        this.answers.clear();
         this.answers.addAll(List.of(answers));
         scoringService.save(this.answers);
-        System.out.println("Received answers: " + Arrays.toString(answers));
         return "redirect:/SimplePsyScoring/V1/scoring/done";
+    }
+
+    // Возвращаем скоринг
+    @GetMapping("{id}")
+    public String getScoring(@PathVariable String id, Model model) {
+        model.addAttribute("customerId", id);
+        model.addAttribute("textQuestions", Scoring.getTextQuestions());
+        model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
+        return "questionnaire";
     }
 
     @GetMapping("/done")
