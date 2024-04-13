@@ -78,7 +78,7 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
-    @GetMapping("/CustomerToClient")
+    @GetMapping("/customerToClient")
     public ResponseEntity<CustomerDTO> CustomerToClient(@RequestParam("customerId") String customerId)
     {
         customerService.updateStatus(customerId);

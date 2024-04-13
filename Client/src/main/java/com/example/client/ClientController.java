@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/SimplePsyClient/V1/client")
 public class ClientController {
     ClientService clientService;
@@ -63,11 +64,12 @@ public class ClientController {
     }
 
     //запрос приходит из скоринга после прохождения анкеты
-    @PostMapping("/newClient")
-    public ResponseEntity<Client> newClientFromCustomer(@RequestParam("customerId") String customerId)
+    @PostMapping("/newClient/{customerId}")
+    public ResponseEntity<String> newClientFromCustomer(@PathVariable String customerId)
     {
+        System.out.println("in method newClientFromCustomer");
         Client client = clientService.getClientByCustomerId(customerId);
         Client savedClient = clientService.save(client);
-        return ResponseEntity.ok(savedClient);
+        return ResponseEntity.ok("client successfully created");
     }
 }

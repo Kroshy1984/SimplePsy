@@ -36,7 +36,7 @@ public class ClientService {
     public Client getClientByCustomerId(String customerId) {
         System.out.println("in method getClientByCustomerId");
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
-        String url = "/SimplePsy/V1/customer/CustomerToClient";
+        String url = "/SimplePsy/V1/customer/customerToClient";
         ResponseEntity<CustomerDTO> result = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
