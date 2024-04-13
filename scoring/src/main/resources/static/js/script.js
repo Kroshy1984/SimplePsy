@@ -42,6 +42,23 @@ function sendData() {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var url = 'http://localhost:8085/emails/scoring';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify([name, email])
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         })
         .catch(error => {
             console.error('Error:', error);

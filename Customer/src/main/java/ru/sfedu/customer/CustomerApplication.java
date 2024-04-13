@@ -1,4 +1,4 @@
-package ru.sfedu;
+package ru.sfedu.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
