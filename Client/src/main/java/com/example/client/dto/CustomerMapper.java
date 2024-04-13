@@ -1,18 +1,18 @@
-package ru.sfedu.customer.dto;
+package com.example.client.dto;
+
+import com.example.client.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import ru.sfedu.customer.Customer;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-    @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "surname", target = "surname")
     @Mapping(source = "contact", target = "contact")
-    @Mapping(source = "problemId", target = "problemId")
-    CustomerDTO customerToCustomerDTO(Customer customer);
-    Customer customerDTOToCustomer(CustomerDTO customerDTO);
+    Client customerDTOToClient(CustomerDTO customerDTO);
+    CustomerDTO clientToCustomerDTO(Client client);
+
 }

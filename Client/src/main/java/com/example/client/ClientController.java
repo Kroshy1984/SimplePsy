@@ -61,4 +61,13 @@ public class ClientController {
         ClientDTO clientDTO = clientService.findById(clientId);
         return ResponseEntity.ok(clientDTO);
     }
+
+    //запрос приходит из скоринга после прохождения анкеты
+    @PostMapping("/newClient")
+    public ResponseEntity<Client> newClientFromCustomer(@RequestParam("customerId") String customerId)
+    {
+        Client client = clientService.getClientByCustomerId(customerId);
+        Client savedClient = clientService.save(client);
+        return ResponseEntity.ok(savedClient);
+    }
 }

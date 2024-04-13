@@ -1,7 +1,4 @@
-package ru.sfedu.customer.dto;
-
-
-import ru.sfedu.customer.Contact;
+package com.example.client.dto;
 
 public class CustomerDTO {
 

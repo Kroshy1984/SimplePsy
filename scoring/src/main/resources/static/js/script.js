@@ -28,7 +28,7 @@ function sendData() {
 
     let newArray = [].concat(textAnswers, checkboxAnswers);
     const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers';
-
+    let saveNewClientUrl =
     localStorage.removeItem('textAnswers');
     localStorage.removeItem('checkboxAnswers');
 
@@ -62,7 +62,11 @@ function sendData() {
         })
         .catch(error => {
             console.error('Error:', error);
-        });
+        }).then(data =>
+    {
+        let clientId = document.getElementById("customerId");
+
+    })
     window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
 }
 
