@@ -49,6 +49,11 @@ function copyUrl() {
 
     navigator.clipboard.writeText(url).then(() => alert("Ссылка скопирована"));
 }
+function answersWindow()
+{
+    let id = document.getElementById("customerIdInput").value;
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/scoring/result' + id;
+}
 
 function sendNotification() {
     var id = document.getElementById("customerIdInput").value;
