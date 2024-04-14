@@ -3,9 +3,11 @@ package ru.sfedu.scoring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
 
 import java.util.List;
 
@@ -82,5 +84,25 @@ public class ScoringService {
     }
 
     public void getScoringResult() {
+    }
+
+    // TODO: Доделать передачу customerId в микросервис Specialist
+    public void sendCustomerId(String customerId) {
+        System.out.println("Sending customerId to Specialist: " + customerId);
+        WebClient webClient = WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(
+                        HttpClient.create().followRedirect(true)
+                )).baseUrl("http://localhost:8081").build();
+        String url = "/SimplePsySpecialist/V1/specialist/find-customer";
+        webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .subscribe(responseBody -> {
+                    System.out.println("Response: " + responseBody);
+                });
     }
 }

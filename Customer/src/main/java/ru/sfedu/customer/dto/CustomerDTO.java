@@ -27,6 +27,14 @@ public class CustomerDTO {
         this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public Contact getContact() {
         return contact;
     }
@@ -41,13 +49,5 @@ public class CustomerDTO {
 
     public void setProblemId(String problemId) {
         this.problemId = problemId;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 }
