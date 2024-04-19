@@ -16,13 +16,14 @@ public class Customer {
     private String id;
 
     private String name;
+    private String surname;
 
     private Status status;
 
     private Contact contact;
     private String description;
-    private byte[] avatar;
     private LocalDate dateOfFirstCall;
+    private byte[] avatar;
     private String problemId;
    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
     public Customer() {
@@ -117,6 +118,14 @@ public class Customer {
 
     public void setProblemId(String problemId) {
         this.problemId = problemId;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @Override

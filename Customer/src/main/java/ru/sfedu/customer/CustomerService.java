@@ -119,6 +119,8 @@ public class CustomerService {
     public void updateStatus(String customerId) {
         Customer foundCustomer = customerRepository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException(""));
         foundCustomer.setStatus(Status.CUSTOMER);
+        System.out.println("customer's status " + foundCustomer.getName() + " was updated to CUSTOMER");
+        customerRepository.save(foundCustomer);
     }
 
     public boolean findByContactData(String data)

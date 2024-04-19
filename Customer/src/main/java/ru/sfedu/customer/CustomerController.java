@@ -78,7 +78,12 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
-
+    @GetMapping("/customerToClient")
+    public ResponseEntity<CustomerDTO> CustomerToClient(@RequestParam("customerId") String customerId)
+    {
+        customerService.updateStatus(customerId);
+        return ResponseEntity.ok(customerService.findById(customerId));
+    }
     @DeleteMapping("/deleteCustomerById")
     public ResponseEntity<String> deleteCustomerById(@RequestParam("customerId") String customerId)
     {

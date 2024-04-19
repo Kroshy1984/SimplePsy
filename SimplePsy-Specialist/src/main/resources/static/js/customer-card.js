@@ -43,10 +43,36 @@ function deleteCard()
 
 }
 
-// TODO: Сделать кнопку отправки уведомления на почту заказчика на скоринг
 function copyUrl() {
     var id = document.getElementById("customerIdInput").value;
     var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/' + id;
 
     navigator.clipboard.writeText(url).then(() => alert("Ссылка скопирована"));
+}
+function answersWindow()
+{
+    let id = document.getElementById("customerIdInput").value;
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/scoring/result' + id;
+}
+
+function sendNotification() {
+    var id = document.getElementById("customerIdInput").value;
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var url = 'http://localhost:8085/emails/scoring';
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([id, name, email])
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log('Success:', data);
+            alert("Ссылка была успешно отправлена!");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }

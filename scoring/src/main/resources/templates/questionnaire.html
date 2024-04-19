@@ -20,7 +20,7 @@
             </div>
             <div class="button-container">
                 <!--<button onclick="openUserFormPage()">Назад</button>-->
-                <button id="submitButton" onclick="showCheckboxQuestions()" >Далее</button>
+                <button id="submitButton" onclick="showCheckboxQuestions()" disabled>Далее</button>
             </div>
         </div>
 
@@ -36,6 +36,7 @@
         </div>
     </div>
 </body>
+<input id="customerId" th:value="${customerId}" hidden="hidden">
 <script>
     function checkFields() {
         let textInputs = document.querySelectorAll('input[type="text"]');

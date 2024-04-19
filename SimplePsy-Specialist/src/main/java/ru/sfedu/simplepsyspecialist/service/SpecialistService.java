@@ -188,6 +188,23 @@ public class SpecialistService {
         return customerDTO;
     }
 
+    public String findCustomerByContactData(String data) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/findCustomerByContactData";
+        Mono<ResponseEntity<String>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("data", data)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<>() {});
+
+        String result = response.block().getBody();
+        System.out.println("Got the customer with data: " + data);
+        return result;
+    }
+
     public void deleteCustomerById(String customerId) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/deleteCustomerById";

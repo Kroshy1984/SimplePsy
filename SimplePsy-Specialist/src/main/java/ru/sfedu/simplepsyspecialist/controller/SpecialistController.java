@@ -38,13 +38,13 @@ public class SpecialistController {
     }
 
     @GetMapping("/signup")
-    public String signUpForm(Model model) {
+    public String getSignUpForm(Model model) {
         model.addAttribute("specialist", new Specialist());
         return "signup";
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model) {
+    public String getLoginForm(Model model) {
         model.addAttribute("specialist", new Specialist());
         return "login";
     }
@@ -77,7 +77,7 @@ public class SpecialistController {
     }
 
     @GetMapping("/calendar")
-    public String calendar() {
+    public String getCalendar() {
         return "calendar";
     }
 
@@ -104,12 +104,12 @@ public class SpecialistController {
     }
 
     @GetMapping("/session")
-    public String sessionForm(Model model) {
+    public String getSessionForm() {
         return "session";
     }
 
     @GetMapping("/sessions")
-    public String sessionForm(@RequestParam("specialistId") String specialistId, Model model) {
+    public String getSessionForm(@RequestParam("specialistId") String specialistId, Model model) {
         List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialistId);
 
         List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
@@ -157,7 +157,7 @@ public class SpecialistController {
     }
 
     @GetMapping("/formed_calendar")
-    public String formed_calendar() {
+    public String getFormedCalendar() {
         return "formed_calendar";
     }
 
@@ -178,11 +178,11 @@ public class SpecialistController {
     @DeleteMapping("/{id}")
     public String deleteResource(@PathVariable("id") String id) {
         specialistService.deleteCustomerById(id);
-        return "redirect:/SimplePsy/V1/specialist/customers";
+        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> newCustomer(@RequestParam("name") String name,
+    public ResponseEntity<String> createNewCustomer(@RequestParam("name") String name,
                                               @RequestParam("surname") String surname,
                                               @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
                                               @RequestParam("gender") String gender,
@@ -204,10 +204,19 @@ public class SpecialistController {
     }
 
     @GetMapping("/customer-form")
-    public String clientForm(Model model) {
+    public String getClientForm(Model model) {
         model.addAttribute("customerDTO", new CustomerDTO());
         return "customer-form";
     }
 
+    @GetMapping("/find-customer")
+    public String getFindCustomerForm() {
+        return "find-customer";
+    }
 
+    @PostMapping("/find-customer")
+    public ResponseEntity<String> getCustomerByContactData(@RequestParam("data") String data) {
+        specialistService.findCustomerByContactData(data);
+        return ResponseEntity.ok("Customer " + data);
+    }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Find customer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/find-customer.css}">
+</head>
+<body>
+<div class="page-content">
+    <form id="registrationForm"  th:action="@{/SimplePsySpecialist/V1/specialist/find-customer}" method="post">
+        <h1>Поиск заказчика в базе</h1>
+        <label for="data"></label>
+        <input type="text" id="data" th:name="data" placeholder="E-mail/Номер телефона/Телеграм">
+
+        <div class="button-container"><button type="submit">Найти</button></div>
+    </form>
+</div>
+</body>
+</html>
