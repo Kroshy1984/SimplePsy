@@ -13,4 +13,8 @@ public interface CustomerRepository extends MongoRepository<Customer, String> {
 
         @Query("{$or: [{'contact.phone': '?0'}, {'contact.email':'?0'}, {'contact.tg': '?0'}]}")
         List<Customer> findAllBySomeContact(String name);
+
+        boolean existsByContactPhone(String phone);
+        boolean existsByContactEmail(String email);
+        boolean existsByContactTg(String tg);
 }

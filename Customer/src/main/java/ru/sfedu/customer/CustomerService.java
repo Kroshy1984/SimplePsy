@@ -121,4 +121,37 @@ public class CustomerService {
         foundCustomer.setStatus(Status.CUSTOMER);
     }
 
+    public boolean findByContactData(String data)
+    {
+        if (isPhoneNumber(data)) {
+            return customerRepository.existsByContactPhone(data);
+        } else if (isEmail(data)) {
+            return  customerRepository.existsByContactEmail(data);
+        } else if (isTelegramUsername(data)) {
+            return customerRepository.existsByContactTg(data);
+        } else {
+            System.out.println(data + " - не является ни номером телефона, ни адресом электронной почты, ни никнеймом в Telegram.");
+            return false;
+        }
+    }
+
+    // Проверка на номер телефона
+    public static boolean isPhoneNumber(String data) {
+        String phoneNumberRegex =  "(\\+\\d{1,3}|\\d{1})?(\\d{3}|\\(\\d{3}\\)|\\d{1})[-\\s]?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}";
+        return data.matches(phoneNumberRegex);
+    }
+
+    // Проверка на адрес электронной почты
+    public static boolean isEmail(String data) {
+        // Пример для проверки адреса электронной почты: example@mail.com
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return data.matches(emailRegex);
+    }
+
+    // Проверка на никнейм в Telegram
+    public static boolean isTelegramUsername(String data) {
+        // Пример для проверки никнейма в Telegram: @username
+        String telegramUsernameRegex = "^@([A-Za-z0-9_]{5,32})$";
+        return data.matches(telegramUsernameRegex);
+    }
 }

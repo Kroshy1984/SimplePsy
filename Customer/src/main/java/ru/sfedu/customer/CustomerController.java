@@ -101,4 +101,10 @@ public class CustomerController {
         customerService.updateStatus(customerId);
     }
 
+    @GetMapping("/findCustomerByContactData")
+    public ResponseEntity<Boolean> findCustomerByContactData(@RequestParam("data") String data)
+    {
+        return ResponseEntity.ok(customerService.findByContactData(data));
+    }
+
 }
