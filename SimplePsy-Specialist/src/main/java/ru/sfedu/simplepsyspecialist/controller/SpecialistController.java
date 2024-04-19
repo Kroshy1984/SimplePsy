@@ -208,4 +208,15 @@ public class SpecialistController {
         model.addAttribute("customerDTO", new CustomerDTO());
         return "customer-form";
     }
+
+    @GetMapping("/find-customer")
+    public String getFindCustomerForm() {
+        return "find-customer";
+    }
+
+    @PostMapping("/find-customer")
+    public ResponseEntity<String> getCustomerByContactData(@RequestParam("data") String data) {
+        specialistService.findCustomerByContactData(data);
+        return ResponseEntity.ok("Customer " + data);
+    }
 }
