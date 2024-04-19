@@ -1,6 +1,7 @@
 package ru.sfedu.scoring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +55,12 @@ public class ScoringController {
     public String done(Model model)
     {
         return "done";
+    }
+
+    @GetMapping("/result/{id}")
+    public ResponseEntity<List<String>> getScoringResult(@PathVariable String id)
+    {
+        scoringService.getScoringResult();
+        return null;
     }
 }

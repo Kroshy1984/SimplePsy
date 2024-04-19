@@ -10,8 +10,20 @@ public interface CustomerMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "surname", target = "surname")
     @Mapping(source = "contact", target = "contact")
     @Mapping(source = "problemId", target = "problemId")
     CustomerDTO customerToCustomerDTO(Customer customer);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "surname", target = "surname")
+    @Mapping(source = "contact", target = "contact")
+    @Mapping(source = "problemId", target = "problemId")
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "dateOfFirstCall", ignore = true)
+    @Mapping(target = "description", ignore = true)
+    @Mapping(target = "avatar", ignore = true)
+    @Mapping(target = "byteAvatar", ignore = true)
     Customer customerDTOToCustomer(CustomerDTO customerDTO);
 }

@@ -78,7 +78,12 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
-
+    @GetMapping("/customerToClient")
+    public ResponseEntity<CustomerDTO> CustomerToClient(@RequestParam("customerId") String customerId)
+    {
+        customerService.updateStatus(customerId);
+        return ResponseEntity.ok(customerService.findById(customerId));
+    }
     @DeleteMapping("/deleteCustomerById")
     public ResponseEntity<String> deleteCustomerById(@RequestParam("customerId") String customerId)
     {
@@ -99,6 +104,12 @@ public class CustomerController {
     @GetMapping("/update-status")
     public void createCustomers(@RequestParam String customerId) {
         customerService.updateStatus(customerId);
+    }
+
+    @GetMapping("/findCustomerByContactData")
+    public ResponseEntity<Boolean> findCustomerByContactData(@RequestParam("data") String data)
+    {
+        return ResponseEntity.ok(customerService.findByContactData(data));
     }
 
 }

@@ -81,4 +81,6 @@ public class ScoringService {
         System.out.println("got the result: " + result.toString());
     }
 
+    public void getScoringResult() {
+    }
 }

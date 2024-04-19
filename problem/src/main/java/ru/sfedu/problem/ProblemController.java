@@ -21,15 +21,13 @@ public class ProblemController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> createNewProblem (@RequestParam("problem") String descriptionOfProblem,
-                                                    @RequestParam("clientId") String clientId)
+    public ResponseEntity<String> createNewProblem (@RequestParam("problem") String descriptionOfProblem)
     {
         Problem problem = new Problem();
         LocalDateTime dateOfFirstContact = LocalDateTime.now();
         problem.setDescriptionOfProblem(descriptionOfProblem);
         problem.setStatus(Status.NEW);
         problem.setDateOfFirstContact(dateOfFirstContact);
-        problem.setClientId(clientId);
         String problemId = problemService.saveProblem(problem).getId();
         return new ResponseEntity<>(problemId, HttpStatus.OK);
     }

@@ -1,4 +1,4 @@
-package ru.sfedu.simplepsy.customer.document;
+package com.example.client.dto;
 
 public class Contact {
 

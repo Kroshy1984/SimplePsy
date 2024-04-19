@@ -29,8 +29,23 @@ function sendData() {
     let newArray = [].concat(textAnswers, checkboxAnswers);
     const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers';
 
+    let customerId = document.getElementById("customerId").value;
+    let saveNewClientUrl = 'http://localhost:8086/SimplePsyClient/V1/client/newClient/' + customerId;
     localStorage.removeItem('textAnswers');
     localStorage.removeItem('checkboxAnswers');
+    fetch(saveNewClientUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 
     fetch(url, {
         method: 'POST',
@@ -42,11 +57,31 @@ function sendData() {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var url = 'http://localhost:8085/emails/scoring';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify([name, email])
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         })
         .catch(error => {
             console.error('Error:', error);
-        });
-    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
+        })
+
+
+
+window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
 }
 
 function checkInput(input) {
