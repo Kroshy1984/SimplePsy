@@ -191,7 +191,7 @@ public class SpecialistController {
                                               @RequestParam("contact.email") String email,
                                               @RequestParam("contact.tg") String tg,
                                               @RequestParam("problem") String problem,
-                                              @ModelAttribute("specialist") Specialist specialist) {
+                                              @AuthenticationPrincipal UserDetails userDetails) {
         System.out.println("Got the new customer:\n" + name);
         System.out.println(surname);
         System.out.println(dateOfBirth);
@@ -202,7 +202,9 @@ public class SpecialistController {
         System.out.println(problem);
         Contact contact = new Contact(phone, email, tg);
         String customerId = specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         specialist.addCustomerId(customerId);
+        specialistService.save(specialist);
         return ResponseEntity.ok("Customer " + name + " successfully saved");
     }
 
@@ -212,13 +214,16 @@ public class SpecialistController {
         return "customer-form";
     }
 
-    @PostMapping("/find-customer")
+    @GetMapping("/find-customer")
     public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
-        System.out.println("Got customerId: " + customerId);
+        System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);
         Specialist specialist = specialistService.findSpecialist(customerId);
+        System.out.println("Found the specialist " + specialist.getName() + " who contains provided customerId");
         String customerName = specialistService.findCustomerById(customerId).getName();
-        System.out.println("SpecialistController Email: " + specialist.getEmail());
-        specialistService.sendEmailtoSpecialist(specialist.getEmail(), specialist.getName(), customerName);
+        System.out.println("Found the customer : " + customerName);
+        System.out.println("Specialist's email: " + specialist.getUsername());
+        System.out.println("sending email to the specialist about scoring completion");
+        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
         return ResponseEntity.ok("Success");
     }
 }

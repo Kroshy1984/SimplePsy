@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface SpecialistRepository extends MongoRepository<Specialist, String> {
     Optional<Specialist> findByUsername(String email);
 
-    Optional<Specialist> findByCustomerIdsContaining(String customerId);
+    Optional<Specialist> findByCustomerIdsIn(String customerId);
 }
