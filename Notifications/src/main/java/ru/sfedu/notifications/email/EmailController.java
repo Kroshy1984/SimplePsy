@@ -36,7 +36,7 @@ public class EmailController {
     public ResponseEntity<String> sendScoringResultEmail(@RequestParam("email") String email,
                                                 @RequestParam("specialistName") String specialistName,
                                                 @RequestParam("customerName") String customerName) {
-        System.out.printf("got email %s and name %s\n", email, specialistName);
+        System.out.printf("got email " + email + "and name " + customerName);
         emailService.sendScoringResultEmail(email, specialistName, customerName);
         return ResponseEntity.ok("Success");
     }

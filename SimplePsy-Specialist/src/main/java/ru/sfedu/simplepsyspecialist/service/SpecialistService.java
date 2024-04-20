@@ -233,7 +233,7 @@ public class SpecialistService {
                 .retrieve()
                 .toEntity(String.class).block();
 
-        System.out.println("Получен новый customerId: " + response.getBody());
+        System.out.println("Got the id of a new saved customer: " + response.getBody());
         return response.getBody();
     }
 
@@ -283,7 +283,7 @@ public class SpecialistService {
     }
 
     public Specialist findSpecialist(String customerId) {
-        return specialistRepository.findByCustomerIdsContaining(customerId).get();
+        return specialistRepository.findByCustomerIdsIn(customerId).get();
     }
 
     public void sendEmailtoSpecialist(String email, String specialistName, String customerName) {
