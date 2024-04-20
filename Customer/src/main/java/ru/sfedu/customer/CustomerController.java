@@ -52,8 +52,9 @@ public class CustomerController {
         System.out.println(customer.getContact().getEmail());
         System.out.println(customer.getName());
         System.out.println(customer.getProblemId());
-        customerService.saveCustomer(customer);
-        return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
+        String newCustomerId = customerService.saveCustomer(customer).getId();
+        System.out.println("CustomerController: " + newCustomerId);
+        return ResponseEntity.ok(newCustomerId);
     }
 
     @DeleteMapping("/{id}")

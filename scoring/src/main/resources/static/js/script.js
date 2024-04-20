@@ -33,6 +33,7 @@ function sendData() {
     let saveNewClientUrl = 'http://localhost:8086/SimplePsyClient/V1/client/newClient/' + customerId;
     localStorage.removeItem('textAnswers');
     localStorage.removeItem('checkboxAnswers');
+
     fetch(saveNewClientUrl, {
         method: 'POST',
         headers: {
@@ -54,18 +55,16 @@ function sendData() {
         },
         body: JSON.stringify(newArray)
     })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var url = 'http://localhost:8085/emails/scoring';
+            var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/find-customer/' + customerId;
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify([name, email])
+                body: {customerId},
             })
                 .then(response => response.text())
                 .then(data => {
@@ -79,9 +78,7 @@ function sendData() {
             console.error('Error:', error);
         })
 
-
-
-window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
+    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
 }
 
 function checkInput(input) {

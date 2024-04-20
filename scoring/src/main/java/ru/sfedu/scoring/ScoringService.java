@@ -83,4 +83,22 @@ public class ScoringService {
 
     public void getScoringResult() {
     }
+
+    // TODO: Доделать передачу customerId в микросервис Specialist
+    public void sendCustomerId(String customerId) {
+        System.out.println("Sending customerId to Specialist: " + customerId);
+        String url = "/SimplePsySpecialist/V1/specialist/find-customer";
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8081").build();
+
+        ResponseEntity<String> result = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .retrieve()
+                .toEntity(String.class)
+                .block();
+        System.out.println("result of sending customer id to find-customer: " + result.getBody());
+    }
+
 }

@@ -59,11 +59,14 @@ function sendNotification() {
     var id = document.getElementById("customerIdInput").value;
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
-    var url = 'http://localhost:8085/emails/scoring';
+    var url = 'http://localhost:8085/emails/scoring-invitation';
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
+            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
         },
         body: JSON.stringify([id, name, email])
     })

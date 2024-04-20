@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.telegram:telegrambots-spring-boot-starter:6.1.0'
 	implementation 'com.google.code.gson:gson:2.8.9'
+	implementation 'javax.servlet:javax.servlet-api:4.0.1'
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

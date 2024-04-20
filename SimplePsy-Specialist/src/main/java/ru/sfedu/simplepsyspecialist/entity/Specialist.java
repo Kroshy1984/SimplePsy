@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -47,9 +48,10 @@ public class Specialist {
     private String notification;
     private String password;
 
+    private List<String> customerIds;
+
 //    @Valid
 //    private List<ClientEntry> clients;
-
 
     public Specialist(String name, String surname, String username, String password) {
         this.name = name;
@@ -98,6 +100,14 @@ public class Specialist {
         this.middleName = middleName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public List<Calendar> getCalendar() {
         return calendar;
     }
@@ -136,5 +146,16 @@ public class Specialist {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<String> getCustomerIds() {
+        return customerIds;
+    }
+
+    public void addCustomerId(String customerId) {
+        if (customerIds == null) {
+            customerIds = new ArrayList<>();
+        }
+        customerIds.add(customerId);
     }
 }
