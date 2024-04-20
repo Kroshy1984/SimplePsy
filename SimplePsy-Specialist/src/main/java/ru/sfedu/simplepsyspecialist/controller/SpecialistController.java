@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
 public class SpecialistController {
@@ -189,7 +190,8 @@ public class SpecialistController {
                                               @RequestParam("contact.phone") String phone,
                                               @RequestParam("contact.email") String email,
                                               @RequestParam("contact.tg") String tg,
-                                              @RequestParam("problem") String problem) {
+                                              @RequestParam("problem") String problem,
+                                              @ModelAttribute("specialist") Specialist specialist) {
         System.out.println("Got the new customer:\n" + name);
         System.out.println(surname);
         System.out.println(dateOfBirth);
@@ -199,7 +201,8 @@ public class SpecialistController {
         System.out.println(tg);
         System.out.println(problem);
         Contact contact = new Contact(phone, email, tg);
-        specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        String customerId = specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        specialist.addCustomerId(customerId);
         return ResponseEntity.ok("Customer " + name + " successfully saved");
     }
 
@@ -209,14 +212,13 @@ public class SpecialistController {
         return "customer-form";
     }
 
-    @GetMapping("/find-customer")
-    public String getFindCustomerForm() {
-        return "find-customer";
-    }
-
     @PostMapping("/find-customer")
-    public ResponseEntity<String> getCustomerByContactData(@RequestParam("data") String data) {
-        specialistService.findCustomerByContactData(data);
-        return ResponseEntity.ok("Customer " + data);
+    public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
+        System.out.println("Got customerId: " + customerId);
+        Specialist specialist = specialistService.findSpecialist(customerId);
+        String customerName = specialistService.findCustomerById(customerId).getName();
+        System.out.println("SpecialistController Email: " + specialist.getEmail());
+        specialistService.sendEmailtoSpecialist(specialist.getEmail(), specialist.getName(), customerName);
+        return ResponseEntity.ok("Success");
     }
 }

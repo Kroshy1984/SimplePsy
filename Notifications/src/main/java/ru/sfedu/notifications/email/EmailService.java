@@ -29,13 +29,25 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
-    public void sendScoringEmail(List<String> array) {
+    public void sendScoringInvitationEmail(List<String> array) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(senderEmail);
         message.setTo(array.get(2));
         message.setSubject("Здравствуйте, " + array.get(1) + "!");
         message.setText("Пройдите анкету по ссылке: http://localhost:8084/SimplePsyScoring/V1/scoring/" + array.get(0));
         System.out.println("Sending email to " + array.get(1));
+        javaMailSender.send(message);
+    }
+
+    public void sendScoringResultEmail(String email, String specialistName, String customerName) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(senderEmail);
+        message.setTo(email);
+        message.setSubject("Здравствуйте, " + specialistName + "!");
+        message.setText("Заказчик ");
+        message.setText(customerName);
+        message.setText(" прошел скоринг");
+        System.out.println("Sending email to " + specialistName);
         javaMailSender.send(message);
     }
 }
