@@ -110,8 +110,9 @@ public class SpecialistController {
     }
 
     @GetMapping("/sessions")
-    public String getSessionForm(@RequestParam("specialistId") String specialistId, Model model) {
-        List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialistId);
+    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialist.getId());
 
         List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
         List<SessionDTO> meetingsByMonday = meetingsByDay.get(0);
