@@ -11,6 +11,7 @@
 </head>
 <body>
 <header>
+    <input type="button" id="back" value="Назад" onclick="showCustomers()">
     <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
 </header>
 <form method="post" th:action="@{/SimplePsy/V1/specialist/customer-card/save}" th:object="${customer}">
@@ -27,7 +28,6 @@
 </div>
 <div class="profile-container">
     <div class="contacts">
-        <span>Контакты</span>
         <fieldset>
             <img class="icon" id="phone-icon" alt="Фото трубки"
                  src="https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png">
@@ -51,6 +51,7 @@
          th:src=" @{'/SimplePsy/V1/specialist/customer-avatar/' + ${customer.getId()}}">
 </div>
 <div class="button-container">
+    <input type="button" id="cancel" value="Отменить" style="display: none;" onclick="cancelButton()">
     <input type="button" id="edit" value="Редактировать" onclick="showButtons()">
     <input name="save" type="submit" id="save" value="Сохранить" style="display: none;">
     <input name="delete" type="button" id="delete" value="Удалить" style="display: none;" onclick="deleteCard()">

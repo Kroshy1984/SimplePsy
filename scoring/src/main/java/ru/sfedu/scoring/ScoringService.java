@@ -84,7 +84,6 @@ public class ScoringService {
     public void getScoringResult() {
     }
 
-    // TODO: Доделать передачу customerId в микросервис Specialist
     public void sendCustomerId(String customerId) {
         System.out.println("Sending customerId to Specialist: " + customerId);
         String url = "/SimplePsySpecialist/V1/specialist/find-customer";
