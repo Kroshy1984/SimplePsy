@@ -328,4 +328,17 @@ public class SpecialistService {
         result.subscribe(); // Запуск запроса
         System.out.println("got the result: " + result.toString());
     }
+
+    public void updateCustomer(CustomerDTO customerDTO) {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer";
+
+        ResponseEntity<String> response = webClient.post()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(customerDTO))
+                .retrieve()
+                .toEntity(String.class).block();
+        System.out.println("Result of updating the customer: " + response.getBody());
+    }
 }

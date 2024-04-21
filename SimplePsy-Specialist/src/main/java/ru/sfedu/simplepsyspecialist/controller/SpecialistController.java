@@ -227,4 +227,15 @@ public class SpecialistController {
         specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
         return ResponseEntity.ok("Success");
     }
+
+    @GetMapping("/find-customer-page")
+    public String getFindCustomerForm() {
+        return "find-customer";
+    }
+
+    @PostMapping("/find-customer")
+    public ResponseEntity<String> getCustomerByContactData(@RequestParam("data") String data) {
+        specialistService.findCustomerByContactData(data);
+        return ResponseEntity.ok("Customer " + data);
+    }
 }
