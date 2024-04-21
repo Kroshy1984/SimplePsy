@@ -22,6 +22,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -188,10 +189,10 @@ public class SpecialistService {
         return customerDTO;
     }
 
-    public String findCustomerByContactData(String data) {
+    public boolean findCustomerByContactData(String data) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/findCustomerByContactData";
-        Mono<ResponseEntity<String>> response = webClient.get()
+        Mono<ResponseEntity<Boolean>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("data", data)
@@ -200,7 +201,7 @@ public class SpecialistService {
                 .retrieve()
                 .toEntity(new ParameterizedTypeReference<>() {});
 
-        String result = response.block().getBody();
+        boolean result = Boolean.TRUE.equals(Objects.requireNonNull(response.block()).getBody());
         System.out.println("Got the customer with data: " + data);
         return result;
     }

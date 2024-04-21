@@ -221,6 +221,16 @@ public class SpecialistController {
         return "customer-form";
     }
 
+    @GetMapping("/find-customer-form")
+    public String getFindCustomerForm() {
+        return "find-customer";
+    }
+
+    @PostMapping("/find-customer-form")
+    public ResponseEntity<Boolean> getCustomerByContactData(@RequestParam("data") String data) {
+        return ResponseEntity.ok(specialistService.findCustomerByContactData(data));
+    }
+
     @GetMapping("/find-customer")
     public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
         System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);
@@ -232,16 +242,5 @@ public class SpecialistController {
         System.out.println("sending email to the specialist about scoring completion");
         specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
         return ResponseEntity.ok("Success");
-    }
-
-    @GetMapping("/find-customer-page")
-    public String getFindCustomerForm() {
-        return "find-customer";
-    }
-
-    @PostMapping("/find-customer")
-    public ResponseEntity<String> getCustomerByContactData(@RequestParam("data") String data) {
-        specialistService.findCustomerByContactData(data);
-        return ResponseEntity.ok("Customer " + data);
     }
 }
