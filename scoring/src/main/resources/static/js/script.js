@@ -69,6 +69,7 @@ function sendData() {
                 .then(response => response.text())
                 .then(data => {
                     console.log('Success:', data);
+                    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -77,8 +78,6 @@ function sendData() {
         .catch(error => {
             console.error('Error:', error);
         })
-
-    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
 }
 
 function checkInput(input) {
