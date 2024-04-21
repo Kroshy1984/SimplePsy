@@ -1,47 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sessions</title>
     <meta charset="UTF-8">
+    <title>Sessions</title>
+    <script type="text/javascript" th:src="@{/js/sessions.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/sessions.css}">
 </head>
-<style>
-    .week-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .day-column {
-        flex: 1 1 0px;
-        margin: 10px;
-    }
-
-    .day-column p {
-        margin-top: 0;
-    }
-
-    .session-item {
-        background-color: #f5f5f5;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .session-item p {
-        margin: 0;
-    }
-
-    .session-item.date {
-        font-weight: bold;
-    }
-
-    .session-item.name {
-        text-transform: capitalize;
-    }
-
-    .session-item.surname {
-        text-transform: capitalize;
-    }
-</style>
 <body>
 <div class="week-container">
 
@@ -122,6 +86,12 @@
         </div>
     </div>
 
+</div>
+<div class="button-container">
+    <!--/customers, /customer-form, /session-->
+    <button onclick="openCustomers()">Список заказчиков</button>
+    <button onclick="openCustomerForm()">Создать нового заказчика</button>
+    <button onclick="openSessionForm()">Назначить новую встречу</button>
 </div>
 </body>
 </html>

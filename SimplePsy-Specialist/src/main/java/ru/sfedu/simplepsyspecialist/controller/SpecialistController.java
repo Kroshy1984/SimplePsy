@@ -110,8 +110,9 @@ public class SpecialistController {
     }
 
     @GetMapping("/sessions")
-    public String getSessionForm(@RequestParam("specialistId") String specialistId, Model model) {
-        List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialistId);
+    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialist.getId());
 
         List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
         List<SessionDTO> meetingsByMonday = meetingsByDay.get(0);
@@ -176,12 +177,6 @@ public class SpecialistController {
         return "customer-card";
     }
 
-    @PostMapping("/customer-card/update")
-    public String saveNewCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO)
-    {
-        specialistService.updateCustomer(customerDTO);
-        return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerDTO.getId();
-    }
     @DeleteMapping("/{id}")
     public String deleteResource(@PathVariable("id") String id) {
         specialistService.deleteCustomerById(id);

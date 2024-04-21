@@ -1,9 +1,21 @@
+function showCustomers() {
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customers';
+}
+
+function cancelButton() {
+    var id = document.getElementById("customerIdInput").value;
+    document.getElementById('cancel').style.display = 'none';
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customer-card/' + id;
+}
+
 function showButtons() {
     // Находим элементы, которые нужно изменить
     var inputsToEnable = document.querySelectorAll('.profile-container input[disabled]');
     var inputsFieldSetToEnable = document.querySelectorAll('.set input[disabled]');
     var saveButton = document.getElementById('save');
     var deleteButton = document.getElementById('delete');
+    var editButton = document.getElementById('edit');
+    var cancelButton = document.getElementById('cancel');
 
     // Убираем атрибут disabled у всех найденных элементов
     inputsToEnable.forEach(function (input) {
@@ -15,6 +27,8 @@ function showButtons() {
     // Показываем кнопки
     saveButton.style.display = 'inline-block';
     deleteButton.style.display = 'inline-block';
+    editButton.style.display = 'none';
+    cancelButton.style.display = 'inline-block';
 }
 
 function deleteCard()
@@ -63,10 +77,7 @@ function sendNotification() {
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
-            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify([id, name, email])
     })
