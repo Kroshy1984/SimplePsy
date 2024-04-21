@@ -25,10 +25,19 @@ public class EmailController {
         return ResponseEntity.ok("Success");
     }
 
-    @PostMapping("/scoring")
-    public ResponseEntity<String> sendScoringEmail(@RequestBody List<String> array) {
+    @PostMapping("/scoring-invitation")
+    public ResponseEntity<String> sendScoringInvitationEmail(@RequestBody List<String> array) {
         System.out.printf("got email %s and name %s\n", array.get(2), array.get(1));
-        emailService.sendScoringEmail(array);
+        emailService.sendScoringInvitationEmail(array);
+        return ResponseEntity.ok("Success");
+    }
+
+    @PostMapping("/scoring-result")
+    public ResponseEntity<String> sendScoringResultEmail(@RequestParam("email") String email,
+                                                @RequestParam("specialistName") String specialistName,
+                                                @RequestParam("customerName") String customerName) {
+        System.out.printf("got email " + email + "and name " + customerName);
+        emailService.sendScoringResultEmail(email, specialistName, customerName);
         return ResponseEntity.ok("Success");
     }
 

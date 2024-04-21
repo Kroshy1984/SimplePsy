@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
 @RequestMapping("/SimplePsyClient/V1/client")
 public class ClientController {
     ClientService clientService;

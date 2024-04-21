@@ -237,12 +237,12 @@ public class SpecialistService {
         return response.getBody();
     }
 
-    public CustomerDTO saveCustomer(CustomerDTO customer, String problem) {
+    public String saveCustomer(CustomerDTO customer, String problem) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/new";
         String problemId = saveProblem(problem);
         customer.setProblemId(problemId);
-        System.out.println("Specialist CustomerDTO" + customer.getProblemId());
+        System.out.println("Specialist CustomerDTO: " + customer.getProblemId());
         ResponseEntity<String> response = webClient.post()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)
@@ -250,8 +250,8 @@ public class SpecialistService {
                 .retrieve()
                 .toEntity(String.class).block();
 
-        System.out.println("The result of creating a new customer:\n" + response.getBody());
-        return null;
+        System.out.println("Got the id of a new saved customer: " + response.getBody());
+        return response.getBody();
     }
 
     public List<SessionDTO> getAllSessions(String specialistId) {
@@ -297,5 +297,35 @@ public class SpecialistService {
             }
         }
         return sessionsByDayOfWeek;
+    }
+
+    public Specialist findSpecialist(String customerId) {
+        return specialistRepository.findByCustomerIdsIn(customerId).get();
+    }
+
+    public void sendEmailtoSpecialist(String email, String specialistName, String customerName) {
+        System.out.println("sending email method");
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8085/emails/scoring-result").build();
+        Mono<ResponseEntity<String>> result = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("email", email)
+                        .queryParam("specialistName", specialistName)
+                        .queryParam("customerName", customerName)
+                        .build())
+                .retrieve()
+                .toEntity(String.class)
+                .flatMap(response -> {
+                    if (response.getStatusCode() == HttpStatus.OK) {
+                        System.out.println("mail's sent");
+                        return Mono.just(response);
+                    } else {
+                        // Обработка неуспешного запроса
+                        System.out.println("didn't sent the email, error's code: " + response.getStatusCode());
+                        return Mono.empty();
+                    }
+                });
+
+        result.subscribe(); // Запуск запроса
+        System.out.println("got the result: " + result.toString());
     }
 }

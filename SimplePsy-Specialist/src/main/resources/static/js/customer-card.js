@@ -1,9 +1,21 @@
+function showCustomers() {
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customers';
+}
+
+function cancelButton() {
+    var id = document.getElementById("customerIdInput").value;
+    document.getElementById('cancel').style.display = 'none';
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customer-card/' + id;
+}
+
 function showButtons() {
     // Находим элементы, которые нужно изменить
     var inputsToEnable = document.querySelectorAll('.profile-container input[disabled]');
     var inputsFieldSetToEnable = document.querySelectorAll('.set input[disabled]');
     var saveButton = document.getElementById('save');
     var deleteButton = document.getElementById('delete');
+    var editButton = document.getElementById('edit');
+    var cancelButton = document.getElementById('cancel');
 
     // Убираем атрибут disabled у всех найденных элементов
     inputsToEnable.forEach(function (input) {
@@ -15,6 +27,8 @@ function showButtons() {
     // Показываем кнопки
     saveButton.style.display = 'inline-block';
     deleteButton.style.display = 'inline-block';
+    editButton.style.display = 'none';
+    cancelButton.style.display = 'inline-block';
 }
 
 function deleteCard()
@@ -59,11 +73,14 @@ function sendNotification() {
     var id = document.getElementById("customerIdInput").value;
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
-    var url = 'http://localhost:8085/emails/scoring';
+    var url = 'http://localhost:8085/emails/scoring-invitation';
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            /*'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
+            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'*/
         },
         body: JSON.stringify([id, name, email])
     })

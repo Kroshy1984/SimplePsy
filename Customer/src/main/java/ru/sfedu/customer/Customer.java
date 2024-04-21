@@ -17,9 +17,7 @@ public class Customer {
 
     private String name;
     private String surname;
-
     private Status status;
-
     private Contact contact;
     private String description;
     private LocalDate dateOfFirstCall;
@@ -65,6 +63,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Status getStatus() {
@@ -118,14 +124,6 @@ public class Customer {
 
     public void setProblemId(String problemId) {
         this.problemId = problemId;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     @Override
