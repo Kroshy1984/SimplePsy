@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/SimplePsySpecialist/V1/specialist")
 public class SpecialistController {
@@ -175,6 +176,12 @@ public class SpecialistController {
         return "customer-card";
     }
 
+    @PostMapping("/customer-card/update")
+    public String saveNewCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO)
+    {
+        specialistService.updateCustomer(customerDTO);
+        return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerDTO.getId();
+    }
     @DeleteMapping("/{id}")
     public String deleteResource(@PathVariable("id") String id) {
         specialistService.deleteCustomerById(id);
@@ -189,7 +196,8 @@ public class SpecialistController {
                                               @RequestParam("contact.phone") String phone,
                                               @RequestParam("contact.email") String email,
                                               @RequestParam("contact.tg") String tg,
-                                              @RequestParam("problem") String problem) {
+                                              @RequestParam("problem") String problem,
+                                              @AuthenticationPrincipal UserDetails userDetails) {
         System.out.println("Got the new customer:\n" + name);
         System.out.println(surname);
         System.out.println(dateOfBirth);
@@ -199,7 +207,10 @@ public class SpecialistController {
         System.out.println(tg);
         System.out.println(problem);
         Contact contact = new Contact(phone, email, tg);
-        specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        String customerId = specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        specialist.addCustomerId(customerId);
+        specialistService.save(specialist);
         return ResponseEntity.ok("Customer " + name + " successfully saved");
     }
 
@@ -210,6 +221,19 @@ public class SpecialistController {
     }
 
     @GetMapping("/find-customer")
+    public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
+        System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);
+        Specialist specialist = specialistService.findSpecialist(customerId);
+        System.out.println("Found the specialist " + specialist.getName() + " who contains provided customerId");
+        String customerName = specialistService.findCustomerById(customerId).getName();
+        System.out.println("Found the customer : " + customerName);
+        System.out.println("Specialist's email: " + specialist.getUsername());
+        System.out.println("sending email to the specialist about scoring completion");
+        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
+        return ResponseEntity.ok("Success");
+    }
+
+    @GetMapping("/find-customer-page")
     public String getFindCustomerForm() {
         return "find-customer";
     }

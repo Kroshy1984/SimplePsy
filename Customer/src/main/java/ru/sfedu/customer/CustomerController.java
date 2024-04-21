@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.customer.dto.CustomerDTO;
+import ru.sfedu.customer.dto.CustomerMapper;
 import ru.sfedu.customer.dto.CustomersSearch;
 
 import java.io.IOException;
@@ -52,10 +53,18 @@ public class CustomerController {
         System.out.println(customer.getContact().getEmail());
         System.out.println(customer.getName());
         System.out.println(customer.getProblemId());
-        customerService.saveCustomer(customer);
-        return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
+        String newCustomerId = customerService.saveCustomer(customer).getId();
+        System.out.println("CustomerController: " + newCustomerId);
+        return ResponseEntity.ok(newCustomerId);
     }
-
+    @PostMapping("/update")
+    public ResponseEntity<String> updateCustomer(@RequestBody CustomerDTO customerDTO)
+    {
+        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
+        System.out.println("In method updateCustomer. The customerId: " + customerDTO.getId());
+        customerService.updateCustomer(customer);
+        return ResponseEntity.ok("Customer " + customer.getName() + " successfully updated");
+    }
     @DeleteMapping("/{id}")
     public boolean deleteResource(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/SimplePsyScoring/V1/scoring")
 public class ScoringController {
@@ -35,16 +36,18 @@ public class ScoringController {
     }*/
 
     @PostMapping("/saveAnswers")
-    public String saveAnswers(@RequestBody String[] answers) {
+    public ResponseEntity<String> saveAnswers(@RequestBody String[] answers) {
         this.answers.clear();
         this.answers.addAll(List.of(answers));
         scoringService.save(this.answers);
-        return "redirect:/SimplePsyScoring/V1/scoring/done";
+        return ResponseEntity.ok("Success");
+//        return "redirect:/SimplePsyScoring/V1/scoring/done";
     }
 
     // Возвращаем скоринг
     @GetMapping("{id}")
-    public String getScoring(@PathVariable String id, Model model) {
+    public String getScoring(@PathVariable String id,
+                             Model model) {
         model.addAttribute("customerId", id);
         model.addAttribute("textQuestions", Scoring.getTextQuestions());
         model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
@@ -52,7 +55,7 @@ public class ScoringController {
     }
 
     @GetMapping("/done")
-    public String done(Model model)
+    public String done()
     {
         return "done";
     }
@@ -62,5 +65,11 @@ public class ScoringController {
     {
         scoringService.getScoringResult();
         return null;
+    }
+
+    @PostMapping("/find-customer/{customerId}")
+    public ResponseEntity<String> sendCustomerId(@PathVariable String customerId) {
+        scoringService.sendCustomerId(customerId);
+        return ResponseEntity.ok("Success");
     }
 }
