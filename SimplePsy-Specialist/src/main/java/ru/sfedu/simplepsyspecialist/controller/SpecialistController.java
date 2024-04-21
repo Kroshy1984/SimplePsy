@@ -176,6 +176,12 @@ public class SpecialistController {
         return "customer-card";
     }
 
+    @PostMapping("/customer-card/update")
+    public String saveNewCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO)
+    {
+        specialistService.updateCustomer(customerDTO);
+        return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerDTO.getId();
+    }
     @DeleteMapping("/{id}")
     public String deleteResource(@PathVariable("id") String id) {
         specialistService.deleteCustomerById(id);
