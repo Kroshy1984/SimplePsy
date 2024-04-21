@@ -158,11 +158,6 @@ public class SpecialistController {
         return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
     }
 
-    @GetMapping("/formed_calendar")
-    public String getFormedCalendar() {
-        return "formed_calendar";
-    }
-
     @GetMapping("/customers")
     public String getCustomersList(Model model) {
         List<CustomerDTO> customers = specialistService.getAllCustomers();
@@ -172,11 +167,22 @@ public class SpecialistController {
 
     @GetMapping("/customer-card/{customerId}")
     public String getCustomerCard(@PathVariable String customerId, Model model) {
+        System.out.println("In method getCustomerCard got the customerId: " + customerId);
         CustomerDTO customer = specialistService.findCustomerById(customerId);
+        customer.setId(customerId);
         model.addAttribute("customer", customer);
         return "customer-card";
     }
-
+    @PostMapping("/customer-card/update")
+    public String updateCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO,
+                                     @RequestParam("customerId") String customerId)
+    {
+        System.out.println("In method updateCustomerCard got the customer with name and surname: " + customerDTO.getName() + " " + customerDTO.getSurname());
+        System.out.println("Customer's id: " + customerId);
+        customerDTO.setId(customerId);
+        specialistService.updateCustomer(customerDTO);
+        return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerDTO.getId();
+    }
     @DeleteMapping("/{id}")
     public String deleteResource(@PathVariable("id") String id) {
         specialistService.deleteCustomerById(id);

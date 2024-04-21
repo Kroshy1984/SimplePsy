@@ -14,9 +14,10 @@
     <input type="button" id="back" value="Назад" onclick="showCustomers()">
     <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
 </header>
-<form method="post" th:action="@{/SimplePsy/V1/specialist/customer-card/save}" th:object="${customer}">
+<form method="post" th:action="@{/SimplePsySpecialist/V1/specialist/customer-card/update}" th:object="${customer}">
 <div>
     <input th:value="${customer.getId()}" th:name="customerId" id="customerIdInput" hidden="hidden">
+    <input th:value="${customer.getSurname()}" th:name="surname" id="surname" hidden="hidden">
     <fieldset class="set">
         <label for="name">Имя</label>
         <input th:value="${customer.getName()}" type="text" id="name" name="name" placeholder="Имя" disabled>

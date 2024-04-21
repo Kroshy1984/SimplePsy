@@ -60,10 +60,10 @@ public class CustomerController {
     @PostMapping("/update")
     public ResponseEntity<String> updateCustomer(@RequestBody CustomerDTO customerDTO)
     {
-        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
-        System.out.println("In method updateCustomer. The customerId: " + customerDTO.getId());
-        customerService.updateCustomer(customer);
-        return ResponseEntity.ok("Customer " + customer.getName() + " successfully updated");
+        System.out.println("In method updateCustomer got the customerDTO with id: " + customerDTO.getId());
+        Customer customerUpdate = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
+        customerService.updateCustomer(customerUpdate);
+        return ResponseEntity.ok("Customer " + customerDTO.getName() + " successfully updated");
     }
     @DeleteMapping("/{id}")
     public boolean deleteResource(@PathVariable("id") String id) {

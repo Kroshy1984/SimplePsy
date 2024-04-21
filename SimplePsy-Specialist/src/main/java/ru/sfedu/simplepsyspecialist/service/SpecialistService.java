@@ -331,8 +331,7 @@ public class SpecialistService {
 
     public void updateCustomer(CustomerDTO customerDTO) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
-        String url = "/SimplePsy/V1/customer";
-
+        String url = "/SimplePsy/V1/customer/update";
         ResponseEntity<String> response = webClient.post()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)
