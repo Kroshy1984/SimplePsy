@@ -163,4 +163,8 @@ public class CustomerService {
         String telegramUsernameRegex = "^@([A-Za-z0-9_]{5,32})$";
         return data.matches(telegramUsernameRegex);
     }
+
+    public Customer findByEmail(String email) {
+        return customerRepository.findByContactEmail(email).get();
+    }
 }

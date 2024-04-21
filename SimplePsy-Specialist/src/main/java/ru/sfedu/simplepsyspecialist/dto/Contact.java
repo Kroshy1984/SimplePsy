@@ -13,6 +13,9 @@ public class Contact {
         this.tg = tg;
     }
 
+    public Contact() {
+    }
+
     public String getPhone() {
         return phone;
     }
