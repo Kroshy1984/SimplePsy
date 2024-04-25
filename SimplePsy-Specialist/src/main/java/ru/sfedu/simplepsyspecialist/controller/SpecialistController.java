@@ -176,7 +176,8 @@ public class SpecialistController {
             for (CustomerDTO customer : customers) {
                 if (Objects.equals(customer.getId(), specialist.getCustomerIds().get(i))) {
                     specialistCustomers.add(customer);
-                    System.out.println(customer.getName());
+                    System.out.println(customers.get(i).getName());
+                    break;
                 }
             }
         }
