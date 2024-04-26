@@ -3,13 +3,16 @@ package ru.sfedu.customer.dto;
 
 import ru.sfedu.customer.Contact;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerDTO {
 
     private String id;
     private String name;
     private String surname;
     private Contact contact;
-    private String problemId;
+    private List<String> problemsId;
 
     public String getId() {
         return id;
@@ -43,11 +46,15 @@ public class CustomerDTO {
         this.contact = contact;
     }
 
-    public String getProblemId() {
-        return problemId;
+    public List<String> getProblemsId() {
+        return problemsId;
+    }
+    public void addProblem(String problemId) {
+        if (problemsId == null)
+        {
+            problemsId = new ArrayList<>();
+        }
+        problemsId.add(problemId);
     }
 
-    public void setProblemId(String problemId) {
-        this.problemId = problemId;
-    }
 }

@@ -244,4 +244,31 @@ public class SpecialistController {
         specialistService.findCustomerByContactData(data);
         return ResponseEntity.ok("Customer " + data);
     }
+
+    @GetMapping("customer/problem/new/{customerId}")
+    public String customerNewProblem(@PathVariable String customerId,
+                                     Model model)
+    {
+        System.out.println("In method customerNewProblem providing customerId " + customerId + " to the model");
+        model.addAttribute("customerId", customerId);
+        return "problem-form";
+    }
+    @PostMapping("customer/problem/new")
+    public String customerNewProblem(@RequestParam("customerId") String customerId,
+                                     @RequestParam("problem") String problem)
+    {
+        System.out.println("In Post mappping method customerNewProblem \ngot customerId: " + customerId + " and problem: " + problem);
+        specialistService.addCustomerProblem(customerId, problem);
+        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+    }
+    @GetMapping("customer/problems")
+    public String customersProblems(@RequestParam("customerId") String customerId,
+                                    Model model)
+    {
+        System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
+        List<String> problems = specialistService.getAllCustomersProblems(customerId);
+        model.addAttribute("problems", problems);
+        return "problems-list";
+    }
+
 }

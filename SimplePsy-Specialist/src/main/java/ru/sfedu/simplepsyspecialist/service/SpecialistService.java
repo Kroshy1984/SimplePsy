@@ -340,4 +340,38 @@ public class SpecialistService {
                 .toEntity(String.class).block();
         System.out.println("Result of updating the customer: " + response.getBody());
     }
+
+    //передавать в кастомера id проблемы и кастомера чтобы добавить ему(кастомеру) новую проблему в список
+    public void addCustomerProblem(String customerId, String problem) {
+        String problemId = saveProblem(problem);
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/problem/new";
+        ResponseEntity<String> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+
+        System.out.println("Result of adding new problem to the customer: " + response.getBody());
+    }
+
+    public List<String> getAllCustomersProblems(String customerId)
+    {
+        String url = "/SimplePsy/V1/customer/problems";
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8081").build();
+        ResponseEntity<List<String>> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntityList(String.class).block();
+        System.out.println("In method getAllCustomersProblems the result of the first one: " + response.getBody().get(0));
+        return response.getBody();
+    }
 }

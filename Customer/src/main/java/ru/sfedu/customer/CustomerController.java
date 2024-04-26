@@ -52,7 +52,7 @@ public class CustomerController {
         System.out.println("Got the new customer:\n" +customer.getName());
         System.out.println(customer.getContact().getEmail());
         System.out.println(customer.getName());
-        System.out.println(customer.getProblemId());
+        System.out.println(customer.getProblemsId());
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
         return ResponseEntity.ok(newCustomerId);
@@ -120,5 +120,19 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.findByContactData(data));
     }
-
+    @PostMapping("/problem/new")
+    public ResponseEntity<String> customerNewProblem(@RequestParam("customerId") String customerId,
+                                                     @RequestParam("problemId") String problemId)
+    {
+        System.out.println("In method customerNewProblem got the customerId " + customerId + " and problemId " + problemId);
+        customerService.addProblem(customerId, problemId);
+        return ResponseEntity.ok("Problem successfully added");
+    }
+    @GetMapping("/problems")
+    public ResponseEntity<List<String>> customersProblems(@RequestParam("customerId") String customerId)
+    {
+        System.out.println("In method customersProblems got the customerId " + customerId);
+        List<String> problems = customerService.getAllCustomersProblems(customerId);
+        return ResponseEntity.ok(problems);
+    }
 }
