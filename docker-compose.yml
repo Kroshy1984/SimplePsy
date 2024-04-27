@@ -1,0 +1,44 @@
+version: "3"
+services:
+  specialist:
+    build:
+      context: ./SimplePsy-Specialist
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+  session:
+    build:
+      context: ./Session
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+  scoring:
+    build:
+      context: ./scoring
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+  problem:
+    build:
+      context: ./problem
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+  customer:
+    build:
+      context: ./Customer
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+  client:
+    build:
+      context: ./Client
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+  calendar:
+    build:
+      context: ./Calendar
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
