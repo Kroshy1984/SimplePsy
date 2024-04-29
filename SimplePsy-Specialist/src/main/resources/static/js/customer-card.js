@@ -90,3 +90,8 @@ function sendNotification() {
             console.error('Error:', error);
         });
 }
+
+function showProblemsList() {
+    var id = document.getElementById("customerIdInput").value;
+    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
+}

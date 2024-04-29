@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document("customer")
 public class Customer {
@@ -22,7 +24,7 @@ public class Customer {
     private String description;
     private LocalDate dateOfFirstCall;
     private byte[] avatar;
-    private String problemId;
+    private List<String> problemsId;
    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
     public Customer() {
     }
@@ -118,14 +120,16 @@ public class Customer {
         this.avatar = avatar;
     }
 
-    public String getProblemId() {
-        return problemId;
+    public List<String> getProblemsId() {
+        return problemsId;
     }
-
-    public void setProblemId(String problemId) {
-        this.problemId = problemId;
+    public void addProblem(String problemId) {
+        if (problemsId == null)
+        {
+            problemsId = new ArrayList<>();
+        }
+        problemsId.add(problemId);
     }
-
     @Override
     public String toString() {
         return "Customer{" +
@@ -134,4 +138,6 @@ public class Customer {
                 ", contact=" + contact +
                 '}';
     }
+
+
 }

@@ -1,0 +1,84 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+fieldset {
+    border: none;
+}
+
+fieldset input {
+    height: 35px
+}
+
+table {
+    width: 600px;
+    border: 1px solid #c0c0c0;
+    border-radius: 10px;
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #c2c2c2;
+}
+
+td {
+    padding: 15px;
+}
+
+.problem-info {
+    text-align: left;
+}
+
+.profile-container {
+    height: 400px;
+    overflow: auto;
+    text-align: center;
+    margin-top: 40px;
+
+    /* Добавленные стили для центрирования */
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#profile-image {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.button-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    position: relative;
+    top: 470px;
+}
+
+table input {
+    width: 30px;
+}
+
+#back {
+    position: absolute;
+}
+
+input[type="button"] {
+    border-radius: 15px;
+    padding: 15px 40px;
+    background-color: #D9D9D9;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover, input:hover {
+    background-color: #c2c2c2;
+}

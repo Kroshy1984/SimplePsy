@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
 import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
@@ -190,7 +191,7 @@ public class SpecialistService {
     }
 
     public boolean findCustomerByContactData(String data) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/findCustomerByContactData";
         Mono<ResponseEntity<Boolean>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -224,7 +225,7 @@ public class SpecialistService {
     }
 
     public String saveProblem(String problem) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8087").build();
+        WebClient webClient = WebClient.builder().baseUrl("http://problem:8087").build();
         String url = "/SimplePsyProblem/V1/problem/new";
         ResponseEntity<String> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
@@ -340,5 +341,42 @@ public class SpecialistService {
                 .retrieve()
                 .toEntity(String.class).block();
         System.out.println("Result of updating the customer: " + response.getBody());
+    }
+
+    //передавать в кастомера id проблемы и кастомера чтобы добавить ему(кастомеру) новую проблему в список
+    public void addCustomerProblem(String customerId, String problem) {
+        String problemId = saveProblem(problem);
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String url = "/SimplePsy/V1/customer/problem/new";
+        ResponseEntity<String> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+
+        System.out.println("Result of adding new problem to the customer: " + response.getBody());
+    }
+
+    // Запрос идет в Customer и из Customer в Problem
+    public List<ProblemDTO> getAllCustomersProblems(String customerId)
+    {
+        String url = "/SimplePsy/V1/customer/problems";
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        ResponseEntity<List<ProblemDTO>> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("customerId", customerId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntityList(ProblemDTO.class).block();
+        System.out.println("In method getAllCustomersProblems the result of the first one: " +
+                response.getBody().get(0).getDescriptionOfProblem() +
+                response.getBody().get(0).getId());
+        return response.getBody();
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
 import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -242,16 +243,6 @@ public class SpecialistController {
         return "customer-form";
     }
 
-    @GetMapping("/find-customer-form")
-    public String getFindCustomerForm() {
-        return "find-customer";
-    }
-
-    @PostMapping("/find-customer-form")
-    public ResponseEntity<Boolean> getCustomerByContactData(@RequestParam("data") String data) {
-        return ResponseEntity.ok(specialistService.findCustomerByContactData(data));
-    }
-
     @GetMapping("/find-customer")
     public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
         System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);
@@ -264,4 +255,46 @@ public class SpecialistController {
         specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
         return ResponseEntity.ok("Success");
     }
+
+    @GetMapping("/find-customer-form")
+    public String getFindCustomerForm() {
+        return "find-customer";
+    }
+
+    @PostMapping("/find-customer-form")
+    public String getCustomerByContactData(@RequestParam("data") String data) {
+        boolean customerWasFound = specialistService.findCustomerByContactData(data);
+        return (customerWasFound ?
+                "redirect:/SimplePsySpecialist/V1/specialist/customers" :
+                "redirect:/SimplePsySpecialist/V1/specialist/customer-form");
+    }
+
+    @GetMapping("customer/problem/new/{customerId}")
+    public String customerNewProblem(@PathVariable String customerId,
+                                     Model model)
+    {
+        System.out.println("In method customerNewProblem providing customerId " + customerId + " to the model");
+        model.addAttribute("customerId", customerId);
+        return "problem-form";
+    }
+
+    @PostMapping("customer/problem/new")
+    public String customerNewProblem(@RequestParam("customerId") String customerId,
+                                     @RequestParam("problem") String problem)
+    {
+        System.out.println("In Post mappping method customerNewProblem \ngot customerId: " + customerId + " and problem: " + problem);
+        specialistService.addCustomerProblem(customerId, problem);
+        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+    }
+
+    @GetMapping("customer/problems/{customerId}")
+    public String customersProblems(@PathVariable String customerId,
+                                    Model model)
+    {
+        System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
+        List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
+        model.addAttribute("problems", problems);
+        return "problems-list";
+    }
+
 }
