@@ -36,9 +36,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8086:8086"
-  calendar:
+  notifications:
     build:
-      context: ./Calendar
+      context: ./Notifications
       dockerfile: Dockerfile
     ports:
-      - "8082:8082"
+      - "8085:8085"
