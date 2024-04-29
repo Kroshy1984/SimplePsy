@@ -18,7 +18,9 @@ import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -160,9 +162,28 @@ public class SpecialistController {
     }
 
     @GetMapping("/customers")
-    public String getCustomersList(Model model) {
+    public String getCustomersList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<CustomerDTO> customers = specialistService.getAllCustomers();
-        model.addAttribute("customers", customers);
+        List<CustomerDTO> specialistCustomers = new ArrayList<>();
+
+        if (specialist.getCustomerIds() == null) {
+            System.out.println("No customers were found for this specialist!");
+            model.addAttribute("customers", specialistCustomers);
+            return "customer-list";
+        }
+
+        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
+            for (CustomerDTO customer : customers) {
+                if (Objects.equals(customer.getId(), specialist.getCustomerIds().get(i))) {
+                    specialistCustomers.add(customer);
+                    System.out.println(customers.get(i).getName());
+                    break;
+                }
+            }
+        }
+
+        model.addAttribute("customers", specialistCustomers);
         return "customer-list";
     }
 
@@ -235,12 +256,12 @@ public class SpecialistController {
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/find-customer-page")
+    @GetMapping("/find-customer-form")
     public String getFindCustomerForm() {
         return "find-customer";
     }
 
-    @PostMapping("/find-customer")
+    @PostMapping("/find-customer-form")
     public String getCustomerByContactData(@RequestParam("data") String data) {
         boolean customerWasFound = specialistService.findCustomerByContactData(data);
         return (customerWasFound ?

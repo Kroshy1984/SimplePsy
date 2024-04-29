@@ -129,6 +129,9 @@ public class CustomerService {
     public boolean findByContactData(String data)
     {
         if (isPhoneNumber(data)) {
+            if (data.charAt(0) == ' ') {
+                data = data.replace(' ', '+');
+            }
             return customerRepository.existsByContactPhone(data);
         } else if (isEmail(data)) {
             return  customerRepository.existsByContactEmail(data);
@@ -142,7 +145,11 @@ public class CustomerService {
 
     // Проверка на номер телефона
     public static boolean isPhoneNumber(String data) {
-        String phoneNumberRegex =  "(\\+\\d{1,3}|\\d{1})?(\\d{3}|\\(\\d{3}\\)|\\d{1})[-\\s]?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}";
+        if (data.charAt(0) == ' ') {
+            data = data.replace(' ', '+');
+        }
+        String phoneNumberRegex = "^(\\+7|7|8)\\d{10}$";
+        System.out.println("Entered data: " + data);
         return data.matches(phoneNumberRegex);
     }
 
