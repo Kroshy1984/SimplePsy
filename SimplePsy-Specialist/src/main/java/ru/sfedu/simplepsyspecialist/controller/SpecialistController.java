@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
 import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -240,9 +241,11 @@ public class SpecialistController {
     }
 
     @PostMapping("/find-customer")
-    public ResponseEntity<String> getCustomerByContactData(@RequestParam("data") String data) {
-        specialistService.findCustomerByContactData(data);
-        return ResponseEntity.ok("Customer " + data);
+    public String getCustomerByContactData(@RequestParam("data") String data) {
+        boolean customerWasFound = specialistService.findCustomerByContactData(data);
+        return (customerWasFound ?
+                "redirect:/SimplePsySpecialist/V1/specialist/customers" :
+                "redirect:/SimplePsySpecialist/V1/specialist/customer-form");
     }
 
     @GetMapping("customer/problem/new/{customerId}")
@@ -253,6 +256,7 @@ public class SpecialistController {
         model.addAttribute("customerId", customerId);
         return "problem-form";
     }
+
     @PostMapping("customer/problem/new")
     public String customerNewProblem(@RequestParam("customerId") String customerId,
                                      @RequestParam("problem") String problem)
@@ -261,12 +265,13 @@ public class SpecialistController {
         specialistService.addCustomerProblem(customerId, problem);
         return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
-    @GetMapping("customer/problems")
-    public String customersProblems(@RequestParam("customerId") String customerId,
+
+    @GetMapping("customer/problems/{customerId}")
+    public String customersProblems(@PathVariable String customerId,
                                     Model model)
     {
         System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
-        List<String> problems = specialistService.getAllCustomersProblems(customerId);
+        List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
         model.addAttribute("problems", problems);
         return "problems-list";
     }

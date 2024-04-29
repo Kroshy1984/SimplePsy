@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.customer.dto.CustomerDTO;
 import ru.sfedu.customer.dto.CustomerMapper;
 import ru.sfedu.customer.dto.CustomersSearch;
+import ru.sfedu.customer.dto.ProblemDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -128,11 +129,11 @@ public class CustomerController {
         customerService.addProblem(customerId, problemId);
         return ResponseEntity.ok("Problem successfully added");
     }
-    @GetMapping("/problems")
-    public ResponseEntity<List<String>> customersProblems(@RequestParam("customerId") String customerId)
+    @PostMapping("/problems")
+    public ResponseEntity<List<ProblemDTO>> customersProblems(@RequestParam("customerId") String customerId)
     {
         System.out.println("In method customersProblems got the customerId " + customerId);
-        List<String> problems = customerService.getAllCustomersProblems(customerId);
+        List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
         return ResponseEntity.ok(problems);
     }
 }

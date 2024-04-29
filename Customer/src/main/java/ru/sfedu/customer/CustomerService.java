@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.customer.dto.CustomerDTO;
 import ru.sfedu.customer.dto.CustomerMapper;
 import ru.sfedu.customer.dto.CustomersSearch;
+import ru.sfedu.customer.dto.ProblemDTO;
 import ru.sfedu.customer.exception.CustomerNotFoundException;
 import ru.sfedu.customer.exception.NotFoundException;
 
@@ -172,18 +173,18 @@ public class CustomerService {
         Customer customer = customerRepository.findById(customerId).get();
         return customer.getProblemsId();
     }
-    public List<String> getAllCustomersProblems(String customerId) {
+    public List<ProblemDTO> getAllCustomersProblems(String customerId) {
         List<String> problems = getAllCustomersProblemIds(customerId);
         System.out.println("Got the customer's problem. The id of first one is: " + problems.get(0));
         String url = "/SimplePsyProblem/V1/problem/customer/problems";
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8087").build();
-        ResponseEntity<List<String>> response = webClient.get()
+        ResponseEntity<List<ProblemDTO>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("problemsIds", problems)
                         .build())
                 .retrieve()
-                .toEntityList(String.class)
+                .toEntityList(ProblemDTO.class)
                 .block();
         System.out.println("In method getAllCustomersProblems the result of the first one: " + response.getBody().get(0));
         return response.getBody();

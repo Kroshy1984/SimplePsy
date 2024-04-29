@@ -14,17 +14,15 @@
     <h1>СПИСОК ЗАКАЗЧИКОВ</h1>
 </header>
 <div class="profile-container">
-
         <table>
             <tr>
-                <td colspan="2">Имя</td>
-                <td>Дата первого звонка</td>
-                <td>Status</td>
+                <td></td>
+                <td></td>
+                <td>Имя</td>
+                <td>Почта</td>
                 <td></td>
             </tr>
-        </table>
-        <table th:each="customer:${customers}">
-            <tr th:data-card-id="${customer.getId()}">
+            <tr th:each="customer:${customers}" th:data-card-id="${customer.getId()}">
                 <td><input type="radio" id="item2" name="selectedItem" th:value="${customer.getId()}"></td>
                 <td><img id="profile-image" alt="Customer pic"
                          th:src=" @{'/SimplePsySpecialist/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>

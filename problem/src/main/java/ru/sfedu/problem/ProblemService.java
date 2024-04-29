@@ -2,6 +2,8 @@ package ru.sfedu.problem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sfedu.problem.dto.ProblemDTO;
+import ru.sfedu.problem.dto.ProblemMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,21 @@ public class ProblemService {
         return problemRepository.save(problem);
     }
 
-    public List<String> getAllCustomersProblems(List<String> problemsId) {
-        List<String> problems = new ArrayList<>();
+    public List<ProblemDTO> getAllCustomersProblems(List<String> problemsId) {
+        List<Problem> problems = new ArrayList<>();
+
         for (int i = 0; i < problemsId.size(); i++) {
-            problems.add(problemRepository.findById(problemsId.get(i)).get().getDescriptionOfProblem());
+            problems.add(problemRepository.findById(problemsId.get(i)).get());
         }
-        return problems;
+
+        List<ProblemDTO> problemDTOList = new ArrayList<>();
+
+        for (int i = 0; i < problems.size(); i++) {
+            ProblemDTO problemDTO = ProblemMapper.INSTANCE.problemToProblemDTO(problems.get(i));
+            problemDTOList.add(problemDTO);
+            System.out.println("Adding problem " + problemDTO.getId() + problemDTO.getDescriptionOfProblem());
+        }
+
+        return problemDTOList;
     }
 }

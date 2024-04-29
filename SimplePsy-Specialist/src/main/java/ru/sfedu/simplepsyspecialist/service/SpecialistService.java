@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
+import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
 import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.SpecialistRole;
@@ -188,10 +189,10 @@ public class SpecialistService {
         return customerDTO;
     }
 
-    public String findCustomerByContactData(String data) {
+    public boolean findCustomerByContactData(String data) {
         WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
         String url = "/SimplePsy/V1/customer/findCustomerByContactData";
-        Mono<ResponseEntity<String>> response = webClient.get()
+        Mono<ResponseEntity<Boolean>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("data", data)
@@ -200,7 +201,7 @@ public class SpecialistService {
                 .retrieve()
                 .toEntity(new ParameterizedTypeReference<>() {});
 
-        String result = response.block().getBody();
+        boolean result = response.block().getBody();
         System.out.println("Got the customer with data: " + data);
         return result;
     }
@@ -359,19 +360,22 @@ public class SpecialistService {
         System.out.println("Result of adding new problem to the customer: " + response.getBody());
     }
 
-    public List<String> getAllCustomersProblems(String customerId)
+    // Запрос идет в Customer и из Customer в Problem
+    public List<ProblemDTO> getAllCustomersProblems(String customerId)
     {
         String url = "/SimplePsy/V1/customer/problems";
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8081").build();
-        ResponseEntity<List<String>> response = webClient.post()
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        ResponseEntity<List<ProblemDTO>> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("customerId", customerId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntityList(String.class).block();
-        System.out.println("In method getAllCustomersProblems the result of the first one: " + response.getBody().get(0));
+                .toEntityList(ProblemDTO.class).block();
+        System.out.println("In method getAllCustomersProblems the result of the first one: " +
+                response.getBody().get(0).getDescriptionOfProblem() +
+                response.getBody().get(0).getId());
         return response.getBody();
     }
 }
