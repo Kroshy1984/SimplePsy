@@ -80,6 +80,7 @@ public class CustomerService {
     public Customer saveCustomer(CustomerDTO customerDTO) {
         Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
         customer.setStatus(Status.LEAD);
+        customer.addProblem(customerDTO.getProblemsId().get(0));
         System.out.println("Customer CustomerDTO" + customer.getProblemsId());
         System.out.println("saving customer " + customer.getName());
         return customerRepository.save(customer);

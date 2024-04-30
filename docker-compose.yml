@@ -7,7 +7,13 @@ services:
     ports:
       - "8081:8081"
     environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
       - SPECIALIST_SERVICE_URL=http://specialist:8081
+      - SESSION_SERVICE_URL=http://session:8083
+      - SCORING_SERVICE_URL=http://scoring:8084
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
+      - CLIENT_SERVICE_URL=http://client:8086
+      - PROBLEM_SERVICE_URL=http://problem:8087
   session:
     build:
       context: ./Session
@@ -15,7 +21,13 @@ services:
     ports:
       - "8083:8083"
     environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
       - SESSION_SERVICE_URL=http://session:8083
+      - SCORING_SERVICE_URL=http://scoring:8084
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
+      - CLIENT_SERVICE_URL=http://client:8086
+      - PROBLEM_SERVICE_URL=http://problem:8087
   scoring:
     build:
       context: ./scoring
@@ -23,7 +35,13 @@ services:
     ports:
       - "8084:8084"
     environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
+      - SESSION_SERVICE_URL=http://session:8083
       - SCORING_SERVICE_URL=http://scoring:8084
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
+      - CLIENT_SERVICE_URL=http://client:8086
+      - PROBLEM_SERVICE_URL=http://problem:8087
   problem:
     build:
       context: ./problem
@@ -31,6 +49,12 @@ services:
     ports:
       - "8087:8087"
     environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
+      - SESSION_SERVICE_URL=http://session:8083
+      - SCORING_SERVICE_URL=http://scoring:8084
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
+      - CLIENT_SERVICE_URL=http://client:8086
       - PROBLEM_SERVICE_URL=http://problem:8087
   customer:
     build:
@@ -40,6 +64,12 @@ services:
       - "8080:8080"
     environment:
       - CUSTOMER_SERVICE_URL=http://customer:8080
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
+      - SESSION_SERVICE_URL=http://session:8083
+      - SCORING_SERVICE_URL=http://scoring:8084
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
+      - CLIENT_SERVICE_URL=http://client:8086
+      - PROBLEM_SERVICE_URL=http://problem:8087
   client:
     build:
       context: ./Client
@@ -47,7 +77,13 @@ services:
     ports:
       - "8086:8086"
     environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
+      - SESSION_SERVICE_URL=http://session:8083
+      - SCORING_SERVICE_URL=http://scoring:8084
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
       - CLIENT_SERVICE_URL=http://client:8086
+      - PROBLEM_SERVICE_URL=http://problem:8087
   notifications:
     build:
       context: ./Notifications
@@ -55,4 +91,10 @@ services:
     ports:
       - "8085:8085"
     environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
+      - SESSION_SERVICE_URL=http://session:8083
+      - SCORING_SERVICE_URL=http://scoring:8084
       - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
+      - CLIENT_SERVICE_URL=http://client:8086
+      - PROBLEM_SERVICE_URL=http://problem:8087

@@ -260,8 +260,8 @@ public class SpecialistService {
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
         String problemId = saveProblem(problem);
-        customer.setProblemId(problemId);
-        System.out.println("Specialist CustomerDTO: " + customer.getProblemId());
+        customer.addProblem(problemId);
+        System.out.println("Specialist CustomerDTO: " + customer.getProblemsId().get(0));
         ResponseEntity<String> response = webClient.post()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)
@@ -370,8 +370,10 @@ public class SpecialistService {
     //передавать в кастомера id проблемы и кастомера чтобы добавить ему(кастомеру) новую проблему в список
     public void addCustomerProblem(String customerId, String problem) {
         String problemId = saveProblem(problem);
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/problem/new";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ResponseEntity<String> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -388,8 +390,10 @@ public class SpecialistService {
     // Запрос идет в Customer и из Customer в Problem
     public List<ProblemDTO> getAllCustomersProblems(String customerId)
     {
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/problems";
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ResponseEntity<List<ProblemDTO>> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)

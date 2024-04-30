@@ -3,6 +3,7 @@ package ru.sfedu.customer.dto;
 
 import ru.sfedu.customer.Contact;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class CustomerDTO {
     private String name;
     private String surname;
     private Contact contact;
+    private LocalDate dateOfBirth;
     private List<String> problemsId;
 
     public String getId() {
@@ -56,5 +58,11 @@ public class CustomerDTO {
         }
         problemsId.add(problemId);
     }
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
 
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

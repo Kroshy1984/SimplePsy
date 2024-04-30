@@ -1,6 +1,8 @@
 package ru.sfedu.simplepsyspecialist.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDTO {
 
@@ -8,7 +10,7 @@ public class CustomerDTO {
     private String name;
     private String surname;
     private LocalDate dateOfBirth;
-    private String problemId;
+    private List<String> problemsId;
     private String gender;
     private Contact contact;
 
@@ -54,12 +56,15 @@ public class CustomerDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getProblemId() {
-        return problemId;
+    public List<String> getProblemsId() {
+        return problemsId;
     }
-
-    public void setProblemId(String problemId) {
-        this.problemId = problemId;
+    public void addProblem(String problemId) {
+        if (problemsId == null)
+        {
+            problemsId = new ArrayList<>();
+        }
+        problemsId.add(problemId);
     }
 
     public String getGender() {

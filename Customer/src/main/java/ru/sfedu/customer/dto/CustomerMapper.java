@@ -18,6 +18,7 @@ public interface CustomerMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "surname", target = "surname")
     @Mapping(source = "contact", target = "contact")
+    @Mapping(source = "problemsId", target = "problemsId")
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "dateOfFirstCall", ignore = true)
     @Mapping(target = "description", ignore = true)
