@@ -77,8 +77,10 @@ public class SpecialistService {
     }
 
     public void sendRequestToSession(String specialistId, String startDate, String endDate) {
-        WebClient webClient = WebClient.builder().baseUrl("http://session:8083").build();
+        String baseUrl = System.getenv().getOrDefault("SESSION_SERVICE_URL", "http://localhost:8083");
         String url = "/SimplePsySession/V1/session/search";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Object result =  webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -99,8 +101,10 @@ public class SpecialistService {
         {
             throw new NotFoundException("Client with email " + clientEmail + "not found\n can not create new session");
         }
-        WebClient webClient = WebClient.builder().baseUrl("http://session:8083").build();
+        String baseUrl = System.getenv().getOrDefault("SESSION_SERVICE_URL", "http://localhost:8083");
         String url = "/SimplePsySession/V1/session/new";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Object result =  webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -116,9 +120,10 @@ public class SpecialistService {
         System.out.println("got the result: " + result.toString());
     }
     public String findClientByEmail(String clientEmail) {
-        WebClient webClient = WebClient.builder().baseUrl("http://client:8086").build();
-        System.out.println("WebClient");
+        String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
         String url = "/SimplePsyClient/V1/client/findByEmail";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         String result = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -154,9 +159,11 @@ public class SpecialistService {
     }
 
     public List<CustomerDTO> getAllCustomers() {
-
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        System.out.println("In method getAllCustomers");
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/getAllCustomers";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Mono<ResponseEntity<List<CustomerDTO>>> response = webClient.get()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)
@@ -173,8 +180,10 @@ public class SpecialistService {
     }
 
     public CustomerDTO findCustomerById(String customerId) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/getCustomerById";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Mono<ResponseEntity<CustomerDTO>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -190,8 +199,10 @@ public class SpecialistService {
     }
 
     public boolean findCustomerByContactData(String data) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/findCustomerByContactData";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Mono<ResponseEntity<Boolean>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -207,8 +218,10 @@ public class SpecialistService {
     }
 
     public void deleteCustomerById(String customerId) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/deleteCustomerById";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Mono<ResponseEntity<String>> response = webClient.delete()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -224,8 +237,10 @@ public class SpecialistService {
     }
 
     public String saveProblem(String problem) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8087").build();
+        String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
         String url = "/SimplePsyProblem/V1/problem/new";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ResponseEntity<String> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -239,8 +254,10 @@ public class SpecialistService {
     }
 
     public String saveCustomer(CustomerDTO customer, String problem) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/new";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         String problemId = saveProblem(problem);
         customer.setProblemId(problemId);
         System.out.println("Specialist CustomerDTO: " + customer.getProblemId());
@@ -256,8 +273,10 @@ public class SpecialistService {
     }
 
     public List<SessionDTO> getAllSessions(String specialistId) {
-        WebClient webClient = WebClient.builder().baseUrl("http://session:8083").build();
+        String baseUrl = System.getenv().getOrDefault("SESSION_SERVICE_URL", "http://localhost:8083");
         String url = "/SimplePsySession/V1/session/calendar";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ResponseEntity<List<SessionDTO>> result =  webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
@@ -306,9 +325,12 @@ public class SpecialistService {
 
     public void sendEmailtoSpecialist(String email, String specialistName, String customerName) {
         System.out.println("sending email method");
-        WebClient webClient = WebClient.builder().baseUrl("http://notifications:8085/emails/scoring-result").build();
+        String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
+        String url = "/emails/scoring-result";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
         Mono<ResponseEntity<String>> result = webClient.post()
                 .uri(uriBuilder -> uriBuilder
+                        .path(url)
                         .queryParam("email", email)
                         .queryParam("specialistName", specialistName)
                         .queryParam("customerName", customerName)
@@ -331,8 +353,10 @@ public class SpecialistService {
     }
 
     public void updateCustomer(CustomerDTO customerDTO) {
-        WebClient webClient = WebClient.builder().baseUrl("http://customer:8080").build();
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/update";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ResponseEntity<String> response = webClient.post()
                 .uri(url)
                 .accept(MediaType.APPLICATION_JSON)

@@ -6,39 +6,53 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
+    environment:
+      - SPECIALIST_SERVICE_URL=http://specialist:8081
   session:
     build:
       context: ./Session
       dockerfile: Dockerfile
     ports:
       - "8083:8083"
+    environment:
+      - SESSION_SERVICE_URL=http://session:8083
   scoring:
     build:
       context: ./scoring
       dockerfile: Dockerfile
     ports:
       - "8084:8084"
+    environment:
+      - SCORING_SERVICE_URL=http://scoring:8084
   problem:
     build:
       context: ./problem
       dockerfile: Dockerfile
     ports:
       - "8087:8087"
+    environment:
+      - PROBLEM_SERVICE_URL=http://problem:8087
   customer:
     build:
       context: ./Customer
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      - CUSTOMER_SERVICE_URL=http://customer:8080
   client:
     build:
       context: ./Client
       dockerfile: Dockerfile
     ports:
       - "8086:8086"
+    environment:
+      - CLIENT_SERVICE_URL=http://client:8086
   notifications:
     build:
       context: ./Notifications
       dockerfile: Dockerfile
     ports:
       - "8085:8085"
+    environment:
+      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085

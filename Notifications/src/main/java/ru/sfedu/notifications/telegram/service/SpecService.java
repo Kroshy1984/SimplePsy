@@ -26,8 +26,10 @@ public class SpecService {
         System.out.println(spec.getEmail());
         String specialist_id = spec.getId();
         System.out.println(specialist_id);
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8083").build();
+        String baseUrl = System.getenv().getOrDefault("SESSION_SERVICE_URL", "http://localhost:8083");
         String url = "/SimplePsySession/V1/session/searchAll";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ResponseEntity<List<LocalDateTime>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder.path(url)
                         .queryParam("specialist_id", specialist_id)

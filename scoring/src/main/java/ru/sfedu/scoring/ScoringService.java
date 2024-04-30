@@ -32,9 +32,12 @@ public class ScoringService {
         System.out.println("Client params: ");
         client.stream().forEach(System.out::println);
         System.out.println(client.get(4));
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086/SimplePsyClient/V1/client/new").build();
+        String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
+        String url = "/SimplePsyClient/V1/client/new";
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086").build();
 
         Mono<ResponseEntity<String>> result = webClient.post()
+                .uri(url)
                 .bodyValue(client)
                 .retrieve()
                 .toEntity(String.class)
@@ -58,9 +61,13 @@ public class ScoringService {
     public void sendEmailNotificationCreatedAccount(String name, String email)
     {
         System.out.println("sending email method");
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8085/emails/text").build();
+        String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
+        String url = "/emails/text";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         Mono<ResponseEntity<String>> result = webClient.post()
                 .uri(uriBuilder -> uriBuilder
+                        .path(url)
                         .queryParam("email", email)
                         .queryParam("name", name)
                         .build())
@@ -86,8 +93,9 @@ public class ScoringService {
 
     public void sendCustomerId(String customerId) {
         System.out.println("Sending customerId to Specialist: " + customerId);
+        String baseUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         String url = "/SimplePsySpecialist/V1/specialist/find-customer";
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8081").build();
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
         ResponseEntity<String> result = webClient.get()
                 .uri(uriBuilder -> uriBuilder

@@ -53,8 +53,10 @@ public class SessionService {
     public ClientDTO getClientById(String clientId)
     {
         System.out.println("ClientDTO id: " + clientId);
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8086").build();
+        String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
         String url = "/SimplePsyClient/V1/client/findById";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
         ClientDTO result =  webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
