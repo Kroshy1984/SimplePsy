@@ -1,10 +1,13 @@
 package ru.sfedu.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.customer.dto.CustomerDTO;
 import ru.sfedu.customer.dto.CustomerMapper;
 import ru.sfedu.customer.dto.CustomersSearch;
+import ru.sfedu.customer.dto.ProblemDTO;
 import ru.sfedu.customer.exception.CustomerNotFoundException;
 import ru.sfedu.customer.exception.NotFoundException;
 
@@ -77,7 +80,7 @@ public class CustomerService {
     public Customer saveCustomer(CustomerDTO customerDTO) {
         Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
         customer.setStatus(Status.LEAD);
-        System.out.println("Customer CustomerDTO" + customer.getProblemId());
+        System.out.println("Customer CustomerDTO" + customer.getProblemsId());
         System.out.println("saving customer " + customer.getName());
         return customerRepository.save(customer);
     }
@@ -166,5 +169,31 @@ public class CustomerService {
 
     public Customer findByEmail(String email) {
         return customerRepository.findByContactEmail(email).get();
+    }
+
+    public void addProblem(String customerId, String problemId) {
+        Customer customer = customerRepository.findById(customerId).get();
+        customer.addProblem(problemId);
+        customerRepository.save(customer);
+    }
+    public List<String> getAllCustomersProblemIds(String customerId) {
+        Customer customer = customerRepository.findById(customerId).get();
+        return customer.getProblemsId();
+    }
+    public List<ProblemDTO> getAllCustomersProblems(String customerId) {
+        List<String> problems = getAllCustomersProblemIds(customerId);
+        System.out.println("Got the customer's problem. The id of first one is: " + problems.get(0));
+        String url = "/SimplePsyProblem/V1/problem/customer/problems";
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8087").build();
+        ResponseEntity<List<ProblemDTO>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemsIds", problems)
+                        .build())
+                .retrieve()
+                .toEntityList(ProblemDTO.class)
+                .block();
+        System.out.println("In method getAllCustomersProblems the result of the first one: " + response.getBody().get(0));
+        return response.getBody();
     }
 }
