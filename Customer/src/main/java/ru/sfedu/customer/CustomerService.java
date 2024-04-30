@@ -184,8 +184,9 @@ public class CustomerService {
     public List<ProblemDTO> getAllCustomersProblems(String customerId) {
         List<String> problems = getAllCustomersProblemIds(customerId);
         System.out.println("Got the customer's problem. The id of first one is: " + problems.get(0));
+        String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
         String url = "/SimplePsyProblem/V1/problem/customer/problems";
-        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8087").build();
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
         ResponseEntity<List<ProblemDTO>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
