@@ -223,16 +223,16 @@ public class SpecialistService {
         String url = "/SimplePsy/V1/customer/deleteCustomerById";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        Mono<ResponseEntity<String>> response = webClient.delete()
+        ResponseEntity<String> response = webClient.delete()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("customerId", customerId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntity(String.class);
+                .toEntity(String.class).block();
 
-        String result = response.block().getBody();
+        String result = response.getBody();
         System.out.println("The result of deleting customer with id: "
                 + customerId + " - " + result);
     }

@@ -30,8 +30,7 @@ function deleteSelectedCard()
         fetch(url, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json', // Указывайте тип контента, если это необходимо
-                // Дополнительные заголовки, если необходимо
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({selectedCardId}),
         })
@@ -39,11 +38,12 @@ function deleteSelectedCard()
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
+                return response.text();
             })
             .then(data => {
                 // Обработка успешного ответа
                 console.log('DELETE request successful', data);
+                window.location.href = "/SimplePsySpecialist/V1/specialist/customers"
             })
             .catch(error => {
                 // Обработка ошибки

@@ -297,7 +297,7 @@ public class SpecialistController {
     {
         System.out.println("In Post mappping method customerNewProblem \ngot customerId: " + customerId + " and problem: " + problem);
         specialistService.addCustomerProblem(customerId, problem);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
     }
 
     @GetMapping("customer/problems/{customerId}")
