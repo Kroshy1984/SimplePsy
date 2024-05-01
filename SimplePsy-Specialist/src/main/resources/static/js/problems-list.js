@@ -8,6 +8,3 @@ function addNewProblem() {
     window.location.href = "http://localhost:8081/SimplePsySpecialist/V1/specialist/customer/problem/new/" + id;
 }
 
-function showScoring() {
-
-}

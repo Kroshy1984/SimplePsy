@@ -1,7 +1,10 @@
 package ru.sfedu.problem;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.problem.dto.ProblemDTO;
 import ru.sfedu.problem.dto.ProblemMapper;
 
@@ -45,5 +48,24 @@ public class ProblemService {
         Problem problem = problemRepository.findById(problemId).get();
         problem.setScoringId(scoringId);
         problemRepository.save(problem);
+    }
+
+    public List<String> getScoringAnswers(String problemId) {
+        String scoringId = problemRepository.findById(problemId).get().getScoringId();
+        String baseUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        String url = "/SimplePsyScoring/V1/scoring/getScoringAnswers";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
+        ResponseEntity<List<String>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("scoringId", scoringId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntityList(String.class).block();
+
+        System.out.println("Got the result in method getScoringAnswersByProblemId: " + response.getBody());
+        return response.getBody();
     }
 }

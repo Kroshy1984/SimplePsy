@@ -64,11 +64,11 @@ public class ClientController {
     }
 
     //запрос приходит из скоринга после прохождения анкеты
-    @PostMapping("/newClient/{customerId}")
-    public ResponseEntity<String> newClientFromCustomer(@PathVariable String customerId)
+    @PostMapping("/newClient/{problemId}")
+    public ResponseEntity<String> newClientFromCustomer(@PathVariable String problemId)
     {
-        System.out.println("in method newClientFromCustomer");
-        Client client = clientService.getClientByCustomerId(customerId);
+        System.out.println("in method newClientFromCustomer got problemId: " + problemId);
+        Client client = clientService.getCustomerByProblemId(problemId);
         Client savedClient = clientService.save(client);
         return ResponseEntity.ok("client successfully created");
     }

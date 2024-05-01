@@ -309,5 +309,13 @@ public class SpecialistController {
         model.addAttribute("problems", problems);
         return "problems-list";
     }
-
+    @GetMapping("/customer/scoring/{problemId}")
+    public String scoringAnswers(@PathVariable String problemId,
+                                 Model model)
+    {
+        System.out.println("In method scoringAnswers");
+        List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
+        model.addAttribute("answers", answers);
+        return "scoring-answers";
+    }
 }

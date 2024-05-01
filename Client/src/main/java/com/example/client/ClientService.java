@@ -55,4 +55,27 @@ public class ClientService {
         System.out.println("CustomerDTO mapped to the client object with tg: " + client.getContact().getTg());
         return client;
     }
+
+    public Client getCustomerByProblemId(String problemId) {
+        System.out.println("in method getClientByProblemId got problemId: " + problemId);
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
+        String url = "/SimplePsy/V1/customer/getCustomerByProblemId";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
+        ResponseEntity<CustomerDTO> result = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .retrieve()
+                .toEntity(CustomerDTO.class)
+                .block();
+        System.out.println("Customer name: " + result.getBody().getName());
+        Client client = CustomerMapper.INSTANCE.customerDTOToClient(result.getBody());
+        System.out.println("CustomerDTO mapped to the client object with name: " + client.getName());
+        System.out.println("CustomerDTO mapped to the client object with surname: " + client.getSurname());
+        System.out.println("CustomerDTO mapped to the client object with email: " + client.getContact().getEmail());
+        System.out.println("CustomerDTO mapped to the client object with tg: " + client.getContact().getTg());
+        return client;
+    }
 }

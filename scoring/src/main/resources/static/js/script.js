@@ -28,11 +28,11 @@ function sendData() {
     checkboxAnswers = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
     localStorage.setItem('checkboxAnswers', JSON.stringify(checkboxAnswers));
 
-    let newArray = [].concat(textAnswers, checkboxAnswers);
-    const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers';
-
     let problemId = document.getElementById("problemId").value;
     let scoringId = document.getElementById("scoringId").value;
+    let newArray = [].concat(textAnswers, checkboxAnswers);
+
+    const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers?scoringId=' + scoringId;
     let saveNewClientUrl = 'http://localhost:8086/SimplePsyClient/V1/client/newClient/' + problemId;
     console.log(scoringId)
 

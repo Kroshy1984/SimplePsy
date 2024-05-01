@@ -428,4 +428,24 @@ public class SpecialistService {
     }
 
 
+    public List<String> getScoringAnswersByProblemId(String problemId) {
+        String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
+        String url = "/SimplePsyProblem/V1/problem/getScoringAnswersByProblemId";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
+        ResponseEntity<List<String>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntityList(String.class).block();
+        List<String> answers = response.getBody();
+        System.out.println("Got the result in method getScoringAnswersByProblemId: ");
+        for (int i = 0; i < answers.size(); i++) {
+            System.out.println(answers.get(i));
+        }
+        return response.getBody();
+    }
 }

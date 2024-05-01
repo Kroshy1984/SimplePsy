@@ -49,4 +49,11 @@ public class ProblemController {
         problemService.saveCustomersScoring(problemId, scoringId);
         return ResponseEntity.ok("Problem with id " + problemId + " successfully saved scoring with id " + scoringId);
     }
+    @GetMapping("/getScoringAnswersByProblemId")
+    public ResponseEntity<List<String>> getScoringAnswersByProblemId(@RequestParam("problemId") String problemId)
+    {
+        System.out.println("In method getScoringAnswersByProblemId got the problemId: " + problemId );
+        List<String> answers = problemService.getScoringAnswers(problemId);
+        return ResponseEntity.ok(answers);
+    }
 }

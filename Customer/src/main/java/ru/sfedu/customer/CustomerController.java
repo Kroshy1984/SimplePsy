@@ -142,5 +142,4 @@ public class CustomerController {
         List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
         return ResponseEntity.ok(problems);
     }
-
 }
