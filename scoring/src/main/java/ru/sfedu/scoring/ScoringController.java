@@ -25,6 +25,7 @@ public class ScoringController {
     @GetMapping("/userForm")
     public String userForm(Model model)
     {
+
         model.addAttribute("questions", Scoring.getUserData());
         return "userForm";
     }
@@ -39,8 +40,8 @@ public class ScoringController {
     public ResponseEntity<String> saveAnswers(@RequestBody String[] answers) {
         this.answers.clear();
         this.answers.addAll(List.of(answers));
-        scoringService.save(this.answers);
-        return ResponseEntity.ok("Success");
+        String scoringId = scoringService.save(this.answers).getId();
+        return ResponseEntity.ok(scoringId);
 //        return "redirect:/SimplePsyScoring/V1/scoring/done";
     }
 
@@ -48,7 +49,9 @@ public class ScoringController {
     @GetMapping("{id}")
     public String getScoring(@PathVariable String id,
                              Model model) {
-        model.addAttribute("customerId", id);
+        String scoringId = scoringService.saveScoring(new Scoring()).getId();
+        model.addAttribute("scoringId", scoringId);
+        model.addAttribute("problemId", id);
         model.addAttribute("textQuestions", Scoring.getTextQuestions());
         model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
         return "questionnaire";
@@ -70,6 +73,14 @@ public class ScoringController {
     @PostMapping("/find-customer/{customerId}")
     public ResponseEntity<String> sendCustomerId(@PathVariable String customerId) {
         scoringService.sendCustomerId(customerId);
+        return ResponseEntity.ok("Success");
+    }
+    @PostMapping("/find-customer/byProblemId/{problemId}")
+    public ResponseEntity<String> sendProblemId(@PathVariable String problemId,
+                                                @RequestParam("scoringId") String scoringId) {
+        System.out.println("In method sendProblemId\nGot the problemId " + problemId);
+        scoringService.saveCustomersScoring(problemId, scoringId);
+        scoringService.sendProblemId(problemId);
         return ResponseEntity.ok("Success");
     }
 }

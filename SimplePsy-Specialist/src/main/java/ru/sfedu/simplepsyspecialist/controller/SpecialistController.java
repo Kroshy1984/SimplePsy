@@ -243,6 +243,19 @@ public class SpecialistController {
         return "customer-form";
     }
 
+    @GetMapping("/find-customer/byProblemId")
+    public ResponseEntity<String> sendEmailToSpecialistByProblemId(@RequestParam("problemId") String problemId) {
+        System.out.println("In method sendEmailToSpecialistByProblemId \nGot problemId: " + problemId);
+        String customerId = specialistService.findCustomerByProblemId(problemId).getId();
+        Specialist specialist = specialistService.findSpecialist(customerId);
+        System.out.println("Found the specialist " + specialist.getName() + " who contains provided customerId");
+        String customerName = specialistService.findCustomerById(customerId).getName();
+        System.out.println("Found the customer : " + customerName);
+        System.out.println("Specialist's email: " + specialist.getUsername());
+        System.out.println("sending email to the specialist about scoring completion");
+        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
+        return ResponseEntity.ok("Success");
+    }
     @GetMapping("/find-customer")
     public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
         System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);

@@ -198,4 +198,11 @@ public class CustomerService {
         System.out.println("In method getAllCustomersProblems the result of the first one: " + response.getBody().get(0));
         return response.getBody();
     }
+
+    public CustomerDTO findByProblemId(String problemId) {
+        Customer customer = customerRepository.findByProblemsIdContaining(problemId).get();
+        System.out.println("Found the customer " + customer.getName() + " with problemId " + problemId);
+        CustomerDTO customerDTO = CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+        return customerDTO;
+    }
 }

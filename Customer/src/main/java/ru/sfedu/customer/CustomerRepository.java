@@ -16,6 +16,7 @@ public interface CustomerRepository extends MongoRepository<Customer, String> {
         List<Customer> findAllBySomeContact(String name);
 
         Optional<Customer> findByContactEmail(String email);
+        Optional<Customer> findByProblemsIdContaining(String problemId);
 
         boolean existsByContactPhone(String phone);
         boolean existsByContactEmail(String email);

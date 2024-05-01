@@ -14,7 +14,7 @@ public class Problem {
 
     private String descriptionOfProblem;
     private LocalDateTime dateOfFirstContact;
-
+    private String scoringId;
     public Problem(Status status, String descriptionOfProblem, LocalDateTime dateOfFirstContact) {
         this.status = status;
         this.descriptionOfProblem = descriptionOfProblem;
@@ -54,5 +54,13 @@ public class Problem {
 
     public void setDateOfFirstContact(LocalDateTime dateOfFirstContact) {
         this.dateOfFirstContact = dateOfFirstContact;
+    }
+
+    public String getScoringId() {
+        return scoringId;
+    }
+
+    public void setScoringId(String scoringId) {
+        this.scoringId = scoringId;
     }
 }

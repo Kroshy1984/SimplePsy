@@ -88,6 +88,12 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
+    @GetMapping("/getCustomerByProblemId")
+    public ResponseEntity<CustomerDTO> getCustomerByProblemId(@RequestParam("problemId") String problemId)
+    {
+        System.out.println("In method getCustomerByProblemId");
+        return ResponseEntity.ok(customerService.findByProblemId(problemId));
+    }
     @GetMapping("/customerToClient")
     public ResponseEntity<CustomerDTO> CustomerToClient(@RequestParam("customerId") String customerId)
     {
@@ -136,4 +142,5 @@ public class CustomerController {
         List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
         return ResponseEntity.ok(problems);
     }
+
 }

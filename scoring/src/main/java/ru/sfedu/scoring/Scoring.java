@@ -19,6 +19,14 @@ public class Scoring {
     public List<String> answers = new ArrayList<>();
     public String customerId;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public List<String> getAnswers() {
         return answers;
     }

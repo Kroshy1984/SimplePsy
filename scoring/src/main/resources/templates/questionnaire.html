@@ -10,6 +10,7 @@
     <title>Questionnaire</title>
 </head>
 <body>
+<input type="text" th:name="scoringId" id="scoringId" th:value="${scoringId}" hidden="hidden">
     <div class="page-content">
         <div id="textQuestions" class="form-container">
             <div th:each="textQuestion, questionIndex : ${textQuestions}">
@@ -36,7 +37,7 @@
         </div>
     </div>
 </body>
-<input id="customerId" th:value="${customerId}" hidden="hidden">
+<input id="problemId" th:value="${problemId}" hidden="hidden">
 <script>
     function checkFields() {
         let textInputs = document.querySelectorAll('input[type="text"]');

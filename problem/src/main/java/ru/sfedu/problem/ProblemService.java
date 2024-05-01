@@ -40,4 +40,10 @@ public class ProblemService {
 
         return problemDTOList;
     }
+
+    public void saveCustomersScoring(String problemId, String scoringId) {
+        Problem problem = problemRepository.findById(problemId).get();
+        problem.setScoringId(scoringId);
+        problemRepository.save(problem);
+    }
 }

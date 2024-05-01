@@ -40,4 +40,13 @@ public class ProblemController {
         }
         return ResponseEntity.ok(problems);
     }
+    @PostMapping("/saveCustomersScoring")
+    public ResponseEntity<String> saveCustomersScoring(@RequestParam("problemId") String problemId,
+                                                       @RequestParam("scoringId") String scoringId)
+    {
+        System.out.println("In method saveCustomersScoring got the problemId: " + problemId
+                + " \nscoringId: " + scoringId);
+        problemService.saveCustomersScoring(problemId, scoringId);
+        return ResponseEntity.ok("Problem with id " + problemId + " successfully saved scoring with id " + scoringId);
+    }
 }

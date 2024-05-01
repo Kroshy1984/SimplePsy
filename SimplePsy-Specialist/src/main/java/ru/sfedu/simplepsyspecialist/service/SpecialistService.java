@@ -407,4 +407,25 @@ public class SpecialistService {
                 response.getBody().get(0).getId());
         return response.getBody();
     }
+
+    public CustomerDTO findCustomerByProblemId(String problemId) {
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
+        String url = "/SimplePsy/V1/customer/getCustomerByProblemId";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
+        ResponseEntity<CustomerDTO> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(CustomerDTO.class).block();
+
+        CustomerDTO customerDTO = response.getBody();
+        System.out.println("Got the customer with name: " + customerDTO.getName());
+        return customerDTO;
+    }
+
+
 }
