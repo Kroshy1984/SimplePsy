@@ -39,6 +39,7 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests((request) -> request
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/signup").permitAll()
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer").permitAll()
+                        .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer/byProblemId").permitAll()
                         .anyRequest().authenticated()).
                 formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
                         .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/calendar")

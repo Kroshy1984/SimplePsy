@@ -6,6 +6,8 @@ let checkboxAnswers = JSON.parse(localStorage.getItem('checkboxAnswers'));
 function collectUserFormAnswers() {
     userFormAnswers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
     localStorage.setItem('userFormAnswers', JSON.stringify(userFormAnswers));
+    let scoringId = document.getElementById("scoringId").value;
+    console.log(scoringId)
     window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestions';
 }
 
@@ -29,8 +31,11 @@ function sendData() {
     let newArray = [].concat(textAnswers, checkboxAnswers);
     const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers';
 
-    let customerId = document.getElementById("customerId").value;
-    let saveNewClientUrl = 'http://localhost:8086/SimplePsyClient/V1/client/newClient/' + customerId;
+    let problemId = document.getElementById("problemId").value;
+    let scoringId = document.getElementById("scoringId").value;
+    let saveNewClientUrl = 'http://localhost:8086/SimplePsyClient/V1/client/newClient/' + problemId;
+    console.log(scoringId)
+
     localStorage.removeItem('textAnswers');
     localStorage.removeItem('checkboxAnswers');
 
@@ -47,8 +52,7 @@ function sendData() {
         .catch(error => {
             console.error('Error:', error);
         });
-
-    fetch(url, {
+        fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -58,13 +62,13 @@ function sendData() {
         .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
-            var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/find-customer/' + customerId;
+            var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: {customerId},
+                body: JSON.stringify({scoringId : scoringId})
             })
                 .then(response => response.text())
                 .then(data => {
