@@ -273,6 +273,7 @@ public class SpecialistService {
                 .toEntity(String.class).block();
 
         System.out.println("Got the id of a new saved customer: " + response.getBody());
+        sendScoringNotification(response.getBody(), problemId);
         return response.getBody();
     }
 
@@ -369,7 +370,25 @@ public class SpecialistService {
                 .toEntity(String.class).block();
         System.out.println("Result of updating the customer: " + response.getBody());
     }
+    public void sendScoringNotification(String customerId, String problemId)
+    {
+        String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
+        String url = "/emails/scoring-invitation";
+        System.out.println("Finding customer with id " + customerId);
+        CustomerDTO customerDTO = findCustomerById(customerId);
+        List<String> customerParams = List.of(problemId, customerDTO.getName(), customerDTO.getContact().getEmail());
+        System.out.println("Got the customer with name: " + customerParams.get(1) + "\nAnd email: " + customerParams.get(2));
+        System.out.println("The id of problem is: " + customerParams.get(0));
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
+        ResponseEntity<String> response = webClient.post()
+                .uri(url)
+                .body(BodyInserters.fromValue(customerParams))
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+        System.out.println("result of sending scoring invitation: " + response.getBody());
+    }
     //передавать в кастомера id проблемы и кастомера чтобы добавить ему(кастомеру) новую проблему в список
     public void addCustomerProblem(String customerId, String problem) {
         String problemId = saveProblem(problem);
@@ -388,6 +407,7 @@ public class SpecialistService {
                 .toEntity(String.class).block();
 
         System.out.println("Result of adding new problem to the customer: " + response.getBody());
+        sendScoringNotification(customerId, problemId);
     }
 
     // Запрос идет в Customer и из Customer в Problem

@@ -21,13 +21,17 @@ public class ScoringService {
 
     public Scoring save(String scoringId, List<String> answers) {
         Scoring scoring = scoringRepository.findById(scoringId).get();
+
         System.out.println("Found the scoring with id: " + scoring.getId());
         /*List<String> clientsParams = new ArrayList<>();
         clientsParams.addAll(answers.subList(0, 6));
         createNewClient(clientsParams);*/
         scoring.setAnswers(answers);
         System.out.println("Ответы: " + scoring.getAnswers());
-        return scoringRepository.save(scoring);
+        Scoring resultScoring = scoringRepository.save(scoring);
+        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
+        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
+        return resultScoring;
     }
     public Scoring saveScoring(Scoring scoring)
     {
