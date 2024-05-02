@@ -206,8 +206,10 @@ public class SpecialistController {
         return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerDTO.getId();
     }
     @DeleteMapping("/{id}")
-    public String deleteResource(@PathVariable("id") String id) {
-        specialistService.deleteCustomerById(id);
+    public String deleteResource(@PathVariable("id") String customerId,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        specialistService.deleteCustomerById(customerId, specialistId);
         return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
 

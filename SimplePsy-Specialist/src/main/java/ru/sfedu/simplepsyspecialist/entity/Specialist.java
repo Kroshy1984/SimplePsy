@@ -158,4 +158,8 @@ public class Specialist {
         }
         customerIds.add(customerId);
     }
+    public void deleteCustomerById(String customerId)
+    {
+        customerIds.remove(customerId);
+    }
 }

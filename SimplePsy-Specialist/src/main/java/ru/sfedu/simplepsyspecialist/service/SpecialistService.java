@@ -218,7 +218,10 @@ public class SpecialistService {
         return result;
     }
 
-    public void deleteCustomerById(String customerId) {
+    public void deleteCustomerById(String customerId, String specialistId) {
+        Specialist specialist = specialistRepository.findById(specialistId).get();
+        specialist.deleteCustomerById(customerId);
+        specialistRepository.save(specialist);
         String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/deleteCustomerById";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
