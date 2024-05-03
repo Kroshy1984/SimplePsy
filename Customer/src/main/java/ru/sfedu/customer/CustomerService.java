@@ -38,6 +38,9 @@ public class CustomerService {
 
     public List<CustomerDTO> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
+        if (customers.size() == 0 || customers.isEmpty())
+            return new ArrayList<>();
+
         System.out.println("List of customers names:");
         for (int i = 0; i < customers.size(); i++) {
             System.out.println(customers.get(i));
