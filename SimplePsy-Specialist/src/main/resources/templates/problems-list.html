@@ -38,23 +38,4 @@
     <input type="button" id="newProblem" value="Добавить проблему" onclick="addNewProblem()">
 </div>
 </body>
-<script>
-    function showScoring() {
-        var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
-
-
-        if (selectedRadioButton) {
-
-            var selectedProblemId = selectedRadioButton.value;
-
-
-            var viewUrl = '/SimplePsySpecialist/V1/specialist/customer/scoring/' + selectedProblemId;
-
-
-            window.location.href = viewUrl;
-        } else {
-            alert('Выберите карточку перед нажатием "Посмотреть".');
-        }
-    }
-</script>
 </html>

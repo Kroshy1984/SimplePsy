@@ -47,6 +47,16 @@ public class SpecialistController {
         return "signup";
     }
 
+    @PostMapping("/signup")
+    public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist) {
+        System.out.println(specialist.getName());
+        System.out.println(specialist.getSurname());
+        System.out.println(specialist.getUsername());
+        System.out.println(specialist.getPassword());
+        specialistService.registerNewSpecialist(specialist);
+        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+    }
+
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("specialist", new Specialist());
@@ -69,16 +79,6 @@ public class SpecialistController {
 //    specialistService.authorizeSpecialist(specialist);
 //    return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
 //}
-
-    @PostMapping("/signup")
-    public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist) {
-        System.out.println(specialist.getName());
-        System.out.println(specialist.getSurname());
-        System.out.println(specialist.getUsername());
-        System.out.println(specialist.getPassword());
-        specialistService.registerNewSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
-    }
 
     @GetMapping("/calendar")
     public String getCalendar() {
@@ -158,7 +158,7 @@ public class SpecialistController {
         System.out.println(specialist_id);
         specialistService.createNewSession(email, specialist_id, problem, date);
         System.out.println("Session was created");
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
     }
 
     @GetMapping("/customers")
@@ -215,7 +215,7 @@ public class SpecialistController {
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> createNewCustomer(@RequestParam("name") String name,
+    public String createNewCustomer(@RequestParam("name") String name,
                                               @RequestParam("surname") String surname,
                                               @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
                                               @RequestParam("gender") String gender,
@@ -237,7 +237,7 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         specialist.addCustomerId(customerId);
         specialistService.save(specialist);
-        return ResponseEntity.ok("Customer " + name + " successfully saved");
+        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
 
     @GetMapping("/customer-form")

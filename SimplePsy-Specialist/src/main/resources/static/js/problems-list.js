@@ -12,16 +12,32 @@ function copyUrl() {
 
     var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
 
+    if (selectedRadioButton) {
+
+        var selectedProblemId = selectedRadioButton.value;
+
+        var viewUrl = 'http://localhost:8084/SimplePsyScoring/V1/scoring/' + selectedProblemId;
+
+        navigator.clipboard.writeText(viewUrl).then(() => alert("Ссылка скопирована"));
+    } else {
+        alert('Выберите проблему перед копированием ссылки!');
+    }
+}
+
+function showScoring() {
+    var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
+
 
     if (selectedRadioButton) {
 
         var selectedProblemId = selectedRadioButton.value;
 
 
-        var viewUrl = 'http://localhost:8084/SimplePsyScoring/V1/scoring/' + selectedProblemId;
+        var viewUrl = '/SimplePsySpecialist/V1/specialist/customer/scoring/' + selectedProblemId;
 
+
+        window.location.href = viewUrl;
     } else {
-        alert('Выберите проблемы перед копированием ссылки.');
+        alert('Выберите карточку перед нажатием "Посмотреть".');
     }
-    navigator.clipboard.writeText(viewUrl).then(() => alert("Ссылка скопирована"));
 }
