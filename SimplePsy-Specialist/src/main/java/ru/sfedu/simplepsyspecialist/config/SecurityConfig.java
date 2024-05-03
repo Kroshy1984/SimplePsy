@@ -14,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
@@ -42,7 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer/byProblemId").permitAll()
                         .anyRequest().authenticated()).
                 formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
-                        .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/calendar")
+                        .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/sessions")
                         .permitAll())
                 .logout((logout) -> logout.permitAll());
         return httpSecurity.build();

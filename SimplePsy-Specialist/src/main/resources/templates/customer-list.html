@@ -5,38 +5,39 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" th:src="@{/js/customer-list.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/customer-list.css}">
+    <script type="text/javascript" th:src="@{/js/customer-list.js}"></script>
     <title>Customer list</title>
 </head>
 <body>
 <header>
     <h1>СПИСОК ЗАКАЗЧИКОВ</h1>
 </header>
-<div class="profile-container">
-        <table>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>Имя</td>
-                <td>Почта</td>
-                <td></td>
-            </tr>
-            <tr th:each="customer:${customers}" th:data-card-id="${customer.getId()}">
-                <td><input type="radio" id="item2" name="selectedItem" th:value="${customer.getId()}"></td>
-                <td><img id="profile-image" alt="Customer pic"
-                         th:src=" @{'/SimplePsySpecialist/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>
-                <td>
-                    <div class="customer-info">
-                        <div th:text="${customer.getName()}" class="name">Devon Lane</div>
-                        <div class="description">Description</div>
-                    </div>
-                </td>
-                <td th:text="${customer.getContact().getEmail()}"></td>
-                <td><input class="remove" type="image" alt="Recycle bin pic"
-                           src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png"></td>
-            </tr>
-        </table>
+<div class="profile-container" >
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Имя</td>
+            <td>Почта</td>
+            <td></td>
+        </tr>
+        <tr th:each="customer:${customers}" th:data-card-id="${customer.getId()}">
+            <td><input type="radio" id="item2" name="selectedItem" th:value="${customer.getId()}"></td>
+            <td><img id="profile-image" alt="Customer pic"
+                     th:src=" @{'/SimplePsySpecialist/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>
+            <td>
+                <div class="customer-info">
+                    <div th:text="${customer.getName()}" class="name">Devon Lane</div>
+                    <div class="description">Description</div>
+                </div>
+            </td>
+            <td th:text="${customer.getContact().getEmail()}"></td>
+            <td><input class="remove" type="image" alt="Recycle bin pic" th:value="${customer.getId()}" onclick="deleteById(this)"
+                       src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png"></td>
+        </tr>
+    </table>
 </div>
 
 <div class="button-container">
@@ -44,6 +45,5 @@
     <button onclick="deleteSelectedCard()">Удалить</button>
     <button onclick="addNewCustomer()">Добавить</button>
 </div>
-
 </body>
 </html>

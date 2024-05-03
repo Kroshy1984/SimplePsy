@@ -15,6 +15,7 @@
     <h1>СПИСОК ПРОБЛЕМ ЗАКАЗЧИКА</h1>
 </header>
 <div class="profile-container">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <input th:value="${customerId}" th:name="customerId" id="customerIdInput" hidden="hidden">
     <table>
         <tr th:each="problem:${problems}" th:data-card-id="${problem.getId()}">

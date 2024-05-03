@@ -205,7 +205,8 @@ public class SpecialistController {
         specialistService.updateCustomer(customerDTO);
         return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerDTO.getId();
     }
-    @DeleteMapping("/{id}")
+
+    @PostMapping("/delete-customer/{id}")
     public String deleteResource(@PathVariable("id") String customerId,
                                  @AuthenticationPrincipal UserDetails userDetails) {
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
@@ -276,6 +277,7 @@ public class SpecialistController {
         return "find-customer";
     }
 
+    // TODO: Сделать переадресацию на карточку заказчика вместо списка
     @PostMapping("/find-customer-form")
     public String getCustomerByContactData(@RequestParam("data") String data) {
         boolean customerWasFound = specialistService.findCustomerByContactData(data);

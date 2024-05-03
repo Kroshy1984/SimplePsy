@@ -15,6 +15,7 @@
     <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
 </header>
 <form method="post" th:action="@{/SimplePsySpecialist/V1/specialist/customer-card/update}" th:object="${customer}">
+<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 <div class="profile-container">
     <div>
         <input th:value="${customer.getId()}" th:name="customerId" id="customerIdInput" hidden="hidden">
