@@ -1,32 +1,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>New Session</title>
-<link rel="stylesheet" type="text/css" th:href="@{/session.css}">
-<script>
-  document.getElementById('sessionForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('New session was created');
-  });
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Session</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/session.css}">
+    <script type="text/javascript" th:src="@{/js/session.js}"></script>
 </head>
 <body>
+<header>
+    <input type="button" id="back" value="Назад" onclick="goBack()">
+</header>
 <div class="page-content">
-  <form id="sessionForm" th:action="@{/SimplePsySpecialist/V1/specialist/session}" method="post">
-    <h1>Назначить новую встречу</h1>
+    <form id="sessionForm" th:action="@{/SimplePsySpecialist/V1/specialist/session}" method="post">
+        <h1>Назначить новую встречу</h1>
 
-    <label for="email">E-mail *</label>
-    <input type="email" id="email" th:name="email" placeholder="E-mail" required>
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" th:name="email" placeholder="E-mail" required>
 
-    <label for="problem">Проблема *</label>
-    <input type="text" id="problem" th:name="problem" placeholder="Problem" required>
+        <label for="problem">Проблема *</label>
+        <input type="text" id="problem" th:name="problem" placeholder="Problem" required>
 
-    <label for="date">Дата</label>
-    <input type="datetime-local" id="date" th:name="date" placeholder="01.01.1970" required>
+        <label for="date">Дата</label>
+        <input type="datetime-local" id="date" th:name="date" placeholder="01.01.1970" required>
 
-    <div class="button-container"><button type="submit">Подтвердить</button></div>
+        <div class="button-container"><button type="submit">Подтвердить</button></div>
   </form>
 </div>
 </body>

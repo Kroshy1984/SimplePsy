@@ -1,3 +1,11 @@
+function findCustomer() {
+    window.location.href = "/SimplePsySpecialist/V1/specialist/find-customer-form";
+}
+
+function viewSessionsList() {
+    window.location.href = "/SimplePsySpecialist/V1/specialist/sessions";
+}
+
 function viewSelectedCard() {
 
     var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
