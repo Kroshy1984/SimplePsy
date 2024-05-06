@@ -23,7 +23,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -199,12 +198,12 @@ public class SpecialistService {
         return customerDTO;
     }
 
-    public boolean findCustomerByContactData(String data) {
+    public String findCustomerByContactData(String data) {
         String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/findCustomerByContactData";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        Mono<ResponseEntity<Boolean>> response = webClient.get()
+        Mono<ResponseEntity<String>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("data", data)
@@ -213,7 +212,7 @@ public class SpecialistService {
                 .retrieve()
                 .toEntity(new ParameterizedTypeReference<>() {});
 
-        boolean result = Boolean.TRUE.equals(Objects.requireNonNull(response.block()).getBody());
+        String result = response.block().getBody();
         System.out.println("Got the customer with data: " + data);
         return result;
     }
@@ -328,7 +327,7 @@ public class SpecialistService {
         return specialistRepository.findByCustomerIdsIn(customerId).get();
     }
 
-    public void sendEmailtoSpecialist(String email, String specialistName, String customerName) {
+    public void sendEmailtoSpecialist(String email, String specialistName, String customerName, String problemId) {
         System.out.println("sending email method");
         String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
         String url = "/emails/scoring-result";
@@ -339,6 +338,7 @@ public class SpecialistService {
                         .queryParam("email", email)
                         .queryParam("specialistName", specialistName)
                         .queryParam("customerName", customerName)
+                        .queryParam("problemId", problemId)
                         .build())
                 .retrieve()
                 .toEntity(String.class)

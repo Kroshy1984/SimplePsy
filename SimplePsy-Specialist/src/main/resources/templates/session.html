@@ -16,10 +16,11 @@
         <h1>Назначить новую встречу</h1>
 
         <label for="email">E-mail *</label>
-        <input type="email" id="email" th:name="email" placeholder="E-mail" required>
+        <input type="email" id="email" th:name="email" placeholder="E-mail"
+               pattern="^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$" required>
 
         <label for="problem">Проблема *</label>
-        <input type="text" id="problem" th:name="problem" placeholder="Problem" required>
+        <input type="text" id="problem" th:name="problem" placeholder="Problem" pattern="[А-Яа-яЁё]*" required>
 
         <label for="date">Дата</label>
         <input type="datetime-local" id="date" th:name="date" placeholder="01.01.1970" required>

@@ -197,10 +197,10 @@ public class SpecialistController {
         model.addAttribute("customer", customer);
         return "customer-card";
     }
+
     @PostMapping("/customer-card/update")
     public String updateCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO,
-                                     @RequestParam("customerId") String customerId)
-    {
+                                     @RequestParam("customerId") String customerId) {
         System.out.println("In method updateCustomerCard got the customer with name and surname: " + customerDTO.getName() + " " + customerDTO.getSurname());
         System.out.println("Customer's id: " + customerId);
         customerDTO.setId(customerId);
@@ -218,14 +218,14 @@ public class SpecialistController {
 
     @PostMapping("/customers/new")
     public String createNewCustomer(@RequestParam("name") String name,
-                                              @RequestParam("surname") String surname,
-                                              @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
-                                              @RequestParam("gender") String gender,
-                                              @RequestParam("contact.phone") String phone,
-                                              @RequestParam("contact.email") String email,
-                                              @RequestParam("contact.tg") String tg,
-                                              @RequestParam("problem") String problem,
-                                              @AuthenticationPrincipal UserDetails userDetails) {
+                                    @RequestParam("surname") String surname,
+                                    @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
+                                    @RequestParam("gender") String gender,
+                                    @RequestParam("contact.phone") String phone,
+                                    @RequestParam("contact.email") String email,
+                                    @RequestParam("contact.tg") String tg,
+                                    @RequestParam("problem") String problem,
+                                    @AuthenticationPrincipal UserDetails userDetails) {
         System.out.println("Got the new customer:\n" + name);
         System.out.println(surname);
         System.out.println(dateOfBirth);
@@ -258,19 +258,7 @@ public class SpecialistController {
         System.out.println("Found the customer : " + customerName);
         System.out.println("Specialist's email: " + specialist.getUsername());
         System.out.println("sending email to the specialist about scoring completion");
-        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
-        return ResponseEntity.ok("Success");
-    }
-    @GetMapping("/find-customer")
-    public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
-        System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);
-        Specialist specialist = specialistService.findSpecialist(customerId);
-        System.out.println("Found the specialist " + specialist.getName() + " who contains provided customerId");
-        String customerName = specialistService.findCustomerById(customerId).getName();
-        System.out.println("Found the customer : " + customerName);
-        System.out.println("Specialist's email: " + specialist.getUsername());
-        System.out.println("sending email to the specialist about scoring completion");
-        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
+        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName, problemId);
         return ResponseEntity.ok("Success");
     }
 
@@ -279,13 +267,22 @@ public class SpecialistController {
         return "find-customer";
     }
 
-    // TODO: Сделать переадресацию на карточку заказчика вместо списка
     @PostMapping("/find-customer-form")
-    public String getCustomerByContactData(@RequestParam("data") String data) {
-        boolean customerWasFound = specialistService.findCustomerByContactData(data);
-        return (customerWasFound ?
-                "redirect:/SimplePsySpecialist/V1/specialist/customers" :
-                "redirect:/SimplePsySpecialist/V1/specialist/customer-form");
+    public String getCustomerByContactData(@AuthenticationPrincipal UserDetails userDetails,
+                                           @RequestParam("data") String data) {
+        String customerId = specialistService.findCustomerByContactData(data);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        if (Objects.equals(customerId, "Customer not found")) {
+            return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
+        }
+
+        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
+            if (Objects.equals(customerId, specialist.getCustomerIds().get(i))) {
+                return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerId;
+            }
+        }
+        return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
     }
 
     @GetMapping("customer/problem/new/{customerId}")

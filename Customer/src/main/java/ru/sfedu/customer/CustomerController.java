@@ -12,6 +12,7 @@ import ru.sfedu.customer.dto.ProblemDTO;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -123,9 +124,15 @@ public class CustomerController {
     }
 
     @GetMapping("/findCustomerByContactData")
-    public ResponseEntity<Boolean> findCustomerByContactData(@RequestParam("data") String data)
+    public ResponseEntity<String> findCustomerByContactData(@RequestParam("data") String data)
     {
-        return ResponseEntity.ok(customerService.findByContactData(data));
+        try {
+            Customer customer = customerService.findByContactData(data);
+            return ResponseEntity.ok(customer.getId());
+        } catch (NullPointerException | NoSuchElementException e) {
+            return ResponseEntity.ok("Customer not found");
+        }
+
     }
     @PostMapping("/problem/new")
     public ResponseEntity<String> customerNewProblem(@RequestParam("customerId") String customerId,

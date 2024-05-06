@@ -39,13 +39,14 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
-    public void sendScoringResultEmail(String email, String specialistName, String customerName) {
+    public void sendScoringResultEmail(String email, String specialistName, String customerName, String problemId) {
         SimpleMailMessage message = new SimpleMailMessage();
         System.out.println("Customer name: " + customerName);
         message.setFrom(senderEmail);
         message.setTo(email);
         message.setSubject("Здравствуйте, " + specialistName + "!");
-        message.setText("Заказчик " + customerName + " прошел скоринг!");
+        message.setText("Заказчик " + customerName + " прошел скоринг!\n" +
+                "Посмотреть результат: http://localhost:8081/SimplePsySpecialist/V1/specialist/customer/scoring/" + problemId);
         System.out.println("Sending email to " + specialistName);
         javaMailSender.send(message);
     }
