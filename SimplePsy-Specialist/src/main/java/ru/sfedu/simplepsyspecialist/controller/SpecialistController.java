@@ -13,12 +13,14 @@ import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
 import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -313,13 +315,28 @@ public class SpecialistController {
         model.addAttribute("problems", problems);
         return "problems-list";
     }
+
     @GetMapping("/customer/scoring/{problemId}")
     public String scoringAnswers(@PathVariable String problemId,
                                  Model model)
     {
         System.out.println("In method scoringAnswers");
+        List<String> textQuestions = Scoring.getTextQuestions();
+        List<String> checkboxQuestions = Scoring.getCheckboxQuestions();
         List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
-        model.addAttribute("answers", answers);
+
+        LinkedHashMap<String, String> textQuestionsAnswers = new LinkedHashMap<>();
+        for (int i = 0; i < textQuestions.size(); i++) {
+            textQuestionsAnswers.put(textQuestions.get(i), answers.get(i+1));
+        }
+
+        LinkedHashMap<String, String> checkboxQuestionsAnswers = new LinkedHashMap<>();
+        for (int i = 0; i < checkboxQuestions.size(); i++) {
+            checkboxQuestionsAnswers.put(checkboxQuestions.get(i), answers.get(i+15));
+        }
+
+        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
+        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
         return "scoring-answers";
     }
 }

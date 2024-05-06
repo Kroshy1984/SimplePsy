@@ -1,10 +1,12 @@
 package ru.sfedu.problem;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import ru.sfedu.problem.dto.ProblemDTO;
 import ru.sfedu.problem.dto.ProblemMapper;
 
@@ -56,16 +58,27 @@ public class ProblemService {
         String url = "/SimplePsyScoring/V1/scoring/getScoringAnswers";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        ResponseEntity<List<String>> response = webClient.get()
+        /*ResponseEntity<List<String>> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("scoringId", scoringId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntityList(String.class).block();
+                .toEntityList(String.class).block();*/
 
-        System.out.println("Got the result in method getScoringAnswersByProblemId: " + response.getBody());
-        return response.getBody();
+        Mono<ResponseEntity<List<String>>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("scoringId", scoringId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<>() {});
+
+        List<String> answers = response.block().getBody();
+
+        System.out.println("Got the result in method getScoringAnswersByProblemId: " + answers);
+        return answers;
     }
 }

@@ -1,5 +1,5 @@
 .page-content {
-    width: 360px;
+    width: 1000px;
 }
 
 body {
@@ -9,28 +9,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #f9f9f9;
 }
 
-h1 {
-    color: #C79CF2;
-    text-align: center;
-    font-size: 25px;
-}
-
-a {
-    color: rgb(220, 185, 255);
-}
-
-form {
+.form-container {
     background-color: #ffffff;
-    padding: 5px 40px 40px 40px;
+    padding: 40px 40px 40px 40px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input {
+input[type="text"] {
     width: 100%;
     margin-bottom: 20px;
     padding: 7px;
@@ -38,31 +27,14 @@ input {
     border-radius: 10px;
 }
 
-header {
-    top: 1.34em;
-    left: 8px;
-    position: absolute;
-}
-
-#back {
-    border: none;
-    width: auto;
+input[type="checkbox"] {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 10px 30px;
-    color: black;
-    cursor: pointer;
-}
-
-input[typer="button"] {
-    background-color: #E9E9E9;
-}
-
-input[type="button"]:hover {
-    background-color: #e2e2e2;
 }
 
 button {
-    width: 70%;
+    width: 30%;
     padding: 10px;
     background-color: #007BFF;
     color: #ffffff;

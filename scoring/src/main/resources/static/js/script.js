@@ -25,7 +25,9 @@ function sendData() {
     localStorage.setItem('textAnswers', JSON.stringify(textAnswers));
 
     // From checkboxQuestions
-    checkboxAnswers = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
+    checkboxAnswers = Array.from(document.querySelectorAll('input[type="checkbox"]')).map(function (input) {
+        return input.checked ? input.value : "";
+    });
     localStorage.setItem('checkboxAnswers', JSON.stringify(checkboxAnswers));
 
     let problemId = document.getElementById("problemId").value;
@@ -73,7 +75,7 @@ function sendData() {
                 .then(response => response.text())
                 .then(data => {
                     console.log('Success:', data);
-                    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
+                    // window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
                 })
                 .catch(error => {
                     console.error('Error:', error);

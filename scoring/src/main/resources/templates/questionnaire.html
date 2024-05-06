@@ -27,8 +27,8 @@
 
         <div id="checkboxQuestions" class="form-container" style = "display: none">
             <div th:each="checkboxQuestion, questionIndex : ${checkboxQuestions}">
-                <input type="checkbox" id="answer" th:value="${checkboxQuestion}" th:name="'answers[' + ${questionIndex.index} + ']'">
-                <label for="answer" th:text="${checkboxQuestion}"></label>
+                <input type="checkbox" th:id="'answers[' + ${questionIndex.index} + ']'" th:value="${checkboxQuestion}" th:name="'answers[' + ${questionIndex.index} + ']'">
+                <label th:for="'answers[' + ${questionIndex.index} + ']'" th:text="${checkboxQuestion}"></label>
             </div>
             <div class="button-container">
                 <button onclick="showTextQuestions()">Назад</button>

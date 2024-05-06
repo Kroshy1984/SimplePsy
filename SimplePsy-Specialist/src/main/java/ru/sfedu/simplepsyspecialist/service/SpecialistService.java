@@ -450,25 +450,25 @@ public class SpecialistService {
         return customerDTO;
     }
 
-
     public List<String> getScoringAnswersByProblemId(String problemId) {
         String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
         String url = "/SimplePsyProblem/V1/problem/getScoringAnswersByProblemId";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        ResponseEntity<List<String>> response = webClient.get()
+        Mono<ResponseEntity<List<String>>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("problemId", problemId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntityList(String.class).block();
-        List<String> answers = response.getBody();
+                .toEntity(new ParameterizedTypeReference<>() {});
+        List<String> answers = response.block().getBody();
         System.out.println("Got the result in method getScoringAnswersByProblemId: ");
         for (int i = 0; i < answers.size(); i++) {
             System.out.println(answers.get(i));
+            System.out.println(i);
         }
-        return response.getBody();
+        return answers;
     }
 }
