@@ -123,6 +123,11 @@ public class Customer {
     public List<String> getProblemsId() {
         return problemsId;
     }
+
+    public void setProblemsId(List<String> problemsId) {
+        this.problemsId = problemsId;
+    }
+
     public void addProblem(String problemId) {
         if (problemsId == null)
         {

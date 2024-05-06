@@ -7,13 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Find customer</title>
     <link rel="stylesheet" type="text/css" th:href="@{/find-customer.css}">
+    <script type="text/javascript" th:src="@{/js/find-customer.js}"></script>
 </head>
 <body>
+<header>
+    <input type="button" id="back" value="Назад" onclick="goBack()">
+</header>
 <div class="page-content">
     <form id="registrationForm"  th:action="@{/SimplePsySpecialist/V1/specialist/find-customer-form}" method="post">
         <h1>Поиск заказчика в базе</h1>
         <label for="data"></label>
-        <input type="text" id="data" th:name="data" placeholder="E-mail/Номер телефона/Телеграм">
+        <input type="text" id="data" th:name="data" placeholder="E-mail/Номер телефона/Телеграм" required>
 
         <div class="button-container"><button type="submit">Найти</button></div>
     </form>

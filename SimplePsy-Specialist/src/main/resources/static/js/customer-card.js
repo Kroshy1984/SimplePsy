@@ -34,11 +34,13 @@ function showButtons() {
 function deleteCard()
 {
     var id = document.getElementById("customerIdInput").value;
-    var url = 'http://localhost:8080/SimplePsy/V1/customer/' + id;
+    var url = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/delete-customer/' + id;
+    var token = document.querySelector("[name='_csrf']").value;
     fetch(url, {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
         },
 
     })
@@ -46,13 +48,14 @@ function deleteCard()
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json();
+            return response.text();
         })
         .then(data => {
-            console.log('DELETE request successful', data);
+            console.log('POST request successful', data);
+            window.location.href = "/SimplePsySpecialist/V1/specialist/customers";
         })
         .catch(error => {
-            console.error('DELETE request failed', error);
+            console.error('POST request failed', error);
         });
 
 }

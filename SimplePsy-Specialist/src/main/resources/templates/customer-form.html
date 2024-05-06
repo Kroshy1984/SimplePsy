@@ -6,9 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" th:href="@{/customer-form.css}">
+    <script type="text/javascript" th:src="@{/js/customer-form.js}"></script>
     <title>Customer form</title>
 </head>
 <body>
+<header>
+    <input type="button" id="back" value="Назад" onclick="goBack()">
+</header>
 <div class="page-content">
     <form id="registrationForm" th:object="${customerDTO}" th:action="@{/SimplePsySpecialist/V1/specialist/customers/new}" method="post">
         <h1>Новый заказчик</h1>

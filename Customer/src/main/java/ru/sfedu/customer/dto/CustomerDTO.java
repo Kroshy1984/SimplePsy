@@ -51,6 +51,7 @@ public class CustomerDTO {
     public List<String> getProblemsId() {
         return problemsId;
     }
+
     public void addProblem(String problemId) {
         if (problemsId == null)
         {

@@ -19,14 +19,19 @@ public class ScoringService {
         this.scoringRepository = scoringRepository;
     }
 
-    public Scoring save(List<String> answers) {
-        Scoring scoring = new Scoring();
+    public Scoring save(String scoringId, List<String> answers) {
+        Scoring scoring = scoringRepository.findById(scoringId).get();
+
+        System.out.println("Found the scoring with id: " + scoring.getId());
         /*List<String> clientsParams = new ArrayList<>();
         clientsParams.addAll(answers.subList(0, 6));
         createNewClient(clientsParams);*/
         scoring.setAnswers(answers);
         System.out.println("Ответы: " + scoring.getAnswers());
-        return scoringRepository.save(scoring);
+        Scoring resultScoring = scoringRepository.save(scoring);
+        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
+        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
+        return resultScoring;
     }
     public Scoring saveScoring(Scoring scoring)
     {
@@ -143,5 +148,9 @@ public class ScoringService {
                 .toEntity(String.class).block();
 
         System.out.println("The result of saving scoring: " + response.getBody());
+    }
+
+    public List<String> getScoringAnswers(String scoringId) {
+        return scoringRepository.findById(scoringId).get().getAnswers();
     }
 }

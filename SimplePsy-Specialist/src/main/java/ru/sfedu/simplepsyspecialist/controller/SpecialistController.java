@@ -13,12 +13,14 @@ import ru.sfedu.simplepsyspecialist.dto.Contact;
 import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
 import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
 import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,6 +49,16 @@ public class SpecialistController {
         return "signup";
     }
 
+    @PostMapping("/signup")
+    public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist) {
+        System.out.println(specialist.getName());
+        System.out.println(specialist.getSurname());
+        System.out.println(specialist.getUsername());
+        System.out.println(specialist.getPassword());
+        specialistService.registerNewSpecialist(specialist);
+        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+    }
+
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("specialist", new Specialist());
@@ -69,16 +81,6 @@ public class SpecialistController {
 //    specialistService.authorizeSpecialist(specialist);
 //    return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
 //}
-
-    @PostMapping("/signup")
-    public String createNewSpecialist(@ModelAttribute("specialist") Specialist specialist) {
-        System.out.println(specialist.getName());
-        System.out.println(specialist.getSurname());
-        System.out.println(specialist.getUsername());
-        System.out.println(specialist.getPassword());
-        specialistService.registerNewSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
-    }
 
     @GetMapping("/calendar")
     public String getCalendar() {
@@ -158,7 +160,7 @@ public class SpecialistController {
         System.out.println(specialist_id);
         specialistService.createNewSession(email, specialist_id, problem, date);
         System.out.println("Session was created");
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
     }
 
     @GetMapping("/customers")
@@ -205,14 +207,17 @@ public class SpecialistController {
         specialistService.updateCustomer(customerDTO);
         return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerDTO.getId();
     }
-    @DeleteMapping("/{id}")
-    public String deleteResource(@PathVariable("id") String id) {
-        specialistService.deleteCustomerById(id);
+
+    @PostMapping("/delete-customer/{id}")
+    public String deleteResource(@PathVariable("id") String customerId,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        specialistService.deleteCustomerById(customerId, specialistId);
         return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> createNewCustomer(@RequestParam("name") String name,
+    public String createNewCustomer(@RequestParam("name") String name,
                                               @RequestParam("surname") String surname,
                                               @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
                                               @RequestParam("gender") String gender,
@@ -234,7 +239,7 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         specialist.addCustomerId(customerId);
         specialistService.save(specialist);
-        return ResponseEntity.ok("Customer " + name + " successfully saved");
+        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
 
     @GetMapping("/customer-form")
@@ -274,6 +279,7 @@ public class SpecialistController {
         return "find-customer";
     }
 
+    // TODO: Сделать переадресацию на карточку заказчика вместо списка
     @PostMapping("/find-customer-form")
     public String getCustomerByContactData(@RequestParam("data") String data) {
         boolean customerWasFound = specialistService.findCustomerByContactData(data);
@@ -297,7 +303,7 @@ public class SpecialistController {
     {
         System.out.println("In Post mappping method customerNewProblem \ngot customerId: " + customerId + " and problem: " + problem);
         specialistService.addCustomerProblem(customerId, problem);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
     }
 
     @GetMapping("customer/problems/{customerId}")
@@ -310,4 +316,27 @@ public class SpecialistController {
         return "problems-list";
     }
 
+    @GetMapping("/customer/scoring/{problemId}")
+    public String scoringAnswers(@PathVariable String problemId,
+                                 Model model)
+    {
+        System.out.println("In method scoringAnswers");
+        List<String> textQuestions = Scoring.getTextQuestions();
+        List<String> checkboxQuestions = Scoring.getCheckboxQuestions();
+        List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
+
+        LinkedHashMap<String, String> textQuestionsAnswers = new LinkedHashMap<>();
+        for (int i = 0; i < textQuestions.size(); i++) {
+            textQuestionsAnswers.put(textQuestions.get(i), answers.get(i+1));
+        }
+
+        LinkedHashMap<String, String> checkboxQuestionsAnswers = new LinkedHashMap<>();
+        for (int i = 0; i < checkboxQuestions.size(); i++) {
+            checkboxQuestionsAnswers.put(checkboxQuestions.get(i), answers.get(i+15));
+        }
+
+        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
+        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
+        return "scoring-answers";
+    }
 }

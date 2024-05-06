@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scoring answers</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/scoring-answers.css}">
+    <script type="text/javascript" th:src="@{/js/scoring-answers.js}"></script>
+</head>
+<body>
+<div class="page-content">
+    <div id="textQuestions" class="form-container">
+        <div th:each="map : ${textQuestionsAnswers}">
+            <label th:text="${map.key}"></label>
+            <input type="text" th:value="${map.value}" disabled/>
+        </div>
+        <div class="button-container">
+            <button id="submitButton" onclick="showCheckboxQuestions()">Далее</button>
+        </div>
+    </div>
+
+    <div id="checkboxQuestions" class="form-container" style = "display: none">
+        <div th:each="map, questionIndex : ${checkboxQuestionsAnswers}">
+            <input type="checkbox" th:id="'answers[' + ${questionIndex.index} + ']'" th:checked="${map.value=='' ? false : true}" disabled>
+            <label th:for="'answers[' + ${questionIndex.index} + ']'" th:text="${map.key}"></label>
+        </div>
+        <div class="button-container">
+            <button onclick="showTextQuestions()">Назад</button>
+            <button onclick="goBack()">Вернуться в список </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

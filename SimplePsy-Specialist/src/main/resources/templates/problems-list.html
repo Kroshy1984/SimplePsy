@@ -15,6 +15,7 @@
     <h1>СПИСОК ПРОБЛЕМ ЗАКАЗЧИКА</h1>
 </header>
 <div class="profile-container">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <input th:value="${customerId}" th:name="customerId" id="customerIdInput" hidden="hidden">
     <table>
         <tr th:each="problem:${problems}" th:data-card-id="${problem.getId()}">
@@ -26,11 +27,13 @@
             </td>
             <td><input class="remove" type="image" alt="Recycle bin pic"
                        src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png"></td>
+
         </tr>
     </table>
 </div>
 
 <div class="button-container">
+    <input type="button" id="scoringUrl" value="Скопировать ссылку на скоринг" onclick="copyUrl()">
     <input type="button" id="scoring" value="Посмотреть скоринг" onclick="showScoring()">
     <input type="button" id="newProblem" value="Добавить проблему" onclick="addNewProblem()">
 </div>

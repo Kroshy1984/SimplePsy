@@ -1,28 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>New Problem</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/problem-form.css}">
-  <script>
-    document.getElementById('problemForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('New problem was created!');
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Problem</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/problem-form.css}">
+    <script type="text/javascript" th:src="@{/js/problem-form.js}"></script>
 </head>
 <body>
+<header>
+    <input type="button" id="back" value="Назад" onclick="goBack()">
+</header>
 <div class="page-content">
-  <form id="problemForm" th:action="@{/SimplePsySpecialist/V1/specialist/customer/problem/new}" method="post">
-    <input th:value="${customerId}" th:name="customerId" id="customerIdInput" hidden="hidden">
-    <h1>Создать новую проблему</h1>
+    <form id="problemForm" th:action="@{/SimplePsySpecialist/V1/specialist/customer/problem/new}" method="post">
+        <input th:value="${customerId}" th:name="customerId" id="customerIdInput" hidden="hidden">
+        <h1>Создать новую проблему</h1>
 
-    <label for="problem">Проблема *</label>
-    <textarea id="problem" placeholder="Проблема" th:name="problem" required></textarea>
+        <label for="problem"></label>
+        <textarea id="problem" placeholder="Проблема" th:name="problem" required></textarea>
 
-    <div class="button-container"><button type="submit">Подтвердить</button></div>
-  </form>
+        <div class="button-container"><button type="submit">Подтвердить</button></div>
+    </form>
 </div>
 </body>
 </html>

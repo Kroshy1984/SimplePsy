@@ -67,9 +67,9 @@ public class CustomerController {
         return ResponseEntity.ok("Customer " + customerDTO.getName() + " successfully updated");
     }
     @DeleteMapping("/{id}")
-    public boolean deleteResource(@PathVariable("id") String id) {
+    public ResponseEntity<String> deleteResource(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);
-        return true;
+        return ResponseEntity.ok("Customer " + id + " successfully deleted");
     }
 
     @PutMapping("/update")
@@ -142,5 +142,4 @@ public class CustomerController {
         List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
         return ResponseEntity.ok(problems);
     }
-
 }

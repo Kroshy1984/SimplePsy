@@ -38,6 +38,9 @@ public class CustomerService {
 
     public List<CustomerDTO> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
+        if (customers.size() == 0 || customers.isEmpty())
+            return new ArrayList<>();
+
         System.out.println("List of customers names:");
         for (int i = 0; i < customers.size(); i++) {
             System.out.println(customers.get(i));
@@ -80,7 +83,6 @@ public class CustomerService {
     public Customer saveCustomer(CustomerDTO customerDTO) {
         Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
         customer.setStatus(Status.LEAD);
-        customer.addProblem(customerDTO.getProblemsId().get(0));
         System.out.println("Customer CustomerDTO" + customer.getProblemsId());
         System.out.println("saving customer " + customer.getName());
         return customerRepository.save(customer);
@@ -98,6 +100,9 @@ public class CustomerService {
         if (customerRepository.findById(id).isEmpty()) {
             throw new NotFoundException("Customer with id " + id + " not found.");
         }
+        Customer oldCustomer = customerRepository.findById(id).get();
+        customer.setProblemsId(oldCustomer.getProblemsId());
+        customer.setStatus(oldCustomer.getStatus());
         return customerRepository.save(customer);
     }
 

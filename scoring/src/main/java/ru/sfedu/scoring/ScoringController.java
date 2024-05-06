@@ -37,10 +37,12 @@ public class ScoringController {
     }*/
 
     @PostMapping("/saveAnswers")
-    public ResponseEntity<String> saveAnswers(@RequestBody String[] answers) {
+    public ResponseEntity<String> saveAnswers(@RequestBody String[] answers,
+                                              @RequestParam("scoringId") String scoringId) {
+        System.out.println("In method saveAnswers got the scoring id " + scoringId);
         this.answers.clear();
         this.answers.addAll(List.of(answers));
-        String scoringId = scoringService.save(this.answers).getId();
+         scoringService.save(scoringId, this.answers);
         return ResponseEntity.ok(scoringId);
 //        return "redirect:/SimplePsyScoring/V1/scoring/done";
     }
@@ -82,5 +84,12 @@ public class ScoringController {
         scoringService.saveCustomersScoring(problemId, scoringId);
         scoringService.sendProblemId(problemId);
         return ResponseEntity.ok("Success");
+    }
+    @GetMapping("/getScoringAnswers")
+    public ResponseEntity<List<String>> getScoringAnswers(@RequestParam("scoringId") String scoringId)
+    {
+        System.out.println("In method getScoringAnswers got the scoringId: " + scoringId);
+        List<String> answers = scoringService.getScoringAnswers(scoringId);
+        return ResponseEntity.ok(answers);
     }
 }

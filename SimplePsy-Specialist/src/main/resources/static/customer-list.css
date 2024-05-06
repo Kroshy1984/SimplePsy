@@ -71,14 +71,14 @@ td {
 }
 
 button {
-    border-radius: 15px;
-    padding: 15px 40px;
-    background-color: #D9D9D9;
+    border-radius: 10px;
+    padding: 10px 30px;
+    background-color: #E9E9E9;
     color: black;
     border: none;
     cursor: pointer;
 }
 
 button:hover, input:hover {
-    background-color: #c2c2c2;
+    background-color: #e2e2e2;
 }

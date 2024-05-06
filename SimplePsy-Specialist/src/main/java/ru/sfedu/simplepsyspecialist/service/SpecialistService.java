@@ -218,21 +218,24 @@ public class SpecialistService {
         return result;
     }
 
-    public void deleteCustomerById(String customerId) {
+    public void deleteCustomerById(String customerId, String specialistId) {
+        Specialist specialist = specialistRepository.findById(specialistId).get();
+        specialist.deleteCustomerById(customerId);
+        specialistRepository.save(specialist);
         String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
         String url = "/SimplePsy/V1/customer/deleteCustomerById";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        Mono<ResponseEntity<String>> response = webClient.delete()
+        ResponseEntity<String> response = webClient.delete()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("customerId", customerId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntity(String.class);
+                .toEntity(String.class).block();
 
-        String result = response.block().getBody();
+        String result = response.getBody();
         System.out.println("The result of deleting customer with id: "
                 + customerId + " - " + result);
     }
@@ -270,6 +273,7 @@ public class SpecialistService {
                 .toEntity(String.class).block();
 
         System.out.println("Got the id of a new saved customer: " + response.getBody());
+        sendScoringNotification(response.getBody(), problemId);
         return response.getBody();
     }
 
@@ -366,7 +370,25 @@ public class SpecialistService {
                 .toEntity(String.class).block();
         System.out.println("Result of updating the customer: " + response.getBody());
     }
+    public void sendScoringNotification(String customerId, String problemId)
+    {
+        String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
+        String url = "/emails/scoring-invitation";
+        System.out.println("Finding customer with id " + customerId);
+        CustomerDTO customerDTO = findCustomerById(customerId);
+        List<String> customerParams = List.of(problemId, customerDTO.getName(), customerDTO.getContact().getEmail());
+        System.out.println("Got the customer with name: " + customerParams.get(1) + "\nAnd email: " + customerParams.get(2));
+        System.out.println("The id of problem is: " + customerParams.get(0));
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
+        ResponseEntity<String> response = webClient.post()
+                .uri(url)
+                .body(BodyInserters.fromValue(customerParams))
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+        System.out.println("result of sending scoring invitation: " + response.getBody());
+    }
     //передавать в кастомера id проблемы и кастомера чтобы добавить ему(кастомеру) новую проблему в список
     public void addCustomerProblem(String customerId, String problem) {
         String problemId = saveProblem(problem);
@@ -385,6 +407,7 @@ public class SpecialistService {
                 .toEntity(String.class).block();
 
         System.out.println("Result of adding new problem to the customer: " + response.getBody());
+        sendScoringNotification(customerId, problemId);
     }
 
     // Запрос идет в Customer и из Customer в Problem
@@ -427,5 +450,25 @@ public class SpecialistService {
         return customerDTO;
     }
 
+    public List<String> getScoringAnswersByProblemId(String problemId) {
+        String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
+        String url = "/SimplePsyProblem/V1/problem/getScoringAnswersByProblemId";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
+        Mono<ResponseEntity<List<String>>> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<>() {});
+        List<String> answers = response.block().getBody();
+        System.out.println("Got the result in method getScoringAnswersByProblemId: ");
+        for (int i = 0; i < answers.size(); i++) {
+            System.out.println(answers.get(i));
+            System.out.println(i);
+        }
+        return answers;
+    }
 }
