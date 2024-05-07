@@ -308,7 +308,8 @@ public class SpecialistService {
         // Проходимся по каждой сессии и добавляем ее в соответствующий список
         for (SessionDTO session : sessions) {
             DayOfWeek dayOfWeek = session.getDate().getDayOfWeek();
-            int dayIndex = dayOfWeek.getValue() % 7; // Индекс дня недели (0 - Понедельник, ..., 6 - Воскресенье)
+            System.out.println(session.getDate() + ": " + dayOfWeek + ": " + dayOfWeek.getValue());
+            int dayIndex = dayOfWeek.getValue() - 1; // Индекс дня недели (0 - Понедельник, ..., 6 - Воскресенье)
             sessionsByDayOfWeek.get(dayIndex).add(session);
         }
         System.out.println("sessionsByDayOfWeek.size(): " + sessionsByDayOfWeek.size());

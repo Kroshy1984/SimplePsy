@@ -35,8 +35,7 @@ public class SessionService {
     }
     public void createSession(String clientId, String specialistId,
                               String problem, LocalDateTime date) {
-        LocalDateTime resultDate = date.plusHours(3);
-        Session session = new Session(resultDate, problem, specialistId, clientId);
+        Session session = new Session(date, problem, specialistId, clientId);
         sessionRepository.save(session);
     }
 
@@ -44,6 +43,7 @@ public class SessionService {
         List<Session> sessions = sessionRepository.findAllBySpecialistId(specialistId).get();
         List<SessionDTO> sessionDTOS = new ArrayList<>();
         for (int i = 0; i < sessions.size(); i++) {
+            System.out.println(sessions.get(i).getDate());
             SessionDTO sessionDTO = SessionMapper.INSTANCE.sessionToSessionDTO(sessions.get(i));
             sessionDTO.setClientDTO(getClientById(sessions.get(i).getClientId()));
             sessionDTOS.add(sessionDTO);
