@@ -132,20 +132,20 @@ public class CustomerService {
         customerRepository.save(foundCustomer);
     }
 
-    public boolean findByContactData(String data)
+    public Customer findByContactData(String data)
     {
         if (isPhoneNumber(data)) {
             if (data.charAt(0) == ' ') {
                 data = data.replace(' ', '+');
             }
-            return customerRepository.existsByContactPhone(data);
+            return customerRepository.findByContactPhone(data).get();
         } else if (isEmail(data)) {
-            return  customerRepository.existsByContactEmail(data);
+            return  customerRepository.findByContactEmail(data).get();
         } else if (isTelegramUsername(data)) {
-            return customerRepository.existsByContactTg(data);
+            return customerRepository.findByContactTg(data).get();
         } else {
             System.out.println(data + " - не является ни номером телефона, ни адресом электронной почты, ни никнеймом в Telegram.");
-            return false;
+            return null;
         }
     }
 

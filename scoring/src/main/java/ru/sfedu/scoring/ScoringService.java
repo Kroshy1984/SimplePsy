@@ -100,22 +100,6 @@ public class ScoringService {
     public void getScoringResult() {
     }
 
-    public void sendCustomerId(String customerId) {
-        System.out.println("Sending customerId to Specialist: " + customerId);
-        String baseUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        String url = "/SimplePsySpecialist/V1/specialist/find-customer";
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-
-        ResponseEntity<String> result = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("customerId", customerId)
-                        .build())
-                .retrieve()
-                .toEntity(String.class)
-                .block();
-        System.out.println("result of sending customer id to find-customer: " + result.getBody());
-    }
     public void sendProblemId(String problemId) {
         System.out.println("Sending problemId to Specialist: " + problemId);
         String baseUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");

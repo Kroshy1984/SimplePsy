@@ -110,7 +110,9 @@ public class SpecialistController {
     }
 
     @GetMapping("/session")
-    public String getSessionForm() {
+    public String getSessionForm(Model model) {
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        model.addAttribute("specUrl", specUrl);
         return "session";
     }
 
@@ -118,7 +120,7 @@ public class SpecialistController {
     public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialist.getId());
-
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
         List<SessionDTO> meetingsByMonday = meetingsByDay.get(0);
         System.out.println(meetingsByMonday.size());
@@ -141,7 +143,8 @@ public class SpecialistController {
         model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
         model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
         model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
-
+        System.out.println(specUrl);
+        model.addAttribute("specUrl", specUrl);
 
         return "sessions";
     }
@@ -184,7 +187,8 @@ public class SpecialistController {
                 }
             }
         }
-
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        model.addAttribute("specUrl", specUrl);
         model.addAttribute("customers", specialistCustomers);
         return "customer-list";
     }
@@ -193,14 +197,20 @@ public class SpecialistController {
     public String getCustomerCard(@PathVariable String customerId, Model model) {
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
         CustomerDTO customer = specialistService.findCustomerById(customerId);
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        String notificationUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
         customer.setId(customerId);
+        model.addAttribute("specUrl", specUrl);
+        model.addAttribute("scoringUrl", scoringUrl);
+        model.addAttribute("notificationUrl", notificationUrl);
         model.addAttribute("customer", customer);
         return "customer-card";
     }
+
     @PostMapping("/customer-card/update")
     public String updateCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO,
-                                     @RequestParam("customerId") String customerId)
-    {
+                                     @RequestParam("customerId") String customerId) {
         System.out.println("In method updateCustomerCard got the customer with name and surname: " + customerDTO.getName() + " " + customerDTO.getSurname());
         System.out.println("Customer's id: " + customerId);
         customerDTO.setId(customerId);
@@ -218,14 +228,14 @@ public class SpecialistController {
 
     @PostMapping("/customers/new")
     public String createNewCustomer(@RequestParam("name") String name,
-                                              @RequestParam("surname") String surname,
-                                              @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
-                                              @RequestParam("gender") String gender,
-                                              @RequestParam("contact.phone") String phone,
-                                              @RequestParam("contact.email") String email,
-                                              @RequestParam("contact.tg") String tg,
-                                              @RequestParam("problem") String problem,
-                                              @AuthenticationPrincipal UserDetails userDetails) {
+                                    @RequestParam("surname") String surname,
+                                    @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
+                                    @RequestParam("gender") String gender,
+                                    @RequestParam("contact.phone") String phone,
+                                    @RequestParam("contact.email") String email,
+                                    @RequestParam("contact.tg") String tg,
+                                    @RequestParam("problem") String problem,
+                                    @AuthenticationPrincipal UserDetails userDetails) {
         System.out.println("Got the new customer:\n" + name);
         System.out.println(surname);
         System.out.println(dateOfBirth);
@@ -258,19 +268,7 @@ public class SpecialistController {
         System.out.println("Found the customer : " + customerName);
         System.out.println("Specialist's email: " + specialist.getUsername());
         System.out.println("sending email to the specialist about scoring completion");
-        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
-        return ResponseEntity.ok("Success");
-    }
-    @GetMapping("/find-customer")
-    public ResponseEntity<String> sendEmailToSpecialist(@RequestParam("customerId") String customerId) {
-        System.out.println("In method sendEmailToSpecialist \nGot customerId: " + customerId);
-        Specialist specialist = specialistService.findSpecialist(customerId);
-        System.out.println("Found the specialist " + specialist.getName() + " who contains provided customerId");
-        String customerName = specialistService.findCustomerById(customerId).getName();
-        System.out.println("Found the customer : " + customerName);
-        System.out.println("Specialist's email: " + specialist.getUsername());
-        System.out.println("sending email to the specialist about scoring completion");
-        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName);
+        specialistService.sendEmailtoSpecialist(specialist.getUsername(), specialist.getName(), customerName, problemId);
         return ResponseEntity.ok("Success");
     }
 
@@ -279,13 +277,22 @@ public class SpecialistController {
         return "find-customer";
     }
 
-    // TODO: Сделать переадресацию на карточку заказчика вместо списка
     @PostMapping("/find-customer-form")
-    public String getCustomerByContactData(@RequestParam("data") String data) {
-        boolean customerWasFound = specialistService.findCustomerByContactData(data);
-        return (customerWasFound ?
-                "redirect:/SimplePsySpecialist/V1/specialist/customers" :
-                "redirect:/SimplePsySpecialist/V1/specialist/customer-form");
+    public String getCustomerByContactData(@AuthenticationPrincipal UserDetails userDetails,
+                                           @RequestParam("data") String data) {
+        String customerId = specialistService.findCustomerByContactData(data);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        if (Objects.equals(customerId, "Customer not found")) {
+            return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
+        }
+
+        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
+            if (Objects.equals(customerId, specialist.getCustomerIds().get(i))) {
+                return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerId;
+            }
+        }
+        return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
     }
 
     @GetMapping("customer/problem/new/{customerId}")
@@ -312,6 +319,10 @@ public class SpecialistController {
     {
         System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
         List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        model.addAttribute("specUrl", specUrl);
+        model.addAttribute("scoringUrl", scoringUrl);
         model.addAttribute("problems", problems);
         return "problems-list";
     }

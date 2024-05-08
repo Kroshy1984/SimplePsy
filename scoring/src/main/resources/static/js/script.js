@@ -2,21 +2,22 @@
 let userFormAnswers = JSON.parse(localStorage.getItem('userFormAnswers'));
 let textAnswers = JSON.parse(localStorage.getItem('textAnswers'));
 let checkboxAnswers = JSON.parse(localStorage.getItem('checkboxAnswers'));
-
+const scoringUrl = document.getElementsByClassName("scoringUrl");
+const clientUrl = document.getElementsByClassName("clientUrl");
 function collectUserFormAnswers() {
     userFormAnswers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
     localStorage.setItem('userFormAnswers', JSON.stringify(userFormAnswers));
     let scoringId = document.getElementById("scoringId").value;
     console.log(scoringId)
-    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestions';
+    window.location.href = scoringUrl + '/SimplePsyScoring/V1/scoring/textQuestions';
 }
 
 function openUserFormPage() {
-    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/userForm';
+    window.location.href = scoringUrl + '/SimplePsyScoring/V1/scoring/userForm';
 }
 
 function openTextQuestionsPage() {
-    window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/textQuestions';
+    window.location.href = scoringUrl + '/SimplePsyScoring/V1/scoring/textQuestions';
 }
 
 function sendData() {
@@ -34,8 +35,8 @@ function sendData() {
     let scoringId = document.getElementById("scoringId").value;
     let newArray = [].concat(textAnswers, checkboxAnswers);
 
-    const url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/saveAnswers?scoringId=' + scoringId;
-    let saveNewClientUrl = 'http://localhost:8086/SimplePsyClient/V1/client/newClient/' + problemId;
+    const url = scoringUrl + '/SimplePsyScoring/V1/scoring/saveAnswers?scoringId=' + scoringId;
+    let saveNewClientUrl = clientUrl + '/SimplePsyClient/V1/client/newClient/' + problemId;
     console.log(scoringId)
 
     localStorage.removeItem('textAnswers');
@@ -64,7 +65,7 @@ function sendData() {
         .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
-            var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
+            var url = scoringUrl + '/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -75,7 +76,7 @@ function sendData() {
                 .then(response => response.text())
                 .then(data => {
                     console.log('Success:', data);
-                    // window.location.href = 'http://localhost:8084/SimplePsyScoring/V1/scoring/done';
+                    window.location.href = scoringUrl + '/SimplePsyScoring/V1/scoring/done';
                 })
                 .catch(error => {
                     console.error('Error:', error);

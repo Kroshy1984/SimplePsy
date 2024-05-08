@@ -17,19 +17,20 @@
     <form id="registrationForm" th:object="${customerDTO}" th:action="@{/SimplePsySpecialist/V1/specialist/customers/new}" method="post">
         <h1>Новый заказчик</h1>
         <label for="name">Имя *</label>
-        <input type="text" id="name" placeholder="Имя" th:name="name" required>
+        <input type="text" id="name" placeholder="Имя" th:name="name" pattern="[А-Яа-яЁё]*" required>
 
         <label for="surname">Фамилия *</label>
-        <input type="text" id="surname" placeholder="Фамилия" th:name="surname" required>
+        <input type="text" id="surname" placeholder="Фамилия" th:name="surname" pattern="[А-Яа-яЁё]*" required>
 
         <label for="email">E-mail *</label>
-        <input type="email" id="email" placeholder="E-mail" th:name="contact.email" required>
+        <input type="email" id="email" placeholder="E-mail" th:name="contact.email"
+               pattern="^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$" required>
 
         <label for="phoneNumber">Номер телефона</label>
-        <input type="tel" id="phoneNumber" placeholder="Номер телефона" th:name="contact.phone">
+        <input type="tel" id="phoneNumber" placeholder="Номер телефона" th:name="contact.phone" pattern="^(\+7|7|8)\d{10}$">
 
         <label for="telegram">Телеграм</label>
-        <input type="text" id="telegram" placeholder="Телеграм" th:name="contact.tg">
+        <input type="text" id="telegram" placeholder="Телеграм" th:name="contact.tg" pattern="^@([A-Za-z0-9_]{5,32})$">
 
         <label for="dateOfBirth">Дата рождения *</label>
         <input type="date" id="dateOfBirth" placeholder="Дата рождения" th:name="dateOfBirth" required>

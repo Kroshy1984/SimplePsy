@@ -42,18 +42,23 @@ public class ScoringController {
         System.out.println("In method saveAnswers got the scoring id " + scoringId);
         this.answers.clear();
         this.answers.addAll(List.of(answers));
-         scoringService.save(scoringId, this.answers);
+        scoringService.save(scoringId, this.answers);
         return ResponseEntity.ok(scoringId);
 //        return "redirect:/SimplePsyScoring/V1/scoring/done";
     }
 
+    // TODO: Исправить добавление пустых скорингов
     // Возвращаем скоринг
-    @GetMapping("{id}")
-    public String getScoring(@PathVariable String id,
+    @GetMapping("{problemId}")
+    public String getScoring(@PathVariable String problemId,
                              Model model) {
         String scoringId = scoringService.saveScoring(new Scoring()).getId();
+        String clientUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        model.addAttribute("clientUrl", clientUrl);
+        model.addAttribute("scoringUrl", scoringUrl);
         model.addAttribute("scoringId", scoringId);
-        model.addAttribute("problemId", id);
+        model.addAttribute("problemId", problemId);
         model.addAttribute("textQuestions", Scoring.getTextQuestions());
         model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
         return "questionnaire";
@@ -72,11 +77,6 @@ public class ScoringController {
         return null;
     }
 
-    @PostMapping("/find-customer/{customerId}")
-    public ResponseEntity<String> sendCustomerId(@PathVariable String customerId) {
-        scoringService.sendCustomerId(customerId);
-        return ResponseEntity.ok("Success");
-    }
     @PostMapping("/find-customer/byProblemId/{problemId}")
     public ResponseEntity<String> sendProblemId(@PathVariable String problemId,
                                                 @RequestParam("scoringId") String scoringId) {

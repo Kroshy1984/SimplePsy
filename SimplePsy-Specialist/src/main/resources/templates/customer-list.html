@@ -14,6 +14,7 @@
     <h1>СПИСОК ЗАКАЗЧИКОВ</h1>
 </header>
 <div class="profile-container" >
+    <input type="hidden" name="sessionUrl" class="specUrl" th:value="${specUrl}"/>
     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <table>
         <tr>
@@ -28,10 +29,7 @@
             <td><img id="profile-image" alt="Customer pic"
                      th:src=" @{'/SimplePsySpecialist/V1/specialist/customer-avatar/' + ${customer.getId()}}"></td>
             <td>
-                <div class="customer-info">
-                    <div th:text="${customer.getName()}" class="name">Devon Lane</div>
-                    <div class="description">Description</div>
-                </div>
+                <div th:text="${customer.getName()}" class="name"></div>
             </td>
             <td th:text="${customer.getContact().getEmail()}"></td>
             <td><input class="remove" type="image" alt="Recycle bin pic" th:value="${customer.getId()}" onclick="deleteById(this)"

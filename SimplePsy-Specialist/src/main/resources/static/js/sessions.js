@@ -1,11 +1,12 @@
+const specUrl = document.getElementsByClassName("specUrl")
 function openCustomers() {
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customers';
+    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customers';
 }
 
 function openCustomerForm() {
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customer-form';
+    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer-form';
 }
 
 function openSessionForm() {
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/session';
+    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/session';
 }
