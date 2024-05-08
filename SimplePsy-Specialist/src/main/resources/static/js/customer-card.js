@@ -1,11 +1,14 @@
+const specUrl = document.getElementsByClassName("specUrl")
+const scoringUrl = document.getElementsByClassName("scoringUrl")
+const notificationUrl = document.getElementsByClassName("notificationUrl")
 function showCustomers() {
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customers';
+    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customers';
 }
 
 function cancelButton() {
     var id = document.getElementById("customerIdInput").value;
     document.getElementById('cancel').style.display = 'none';
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customer-card/' + id;
+    window.location.href = specUrl + 'SimplePsySpecialist/V1/specialist/customer-card/' + id;
 }
 
 function showButtons() {
@@ -34,7 +37,7 @@ function showButtons() {
 function deleteCard()
 {
     var id = document.getElementById("customerIdInput").value;
-    var url = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/delete-customer/' + id;
+    var url = specUrl + '/SimplePsySpecialist/V1/specialist/delete-customer/' + id;
     var token = document.querySelector("[name='_csrf']").value;
     fetch(url, {
         method: 'POST',
@@ -62,21 +65,21 @@ function deleteCard()
 
 function copyUrl() {
     var id = document.getElementById("customerIdInput").value;
-    var url = 'http://localhost:8084/SimplePsyScoring/V1/scoring/' + id;
+    var url = scoringUrl + '/SimplePsyScoring/V1/scoring/' + id;
 
     navigator.clipboard.writeText(url).then(() => alert("Ссылка скопирована"));
 }
 function answersWindow()
 {
     let id = document.getElementById("customerIdInput").value;
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/scoring/result' + id;
+    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/scoring/result' + id;
 }
 
 function sendNotification() {
     var id = document.getElementById("customerIdInput").value;
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
-    var url = 'http://localhost:8085/emails/scoring-invitation';
+    var url = notificationUrl + '/emails/scoring-invitation';
     fetch(url, {
         method: 'POST',
         headers: {
@@ -96,5 +99,5 @@ function sendNotification() {
 
 function showProblemsList() {
     var id = document.getElementById("customerIdInput").value;
-    window.location.href = 'http://localhost:8081/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
+    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
 }

@@ -53,6 +53,10 @@ public class ScoringController {
     public String getScoring(@PathVariable String problemId,
                              Model model) {
         String scoringId = scoringService.saveScoring(new Scoring()).getId();
+        String clientUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        model.addAttribute("clientUrl", clientUrl);
+        model.addAttribute("scoringUrl", scoringUrl);
         model.addAttribute("scoringId", scoringId);
         model.addAttribute("problemId", problemId);
         model.addAttribute("textQuestions", Scoring.getTextQuestions());

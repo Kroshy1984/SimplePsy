@@ -110,7 +110,9 @@ public class SpecialistController {
     }
 
     @GetMapping("/session")
-    public String getSessionForm() {
+    public String getSessionForm(Model model) {
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        model.addAttribute("specUrl", specUrl);
         return "session";
     }
 
@@ -118,7 +120,7 @@ public class SpecialistController {
     public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialist.getId());
-
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
         List<SessionDTO> meetingsByMonday = meetingsByDay.get(0);
         System.out.println(meetingsByMonday.size());
@@ -141,7 +143,8 @@ public class SpecialistController {
         model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
         model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
         model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
-
+        System.out.println(specUrl);
+        model.addAttribute("specUrl", specUrl);
 
         return "sessions";
     }
@@ -184,7 +187,8 @@ public class SpecialistController {
                 }
             }
         }
-
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        model.addAttribute("specUrl", specUrl);
         model.addAttribute("customers", specialistCustomers);
         return "customer-list";
     }
@@ -193,7 +197,13 @@ public class SpecialistController {
     public String getCustomerCard(@PathVariable String customerId, Model model) {
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
         CustomerDTO customer = specialistService.findCustomerById(customerId);
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        String notificationUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
         customer.setId(customerId);
+        model.addAttribute("specUrl", specUrl);
+        model.addAttribute("scoringUrl", scoringUrl);
+        model.addAttribute("notificationUrl", notificationUrl);
         model.addAttribute("customer", customer);
         return "customer-card";
     }
@@ -309,6 +319,10 @@ public class SpecialistController {
     {
         System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
         List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        model.addAttribute("specUrl", specUrl);
+        model.addAttribute("scoringUrl", scoringUrl);
         model.addAttribute("problems", problems);
         return "problems-list";
     }
