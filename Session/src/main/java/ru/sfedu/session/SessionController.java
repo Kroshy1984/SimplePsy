@@ -58,8 +58,7 @@ public class SessionController {
     public ResponseEntity<List<SessionDTO>> getCalendarBySpecialistId(
             @RequestParam("specialistId") String specialistId) {
         System.out.println(specialistId);
-        List<SessionDTO> sessions  = sessionService.getAllBySpecialistId(specialistId);
-
+        List<SessionDTO> sessions = sessionService.getAllBySpecialistId(specialistId);
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
 
