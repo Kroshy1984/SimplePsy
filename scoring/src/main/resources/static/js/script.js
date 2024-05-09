@@ -2,8 +2,8 @@
 let userFormAnswers = JSON.parse(localStorage.getItem('userFormAnswers'));
 let textAnswers = JSON.parse(localStorage.getItem('textAnswers'));
 let checkboxAnswers = JSON.parse(localStorage.getItem('checkboxAnswers'));
-const scoringUrl = document.getElementsByClassName("scoringUrl");
-const clientUrl = document.getElementsByClassName("clientUrl");
+const scoringUrl = document.getElementsByClassName("scoringUrl")[0];
+const clientUrl = document.getElementsByClassName("clientUrl")[0];
 function collectUserFormAnswers() {
     userFormAnswers = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
     localStorage.setItem('userFormAnswers', JSON.stringify(userFormAnswers));

@@ -14,7 +14,7 @@
     <h1>СПИСОК ЗАКАЗЧИКОВ</h1>
 </header>
 <div class="profile-container" >
-    <input type="hidden" name="sessionUrl" class="specUrl" th:value="${specUrl}"/>
+    <input type="hidden" name="specUrl" class="specUrl" id="specUrl" th:value="${specUrl}"/>
     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <table>
         <tr>

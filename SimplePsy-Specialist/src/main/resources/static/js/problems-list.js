@@ -1,13 +1,13 @@
-const specUrl = document.getElementsByClassName("specUrl")
-const scoringUrl = document.getElementsByClassName("scoringUrl")
+
+const scoringUrl = document.getElementById("scoringUrl");
 function goBack() {
     var id = document.getElementById("customerIdInput").value;
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer-card/' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer-card/' + id;
 }
 
 function addNewProblem() {
     var id = document.getElementById("customerIdInput").value;
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer/problem/new/' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer/problem/new/' + id;
 }
 
 function copyUrl() {

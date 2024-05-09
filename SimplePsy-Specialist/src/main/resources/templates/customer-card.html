@@ -14,9 +14,9 @@
     <input type="button" id="back" value="Назад" onclick="showCustomers()">
     <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
 </header>
-<input type="hidden" name="baseUrl" class="specUrl" th:value="${specUrl}"/>
-<input type="hidden" name="baseUrl" class="scoringUrl" th:value="${scoringUrl}"/>
-<input type="hidden" name="baseUrl" class="notificationUrl" th:value="${notificationUrl}"/>
+<input type="hidden" name="baseUrl" class="specUrl" id="specUrl" th:value="${specUrl}"/>
+<input type="hidden" name="baseUrl" class="scoringUrl" id="scoringUrl" th:value="${scoringUrl}"/>
+<input type="hidden" name="baseUrl" class="notificationUrl" id="notificationUrl" th:value="${notificationUrl}"/>
 <form method="post" th:action="@{/SimplePsySpecialist/V1/specialist/customer-card/update}" th:object="${customer}">
 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 <div class="profile-container">

@@ -1,14 +1,14 @@
-const specUrl = document.getElementsByClassName("specUrl")
-const scoringUrl = document.getElementsByClassName("scoringUrl")
-const notificationUrl = document.getElementsByClassName("notificationUrl")
+const specUrl = document.getElementById("specUrl");
+const scoringUrl = document.getElementById("scoringUrl");
+const notificationUrl = document.getElementById("notificationUrl");
 function showCustomers() {
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customers';
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customers';
 }
 
 function cancelButton() {
     var id = document.getElementById("customerIdInput").value;
     document.getElementById('cancel').style.display = 'none';
-    window.location.href = specUrl + 'SimplePsySpecialist/V1/specialist/customer-card/' + id;
+    window.location.href = 'SimplePsySpecialist/V1/specialist/customer-card/' + id;
 }
 
 function showButtons() {
@@ -72,7 +72,7 @@ function copyUrl() {
 function answersWindow()
 {
     let id = document.getElementById("customerIdInput").value;
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/scoring/result' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/scoring/result' + id;
 }
 
 function sendNotification() {
@@ -99,5 +99,5 @@ function sendNotification() {
 
 function showProblemsList() {
     var id = document.getElementById("customerIdInput").value;
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
 }

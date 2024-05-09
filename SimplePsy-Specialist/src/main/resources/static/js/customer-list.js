@@ -1,4 +1,4 @@
-const specUrl = document.getElementsByClassName("specUrl")
+
 function findCustomer() {
     window.location.href = "/SimplePsySpecialist/V1/specialist/find-customer-form";
 }

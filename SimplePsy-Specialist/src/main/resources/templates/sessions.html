@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="week-container">
-    <input class="specUrl" th:value="${specUrl}">
+    <input class="specUrl" th:value="${specUrl}" id="specUrl" hidden="hidden">
     <div class="day-column">
         <p>Monday</p>
         <div th:each="monday : ${meetingsByMonday}">
