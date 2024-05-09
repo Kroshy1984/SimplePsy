@@ -12,11 +12,12 @@ import java.util.List;
 
 @Service
 public class SessionService {
+
+    SessionRepository sessionRepository;
+
     public SessionService(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
     }
-
-    SessionRepository sessionRepository;
 
     public List<Session> findByDate(String start_date, String end_date, String specialist_id) {
         return sessionRepository.findSessionsByDateBetweenAndSpecialistId(start_date, end_date, specialist_id).orElse(null);

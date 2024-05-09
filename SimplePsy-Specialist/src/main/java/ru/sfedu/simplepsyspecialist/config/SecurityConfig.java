@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/signup").permitAll()
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer").permitAll()
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer/byProblemId").permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/**/*.css")).permitAll()
                         .anyRequest().authenticated()).
                 formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
                         .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/sessions")

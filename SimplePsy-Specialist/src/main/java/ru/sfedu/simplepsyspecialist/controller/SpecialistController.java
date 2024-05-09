@@ -70,7 +70,7 @@ public class SpecialistController {
         System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.authorizeSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
     }
 
 //@PostMapping("/login")
