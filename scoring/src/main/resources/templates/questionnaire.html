@@ -10,8 +10,8 @@
     <title>Questionnaire</title>
 </head>
 <body>
-<input type="hidden" class="clientUrl" th:value="${clientUrl}"/>
-<input type="hidden" class="scoringUrl" th:value="${scoringUrl}"/>
+<input type="hidden" id="clientUrl" th:value="${clientUrl}"/>
+<input type="hidden" id="scoringUrl" th:value="${scoringUrl}"/>
 <input type="text" th:name="scoringId" id="scoringId" th:value="${scoringId}" hidden="hidden">
     <div class="page-content">
         <div id="textQuestions" class="form-container">

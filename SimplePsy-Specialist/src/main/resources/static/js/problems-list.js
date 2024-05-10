@@ -18,7 +18,7 @@ function copyUrl() {
 
         var selectedProblemId = selectedRadioButton.value;
 
-        var viewUrl = scoringUrl + '/SimplePsyScoring/V1/scoring/' + selectedProblemId;
+        var viewUrl =  'http://localhost:8084/SimplePsyScoring/V1/scoring/' + selectedProblemId;
 
         navigator.clipboard.writeText(viewUrl).then(() => alert("Ссылка скопирована"));
     } else {
