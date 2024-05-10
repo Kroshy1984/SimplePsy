@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-    <input type="hidden" class="specUrl" id="specUrl" th:value="${specUrl}"/>
+    <input type="hidden" class="scoringUrl" id="scoringUrl" th:value="${scoringUrl}"/>
     <input type="button" id="back" value="Назад" onclick="goBack()">
     <h1>СПИСОК ПРОБЛЕМ ЗАКАЗЧИКА</h1>
 </header>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="button-container">
-    <input type="button" id="scoringUrl" value="Скопировать ссылку на скоринг" onclick="copyUrl()">
+    <input type="button" value="Скопировать ссылку на скоринг" onclick="copyUrl()">
     <input type="button" id="scoring" value="Посмотреть скоринг" onclick="showScoring()">
     <input type="button" id="newProblem" value="Добавить проблему" onclick="addNewProblem()">
 </div>

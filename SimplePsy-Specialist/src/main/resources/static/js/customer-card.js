@@ -1,6 +1,5 @@
-const specUrl = document.getElementById("specUrl");
-const scoringUrl = document.getElementById("scoringUrl");
-const notificationUrl = document.getElementById("notificationUrl");
+const specUrl = document.getElementById("specUrl").value;
+
 function showCustomers() {
     window.location.href = '/SimplePsySpecialist/V1/specialist/customers';
 }
@@ -8,7 +7,7 @@ function showCustomers() {
 function cancelButton() {
     var id = document.getElementById("customerIdInput").value;
     document.getElementById('cancel').style.display = 'none';
-    window.location.href = 'SimplePsySpecialist/V1/specialist/customer-card/' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer-card/' + id;
 }
 
 function showButtons() {
@@ -61,40 +60,6 @@ function deleteCard()
             console.error('POST request failed', error);
         });
 
-}
-
-function copyUrl() {
-    var id = document.getElementById("customerIdInput").value;
-    var url = scoringUrl + '/SimplePsyScoring/V1/scoring/' + id;
-
-    navigator.clipboard.writeText(url).then(() => alert("Ссылка скопирована"));
-}
-function answersWindow()
-{
-    let id = document.getElementById("customerIdInput").value;
-    window.location.href = '/SimplePsySpecialist/V1/specialist/scoring/result' + id;
-}
-
-function sendNotification() {
-    var id = document.getElementById("customerIdInput").value;
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var url = notificationUrl + '/emails/scoring-invitation';
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify([id, name, email])
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Success:', data);
-            alert("Ссылка была успешно отправлена!");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
 }
 
 function showProblemsList() {

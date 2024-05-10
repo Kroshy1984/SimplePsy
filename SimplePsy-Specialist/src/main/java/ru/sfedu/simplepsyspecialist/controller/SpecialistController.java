@@ -198,12 +198,8 @@ public class SpecialistController {
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
         CustomerDTO customer = specialistService.findCustomerById(customerId);
         String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
-        String notificationUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
         customer.setId(customerId);
         model.addAttribute("specUrl", specUrl);
-        model.addAttribute("scoringUrl", scoringUrl);
-        model.addAttribute("notificationUrl", notificationUrl);
         model.addAttribute("customer", customer);
         return "customer-card";
     }
@@ -319,8 +315,8 @@ public class SpecialistController {
     {
         System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
         List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
+        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+        model.addAttribute("scoringUrl", scoringUrl);
         model.addAttribute("problems", problems);
         return "problems-list";
     }

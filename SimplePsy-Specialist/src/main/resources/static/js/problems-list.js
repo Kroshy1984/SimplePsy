@@ -1,5 +1,3 @@
-
-const scoringUrl = document.getElementById("scoringUrl");
 function goBack() {
     var id = document.getElementById("customerIdInput").value;
     window.location.href = '/SimplePsySpecialist/V1/specialist/customer-card/' + id;
@@ -11,6 +9,8 @@ function addNewProblem() {
 }
 
 function copyUrl() {
+
+    const scoringUrl = document.getElementById("scoringUrl").value;
 
     var selectedRadioButton = document.querySelector('input[name="selectedItem"]:checked');
 
