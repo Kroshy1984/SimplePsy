@@ -17,6 +17,9 @@ repositories {
 
 dependencies {
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.0.Final'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+	implementation group: 'io.micrometer', name: 'micrometer-tracing-bridge-brave'
+	implementation group: 'io.zipkin.reporter2', name: 'zipkin-reporter-brave'
 	testImplementation 'org.mockito:mockito-core:3.11.2'
 	implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'

@@ -6,6 +6,7 @@ spring:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html
-
+  zipkin:
+    baseUrl: http://127.0.0.1:9411/
 server:
   port: 8083
