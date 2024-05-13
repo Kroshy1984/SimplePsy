@@ -53,7 +53,7 @@ header {
     cursor: pointer;
 }
 
-input[typer="button"] {
+input[type="button"] {
     background-color: #E9E9E9;
 }
 

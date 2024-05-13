@@ -12,6 +12,7 @@
 <body>
 <header>
     <input type="hidden" class="scoringUrl" id="scoringUrl" th:value="${scoringUrl}"/>
+    <input type="button" id="logout" value="Выйти из аккаунта" onclick="logout()">
     <input type="button" id="back" value="Назад" onclick="goBack()">
     <h1>СПИСОК ПРОБЛЕМ ЗАКАЗЧИКА</h1>
 </header>
@@ -19,6 +20,11 @@
     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <input th:value="${customerId}" th:name="customerId" id="customerIdInput" hidden="hidden">
     <table>
+        <tr>
+            <td></td>
+            <td>Описание</td>
+            <td>Дата добавления</td>
+        </tr>
         <tr th:each="problem:${problems}" th:data-card-id="${problem.getId()}">
             <td><input type="radio" id="item2" name="selectedItem" th:value="${problem.getId()}"></td>
             <td>
@@ -26,8 +32,7 @@
                     <div th:text="${problem.getDescriptionOfProblem()}" class="name"></div>
                 </div>
             </td>
-            <td><input class="remove" type="image" alt="Recycle bin pic"
-                       src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png"></td>
+            <td><div th:text="${problem.getDateOfFirstContact()}" class="date"></div></td>
 
         </tr>
     </table>

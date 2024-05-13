@@ -1,3 +1,6 @@
+function logout() {
+    window.location.href = "/SimplePsySpecialist/V1/specialist/logout";
+}
 
 function openCustomers() {
     window.location.href = '/SimplePsySpecialist/V1/specialist/customers';

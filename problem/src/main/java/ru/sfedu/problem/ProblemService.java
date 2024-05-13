@@ -58,15 +58,6 @@ public class ProblemService {
         String url = "/SimplePsyScoring/V1/scoring/getScoringAnswers";
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        /*ResponseEntity<List<String>> response = webClient.post()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("scoringId", scoringId)
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .toEntityList(String.class).block();*/
-
         Mono<ResponseEntity<List<String>>> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)

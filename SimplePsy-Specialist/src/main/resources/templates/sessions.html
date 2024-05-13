@@ -7,85 +7,91 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/sessions.css}">
 </head>
 <body>
-<div class="week-container">
-    <input class="specUrl" th:value="${specUrl}" id="specUrl" hidden="hidden">
-    <div class="day-column">
-        <p>Monday</p>
-        <div th:each="monday : ${meetingsByMonday}">
-            <div class="session-item">
-            <p class="date" th:text="${monday.getDate()}"></p>
-            <p class="name" th:text="${monday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${monday.getClientDTO().surname}"></p>
+<header>
+    <input type="button" id="logout" value="Выйти из аккаунта" onclick="logout()">
+    <h1>КАЛЕНДАРЬ</h1>
+</header>
+<div class="page-content">
+    <div class="week-container">
+        <input class="specUrl" th:value="${specUrl}" id="specUrl" hidden="hidden">
+        <div class="day-column">
+            <p>Понедельник</p>
+            <div th:each="monday : ${meetingsByMonday}">
+                <div class="session-item">
+                <p class="date" th:text="${monday.getDate()}"></p>
+                <p class="name" th:text="${monday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${monday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-column">
-        <p>Tuesday</p>
-        <div th:each="tuesday : ${meetingsByDayTuesday}">
-            <div class="session-item">
-            <p class="date" th:text="${tuesday.getDate()}"></p>
-            <p class="name" th:text="${tuesday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${tuesday.getClientDTO().surname}"></p>
+        <div class="day-column">
+            <p>Вторник</p>
+            <div th:each="tuesday : ${meetingsByDayTuesday}">
+                <div class="session-item">
+                <p class="date" th:text="${tuesday.getDate()}"></p>
+                <p class="name" th:text="${tuesday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${tuesday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-column">
-        <p>Wednesday</p>
-        <div th:each="wednesday : ${meetingsByDayWednesday}">
-            <div class="session-item">
-            <p class="date" th:text="${wednesday.getDate()}"></p>
-            <p class="name" th:text="${wednesday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${wednesday.getClientDTO().surname}"></p>
+        <div class="day-column">
+            <p>Среда</p>
+            <div th:each="wednesday : ${meetingsByDayWednesday}">
+                <div class="session-item">
+                <p class="date" th:text="${wednesday.getDate()}"></p>
+                <p class="name" th:text="${wednesday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${wednesday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-column">
-        <p>Thursday</p>
-        <div th:each="thursday : ${meetingsByDayThursday}">
-            <div class="session-item">
-            <p class="date" th:text="${thursday.getDate()}"></p>
-            <p class="name" th:text="${thursday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${thursday.getClientDTO().surname}"></p>
+        <div class="day-column">
+            <p>Четверг</p>
+            <div th:each="thursday : ${meetingsByDayThursday}">
+                <div class="session-item">
+                <p class="date" th:text="${thursday.getDate()}"></p>
+                <p class="name" th:text="${thursday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${thursday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-column">
-        <p>Friday</p>
-        <div th:each="friday : ${meetingsByDayFriday}">
-            <div class="session-item">
-            <p class="date" th:text="${friday.getDate()}"></p>
-            <p class="name" th:text="${friday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${friday.getClientDTO().surname}"></p>
+        <div class="day-column">
+            <p>Пятница</p>
+            <div th:each="friday : ${meetingsByDayFriday}">
+                <div class="session-item">
+                <p class="date" th:text="${friday.getDate()}"></p>
+                <p class="name" th:text="${friday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${friday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-column">
-        <p>Saturday</p>
-        <div th:each="saturday : ${meetingsByDaySaturday}">
-            <div class="session-item">
-            <p class="date" th:text="${saturday.getDate()}"></p>
-            <p class="name" th:text="${saturday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${saturday.getClientDTO().surname}"></p>
+        <div class="day-column">
+            <p>Суббота</p>
+            <div th:each="saturday : ${meetingsByDaySaturday}">
+                <div class="session-item">
+                <p class="date" th:text="${saturday.getDate()}"></p>
+                <p class="name" th:text="${saturday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${saturday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-column">
-        <p>Sunday</p>
-        <div th:each="sunday : ${meetingsByDaySunDay}">
-            <div class="session-item">
-            <p class="date" th:text="${sunday.getDate()}"></p>
-            <p class="name" th:text="${sunday.getClientDTO().name}"></p>
-            <p class="surname" th:text="${sunday.getClientDTO().surname}"></p>
+        <div class="day-column">
+            <p>Воскресенье</p>
+            <div th:each="sunday : ${meetingsByDaySunDay}">
+                <div class="session-item">
+                <p class="date" th:text="${sunday.getDate()}"></p>
+                <p class="name" th:text="${sunday.getClientDTO().name}"></p>
+                <p class="surname" th:text="${sunday.getClientDTO().surname}"></p>
+                </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
 <div class="button-container">
     <!--/customers, /customer-form, /session-->

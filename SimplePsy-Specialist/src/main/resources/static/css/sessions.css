@@ -1,3 +1,18 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.page-content {
+    max-width: 1000px;
+    margin: auto;
+    height: 550px;
+    text-align: center;
+}
+
 .week-container {
     display: flex;
     flex-wrap: wrap;
@@ -33,6 +48,23 @@
 
 .session-item.surname {
     text-transform: capitalize;
+}
+
+input[type="button"] {
+    position: absolute;
+    top: 1.34em;
+    right: 8px;
+    background-color: #E9E9E9;
+    border: none;
+    width: auto;
+    border-radius: 10px;
+    padding: 10px 30px;
+    color: black;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #e2e2e2;
 }
 
 .button-container {

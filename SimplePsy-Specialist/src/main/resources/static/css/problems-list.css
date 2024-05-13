@@ -70,6 +70,12 @@ table input {
     position: absolute;
 }
 
+#logout {
+    position: absolute;
+    top: 1.34em;
+    right: 8px;
+}
+
 input[type="button"] {
     border-radius: 10px;
     padding: 10px 30px;

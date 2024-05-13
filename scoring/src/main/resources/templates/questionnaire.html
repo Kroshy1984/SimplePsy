@@ -14,6 +14,7 @@
 <input type="hidden" id="scoringUrl" th:value="${scoringUrl}"/>
 <input type="text" th:name="scoringId" id="scoringId" th:value="${scoringId}" hidden="hidden">
     <div class="page-content">
+        <h1>СКОРИНГ</h1>
         <div id="textQuestions" class="form-container">
             <div th:each="textQuestion, questionIndex : ${textQuestions}">
                 <label th:text="${textQuestion}"></label>

@@ -334,6 +334,9 @@ public class SpecialistController {
         List<String> textQuestions = Scoring.getTextQuestions();
         List<String> checkboxQuestions = Scoring.getCheckboxQuestions();
         List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
+        if (answers == null) {
+            return "scoring-error";
+        }
 
         LinkedHashMap<String, String> textQuestionsAnswers = new LinkedHashMap<>();
         for (int i = 0; i < textQuestions.size(); i++) {

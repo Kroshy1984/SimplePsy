@@ -11,6 +11,7 @@ public interface ProblemMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "descriptionOfProblem", target = "descriptionOfProblem")
     @Mapping(source = "scoringId", target = "scoringId")
+    @Mapping(source = "dateOfFirstContact", target = "dateOfFirstContact")
     ProblemDTO problemToProblemDTO(Problem problem);
 
     @Mapping(source = "id", target = "id")

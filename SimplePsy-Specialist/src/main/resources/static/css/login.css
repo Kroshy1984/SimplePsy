@@ -48,6 +48,10 @@ input {
     border-radius: 10px;
 }
 
+.button-container {
+    text-align: center;
+}
+
 button {
     width: 70%;
     padding: 10px;

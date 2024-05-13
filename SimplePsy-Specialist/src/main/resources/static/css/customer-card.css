@@ -69,6 +69,12 @@ fieldset input {
     position: absolute;
 }
 
+#logout {
+    position: absolute;
+    top: 1.34em;
+    right: 8px;
+}
+
 .contacts fieldset {
     display: inline-grid;
     row-gap: 15px;
