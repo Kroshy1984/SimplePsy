@@ -340,6 +340,9 @@ public class SpecialistController {
             checkboxQuestionsAnswers.put(checkboxQuestions.get(i), answers.get(i+15));
         }
 
+        String customerId = specialistService.findCustomerByProblemId(problemId).getId();
+
+        model.addAttribute("customerId", customerId);
         model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
         model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
         return "scoring-answers";

@@ -1,5 +1,3 @@
-const specUrl = document.getElementById("specUrl").value;
-
 function showCustomers() {
     window.location.href = '/SimplePsySpecialist/V1/specialist/customers';
 }
@@ -35,6 +33,7 @@ function showButtons() {
 
 function deleteCard()
 {
+    const specUrl = document.getElementById("specUrl").value;
     var id = document.getElementById("customerIdInput").value;
     var url = specUrl + '/SimplePsySpecialist/V1/specialist/delete-customer/' + id;
     var token = document.querySelector("[name='_csrf']").value;
