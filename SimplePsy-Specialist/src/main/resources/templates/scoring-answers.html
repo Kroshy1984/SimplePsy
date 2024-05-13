@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="page-content">
+    <input id="customerId" th:value="${customerId}" hidden>
     <div id="textQuestions" class="form-container">
         <div th:each="map : ${textQuestionsAnswers}">
             <label th:text="${map.key}"></label>

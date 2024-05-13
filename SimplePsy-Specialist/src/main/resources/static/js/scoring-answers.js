@@ -9,6 +9,6 @@ function showTextQuestions() {
 }
 
 function goBack() {
-    window.history.go(-1);
-    return false;
+    let customerId = document.getElementById("customerId").value;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer/problems/' + customerId;
 }

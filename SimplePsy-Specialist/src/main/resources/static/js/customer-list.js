@@ -1,5 +1,3 @@
-const specUrl = document.getElementById("specUrl").value;
-
 function findCustomer() {
     window.location.href = "/SimplePsySpecialist/V1/specialist/find-customer-form";
 }
@@ -26,6 +24,7 @@ function viewSelectedCard() {
 
 function deleteById(obj) {
     var customerId = obj.value
+    const specUrl = document.getElementById("specUrl").value;
 
     var url = specUrl + '/SimplePsySpecialist/V1/specialist/delete-customer/' + customerId;
 
@@ -63,6 +62,8 @@ function deleteSelectedCard()
     if (selectedRadioButton) {
 
         var selectedCardId = selectedRadioButton.value;
+
+        const specUrl = document.getElementById("specUrl").value;
 
         var url = specUrl + '/SimplePsySpecialist/V1/specialist/delete-customer/' + selectedCardId;
 
