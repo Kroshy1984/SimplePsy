@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -44,7 +45,7 @@ public class SecurityConfig {
                 formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
                         .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/sessions")
                         .permitAll())
-                .logout((logout) -> logout.permitAll());
+                .logout((logout) -> logout.logoutUrl("/logout").permitAll());
         return httpSecurity.build();
     }
 

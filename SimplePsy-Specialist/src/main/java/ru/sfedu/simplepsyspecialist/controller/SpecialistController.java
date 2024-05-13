@@ -1,11 +1,16 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -343,5 +348,19 @@ public class SpecialistController {
         model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
         model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
         return "scoring-answers";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        return "redirect:/SimplePsySpecialist/V1/specialist/login";
+    }
+    @PostMapping("/scoring/approve")
+    public String approveScoring(@RequestParam("problemId") String problemId)
+    {
+        specialistService.approveScoring(problemId);
+        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
     }
 }

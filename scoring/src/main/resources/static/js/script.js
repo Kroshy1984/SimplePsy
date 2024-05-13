@@ -44,31 +44,8 @@ function sendData() {
     localStorage.removeItem('textAnswers');
     localStorage.removeItem('checkboxAnswers');
 
-    fetch(saveNewClientUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-        fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newArray)
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Success:', data);
-            var url = scoringUrl + '/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
-            fetch(url, {
+            var scoringDoneUrl = scoringUrl + '/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
+            fetch(scoringDoneUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -83,10 +60,6 @@ function sendData() {
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        })
 }
 
 function checkInput(input) {

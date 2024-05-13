@@ -472,4 +472,18 @@ public class SpecialistService {
         }
         return answers;
     }
+
+    public void approveScoring(String problemId) {
+        String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
+        String url = "/SimplePsyClient/V1/client/newClient/" + problemId;
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+        ResponseEntity<String> response = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+    }
 }
