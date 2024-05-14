@@ -466,6 +466,9 @@ public class SpecialistService {
                 .toEntity(new ParameterizedTypeReference<>() {});
         List<String> answers = response.block().getBody();
         System.out.println("Got the result in method getScoringAnswersByProblemId: ");
+        for (int i = 0; i < answers.size(); i++) {
+            System.out.println(answers.get(i));
+        }
         return answers;
     }
 

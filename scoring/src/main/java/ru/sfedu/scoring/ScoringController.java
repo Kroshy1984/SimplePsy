@@ -81,6 +81,7 @@ public class ScoringController {
     public ResponseEntity<String> sendProblemId(@PathVariable String problemId,
                                                 @RequestParam("scoringId") String scoringId) {
         System.out.println("In method sendProblemId\nGot the problemId " + problemId);
+        System.out.println("The scoringId is " + scoringId);
         scoringService.saveCustomersScoring(problemId, scoringId);
         scoringService.sendProblemId(problemId);
         return ResponseEntity.ok("Success");

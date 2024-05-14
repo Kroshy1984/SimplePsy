@@ -37,29 +37,42 @@ function sendData() {
     const clientUrl = 'http://localhost:8086'
     console.log(scoringUrl);
     console.log(clientUrl);
-    const url = scoringUrl + '/SimplePsyScoring/V1/scoring/saveAnswers?scoringId=' + scoringId;
+    const saveAnswersUrl = scoringUrl + '/SimplePsyScoring/V1/scoring/saveAnswers?scoringId=' + scoringId;
     let saveNewClientUrl = clientUrl + '/SimplePsyClient/V1/client/newClient/' + problemId;
     console.log(scoringId)
 
     localStorage.removeItem('textAnswers');
     localStorage.removeItem('checkboxAnswers');
 
-            var scoringDoneUrl = scoringUrl + '/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
-            fetch(scoringDoneUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({scoringId : scoringId})
-            })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('Success:', data);
-                    window.location.href = '/SimplePsyScoring/V1/scoring/done';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+    var scoringDoneUrl = scoringUrl + '/SimplePsyScoring/V1/scoring/find-customer/byProblemId/' + problemId + "?scoringId=" + scoringId;
+    fetch(saveAnswersUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newArray)
+    }).then(response => response.text())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    fetch(scoringDoneUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({scoringId: scoringId})
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log('Success:', data);
+            window.location.href = '/SimplePsyScoring/V1/scoring/done';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 function checkInput(input) {
