@@ -12,6 +12,7 @@
 <body>
 <div class="page-content">
     <h1>РЕЗУЛЬТАТЫ СКОРИНГА</h1>
+    <input id="problemId" th:value="${problemId}" hidden>
     <input id="customerId" th:value="${customerId}" hidden>
     <div id="textQuestions" class="form-container">
         <div th:each="map : ${textQuestionsAnswers}">
@@ -30,7 +31,8 @@
         </div>
         <div class="button-container">
             <button onclick="showTextQuestions()">Назад</button>
-            <button onclick="goBack()">Вернуться в список </button>
+            <button onclick="goBack()">Вернуться в список</button>
+            <button onclick="approveScoring()">Одобрить</button>
         </div>
     </div>
 </div>
