@@ -1,3 +1,8 @@
+function approveScoring() {
+    let problemId = document.getElementById("problemId").value;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/scoring/approve/' + problemId;
+}
+
 function showCheckboxQuestions() {
     document.getElementById('textQuestions').style.display = 'none';
     document.getElementById('checkboxQuestions').style.display = 'block';

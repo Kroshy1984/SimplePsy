@@ -350,6 +350,7 @@ public class SpecialistController {
 
         String customerId = specialistService.findCustomerByProblemId(problemId).getId();
 
+        model.addAttribute("problemId", problemId);
         model.addAttribute("customerId", customerId);
         model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
         model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
