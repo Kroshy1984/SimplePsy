@@ -6,6 +6,8 @@ spring:
       uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
   zipkin:
     baseUrl: http://127.0.0.1:9411/
+    service:
+      name: customer
 server:
   address: 0.0.0.0
   port: 8080

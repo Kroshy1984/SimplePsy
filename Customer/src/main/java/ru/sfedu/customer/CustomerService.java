@@ -35,7 +35,6 @@ public class CustomerService {
         }
         return customers;
     }
-
     public List<CustomerDTO> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
         if (customers.size() == 0 || customers.isEmpty())
@@ -205,9 +204,47 @@ public class CustomerService {
     }
 
     public CustomerDTO findByProblemId(String problemId) {
+        System.out.println("problemId=" + problemId);
         Customer customer = customerRepository.findByProblemsIdContaining(problemId).get();
         System.out.println("Found the customer " + customer.getName() + " with problemId " + problemId);
         CustomerDTO customerDTO = CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
         return customerDTO;
+    }
+
+    public void changeCustomerStatusOnCustomer(String problemId) {
+        Customer customer = customerRepository.findByProblemsIdContaining(problemId).get();
+        customer.setStatus(Status.CUSTOMER);
+        Customer result = customerRepository.save(customer);
+        System.out.println("Customer's status: " + result.getStatus());
+    }
+
+    public List<CustomerDTO> getAllCustomersWithStatusCustomer() {
+        List<Customer> customers = customerRepository.findAll();
+        List<Customer> customersWithStatusCustomer = new ArrayList<>();
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println("customer's email: " + customers.get(i).getContact().getEmail());
+            if (customers.get(i).getStatus() == Status.CUSTOMER)
+            {
+                System.out.println("adding Client to the list");
+                customersWithStatusCustomer.add(customers.get(i));
+            }
+        }
+        System.out.println("List of clients names:");
+        for (int i = 0; i < customersWithStatusCustomer.size(); i++) {
+            System.out.println(customersWithStatusCustomer.get(i));
+        }
+        CustomerDTO customerDT = CustomerMapper.INSTANCE.customerToCustomerDTO(customers.get(0));
+        System.out.println("customerDTO name: " + customerDT.getName());
+        if (customers.isEmpty()) {
+            throw new NotFoundException("No customers in db");
+        }
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        for (int i = 0; i < customersWithStatusCustomer.size(); i++) {
+            CustomerDTO customerDTO = CustomerMapper.INSTANCE.customerToCustomerDTO(customersWithStatusCustomer.get(i));
+            customerDTOList.add(customerDTO);
+            System.out.println(customers.get(i).getName());
+        }
+
+        return customerDTOList;
     }
 }

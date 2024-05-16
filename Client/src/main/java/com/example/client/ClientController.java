@@ -69,6 +69,8 @@ public class ClientController {
     {
         System.out.println("in method newClientFromCustomer got problemId: " + problemId);
         Client client = clientService.getCustomerByProblemId(problemId);
+        clientService.changeCustomerStatusOnCustomer(problemId);
+        System.out.println("got the client with id: " + client.id);
         Client savedClient = clientService.save(client);
         return ResponseEntity.ok("client successfully created");
     }

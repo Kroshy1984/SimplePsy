@@ -197,7 +197,31 @@ public class SpecialistController {
         model.addAttribute("customers", specialistCustomers);
         return "customer-list";
     }
+    @GetMapping("/clients")
+    public String getClientsList(@AuthenticationPrincipal UserDetails userDetails, Model model)
+    {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<CustomerDTO> customers = specialistService.getAllCustomersWithStatusCustomer();
+        List<CustomerDTO> clients = new ArrayList<>();
 
+        if (specialist.getCustomerIds() == null) {
+            System.out.println("No customers were found for this specialist!");
+            model.addAttribute("customers", customers);
+            return "customer-list";
+        }
+
+        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
+            for (CustomerDTO customer : customers) {
+                if (Objects.equals(customer.getId(), specialist.getCustomerIds().get(i))) {
+                    clients.add(customer);
+                    System.out.println(customer.getName());
+                    break;
+                }
+            }
+        }
+        model.addAttribute("clients", clients);
+        return "client-list";
+    }
     @GetMapping("/customer-card/{customerId}")
     public String getCustomerCard(@PathVariable String customerId, Model model) {
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
@@ -364,10 +388,12 @@ public class SpecialistController {
         }
         return "redirect:/SimplePsySpecialist/V1/specialist/login";
     }
-    @PostMapping("/scoring/approve")
-    public String approveScoring(@RequestParam("problemId") String problemId)
+    @GetMapping("/scoring/approve/{problemId}")
+    public String approveScoring(@PathVariable("problemId") String problemId)
     {
+        System.out.println("In method approveScoring got the problemId: " + problemId);
         specialistService.approveScoring(problemId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+        return "redirect:/SimplePsySpecialist/V1/specialist/clients";
     }
+
 }

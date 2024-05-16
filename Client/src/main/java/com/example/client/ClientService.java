@@ -78,4 +78,21 @@ public class ClientService {
         System.out.println("CustomerDTO mapped to the client object with tg: " + client.getContact().getTg());
         return client;
     }
+
+    public void changeCustomerStatusOnCustomer(String problemId) {
+        System.out.println("in method changeCustomerStatusOnCustomer got problemId: " + problemId);
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
+        String url = "/SimplePsy/V1/customer/changeCustomerStatusOnCustomer";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
+        ResponseEntity<String> result = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .retrieve()
+                .toEntity(String.class)
+                .block();
+        System.out.println("Result of changing customer's status: " + result.getBody());
+    }
 }

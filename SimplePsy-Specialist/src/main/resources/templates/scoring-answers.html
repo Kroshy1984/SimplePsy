@@ -10,6 +10,7 @@
     <script type="text/javascript" th:src="@{/js/scoring-answers.js}"></script>
 </head>
 <body>
+<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 <div class="page-content">
     <h1>РЕЗУЛЬТАТЫ СКОРИНГА</h1>
     <input id="problemId" th:value="${problemId}" hidden>

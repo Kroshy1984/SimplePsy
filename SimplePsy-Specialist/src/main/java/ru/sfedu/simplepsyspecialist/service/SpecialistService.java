@@ -473,10 +473,11 @@ public class SpecialistService {
     }
 
     public void approveScoring(String problemId) {
+        System.out.println(String.format("scroing with problemId %s was approved, adding new client", problemId));
         String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
         String url = "/SimplePsyClient/V1/client/newClient/" + problemId;
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-        ResponseEntity<String> response = webClient.get()
+        ResponseEntity<String> response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(url)
                         .queryParam("problemId", problemId)
@@ -484,5 +485,26 @@ public class SpecialistService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .toEntity(String.class).block();
+    }
+
+    public List<CustomerDTO> getAllCustomersWithStatusCustomer() {
+        System.out.println("In method getAllCustomersWithStatusCustomer");
+        String baseUrl = System.getenv().getOrDefault("CUSTOMER_SERVICE_URL", "http://localhost:8080");
+        String url = "/SimplePsy/V1/customer/getAllCustomersWithStatusCustomer";
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+
+        Mono<ResponseEntity<List<CustomerDTO>>> response = webClient.get()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<List<CustomerDTO>>() {});
+
+        List<CustomerDTO> customers = response.block().getBody();
+
+        System.out.println("List of customers names:");
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println(customers.get(i).getName());
+        }
+        return customers;
     }
 }

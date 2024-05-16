@@ -83,7 +83,11 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
-
+    @GetMapping("/getAllCustomersWithStatusCustomer")
+    public ResponseEntity<List<CustomerDTO>> getAllCustomersWithStatusCustomer()
+    {
+        return ResponseEntity.ok(customerService.getAllCustomersWithStatusCustomer());
+    }
     @GetMapping("/getCustomerById")
     public ResponseEntity<CustomerDTO> getCustomerById(@RequestParam("customerId") String customerId)
     {
@@ -92,8 +96,15 @@ public class CustomerController {
     @GetMapping("/getCustomerByProblemId")
     public ResponseEntity<CustomerDTO> getCustomerByProblemId(@RequestParam("problemId") String problemId)
     {
-        System.out.println("In method getCustomerByProblemId");
+        System.out.println("In method getCustomerByProblemId got the problemId " + problemId);
         return ResponseEntity.ok(customerService.findByProblemId(problemId));
+    }
+    @GetMapping("/changeCustomerStatusOnCustomer")
+    public ResponseEntity<String> changeCustomerStatusOnCustomer(@RequestParam("problemId") String problemId)
+    {
+        System.out.println("In method changeCustomerStatusOnCustomer got the problemId " + problemId);
+        customerService.changeCustomerStatusOnCustomer(problemId);
+        return ResponseEntity.ok("Customer's status successfully changed");
     }
     @GetMapping("/customerToClient")
     public ResponseEntity<CustomerDTO> CustomerToClient(@RequestParam("customerId") String customerId)
