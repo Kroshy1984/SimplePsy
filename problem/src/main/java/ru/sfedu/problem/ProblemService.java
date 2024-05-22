@@ -32,7 +32,10 @@ public class ProblemService {
         List<Problem> problems = new ArrayList<>();
 
         for (int i = 0; i < problemsId.size(); i++) {
-            problems.add(problemRepository.findById(problemsId.get(i)).get());
+            Problem problem = problemRepository.findById(problemsId.get(i)).get();
+            if (problem.getStatus() != Status.DECLINED) {
+                problems.add(problem);
+            }
         }
 
         List<ProblemDTO> problemDTOList = new ArrayList<>();
@@ -71,5 +74,11 @@ public class ProblemService {
 
         System.out.println("Got the result in method getScoringAnswersByProblemId: " + answers);
         return answers;
+    }
+
+    public void cancelProblemById(String problemId) {
+        Problem problemToUpdate = problemRepository.findById(problemId).orElseThrow();
+        problemToUpdate.setStatus(Status.DECLINED);
+        problemRepository.save(problemToUpdate);
     }
 }

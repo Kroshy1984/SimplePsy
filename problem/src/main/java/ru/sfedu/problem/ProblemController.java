@@ -56,4 +56,10 @@ public class ProblemController {
         List<String> answers = problemService.getScoringAnswers(problemId);
         return ResponseEntity.ok(answers);
     }
+
+    @PostMapping("/cancel/{problemId}")
+    public ResponseEntity<String> cancelScoring (@PathVariable String problemId) {
+        problemService.cancelProblemById(problemId);
+        return ResponseEntity.ok("Success");
+    }
 }

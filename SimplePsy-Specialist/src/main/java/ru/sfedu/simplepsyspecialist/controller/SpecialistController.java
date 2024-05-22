@@ -144,6 +144,23 @@ public class SpecialistController {
         return "session";
     }
 
+    @PostMapping("/session")
+    public String createNewSession(@AuthenticationPrincipal UserDetails userDetails,
+                                   @RequestParam("email") String email,
+                                   @RequestParam("problem") String problem,
+                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+        System.out.println(email);
+        System.out.println(problem);
+        System.out.println(date);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        System.out.println("Specialist found!");
+        String specialist_id = specialist.getId();
+        System.out.println(specialist_id);
+        specialistService.createNewSession(email, specialist_id, problem, date);
+        System.out.println("Session was created");
+        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+    }
+
     @GetMapping("/sessions")
     public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
@@ -175,23 +192,6 @@ public class SpecialistController {
         model.addAttribute("specUrl", specUrl);
 
         return "sessions";
-    }
-
-    @PostMapping("/session")
-    public String createNewSession(@AuthenticationPrincipal UserDetails userDetails,
-                                   @RequestParam("email") String email,
-                                   @RequestParam("problem") String problem,
-                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
-        System.out.println(email);
-        System.out.println(problem);
-        System.out.println(date);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        System.out.println("Specialist found!");
-        String specialist_id = specialist.getId();
-        System.out.println(specialist_id);
-        specialistService.createNewSession(email, specialist_id, problem, date);
-        System.out.println("Session was created");
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
     }
 
     @GetMapping("/customers")
@@ -367,6 +367,9 @@ public class SpecialistController {
     {
         System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
         List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
+        if (problems.isEmpty()) {
+            return "problems-list";
+        }
         String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
         model.addAttribute("scoringUrl", scoringUrl);
         model.addAttribute("problems", problems);
@@ -411,12 +414,21 @@ public class SpecialistController {
         }
         return "redirect:/SimplePsySpecialist/V1/specialist/login";
     }
-    @GetMapping("/scoring/approve/{problemId}")
+    @PostMapping("/scoring/approve/{problemId}")
     public String approveScoring(@PathVariable("problemId") String problemId)
     {
         System.out.println("In method approveScoring got the problemId: " + problemId);
         specialistService.approveScoring(problemId);
         return "redirect:/SimplePsySpecialist/V1/specialist/clients";
+    }
+
+    @PostMapping("/scoring/cancel/{problemId}")
+    public String cancelScoring(@PathVariable("problemId") String problemId)
+    {
+        System.out.println("In method cancelScoring got the problemId: " + problemId);
+        specialistService.cancelScoring(problemId);
+        String customerId = specialistService.findCustomerByProblemId(problemId).getId();
+        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
     }
 
 }

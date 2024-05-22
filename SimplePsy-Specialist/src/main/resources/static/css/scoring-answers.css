@@ -38,7 +38,7 @@ input[type="checkbox"] {
 }
 
 button {
-    width: 30%;
+    width: 24%;
     padding: 10px;
     background-color: #007BFF;
     color: #ffffff;
@@ -49,6 +49,14 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+#cancelButton {
+    background-color: #ff3f38;
+}
+
+#cancelButton:hover {
+    background-color: #b90600;
 }
 
 .button-container {
