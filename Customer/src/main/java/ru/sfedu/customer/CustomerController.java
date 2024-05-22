@@ -11,6 +11,7 @@ import ru.sfedu.customer.dto.CustomersSearch;
 import ru.sfedu.customer.dto.ProblemDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -157,7 +158,12 @@ public class CustomerController {
     public ResponseEntity<List<ProblemDTO>> customersProblems(@RequestParam("customerId") String customerId)
     {
         System.out.println("In method customersProblems got the customerId " + customerId);
-        List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
-        return ResponseEntity.ok(problems);
+        try {
+            List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
+            return ResponseEntity.ok(problems);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Problems list is empty!");
+            return ResponseEntity.ok(new ArrayList<>());
+        }
     }
 }

@@ -199,7 +199,6 @@ public class CustomerService {
                 .retrieve()
                 .toEntityList(ProblemDTO.class)
                 .block();
-        System.out.println("In method getAllCustomersProblems the result of the first one: " + response.getBody().get(0));
         return response.getBody();
     }
 

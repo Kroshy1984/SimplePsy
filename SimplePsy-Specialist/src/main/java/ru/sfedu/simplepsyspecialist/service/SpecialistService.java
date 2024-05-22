@@ -426,9 +426,6 @@ public class SpecialistService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .toEntityList(ProblemDTO.class).block();
-        System.out.println("In method getAllCustomersProblems the result of the first one: " +
-                response.getBody().get(0).getDescriptionOfProblem() +
-                response.getBody().get(0).getId());
         return response.getBody();
     }
 
@@ -466,14 +463,11 @@ public class SpecialistService {
                 .toEntity(new ParameterizedTypeReference<>() {});
         List<String> answers = response.block().getBody();
         System.out.println("Got the result in method getScoringAnswersByProblemId: ");
-        for (int i = 0; i < answers.size(); i++) {
-            System.out.println(answers.get(i));
-        }
         return answers;
     }
 
     public void approveScoring(String problemId) {
-        System.out.println(String.format("scroing with problemId %s was approved, adding new client", problemId));
+        System.out.printf("scoring with problemId %s was approved, adding new client%n", problemId);
         String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
         String url = "/SimplePsyClient/V1/client/newClient/" + problemId;
         WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
@@ -485,6 +479,25 @@ public class SpecialistService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .toEntity(String.class).block();
+
+        System.out.println("Result of approving scoring: " + response.getBody());
+    }
+
+    public void cancelScoring(String problemId) {
+        System.out.printf("scoring with problemId %s was cancelled", problemId);
+        String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
+        String url = "/SimplePsyProblem/V1/problem/cancel/" + problemId;
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+        ResponseEntity<String> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("problemId", problemId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+
+        System.out.println("Result of cancelling scoring: " + response.getBody());
     }
 
     public List<CustomerDTO> getAllCustomersWithStatusCustomer() {
