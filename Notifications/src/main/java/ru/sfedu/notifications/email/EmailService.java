@@ -50,4 +50,15 @@ public class EmailService {
         System.out.println("Sending email to " + specialistName);
         javaMailSender.send(message);
     }
+
+    public void sendChangePasswordPage(String email,
+                                       String specialistId) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(senderEmail);
+        message.setTo(email);
+        message.setSubject("Ссылка для смены пароля");
+        message.setText("http://localhost:8081/SimplePsySpecialist/V1/specialist/setNewPassword/" + specialistId);
+        System.out.println("Sending email to " + specialistId);
+        javaMailSender.send(message);
+    }
 }

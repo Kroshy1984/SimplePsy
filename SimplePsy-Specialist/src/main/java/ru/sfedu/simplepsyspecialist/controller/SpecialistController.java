@@ -77,7 +77,30 @@ public class SpecialistController {
         specialistService.authorizeSpecialist(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
     }
-
+    @GetMapping("/changePass")
+    public String changePass(Model model)
+    {
+        return "change-pass";
+    }
+    @PostMapping("/changePass")
+    public void changePass(@RequestParam("email") String email)
+    {
+        System.out.println("In method changePass got the email " + email);
+        specialistService.changePassword(email);
+    }
+    @GetMapping("/setNewPassword/{specialistId}")
+    public String setNewPassword(@PathVariable String specialistId, Model model)
+    {
+        model.addAttribute("specialistId", specialistId);
+        return "set-new-password";
+    }
+    @PostMapping("/setNewPassword")
+    public String setNewPassword(@RequestParam("specialistId") String specialistId,
+                                 @RequestParam("password") String password)
+    {
+        specialistService.setNewPassword(specialistId, password);
+        return "redirect:/SimplePsySpecialist/V1/specialist/login";
+    }
 //@PostMapping("/login")
 //public String login(@ModelAttribute("specialist") Specialist specialist)
 //{

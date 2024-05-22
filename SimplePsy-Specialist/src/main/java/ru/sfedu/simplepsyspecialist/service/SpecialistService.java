@@ -507,4 +507,30 @@ public class SpecialistService {
         }
         return customers;
     }
+
+    public void changePassword(String email) {
+        Specialist specialist = specialistRepository.findByUsername(email).get();
+        String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
+        String url = "/emails/changePass";
+
+        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+        ResponseEntity<String> response = webClient.post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(url)
+                        .queryParam("email", email)
+                        .queryParam("specialistId", specialist.getId())
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toEntity(String.class).block();
+
+        System.out.println("The result in method changePassword: " + response.getBody());
+    }
+
+    public void setNewPassword(String specialistId, String newPassword) {
+        Specialist specialist = specialistRepository.findById(specialistId).get();
+        String password = passwordEncoder.encode(newPassword);
+        specialist.setPassword(password);
+        specialistRepository.save(specialist);
+    }
 }

@@ -40,6 +40,8 @@ public class SecurityConfig {
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/signup").permitAll()
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer").permitAll()
                         .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer/byProblemId").permitAll()
+                        .requestMatchers("/SimplePsySpecialist/V1/specialist/changePass**").permitAll()
+                        .requestMatchers("/SimplePsySpecialist/V1/specialist/setNewPassword/**").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/**/*.css")).permitAll()
                         .anyRequest().authenticated()).
                 formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()

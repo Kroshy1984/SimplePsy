@@ -42,6 +42,14 @@ public class EmailController {
         return ResponseEntity.ok("Success");
     }
 
+    @PostMapping("/changePass")
+    public ResponseEntity<String> sendChangePasswordPage(@RequestParam("email") String email,
+                                                         @RequestParam("specialistId") String specialistId)
+    {
+        System.out.println("In method sendChangePasswordPage got the email " + email);
+        emailService.sendChangePasswordPage(email, specialistId);
+        return ResponseEntity.ok("mail to the " + email + "successfully sent");
+    }
 //    @PostMapping("/html")
 //    fun sendHtmlEmail(@RequestBody request: MultipleReceiverRequest) {
 //        emailService.sendHtmlEmail(request)
