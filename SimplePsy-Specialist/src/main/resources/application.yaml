@@ -2,10 +2,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
-  zipkin:
-    baseUrl: http://127.0.0.1:9411/
-    service:
-      name: specialist
+#  zipkin:
+#    baseUrl: http://127.0.0.1:9411/
+#    service:
+#      name: specialist
   mail:
     host: smtp.gmail.com
     port: 587

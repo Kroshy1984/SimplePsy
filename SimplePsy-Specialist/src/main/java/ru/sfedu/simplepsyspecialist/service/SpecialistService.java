@@ -6,6 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.simplepsyspecialist.entity.*;
+import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
+import ru.sfedu.simplepsyspecialist.entity.nested.Status;
 import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
 import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
@@ -21,13 +23,16 @@ public class SpecialistService {
 
     ClientService clientService;
     CustomerService customerService;
+    ProblemService problemService;
     SpecialistRepository specialistRepository;
     BCryptPasswordEncoder passwordEncoder;
 
-    public SpecialistService(SpecialistRepository specialistRepository, ClientService clientService, CustomerService customerService) {
+    public SpecialistService(SpecialistRepository specialistRepository, ClientService clientService,
+                             CustomerService customerService, ProblemService problemService) {
         this.specialistRepository = specialistRepository;
         this.clientService = clientService;
         this.customerService = customerService;
+        this.problemService = problemService;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -150,7 +155,12 @@ public class SpecialistService {
     }
 
     public String saveCustomer(Customer customer, String problem) {
-        return null;
+        Problem newProblem = new Problem(ProblemStatus.NEW, problem, LocalDateTime.now());
+        Problem savedProblem = problemService.saveProblem(newProblem);
+        customer.addProblem(savedProblem.getId());
+        customer.setStatus(Status.LEAD);
+        Customer newCustomer = customerService.saveCustomer(customer);
+        return newCustomer.getId();
     }
 
     public List<Session> getAllSessions(String specialistId) {
