@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.service.ScoringService;
 
 import java.util.ArrayList;
 import java.util.List;

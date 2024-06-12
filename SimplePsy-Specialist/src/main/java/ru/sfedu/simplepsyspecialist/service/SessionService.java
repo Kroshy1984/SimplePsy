@@ -1,10 +1,9 @@
 package ru.sfedu.simplepsyspecialist.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import ru.sfedu.session.dto.ClientDTO;
-import ru.sfedu.session.dto.SessionDTO;
-import ru.sfedu.session.dto.SessionMapper;
+import ru.sfedu.simplepsyspecialist.entity.Client;
+import ru.sfedu.simplepsyspecialist.entity.Session;
+import ru.sfedu.simplepsyspecialist.repo.SessionRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,9 +13,11 @@ import java.util.List;
 public class SessionService {
 
     SessionRepository sessionRepository;
+    ClientService clientService;
 
-    public SessionService(SessionRepository sessionRepository) {
+    public SessionService(SessionRepository sessionRepository, ClientService clientService) {
         this.sessionRepository = sessionRepository;
+        this.clientService = clientService;
     }
 
     public List<Session> findByDate(String start_date, String end_date, String specialist_id) {
@@ -40,33 +41,21 @@ public class SessionService {
         sessionRepository.save(session);
     }
 
-    public List<SessionDTO> getAllBySpecialistId(String specialistId) {
+    public List<Session> getAllBySpecialistId(String specialistId) {
         List<Session> sessions = sessionRepository.findAllBySpecialistId(specialistId).get();
-        List<SessionDTO> sessionDTOS = new ArrayList<>();
+        List<Session> sessionDTOS = new ArrayList<>();
         for (int i = 0; i < sessions.size(); i++) {
             System.out.println(sessions.get(i).getDate());
-            SessionDTO sessionDTO = SessionMapper.INSTANCE.sessionToSessionDTO(sessions.get(i));
-            sessionDTO.setClientDTO(getClientById(sessions.get(i).getClientId()));
-            sessionDTOS.add(sessionDTO);
+            Session session = sessions.get(i);
+            session.setClientId(sessions.get(i).getClientId());
+            sessionDTOS.add(session);
         }
         return sessionDTOS;
     }
-    public ClientDTO getClientById(String clientId)
+    public Client getClientById(String clientId)
     {
         System.out.println("ClientDTO id: " + clientId);
-        String baseUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
-        String url = "/SimplePsyClient/V1/client/findById";
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-
-        ClientDTO result =  webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("clientId", clientId)
-                        .build())
-                .retrieve()
-                .bodyToMono(ClientDTO.class)
-                .block();
-        System.out.println("got the client: " + result.getName());
-        return result;
+        Client client = clientService.findById(clientId);
+        return client;
     }
 }

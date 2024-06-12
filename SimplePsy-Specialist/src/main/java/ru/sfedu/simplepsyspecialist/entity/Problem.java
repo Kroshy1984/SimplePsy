@@ -2,6 +2,7 @@ package ru.sfedu.simplepsyspecialist.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
 
 import java.time.LocalDateTime;
 
@@ -10,13 +11,13 @@ public class Problem {
 
     @Id
     private String id;
-    private Status status;
+    private ProblemStatus status;
 
     private String descriptionOfProblem;
     private LocalDateTime dateOfFirstContact;
     private String scoringId;
 
-    public Problem(Status status, String descriptionOfProblem, LocalDateTime dateOfFirstContact) {
+    public Problem(ProblemStatus status, String descriptionOfProblem, LocalDateTime dateOfFirstContact) {
         this.status = status;
         this.descriptionOfProblem = descriptionOfProblem;
         this.dateOfFirstContact = dateOfFirstContact;
@@ -33,11 +34,11 @@ public class Problem {
         this.id = id;
     }
 
-    public Status getStatus() {
+    public ProblemStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(ProblemStatus status) {
         this.status = status;
     }
 

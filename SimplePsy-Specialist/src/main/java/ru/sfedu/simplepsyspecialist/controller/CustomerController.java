@@ -1,16 +1,12 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import ru.sfedu.customer.dto.CustomerDTO;
-import ru.sfedu.customer.dto.CustomerMapper;
-import ru.sfedu.customer.dto.CustomersSearch;
-import ru.sfedu.customer.dto.ProblemDTO;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
+import ru.sfedu.simplepsyspecialist.entity.Problem;
+import ru.sfedu.simplepsyspecialist.service.CustomerService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -27,30 +23,30 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/search")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Customer> getResource(@RequestParam(name = "name", required = false) String name,
-                                      @RequestParam(name = "contact", required = false) String contact) {
+//    @GetMapping("/search")
+//    @ResponseStatus(HttpStatus.FOUND)
+//    public List<Customer> getResource(@RequestParam(name = "name", required = false) String name,
+//                                      @RequestParam(name = "contact", required = false) String contact) {
+//        return customerService.getCustomers(name, contact);
+//    }
 
-        return customerService.getCustomers(name, contact);
-    }
-
-    @PostMapping("/new-customer")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Customer createCustomer(@RequestParam("name") String name,
-                                   @RequestParam("status") Status status,
-                                   @RequestParam("contactPhone") String contactPhone,
-                                   @RequestParam("contactEmail") String contactEmail,
-                                   @RequestParam("contactTg") String contactTg,
-                                   @RequestParam("dateOfFirstCall") String dateOfFirstCall,
-                                   @RequestParam("avatar") MultipartFile avatar) throws IOException {
-        Contact contact = new Contact(contactPhone, contactEmail, contactTg);
-        Customer customer = new Customer(name, status, contact, dateOfFirstCall, avatar);
-        return customerService.saveCustomer(customer);
-    }
+//    @PostMapping("/new-customer")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Customer createCustomer(@RequestParam("name") String name,
+//                                   @RequestParam("surname") String surname,
+//                                   @RequestParam("status") Status status,
+//                                   @RequestParam("contactPhone") String contactPhone,
+//                                   @RequestParam("contactEmail") String contactEmail,
+//                                   @RequestParam("contactTg") String contactTg,
+//                                   @RequestParam("dateOfFirstCall") String dateOfFirstCall,
+//                                   @RequestParam("avatar") MultipartFile avatar) throws IOException {
+//        Contact contact = new Contact(contactPhone, contactEmail, contactTg);
+//        Customer customer = new Customer(name, status, contact, dateOfFirstCall, avatar);
+//        return customerService.saveCustomer(customer);
+//    }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newCustomer(@RequestBody CustomerDTO customer)
+    public ResponseEntity<String> newCustomer(@RequestBody Customer customer)
     {
         System.out.println("Got the new customer:\n" +customer.getName());
         System.out.println(customer.getContact().getEmail());
@@ -61,12 +57,11 @@ public class CustomerController {
         return ResponseEntity.ok(newCustomerId);
     }
     @PostMapping("/update")
-    public ResponseEntity<String> updateCustomer(@RequestBody CustomerDTO customerDTO)
+    public ResponseEntity<String> updateCustomer(@RequestBody Customer customer)
     {
-        System.out.println("In method updateCustomer got the customerDTO with id: " + customerDTO.getId());
-        Customer customerUpdate = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
-        customerService.updateCustomer(customerUpdate);
-        return ResponseEntity.ok("Customer " + customerDTO.getName() + " successfully updated");
+        System.out.println("In method updateCustomer got the customerDTO with id: " + customer.getId());
+        customerService.updateCustomer(customer);
+        return ResponseEntity.ok("Customer " + customer.getName() + " successfully updated");
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteResource(@PathVariable("id") String id) {
@@ -74,28 +69,23 @@ public class CustomerController {
         return ResponseEntity.ok("Customer " + id + " successfully deleted");
     }
 
-    @PutMapping("/update")
-    public Customer updateResource(@RequestBody Customer customer) {
-        return customerService.updateCustomer(customer);
-    }
-
     @GetMapping("/getAllCustomers")
-    public ResponseEntity<List<CustomerDTO>> getAllCustomers()
+    public ResponseEntity<List<Customer>> getAllCustomers()
     {
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
     @GetMapping("/getAllCustomersWithStatusCustomer")
-    public ResponseEntity<List<CustomerDTO>> getAllCustomersWithStatusCustomer()
+    public ResponseEntity<List<Customer>> getAllCustomersWithStatusCustomer()
     {
         return ResponseEntity.ok(customerService.getAllCustomersWithStatusCustomer());
     }
     @GetMapping("/getCustomerById")
-    public ResponseEntity<CustomerDTO> getCustomerById(@RequestParam("customerId") String customerId)
+    public ResponseEntity<Customer> getCustomerById(@RequestParam("customerId") String customerId)
     {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
     @GetMapping("/getCustomerByProblemId")
-    public ResponseEntity<CustomerDTO> getCustomerByProblemId(@RequestParam("problemId") String problemId)
+    public ResponseEntity<Customer> getCustomerByProblemId(@RequestParam("problemId") String problemId)
     {
         System.out.println("In method getCustomerByProblemId got the problemId " + problemId);
         return ResponseEntity.ok(customerService.findByProblemId(problemId));
@@ -108,7 +98,7 @@ public class CustomerController {
         return ResponseEntity.ok("Customer's status successfully changed");
     }
     @GetMapping("/customerToClient")
-    public ResponseEntity<CustomerDTO> CustomerToClient(@RequestParam("customerId") String customerId)
+    public ResponseEntity<Customer> CustomerToClient(@RequestParam("customerId") String customerId)
     {
         customerService.updateStatus(customerId);
         return ResponseEntity.ok(customerService.findById(customerId));
@@ -118,16 +108,6 @@ public class CustomerController {
     {
         customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer successfully deleted");
-    }
-
-    @GetMapping("/search2")
-    public CustomersSearch searchCustomers(@RequestBody CustomersSearch customersSearch) {
-        return customerService.searchCustomers(customersSearch.getSpecialistId(), customersSearch.getCustomers());
-    }
-
-    @GetMapping("/create2")
-    public CustomersSearch createCustomers(@RequestBody CustomersSearch customersSearch) {
-        return customerService.createCustomers(customersSearch.getSpecialistId(), customersSearch.getCustomers());
     }
 
     @GetMapping("/update-status")
@@ -155,11 +135,11 @@ public class CustomerController {
         return ResponseEntity.ok("Problem successfully added");
     }
     @PostMapping("/problems")
-    public ResponseEntity<List<ProblemDTO>> customersProblems(@RequestParam("customerId") String customerId)
+    public ResponseEntity<List<Problem>> customersProblems(@RequestParam("customerId") String customerId)
     {
         System.out.println("In method customersProblems got the customerId " + customerId);
         try {
-            List<ProblemDTO> problems = customerService.getAllCustomersProblems(customerId);
+            List<Problem> problems = customerService.getAllCustomersProblems(customerId);
             return ResponseEntity.ok(problems);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Problems list is empty!");

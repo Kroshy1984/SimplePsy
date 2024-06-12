@@ -1,7 +1,7 @@
 package ru.sfedu.simplepsyspecialist.entity;
 
-import com.example.client.nested.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -4,6 +4,9 @@ package ru.sfedu.simplepsyspecialist.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
+import ru.sfedu.simplepsyspecialist.entity.nested.Contact;
+import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
+import ru.sfedu.simplepsyspecialist.entity.nested.Status;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -23,6 +26,8 @@ public class Customer {
     private Contact contact;
     private String description;
     private LocalDate dateOfFirstCall;
+    private LocalDate dateOfBirth;
+    private Sex sex;
     private byte[] avatar;
     private List<String> problemsId;
    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
@@ -42,13 +47,13 @@ public class Customer {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.dateOfFirstCall = LocalDate.parse(dateOfFirstCall, formatter);
     }
-    public Customer(String name, Status status, Contact contact, String dateOfFirstCall, MultipartFile avatar) throws IOException {
+    public Customer(String name, String surname, LocalDate dateOfBirth, Sex sex, Contact contact) throws IOException {
         this.name = name;
-        this.status = status;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
         this.contact = contact;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.dateOfFirstCall = LocalDate.parse(dateOfFirstCall, formatter);
-        this.avatar = avatar.getBytes();
+
     }
 
     public String getId() {

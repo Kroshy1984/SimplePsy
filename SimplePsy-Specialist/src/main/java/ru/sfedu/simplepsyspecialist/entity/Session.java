@@ -2,78 +2,88 @@ package ru.sfedu.simplepsyspecialist.entity;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Document("Session")
 public class Session {
 
-    @NotBlank
-    @Pattern(regexp = "^[а-яА-ЯёЁ]+\\s[0-9]{2}/[0-9]{2}/[0-9]{4}$")
-    private String date;
+    @Id
+    private String id;
 
     @NotBlank
-    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    private String time;
+    private LocalDateTime date;
 
-    @NotBlank
-    @Size(min = 1, max = 255)
-    private String typeOfClients;
-    private String timeOfMeeting;
+    private String problem;
+
 
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    private List<Client> clients;
+    private String specialistId;
+
+    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    private String clientId;
+
+    private Client client;
 
     public Session() {
     }
 
-    public Session(String date, String time, String typeOfClients, String timeOfMeeting, List<Client> clients) {
-        this.date = date;
-        this.time = time;
-        this.typeOfClients = typeOfClients;
-        this.timeOfMeeting = timeOfMeeting;
-        this.clients = clients;
+    public Client getClient() {
+        return client;
     }
 
-    public String getDate() {
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public String getSpecialistId() {
+        return specialistId;
+    }
+
+    public void setSpecialistId(String specialistId) {
+        this.specialistId = specialistId;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
+    public String getProblem() {
+        return problem;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setProblem(String problem) {
+        this.problem = problem;
     }
 
-    public String getTypeOfClients() {
-        return typeOfClients;
-    }
 
-    public void setTypeOfClients(String typeOfClients) {
-        this.typeOfClients = typeOfClients;
-    }
-
-    public String getTimeOfMeeting() {
-        return timeOfMeeting;
-    }
-
-    public void setTimeOfMeeting(String timeOfMeeting) {
-        this.timeOfMeeting = timeOfMeeting;
-    }
-
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
+    public Session(LocalDateTime date, String problem, String specialistId, String clientId) {
+        this.date = date;
+        this.problem = problem;
+        this.specialistId = specialistId;
+        this.clientId = clientId;
     }
 }

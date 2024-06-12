@@ -2,30 +2,33 @@ package ru.sfedu.simplepsyspecialist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.repo.ScoringRepository;
 
 import java.util.List;
 
 @Service
 public class ScoringService {
     ScoringRepository scoringRepository;
-
+    ClientService clientService;
+    CustomerService customerService;
+    ProblemService problemService;
     @Autowired
-    public ScoringService(ScoringRepository scoringRepository) {
+    public ScoringService(ScoringRepository scoringRepository, ClientService clientService, CustomerService customerService, ProblemService problemService) {
         this.scoringRepository = scoringRepository;
+        this.clientService = clientService;
+        this.customerService = customerService;
+        this.problemService = problemService;
     }
 
     public Scoring save(String scoringId, List<String> answers) {
         Scoring scoring = scoringRepository.findById(scoringId).get();
 
         System.out.println("Found the scoring with id: " + scoring.getId());
-        /*List<String> clientsParams = new ArrayList<>();
-        clientsParams.addAll(answers.subList(0, 6));
-        createNewClient(clientsParams);*/
         scoring.setAnswers(answers);
         System.out.println("Ответы: " + scoring.getAnswers());
         Scoring resultScoring = scoringRepository.save(scoring);
@@ -117,21 +120,7 @@ public class ScoringService {
         System.out.println("result of sending customer id to find-customer: " + result.getBody());
     }
     public void saveCustomersScoring(String problemId, String scoringId) {
-        String baseUrl = System.getenv().getOrDefault("PROBLEM_SERVICE_URL", "http://localhost:8087");
-        String url = "/SimplePsyProblem/V1/problem/saveCustomersScoring";
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-
-        ResponseEntity<String> response = webClient.post()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("problemId", problemId)
-                        .queryParam("scoringId", scoringId)
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .toEntity(String.class).block();
-
-        System.out.println("The result of saving scoring: " + response.getBody());
+        problemService.saveCustomersScoring(problemId, scoringId);
     }
 
     public List<String> getScoringAnswers(String scoringId) {

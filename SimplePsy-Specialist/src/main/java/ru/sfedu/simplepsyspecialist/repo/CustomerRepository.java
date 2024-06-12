@@ -2,6 +2,7 @@ package ru.sfedu.simplepsyspecialist.repo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
 
 import java.util.List;
 import java.util.Optional;

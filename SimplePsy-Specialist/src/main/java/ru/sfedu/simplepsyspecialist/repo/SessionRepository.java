@@ -1,6 +1,7 @@
 package ru.sfedu.simplepsyspecialist.repo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import ru.sfedu.simplepsyspecialist.entity.Session;
 
 import java.util.List;
 import java.util.Optional;

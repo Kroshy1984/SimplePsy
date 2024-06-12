@@ -1,10 +1,11 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
-import com.example.client.dto.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.entity.Client;
+import ru.sfedu.simplepsyspecialist.service.ClientService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -46,7 +47,7 @@ public class ClientController {
                     .body("Client with email " + email + " not found");
         }
         else {
-            return ResponseEntity.status(HttpStatus.OK).body(client.id);
+            return ResponseEntity.status(HttpStatus.OK).body(client.getId());
         }
     }
     @PostMapping("/new")
@@ -56,10 +57,10 @@ public class ClientController {
         return ResponseEntity.ok("Client successfully created");
     }
     @GetMapping("/findById")
-    public ResponseEntity<ClientDTO> findById(@RequestParam("clientId") String clientId)
+    public ResponseEntity<Client> findById(@RequestParam("clientId") String clientId)
     {
         System.out.println("got the clientId: " + clientId);
-        ClientDTO clientDTO = clientService.findById(clientId);
+        Client clientDTO = clientService.findById(clientId);
         return ResponseEntity.ok(clientDTO);
     }
 
@@ -70,7 +71,7 @@ public class ClientController {
         System.out.println("in method newClientFromCustomer got problemId: " + problemId);
         Client client = clientService.getCustomerByProblemId(problemId);
         clientService.changeCustomerStatusOnCustomer(problemId);
-        System.out.println("got the client with id: " + client.id);
+        System.out.println("got the client with id: " + client.getId());
         Client savedClient = clientService.save(client);
         return ResponseEntity.ok("client successfully created");
     }

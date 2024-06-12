@@ -1,14 +1,10 @@
 package ru.sfedu.simplepsyspecialist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
-import ru.sfedu.problem.dto.ProblemDTO;
-import ru.sfedu.problem.dto.ProblemMapper;
+import ru.sfedu.simplepsyspecialist.entity.Problem;
+import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
+import ru.sfedu.simplepsyspecialist.repo.ProblemRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +14,10 @@ public class ProblemService {
 
 
     private ProblemRepository problemRepository;
+    ScoringService scoringService;
 
     @Autowired
-    public ProblemService(ru.sfedu.problem.ProblemRepository problemRepository) {
+    public ProblemService(ProblemRepository problemRepository) {
         this.problemRepository = problemRepository;
     }
 
@@ -28,25 +25,17 @@ public class ProblemService {
         return problemRepository.save(problem);
     }
 
-    public List<ProblemDTO> getAllCustomersProblems(List<String> problemsId) {
+    public List<Problem> getAllCustomersProblems(List<String> problemsId) {
         List<Problem> problems = new ArrayList<>();
 
         for (int i = 0; i < problemsId.size(); i++) {
             Problem problem = problemRepository.findById(problemsId.get(i)).get();
-            if (problem.getStatus() != Status.DECLINED) {
+            if (problem.getStatus() != ProblemStatus.DECLINED) {
                 problems.add(problem);
             }
         }
 
-        List<ProblemDTO> problemDTOList = new ArrayList<>();
-
-        for (int i = 0; i < problems.size(); i++) {
-            ProblemDTO problemDTO = ProblemMapper.INSTANCE.problemToProblemDTO(problems.get(i));
-            problemDTOList.add(problemDTO);
-            System.out.println("Adding problem " + problemDTO.getId() + problemDTO.getDescriptionOfProblem());
-        }
-
-        return problemDTOList;
+        return problems;
     }
 
     public void saveCustomersScoring(String problemId, String scoringId) {
@@ -57,28 +46,14 @@ public class ProblemService {
 
     public List<String> getScoringAnswers(String problemId) {
         String scoringId = problemRepository.findById(problemId).get().getScoringId();
-        String baseUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
-        String url = "/SimplePsyScoring/V1/scoring/getScoringAnswers";
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-
-        Mono<ResponseEntity<List<String>>> response = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("scoringId", scoringId)
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .toEntity(new ParameterizedTypeReference<>() {});
-
-        List<String> answers = response.block().getBody();
-
+        List<String> answers = scoringService.getScoringAnswers(scoringId);
         System.out.println("Got the result in method getScoringAnswersByProblemId: " + answers);
         return answers;
     }
 
     public void cancelProblemById(String problemId) {
         Problem problemToUpdate = problemRepository.findById(problemId).orElseThrow();
-        problemToUpdate.setStatus(Status.DECLINED);
+        problemToUpdate.setStatus(ProblemStatus.DECLINED);
         problemRepository.save(problemToUpdate);
     }
 }

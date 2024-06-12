@@ -3,7 +3,8 @@ package ru.sfedu.simplepsyspecialist.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.session.dto.SessionDTO;
+import ru.sfedu.simplepsyspecialist.entity.Session;
+import ru.sfedu.simplepsyspecialist.service.SessionService;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -55,10 +56,10 @@ public class SessionController {
         return ResponseEntity.ok("Session successfully created");
     }
     @GetMapping("/calendar")
-    public ResponseEntity<List<SessionDTO>> getCalendarBySpecialistId(
+    public ResponseEntity<List<Session>> getCalendarBySpecialistId(
             @RequestParam("specialistId") String specialistId) {
         System.out.println(specialistId);
-        List<SessionDTO> sessions = sessionService.getAllBySpecialistId(specialistId);
+        List<Session> sessions = sessionService.getAllBySpecialistId(specialistId);
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
 

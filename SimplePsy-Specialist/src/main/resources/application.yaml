@@ -20,10 +20,11 @@ spring:
     sender:
       email: juggeryurnero276@gmail.com
 
-  #bot.name: psy_notification_bot
-  bot:
-    token: 6829037654:AAFsiBStsmIn3bXkM4PU2wtRAZqkxJ7rdTc
-    owner: 505701273
+
+bot:
+  name: "psy_notification_bot"
+  token: "6829037654:AAFsiBStsmIn3bXkM4PU2wtRAZqkxJ7rdTc"
+  owner: 505701273
 
 server:
   address: 0.0.0.0

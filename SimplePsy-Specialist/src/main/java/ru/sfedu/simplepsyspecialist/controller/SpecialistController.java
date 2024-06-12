@@ -14,14 +14,12 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.dto.Contact;
-import ru.sfedu.simplepsyspecialist.dto.CustomerDTO;
-import ru.sfedu.simplepsyspecialist.dto.ProblemDTO;
-import ru.sfedu.simplepsyspecialist.dto.SessionDTO;
-import ru.sfedu.simplepsyspecialist.entity.Scoring;
-import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.entity.*;
+import ru.sfedu.simplepsyspecialist.entity.nested.Contact;
+import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -164,22 +162,22 @@ public class SpecialistController {
     @GetMapping("/sessions")
     public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<SessionDTO> sessionDTOS = specialistService.getAllSessions(specialist.getId());
+        List<Session> sessionDTOS = specialistService.getAllSessions(specialist.getId());
         String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        List<List<SessionDTO>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
-        List<SessionDTO> meetingsByMonday = meetingsByDay.get(0);
+        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
+        List<Session> meetingsByMonday = meetingsByDay.get(0);
         System.out.println(meetingsByMonday.size());
-        List<SessionDTO> meetingsByDayTuesday = meetingsByDay.get(1);
+        List<Session> meetingsByDayTuesday = meetingsByDay.get(1);
         System.out.println(meetingsByDayTuesday.size());
-        List<SessionDTO> meetingsByDayWednesday = meetingsByDay.get(2);
+        List<Session> meetingsByDayWednesday = meetingsByDay.get(2);
         System.out.println(meetingsByDayWednesday.size());
-        List<SessionDTO> meetingsByDayThursday = meetingsByDay.get(3);
+        List<Session> meetingsByDayThursday = meetingsByDay.get(3);
         System.out.println(meetingsByDayThursday.size());
-        List<SessionDTO> meetingsByDayFriday = meetingsByDay.get(4);
+        List<Session> meetingsByDayFriday = meetingsByDay.get(4);
         System.out.println(meetingsByDayFriday.size());
-        List<SessionDTO> meetingsByDaySaturday = meetingsByDay.get(5);
+        List<Session> meetingsByDaySaturday = meetingsByDay.get(5);
         System.out.println(meetingsByDaySaturday.size());
-        List<SessionDTO> meetingsByDaySunDay = meetingsByDay.get(6);
+        List<Session> meetingsByDaySunDay = meetingsByDay.get(6);
         System.out.println(meetingsByDaySunDay.size());
         model.addAttribute("meetingsByMonday", meetingsByMonday);
         model.addAttribute("meetingsByDayTuesday", meetingsByDayTuesday);
@@ -197,8 +195,8 @@ public class SpecialistController {
     @GetMapping("/customers")
     public String getCustomersList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<CustomerDTO> customers = specialistService.getAllCustomers();
-        List<CustomerDTO> specialistCustomers = new ArrayList<>();
+        List<Customer> customers = specialistService.getAllCustomers();
+        List<Customer> specialistCustomers = new ArrayList<>();
 
         if (specialist.getCustomerIds() == null) {
             System.out.println("No customers were found for this specialist!");
@@ -207,7 +205,7 @@ public class SpecialistController {
         }
 
         for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
-            for (CustomerDTO customer : customers) {
+            for (Customer customer : customers) {
                 if (Objects.equals(customer.getId(), specialist.getCustomerIds().get(i))) {
                     specialistCustomers.add(customer);
                     System.out.println(customers.get(i).getName());
@@ -224,8 +222,8 @@ public class SpecialistController {
     public String getClientsList(@AuthenticationPrincipal UserDetails userDetails, Model model)
     {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<CustomerDTO> customers = specialistService.getAllCustomersWithStatusCustomer();
-        List<CustomerDTO> clients = new ArrayList<>();
+        List<Customer> customers = specialistService.getAllCustomersWithStatusCustomer();
+        List<Customer> clients = new ArrayList<>();
 
         if (specialist.getCustomerIds() == null) {
             System.out.println("No customers were found for this specialist!");
@@ -234,7 +232,7 @@ public class SpecialistController {
         }
 
         for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
-            for (CustomerDTO customer : customers) {
+            for (Customer customer : customers) {
                 if (Objects.equals(customer.getId(), specialist.getCustomerIds().get(i))) {
                     clients.add(customer);
                     System.out.println(customer.getName());
@@ -248,7 +246,7 @@ public class SpecialistController {
     @GetMapping("/customer-card/{customerId}")
     public String getCustomerCard(@PathVariable String customerId, Model model) {
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
-        CustomerDTO customer = specialistService.findCustomerById(customerId);
+        Customer customer = specialistService.findCustomerById(customerId);
         String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         customer.setId(customerId);
         model.addAttribute("specUrl", specUrl);
@@ -257,7 +255,7 @@ public class SpecialistController {
     }
 
     @PostMapping("/customer-card/update")
-    public String updateCustomerCard(@ModelAttribute("customer") CustomerDTO customerDTO,
+    public String updateCustomerCard(@ModelAttribute("customer") Customer customerDTO,
                                      @RequestParam("customerId") String customerId) {
         System.out.println("In method updateCustomerCard got the customer with name and surname: " + customerDTO.getName() + " " + customerDTO.getSurname());
         System.out.println("Customer's id: " + customerId);
@@ -283,7 +281,7 @@ public class SpecialistController {
                                     @RequestParam("contact.email") String email,
                                     @RequestParam("contact.tg") String tg,
                                     @RequestParam("problem") String problem,
-                                    @AuthenticationPrincipal UserDetails userDetails) {
+                                    @AuthenticationPrincipal UserDetails userDetails) throws IOException {
         System.out.println("Got the new customer:\n" + name);
         System.out.println(surname);
         System.out.println(dateOfBirth);
@@ -293,7 +291,8 @@ public class SpecialistController {
         System.out.println(tg);
         System.out.println(problem);
         Contact contact = new Contact(phone, email, tg);
-        String customerId = specialistService.saveCustomer(new CustomerDTO(name, surname, dateOfBirth, gender, contact), problem);
+        Sex sex = gender.equals("MALE") ? Sex.MALE : Sex.FEMALE;
+        String customerId = specialistService.saveCustomer(new Customer(name, surname, dateOfBirth, sex , contact), problem);
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         specialist.addCustomerId(customerId);
         specialistService.save(specialist);
@@ -302,7 +301,7 @@ public class SpecialistController {
 
     @GetMapping("/customer-form")
     public String getClientForm(Model model) {
-        model.addAttribute("customerDTO", new CustomerDTO());
+        model.addAttribute("customerDTO", new Customer());
         return "customer-form";
     }
 
@@ -366,7 +365,7 @@ public class SpecialistController {
                                     Model model)
     {
         System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
-        List<ProblemDTO> problems = specialistService.getAllCustomersProblems(customerId);
+        List<Problem> problems = specialistService.getAllCustomersProblems(customerId);
         if (problems.isEmpty()) {
             return "problems-list";
         }
