@@ -120,7 +120,13 @@ public class SpecialistService {
     }
 
     public List<Customer> getAllCustomers() {
-       return new ArrayList<>();
+        List<Customer> customers = customerService.getAllCustomers();
+        System.out.println("List of customers names:");
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println(customers.get(i).getName());
+        }
+
+       return customers;
     }
 
     public Customer findCustomerById(String customerId) {

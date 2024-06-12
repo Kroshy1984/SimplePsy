@@ -70,8 +70,8 @@ public class SpecialistController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("specialist") Specialist specialist) {
-        System.out.println(specialist.getUsername());
-        System.out.println(specialist.getPassword());
+        System.out.println("Got the specialist's  username: " + specialist.getUsername());
+        System.out.println("Got the specialist's  password: " + specialist.getPassword());
         specialistService.authorizeSpecialist(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
     }
