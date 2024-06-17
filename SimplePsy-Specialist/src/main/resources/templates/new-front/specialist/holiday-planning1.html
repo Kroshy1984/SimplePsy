@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="../../../static/css/new-front/global.css" />
+    <link rel="stylesheet" href="../../../static/css/new-front/new-event.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="new-event2">
+      <div class="main">
+        <div class="base21"></div>
+        <img
+          class="main-child"
+          loading="lazy"
+          alt=""
+          src="../public/group-28@2x.png"
+          id="groupIcon"
+        />
+
+        <div class="wrapper4">
+          <div class="div32">Наименование нерабочих дней</div>
+        </div>
+        <div class="button-wrapper">
+          <div class="button17">
+            <input class="input4" placeholder="Плановый отпуск" type="text" />
+          </div>
+        </div>
+        <div class="date-range-wrapper-parent">
+          <div class="date-range-wrapper">
+            <div class="date-range-label">
+              <div class="div33">С</div>
+              <div class="div34">До</div>
+            </div>
+          </div>
+          <div class="calendar-wrapper">
+            <div class="calendar-container">
+              <div class="calendar-grid1">
+                <div class="calendar-row">
+                  <div class="calendar-row-child"></div>
+                  <div class="calendar-cell">
+                    <div class="date-placeholder">03/20/2024</div>
+                  </div>
+                  <div class="line-group">
+                    <div class="line-div"></div>
+                    <div class="date-placeholder1">
+                      <div class="date-placeholder2">8:00</div>
+                    </div>
+                    <div class="frame-child2"></div>
+                  </div>
+                </div>
+                <div class="calendar-row1">
+                  <div class="calendar-row-item"></div>
+                  <div class="wrapper5">
+                    <div class="div35">10/20/2024</div>
+                  </div>
+                  <div class="line-container">
+                    <div class="frame-child3"></div>
+                    <div class="wrapper6">
+                      <div class="div36">12:00</div>
+                    </div>
+                    <div class="frame-child4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="group-div" id="groupContainer">
+              <div class="frame-child5"></div>
+              <h2 class="h2">Добавить график</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var groupIcon = document.getElementById("groupIcon");
+      if (groupIcon) {
+        groupIcon.addEventListener("click", function (e) {
+          window.location.href = "./frame.html";
+        });
+      }
+      
+      var groupContainer = document.getElementById("groupContainer");
+      if (groupContainer) {
+        groupContainer.addEventListener("click", function (e) {
+          window.location.href = "./frame.html";
+        });
+      }
+      </script>
+  </body>
+</html>

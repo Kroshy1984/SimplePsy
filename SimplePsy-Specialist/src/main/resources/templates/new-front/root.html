@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="../../static/css/new-front/global.css" />
+    <link rel="stylesheet" href="../../static/css/new-front/root.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="root">
+      <section class="methodology">
+        <div class="base70"></div>
+        <div class="div101">Название методики</div>
+        <img
+          class="methodology-child"
+          loading="lazy"
+          alt=""
+          src="./public/group-281@2x.png"
+          id="groupIcon"
+        />
+
+        <div class="instructions-parent">
+          <div class="instructions">
+            <div class="drawing-area">
+              <div class="drawing-canvas"></div>
+              <div class="div102">Дом, дерево, человек</div>
+            </div>
+            <img class="icon91" alt="" src="./public/icon21.svg" />
+          </div>
+          <div class="image-input-wrapper">
+            <div class="image-input">
+              <div class="image-preview">
+                <img
+                  class="image-12-icon1"
+                  loading="lazy"
+                  alt=""
+                  src="./public/image-121@2x.png"
+                />
+              </div>
+              <div class="input-fields">
+                <div class="animal-input">
+                  <div class="animal-name">
+                    <div class="animal-name-field">
+                      <img
+                        class="image-13-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./public/image-13@2x.png"
+                      />
+
+                      <div class="component6">
+                        <div class="item37">
+                          <img class="feather-icon-chevron-up7" alt="" />
+                        </div>
+                        <div class="item38">
+                          <img
+                            class="feather-icon-plus5"
+                            alt=""
+                            src="./public/feathericon--plus.svg"
+                          />
+
+                          <div class="wrapper36">
+                            <div class="div103">Дом, дерево, человек</div>
+                          </div>
+                        </div>
+                        <div class="item39">
+                          <img
+                            class="feather-icon-check8"
+                            alt=""
+                            src="./public/feathericon--check.svg"
+                          />
+
+                          <input
+                            class="input8"
+                            placeholder="Рисунок несуществующего животного"
+                            type="text"
+                          />
+                        </div>
+                        <div class="item40">
+                          <img
+                            class="feather-icon-eye1"
+                            alt=""
+                            src="./public/feathericon--eye1.svg"
+                          />
+
+                          <input
+                            class="input9"
+                            placeholder="Введите новое значение"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="add-photo">
+                      <div class="rectangle-parent82">
+                        <div class="frame-child103"></div>
+                        <div class="div104">
+                          <p class="p41">Добавить</p>
+                          <p class="p42">фото</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-technique-button-parent" id="groupContainer">
+                  <div class="add-technique-button"></div>
+                  <div class="div105">Добавить методику</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      var groupIcon = document.getElementById("groupIcon");
+      if (groupIcon) {
+        groupIcon.addEventListener("click", function (e) {
+          window.location.href = "./frame.html";
+        });
+      }
+      
+      var groupContainer = document.getElementById("groupContainer");
+      if (groupContainer) {
+        groupContainer.addEventListener("click", function (e) {
+          window.location.href = "./component6.html";
+        });
+      }
+      </script>
+  </body>
+</html>
