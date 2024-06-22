@@ -302,7 +302,7 @@ public class SpecialistController {
     @GetMapping("/customer-form")
     public String getClientForm(Model model) {
         model.addAttribute("customerDTO", new Customer());
-        return "customer-form";
+        return "new-front/customer/customer-creation";
     }
 
     @GetMapping("/find-customer/byProblemId")
