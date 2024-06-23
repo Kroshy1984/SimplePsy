@@ -201,7 +201,7 @@ public class SpecialistController {
         if (specialist.getCustomerIds() == null) {
             System.out.println("No customers were found for this specialist!");
             model.addAttribute("customers", specialistCustomers);
-            return "customer-list";
+            return "new-front/customer/customer-list";
         }
 
         for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
@@ -216,7 +216,7 @@ public class SpecialistController {
         String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         model.addAttribute("specUrl", specUrl);
         model.addAttribute("customers", specialistCustomers);
-        return "customer-list";
+        return "new-front/customer/customer-list";
     }
     @GetMapping("/clients")
     public String getClientsList(@AuthenticationPrincipal UserDetails userDetails, Model model)
