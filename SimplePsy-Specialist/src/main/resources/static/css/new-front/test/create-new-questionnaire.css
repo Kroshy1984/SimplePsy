@@ -1,3 +1,27 @@
+.dashboard40:hover,
+.calendar-item1:hover,
+.invoice28:hover,
+.base-parent18:hover,
+.div339:hover,
+.frame-parent163:hover,
+.frame-parent164:hover {
+  transition: all 0.2s ease;
+}
+
+.dashboard40:hover,
+.calendar-item1:hover {
+  transform: scale(1.05);
+  background-color: #f0f0f0;
+}
+
+.invoice28:hover,
+.base-parent18:hover,
+.div339:hover,
+.frame-parent163:hover,
+.frame-parent164:hover {
+  transform: scale(1.05);
+  background-color: #f0f0f0;
+}
 .settings8 {
   width: 16px;
   height: 4px;

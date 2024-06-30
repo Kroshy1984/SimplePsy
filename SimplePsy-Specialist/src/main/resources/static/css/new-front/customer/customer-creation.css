@@ -336,7 +336,7 @@
   border: 2px solid var(--grey-blue-95);
   flex-direction: column;
   padding: var(--padding-5xl) var(--padding-5xl) var(--padding-xl)
-    var(--padding-11xl);
+  var(--padding-11xl);
   gap: var(--gap-xl);
 }
 .dashboard26,
@@ -442,7 +442,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: var(--padding-11xl) var(--padding-10xl) var(--padding-xl)
-    var(--padding-11xl);
+  var(--padding-11xl);
   position: relative;
   gap: var(--gap-xl);
 }
@@ -569,7 +569,7 @@
   background-color: var(--grey-blue-95);
   align-items: flex-start;
   padding: var(--padding-4xs-7) var(--padding-xs) var(--padding-6xs-3)
-    var(--padding-5xl);
+  var(--padding-5xl);
   white-space: nowrap;
   margin-left: -24.4px;
   font-size: var(--black-8-size);
@@ -628,7 +628,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: var(--padding-4xs-7) var(--padding-xs) var(--padding-6xs-3)
-    var(--padding-5xl);
+  var(--padding-5xl);
   white-space: nowrap;
   margin-left: -24.4px;
   font-size: var(--black-8-size);
@@ -1010,7 +1010,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 59px;
   max-width: 100%;
@@ -1035,7 +1035,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 43px;
   max-width: 100%;
@@ -1060,7 +1060,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 43px;
   max-width: 100%;
@@ -1169,7 +1169,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 59px;
   max-width: 100%;
@@ -1485,7 +1485,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 43px;
   max-width: 100%;
@@ -1510,7 +1510,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 43px;
   max-width: 100%;
@@ -1614,7 +1614,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: var(--padding-9xs) var(--padding-8xs) var(--padding-9xs)
-    var(--padding-5xs);
+  var(--padding-5xs);
   gap: var(--gap-9xs);
   min-height: 59px;
   max-width: 100%;
@@ -2104,4 +2104,100 @@
   .profile-container {
     gap: var(--gap-6xl);
   }
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+header {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.form-section label {
+  margin-bottom: 10px;
+}
+
+.form-section select,
+.form-section input,
+.form-section textarea {
+  width: calc(100% - 12px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-section input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#client-form1,
+#additional-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
