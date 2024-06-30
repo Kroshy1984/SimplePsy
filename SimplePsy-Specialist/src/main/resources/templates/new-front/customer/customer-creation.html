@@ -16,6 +16,7 @@
     />
 </head>
 <body>
+<body>
 <div class="div141">
     <div class="settings3"></div>
     <header class="app-container">
@@ -23,23 +24,13 @@
             <div class="content-layout">
                 <div class="main-area">
                     <div class="sidebar-container">
-                        <img
-                                class="icon124"
-                                loading="lazy"
-                                alt=""
-                                src="../public/icon@2x.png"
-                        />
+                        <img class="icon124" loading="lazy" alt="" src="../public/icon@2x.png"/>
 
                         <div class="constructor-wrapper3">
                             <a class="constructor9">Понятная практика</a>
                         </div>
                         <div class="icon-parent23">
-                            <img
-                                    class="icon125"
-                                    loading="lazy"
-                                    alt=""
-                                    src="../public/icon-1@2x.png"
-                            />
+                            <img class="icon125" loading="lazy" alt="" src="../public/icon-1@2x.png"/>
 
                             <div class="search-input3">
                                 <b class="search10">Найти клиента...</b>
@@ -75,13 +66,7 @@
             <div class="profile-header">
                 <div class="wrapper-user-wrapper1">
                     <div class="wrapper-user9">
-                        <img
-                                class="user-icon9"
-                                loading="lazy"
-                                alt=""
-                                src="../public/user@2x.png"
-                                id="userImage"
-                        />
+                        <img class="user-icon9" loading="lazy" alt="" src="../public/user@2x.png" id="userImage"/>
                     </div>
                 </div>
                 <div class="profile-info">
@@ -103,23 +88,14 @@
                                 <div class="dashboard26" id="dashboardContainer">
                                     <div class="base80"></div>
                                     <div class="icon-wrapper25">
-                                        <img
-                                                class="icon128"
-                                                loading="lazy"
-                                                alt=""
-                                                src="../public/icon-3@2x.png"
-                                        />
+                                        <img class="icon128" loading="lazy" alt="" src="../public/icon-3@2x.png"/>
                                     </div>
                                     <b class="dashboard27">Список клинетов</b>
                                     <div class="email4" id="emailContainer">
                                         <div class="base81">
                                             <div class="icon-wrapper26">
-                                                <img
-                                                        class="icon129"
-                                                        loading="lazy"
-                                                        alt=""
-                                                        src="../public/icon-41@2x.png"
-                                                />
+                                                <img class="icon129" loading="lazy" alt=""
+                                                     src="../public/icon-41@2x.png"/>
                                             </div>
                                             <b class="calendars9">Календарь</b>
                                         </div>
@@ -129,24 +105,14 @@
                                     <div class="invoice17" id="invoiceContainer">
                                         <div class="base82"></div>
                                         <div class="icon-wrapper27">
-                                            <img
-                                                    class="icon130"
-                                                    loading="lazy"
-                                                    alt=""
-                                                    src="../public/icon-5.svg"
-                                            />
+                                            <img class="icon130" loading="lazy" alt="" src="../public/icon-5.svg"/>
                                         </div>
                                         <b class="invoice18">Уведомления</b>
                                     </div>
                                     <div class="invoice19">
                                         <div class="base83"></div>
                                         <div class="icon-wrapper28">
-                                            <img
-                                                    class="icon131"
-                                                    loading="lazy"
-                                                    alt=""
-                                                    src="../public/icon-6.svg"
-                                            />
+                                            <img class="icon131" loading="lazy" alt="" src="../public/icon-6.svg"/>
                                         </div>
                                         <b class="files10">Аналитика</b>
                                     </div>
@@ -187,23 +153,13 @@
                     </div>
                 </div>
                 <div class="icon-parent25">
-                    <img
-                            class="icon132"
-                            loading="lazy"
-                            alt=""
-                            src="../public/icon-7@2x.png"
-                    />
+                    <img class="icon132" loading="lazy" alt="" src="../public/icon-7@2x.png"/>
 
                     <div class="feedback-link-parent">
                         <div class="feedback-link1">
                             <b class="send-feedback9">Обратная связь</b>
                         </div>
-                        <img
-                                class="icon133"
-                                loading="lazy"
-                                alt=""
-                                src="../public/icon-8.svg"
-                        />
+                        <img class="icon133" loading="lazy" alt="" src="../public/icon-8.svg"/>
                     </div>
                 </div>
             </div>
@@ -241,276 +197,430 @@
                     </div>
                 </div>
             </div>
-            <div class="client-form1">
-                <div class="item73">
-                    <div class="div148">Тип клиента</div>
-                    <div class="div149">Взрослый (справочник)</div>
-                    <div class="button54">
-                        <img
-                                class="feather-icon-chevron-down"
-                                loading="lazy"
-                                alt=""
-                                src="../public/feathericon--chevrondown.svg"
-                        />
+            <div class="container">
+
+                <form id="client-form1">
+                    <div class="form-section">
+                        <label for="client-type">Тип клиента</label>
+                        <select id="client-type" name="client-type" onchange="updateForm()" required>
+                            <option value="adult">Взрослый</option>
+                            <option value="child">Ребёнок</option>
+                            <option value="couple">Пара</option>
+                        </select>
                     </div>
-                </div>
-                <div class="item74">
-                    <div class="div150">ФИО клиента</div>
-                    <div class="string">Иванова Елизавета Станиславовна (string)</div>
-                </div>
-                <div class="item75">
-                    <div class="div151">Номер телефона</div>
-                    <div class="int">+7 960 307 08 92 (int)</div>
-                </div>
-                <div class="item76">
-                    <div class="div152">Почта</div>
-                    <div class="kirraaagmailcom-string">
-                        kirraaa@gmail.com (string)
-                    </div>
-                </div>
-                <div class="item77">
-                    <div class="div153">Пол</div>
-                    <div class="div154">Женский (справочник)</div>
-                    <div class="button55">
-                        <img
-                                class="feather-icon-chevron-down1"
-                                loading="lazy"
-                                alt=""
-                                src="../public/feathericon--chevrondown.svg"
-                        />
-                    </div>
-                </div>
-                <div class="item78">
-                    <div class="div155">
-                        Каким способом обратился клиент/попечитель
-                    </div>
-                    <div class="div156">Мессенджер (справочник)</div>
-                    <div class="button56">
-                        <img
-                                class="feather-icon-chevron-down2"
-                                loading="lazy"
-                                alt=""
-                                src="../public/feathericon--chevrondown.svg"
-                        />
-                    </div>
-                </div>
-                <div class="item79">
-                    <div class="div157">
-                        Дата первого обращения (запрос на консультацию)
-                    </div>
-                    <div class="int1">20.11.2021 (int)</div>
-                </div>
-                <div class="item80">
-                    <div class="div158">Дата первой консультации</div>
-                    <div class="int2">01.12.2021 (int)</div>
-                </div>
-                <div class="item81">
-                    <div class="div159">Предпочтительный формат встречи</div>
-                    <div class="div160">Онлайн (справочник)</div>
-                    <div class="button57">
-                        <img
-                                class="feather-icon-chevron-down3"
-                                loading="lazy"
-                                alt=""
-                                src="../public/feathericon--chevrondown.svg"
-                        />
-                    </div>
-                </div>
-                <div class="item82">
-                    <div class="div161">
-                        Для онлайн выбрать/указать площадку взаимодействия
-                    </div>
-                    <div class="zoom">Zoom (справочник)</div>
-                    <div class="button58">
-                        <img
-                                class="feather-icon-chevron-down4"
-                                loading="lazy"
-                                alt=""
-                                src="../public/feathericon--chevrondown.svg"
-                        />
-                    </div>
-                </div>
-                <div class="item83">
-                    <div class="div162">
-                        Для оффлайн выбрать адрес проведения встречи
-                    </div>
-                    <div class="string1">Чехова 32 (string)</div>
-                </div>
-                <div class="item84">
-                    <div class="div163">Статус клиента</div>
-                    <div class="wrapper43">
-                        <div class="div164">по запросу (справочник)</div>
-                    </div>
-                    <div class="button59">
-                        <img
-                                class="feather-icon-chevron-down5"
-                                loading="lazy"
-                                alt=""
-                                src="../public/feathericon--chevrondown.svg"
-                        />
-                    </div>
-                </div>
-                <div class="item85">
-                    <div class="div165">
-                        Первичный/изначальный запрос клиента на терапию
-                    </div>
-                    <div class="string2">(string)</div>
-                </div>
-                <div class="item86">
-                    <div class="div166">
-                        Фиксированное время/день недели для встречи (если да, то
-                        указать)
-                    </div>
-                    <div class="string3">(string)</div>
-                </div>
-                <div class="item87">
-                    <div class="div167">Финансовые условия</div>
-                </div>
-            </div>
-            <div class="details">
-                <div class="div168">Подробнее....</div>
-            </div>
-            <div class="additional-info">
-                <div class="info-fields">
-                    <div class="item88">
-                        <div class="div169">Дата рождения</div>
-                        <div class="int3">20.11.2021 (int)</div>
-                    </div>
-                    <div class="item89">
-                        <div class="div170">Адрес проживания</div>
-                        <div class="string4">Чехова 32 (string)</div>
-                    </div>
-                    <div class="item90">
-                        <div class="div171">
-                            Коллегиальные рекомендации (поле для заполнения кто вас
-                            порекомендовал клиенту)
+
+                    <div id="common-fields">
+                        <div class="form-section">
+                            <label for="full-name">ФИО клиента</label>
+                            <input type="text" id="full-name" name="full-name" required>
                         </div>
-                        <div class="string5">(string)</div>
-                    </div>
-                    <div class="item91">
-                        <div class="div172">Особые условия контракта</div>
-                        <div class="string6">(string)</div>
-                        <div class="button60">
-                            <img
-                                    class="feather-icon-chevron-down6"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
+
+                        <div class="form-section">
+                            <label for="phone-number">Номер телефона</label>
+                            <input type="tel" id="phone-number" name="phone-number" required>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="email">Почта</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="gender">Пол</label>
+                            <select id="gender" name="gender" required>
+                                <option value="male">Мужской</option>
+                                <option value="female">Женский</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="item92">
-                        <div class="div173">Семейное положение</div>
-                        <div class="div174">Женат/Замужем (справочник)</div>
-                        <div class="button61">
-                            <img
-                                    class="feather-icon-chevron-down7"
-                                    loading="lazy"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
+
+                    <div id="couple-fields" class="hidden">
+                        <div class="form-section">
+                            <label for="full-name-1">ФИО клиента 1</label>
+                            <input type="text" id="full-name-1" name="full-name-1">
+                        </div>
+
+                        <div class="form-section">
+                            <label for="phone-number-1">Номер телефона 1</label>
+                            <input type="tel" id="phone-number-1" name="phone-number-1">
+                        </div>
+
+                        <div class="form-section">
+                            <label for="email-1">Почта 1</label>
+                            <input type="email" id="email-1" name="email-1">
+                        </div>
+
+                        <div class="form-section">
+                            <label for="gender-1">Пол 1</label>
+                            <select id="gender-1" name="gender-1">
+                                <option value="male">Мужской</option>
+                                <option value="female">Женский</option>
+                            </select>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="full-name-2">ФИО клиента 2</label>
+                            <input type="text" id="full-name-2" name="full-name-2">
+                        </div>
+
+                        <div class="form-section">
+                            <label for="phone-number-2">Номер телефона 2</label>
+                            <input type="tel" id="phone-number-2" name="phone-number-2">
+                        </div>
+
+                        <div class="form-section">
+                            <label for="email-2">Почта 2</label>
+                            <input type="email" id="email-2" name="email-2">
+                        </div>
+
+                        <div class="form-section">
+                            <label for="gender-2">Пол 2</label>
+                            <select id="gender-2" name="gender-2">
+                                <option value="male">Мужской</option>
+                                <option value="female">Женский</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="item93">
-                        <div class="div175">
-                            Приоритетный канал коммуникации (выпадающий список куда
-                            писать)
+
+                    <div id="child-fields" class="hidden">
+                        <div class="form-section">
+                            <label for="who-brings">Кто приводит клиента</label>
+                            <select id="who-brings" name="who-brings" onchange="updateGuardianFields()">
+                                <option value="parent">Родитель</option>
+                                <option value="both-parents">Оба родителя</option>
+                                <option value="guardian">Попечитель</option>
+                            </select>
                         </div>
-                        <div class="telegram2">Telegram (справочник)</div>
-                        <div class="button62">
-                            <img
-                                    class="feather-icon-chevron-down8"
-                                    loading="lazy"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
+
+                        <div id="parent-fields">
+                            <div class="form-section">
+                                <label for="parent-full-name">ФИО родителя</label>
+                                <input type="text" id="parent-full-name" name="parent-full-name">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent-phone-number">Номер телефона родителя</label>
+                                <input type="tel" id="parent-phone-number" name="parent-phone-number">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent-email">Почта родителя</label>
+                                <input type="email" id="parent-email" name="parent-email">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent-gender">Пол родителя</label>
+                                <select id="parent-gender" name="parent-gender">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="both-parents-fields" class="hidden">
+                            <div class="form-section">
+                                <label for="parent1-full-name">ФИО первого родителя</label>
+                                <input type="text" id="parent1-full-name" name="parent1-full-name">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent1-phone-number">Номер телефона первого родителя</label>
+                                <input type="tel" id="parent1-phone-number" name="parent1-phone-number">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent1-email">Почта первого родителя</label>
+                                <input type="email" id="parent1-email" name="parent1-email">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent1-gender">Пол первого родителя</label>
+                                <select id="parent1-gender" name="parent1-gender">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent2-full-name">ФИО второго родителя</label>
+                                <input type="text" id="parent2-full-name" name="parent2-full-name">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent2-phone-number">Номер телефона второго родителя</label>
+                                <input type="tel" id="parent2-phone-number" name="parent2-phone-number">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent2-email">Почта второго родителя</label>
+                                <input type="email" id="parent2-email" name="parent2-email">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="parent2-gender">Пол второго родителя</label>
+                                <select id="parent2-gender" name="parent2-gender">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="guardian-fields" class="hidden">
+                            <div class="form-section">
+                                <label for="guardian-full-name">ФИО попечителя</label>
+                                <input type="text" id="guardian-full-name" name="guardian-full-name">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="guardian-phone-number">Номер телефона попечителя</label>
+                                <input type="tel" id="guardian-phone-number" name="guardian-phone-number">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="guardian-email">Почта попечителя</label>
+                                <input type="email" id="guardian-email" name="guardian-email">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="guardian-gender">Пол попечителя</label>
+                                <select id="guardian-gender" name="guardian-gender">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="item94">
-                        <div class="div176">
-                            Берется ли супервизия на данного клиента
-                        </div>
-                        <div class="div177">Да (справочник)</div>
-                        <div class="button63">
-                            <img
-                                    class="feather-icon-chevron-down9"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
-                        </div>
-                        <div class="button64">
-                            <img
-                                    class="feather-icon-chevron-down10"
-                                    loading="lazy"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
+
+                    <div class="form-section">
+                        <label for="contact-method">Каким способом обратился клиент/попечитель?</label>
+                        <select id="contact-method" name="contact-method" required>
+                            <option value="messenger">Мессенжер</option>
+                            <option value="social-network">Социальная сеть</option>
+                            <option value="aggregator">Агрегатор</option>
+                        </select>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="first-contact-date">Дата первого обращения (запрос на консультацию)</label>
+                        <input type="date" id="first-contact-date" name="first-contact-date" required>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="first-consultation-date">Дата первой консультации</label>
+                        <input type="date" id="first-consultation-date" name="first-consultation-date" required>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="meeting-format">Предпочтительный формат встречи</label>
+                        <select id="meeting-format" name="meeting-format" onchange="updateMeetingFields()" required>
+                            <option value="online" selected>Онлайн</option>
+                            <option value="offline">Оффлайн</option>
+                        </select>
+                    </div>
+
+                    <div id="online-platforms">
+                        <div class="form-section">
+                            <label for="online-platform">Выбрать/указать площадку взаимодействия</label>
+                            <select id="online-platform" name="online-platform">
+                                <option value="zoom">Zoom</option>
+                                <option value="telebridge">Телемост</option>
+                                <option value="googlemeet">Google Meet</option>
+                                <option value="telegram">Telegram</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="skype">Skype</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="item95">
-                        <div class="div178">ФИО и контакты супервизора</div>
-                        <div class="string7">(string)</div>
-                        <div class="button65">
-                            <img
-                                    class="feather-icon-chevron-down11"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
+
+                    <div id="offline-address" class="hidden">
+                        <div class="form-section">
+                            <label for="meeting-address">Адрес проведения встречи</label>
+                            <input type="text" id="meeting-address" name="meeting-address">
                         </div>
                     </div>
-                    <div class="item96">
-                        <div class="div179">
-                            Материал для следующих сеансов из супервизии
-                        </div>
-                        <div class="string8">(string)</div>
-                        <div class="button66">
-                            <img
-                                    class="feather-icon-chevron-down12"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
-                        </div>
+
+                    <div class="form-section">
+                        <label for="client-status">Статус клиента</label>
+                        <select id="client-status" name="client-status" required>
+                            <option value="regular">Регулярный</option>
+                            <option value="on-demand">По запросу</option>
+                            <option value="completed">Завершён</option>
+                            <option value="application">Заявка</option>
+                        </select>
                     </div>
-                    <div class="item97">
-                        <div class="div180">Заметки</div>
-                        <div class="string9">(string)</div>
+
+                    <div class="form-section">
+                        <label for="initial-request">Первичный/изначальный запрос клиента на терапию</label>
+                        <textarea id="initial-request" name="initial-request" required></textarea>
                     </div>
-                    <div class="item98">
-                        <div class="div181">Статус клиента (Регулярный/по запросу)</div>
-                        <div class="wrapper44">
-                            <div class="div182">по запросу (справочник)</div>
+
+                    <div class="form-section">
+                        <label for="fixed-time">Фиксированное время/день недели для встречи (если да, то
+                            указать)</label>
+                        <input type="text" id="fixed-time" name="fixed-time">
+                    </div>
+
+                    <div class="form-section">
+                        <label for="financial-terms">Финансовые условия</label>
+                        <textarea id="financial-terms" name="financial-terms" required></textarea>
+                    </div>
+                </form>
+
+                <div>
+                    <h3>Подробнее...</h3>
+                    <form id="additional-form">
+                        <div class="form-section">
+                            <label for="birth-date">Дата рождения</label>
+                            <input type="date" id="birth-date" name="birth-date" required>
                         </div>
-                        <div class="button67">
-                            <img
-                                    class="feather-icon-chevron-down13"
-                                    alt=""
-                                    src="../public/feathericon--chevrondown.svg"
-                            />
+
+                        <div class="form-section">
+                            <label for="address">Адрес проживания</label>
+                            <input type="text" id="address" name="address" required>
                         </div>
-                    </div>
-                    <div class="item99">
-                        <div class="div183">
-                            Первичный/изначальный запрос клиента на терапию
+
+                        <div class="form-section">
+                            <label for="referrals">Коллегиальные рекомендации (поле для заполнения кто вас
+                                порекомендовал клиенту)</label>
+                            <textarea id="referrals" name="referrals" required></textarea>
                         </div>
-                        <div class="div184">Текстовое поле</div>
-                    </div>
-                    <div class="item100">
-                        <div class="div185">
-                            Фиксированное время/день недели для встречи (если да, то
-                            указать)
+
+                        <div class="form-section">
+                            <label for="contract-conditions">Особые условия контракта</label>
+                            <textarea id="contract-conditions" name="contract-conditions" required></textarea>
                         </div>
-                        <div class="div186">Текстовое поле</div>
-                    </div>
-                    <div class="item101">
-                        <div class="div187">Финансовые условия</div>
-                        <div class="div188">Числовое поле</div>
-                    </div>
+
+                        <div class="form-section">
+                            <label for="marital-status">Семейное положение</label>
+                            <select id="marital-status" name="marital-status" required>
+                                <option value="married">Женат/Замужем</option>
+                                <option value="single">Холост/Незамужем</option>
+                                <option value="divorced">В разводе</option>
+                                <option value="widowed">Вдовец/Вдова</option>
+                                <option value="cohabitation">Сожительство/Несостоявшийся брак</option>
+                                <option value="officially-separated">Официальный брак с раздельным проживанием
+                                </option>
+                                <option value="lonely">Одиночество/Не в постоянных отношениях</option>
+                                <option value="family-with-children">Семьи с детьми</option>
+                            </select>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="preferred-communication-channel">Приоритетный канал коммуникации</label>
+                            <select id="preferred-communication-channel" name="preferred-communication-channel"
+                                    required>
+                                <option value="telegram">Telegram</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="viber">Viber</option>
+                                <option value="skype">Skype</option>
+                                <option value="email">Почта</option>
+                                <option value="snapchat">Snapchat</option>
+                            </select>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="supervision">Берётся ли супервизия на данного клиента</label>
+                            <select id="supervision" name="supervision" required>
+                                <option value="yes">Да</option>
+                                <option value="no">Нет</option>
+                            </select>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="supervisor-info">ФИО и контакты супервизора</label>
+                            <textarea id="supervisor-info" name="supervisor-info" required></textarea>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="supervision-material">Материал для следующих сеансов из супервизии</label>
+                            <textarea id="supervision-material" name="supervision-material" required></textarea>
+                        </div>
+
+                        <div class="form-section">
+                            <label for="notes">Заметки</label>
+                            <textarea id="notes" name="notes" required></textarea>
+                        </div>
+                    </form>
                 </div>
-            </div>
         </section>
     </main>
 </div>
 
 <script>
+        var userImage = document.getElementById("userImage");
+        if (userImage) {
+            userImage.addEventListener("click", function (e) {
+                window.location.href = "./component4.html";
+            });
+        }
+
+        var emailContainer = document.getElementById("emailContainer");
+        if (emailContainer) {
+            emailContainer.addEventListener("click", function (e) {
+                window.location.href = "./frame.html";
+            });
+        }
+
+        var dashboardContainer = document.getElementById("dashboardContainer");
+        if (dashboardContainer) {
+            dashboardContainer.addEventListener("click", function (e) {
+                window.location.href = "./component2.html";
+            });
+        }
+
+        var invoiceContainer = document.getElementById("invoiceContainer");
+        if (invoiceContainer) {
+            invoiceContainer.addEventListener("click", function (e) {
+                window.location.href = "./component3.html";
+            });
+        }
+
+        var groupContainer = document.getElementById("groupContainer");
+        if (groupContainer) {
+            groupContainer.addEventListener("click", function (e) {
+                window.location.href = "./component6.html";
+            });
+        }
+
+        var groupContainer1 = document.getElementById("groupContainer1");
+        if (groupContainer1) {
+            groupContainer1.addEventListener("click", function (e) {
+                window.location.href = "./component6.html";
+            });
+        }
+
+        var groupContainer = document.getElementById("groupContainer");
+        if (groupContainer) {
+            groupContainer.addEventListener("click", function (e) {
+                window.location.href = "./component13.html";
+            });
+        }
+
+        function updateForm() {
+            const clientType = document.getElementById('client-type').value;
+            document.getElementById('common-fields').style.display = clientType === 'adult' ? 'block' : 'none';
+            document.getElementById('couple-fields').style.display = clientType === 'couple' ? 'block' : 'none';
+            document.getElementById('child-fields').style.display = clientType === 'child' ? 'block' : 'none';
+        }
+
+        function updateGuardianFields() {
+            const whoBrings = document.getElementById('who-brings').value;
+            document.getElementById('parent-fields').style.display = whoBrings === 'parent' ? 'block' : 'none';
+            document.getElementById('both-parents-fields').style.display = whoBrings === 'both-parents' ? 'block' : 'none';
+            document.getElementById('guardian-fields').style.display = whoBrings === 'guardian' ? 'block' : 'none';
+        }
+
+        function updateMeetingFields() {
+            const meetingFormat = document.getElementById('meeting-format').value;
+            document.getElementById('online-platforms').style.display = meetingFormat === 'online' ? 'block' : 'none';
+            document.getElementById('offline-address').style.display = meetingFormat === 'offline' ? 'block' : 'none';
+        }
+
+        // Initialize form
+        updateForm();
+        updateGuardianFields();
+        updateMeetingFields();
+
     var userImage = document.getElementById("userImage");
     if (userImage) {
         userImage.addEventListener("click", function (e) {
@@ -559,6 +669,7 @@
             window.location.href = "./component13.html";
         });
     }
+
 </script>
 </body>
 </html>
