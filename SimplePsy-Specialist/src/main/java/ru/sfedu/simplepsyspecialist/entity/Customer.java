@@ -4,9 +4,7 @@ package ru.sfedu.simplepsyspecialist.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
-import ru.sfedu.simplepsyspecialist.entity.nested.Contact;
-import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
-import ru.sfedu.simplepsyspecialist.entity.nested.Status;
+import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,9 +18,10 @@ public class Customer {
     @Id
     private String id;
 
+    private TypeOfClient typeOfClient;
     private String name;
     private String surname;
-    private Status status;
+    private Status status; // TODO: Решить нужно ли это поле
     private Contact contact;
     private String description;
     private LocalDate dateOfFirstCall;
@@ -30,7 +29,46 @@ public class Customer {
     private Sex sex;
     private byte[] avatar;
     private List<String> problemsId;
-   // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
+    private TypeOfTreatment typeOfTreatment;
+    private LocalDate dateOfFirstConsultation;
+    private PreferredMeetingFormat preferredMeetingFormat;
+    private OnlineMeetingPlace onlineMeetingPlace;
+    private String offlineMeetingPlace;
+    private ClientStatus clientStatus;
+    private String clientsFirstRequestForTherapy;
+    private String fixedTimeForMeeting;
+    private String financialConditions;
+    private String residentialAddress;
+    private String collegialRecommendations;
+    private String specialTermsOfContract;
+    private FamilyStatus familyStatus;
+    private PriorityCommunicationChannel priorityCommunicationChannel;
+    private boolean IsSupervision;
+    private String supervisorsName;
+    private String supervisorsSurname;
+    private Contact supervisorsContact;
+    private String materialForNextSessionsFromSupervision;
+    private String notes;
+    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
+    // Поля для пары
+    private String partnersName;
+    private String partnersSurname;
+    private Contact partnersContact;
+    private Sex partnersSex;
+    // Поля для ребёнка
+    private LeadsClient leadsClient;
+    private String firstParentsName;
+    private String firstParentsSurname;
+    private Contact firstParentsContact;
+    private Sex firstParentsSex;
+    private String secondParentsName;
+    private String secondParentsSurname;
+    private Contact secondParentsContact;
+    private Sex secondParentsSex;
+    private String trusteesName;
+    private String trusteesSurname;
+    private Contact trusteesContact;
+    private Sex trusteesSex;
     public Customer() {
     }
 
@@ -54,6 +92,72 @@ public class Customer {
         this.sex = sex;
         this.contact = contact;
 
+    }
+
+    public Customer(String id, TypeOfClient typeOfClient, String name, String surname, Status status, Contact contact,
+                    String description, LocalDate dateOfFirstCall, LocalDate dateOfBirth, Sex sex, byte[] avatar,
+                    List<String> problemsId, TypeOfTreatment typeOfTreatment, LocalDate dateOfFirstConsultation,
+                    PreferredMeetingFormat preferredMeetingFormat, OnlineMeetingPlace onlineMeetingPlace,
+                    String offlineMeetingPlace, ClientStatus clientStatus, String clientsFirstRequestForTherapy,
+                    String fixedTimeForMeeting, String financialConditions, String residentialAddress,
+                    String collegialRecommendations, String specialTermsOfContract, FamilyStatus familyStatus,
+                    PriorityCommunicationChannel priorityCommunicationChannel, boolean isSupervision,
+                    String supervisorsName, String supervisorsSurname, Contact supervisorsContact,
+                    String materialForNextSessionsFromSupervision, String notes, String partnersName,
+                    String partnersSurname, Contact partnersContact, Sex partnersSex, LeadsClient leadsClient,
+                    String firstParentsName, String firstParentsSurname, Contact firstParentsContact,
+                    Sex firstParentsSex, String secondParentsName, String secondParentsSurname,
+                    Contact secondParentsContact, Sex secondParentsSex, String trusteesName, String trusteesSurname,
+                    Contact trusteesContact, Sex trusteesSex) {
+        this.id = id;
+        this.typeOfClient = typeOfClient;
+        this.name = name;
+        this.surname = surname;
+        this.status = status;
+        this.contact = contact;
+        this.description = description;
+        this.dateOfFirstCall = dateOfFirstCall;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.avatar = avatar;
+        this.problemsId = problemsId;
+        this.typeOfTreatment = typeOfTreatment;
+        this.dateOfFirstConsultation = dateOfFirstConsultation;
+        this.preferredMeetingFormat = preferredMeetingFormat;
+        this.onlineMeetingPlace = onlineMeetingPlace;
+        this.offlineMeetingPlace = offlineMeetingPlace;
+        this.clientStatus = clientStatus;
+        this.clientsFirstRequestForTherapy = clientsFirstRequestForTherapy;
+        this.fixedTimeForMeeting = fixedTimeForMeeting;
+        this.financialConditions = financialConditions;
+        this.residentialAddress = residentialAddress;
+        this.collegialRecommendations = collegialRecommendations;
+        this.specialTermsOfContract = specialTermsOfContract;
+        this.familyStatus = familyStatus;
+        this.priorityCommunicationChannel = priorityCommunicationChannel;
+        IsSupervision = isSupervision;
+        this.supervisorsName = supervisorsName;
+        this.supervisorsSurname = supervisorsSurname;
+        this.supervisorsContact = supervisorsContact;
+        this.materialForNextSessionsFromSupervision = materialForNextSessionsFromSupervision;
+        this.notes = notes;
+        this.partnersName = partnersName;
+        this.partnersSurname = partnersSurname;
+        this.partnersContact = partnersContact;
+        this.partnersSex = partnersSex;
+        this.leadsClient = leadsClient;
+        this.firstParentsName = firstParentsName;
+        this.firstParentsSurname = firstParentsSurname;
+        this.firstParentsContact = firstParentsContact;
+        this.firstParentsSex = firstParentsSex;
+        this.secondParentsName = secondParentsName;
+        this.secondParentsSurname = secondParentsSurname;
+        this.secondParentsContact = secondParentsContact;
+        this.secondParentsSex = secondParentsSex;
+        this.trusteesName = trusteesName;
+        this.trusteesSurname = trusteesSurname;
+        this.trusteesContact = trusteesContact;
+        this.trusteesSex = trusteesSex;
     }
 
     public String getId() {
@@ -133,6 +237,334 @@ public class Customer {
         this.problemsId = problemsId;
     }
 
+    public TypeOfClient getTypeOfClient() {
+        return typeOfClient;
+    }
+
+    public void setTypeOfClient(TypeOfClient typeOfClient) {
+        this.typeOfClient = typeOfClient;
+    }
+
+    public void setDateOfFirstCall(LocalDate dateOfFirstCall) {
+        this.dateOfFirstCall = dateOfFirstCall;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public TypeOfTreatment getTypeOfTreatment() {
+        return typeOfTreatment;
+    }
+
+    public void setTypeOfTreatment(TypeOfTreatment typeOfTreatment) {
+        this.typeOfTreatment = typeOfTreatment;
+    }
+
+    public LocalDate getDateOfFirstConsultation() {
+        return dateOfFirstConsultation;
+    }
+
+    public void setDateOfFirstConsultation(LocalDate dateOfFirstConsultation) {
+        this.dateOfFirstConsultation = dateOfFirstConsultation;
+    }
+
+    public PreferredMeetingFormat getPreferredMeetingFormat() {
+        return preferredMeetingFormat;
+    }
+
+    public void setPreferredMeetingFormat(PreferredMeetingFormat preferredMeetingFormat) {
+        this.preferredMeetingFormat = preferredMeetingFormat;
+    }
+
+    public OnlineMeetingPlace getOnlineMeetingPlace() {
+        return onlineMeetingPlace;
+    }
+
+    public void setOnlineMeetingPlace(OnlineMeetingPlace onlineMeetingPlace) {
+        this.onlineMeetingPlace = onlineMeetingPlace;
+    }
+
+    public String getOfflineMeetingPlace() {
+        return offlineMeetingPlace;
+    }
+
+    public void setOfflineMeetingPlace(String offlineMeetingPlace) {
+        this.offlineMeetingPlace = offlineMeetingPlace;
+    }
+
+    public ClientStatus getClientStatus() {
+        return clientStatus;
+    }
+
+    public void setClientStatus(ClientStatus clientStatus) {
+        this.clientStatus = clientStatus;
+    }
+
+    public String getClientsFirstRequestForTherapy() {
+        return clientsFirstRequestForTherapy;
+    }
+
+    public void setClientsFirstRequestForTherapy(String clientsFirstRequestForTherapy) {
+        this.clientsFirstRequestForTherapy = clientsFirstRequestForTherapy;
+    }
+
+    public String getFixedTimeForMeeting() {
+        return fixedTimeForMeeting;
+    }
+
+    public void setFixedTimeForMeeting(String fixedTimeForMeeting) {
+        this.fixedTimeForMeeting = fixedTimeForMeeting;
+    }
+
+    public String getFinancialConditions() {
+        return financialConditions;
+    }
+
+    public void setFinancialConditions(String financialConditions) {
+        this.financialConditions = financialConditions;
+    }
+
+    public String getResidentialAddress() {
+        return residentialAddress;
+    }
+
+    public void setResidentialAddress(String residentialAddress) {
+        this.residentialAddress = residentialAddress;
+    }
+
+    public String getCollegialRecommendations() {
+        return collegialRecommendations;
+    }
+
+    public void setCollegialRecommendations(String collegialRecommendations) {
+        this.collegialRecommendations = collegialRecommendations;
+    }
+
+    public String getSpecialTermsOfContract() {
+        return specialTermsOfContract;
+    }
+
+    public void setSpecialTermsOfContract(String specialTermsOfContract) {
+        this.specialTermsOfContract = specialTermsOfContract;
+    }
+
+    public FamilyStatus getFamilyStatus() {
+        return familyStatus;
+    }
+
+    public void setFamilyStatus(FamilyStatus familyStatus) {
+        this.familyStatus = familyStatus;
+    }
+
+    public PriorityCommunicationChannel getPriorityCommunicationChannel() {
+        return priorityCommunicationChannel;
+    }
+
+    public void setPriorityCommunicationChannel(PriorityCommunicationChannel priorityCommunicationChannel) {
+        this.priorityCommunicationChannel = priorityCommunicationChannel;
+    }
+
+    public boolean isSupervision() {
+        return IsSupervision;
+    }
+
+    public void setSupervision(boolean supervision) {
+        IsSupervision = supervision;
+    }
+
+    public String getSupervisorsName() {
+        return supervisorsName;
+    }
+
+    public void setSupervisorsName(String supervisorsName) {
+        this.supervisorsName = supervisorsName;
+    }
+
+    public String getSupervisorsSurname() {
+        return supervisorsSurname;
+    }
+
+    public void setSupervisorsSurname(String supervisorsSurname) {
+        this.supervisorsSurname = supervisorsSurname;
+    }
+
+    public Contact getSupervisorsContact() {
+        return supervisorsContact;
+    }
+
+    public void setSupervisorsContact(Contact supervisorsContact) {
+        this.supervisorsContact = supervisorsContact;
+    }
+
+    public String getMaterialForNextSessionsFromSupervision() {
+        return materialForNextSessionsFromSupervision;
+    }
+
+    public void setMaterialForNextSessionsFromSupervision(String materialForNextSessionsFromSupervision) {
+        this.materialForNextSessionsFromSupervision = materialForNextSessionsFromSupervision;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getPartnersName() {
+        return partnersName;
+    }
+
+    public void setPartnersName(String partnersName) {
+        this.partnersName = partnersName;
+    }
+
+    public String getPartnersSurname() {
+        return partnersSurname;
+    }
+
+    public void setPartnersSurname(String partnersSurname) {
+        this.partnersSurname = partnersSurname;
+    }
+
+    public Contact getPartnersContact() {
+        return partnersContact;
+    }
+
+    public void setPartnersContact(Contact partnersContact) {
+        this.partnersContact = partnersContact;
+    }
+
+    public Sex getPartnersSex() {
+        return partnersSex;
+    }
+
+    public void setPartnersSex(Sex partnersSex) {
+        this.partnersSex = partnersSex;
+    }
+
+    public LeadsClient getLeadsClient() {
+        return leadsClient;
+    }
+
+    public void setLeadsClient(LeadsClient leadsClient) {
+        this.leadsClient = leadsClient;
+    }
+
+    public String getFirstParentsName() {
+        return firstParentsName;
+    }
+
+    public void setFirstParentsName(String firstParentsName) {
+        this.firstParentsName = firstParentsName;
+    }
+
+    public String getFirstParentsSurname() {
+        return firstParentsSurname;
+    }
+
+    public void setFirstParentsSurname(String firstParentsSurname) {
+        this.firstParentsSurname = firstParentsSurname;
+    }
+
+    public Contact getFirstParentsContact() {
+        return firstParentsContact;
+    }
+
+    public void setFirstParentsContact(Contact firstParentsContact) {
+        this.firstParentsContact = firstParentsContact;
+    }
+
+    public Sex getFirstParentsSex() {
+        return firstParentsSex;
+    }
+
+    public void setFirstParentsSex(Sex firstParentsSex) {
+        this.firstParentsSex = firstParentsSex;
+    }
+
+    public String getSecondParentsName() {
+        return secondParentsName;
+    }
+
+    public void setSecondParentsName(String secondParentsName) {
+        this.secondParentsName = secondParentsName;
+    }
+
+    public String getSecondParentsSurname() {
+        return secondParentsSurname;
+    }
+
+    public void setSecondParentsSurname(String secondParentsSurname) {
+        this.secondParentsSurname = secondParentsSurname;
+    }
+
+    public Contact getSecondParentsContact() {
+        return secondParentsContact;
+    }
+
+    public void setSecondParentsContact(Contact secondParentsContact) {
+        this.secondParentsContact = secondParentsContact;
+    }
+
+    public Sex getSecondParentsSex() {
+        return secondParentsSex;
+    }
+
+    public void setSecondParentsSex(Sex secondParentsSex) {
+        this.secondParentsSex = secondParentsSex;
+    }
+
+    public String getTrusteesName() {
+        return trusteesName;
+    }
+
+    public void setTrusteesName(String trusteesName) {
+        this.trusteesName = trusteesName;
+    }
+
+    public String getTrusteesSurname() {
+        return trusteesSurname;
+    }
+
+    public void setTrusteesSurname(String trusteesSurname) {
+        this.trusteesSurname = trusteesSurname;
+    }
+
+    public Contact getTrusteesContact() {
+        return trusteesContact;
+    }
+
+    public void setTrusteesContact(Contact trusteesContact) {
+        this.trusteesContact = trusteesContact;
+    }
+
+    public Sex getTrusteesSex() {
+        return trusteesSex;
+    }
+
+    public void setTrusteesSex(Sex trusteesSex) {
+        this.trusteesSex = trusteesSex;
+    }
+
     public void addProblem(String problemId) {
         if (problemsId == null)
         {
@@ -148,6 +580,5 @@ public class Customer {
                 ", contact=" + contact +
                 '}';
     }
-
 
 }
