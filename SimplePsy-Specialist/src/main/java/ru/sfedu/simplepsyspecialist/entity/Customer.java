@@ -91,7 +91,6 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.contact = contact;
-
     }
 
     public Customer(String id, TypeOfClient typeOfClient, String name, String surname, Status status, Contact contact,

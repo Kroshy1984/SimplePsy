@@ -48,7 +48,7 @@ public class CustomerController {
     @PostMapping("/new")
     public ResponseEntity<String> newCustomer(@RequestBody Customer customer)
     {
-        System.out.println("Got the new customer:\n" +customer.getName());
+        System.out.println("Got the new customer:\n" + customer.getName());
         System.out.println(customer.getContact().getEmail());
         System.out.println(customer.getName());
         System.out.println(customer.getProblemsId());
