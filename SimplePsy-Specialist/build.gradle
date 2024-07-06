@@ -23,9 +23,9 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    implementation group: 'io.micrometer', name: 'micrometer-tracing-bridge-brave'
-    implementation group: 'io.zipkin.reporter2', name: 'zipkin-reporter-brave'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+//    implementation group: 'io.micrometer', name: 'micrometer-tracing-bridge-brave'
+//    implementation group: 'io.zipkin.reporter2', name: 'zipkin-reporter-brave'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.telegram:telegrambots-spring-boot-starter:6.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'

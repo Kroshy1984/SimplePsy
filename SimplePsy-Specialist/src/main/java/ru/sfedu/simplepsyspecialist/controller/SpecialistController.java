@@ -15,12 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.*;
-import ru.sfedu.simplepsyspecialist.entity.nested.Contact;
-import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -273,36 +270,23 @@ public class SpecialistController {
     }
 
     @PostMapping("/customers/new")
-    public String createNewCustomer(@RequestParam("name") String name,
-                                    @RequestParam("surname") String surname,
-                                    @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
-                                    @RequestParam("gender") String gender,
-                                    @RequestParam("contact.phone") String phone,
-                                    @RequestParam("contact.email") String email,
-                                    @RequestParam("contact.tg") String tg,
-                                    @RequestParam("problem") String problem,
+    public String createNewCustomer(@RequestBody Customer customer,
                                     @AuthenticationPrincipal UserDetails userDetails) throws IOException {
-        System.out.println("Got the new customer:\n" + name);
-        System.out.println(surname);
-        System.out.println(dateOfBirth);
-        System.out.println(gender);
-        System.out.println(phone);
-        System.out.println(email);
-        System.out.println(tg);
-        System.out.println(problem);
-        Contact contact = new Contact(phone, email, tg);
-        Sex sex = gender.equals("MALE") ? Sex.MALE : Sex.FEMALE;
-        String customerId = specialistService.saveCustomer(new Customer(name, surname, dateOfBirth, sex , contact), problem);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        specialist.addCustomerId(customerId);
-        specialistService.save(specialist);
+        //System.out.println("Got the new customer:\n" + name);
+        System.out.println(customer.getSurname());
+        System.out.println(customer.getDateOfBirth());
+        System.out.println(customer.getSex());
+        System.out.println(customer.getContact().getPhone());
+//        System.out.println(email);
+//        System.out.println(tg);
+//        System.out.println(problem);
+//        Contact contact = new Contact(phone, email, tg);
+//        Sex sex = gender.equals("MALE") ? Sex.MALE : Sex.FEMALE;
+//        String customerId = specialistService.saveCustomer(new Customer(name, surname, dateOfBirth, sex , contact), problem);
+//        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+//        specialist.addCustomerId(customerId);
+//        specialistService.save(specialist);
         return "redirect:/SimplePsySpecialist/V1/specialist/customers";
-    }
-
-    @GetMapping("/customer-form")
-    public String getClientForm(Model model) {
-        model.addAttribute("customerDTO", new Customer());
-        return "new-front/customer/customer-creation";
     }
 
     @GetMapping("/find-customer/byProblemId")

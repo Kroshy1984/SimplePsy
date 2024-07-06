@@ -3,7 +3,6 @@ package ru.sfedu.simplepsyspecialist.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
 import java.io.IOException;
@@ -24,10 +23,8 @@ public class Customer {
     private Status status; // TODO: Решить нужно ли это поле
     private Contact contact;
     private String description;
-    private LocalDate dateOfFirstCall;
     private LocalDate dateOfBirth;
     private Sex sex;
-    private byte[] avatar;
     private List<String> problemsId;
     private TypeOfTreatment typeOfTreatment;
     private LocalDate dateOfFirstConsultation;
@@ -72,18 +69,12 @@ public class Customer {
     public Customer() {
     }
 
+
     public Customer(String name, Status status, Contact contact) {
         this.name = name;
         this.status = status;
         this.contact = contact;
-    }
-
-    public Customer(String name, Status status, Contact contact, String dateOfFirstCall) {
-        this.name = name;
-        this.status = status;
-        this.contact = contact;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.dateOfFirstCall = LocalDate.parse(dateOfFirstCall, formatter);
     }
     public Customer(String name, String surname, LocalDate dateOfBirth, Sex sex, Contact contact) throws IOException {
         this.name = name;
@@ -94,7 +85,7 @@ public class Customer {
     }
 
     public Customer(String id, TypeOfClient typeOfClient, String name, String surname, Status status, Contact contact,
-                    String description, LocalDate dateOfFirstCall, LocalDate dateOfBirth, Sex sex, byte[] avatar,
+                    String description, LocalDate dateOfBirth, Sex sex,
                     List<String> problemsId, TypeOfTreatment typeOfTreatment, LocalDate dateOfFirstConsultation,
                     PreferredMeetingFormat preferredMeetingFormat, OnlineMeetingPlace onlineMeetingPlace,
                     String offlineMeetingPlace, ClientStatus clientStatus, String clientsFirstRequestForTherapy,
@@ -115,10 +106,8 @@ public class Customer {
         this.status = status;
         this.contact = contact;
         this.description = description;
-        this.dateOfFirstCall = dateOfFirstCall;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
-        this.avatar = avatar;
         this.problemsId = problemsId;
         this.typeOfTreatment = typeOfTreatment;
         this.dateOfFirstConsultation = dateOfFirstConsultation;
@@ -199,15 +188,6 @@ public class Customer {
         this.contact = contact;
     }
 
-    public String getDateOfFirstCall() {
-        return dateOfFirstCall.toString();
-    }
-
-    public void setDateOfFirstCall(String dateOfFirstCall) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.dateOfFirstCall = LocalDate.parse(dateOfFirstCall, formatter);
-    }
-
     public String getDescription() {
         return description;
     }
@@ -216,17 +196,6 @@ public class Customer {
         this.description = description;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MultipartFile avatar) throws IOException {
-        this.avatar = avatar.getBytes();
-    }
-    public void setByteAvatar(byte[] avatar)
-    {
-        this.avatar = avatar;
-    }
 
     public List<String> getProblemsId() {
         return problemsId;
@@ -244,10 +213,6 @@ public class Customer {
         this.typeOfClient = typeOfClient;
     }
 
-    public void setDateOfFirstCall(LocalDate dateOfFirstCall) {
-        this.dateOfFirstCall = dateOfFirstCall;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -262,10 +227,6 @@ public class Customer {
 
     public void setSex(Sex sex) {
         this.sex = sex;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
     }
 
     public TypeOfTreatment getTypeOfTreatment() {

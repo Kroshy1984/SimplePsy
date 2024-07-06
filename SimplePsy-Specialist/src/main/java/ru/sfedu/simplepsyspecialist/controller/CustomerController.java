@@ -2,17 +2,20 @@ package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RestController
+@Controller
 @RequestMapping("/SimplePsy/V1/customer")
 public class CustomerController {
 
@@ -145,5 +148,22 @@ public class CustomerController {
             System.out.println("Problems list is empty!");
             return ResponseEntity.ok(new ArrayList<>());
         }
+    }
+    @GetMapping("/customer-form")
+    public String getClientForm(Model model) {
+        model.addAttribute("customerDTO", new Customer());
+        return "new-front/customer/customer-creation";
+    }
+    @PostMapping("/customers/new")
+    public Customer createNewCustomer(@RequestBody Customer customer) throws IOException {
+        //System.out.println("Got the new customer:\n" + name);
+        System.out.println(customer.getSurname());
+        System.out.println(customer.getDateOfBirth());
+        System.out.println(customer.getSex());
+        Customer newCustomer = customerService.saveCustomer(customer);
+        System.out.println(newCustomer.getSurname());
+        System.out.println(newCustomer.getDateOfBirth());
+        System.out.println(newCustomer.getSex());
+        return newCustomer;
     }
 }

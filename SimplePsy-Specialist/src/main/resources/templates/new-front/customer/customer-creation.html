@@ -128,16 +128,16 @@
                             <div class="applications1">
                                 <b class="b117">Заявки</b>
                             </div>
-                            <div class="frame-parent106" id="groupContainer">
-                                <div class="rectangle-parent89">
-                                    <div class="frame-child115"></div>
-                                    <b class="empty">20.02.2024</b>
-                                </div>
-                                <div class="rectangle-parent90">
-                                    <div class="frame-child116"></div>
-                                    <b class="b118">Овсянникова Юля Матвеевна</b>
-                                </div>
-                            </div>
+<!--                            <div class="frame-parent106" id="groupContainer">-->
+<!--                                <div class="rectangle-parent89">-->
+<!--                                    <div class="frame-child115"></div>-->
+<!--                                    <b class="empty">20.02.2024</b>-->
+<!--                                </div>-->
+<!--                                <div class="rectangle-parent90">-->
+<!--                                    <div class="frame-child116"></div>-->
+<!--                                    <b class="b118">Овсянникова Юля Матвеевна</b>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="frame-parent107" id="groupContainer1">
                                 <div class="rectangle-parent91">
                                     <div class="frame-child117"></div>
@@ -191,6 +191,7 @@
                         <div class="div146">Сохранить</div>
                     </div>
                     <div class="rectangle-parent98">
+
                         <div class="frame-child124"></div>
                         <div class="div147">Ссылка на анкету</div>
                     </div>
@@ -198,7 +199,7 @@
             </div>
             <div class="container">
 
-                <form id="client-form1" th:object="${customerDTO}" th:action="@{/SimplePsySpecialist/V1/specialist/login}" method="post">
+                <form id="client-form1" th:object="${customerDTO}" th:action="@{/SimplePsy/V1/customer/customers/new}" method="post">
                     <div class="form-section">
                         <label for="client-type">Тип клиента</label>
                         <select id="client-type" name="client-type" onchange="updateForm()" required>
@@ -211,7 +212,8 @@
                     <div id="common-fields">
                         <div class="form-section">
                             <label for="full-name">ФИО клиента</label>
-                            <input type="text" id="full-name" th:name="full-name" required>
+                            <input type="text" id="full-name" th:name="name" required>
+                            <input type="text"  th:name="surname" required>
                         </div>
 
                         <div class="form-section">
@@ -539,6 +541,7 @@
                             <label for="notes">Заметки</label>
                             <textarea id="notes" th:name="notes" required></textarea>
                         </div>
+                        <button type="submit">Отправить</button>
                     </form>
                 </div>
             </div>

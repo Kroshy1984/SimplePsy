@@ -1,7 +1,7 @@
 package ru.sfedu.simplepsyspecialist.entity.nested;
 
 public enum ClientStatus {
-    REGULAR,
+    regular,
     ON_REQUEST,
     COMPLETED,
     APPLICATION
