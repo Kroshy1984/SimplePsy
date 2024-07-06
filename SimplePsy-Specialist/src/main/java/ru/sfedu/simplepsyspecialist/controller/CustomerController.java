@@ -155,7 +155,7 @@ public class CustomerController {
         return "new-front/customer/customer-creation";
     }
     @PostMapping("/customers/new")
-    public Customer createNewCustomer(@RequestBody Customer customer) throws IOException {
+    public ResponseEntity<String> createNewCustomer(Customer customer) throws IOException {
         //System.out.println("Got the new customer:\n" + name);
         System.out.println(customer.getSurname());
         System.out.println(customer.getDateOfBirth());
@@ -164,6 +164,6 @@ public class CustomerController {
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
         System.out.println(newCustomer.getSex());
-        return newCustomer;
+        return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
     }
 }

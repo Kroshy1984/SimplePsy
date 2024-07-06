@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, width=device-width"/>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}"/>
@@ -198,7 +198,6 @@
                 </div>
             </div>
             <div class="container">
-
                 <form id="client-form1" th:object="${customerDTO}" th:action="@{/SimplePsy/V1/customer/customers/new}" method="post">
                     <div class="form-section">
                         <label for="client-type">Тип клиента</label>
@@ -465,11 +464,9 @@
                         <label for="financial-terms">Финансовые условия</label>
                         <textarea id="financial-terms" th:name="financial-terms" required></textarea>
                     </div>
-                </form>
 
-                <div>
-                    <h3>Подробнее...</h3>
-                    <form id="additional-form">
+                    <div>
+                        <h3>Подробнее...</h3>
                         <div class="form-section">
                             <label for="birth-date">Дата рождения</label>
                             <input type="date" id="birth-date" th:name="birth-date" required>
@@ -541,9 +538,9 @@
                             <label for="notes">Заметки</label>
                             <textarea id="notes" th:name="notes" required></textarea>
                         </div>
-                        <button type="submit">Отправить</button>
-                    </form>
-                </div>
+                    </div>
+                    <button type="submit">Отправить</button>
+                </form>
             </div>
         </section>
     </main>
