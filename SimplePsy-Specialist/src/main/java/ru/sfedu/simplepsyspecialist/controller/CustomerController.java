@@ -157,6 +157,7 @@ public class CustomerController {
     @PostMapping("/customers/new")
     public ResponseEntity<String> createNewCustomer(Customer customer) throws IOException {
         //System.out.println("Got the new customer:\n" + name);
+        customer.cleanAttributes();
         System.out.println(customer.getSurname());
         System.out.println(customer.getDateOfBirth());
         System.out.println(customer.getSex());

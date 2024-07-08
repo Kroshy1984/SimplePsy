@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -553,4 +554,23 @@ public class Customer {
                 '}';
     }
 
+        public void cleanAttributes() {
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                Object value = field.get(this);
+                if (value instanceof String && ((String) value).isEmpty()) {
+                    field.set(this, null);
+                } else if (value == null) {
+                } else if (value instanceof List && ((List<?>) value).isEmpty()) {
+                    field.set(this, null);
+                } else if (value instanceof LocalDate && value.equals(LocalDate.of(1000, 1, 1))) {
+                    field.set(this, null);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
