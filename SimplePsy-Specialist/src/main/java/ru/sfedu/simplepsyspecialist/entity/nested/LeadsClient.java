@@ -1,7 +1,7 @@
 package ru.sfedu.simplepsyspecialist.entity.nested;
 
 public enum LeadsClient {
-    PARENTS,
+    PARENT,
     BOTH_PARENTS,
     GUARDIAN
 }

@@ -201,35 +201,35 @@
                 <form id="client-form1" th:object="${customerDTO}" th:action="@{/SimplePsy/V1/customer/customers/new}" method="post">
                     <div class="form-section">
                         <label for="client-type">Тип клиента</label>
-                        <select id="client-type" name="client-type" onchange="updateForm()" required>
-                            <option value="adult">Взрослый</option>
-                            <option value="child">Ребёнок</option>
-                            <option value="couple">Пара</option>
+                        <select id="client-type" name="client-type" onchange="updateForm()">
+                            <option value="ADULT">Взрослый</option>
+                            <option value="CHILD">Ребёнок</option>
+                            <option value="COUPLE">Пара</option>
                         </select>
                     </div>
 
                     <div id="common-fields">
                         <div class="form-section">
                             <label for="full-name">ФИО клиента</label>
-                            <input type="text" id="full-name" th:name="name" required>
-                            <input type="text"  th:name="surname" required>
+                            <input type="text" id="full-name" th:name="name">
+                            <input type="text" th:name="surname">
                         </div>
 
                         <div class="form-section">
                             <label for="phone-number">Номер телефона</label>
-                            <input type="tel" id="phone-number" th:name="contact.phone" required>
+                            <input type="tel" id="phone-number" th:name="contact.phone">
                         </div>
 
                         <div class="form-section">
                             <label for="email">Почта</label>
-                            <input type="email" id="email" th:name="contact.email" required>
+                            <input type="email" id="email" th:name="contact.email">
                         </div>
 
                         <div class="form-section">
                             <label for="gender">Пол</label>
-                            <select id="gender" th:name="sex" required>
-                                <option value="male">Мужской</option>
-                                <option value="female">Женский</option>
+                            <select id="gender" th:name="sex">
+                                <option value="MALE">Мужской</option>
+                                <option value="FEMALE">Женский</option>
                             </select>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                         <div class="form-section">
                             <label for="full-name-1">ФИО клиента 1</label>
                             <input type="text" id="full-name-1" th:name="name">
-                            <input type="text"  th:name="surname" required>
+                            <input type="text" th:name="surname">
                         </div>
 
                         <div class="form-section">
@@ -254,15 +254,15 @@
                         <div class="form-section">
                             <label for="gender-1">Пол 1</label>
                             <select id="gender-1" th:name="sex">
-                                <option value="male">Мужской</option>
-                                <option value="female">Женский</option>
+                                <option value="MALE">Мужской</option>
+                                <option value="FEMALE">Женский</option>
                             </select>
                         </div>
 
                         <div class="form-section">
                             <label for="full-name-2">ФИО клиента 2</label>
                             <input type="text" id="full-name-2" th:name="partnersName">
-                            <input type="text"  th:name="partnersSurname" required>
+                            <input type="text" th:name="partnersSurname">
                         </div>
 
                         <div class="form-section">
@@ -278,8 +278,8 @@
                         <div class="form-section">
                             <label for="gender-2">Пол 2</label>
                             <select id="gender-2" th:name="partnersSex">
-                                <option value="male">Мужской</option>
-                                <option value="female">Женский</option>
+                                <option value="MALE">Мужской</option>
+                                <option value="FEMALE">Женский</option>
                             </select>
                         </div>
                     </div>
@@ -288,9 +288,9 @@
                         <div class="form-section">
                             <label for="who-brings">Кто приводит клиента</label>
                             <select id="who-brings" th:name="leadsClient" onchange="updateGuardianFields()">
-                                <option value="parent">Родитель</option>
-                                <option value="both-parents">Оба родителя</option>
-                                <option value="guardian">Попечитель</option>
+                                <option value="PARENT">Родитель</option>
+                                <option value="BOTH_PARENTS">Оба родителя</option>
+                                <option value="GUARDIAN">Попечитель</option>
                             </select>
                         </div>
 
@@ -298,7 +298,7 @@
                             <div class="form-section">
                                 <label for="parent-full-name">ФИО родителя</label>
                                 <input type="text" id="parent-full-name" th:name="firstParentsName">
-                                <input type="text"  th:name="firstParentsSurname" required>
+                                <input type="text" th:name="firstParentsSurname">
                             </div>
 
                             <div class="form-section">
@@ -314,8 +314,8 @@
                             <div class="form-section">
                                 <label for="parent-gender">Пол родителя</label>
                                 <select id="parent-gender" th:name="firstParentsSex">
-                                    <option value="male">Мужской</option>
-                                    <option value="female">Женский</option>
+                                    <option value="MALE">Мужской</option>
+                                    <option value="FEMALE">Женский</option>
                                 </select>
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                             <div class="form-section">
                                 <label for="parent1-full-name">ФИО первого родителя</label>
                                 <input type="text" id="parent1-full-name" th:name="firstParentsName">
-                                <input type="text"  th:name="firstParentsSurname" required>
+                                <input type="text" th:name="firstParentsSurname">
                             </div>
 
                             <div class="form-section">
@@ -340,15 +340,15 @@
                             <div class="form-section">
                                 <label for="parent1-gender">Пол первого родителя</label>
                                 <select id="parent1-gender" th:name="firstParentsSex">
-                                    <option value="male">Мужской</option>
-                                    <option value="female">Женский</option>
+                                    <option value="MALE">Мужской</option>
+                                    <option value="FEMALE">Женский</option>
                                 </select>
                             </div>
 
                             <div class="form-section">
                                 <label for="parent2-full-name">ФИО второго родителя</label>
                                 <input type="text" id="parent2-full-name" th:name="secondParentsName">
-                                <input type="text"  th:name="secondParentsSurname" required>
+                                <input type="text" th:name="secondParentsSurname">
                             </div>
 
                             <div class="form-section">
@@ -364,8 +364,8 @@
                             <div class="form-section">
                                 <label for="parent2-gender">Пол второго родителя</label>
                                 <select id="parent2-gender" th:name="secondParentsSex">
-                                    <option value="male">Мужской</option>
-                                    <option value="female">Женский</option>
+                                    <option value="MALE">Мужской</option>
+                                    <option value="FEMALE">Женский</option>
                                 </select>
                             </div>
                         </div>
@@ -374,7 +374,7 @@
                             <div class="form-section">
                                 <label for="guardian-full-name">ФИО попечителя</label>
                                 <input type="text" id="guardian-full-name" th:name="trusteesName">
-                                <input type="text"  th:name="trusteesSurname" required>
+                                <input type="text" th:name="trusteesSurname">
                             </div>
 
                             <div class="form-section">
@@ -390,8 +390,8 @@
                             <div class="form-section">
                                 <label for="guardian-gender">Пол попечителя</label>
                                 <select id="guardian-gender" th:name="trusteesSex">
-                                    <option value="male">Мужской</option>
-                                    <option value="female">Женский</option>
+                                    <option value="MALE">Мужской</option>
+                                    <option value="FEMALE">Женский</option>
                                 </select>
                             </div>
                         </div>
@@ -399,28 +399,28 @@
 
                     <div class="form-section">
                         <label for="contact-method">Каким способом обратился клиент/попечитель?</label>
-                        <select id="contact-method" th:name="typeOfTreatment" required>
-                            <option value="messenger">Мессенжер</option>
-                            <option value="social-network">Социальная сеть</option>
-                            <option value="aggregator">Агрегатор</option>
+                        <select id="contact-method" th:name="typeOfTreatment">
+                            <option value="MESSENGER">Мессенжер</option>
+                            <option value="SOCIAL_NETWORK">Социальная сеть</option>
+                            <option value="AGGREGATOR">Агрегатор</option>
                         </select>
                     </div>
 
                     <div class="form-section">
                         <label for="first-contact-date">Дата первого обращения (запрос на консультацию)</label>
-                        <input type="date" id="first-contact-date" th:name="dateOfFirstRequest" required>
+                        <input type="date" id="first-contact-date" th:name="dateOfFirstRequest">
                     </div>
 
                     <div class="form-section">
                         <label for="first-consultation-date">Дата первой консультации</label>
-                        <input type="date" id="first-consultation-date" th:name="dateOfFirstConsultation" required>
+                        <input type="date" id="first-consultation-date" th:name="dateOfFirstConsultation">
                     </div>
 
                     <div class="form-section">
                         <label for="meeting-format">Предпочтительный формат встречи</label>
-                        <select id="meeting-format" th:name="preferredMeetingFormat" onchange="updateMeetingFields()" required>
-                            <option value="online" selected>Онлайн</option>
-                            <option value="offline">Оффлайн</option>
+                        <select id="meeting-format" th:name="preferredMeetingFormat" onchange="updateMeetingFields()">
+                            <option value="ONLINE" selected>Онлайн</option>
+                            <option value="OFFLINE">Оффлайн</option>
                         </select>
                     </div>
 
@@ -428,12 +428,12 @@
                         <div class="form-section">
                             <label for="online-platform">Выбрать/указать площадку взаимодействия</label>
                             <select id="online-platform" th:name="onlineMeetingPlace">
-                                <option value="zoom">Zoom</option>
-                                <option value="telebridge">Телемост</option>
-                                <option value="googlemeet">Google Meet</option>
-                                <option value="telegram">Telegram</option>
-                                <option value="whatsapp">WhatsApp</option>
-                                <option value="skype">Skype</option>
+                                <option value="ZOOM">Zoom</option>
+                                <option value="TELEMOST">Телемост</option>
+                                <option value="GOOGLE_MEET">Google Meet</option>
+                                <option value="TELEGRAM">Telegram</option>
+                                <option value="WHATSAPP">WhatsApp</option>
+                                <option value="SKYPE">Skype</option>
                             </select>
                         </div>
                     </div>
@@ -447,17 +447,17 @@
 
                     <div class="form-section">
                         <label for="client-status">Статус клиента</label>
-                        <select id="client-status" th:name="clientStatus" required>
-                            <option value="regular">Регулярный</option>
-                            <option value="on-demand">По запросу</option>
-                            <option value="completed">Завершён</option>
-                            <option value="application">Заявка</option>
+                        <select id="client-status" th:name="clientStatus">
+                            <option value="REGULAR">Регулярный</option>
+                            <option value="ON_REQUEST">По запросу</option>
+                            <option value="COMPLETED">Завершён</option>
+                            <option value="APPLICATION">Заявка</option>
                         </select>
                     </div>
 
                     <div class="form-section">
                         <label for="initial-request">Первичный/изначальный запрос клиента на терапию</label>
-                        <textarea id="initial-request" th:name="clientsFirstRequestForTherapy" required></textarea>
+                        <textarea id="initial-request" th:name="clientsFirstRequestForTherapy"></textarea>
                     </div>
 
                     <div class="form-section">
@@ -468,84 +468,82 @@
 
                     <div class="form-section">
                         <label for="financial-terms">Финансовые условия</label>
-                        <textarea id="financial-terms" th:name="financialConditions" required></textarea>
+                        <textarea id="financial-terms" th:name="financialConditions"></textarea>
                     </div>
 
                     <div>
                         <h3>Подробнее...</h3>
                         <div class="form-section">
                             <label for="birth-date">Дата рождения</label>
-                            <input type="date" id="birth-date" th:name="dateOfBirth" required>
+                            <input type="date" id="birth-date" th:name="dateOfBirth">
                         </div>
 
                         <div class="form-section">
                             <label for="address">Адрес проживания</label>
-                            <input type="text" id="address" th:name="residentialAddress" required>
+                            <input type="text" id="address" th:name="residentialAddress">
                         </div>
 
                         <div class="form-section">
                             <label for="referrals">Коллегиальные рекомендации (поле для заполнения кто вас
                                 порекомендовал клиенту)</label>
-                            <textarea id="referrals" th:name="collegialRecommendations" required></textarea>
+                            <textarea id="referrals" th:name="collegialRecommendations"></textarea>
                         </div>
 
                         <div class="form-section">
                             <label for="contract-conditions">Особые условия контракта</label>
-                            <textarea id="contract-conditions" th:name="specialTermsOfContract" required></textarea>
+                            <textarea id="contract-conditions" th:name="specialTermsOfContract"></textarea>
                         </div>
 
                         <div class="form-section">
                             <label for="marital-status">Семейное положение</label>
-                            <select id="marital-status" th:name="familyStatus" required>
-                                <option value="married">Женат/Замужем</option>
-                                <option value="single">Холост/Незамужем</option>
-                                <option value="divorced">В разводе</option>
-                                <option value="widowed">Вдовец/Вдова</option>
-                                <option value="cohabitation">Сожительство/Несостоявшийся брак</option>
-                                <option value="officially-separated">Официальный брак с раздельным проживанием
+                            <select id="marital-status" th:name="familyStatus">
+                                <option value="MARRIED">Женат/Замужем</option>
+                                <option value="SINGLE">Холост/Незамужем</option>
+                                <option value="DIVORCED">В разводе</option>
+                                <option value="WIDOWED">Вдовец/Вдова</option>
+                                <option value="COHABITATION">Сожительство/Несостоявшийся брак</option>
+                                <option value="MARRIAGE_WITH_SEPARATE_HOUSING">Официальный брак с раздельным проживанием
                                 </option>
-                                <option value="lonely">Одиночество/Не в постоянных отношениях</option>
-                                <option value="family-with-children">Семьи с детьми</option>
+                                <option value="LONELY">Одиночество/Не в постоянных отношениях</option>
+                                <option value="FAMILY_WITH_CHILDREN">Семьи с детьми</option>
                             </select>
                         </div>
 
                         <div class="form-section">
                             <label for="preferred-communication-channel">Приоритетный канал коммуникации</label>
-                            <select id="preferred-communication-channel" th:name="priorityCommunicationChannel"
-                                    required>
-                                <option value="telegram">Telegram</option>
-                                <option value="whatsapp">WhatsApp</option>
-                                <option value="viber">Viber</option>
-                                <option value="skype">Skype</option>
-                                <option value="email">Почта</option>
-                                <option value="snapchat">Snapchat</option>
+                            <select id="preferred-communication-channel" th:name="priorityCommunicationChannel">
+                                <option value="TELEGRAM">Telegram</option>
+                                <option value="WHATSAPP">WhatsApp</option>
+                                <option value="VIBER">Viber</option>
+                                <option value="SKYPE">Skype</option>
+                                <option value="EMAIL">Почта</option>
+                                <option value="SNAPCHAT">Snapchat</option>
                             </select>
                         </div>
 
                         <div class="form-section">
                             <label for="supervision">Берётся ли супервизия на данного клиента</label>
-                            <select id="supervision" th:name="isSupervision" required>
-                                <option value="yes">Да</option>
-                                <option value="no">Нет</option>
+                            <select id="supervision" th:name="isSupervision">
+                                <option value="YES">Да</option>
+                                <option value="NO">Нет</option>
                             </select>
                         </div>
 
                         <div class="form-section">
                             <label for="supervisor-info">ФИО и контакты супервизора</label>
                             <input type="text" id="supervisor-info" th:name="supervisorsName">
-                            <input type="text" th:name="supervisorsSurname" required>
-                            <input type="tel" th:name="supervisorsContact.phone" required>
-                            <input type="email" th:name="supervisorsContact.email" required>
+                            <input type="text" th:name="supervisorsSurname">
+                            <input type="tel" th:name="supervisorsContact.phone">
+                            <input type="email" th:name="supervisorsContact.email">
                         </div>
                         <div class="form-section">
                             <label for="supervision-material">Материал для следующих сеансов из супервизии</label>
-                            <textarea id="supervision-material" th:name="materialForNextSessionsFromSupervision"
-                                      required></textarea>
+                            <textarea id="supervision-material" th:name="materialForNextSessionsFromSupervision"></textarea>
                         </div>
 
                         <div class="form-section">
                             <label for="notes">Заметки</label>
-                            <textarea id="notes" th:name="notes" required></textarea>
+                            <textarea id="notes" th:name="notes"></textarea>
                         </div>
                     </div>
                     <button type="submit">Отправить</button>
@@ -558,71 +556,71 @@
 <script>
     var userImage = document.getElementById("userImage");
     if (userImage) {
-        userImage.addEventListener("click", function (e) {
+        userImage.addEventListener("click", function () {
             window.location.href = "./component4.html";
         });
     }
 
     var emailContainer = document.getElementById("emailContainer");
     if (emailContainer) {
-        emailContainer.addEventListener("click", function (e) {
+        emailContainer.addEventListener("click", function () {
             window.location.href = "./frame.html";
         });
     }
 
     var dashboardContainer = document.getElementById("dashboardContainer");
     if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
+        dashboardContainer.addEventListener("click", function () {
             window.location.href = "./component2.html";
         });
     }
 
     var invoiceContainer = document.getElementById("invoiceContainer");
     if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
+        invoiceContainer.addEventListener("click", function () {
             window.location.href = "./component3.html";
         });
     }
 
     var groupContainer = document.getElementById("groupContainer");
     if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
+        groupContainer.addEventListener("click", function () {
             window.location.href = "./component6.html";
         });
     }
 
     var groupContainer1 = document.getElementById("groupContainer1");
     if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
+        groupContainer1.addEventListener("click", function () {
             window.location.href = "./component6.html";
         });
     }
 
     var groupContainer = document.getElementById("groupContainer");
     if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
+        groupContainer.addEventListener("click", function () {
             window.location.href = "./component13.html";
         });
     }
 
     function updateForm() {
         const clientType = document.getElementById('client-type').value;
-        document.getElementById('common-fields').style.display = clientType === 'adult' ? 'block' : 'none';
-        document.getElementById('couple-fields').style.display = clientType === 'couple' ? 'block' : 'none';
-        document.getElementById('child-fields').style.display = clientType === 'child' ? 'block' : 'none';
+        document.getElementById('common-fields').style.display = clientType === 'ADULT' ? 'block' : 'none';
+        document.getElementById('couple-fields').style.display = clientType === 'COUPLE' ? 'block' : 'none';
+        document.getElementById('child-fields').style.display = clientType === 'CHILD' ? 'block' : 'none';
     }
 
     function updateGuardianFields() {
         const whoBrings = document.getElementById('who-brings').value;
-        document.getElementById('parent-fields').style.display = whoBrings === 'parent' ? 'block' : 'none';
-        document.getElementById('both-parents-fields').style.display = whoBrings === 'both-parents' ? 'block' : 'none';
-        document.getElementById('guardian-fields').style.display = whoBrings === 'guardian' ? 'block' : 'none';
+        document.getElementById('parent-fields').style.display = whoBrings === 'PARENT' ? 'block' : 'none';
+        document.getElementById('both-parents-fields').style.display = whoBrings === 'BOTH-PARENTS' ? 'block' : 'none';
+        document.getElementById('guardian-fields').style.display = whoBrings === 'GUARDIAN' ? 'block' : 'none';
     }
 
     function updateMeetingFields() {
         const meetingFormat = document.getElementById('meeting-format').value;
-        document.getElementById('online-platforms').style.display = meetingFormat === 'online' ? 'block' : 'none';
-        document.getElementById('offline-address').style.display = meetingFormat === 'offline' ? 'block' : 'none';
+        document.getElementById('online-platforms').style.display = meetingFormat === 'ONLINE' ? 'block' : 'none';
+        document.getElementById('offline-address').style.display = meetingFormat === 'OFFLINE' ? 'block' : 'none';
     }
 
     // Initialize form
@@ -632,49 +630,49 @@
 
     var userImage = document.getElementById("userImage");
     if (userImage) {
-        userImage.addEventListener("click", function (e) {
+        userImage.addEventListener("click", function () {
             window.location.href = "./component4.html";
         });
     }
 
     var emailContainer = document.getElementById("emailContainer");
     if (emailContainer) {
-        emailContainer.addEventListener("click", function (e) {
+        emailContainer.addEventListener("click", function () {
             window.location.href = "./frame.html";
         });
     }
 
     var dashboardContainer = document.getElementById("dashboardContainer");
     if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
+        dashboardContainer.addEventListener("click", function () {
             window.location.href = "./component2.html";
         });
     }
 
     var invoiceContainer = document.getElementById("invoiceContainer");
     if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
+        invoiceContainer.addEventListener("click", function () {
             window.location.href = "./component3.html";
         });
     }
 
     var groupContainer = document.getElementById("groupContainer");
     if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
+        groupContainer.addEventListener("click", function () {
             window.location.href = "./component6.html";
         });
     }
 
     var groupContainer1 = document.getElementById("groupContainer1");
     if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
+        groupContainer1.addEventListener("click", function () {
             window.location.href = "./component6.html";
         });
     }
 
     var groupContainer = document.getElementById("groupContainer");
     if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
+        groupContainer.addEventListener("click", function () {
             window.location.href = "./component13.html";
         });
     }

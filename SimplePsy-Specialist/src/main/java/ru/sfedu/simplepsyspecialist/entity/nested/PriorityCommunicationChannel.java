@@ -5,6 +5,6 @@ public enum PriorityCommunicationChannel {
     WHATSAPP,
     VIBER,
     SKYPE,
-    MAIL,
+    EMAIL,
     SNAPCHAT
 }
