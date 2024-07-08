@@ -217,17 +217,17 @@
 
                         <div class="form-section">
                             <label for="phone-number">Номер телефона</label>
-                            <input type="tel" id="phone-number" th:name="phone-number" required>
+                            <input type="tel" id="phone-number" th:name="contact.phone" required>
                         </div>
 
                         <div class="form-section">
                             <label for="email">Почта</label>
-                            <input type="email" id="email" th:name="email" required>
+                            <input type="email" id="email" th:name="contact.email" required>
                         </div>
 
                         <div class="form-section">
                             <label for="gender">Пол</label>
-                            <select id="gender" th:name="gender" required>
+                            <select id="gender" th:name="sex" required>
                                 <option value="male">Мужской</option>
                                 <option value="female">Женский</option>
                             </select>
@@ -237,22 +237,23 @@
                     <div id="couple-fields" class="hidden">
                         <div class="form-section">
                             <label for="full-name-1">ФИО клиента 1</label>
-                            <input type="text" id="full-name-1" th:name="full-name-1">
+                            <input type="text" id="full-name-1" th:name="name">
+                            <input type="text"  th:name="surname" required>
                         </div>
 
                         <div class="form-section">
                             <label for="phone-number-1">Номер телефона 1</label>
-                            <input type="tel" id="phone-number-1" th:name="phone-number-1">
+                            <input type="tel" id="phone-number-1" th:name="contact.phone">
                         </div>
 
                         <div class="form-section">
                             <label for="email-1">Почта 1</label>
-                            <input type="email" id="email-1" th:name="email-1">
+                            <input type="email" id="email-1" th:name="contact.email">
                         </div>
 
                         <div class="form-section">
                             <label for="gender-1">Пол 1</label>
-                            <select id="gender-1" th:name="gender-1">
+                            <select id="gender-1" th:name="sex">
                                 <option value="male">Мужской</option>
                                 <option value="female">Женский</option>
                             </select>
@@ -260,22 +261,23 @@
 
                         <div class="form-section">
                             <label for="full-name-2">ФИО клиента 2</label>
-                            <input type="text" id="full-name-2" th:name="full-name-2">
+                            <input type="text" id="full-name-2" th:name="partnersName">
+                            <input type="text"  th:name="partnersSurname" required>
                         </div>
 
                         <div class="form-section">
                             <label for="phone-number-2">Номер телефона 2</label>
-                            <input type="tel" id="phone-number-2" th:name="phone-number-2">
+                            <input type="tel" id="phone-number-2" th:name="partnersContact.phone">
                         </div>
 
                         <div class="form-section">
                             <label for="email-2">Почта 2</label>
-                            <input type="email" id="email-2" th:name="email-2">
+                            <input type="email" id="email-2" th:name="partnersContact.email">
                         </div>
 
                         <div class="form-section">
                             <label for="gender-2">Пол 2</label>
-                            <select id="gender-2" th:name="gender-2">
+                            <select id="gender-2" th:name="partnersSex">
                                 <option value="male">Мужской</option>
                                 <option value="female">Женский</option>
                             </select>
@@ -285,7 +287,7 @@
                     <div id="child-fields" class="hidden">
                         <div class="form-section">
                             <label for="who-brings">Кто приводит клиента</label>
-                            <select id="who-brings" th:name="who-brings" onchange="updateGuardianFields()">
+                            <select id="who-brings" th:name="leadsClient" onchange="updateGuardianFields()">
                                 <option value="parent">Родитель</option>
                                 <option value="both-parents">Оба родителя</option>
                                 <option value="guardian">Попечитель</option>
@@ -295,22 +297,23 @@
                         <div id="parent-fields">
                             <div class="form-section">
                                 <label for="parent-full-name">ФИО родителя</label>
-                                <input type="text" id="parent-full-name" th:name="parent-full-name">
+                                <input type="text" id="parent-full-name" th:name="firstParentsName">
+                                <input type="text"  th:name="firstParentsSurname" required>
                             </div>
 
                             <div class="form-section">
                                 <label for="parent-phone-number">Номер телефона родителя</label>
-                                <input type="tel" id="parent-phone-number" th:name="parent-phone-number">
+                                <input type="tel" id="parent-phone-number" th:name="firstParentsContact.phone">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent-email">Почта родителя</label>
-                                <input type="email" id="parent-email" th:name="parent-email">
+                                <input type="email" id="parent-email" th:name="firstParentsContact.email">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent-gender">Пол родителя</label>
-                                <select id="parent-gender" th:name="parent-gender">
+                                <select id="parent-gender" th:name="firstParentsSex">
                                     <option value="male">Мужской</option>
                                     <option value="female">Женский</option>
                                 </select>
@@ -320,22 +323,23 @@
                         <div id="both-parents-fields" class="hidden">
                             <div class="form-section">
                                 <label for="parent1-full-name">ФИО первого родителя</label>
-                                <input type="text" id="parent1-full-name" th:name="parent1-full-name">
+                                <input type="text" id="parent1-full-name" th:name="firstParentsName">
+                                <input type="text"  th:name="firstParentsSurname" required>
                             </div>
 
                             <div class="form-section">
                                 <label for="parent1-phone-number">Номер телефона первого родителя</label>
-                                <input type="tel" id="parent1-phone-number" th:name="parent1-phone-number">
+                                <input type="tel" id="parent1-phone-number" th:name="firstParentsContact.phone">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent1-email">Почта первого родителя</label>
-                                <input type="email" id="parent1-email" th:name="parent1-email">
+                                <input type="email" id="parent1-email" th:name="firstParentsContact.email">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent1-gender">Пол первого родителя</label>
-                                <select id="parent1-gender" th:name="parent1-gender">
+                                <select id="parent1-gender" th:name="firstParentsSex">
                                     <option value="male">Мужской</option>
                                     <option value="female">Женский</option>
                                 </select>
@@ -343,22 +347,23 @@
 
                             <div class="form-section">
                                 <label for="parent2-full-name">ФИО второго родителя</label>
-                                <input type="text" id="parent2-full-name" th:name="parent2-full-name">
+                                <input type="text" id="parent2-full-name" th:name="secondParentsName">
+                                <input type="text"  th:name="secondParentsSurname" required>
                             </div>
 
                             <div class="form-section">
                                 <label for="parent2-phone-number">Номер телефона второго родителя</label>
-                                <input type="tel" id="parent2-phone-number" th:name="parent2-phone-number">
+                                <input type="tel" id="parent2-phone-number" th:name="secondParentsContact.phone">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent2-email">Почта второго родителя</label>
-                                <input type="email" id="parent2-email" th:name="parent2-email">
+                                <input type="email" id="parent2-email" th:name="secondParentsContact.email">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent2-gender">Пол второго родителя</label>
-                                <select id="parent2-gender" th:name="parent2-gender">
+                                <select id="parent2-gender" th:name="secondParentsSex">
                                     <option value="male">Мужской</option>
                                     <option value="female">Женский</option>
                                 </select>
@@ -368,22 +373,23 @@
                         <div id="guardian-fields" class="hidden">
                             <div class="form-section">
                                 <label for="guardian-full-name">ФИО попечителя</label>
-                                <input type="text" id="guardian-full-name" th:name="guardian-full-name">
+                                <input type="text" id="guardian-full-name" th:name="trusteesName">
+                                <input type="text"  th:name="trusteesSurname" required>
                             </div>
 
                             <div class="form-section">
                                 <label for="guardian-phone-number">Номер телефона попечителя</label>
-                                <input type="tel" id="guardian-phone-number" th:name="guardian-phone-number">
+                                <input type="tel" id="guardian-phone-number" th:name="trusteesContact.phone">
                             </div>
 
                             <div class="form-section">
                                 <label for="guardian-email">Почта попечителя</label>
-                                <input type="email" id="guardian-email" th:name="guardian-email">
+                                <input type="email" id="guardian-email" th:name="trusteesContact.email">
                             </div>
 
                             <div class="form-section">
                                 <label for="guardian-gender">Пол попечителя</label>
-                                <select id="guardian-gender" th:name="guardian-gender">
+                                <select id="guardian-gender" th:name="trusteesSex">
                                     <option value="male">Мужской</option>
                                     <option value="female">Женский</option>
                                 </select>
@@ -393,7 +399,7 @@
 
                     <div class="form-section">
                         <label for="contact-method">Каким способом обратился клиент/попечитель?</label>
-                        <select id="contact-method" th:name="contact-method" required>
+                        <select id="contact-method" th:name="typeOfTreatment" required>
                             <option value="messenger">Мессенжер</option>
                             <option value="social-network">Социальная сеть</option>
                             <option value="aggregator">Агрегатор</option>
@@ -402,17 +408,17 @@
 
                     <div class="form-section">
                         <label for="first-contact-date">Дата первого обращения (запрос на консультацию)</label>
-                        <input type="date" id="first-contact-date" th:name="first-contact-date" required>
+                        <input type="date" id="first-contact-date" th:name="dateOfFirstRequest" required>
                     </div>
 
                     <div class="form-section">
                         <label for="first-consultation-date">Дата первой консультации</label>
-                        <input type="date" id="first-consultation-date" th:name="first-consultation-date" required>
+                        <input type="date" id="first-consultation-date" th:name="dateOfFirstConsultation" required>
                     </div>
 
                     <div class="form-section">
                         <label for="meeting-format">Предпочтительный формат встречи</label>
-                        <select id="meeting-format" th:name="meeting-format" onchange="updateMeetingFields()" required>
+                        <select id="meeting-format" th:name="preferredMeetingFormat" onchange="updateMeetingFields()" required>
                             <option value="online" selected>Онлайн</option>
                             <option value="offline">Оффлайн</option>
                         </select>
@@ -421,7 +427,7 @@
                     <div id="online-platforms">
                         <div class="form-section">
                             <label for="online-platform">Выбрать/указать площадку взаимодействия</label>
-                            <select id="online-platform" th:name="online-platform">
+                            <select id="online-platform" th:name="onlineMeetingPlace">
                                 <option value="zoom">Zoom</option>
                                 <option value="telebridge">Телемост</option>
                                 <option value="googlemeet">Google Meet</option>
@@ -435,13 +441,13 @@
                     <div id="offline-address" class="hidden">
                         <div class="form-section">
                             <label for="meeting-address">Адрес проведения встречи</label>
-                            <input type="text" id="meeting-address" th:name="meeting-address">
+                            <input type="text" id="meeting-address" th:name="offlineMeetingPlace">
                         </div>
                     </div>
 
                     <div class="form-section">
                         <label for="client-status">Статус клиента</label>
-                        <select id="client-status" th:name="client-status" required>
+                        <select id="client-status" th:name="clientStatus" required>
                             <option value="regular">Регулярный</option>
                             <option value="on-demand">По запросу</option>
                             <option value="completed">Завершён</option>
@@ -451,46 +457,46 @@
 
                     <div class="form-section">
                         <label for="initial-request">Первичный/изначальный запрос клиента на терапию</label>
-                        <textarea id="initial-request" th:name="initial-request" required></textarea>
+                        <textarea id="initial-request" th:name="clientsFirstRequestForTherapy" required></textarea>
                     </div>
 
                     <div class="form-section">
                         <label for="fixed-time">Фиксированное время/день недели для встречи (если да, то
                             указать)</label>
-                        <input type="text" id="fixed-time" th:name="fixed-time">
+                        <input type="text" id="fixed-time" th:name="fixedTimeForMeeting">
                     </div>
 
                     <div class="form-section">
                         <label for="financial-terms">Финансовые условия</label>
-                        <textarea id="financial-terms" th:name="financial-terms" required></textarea>
+                        <textarea id="financial-terms" th:name="financialConditions" required></textarea>
                     </div>
 
                     <div>
                         <h3>Подробнее...</h3>
                         <div class="form-section">
                             <label for="birth-date">Дата рождения</label>
-                            <input type="date" id="birth-date" th:name="birth-date" required>
+                            <input type="date" id="birth-date" th:name="dateOfBirth" required>
                         </div>
 
                         <div class="form-section">
                             <label for="address">Адрес проживания</label>
-                            <input type="text" id="address" th:name="address" required>
+                            <input type="text" id="address" th:name="residentialAddress" required>
                         </div>
 
                         <div class="form-section">
                             <label for="referrals">Коллегиальные рекомендации (поле для заполнения кто вас
                                 порекомендовал клиенту)</label>
-                            <textarea id="referrals" th:name="referrals" required></textarea>
+                            <textarea id="referrals" th:name="collegialRecommendations" required></textarea>
                         </div>
 
                         <div class="form-section">
                             <label for="contract-conditions">Особые условия контракта</label>
-                            <textarea id="contract-conditions" th:name="contract-conditions" required></textarea>
+                            <textarea id="contract-conditions" th:name="specialTermsOfContract" required></textarea>
                         </div>
 
                         <div class="form-section">
                             <label for="marital-status">Семейное положение</label>
-                            <select id="marital-status" th:name="marital-status" required>
+                            <select id="marital-status" th:name="familyStatus" required>
                                 <option value="married">Женат/Замужем</option>
                                 <option value="single">Холост/Незамужем</option>
                                 <option value="divorced">В разводе</option>
@@ -505,7 +511,7 @@
 
                         <div class="form-section">
                             <label for="preferred-communication-channel">Приоритетный канал коммуникации</label>
-                            <select id="preferred-communication-channel" th:name="preferred-communication-channel"
+                            <select id="preferred-communication-channel" th:name="priorityCommunicationChannel"
                                     required>
                                 <option value="telegram">Telegram</option>
                                 <option value="whatsapp">WhatsApp</option>
@@ -518,7 +524,7 @@
 
                         <div class="form-section">
                             <label for="supervision">Берётся ли супервизия на данного клиента</label>
-                            <select id="supervision" th:name="supervision" required>
+                            <select id="supervision" th:name="isSupervision" required>
                                 <option value="yes">Да</option>
                                 <option value="no">Нет</option>
                             </select>
@@ -526,12 +532,15 @@
 
                         <div class="form-section">
                             <label for="supervisor-info">ФИО и контакты супервизора</label>
-                            <textarea id="supervisor-info" th:name="supervisor-info" required></textarea>
+                            <input type="text" id="supervisor-info" th:name="supervisorsName">
+                            <input type="text" th:name="supervisorsSurname" required>
+                            <input type="tel" th:name="supervisorsContact.phone" required>
+                            <input type="email" th:name="supervisorsContact.email" required>
                         </div>
-
                         <div class="form-section">
                             <label for="supervision-material">Материал для следующих сеансов из супервизии</label>
-                            <textarea id="supervision-material" th:name="supervision-material" required></textarea>
+                            <textarea id="supervision-material" th:name="materialForNextSessionsFromSupervision"
+                                      required></textarea>
                         </div>
 
                         <div class="form-section">

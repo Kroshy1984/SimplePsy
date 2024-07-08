@@ -16,17 +16,16 @@ public class Customer {
 
     @Id
     private String id;
-
     private TypeOfClient typeOfClient;
     private String name;
     private String surname;
     private Status status; // TODO: Решить нужно ли это поле
     private Contact contact;
     private String description;
-    private LocalDate dateOfBirth;
     private Sex sex;
     private List<String> problemsId;
     private TypeOfTreatment typeOfTreatment;
+    private LocalDate dateOfFirstRequest;
     private LocalDate dateOfFirstConsultation;
     private PreferredMeetingFormat preferredMeetingFormat;
     private OnlineMeetingPlace onlineMeetingPlace;
@@ -35,12 +34,14 @@ public class Customer {
     private String clientsFirstRequestForTherapy;
     private String fixedTimeForMeeting;
     private String financialConditions;
+    // вторая форма
+    private LocalDate dateOfBirth;
     private String residentialAddress;
     private String collegialRecommendations;
     private String specialTermsOfContract;
     private FamilyStatus familyStatus;
     private PriorityCommunicationChannel priorityCommunicationChannel;
-    private boolean IsSupervision;
+    private boolean isSupervision;
     private String supervisorsName;
     private String supervisorsSurname;
     private Contact supervisorsContact;
@@ -66,6 +67,7 @@ public class Customer {
     private String trusteesSurname;
     private Contact trusteesContact;
     private Sex trusteesSex;
+
     public Customer() {
     }
 
@@ -76,6 +78,7 @@ public class Customer {
         this.contact = contact;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
+
     public Customer(String name, String surname, LocalDate dateOfBirth, Sex sex, Contact contact) throws IOException {
         this.name = name;
         this.surname = surname;
@@ -85,8 +88,8 @@ public class Customer {
     }
 
     public Customer(String id, TypeOfClient typeOfClient, String name, String surname, Status status, Contact contact,
-                    String description, LocalDate dateOfBirth, Sex sex,
-                    List<String> problemsId, TypeOfTreatment typeOfTreatment, LocalDate dateOfFirstConsultation,
+                    String description, LocalDate dateOfBirth, Sex sex, List<String> problemsId,
+                    TypeOfTreatment typeOfTreatment, LocalDate dateOfFirstRequest, LocalDate dateOfFirstConsultation,
                     PreferredMeetingFormat preferredMeetingFormat, OnlineMeetingPlace onlineMeetingPlace,
                     String offlineMeetingPlace, ClientStatus clientStatus, String clientsFirstRequestForTherapy,
                     String fixedTimeForMeeting, String financialConditions, String residentialAddress,
@@ -110,6 +113,7 @@ public class Customer {
         this.sex = sex;
         this.problemsId = problemsId;
         this.typeOfTreatment = typeOfTreatment;
+        this.dateOfFirstRequest = dateOfFirstRequest;
         this.dateOfFirstConsultation = dateOfFirstConsultation;
         this.preferredMeetingFormat = preferredMeetingFormat;
         this.onlineMeetingPlace = onlineMeetingPlace;
@@ -123,7 +127,7 @@ public class Customer {
         this.specialTermsOfContract = specialTermsOfContract;
         this.familyStatus = familyStatus;
         this.priorityCommunicationChannel = priorityCommunicationChannel;
-        IsSupervision = isSupervision;
+        this.isSupervision = isSupervision;
         this.supervisorsName = supervisorsName;
         this.supervisorsSurname = supervisorsSurname;
         this.supervisorsContact = supervisorsContact;
@@ -146,6 +150,14 @@ public class Customer {
         this.trusteesSurname = trusteesSurname;
         this.trusteesContact = trusteesContact;
         this.trusteesSex = trusteesSex;
+    }
+
+    public LocalDate getDateOfFirstRequest() {
+        return dateOfFirstRequest;
+    }
+
+    public void setDateOfFirstRequest(LocalDate dateOfFirstRequest) {
+        this.dateOfFirstRequest = dateOfFirstRequest;
     }
 
     public String getId() {
@@ -342,11 +354,11 @@ public class Customer {
     }
 
     public boolean isSupervision() {
-        return IsSupervision;
+        return isSupervision;
     }
 
     public void setSupervision(boolean supervision) {
-        IsSupervision = supervision;
+        isSupervision = supervision;
     }
 
     public String getSupervisorsName() {
@@ -526,12 +538,12 @@ public class Customer {
     }
 
     public void addProblem(String problemId) {
-        if (problemsId == null)
-        {
+        if (problemsId == null) {
             problemsId = new ArrayList<>();
         }
         problemsId.add(problemId);
     }
+
     @Override
     public String toString() {
         return "Customer{" +
