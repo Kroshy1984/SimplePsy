@@ -2,9 +2,13 @@ package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Session;
+import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
+import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -15,9 +19,11 @@ import java.util.List;
 public class SessionController {
 
     SessionService sessionService;
+    SpecialistService specialistService;
 
-    public SessionController(SessionService sessionService) {
+    public SessionController(SessionService sessionService, SpecialistService specialistService) {
         this.sessionService = sessionService;
+        this.specialistService = specialistService;
     }
 
     @GetMapping("/search")
@@ -55,12 +61,28 @@ public class SessionController {
         sessionService.createSession(clientId, specialistId, problem, date);
         return ResponseEntity.ok("Session successfully created");
     }
-    @GetMapping("/calendar")
-    public ResponseEntity<List<Session>> getCalendarBySpecialistId(
-            @RequestParam("specialistId") String specialistId) {
-        System.out.println(specialistId);
-        List<Session> sessions = sessionService.getAllBySpecialistId(specialistId);
+    @GetMapping("/calendar-day")
+    public ResponseEntity<List<Session>> getCalendarDayBySpecialistId(
+            @AuthenticationPrincipal UserDetails userDetails) {
+        System.out.println(userDetails.getUsername());
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
-
+    @GetMapping("/calendar-week")
+    public ResponseEntity<List<Session>> getCalendarWeekBySpecialistId(
+            @AuthenticationPrincipal UserDetails userDetails) {
+        System.out.println(userDetails.getUsername());
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
+        return new ResponseEntity<>(sessions, HttpStatus.OK);
+    }
+    @GetMapping("/calendar-month")
+    public ResponseEntity<List<Session>> getCalendarMonthBySpecialistId(
+            @AuthenticationPrincipal UserDetails userDetails) {
+        System.out.println(userDetails.getUsername());
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
+        return new ResponseEntity<>(sessions, HttpStatus.OK);
+    }
 }
