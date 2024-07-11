@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
-@RequestMapping("/SimplePsyScoring/V1/scoring")
+@RequestMapping("/SimplePsy/V1/scoring")
 public class ScoringController {
 
     public List<String> answers = new ArrayList<>();
@@ -46,7 +46,7 @@ public class ScoringController {
         this.answers.addAll(List.of(answers));
         scoringService.save(scoringId, this.answers);
         return ResponseEntity.ok(scoringId);
-//        return "redirect:/SimplePsyScoring/V1/scoring/done";
+//        return "redirect:/SimplePsy/V1/scoring/done";
     }
 
     // TODO: Исправить добавление пустых скорингов

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/SimplePsyProblem/V1/problem")
+@RequestMapping("/SimplePsy/V1/problem")
 public class ProblemController {
     private ProblemService problemService;
 

@@ -9,7 +9,7 @@ import ru.sfedu.simplepsyspecialist.service.ClientService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/SimplePsyClient/V1/client")
+@RequestMapping("/SimplePsy/V1/client")
 public class ClientController {
     ClientService clientService;
 

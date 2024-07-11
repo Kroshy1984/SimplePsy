@@ -3,7 +3,6 @@ package ru.sfedu.simplepsyspecialist.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,11 +13,13 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.*;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
+import ru.sfedu.simplepsyspecialist.entity.Problem;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.Objects;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
-@RequestMapping("/SimplePsySpecialist/V1/specialist")
+@RequestMapping("/SimplePsy/V1/specialist")
 public class SpecialistController {
 
     @Autowired
@@ -56,7 +57,7 @@ public class SpecialistController {
         System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.registerNewSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+        return "redirect:/SimplePsy/V1/specialist/sessions";
     }
 
     @GetMapping("/login")
@@ -70,7 +71,7 @@ public class SpecialistController {
         System.out.println("Got the specialist's  username: " + specialist.getUsername());
         System.out.println("Got the specialist's  password: " + specialist.getPassword());
         specialistService.authorizeSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+        return "redirect:/SimplePsy/V1/specialist/sessions";
     }
     @GetMapping("/changePass")
     public String changePass(Model model)
@@ -94,7 +95,7 @@ public class SpecialistController {
                                  @RequestParam("password") String password)
     {
         specialistService.setNewPassword(specialistId, password);
-        return "redirect:/SimplePsySpecialist/V1/specialist/login";
+        return "redirect:/SimplePsy/V1/specialist/login";
     }
 //@PostMapping("/login")
 //public String login(@ModelAttribute("specialist") Specialist specialist)
@@ -102,7 +103,7 @@ public class SpecialistController {
 //    System.out.println(specialist.getEmail());
 //    System.out.println(specialist.getPassword());
 //    specialistService.authorizeSpecialist(specialist);
-//    return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+//    return "redirect:/SimplePsy/V1/specialist/calendar";
 //}
 
     @GetMapping("/calendar")
@@ -129,64 +130,7 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         String specialist_id = specialist.getId();
         specialistService.sendRequestToSession(specialist_id, startDate, endDate);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
-    }
-
-    @GetMapping("/session")
-    public String getSessionForm(Model model) {
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
-        return "session";
-    }
-
-    @PostMapping("/session")
-    public String createNewSession(@AuthenticationPrincipal UserDetails userDetails,
-                                   @RequestParam("email") String email,
-                                   @RequestParam("problem") String problem,
-                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
-        System.out.println(email);
-        System.out.println(problem);
-        System.out.println(date);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        System.out.println("Specialist found!");
-        String specialist_id = specialist.getId();
-        System.out.println(specialist_id);
-        specialistService.createNewSession(email, specialist_id, problem, date);
-        System.out.println("Session was created");
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
-    }
-
-    @GetMapping("/sessions")
-    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<Session> sessionDTOS = specialistService.getAllSessions(specialist.getId());
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
-        List<Session> meetingsByMonday = meetingsByDay.get(0);
-        System.out.println(meetingsByMonday.size());
-        List<Session> meetingsByDayTuesday = meetingsByDay.get(1);
-        System.out.println(meetingsByDayTuesday.size());
-        List<Session> meetingsByDayWednesday = meetingsByDay.get(2);
-        System.out.println(meetingsByDayWednesday.size());
-        List<Session> meetingsByDayThursday = meetingsByDay.get(3);
-        System.out.println(meetingsByDayThursday.size());
-        List<Session> meetingsByDayFriday = meetingsByDay.get(4);
-        System.out.println(meetingsByDayFriday.size());
-        List<Session> meetingsByDaySaturday = meetingsByDay.get(5);
-        System.out.println(meetingsByDaySaturday.size());
-        List<Session> meetingsByDaySunDay = meetingsByDay.get(6);
-        System.out.println(meetingsByDaySunDay.size());
-        model.addAttribute("meetingsByMonday", meetingsByMonday);
-        model.addAttribute("meetingsByDayTuesday", meetingsByDayTuesday);
-        model.addAttribute("meetingsByDayWednesday", meetingsByDayWednesday);
-        model.addAttribute("meetingsByDayThursday", meetingsByDayThursday);
-        model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
-        model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
-        model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
-        System.out.println(specUrl);
-        model.addAttribute("specUrl", specUrl);
-
-        return "sessions";
+        return "redirect:/SimplePsy/V1/specialist/calendar";
     }
 
     @GetMapping("/customers")
@@ -258,7 +202,7 @@ public class SpecialistController {
         System.out.println("Customer's id: " + customerId);
         customerDTO.setId(customerId);
         specialistService.updateCustomer(customerDTO);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerDTO.getId();
+        return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerDTO.getId();
     }
 
     @PostMapping("/delete-customer/{id}")
@@ -266,7 +210,7 @@ public class SpecialistController {
                                  @AuthenticationPrincipal UserDetails userDetails) {
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
         specialistService.deleteCustomerById(customerId, specialistId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
 
     @PostMapping("/customers/new")
@@ -286,7 +230,7 @@ public class SpecialistController {
 //        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 //        specialist.addCustomerId(customerId);
 //        specialistService.save(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
 
     @GetMapping("/find-customer/byProblemId")
@@ -315,15 +259,15 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 
         if (Objects.equals(customerId, "Customer not found")) {
-            return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
+            return "redirect:/SimplePsy/V1/specialist/customer-form";
         }
 
         for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
             if (Objects.equals(customerId, specialist.getCustomerIds().get(i))) {
-                return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerId;
+                return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerId;
             }
         }
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
+        return "redirect:/SimplePsy/V1/specialist/customer-form";
     }
 
     @GetMapping("customer/problem/new/{customerId}")
@@ -341,7 +285,7 @@ public class SpecialistController {
     {
         System.out.println("In Post mappping method customerNewProblem \ngot customerId: " + customerId + " and problem: " + problem);
         specialistService.addCustomerProblem(customerId, problem);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
+        return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
 
     @GetMapping("customer/problems/{customerId}")
@@ -395,14 +339,14 @@ public class SpecialistController {
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
-        return "redirect:/SimplePsySpecialist/V1/specialist/login";
+        return "redirect:/SimplePsy/V1/specialist/login";
     }
     @PostMapping("/scoring/approve/{problemId}")
     public String approveScoring(@PathVariable("problemId") String problemId)
     {
         System.out.println("In method approveScoring got the problemId: " + problemId);
         specialistService.approveScoring(problemId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/clients";
+        return "redirect:/SimplePsy/V1/specialist/clients";
     }
 
     @PostMapping("/scoring/cancel/{problemId}")
@@ -411,7 +355,7 @@ public class SpecialistController {
         System.out.println("In method cancelScoring got the problemId: " + problemId);
         specialistService.cancelScoring(problemId);
         String customerId = specialistService.findCustomerByProblemId(problemId).getId();
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
+        return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
 
 }

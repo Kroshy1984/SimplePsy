@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/SimplePsySession/V1/session")
+@RequestMapping("/SimplePsy/V1/session")
 public class SessionController {
 
     SessionService sessionService;
@@ -89,5 +90,60 @@ public class SessionController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
         return "new-front/calendar/calendar-week1";
+    }
+
+    @GetMapping("/session-form")
+    public String getSessionForm(Model model) {
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        model.addAttribute("specUrl", specUrl);
+        return "new-front/session/session-creation";
+    }
+
+    // TODO: Сделать создание встречи
+    @PostMapping("/create-session")
+    public String createNewSession(Session session) {
+//        System.out.println(session.getClient().getName());
+        System.out.println(session.getPlace());
+        System.out.println(session.getDate());
+//        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+//        System.out.println("Specialist found!");
+//        String specialist_id = specialist.getId();
+//        System.out.println(specialist_id);
+//        specialistService.createNewSession(email, specialist_id, problem, session.getDate());
+//        System.out.println("Session was created");
+        return "redirect:/SimplePsy/V1/session/sessions-list";
+    }
+
+    @GetMapping("/sessions")
+    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<Session> sessionDTOS = specialistService.getAllSessions(specialist.getId());
+        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
+        List<Session> meetingsByMonday = meetingsByDay.get(0);
+        System.out.println(meetingsByMonday.size());
+        List<Session> meetingsByDayTuesday = meetingsByDay.get(1);
+        System.out.println(meetingsByDayTuesday.size());
+        List<Session> meetingsByDayWednesday = meetingsByDay.get(2);
+        System.out.println(meetingsByDayWednesday.size());
+        List<Session> meetingsByDayThursday = meetingsByDay.get(3);
+        System.out.println(meetingsByDayThursday.size());
+        List<Session> meetingsByDayFriday = meetingsByDay.get(4);
+        System.out.println(meetingsByDayFriday.size());
+        List<Session> meetingsByDaySaturday = meetingsByDay.get(5);
+        System.out.println(meetingsByDaySaturday.size());
+        List<Session> meetingsByDaySunDay = meetingsByDay.get(6);
+        System.out.println(meetingsByDaySunDay.size());
+        model.addAttribute("meetingsByMonday", meetingsByMonday);
+        model.addAttribute("meetingsByDayTuesday", meetingsByDayTuesday);
+        model.addAttribute("meetingsByDayWednesday", meetingsByDayWednesday);
+        model.addAttribute("meetingsByDayThursday", meetingsByDayThursday);
+        model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
+        model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
+        model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
+        System.out.println(specUrl);
+        model.addAttribute("specUrl", specUrl);
+
+        return "new-front/session/sessions-list";
     }
 }
