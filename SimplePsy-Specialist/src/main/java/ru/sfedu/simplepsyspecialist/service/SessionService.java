@@ -35,9 +35,7 @@ public class SessionService {
         System.out.println("sessions's list: " + sessions);
         return listOfSessions;
     }
-    public void createSession(String clientId, String specialistId,
-                              String problem, LocalDateTime date) {
-        Session session = new Session(date, problem, specialistId, clientId);
+    public void createSession(Session session) {
         sessionRepository.save(session);
     }
 

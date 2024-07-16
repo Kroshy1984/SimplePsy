@@ -40,7 +40,6 @@ public class Session {
 
     public Session() {
     }
-
     public Session(LocalDateTime date, String problem, String specialistId, String clientId) {
         this.date = date;
         this.problem = problem;

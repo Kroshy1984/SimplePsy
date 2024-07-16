@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="page-content">
-<form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsySpecialist/V1/specialist/login}" method="post">
+<form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsy/V1/specialist/login}" method="post">
     <h1>Вход в понятную практику</h1>
     <label for="email">E-mail *</label>
     <input type="email" id="email" th:name="username" th:field="*{username}" placeholder="E-mail" required>
@@ -20,7 +20,7 @@
     <div class="checkbox-element">
         <input type="checkbox" id="remember-password" name="remember-password">
         <label for="remember-password">Запомнить пароль</label>
-        <a th:href="@{/SimplePsySpecialist/V1/specialist/changePass}">Забыли пароль?</a>
+        <a th:href="@{/SimplePsy/V1/specialist/changePass}">Забыли пароль?</a>
     </div>
     <!--    <label for="confirmPassword">Confirm Password:</label>-->
     <!--    <input type="password" id="confirmPassword" name="confirmPassword" required>-->
@@ -28,7 +28,7 @@
         <button type="submit">Войти</button>
     </div>
     <p>Нет аккаунта в понятной практике?</p>
-    <a th:href="@{/SimplePsySpecialist/V1/specialist/signup}">Зарегистрироваться</a>
+    <a th:href="@{/SimplePsy/V1/specialist/signup}">Зарегистрироваться</a>
 </form>
 </div>
 </body>

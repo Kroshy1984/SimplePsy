@@ -187,7 +187,7 @@ public class SpecialistService {
             System.out.println("sessionDTOS.size(): " + sessionDTOS.size());
             for (int j = 0; j < sessionDTOS.size(); j++) {
                 System.out.println("Date of session: " + sessionDTOS.get(j).getDate());
-                System.out.println("Client name " + sessionDTOS.get(j).getClient().getName());
+              //  System.out.println("Client name " + sessionDTOS.get(j).getClient().getName());
             }
         }
         return sessionsByDayOfWeek;

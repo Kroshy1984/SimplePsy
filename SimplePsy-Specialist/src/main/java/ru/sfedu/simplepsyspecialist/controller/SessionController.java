@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
@@ -25,10 +27,14 @@ public class SessionController {
 
     SessionService sessionService;
     SpecialistService specialistService;
+    ClientService clientService;
 
-    public SessionController(SessionService sessionService, SpecialistService specialistService) {
+    public SessionController(SessionService sessionService,
+                             SpecialistService specialistService,
+                             ClientService clientService) {
         this.sessionService = sessionService;
         this.specialistService = specialistService;
+        this.clientService = clientService;
     }
 
     @GetMapping("/search")
@@ -52,20 +58,20 @@ public class SessionController {
                 "SessionController in method searchAllSessions: " + sessions);
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
-    @PostMapping("/new")
-    public  ResponseEntity<String> createNewSession(
-            @RequestParam("clientId") String clientId,
-            @RequestParam("specialistId") String specialistId,
-            @RequestParam("problem") String problem,
-            @RequestParam("date") LocalDateTime date
-           ) {
-        System.out.println("clientId: " + clientId);
-        System.out.println("specialistId: " + specialistId);
-        System.out.println("problem: " + problem);
-        System.out.println("date: " + date);
-        sessionService.createSession(clientId, specialistId, problem, date);
-        return ResponseEntity.ok("Session successfully created");
-    }
+//    @PostMapping("/new")
+//    public  ResponseEntity<String> createNewSession(
+//            @RequestParam("clientId") String clientId,
+//            @RequestParam("specialistId") String specialistId,
+//            @RequestParam("problem") String problem,
+//            @RequestParam("date") LocalDateTime date
+//           ) {
+//        System.out.println("clientId: " + clientId);
+//        System.out.println("specialistId: " + specialistId);
+//        System.out.println("problem: " + problem);
+//        System.out.println("date: " + date);
+//        sessionService.createSession(clientId, specialistId, problem, date);
+//        return ResponseEntity.ok("Session successfully created");
+//    }
     @GetMapping("/calendar-day")
     public String getCalendarDayBySpecialistId(
     //        @AuthenticationPrincipal UserDetails userDetails
@@ -94,6 +100,9 @@ public class SessionController {
 
     @GetMapping("/session-form")
     public String getSessionForm(Model model) {
+        Session session = new Session();
+        //session.setClient(new Client());
+        model.addAttribute("session", session);
         String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         model.addAttribute("specUrl", specUrl);
         return "new-front/session/session-creation";
@@ -101,10 +110,17 @@ public class SessionController {
 
     // TODO: Сделать создание встречи
     @PostMapping("/create-session")
-    public String createNewSession(Session session) {
+    public String createNewSession(Session session,
+                                   @AuthenticationPrincipal UserDetails userDetails) {
 //        System.out.println(session.getClient().getName());
         System.out.println(session.getPlace());
         System.out.println(session.getDate());
+        System.out.println(session.getClientId());
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        session.setSpecialistId(specialistId);
+        Client client = clientService.findById(session.getClientId());
+        session.setClient(client);
+        sessionService.createSession(session);
 //        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 //        System.out.println("Specialist found!");
 //        String specialist_id = specialist.getId();

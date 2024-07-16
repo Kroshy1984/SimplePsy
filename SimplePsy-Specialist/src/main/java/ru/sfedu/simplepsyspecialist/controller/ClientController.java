@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/SimplePsy/V1/client")
@@ -74,5 +76,10 @@ public class ClientController {
         System.out.println("got the client with id: " + client.getId());
         Client savedClient = clientService.save(client);
         return ResponseEntity.ok("client successfully created");
+    }
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Client>> findAllClients()
+    {
+        return ResponseEntity.ok(clientService.findAll());
     }
 }
