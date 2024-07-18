@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
 import ru.sfedu.simplepsyspecialist.entity.nested.SessionType;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Document("Session")
@@ -27,7 +27,7 @@ public class Session {
     private Client client;
     private SessionType sessionType;
     @NotBlank
-    private LocalDateTime date;
+    private LocalDate date;
     private String place;
     private LocalTime timeStart;
     private LocalTime timeFinish;
@@ -40,7 +40,7 @@ public class Session {
 
     public Session() {
     }
-    public Session(LocalDateTime date, String problem, String specialistId, String clientId) {
+    public Session(LocalDate date, String problem, String specialistId, String clientId) {
         this.date = date;
         this.problem = problem;
         this.specialistId = specialistId;
@@ -79,11 +79,11 @@ public class Session {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

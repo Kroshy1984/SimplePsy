@@ -151,52 +151,12 @@
             </div>
             <div class="component-19-wrapper">
               <div class="component-19">
-                <div class="rectangle-parent54" id="groupContainer">
+                <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.getId()}" id="groupContainer">
                   <div class="frame-child57"></div>
                   <div class="frame-child58"></div>
-                  <b class="b82">20.02.2024</b>
+                  <b class="b82" th:text="${newSession.getDate()}"></b>
                   <div class="wrapper22">
-                    <b class="b83">Встреча 6</b>
-                  </div>
-                </div>
-                <div class="rectangle-parent55">
-                  <div class="frame-child59"></div>
-                  <div class="frame-child60"></div>
-                  <b class="b84">20.02.2024</b>
-                  <div class="wrapper23">
-                    <b class="b85">Встреча 5</b>
-                  </div>
-                </div>
-                <div class="rectangle-parent56">
-                  <div class="frame-child61"></div>
-                  <div class="frame-child62"></div>
-                  <b class="b86">20.02.2024</b>
-                  <div class="wrapper24">
-                    <b class="b87">Встреча 4</b>
-                  </div>
-                </div>
-                <div class="rectangle-parent57">
-                  <div class="frame-child63"></div>
-                  <div class="frame-child64"></div>
-                  <b class="b88">20.02.2024</b>
-                  <div class="wrapper25">
-                    <b class="b89">Встреча 3</b>
-                  </div>
-                </div>
-                <div class="rectangle-parent58">
-                  <div class="frame-child65"></div>
-                  <div class="frame-child66"></div>
-                  <b class="b90">20.02.2024</b>
-                  <div class="wrapper26">
-                    <b class="b91">Встреча 2</b>
-                  </div>
-                </div>
-                <div class="rectangle-parent59">
-                  <div class="frame-child67"></div>
-                  <div class="frame-child68"></div>
-                  <b class="b92">20.02.2024</b>
-                  <div class="wrapper27">
-                    <b class="b93">Встреча 1</b>
+                    <b class="b83" th:text="${newSession.getClient().getName()}"></b>
                   </div>
                 </div>
               </div>
