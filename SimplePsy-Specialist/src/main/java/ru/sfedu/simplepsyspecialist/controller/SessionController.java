@@ -180,4 +180,9 @@ public class SessionController {
 
         return "new-front/session/sessions-list";
     }
+
+    @GetMapping("/calendar")
+    public String getCalendar(Model model) {
+        return "/new-front/calendar/calendar";
+    }
 }

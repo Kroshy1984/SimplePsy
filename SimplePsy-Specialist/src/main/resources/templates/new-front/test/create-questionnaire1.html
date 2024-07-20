@@ -6,6 +6,7 @@
 
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/create-questionnaire1.css}" />
   <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -16,52 +17,6 @@
   />
 </head>
 <body>
-<style>
-  .survey-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .survey-container input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .survey-container button {
-    padding: 10px 15px;
-    margin: 10px 5px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .survey-container button:hover {
-    background-color: #0056b3;
-  }
-
-  .survey-option {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-  }
-
-  .survey-option input[type="radio"] {
-    margin-right: 10px;
-  }
-
-  .add-option-button {
-    margin-top: 10px;
-    display: block;
-  }
-</style>
 <div class="div139">
   <div class="sidebar1">
     <div class="menu">
@@ -157,7 +112,6 @@
       <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
     </div>
   </div>
-  <b class="page-title">21</b>
   <header class="head1">
     <div class="navigate">
       <a class="constructor8">Понятная практика</a>
@@ -190,21 +144,21 @@
               class="icon123"
               loading="lazy"
               alt=""
-              src="./public/icon22@2x.png"
+              src="/images/icon@2x.png"
       />
     </div>
 
   </header>
 
-</div>
-<div class="survey-container">
-  <h2>Создать опрос</h2>
-  <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/creation}">
-    <div id="questionsContainer"></div>
+  <div class="survey-container">
+    <h2>Создать опрос</h2>
+    <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/creation}">
+      <div id="questionsContainer"></div>
 
-    <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
-    <button type="submit">Создать опрос</button>
-  </form>
+      <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
+      <button type="submit">Создать опрос</button>
+    </form>
+  </div>
 </div>
 <script>
   var dashboardContainer = document.getElementById("dashboardContainer");
