@@ -17,7 +17,7 @@ import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,10 +50,10 @@ public class SessionController {
         return sessions;
     }
     @GetMapping("/searchAll")
-    public ResponseEntity<List<LocalDateTime>> searchAllSessions(
+    public ResponseEntity<List<LocalDate>> searchAllSessions(
             @RequestParam("specialist_id") String specialist_id) {
         System.out.println(specialist_id);
-        List<LocalDateTime> sessions  = sessionService.findAllBySpecialistId(specialist_id);
+        List<LocalDate> sessions  = sessionService.findAllBySpecialistId(specialist_id);
         System.out.println("Sending JsonArray sessions back to the notification from" +
                 "SessionController in method searchAllSessions: " + sessions);
         return new ResponseEntity<>(sessions, HttpStatus.OK);
@@ -127,15 +127,34 @@ public class SessionController {
 //        System.out.println(specialist_id);
 //        specialistService.createNewSession(email, specialist_id, problem, session.getDate());
 //        System.out.println("Session was created");
-        return "redirect:/SimplePsy/V1/session/sessions-list";
+        return "redirect:/SimplePsy/V1/session/sessions";
     }
 
     @GetMapping("/sessions")
     public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<Session> sessionDTOS = specialistService.getAllSessions(specialist.getId());
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
+        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
+
+        /*if (specialist.getCustomerIds() == null) {
+            System.out.println("No customers were found for this specialist!");
+            model.addAttribute("customers", specialistCustomers);
+            return "new-front/customer/customer-list";
+        }*/
+
+/*        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
+            for (Session session : sessions) {
+                if (Objects.equals(session.getId(), specialist.getCustomerIds().get(i))) {
+                    sessions.add(session);
+                    System.out.println(sessions.get(i).getDate());
+                    break;
+                }
+            }
+        }*/
+        model.addAttribute("sessions", sessions);
+
+        /*String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
+        model.addAttribute("specUrl", specUrl);
+        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessions);
         List<Session> meetingsByMonday = meetingsByDay.get(0);
         System.out.println(meetingsByMonday.size());
         List<Session> meetingsByDayTuesday = meetingsByDay.get(1);
@@ -157,8 +176,7 @@ public class SessionController {
         model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
         model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
         model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
-        System.out.println(specUrl);
-        model.addAttribute("specUrl", specUrl);
+        model.addAttribute("specUrl", specUrl);*/
 
         return "new-front/session/sessions-list";
     }

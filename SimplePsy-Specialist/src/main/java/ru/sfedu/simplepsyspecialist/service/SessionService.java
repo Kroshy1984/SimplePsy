@@ -5,7 +5,7 @@ import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.repo.SessionRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +23,10 @@ public class SessionService {
     public List<Session> findByDate(String start_date, String end_date, String specialist_id) {
         return sessionRepository.findSessionsByDateBetweenAndSpecialistId(start_date, end_date, specialist_id).orElse(null);
     }
-    public List<LocalDateTime> findAllBySpecialistId(String specialist_id) {
+    public List<LocalDate> findAllBySpecialistId(String specialist_id) {
         System.out.println("received specialist_id: " + specialist_id);
         List<Session> sessions = sessionRepository.findAllBySpecialistId(specialist_id).orElse(null);
-        List<LocalDateTime> listOfSessions = new ArrayList<>();
+        List<LocalDate> listOfSessions = new ArrayList<>();
 
         for (int i = 0; i < sessions.size(); i++) {
                 listOfSessions.add(sessions.get(i).getDate());

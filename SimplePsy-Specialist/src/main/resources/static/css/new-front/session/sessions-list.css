@@ -635,6 +635,8 @@
   z-index: 1;
 }
 .b82 {
+  top: 35px;
+  right: 15px;
   width: 70px;
   transform: rotate(-90deg);
 }
@@ -658,8 +660,8 @@
   color: var(--grey-blue-60);
 }
 .rectangle-parent54 {
-  width: 567px;
-  flex: 1;
+  width: 520px;
+  height: 100px;
   flex-direction: row;
   padding: var(--padding-10xs) 0;
   position: relative;
@@ -979,13 +981,12 @@
 }
 .component-19 {
   flex: 1;
-  overflow-x: auto;
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--gap-mini);
 }
 .component-19-wrapper {
-  height: 531px;
+  height: 550px;
   flex-direction: row;
   justify-content: flex-end;
   padding: 0 var(--padding-lgi) 0 0;
