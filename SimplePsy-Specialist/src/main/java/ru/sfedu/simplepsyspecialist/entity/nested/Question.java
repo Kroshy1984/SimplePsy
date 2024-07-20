@@ -10,6 +10,11 @@ public class Question {
     public Question() {
     }
 
+    public Question(String questionText, List<String> options) {
+        this.questionText = questionText;
+        this.options = options;
+    }
+
     public String getQuestionText() {
         return questionText;
     }

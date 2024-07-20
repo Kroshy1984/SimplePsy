@@ -198,12 +198,18 @@
 
 </div>
 <div class="survey-container">
-  <h2>Создать опрос</h2>
-  <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/creation}">
-    <div id="questionsContainer"></div>
-
-    <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
-    <button type="submit">Создать опрос</button>
+  <h2>Опросник</h2>
+  <form id="survey-form">
+    <div th:each="question, iterStat : ${scoring.questions}">
+      <h3 th:text="${question.questionText}">Question Text</h3>
+      <div th:each="option, optStat : ${question.options}">
+        <input type="radio" th:id="'option-' + ${iterStat.index} + '-' + ${optStat.index}"
+               th:name="${question.questionText}" th:value="${option}" />
+        <label th:for="'option-' + ${iterStat.index} + '-' + ${optStat.index}" th:text="${option}">Option</label>
+      </div>
+    </div>
+    <input type="hidden" id="customerId" th:value="${customerId}">
+    <button type="button" onclick="submitSurvey()">Submit</button>
   </form>
 </div>
 <script>
@@ -304,6 +310,31 @@
     userImage.addEventListener("click", function (e) {
       window.location.href = "./component4.html";
     });
+  }
+  function submitSurvey() {
+    const form = document.getElementById('survey-form');
+    const formData = new FormData(form);
+    const answers = {};
+    formData.forEach((value, key) => {
+      answers[key] = value;
+    });
+
+    const customerId = document.getElementById('customerId').value;
+    const completedScoring = {
+      customerId: customerId,
+      answers: answers
+    };
+
+    fetch('/SimplePsy/V1/scoring/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(completedScoring)
+    })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
   }
 </script>
 </body>

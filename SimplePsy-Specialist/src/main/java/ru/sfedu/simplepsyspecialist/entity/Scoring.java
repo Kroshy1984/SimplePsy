@@ -1,6 +1,5 @@
 package ru.sfedu.simplepsyspecialist.entity;
 
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.Question;
 
@@ -9,7 +8,7 @@ import java.util.List;
 @Document("Scoring")
 public class Scoring {
     private String id;
-    @Transient
+
     private List<Question> questions;
 //    @Transient
 //    private static List<String> userData;

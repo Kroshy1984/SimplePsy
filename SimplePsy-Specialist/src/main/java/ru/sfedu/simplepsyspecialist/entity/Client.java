@@ -29,7 +29,7 @@ public class Client {
     String recommendations;
     MaritalStatus maritalStatus;
     List<String> problems;
-
+    List<CompletedScoring> scorings;
     public Client() {
     }
 
@@ -202,5 +202,17 @@ public class Client {
             problems = new ArrayList<>();
         }
         problems.add(problemId);
+    }
+
+    public List<CompletedScoring> getScorings() {
+        return scorings;
+    }
+
+    public void addScoring(CompletedScoring scoring) {
+        if(this.scorings == null)
+        {
+            scorings = new ArrayList<>();
+        }
+        scorings.add(scoring);
     }
 }

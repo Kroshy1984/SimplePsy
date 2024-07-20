@@ -34,9 +34,18 @@ public class ScoringService {
 //        Scoring resultScoring = scoringRepository.save(scoring);
 //        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
 //        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
-        System.out.println(scoring.getQuestions().get(0).getQuestionText());
-        System.out.println(scoring.getQuestions().size());
-        return scoringRepository.save(scoring);
+        Scoring scor = scoringRepository.save(scoring);
+        System.out.println(scor.getQuestions().get(0).getQuestionText());
+        System.out.println(scor.getQuestions().get(1).getQuestionText());
+        System.out.println(scor.getId());
+        Scoring savedScoring = scoringRepository.findById(scor.getId()).get();
+        System.out.println(savedScoring.getId());
+        System.out.println(savedScoring.getQuestions().get(0).getQuestionText());
+        System.out.println(savedScoring.getQuestions().get(1).getQuestionText());
+        System.out.println(savedScoring.getQuestions().get(0).getOptions().get(0));
+        System.out.println(savedScoring.getQuestions().get(1).getOptions().get(0));
+
+        return savedScoring;
     }
     public Scoring saveScoring(Scoring scoring)
     {
@@ -123,6 +132,10 @@ public class ScoringService {
     }
     public void saveCustomersScoring(String problemId, String scoringId) {
         problemService.saveCustomersScoring(problemId, scoringId);
+    }
+
+    public Scoring findById(String id) {
+        return scoringRepository.findById(id).get();
     }
 
 //    public List<String> getScoringAnswers(String scoringId) {

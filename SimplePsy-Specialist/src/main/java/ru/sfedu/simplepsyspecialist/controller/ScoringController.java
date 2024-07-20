@@ -3,8 +3,12 @@ package ru.sfedu.simplepsyspecialist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.simplepsyspecialist.entity.Client;
+import ru.sfedu.simplepsyspecialist.entity.CompletedScoring;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 
 import java.util.ArrayList;
@@ -17,10 +21,12 @@ public class ScoringController {
 
     public List<String> answers = new ArrayList<>();
     ScoringService scoringService;
+    ClientService clientService;
 
     @Autowired
-    public ScoringController(ScoringService scoringService) {
+    public ScoringController(ScoringService scoringService, ClientService clientService) {
         this.scoringService = scoringService;
+        this.clientService = clientService;
     }
 
 //    @GetMapping("/userForm")
@@ -102,13 +108,25 @@ public class ScoringController {
     @PostMapping("/creation")
     public String createQuestionnaire(@RequestBody Scoring scoring)
     {
-        System.out.println(scoring.getQuestions().get(0).getQuestionText());
         scoringService.save(scoring);
         return "new-front/test/create-questionnaire1";
     }
-    @GetMapping("/questionnaire/{questionnaireId}")
-    public String getQuestionnaire(String questionnaireId)
+    @GetMapping("/questionnaire/{questionnaireId}/{customerId}")
+    public String getQuestionnaire(@PathVariable String questionnaireId,
+                                   @PathVariable String customerId,
+                                   Model model)
     {
-        return null;
+        Scoring scoring = scoringService.findById(questionnaireId);
+        System.out.println(scoring.getQuestions().get(0).getQuestionText());
+        model.addAttribute("scoring", scoring);
+        model.addAttribute("customerId", customerId);
+        return "new-front/test/questionnaire";
+    }
+    @PostMapping("/submit")
+    public String submitScoring(@RequestBody CompletedScoring completedScoring) {
+        Client client = clientService.findById(completedScoring.getCustomerId());
+        client.addScoring(completedScoring);
+        clientService.save(client);
+        return "new-front/test/create-questionnaire1";
     }
 }
