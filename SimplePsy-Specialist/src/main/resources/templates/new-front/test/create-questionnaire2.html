@@ -46,7 +46,7 @@
                   </div>
                 </div>
               </div>
-              <div class="frame-wrapper105">
+              <div class="5frame-wrapper10">
                 <div class="about-us-parent8">
                   <a class="about-us25">Добавить клиента</a>
                   <div class="news-parent2">
@@ -350,6 +350,18 @@
           window.location.href = "./component12.html";
         });
       }
+      const addOptionButton = document.getElementById('add-option');
+      const answerOptionsContainer = document.querySelector('.answer-options');
+
+      addOptionButton.addEventListener('click', () => {
+        const newOption = document.createElement('div');
+        newOption.innerHTML = `
+    <label for="option${answerOptionsContainer.children.length + 1}">Вариант ответа ${answerOptionsContainer.children.length + 1}:</label>
+    <input type="radio" id="option${answerOptionsContainer.children.length + 1}" name="answer">
+    <input type="text" id="option${answerOptionsContainer.children.length + 1}-text" name="option${answerOptionsContainer.children.length + 1}-text"><br><br>
+  `;
+        answerOptionsContainer.appendChild(newOption);
+      });
       </script>
   </body>
 </html>

@@ -1,506 +1,310 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/questionnaire1.css}" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
-    />
-  </head>
-  <body>
-    <div class="div189">
-      <div class="settings4"></div>
-      <section class="frame-parent108">
-        <div class="navigation-left-parent">
-          <div class="navigation-left">
-            <div class="navigation-menu1">
-              <div class="navigation-items2">
-                <div class="frame-parent109">
-                  <div class="icon-parent26">
-                    <img
-                      class="icon134"
-                      loading="lazy"
-                      alt=""
-                      src="/images/icon@2x.png"
-                    />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+  />
+</head>
+<body>
+<style>
+  .survey-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-                    <a class="constructor10">Понятная практика</a>
-                  </div>
-                  <div class="navigation-right">
-                    <div class="wrapper-user-parent1">
-                      <div class="wrapper-user10">
-                        <img
-                          class="user-icon10"
-                          loading="lazy"
-                          alt=""
-                          src="/images/user@2x.png"
-                          id="userImage"
-                        />
-                      </div>
-                      <div class="user-info1">
-                        <div class="user-name2">
-                          <b class="hello-rosalie10">Привет, Антон!</b>
-                        </div>
-                        <b class="rosaliericegmailc10">
-                          <p class="ponyatpractikagmailcom6">
-                            ponyatpractika@gmail.com
-                          </p>
-                        </b>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="dashboard-navigation-wrapper">
-                    <div class="dashboard-navigation">
-                      <div class="navigation-options">
-                        <div class="navigation-items-container">
-                          <div class="dashboard29" id="dashboardContainer">
-                            <div class="base85"></div>
-                            <div class="icon-wrapper29">
-                              <img
-                                class="icon135"
-                                alt=""
-                                src="/images/icon-3@2x.png"
-                              />
-                            </div>
-                            <b class="dashboard30">Список клиентов</b>
-                          </div>
-                          <div class="calendar-item">
-                            <div class="base86" id="baseContainer">
-                              <div class="icon-wrapper30">
-                                <img
-                                  class="icon136"
-                                  alt=""
-                                  src="/images/icon-41@2x.png"
-                                />
-                              </div>
-                              <b class="calendars10">Календарь</b>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="navigation-options1">
-                        <div class="invoice-container">
-                          <div class="invoice20" id="invoiceContainer">
-                            <div class="base87"></div>
-                            <div class="icon-wrapper31">
-                              <img
-                                class="icon137"
-                                alt=""
-                                src="/images/icon-5.svg"
-                              />
-                            </div>
-                            <b class="invoice21">Уведомления</b>
-                          </div>
-                          <div class="base-parent13">
-                            <div class="base88"></div>
-                            <div class="icon-wrapper32">
-                              <img
-                                class="icon138"
-                                alt=""
-                                src="/images/icon-6.svg"
-                              />
-                            </div>
-                            <b class="files11">Аналитика</b>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="div190" id="container">
-                        <div class="base89"></div>
-                        <b class="dashboard31">Опросники и тесты</b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="notification-icon">
-                <img class="icon139" alt="" src="/images/icon-1@2x.png" />
-              </div>
-              <div class="search-bar">
-                <div class="search-input4">
-                  <nav class="search-input-container">
-                    <div class="search-input-field">
-                      <b class="search11">Найти клиента...</b>
-                    </div>
-                    <div class="search-options">
-                      <div class="search-dropdown">
-                        <div class="search-dropdown-items">
-                          <a class="about-us17">Добавить клиента</a>
-                          <div class="policy-items">
-                            <a class="news11">Назначить встречу</a>
-                            <b class="user-policy11"
-                              >Добавить график нерабочих дней
-                            </b>
-                          </div>
-                        </div>
-                        <div class="frame-parent110">
-                          <button class="rectangle-parent99" id="groupButton">
-                            <div class="frame-child125"></div>
-                            <div class="div191">Карта клиента</div>
-                          </button>
-                          <button class="rectangle-parent100">
-                            <div class="frame-child126"></div>
-                            <div class="div192">Список встреч</div>
-                          </button>
-                          <div class="rectangle-parent101" id="groupContainer">
-                            <div class="frame-child127"></div>
-                            <h3 class="h33">Опросники и тесты</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="location1">
-                      <img
-                        class="icon140"
-                        alt=""
-                        src="/images/icon-2@2x.png"
-                      />
+  .survey-container input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
 
-                      <div class="location-name2">
-                        <b class="new-york10">Ростов-на-Дону</b>
-                      </div>
-                    </div>
-                  </nav>
-                  <div class="content-right">
-                    <div class="frame-parent111">
-                      <div class="filter-bar-wrapper">
-                        <div class="filter-bar">
-                          <div class="image-filter">
-                            <img
-                              class="image-4-icon2"
-                              loading="lazy"
-                              alt=""
-                              src="/images/image-4@2x.png"
-                            />
+  .survey-container button {
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
 
-                            <div class="image-filter-inner">
-                              <div class="rectangle-parent102">
-                                <div class="frame-child128"></div>
-                                <div class="div193">А/Я</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="filter-name">
-                            <h3 class="h34">Панель фильтрации</h3>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="component-19-parent">
-                        <div class="component-191">
-                          <div class="frame-parent112">
-                            <div class="rectangle-parent103">
-                              <div class="frame-child129"></div>
-                              <b class="test-list-dividers">20.02.2024</b>
-                            </div>
-                            <div class="test-list-names">
-                              <div class="test-list-names-child"></div>
-                              <h2 class="h23">Тест по завершению терапии</h2>
-                              <div class="test-list-icons">
-                                <button class="rectangle-parent104">
-                                  <div class="frame-child130"></div>
-                                  <b class="b121">Тест</b>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="frame-parent113">
-                            <div class="rectangle-parent105">
-                              <div class="frame-child131"></div>
-                              <b class="b122">20.02.2024</b>
-                            </div>
-                            <div class="rectangle-parent106">
-                              <div class="frame-child132"></div>
-                              <h2 class="h24">Опрос по завершению терапии</h2>
-                              <div class="frame-wrapper66">
-                                <button class="rectangle-parent107">
-                                  <div class="frame-child133"></div>
-                                  <b class="b123">Опрос</b>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="frame-parent114">
-                            <div class="rectangle-parent108">
-                              <div class="frame-child134"></div>
-                              <b class="b124">20.02.2024</b>
-                            </div>
-                            <div class="rectangle-parent109">
-                              <div class="frame-child135"></div>
-                              <h2 class="h25">Тест (промежуточный резульат)</h2>
-                              <div class="frame-wrapper67">
-                                <div class="rectangle-parent110">
-                                  <div class="frame-child136"></div>
-                                  <b class="b125">Тест</b>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="frame-parent115">
-                            <div class="rectangle-parent111">
-                              <div class="frame-child137"></div>
-                              <b class="b126">20.02.2024</b>
-                            </div>
-                            <div class="rectangle-parent112">
-                              <div class="frame-child138"></div>
-                              <h2 class="h26">
-                                Тестирование итогу первой встречи
-                              </h2>
-                              <div class="frame-wrapper68">
-                                <button class="rectangle-parent113">
-                                  <div class="frame-child139"></div>
-                                  <b class="b127">Тест</b>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="frame-parent116">
-                            <div class="rectangle-parent114">
-                              <div class="frame-child140"></div>
-                              <b class="b128">20.02.2024</b>
-                            </div>
-                            <div class="rectangle-parent115">
-                              <div class="frame-child141"></div>
-                              <h2 class="h27">
-                                Опрос о причинах обращения для взрослого
-                              </h2>
-                              <div class="frame-wrapper69">
-                                <button class="rectangle-parent116">
-                                  <div class="frame-child142"></div>
-                                  <b class="b129">Опрос</b>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <form class="search-bar-container-parent">
-                          <div class="search-bar-container">
-                            <div class="search-bar-container-child"></div>
-                            <div class="search-bar-container-inner">
-                              <div class="rectangle-parent117">
-                                <div class="frame-child143"></div>
-                                <img
-                                  class="icon141"
-                                  alt=""
-                                  src="/images/icon-1@2x.png"
-                                />
+  .survey-container button:hover {
+    background-color: #0056b3;
+  }
 
-                                <input
-                                  class="search-input-area"
-                                  placeholder="Поиск "
-                                  type="text"
-                                />
-                              </div>
-                            </div>
-                            <div class="filter-options">
-                              <div class="filter-dropdown">
-                                <div class="component17">
-                                  <div class="item102">
-                                    <img
-                                      class="feather-icon-chevron-up17"
-                                      alt=""
-                                    />
-                                  </div>
-                                  <div class="item103">
-                                    <img
-                                      class="feather-icon-plus13"
-                                      alt=""
-                                      src="/images/feathericon--plus.svg"
-                                    />
+  .survey-option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
 
-                                    <div class="filter-dropdown-values">
-                                      <div class="div194">Анкета</div>
-                                    </div>
-                                  </div>
-                                  <div class="item104">
-                                    <img
-                                      class="feather-icon-check24"
-                                      alt=""
-                                      src="/images/feathericon--check1.svg"
-                                    />
+  .survey-option input[type="radio"] {
+    margin-right: 10px;
+  }
 
-                                    <div class="div195">Опрос</div>
-                                  </div>
-                                  <div class="item105">
-                                    <img
-                                      class="feather-icon-eye3"
-                                      alt=""
-                                      src="/images/feathericon--eye.svg"
-                                    />
-
-                                    <div class="div196">Тест</div>
-                                  </div>
-                                </div>
-                                <div class="search-button">
-                                  <div class="frame-parent117">
-                                    <div class="frame-wrapper70">
-                                      <div class="frame-parent118">
-                                        <div class="wrapper45">
-                                          <div class="div197">с</div>
-                                        </div>
-                                        <div class="rectangle-parent118">
-                                          <div class="frame-child144"></div>
-                                          <div class="xxxxxxxx">xx.xx.xxxx</div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="preposition-container-parent">
-                                      <div class="preposition-container">
-                                        <div class="div198">по</div>
-                                      </div>
-                                      <div class="preposition-background">
-                                        <div
-                                          class="preposition-background-child"
-                                        ></div>
-                                        <div class="xxxxxxxx1">xx.xx.xxxx</div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="search-button-container">
-                                <div class="rectangle-parent119">
-                                  <div class="frame-child145"></div>
-                                  <div class="div199">Найти</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="my-materials-container">
-                            <button
-                              class="rectangle-parent120"
-                              id="groupButton6"
-                            >
-                              <div class="frame-child146"></div>
-                              <div class="div200">
-                                Перейти к моим материалам
-                              </div>
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <img class="icon142" alt="" src="/images/icon2.svg" />
-              </div>
-            </div>
-            <div class="wrapper46">
-              <b class="b130">Заявки</b>
-            </div>
-          </div>
-          <div class="application-entry">
-            <div class="empty-field-parent" id="groupContainer">
-              <div class="empty-field">
-                <div class="empty-field-child"></div>
-                <b class="placeholder18">20.02.2024</b>
-              </div>
-              <div class="applicant-name-field">
-                <div class="applicant-name-field-child"></div>
-                <b class="b131">Овсянникова Юля Матвеевна</b>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="second-application-entry">
-          <div class="second-empty-field-parent" id="groupContainer">
-            <div class="second-empty-field">
-              <div class="second-empty-field-child"></div>
-              <b class="second-placeholder">25.02.2024</b>
-            </div>
-            <div class="second-applicant-name">
-              <div class="second-applicant-name-child"></div>
-              <b class="b132">Овсянникова Юля Матвеевна</b>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="item106">
-        <img class="feather-icon-chevron-up18" alt="" />
+  .add-option-button {
+    margin-top: 10px;
+    display: block;
+  }
+</style>
+<div class="div139">
+  <div class="sidebar1">
+    <div class="menu">
+      <div class="dashboard23" id="dashboardContainer">
+        <div class="base75"></div>
+        <b class="dashboard24">Список клинетов</b>
+        <img
+                class="icon115"
+                loading="lazy"
+                alt=""
+                src="/images/icon-3@2x.png"
+        />
       </div>
-      <div class="feedback-container-wrapper">
-        <div class="feedback-container1">
-          <img class="icon143" alt="" src="/images/icon-7@2x.png" />
+      <div class="invoice15" id="invoiceContainer">
+        <div class="base76"></div>
+        <b class="invoice16">Уведомления</b>
+        <img
+                class="icon116"
+                loading="lazy"
+                alt=""
+                src="/images/icon-5.svg"
+        />
+      </div>
+      <div class="files8">
+        <div class="base77"></div>
+        <b class="files9">Аналитика</b>
+        <img
+                class="icon117"
+                loading="lazy"
+                alt=""
+                src="/images/icon-6.svg"
+        />
+      </div>
+      <div class="email3">
+        <div class="base78"></div>
+        <b class="calendars8">Календарь</b>
+        <img
+                class="icon118"
+                loading="lazy"
+                alt=""
+                src="/images/icon-4@2x.png"
+        />
+      </div>
 
-          <div class="feedback-button1">
-            <div class="feedback-label1">
-              <b class="send-feedback10">Обратная связь</b>
-            </div>
-            <img class="icon144" alt="" src="/images/icon-8.svg" />
-          </div>
+      <div class="div140" id="container">
+        <div class="base79"></div>
+        <b class="dashboard25">Опросники и тесты</b>
+      </div>
+      <div class="parent26">
+        <b class="b112">Заявки</b>
+        <div class="rectangle-parent87" id="groupContainer">
+          <div class="frame-child111"></div>
+          <div class="frame-child112"></div>
+          <b class="b113">Овсянникова Юля Матвеевна</b>
+          <b class="b114">20.02.2024</b>
+        </div>
+        <div class="rectangle-parent88" id="groupContainer1">
+          <div class="frame-child113"></div>
+          <div class="frame-child114"></div>
+          <b class="b115">Овсянникова Кирилл Матвеев</b>
+          <b class="b116">25.02.2024</b>
         </div>
       </div>
     </div>
+    <div class="feedback3">
+      <b class="send-feedback8">Обратная связь</b>
+      <img
+              class="icon119"
+              loading="lazy"
+              alt=""
+              src="/images/icon-7@2x.png"
+      />
 
-    <script>
-      var userImage = document.getElementById("userImage");
-      if (userImage) {
-        userImage.addEventListener("click", function (e) {
-          window.location.href = "./component4.html";
-        });
-      }
-      
-      var dashboardContainer = document.getElementById("dashboardContainer");
-      if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-          window.location.href = "./component2.html";
-        });
-      }
-      
-      var baseContainer = document.getElementById("baseContainer");
-      if (baseContainer) {
-        baseContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
-      
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./component3.html";
-        });
-      }
-      
-      var container = document.getElementById("container");
-      if (container) {
-        container.addEventListener("click", function (e) {
-          window.location.href = "./component14.html";
-        });
-      }
-      
-      var groupButton = document.getElementById("groupButton");
-      if (groupButton) {
-        groupButton.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component13.html";
-        });
-      }
-      
-      var groupButton6 = document.getElementById("groupButton6");
-      if (groupButton6) {
-        groupButton6.addEventListener("click", function (e) {
-          window.location.href = "./component14.html";
-        });
-      }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      </script>
-  </body>
+      <img
+              class="icon120"
+              loading="lazy"
+              alt=""
+              src="/images/icon-8.svg"
+      />
+    </div>
+
+    <div class="head">
+      <div class="wrapper-user8">
+        <img
+                class="user-icon8"
+                loading="lazy"
+                alt=""
+                src="/images/user@2x.png"
+                id="userImage"
+        />
+      </div>
+      <b class="hello-rosalie8">Привет, Антон!</b>
+      <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+    </div>
+  </div>
+  <b class="page-title">21</b>
+  <header class="head1">
+    <div class="navigate">
+      <a class="constructor8">Понятная практика</a>
+      <div class="menu1">
+        <b class="news9" id="newsText">Назначить встречу</b>
+        <b class="user-policy9" id="userPolicyText"
+        >Добавить график нерабочих дней
+        </b>
+        <b class="about-us15" id="aboutUsText">Добавить клиента</b>
+      </div>
+      <div class="search8">
+        <b class="search9">Найти клиента...</b>
+        <img
+                class="icon121"
+                loading="lazy"
+                alt=""
+                src="/images/icon-1@2x.png"
+        />
+      </div>
+      <div class="city">
+        <b class="new-york8">Ростов-на-Дону</b>
+        <img
+                class="icon122"
+                loading="lazy"
+                alt=""
+                src="/images/icon-2@2x.png"
+        />
+      </div>
+      <img
+              class="icon123"
+              loading="lazy"
+              alt=""
+              src="./public/icon22@2x.png"
+      />
+    </div>
+
+  </header>
+
+</div>
+<div class="survey-container">
+  <h2>Создать опрос</h2>
+  <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/creation}">
+    <div id="questionsContainer"></div>
+
+    <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
+    <button type="submit">Создать опрос</button>
+  </form>
+</div>
+<script>
+  var dashboardContainer = document.getElementById("dashboardContainer");
+  if (dashboardContainer) {
+    dashboardContainer.addEventListener("click", function (e) {
+      window.location.href = "./component2.html";
+    });
+  }
+
+  var invoiceContainer = document.getElementById("invoiceContainer");
+  if (invoiceContainer) {
+    invoiceContainer.addEventListener("click", function (e) {
+      window.location.href = "./component3.html";
+    });
+  }
+
+  var container = document.getElementById("container");
+  if (container) {
+    container.addEventListener("click", function (e) {
+      window.location.href = "./component2.html";
+    });
+  }
+
+  var groupContainer = document.getElementById("groupContainer");
+  if (groupContainer) {
+    groupContainer.addEventListener("click", function (e) {
+      window.location.href = "./component6.html";
+    });
+  }
+
+  var groupContainer1 = document.getElementById("groupContainer1");
+  if (groupContainer1) {
+    groupContainer1.addEventListener("click", function (e) {
+      window.location.href = "./component6.html";
+    });
+  }
+
+  var userImage = document.getElementById("userImage");
+  if (userImage) {
+    userImage.addEventListener("click", function (e) {
+      window.location.href = "./component4.html";
+    });
+  }
+
+  var newsText = document.getElementById("newsText");
+  if (newsText) {
+    newsText.addEventListener("click", function (e) {
+      // Please sync "Модальное окно "Назначить встречу" Тип встерча = Встреча с клиентом" to the project
+    });
+  }
+
+  var userPolicyText = document.getElementById("userPolicyText");
+  if (userPolicyText) {
+    userPolicyText.addEventListener("click", function (e) {
+      // Please sync "Модальное окно "Добавить график  нерабочих дней "" to the project
+    });
+  }
+
+  var aboutUsText = document.getElementById("aboutUsText");
+  if (aboutUsText) {
+    aboutUsText.addEventListener("click", function (e) {
+      // Please sync "Модальное окно "Добавить клиента"" to the project
+    });
+  }
+  var dashboardContainer = document.getElementById("dashboardContainer");
+  if (dashboardContainer) {
+    dashboardContainer.addEventListener("click", function (e) {
+      window.location.href = "./component2.html";
+    });
+  }
+  var invoiceContainer = document.getElementById("invoiceContainer");
+  if (invoiceContainer) {
+    invoiceContainer.addEventListener("click", function (e) {
+      window.location.href = "./component3.html";
+    });
+  }
+  var container = document.getElementById("container");
+  if (container) {
+    container.addEventListener("click", function (e) {
+      window.location.href = "./component2.html";
+    });
+  }
+  var groupContainer = document.getElementById("groupContainer");
+  if (groupContainer) {
+    groupContainer.addEventListener("click", function (e) {
+      window.location.href = "./component6.html";
+    });
+  }
+  var groupContainer1 = document.getElementById("groupContainer1");
+  if (groupContainer1) {
+    groupContainer1.addEventListener("click", function (e) {
+      window.location.href = "./component6.html";
+    });
+  }
+  var userImage = document.getElementById("userImage");
+  if (userImage) {
+    userImage.addEventListener("click", function (e) {
+      window.location.href = "./component4.html";
+    });
+  }
+</script>
+</body>
 </html>

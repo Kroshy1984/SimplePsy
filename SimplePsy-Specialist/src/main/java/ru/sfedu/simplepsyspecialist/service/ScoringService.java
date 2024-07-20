@@ -25,16 +25,18 @@ public class ScoringService {
         this.problemService = problemService;
     }
 
-    public Scoring save(String scoringId, List<String> answers) {
-        Scoring scoring = scoringRepository.findById(scoringId).get();
-
-        System.out.println("Found the scoring with id: " + scoring.getId());
-        scoring.setAnswers(answers);
-        System.out.println("Ответы: " + scoring.getAnswers());
-        Scoring resultScoring = scoringRepository.save(scoring);
-        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
-        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
-        return resultScoring;
+    public Scoring save(Scoring scoring) {
+//        Scoring scoring = scoringRepository.findById(scoringId).get();
+//
+//        System.out.println("Found the scoring with id: " + scoring.getId());
+////        scoring.setAnswers(answers);
+////        System.out.println("Ответы: " + scoring.getAnswers());
+//        Scoring resultScoring = scoringRepository.save(scoring);
+//        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
+//        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
+        System.out.println(scoring.getQuestions().get(0).getQuestionText());
+        System.out.println(scoring.getQuestions().size());
+        return scoringRepository.save(scoring);
     }
     public Scoring saveScoring(Scoring scoring)
     {
@@ -123,11 +125,11 @@ public class ScoringService {
         problemService.saveCustomersScoring(problemId, scoringId);
     }
 
-    public List<String> getScoringAnswers(String scoringId) {
-        if (scoringRepository.findById(scoringId).isPresent()) {
-            return scoringRepository.findById(scoringId).get().getAnswers();
-        } else {
-            return null;
-        }
-    }
+//    public List<String> getScoringAnswers(String scoringId) {
+//        if (scoringRepository.findById(scoringId).isPresent()) {
+//            return scoringRepository.findById(scoringId).get().getAnswers();
+//        } else {
+//            return null;
+//        }
+//    }
 }

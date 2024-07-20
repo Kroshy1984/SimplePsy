@@ -3,7 +3,6 @@ package ru.sfedu.simplepsyspecialist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
@@ -24,13 +23,13 @@ public class ScoringController {
         this.scoringService = scoringService;
     }
 
-    @GetMapping("/userForm")
-    public String userForm(Model model)
-    {
-
-        model.addAttribute("questions", Scoring.getUserData());
-        return "userForm";
-    }
+//    @GetMapping("/userForm")
+//    public String userForm(Model model)
+//    {
+//
+//        model.addAttribute("questions", Scoring.getUserData());
+//        return "userForm";
+//    }
 
     /*@GetMapping("/checkboxQuestions")
     public String checkboxQuestions(Model model) {
@@ -38,33 +37,33 @@ public class ScoringController {
         return "checkboxQuestions";
     }*/
 
-    @PostMapping("/saveAnswers")
-    public ResponseEntity<String> saveAnswers(@RequestBody String[] answers,
-                                              @RequestParam("scoringId") String scoringId) {
-        System.out.println("In method saveAnswers got the scoring id " + scoringId);
-        this.answers.clear();
-        this.answers.addAll(List.of(answers));
-        scoringService.save(scoringId, this.answers);
-        return ResponseEntity.ok(scoringId);
-//        return "redirect:/SimplePsy/V1/scoring/done";
-    }
+//    @PostMapping("/saveAnswers")
+//    public ResponseEntity<String> saveAnswers(@RequestBody String[] answers,
+//                                              @RequestParam("scoringId") String scoringId) {
+//        System.out.println("In method saveAnswers got the scoring id " + scoringId);
+//        this.answers.clear();
+//        this.answers.addAll(List.of(answers));
+//        scoringService.save(scoringId, this.answers);
+//        return ResponseEntity.ok(scoringId);
+////        return "redirect:/SimplePsy/V1/scoring/done";
+//    }
 
     // TODO: Исправить добавление пустых скорингов
     // Возвращаем скоринг
-    @GetMapping("{problemId}")
-    public String getScoring(@PathVariable String problemId,
-                             Model model) {
-        String scoringId = scoringService.saveScoring(new Scoring()).getId();
-        String clientUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
-        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
-        model.addAttribute("clientUrl", clientUrl);
-        model.addAttribute("scoringUrl", scoringUrl);
-        model.addAttribute("scoringId", scoringId);
-        model.addAttribute("problemId", problemId);
-        model.addAttribute("textQuestions", Scoring.getTextQuestions());
-        model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
-        return "questionnaire";
-    }
+//    @GetMapping("{problemId}")
+//    public String getScoring(@PathVariable String problemId,
+//                             Model model) {
+//        String scoringId = scoringService.saveScoring(new Scoring()).getId();
+//        String clientUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
+//        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
+//        model.addAttribute("clientUrl", clientUrl);
+//        model.addAttribute("scoringUrl", scoringUrl);
+//        model.addAttribute("scoringId", scoringId);
+//        model.addAttribute("problemId", problemId);
+//        model.addAttribute("textQuestions", Scoring.getTextQuestions());
+//        model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
+//        return "questionnaire";
+//    }
 
     @GetMapping("/done")
     public String done()
@@ -88,11 +87,28 @@ public class ScoringController {
         scoringService.sendProblemId(problemId);
         return ResponseEntity.ok("Success");
     }
-    @GetMapping("/getScoringAnswers")
-    public ResponseEntity<List<String>> getScoringAnswers(@RequestParam("scoringId") String scoringId)
+//    @GetMapping("/getScoringAnswers")
+//    public ResponseEntity<List<String>> getScoringAnswers(@RequestParam("scoringId") String scoringId)
+//    {
+//        System.out.println("In method getScoringAnswers got the scoringId: " + scoringId);
+//        List<String> answers = scoringService.getScoringAnswers(scoringId);
+//        return ResponseEntity.ok(answers);
+//    }
+    @GetMapping("/creation")
+    public String createQuestionnaireForm()
     {
-        System.out.println("In method getScoringAnswers got the scoringId: " + scoringId);
-        List<String> answers = scoringService.getScoringAnswers(scoringId);
-        return ResponseEntity.ok(answers);
+        return "new-front/test/create-questionnaire1";
+    }
+    @PostMapping("/creation")
+    public String createQuestionnaire(@RequestBody Scoring scoring)
+    {
+        System.out.println(scoring.getQuestions().get(0).getQuestionText());
+        scoringService.save(scoring);
+        return "new-front/test/create-questionnaire1";
+    }
+    @GetMapping("/questionnaire/{questionnaireId}")
+    public String getQuestionnaire(String questionnaireId)
+    {
+        return null;
     }
 }
