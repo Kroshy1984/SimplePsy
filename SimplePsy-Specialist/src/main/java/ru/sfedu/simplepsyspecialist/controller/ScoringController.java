@@ -119,11 +119,13 @@ public class ScoringController {
         Scoring scoring = scoringService.findById(questionnaireId);
         System.out.println(scoring.getQuestions().get(0).getQuestionText());
         model.addAttribute("scoring", scoring);
+        model.addAttribute("title", scoring.getTitle());
         model.addAttribute("customerId", customerId);
         return "new-front/test/questionnaire";
     }
     @PostMapping("/submit")
     public String submitScoring(@RequestBody CompletedScoring completedScoring) {
+        System.out.println("Scoring title: " + completedScoring.getTitle());
         Client client = clientService.findById(completedScoring.getCustomerId());
         client.addScoring(completedScoring);
         clientService.save(client);

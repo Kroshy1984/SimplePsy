@@ -153,6 +153,7 @@
   <div class="survey-container">
     <h2>Создать опрос</h2>
     <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/creation}">
+      <input type="text" id="surveyTitle" name="title" placeholder="Введите название опроса" required>
       <div id="questionsContainer"></div>
 
       <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
@@ -292,6 +293,7 @@
 
   document.getElementById("surveyForm").addEventListener("submit", function(event) {
     event.preventDefault();
+    const title = document.getElementById("surveyTitle").value;
     const questions = Array.from(document.querySelectorAll(".survey-question")).map(question => {
       const questionText = question.querySelector("input[name='questionText']").value;
       const options = Array.from(question.querySelectorAll("input[name^='optionText']")).map(option => option.value);
@@ -302,7 +304,7 @@
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ questions }),
+      body: JSON.stringify({title, questions }),
     })
             .then(response => response.json())
             .then(data => {

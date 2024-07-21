@@ -1,5 +1,6 @@
 package ru.sfedu.simplepsyspecialist.entity;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.Question;
 
@@ -8,18 +9,28 @@ import java.util.List;
 @Document("Scoring")
 public class Scoring {
     private String id;
-
+    private String title;
     private List<Question> questions;
 //    @Transient
 //    private static List<String> userData;
 //    public List<String> answers = new ArrayList<>();
+    @Transient
     public String customerId;
 
     public Scoring() {
     }
 
-    public Scoring(List<Question> questions) {
+    public Scoring(List<Question> questions, String title) {
         this.questions = questions;
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getId() {

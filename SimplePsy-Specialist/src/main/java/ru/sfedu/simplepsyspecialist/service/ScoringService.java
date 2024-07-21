@@ -35,9 +35,6 @@ public class ScoringService {
 //        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
 //        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
         Scoring scor = scoringRepository.save(scoring);
-        System.out.println(scor.getQuestions().get(0).getQuestionText());
-        System.out.println(scor.getQuestions().get(1).getQuestionText());
-        System.out.println(scor.getId());
         Scoring savedScoring = scoringRepository.findById(scor.getId()).get();
         System.out.println(savedScoring.getId());
         System.out.println(savedScoring.getQuestions().get(0).getQuestionText());

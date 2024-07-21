@@ -198,7 +198,8 @@
 
 </div>
 <div class="survey-container">
-  <h2>Опросник</h2>
+  <h2 type="text" th:text="${title}"></h2>
+  <input type="text" id="surveyTitle" name="title" hidden="hidden" th:value="${title}">
   <form id="survey-form">
     <div th:each="question, iterStat : ${scoring.questions}">
       <h3 th:text="${question.questionText}">Question Text</h3>
@@ -318,11 +319,12 @@
     formData.forEach((value, key) => {
       answers[key] = value;
     });
-
+    const title = document.getElementById("surveyTitle").value;
     const customerId = document.getElementById('customerId').value;
     const completedScoring = {
       customerId: customerId,
-      answers: answers
+      answers: answers,
+      title: title
     };
 
     fetch('/SimplePsy/V1/scoring/submit', {
