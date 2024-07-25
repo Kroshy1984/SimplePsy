@@ -657,6 +657,9 @@
   color: var(--color-slategray-500);
   text-align: center;
   z-index: 1;
+  border: none; /* Убирает рамку вокруг кнопки */
+  background: transparent; /* Прозрачный фон, если не требуется стиль фона */
+  cursor: pointer; /* Изменяет курсор на указатель */
 }
 .rectangle-parent174 {
   width: 203px;
@@ -781,7 +784,7 @@
   position: relative;
   border-radius: 50%;
   background-color: var(--color-lime);
-  border: 0 solid var(--color-darkslategray);
+  border: 2px solid var(--color-darkslategray);
   box-sizing: border-box;
   z-index: 1;
 }
@@ -799,21 +802,6 @@
   border-radius: var(--br-xl);
   display: none;
   max-width: 100%;
-}
-.b159 {
-  height: 29px;
-  width: 322px;
-  position: relative;
-  font-size: var(--font-size-xl);
-  line-height: 24px;
-  display: flex;
-  font-family: var(--bold-10);
-  color: var(--grey-blue-60);
-  text-align: left;
-  align-items: center;
-  flex-shrink: 0;
-  max-width: calc(100% - 34px);
-  z-index: 2;
 }
 .first-answer-input-rect,
 .first-answer-input-rect1 {
@@ -951,13 +939,13 @@
   max-width: 100%;
   row-gap: 20px;
 }
-.second-question-variant-child {
+.second-answer-variant-icon {
   width: 24px;
   height: 24px;
   position: relative;
   border-radius: 50%;
   background-color: var(--color-firebrick);
-  border: 0 solid var(--color-darkslategray);
+  border: 2px solid var(--color-darkslategray);
   box-sizing: border-box;
   z-index: 1;
 }
@@ -1448,4 +1436,19 @@
   .frame-parent169 {
     gap: var(--gap-mid);
   }
+}
+.editable-heading, .editable-option {
+  border: none;  /* Убирает стандартную границу input */
+  outline: none;  /* Убирает стандартную рамку при фокусе */
+  font-family: inherit; /* Наследует семейство шрифтов */
+  color: inherit; /* Наследует цвет текста */
+  cursor: text; /* Указывает, что элемент редактируемый */
+}
+
+.editable-heading::placeholder {
+  color: var(--grey-blue-60);
+}
+
+.editable-option::placeholder {
+  color: var(--grey-blue-60);
 }
