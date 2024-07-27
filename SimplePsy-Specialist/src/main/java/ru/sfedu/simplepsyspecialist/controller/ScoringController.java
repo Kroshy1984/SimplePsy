@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.CompletedScoring;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 
@@ -108,6 +109,7 @@ public class ScoringController {
     @PostMapping("/creation")
     public String createQuestionnaire(@RequestBody Scoring scoring)
     {
+        scoring.setType(TypeOfScoring.QUESTIONER);
         scoringService.save(scoring);
         return "new-front/test/create-questionnaire1";
     }
@@ -125,6 +127,43 @@ public class ScoringController {
     }
     @PostMapping("/submit")
     public String submitScoring(@RequestBody CompletedScoring completedScoring) {
+        System.out.println("Scoring title: " + completedScoring.getTitle());
+        Client client = clientService.findById(completedScoring.getCustomerId());
+        client.addScoring(completedScoring);
+        clientService.save(client);
+        return "new-front/test/create-questionnaire1";
+    }
+    @GetMapping("test/creation")
+    public String createTestForm()
+    {
+        return "new-front/test/create-new-test";
+    }
+    @PostMapping("test/creation")
+    public String createTest(@RequestBody Scoring scoring) {
+        System.out.println(scoring.getTitle());
+        scoring.getQuestions().forEach(question -> {
+            System.out.println("Question: " + question.getQuestionText());
+            question.getOptions().forEach(option -> System.out.println("Option: " + option));
+        });
+        scoring.setType(TypeOfScoring.TEST);
+        scoringService.save(scoring);
+        return "new-front/test/create-new-test";
+    }
+
+    @GetMapping("/test/{testId}/{customerId}")
+    public String getTest(@PathVariable String testId,
+                                   @PathVariable String customerId,
+                                   Model model)
+    {
+        Scoring scoring = scoringService.findById(testId);
+        System.out.println(scoring.getQuestions().get(0).getQuestionText());
+        model.addAttribute("scoring", scoring);
+        model.addAttribute("title", scoring.getTitle());
+        model.addAttribute("customerId", customerId);
+        return "new-front/test/questionnaire";
+    }
+    @PostMapping("test/submit")
+    public String submitTest(@RequestBody CompletedScoring completedScoring) {
         System.out.println("Scoring title: " + completedScoring.getTitle());
         Client client = clientService.findById(completedScoring.getCustomerId());
         client.addScoring(completedScoring);

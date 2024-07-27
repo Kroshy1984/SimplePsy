@@ -8,18 +8,26 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
 import ru.sfedu.simplepsyspecialist.repo.ScoringRepository;
+import ru.sfedu.simplepsyspecialist.repo.TestRepository;
 
 import java.util.List;
 
 @Service
 public class ScoringService {
     ScoringRepository scoringRepository;
+    TestRepository testRepository;
     ClientService clientService;
     CustomerService customerService;
     ProblemService problemService;
+
     @Autowired
-    public ScoringService(ScoringRepository scoringRepository, ClientService clientService, CustomerService customerService, ProblemService problemService) {
+    public ScoringService(ScoringRepository scoringRepository,
+                          ClientService clientService,
+                          CustomerService customerService,
+                          ProblemService problemService,
+                          TestRepository testRepository) {
         this.scoringRepository = scoringRepository;
+        this.testRepository = testRepository;
         this.clientService = clientService;
         this.customerService = customerService;
         this.problemService = problemService;
@@ -34,16 +42,10 @@ public class ScoringService {
 //        Scoring resultScoring = scoringRepository.save(scoring);
 //        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
 //        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
-        Scoring scor = scoringRepository.save(scoring);
-        Scoring savedScoring = scoringRepository.findById(scor.getId()).get();
-        System.out.println(savedScoring.getId());
-        System.out.println(savedScoring.getQuestions().get(0).getQuestionText());
-        System.out.println(savedScoring.getQuestions().get(1).getQuestionText());
-        System.out.println(savedScoring.getQuestions().get(0).getOptions().get(0));
-        System.out.println(savedScoring.getQuestions().get(1).getOptions().get(0));
 
-        return savedScoring;
+        return scoringRepository.save(scoring);
     }
+
     public Scoring saveScoring(Scoring scoring)
     {
         return scoringRepository.save(scoring);
@@ -134,7 +136,9 @@ public class ScoringService {
     public Scoring findById(String id) {
         return scoringRepository.findById(id).get();
     }
-
+    public Test findTestById(String id) {
+        return testRepository.findById(id).get();
+    }
 //    public List<String> getScoringAnswers(String scoringId) {
 //        if (scoringRepository.findById(scoringId).isPresent()) {
 //            return scoringRepository.findById(scoringId).get().getAnswers();

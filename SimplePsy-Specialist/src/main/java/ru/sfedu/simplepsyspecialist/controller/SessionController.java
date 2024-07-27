@@ -79,7 +79,7 @@ public class SessionController {
 //        System.out.println(userDetails.getUsername());
 //        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 //        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
-        return "new-front/calendar/calendar-day";
+        return "new-front/calendar/calendar";
     }
     @GetMapping("/calendar-week")
     public String getCalendarWeekBySpecialistId(

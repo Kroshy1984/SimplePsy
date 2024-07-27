@@ -169,12 +169,12 @@
                     </div>
                 </div>
             </div>
-            <form class="create-test-content-parent">
+            <form id="testForm" onsubmit="sendForm(event)" class="create-test-content-parent">
                 <div class="create-test-content">
                     <div class="create-test-header">
                         <div class="create-test-type">
                             <div class="create-test-type-content">
-                                <button class="rectangle-parent172">
+                                <button class="rectangle-parent172" type="button">
                                     <div class="frame-child206"></div>
                                     <div class="div342">Опрос</div>
                                 </button>
@@ -196,71 +196,21 @@
                     <div class="div343">Название теста</div>
                     <div class="test-name-input">
                         <div class="test-name-rect"></div>
-                        <input class="input21" placeholder="....." type="text"/>
+                        <input name="title" class="input21" placeholder="....." type="text"/>
                     </div>
                 </div>
-                <div class="frame-wrapper101" id="question-template">
-                    <div class="rectangle-parent175">
-                        <div class="frame-child209"></div>
-                        <div class="first-question">
+                <div id="questions-container">
+                    <div class="frame-wrapper101 question-block">
+                        <div class="rectangle-parent175">
+                            <div class="frame-child209"></div>
                             <div class="question-content-wrapper">
                                 <div class="question-content1">
-                                    <input type="text" class="h214 editable-heading" placeholder="Новый вопрос">
-                                    <div class="first-answer">
-                                        <div class="first-answer-content">
-                                            <div class="first-answer-variant">
-                                                <div class="first-answer-variant-icon"></div>
-                                            </div>
-                                            <div class="vector-parent1">
-                                                <img
-                                                        class="frame-child210"
-                                                        alt=""
-                                                        src="/images/rectangle-307.svg"
-                                                />
-
-                                                <input type="text" class="b160 editable-option" placeholder="Вариант 1">
-                                                <div class="first-answer-input">
-                                                    <div class="first-answer-input-content-parent">
-                                                        <div class="first-answer-input-content">
-                                                            <div class="first-answer-input-rect"></div>
-                                                            <div class="first-answer-input-rect1"></div>
-                                                        </div>
-                                                        <div class="second-answer-input-rect-parent">
-                                                            <div class="second-answer-input-rect"></div>
-                                                            <div class="second-answer-input-rect1"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <input name="questions[0].questionText" type="text" class="h214 editable-heading" placeholder="Новый вопрос">
+                                    <div class="answer">
+                                        <input name="questions[0].options[0]" type="text" class="editable-option" placeholder="Да">
                                     </div>
-                                </div>
-                            </div>
-                            <img
-                                    class="image-14-icon1"
-                                    loading="lazy"
-                                    alt=""
-                                    src="/images/image-14@2x.png"
-                            />
-                        </div>
-                        <div class="second-question">
-                            <div class="second-question-content">
-                                <div class="second-question-variant">
-                                    <div class="second-answer-variant-icon"></div>
-                                </div>
-                                <div class="vector-parent2">
-                                    <img
-                                            class="frame-child211"
-                                            alt=""
-                                            src="/images/rectangle-307.svg"
-                                    />
-
-                                    <input type="text" class="b160 editable-option" placeholder="Вариант 2">
-                                    <div class="option-two-container">
-                                        <div class="rectangle-parent176">
-                                            <div class="frame-child212"></div>
-                                            <div class="frame-child213"></div>
-                                        </div>
+                                    <div class="answer">
+                                        <input name="questions[0].options[1]" type="text" class="editable-option" placeholder="Нет">
                                     </div>
                                 </div>
                             </div>
@@ -365,27 +315,71 @@
       });
     }
 
-  document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById("addQuestionBtn").addEventListener("click", function() {
-      // Найти шаблон
-      const template = document.getElementById("question-template");
-      // Клонировать содержимое шаблона
-      const newQuestion = template.cloneNode(true);
-      // Показать новый вопрос
-      newQuestion.style.display = "";
-      // Удалить id из клонированного элемента
-      newQuestion.removeAttribute("id");
+    function sendForm(event) {
+        event.preventDefault();
 
-      // Очистить значения полей ввода
-      const inputs = newQuestion.getElementsByTagName('input');
-      for (let input of inputs) {
-          input.value = ''; // Очищаем значения
-      }
+        const form = document.getElementById('testForm');
+        const formData = new FormData(form);
+        const data = {
+            title: formData.get('title'),
+            questions: []
+        };
 
-      // Вставить новый вопрос перед кнопкой "Добавить вопрос..."
-      document.getElementById("addQuestionBtn").insertAdjacentElement('beforebegin', newQuestion);
-  });
-});
+        document.querySelectorAll('.question-block').forEach((block, index) => {
+            const questionText = formData.get(`questions[${index}].questionText`);
+            const options = [
+                formData.get(`questions[${index}].options[0]`),
+                formData.get(`questions[${index}].options[1]`)
+            ];
+            data.questions.push({
+                questionText,
+                options
+            });
+        });
+
+        fetch('/SimplePsy/V1/scoring/test/creation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())
+            .then(response => {
+                console.log(response);
+                // Перенаправление или отображение результата
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    document.getElementById('addQuestionBtn').addEventListener('click', () => {
+        const questionsContainer = document.getElementById('questions-container');
+        const questionBlocks = document.querySelectorAll('.question-block');
+        const newIndex = questionBlocks.length;
+
+        const newQuestionBlock = document.createElement('div');
+        newQuestionBlock.className = 'frame-wrapper101 question-block';
+        newQuestionBlock.innerHTML = `
+                <div class="rectangle-parent175">
+                    <div class="frame-child209"></div>
+                    <div class="question-content-wrapper">
+                        <div class="question-content1">
+                            <input name="questions[${newIndex}].questionText" type="text" class="h214 editable-heading" placeholder="Новый вопрос">
+                            <div class="answer">
+                                <input name="questions[${newIndex}].options[0]" type="text" class="editable-option" placeholder="Да">
+                            </div>
+                            <div class="answer">
+                                <input name="questions[${newIndex}].options[1]" type="text" class="editable-option" placeholder="Нет">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        questionsContainer.appendChild(newQuestionBlock);
+    });
 </script>
 </body>
 </html>

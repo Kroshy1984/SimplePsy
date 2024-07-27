@@ -3,6 +3,7 @@ package ru.sfedu.simplepsyspecialist.entity;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.Question;
+import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Scoring {
     private String id;
     private String title;
     private List<Question> questions;
+    private TypeOfScoring type;
 //    @Transient
 //    private static List<String> userData;
 //    public List<String> answers = new ArrayList<>();
@@ -47,6 +49,13 @@ public class Scoring {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+    public TypeOfScoring getType() {
+        return type;
+    }
+
+    public void setType(TypeOfScoring type) {
+        this.type = type;
     }
 
 //    public List<String> getAnswers() {
