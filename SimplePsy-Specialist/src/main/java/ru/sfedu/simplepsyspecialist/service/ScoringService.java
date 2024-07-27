@@ -8,14 +8,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
 import ru.sfedu.simplepsyspecialist.repo.ScoringRepository;
-import ru.sfedu.simplepsyspecialist.repo.TestRepository;
 
 import java.util.List;
 
 @Service
 public class ScoringService {
     ScoringRepository scoringRepository;
-    TestRepository testRepository;
     ClientService clientService;
     CustomerService customerService;
     ProblemService problemService;
@@ -24,10 +22,8 @@ public class ScoringService {
     public ScoringService(ScoringRepository scoringRepository,
                           ClientService clientService,
                           CustomerService customerService,
-                          ProblemService problemService,
-                          TestRepository testRepository) {
+                          ProblemService problemService) {
         this.scoringRepository = scoringRepository;
-        this.testRepository = testRepository;
         this.clientService = clientService;
         this.customerService = customerService;
         this.problemService = problemService;
@@ -135,9 +131,6 @@ public class ScoringService {
 
     public Scoring findById(String id) {
         return scoringRepository.findById(id).get();
-    }
-    public Test findTestById(String id) {
-        return testRepository.findById(id).get();
     }
 //    public List<String> getScoringAnswers(String scoringId) {
 //        if (scoringRepository.findById(scoringId).isPresent()) {

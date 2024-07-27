@@ -6,6 +6,7 @@
 
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/questionnaire.css}" />
   <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -16,52 +17,6 @@
   />
 </head>
 <body>
-<style>
-  .survey-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .survey-container input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .survey-container button {
-    padding: 10px 15px;
-    margin: 10px 5px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .survey-container button:hover {
-    background-color: #0056b3;
-  }
-
-  .survey-option {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-  }
-
-  .survey-option input[type="radio"] {
-    margin-right: 10px;
-  }
-
-  .add-option-button {
-    margin-top: 10px;
-    display: block;
-  }
-</style>
 <div class="div139">
   <div class="sidebar1">
     <div class="menu">
@@ -157,7 +112,6 @@
       <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
     </div>
   </div>
-  <b class="page-title">21</b>
   <header class="head1">
     <div class="navigate">
       <a class="constructor8">Понятная практика</a>
@@ -190,28 +144,28 @@
               class="icon123"
               loading="lazy"
               alt=""
-              src="./public/icon22@2x.png"
+              src="/images/icon@2x.png"
       />
     </div>
 
   </header>
 
-</div>
-<div class="survey-container">
-  <h2 type="text" th:text="${title}"></h2>
-  <input type="text" id="surveyTitle" name="title" hidden="hidden" th:value="${title}">
-  <form id="survey-form">
-    <div th:each="question, iterStat : ${scoring.questions}">
-      <h3 th:text="${question.questionText}">Question Text</h3>
-      <div th:each="option, optStat : ${question.options}">
-        <input type="radio" th:id="'option-' + ${iterStat.index} + '-' + ${optStat.index}"
-               th:name="${question.questionText}" th:value="${option}" />
-        <label th:for="'option-' + ${iterStat.index} + '-' + ${optStat.index}" th:text="${option}">Option</label>
+  <div class="survey-container">
+    <h2 type="text" th:text="${title}"></h2>
+    <input type="text" id="surveyTitle" name="title" hidden="hidden" th:value="${title}">
+    <form id="survey-form">
+      <div th:each="question, iterStat : ${scoring.questions}">
+        <h3 th:text="${question.questionText}">Question Text</h3>
+        <div th:each="option, optStat : ${question.options}">
+          <input type="radio" th:id="'option-' + ${iterStat.index} + '-' + ${optStat.index}"
+                 th:name="${question.questionText}" th:value="${option}" />
+          <label th:for="'option-' + ${iterStat.index} + '-' + ${optStat.index}" th:text="${option}">Option</label>
+        </div>
       </div>
-    </div>
-    <input type="hidden" id="customerId" th:value="${customerId}">
-    <button type="button" onclick="submitSurvey()">Submit</button>
-  </form>
+      <input type="hidden" id="customerId" th:value="${customerId}">
+      <button type="button" onclick="submitSurvey()">Подтвердить</button>
+    </form>
+  </div>
 </div>
 <script>
   var dashboardContainer = document.getElementById("dashboardContainer");
