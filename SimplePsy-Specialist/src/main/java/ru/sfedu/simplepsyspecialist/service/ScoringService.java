@@ -132,6 +132,10 @@ public class ScoringService {
     public Scoring findById(String id) {
         return scoringRepository.findById(id).get();
     }
+
+    public List<Scoring> findAll() {
+        return scoringRepository.findAll();
+    }
 //    public List<String> getScoringAnswers(String scoringId) {
 //        if (scoringRepository.findById(scoringId).isPresent()) {
 //            return scoringRepository.findById(scoringId).get().getAnswers();

@@ -5,6 +5,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.Question;
 import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Document("Scoring")
@@ -13,6 +16,7 @@ public class Scoring {
     private String title;
     private List<Question> questions;
     private TypeOfScoring type;
+    private Date date;
 //    @Transient
 //    private static List<String> userData;
 //    public List<String> answers = new ArrayList<>();
@@ -25,6 +29,7 @@ public class Scoring {
     public Scoring(List<Question> questions, String title) {
         this.questions = questions;
         this.title = title;
+        this.date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     public String getTitle() {
