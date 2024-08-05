@@ -154,6 +154,16 @@ public class CustomerController {
         model.addAttribute("customerDTO", new Customer());
         return "new-front/customer/customer-creation";
     }
+
+    @GetMapping("/customer-card/{customerId}")
+    public String getCustomerCard(@PathVariable String customerId, Model model) {
+        System.out.println("In method getCustomerCard got the customerId: " + customerId);
+        Customer customer = customerService.findById(customerId);
+        customer.setId(customerId);
+        model.addAttribute("customer", customer);
+        return "new-front/customer/customer-card";
+    }
+
     @PostMapping("/customers/new")
     public ResponseEntity<String> createNewCustomer(Customer customer) throws IOException {
         //System.out.println("Got the new customer:\n" + name);
