@@ -170,4 +170,26 @@ public class ScoringController {
         clientService.save(client);
         return "new-front/test/create-questionnaire1";
     }
+    @GetMapping("/list")
+    public String getList(Model model)
+    {
+        List<Scoring> scorings = scoringService.findAll();
+        model.addAttribute("scorings", scorings);
+        return "new-front/test/tests-list";
+    }
+    @GetMapping("test/edit/{scoringId}")
+    public String testEdit(Model model,
+                           @PathVariable String scoringId)
+    {
+        Scoring scoring = scoringService.findById(scoringId);
+        model.addAttribute("scoring", scoring);
+        return "new-front/test/test-edit";
+    }
+    @PostMapping("/test/update")
+    public String updateTest(@ModelAttribute Scoring scoring) {
+        System.out.println(scoring.getQuestions().get(0).getQuestionText());
+        System.out.println(scoring.getTitle());
+        scoringService.save(scoring);
+        return "redirect:/SimplePsy/V1/scoring/list";
+    }
 }
