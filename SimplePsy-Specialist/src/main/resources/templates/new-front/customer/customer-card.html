@@ -227,55 +227,29 @@
             <div class="component19">
               <div class="item113">
                 <div class="div221">Тип клиента</div>
-                <div class="div222">Пара</div>
-                <div class="button68">
-                  <img
-                    class="feather-icon-chevron-down14"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div222" th:text="${customer.typeOfClient}"></div>
               </div>
               <div class="item114">
                 <div class="div223">ФИО клиента 1</div>
-                <div class="string10">
-                  Иванова Елизавета Станиславовна (string)
+                <div class="string10" th:text="${customer.name}">
                 </div>
               </div>
               <div class="item115">
                 <div class="div224">Номер телефона 1</div>
-                <div class="int4">+7 960 307 08 92 (int)</div>
+                <div class="int4" th:text="${customer.contact.phone}"></div>
               </div>
               <div class="item116">
                 <div class="div225">Почта 1</div>
-                <div class="kirraaagmailcom-string1">
-                  kirraaa@gmail.com (string)
+                <div class="kirraaagmailcom-string1" th:text="${customer.contact.email}">
                 </div>
               </div>
               <div class="item117">
                 <div class="div226">Пол 1</div>
-                <div class="div227">Женский (справочник)</div>
-                <div class="button69">
-                  <img
-                    class="feather-icon-chevron-down15"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div227" th:text="${customer.sex}"></div>
               </div>
               <div class="item118">
                 <div class="div228">Клиент проходит групповую терапию</div>
                 <div class="div229">Да</div>
-                <div class="button70">
-                  <img
-                    class="feather-icon-chevron-down16"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
               </div>
               <div class="item119">
                 <input
@@ -284,100 +258,58 @@
                   type="text"
                 />
 
-                <div class="div230">
-                  .... *Поле появляется только когда клиент проходит групповую
-                  терапию
-                </div>
-                <div class="button71">
-                  <img
-                    class="feather-icon-chevron-down17"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div230"></div>
               </div>
               <div class="item120">
                 <div class="div231">
                   Каким способом обратился клиент/попечитель
                 </div>
-                <div class="div232">Мессенджер (справочник)</div>
-                <div class="button72">
-                  <img
-                    class="feather-icon-chevron-down18"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div232" th:text="${customer.typeOfTreatment}"></div>
               </div>
               <div class="item121">
                 <div class="div233">
                   Дата первого обращения (запрос на консультацию)
                 </div>
-                <div class="int5">20.11.2021 (int)</div>
+                <div class="int5" th:text="${customer.dateOfFirstRequest}"></div>
               </div>
               <div class="item122">
                 <div class="div234">Дата первой консультации</div>
-                <div class="int6">01.12.2021 (int)</div>
+                <div class="int6" th:text="${customer.dateOfFirstConsultation}"></div>
               </div>
               <div class="item123">
                 <div class="div235">Предпочтительный формат встречи</div>
-                <div class="div236">Онлайн (справочник)</div>
-                <div class="button73">
-                  <img
-                    class="feather-icon-chevron-down19"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div236" th:text="${customer.preferredMeetingFormat}"></div>
               </div>
               <div class="item124">
                 <div class="div237">
                   Для онлайн выбрать/указать площадку взаимодействия
                 </div>
-                <div class="zoom1">Zoom (справочник)</div>
-                <div class="button74">
-                  <img
-                    class="feather-icon-chevron-down20"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="zoom1" th:text="${customer.onlineMeetingPlace}"></div>
               </div>
               <div class="item125">
                 <div class="div238">
                   Для оффлайн выбрать адрес проведения встречи
                 </div>
-                <div class="string11">Чехова 32 (string)</div>
+                <div class="string11" th:text="${customer.offlineMeetingPlace}"></div>
               </div>
               <div class="item126">
                 <div class="div239">Статус клиента</div>
                 <div class="wrapper50">
-                  <div class="div240">по запросу (справочник)</div>
-                </div>
-                <div class="button75">
-                  <img
-                    class="feather-icon-chevron-down21"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
+                  <div class="div240" th:text="${customer.clientStatus}"></div>
                 </div>
               </div>
               <div class="item127">
                 <div class="div241">
                   Первичный/изначальный запрос клиента на терапию
                 </div>
-                <div class="string12">(string)</div>
+                <div class="string12" th:text="${customer.clientsFirstRequestForTherapy}"></div>
               </div>
               <div class="item128">
                 <div class="div242">
                   Фиксированное время/день недели для встречи (если да, то
                   указать)
                 </div>
-                <div class="string13">(string)</div>
+                <div class="string13" th:text="${customer.fixedTimeForMeeting}"></div>
               </div>
               <div class="item129">
                 <div class="div243">Финансовые условия</div>
@@ -417,41 +349,26 @@
             <div class="client-details-form">
               <div class="item130">
                 <div class="div245">Дата рождения</div>
-                <div class="int7">20.11.2021 (int)</div>
+                <div class="int7" th:text="${customer.dateOfBirth}"></div>
               </div>
               <div class="item131">
                 <div class="div246">Адрес проживания</div>
-                <div class="string14">Чехова 32 (string)</div>
+                <div class="string14" th:text="${customer.residentialAddress}"></div>
               </div>
               <div class="item132">
                 <div class="div247">
                   Коллегиальные рекомендации (поле для заполнения кто вас
                   порекомендовал клиенту)
                 </div>
-                <div class="string15">(string)</div>
+                <div class="string15" th:text="${customer.collegialRecommendations}"></div>
               </div>
               <div class="item133">
                 <div class="div248">Особые условия контракта</div>
-                <div class="string16">(string)</div>
-                <div class="button76">
-                  <img
-                    class="feather-icon-chevron-down22"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="string16" th:text="${customer.specialTermsOfContract}"></div>
               </div>
               <div class="item134">
                 <div class="div249">Семейное положение</div>
-                <div class="div250">Женат/Замужем (справочник)</div>
-                <div class="button77">
-                  <img
-                    class="feather-icon-chevron-down23"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div250" th:text="${customer.familyStatus}"></div>
               </div>
               <div class="item135">
                 <div class="div251">
@@ -471,40 +388,17 @@
                   Приоритетный канал коммуникации (выпадающий список куда
                   писать)
                 </div>
-                <div class="telegram3">Telegram (справочник)</div>
-                <div class="button78">
-                  <img
-                    class="feather-icon-chevron-down24"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="telegram3" th:text="${customer.priorityCommunicationChannel}"></div>
               </div>
               <div class="item138">
                 <div class="div254">
                   Берется ли супервизия на данного клиента
                 </div>
-                <div class="div255">Да (справочник)</div>
-                <div class="button79">
-                  <img
-                    class="feather-icon-chevron-down25"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
-                <div class="button80">
-                  <img
-                    class="feather-icon-chevron-down26"
-                    loading="lazy"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div255" th:text="${customer.isSupervision}"></div>
               </div>
               <div class="item139">
                 <div class="div256">ФИО и контакты супервизора</div>
-                <div class="string19">(string)</div>
+                <div class="string19" th:text="${customer.supervisorsName}"></div>
                 <div class="button81">
                   <img
                     class="feather-icon-chevron-down27"
@@ -517,7 +411,7 @@
                 <div class="div257">
                   Материал для следующих сеансов из супервизии
                 </div>
-                <div class="string20">(string)</div>
+                <div class="string20" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
                 <div class="button82">
                   <img
                     class="feather-icon-chevron-down28"
@@ -528,37 +422,7 @@
               </div>
               <div class="item141">
                 <div class="div258">Заметки</div>
-                <div class="string21">(string)</div>
-              </div>
-              <div class="item142">
-                <div class="div259">Статус клиента (Регулярный/по запросу)</div>
-                <div class="wrapper51">
-                  <div class="div260">по запросу (справочник)</div>
-                </div>
-                <div class="button83">
-                  <img
-                    class="feather-icon-chevron-down29"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
-              </div>
-              <div class="item143">
-                <div class="div261">
-                  Первичный/изначальный запрос клиента на терапию
-                </div>
-                <div class="div262">Текстовое поле</div>
-              </div>
-              <div class="item144">
-                <div class="div263">
-                  Фиксированное время/день недели для встречи (если да, то
-                  указать)
-                </div>
-                <div class="div264">Текстовое поле</div>
-              </div>
-              <div class="item145">
-                <div class="div265">Финансовые условия</div>
-                <div class="div266">Числовое поле</div>
+                <div class="string21" th:text="${customer.notes}"></div>
               </div>
             </div>
           </div>

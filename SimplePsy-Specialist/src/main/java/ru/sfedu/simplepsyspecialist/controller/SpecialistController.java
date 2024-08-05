@@ -182,16 +182,6 @@ public class SpecialistController {
         model.addAttribute("clients", clients);
         return "client-list";
     }
-    @GetMapping("/customer-card/{customerId}")
-    public String getCustomerCard(@PathVariable String customerId, Model model) {
-        System.out.println("In method getCustomerCard got the customerId: " + customerId);
-        Customer customer = specialistService.findCustomerById(customerId);
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        customer.setId(customerId);
-        model.addAttribute("specUrl", specUrl);
-        model.addAttribute("customer", customer);
-        return "customer-card";
-    }
 
     @PostMapping("/customer-card/update")
     public String updateCustomerCard(@ModelAttribute("customer") Customer customerDTO,
