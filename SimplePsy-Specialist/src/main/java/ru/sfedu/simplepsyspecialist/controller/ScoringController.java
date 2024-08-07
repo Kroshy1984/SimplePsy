@@ -182,14 +182,19 @@ public class ScoringController {
                            @PathVariable String scoringId)
     {
         Scoring scoring = scoringService.findById(scoringId);
+        if (scoring.getQuestions() == null) {
+            scoring.setQuestions(new ArrayList<>());
+        }
         model.addAttribute("scoring", scoring);
         return "new-front/test/test-edit";
     }
-    @PostMapping("/test/update")
-    public String updateTest(@ModelAttribute Scoring scoring) {
-        System.out.println(scoring.getQuestions().get(0).getQuestionText());
-        System.out.println(scoring.getTitle());
+
+    @PutMapping("test/{id}/update")
+    public String updateTest(@PathVariable String id, @RequestBody Scoring scoring) {
+        scoring.setId(id);
+        scoring.getQuestions().forEach(question -> System.out.println(question.getQuestionText()));
         scoringService.save(scoring);
-        return "redirect:/SimplePsy/V1/scoring/list";
+        return "redirect:/list"; // перенаправление на список тестов или другой нужный маршрут
     }
+
 }
