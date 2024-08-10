@@ -230,35 +230,28 @@
                 <div class="div222" th:text="${customer.typeOfClient}"></div>
               </div>
               <div class="item114">
-                <div class="div223">ФИО клиента 1</div>
-                <div class="string10" th:text="${customer.name}">
+                <div class="div223">ФИО клиента</div>
+                <div class="string10" th:text="${customer.name + ' ' + customer.surname + ' ' + customer.lastName}">
                 </div>
               </div>
               <div class="item115">
-                <div class="div224">Номер телефона 1</div>
+                <div class="div224">Номер телефона</div>
                 <div class="int4" th:text="${customer.contact.phone}"></div>
               </div>
               <div class="item116">
-                <div class="div225">Почта 1</div>
+                <div class="div225">Почта</div>
                 <div class="kirraaagmailcom-string1" th:text="${customer.contact.email}">
                 </div>
               </div>
               <div class="item117">
-                <div class="div226">Пол 1</div>
+                <div class="div226">Пол</div>
                 <div class="div227" th:text="${customer.sex}"></div>
               </div>
-              <div class="item118">
-                <div class="div228">Клиент проходит групповую терапию</div>
-                <div class="div229">Да</div>
-              </div>
-              <div class="item119">
-                <input
-                  class="input18"
-                  placeholder="Укажите клиента"
-                  type="text"
-                />
-
-                <div class="div230"></div>
+              <div class="item126">
+                <div class="div239">Статус клиента</div>
+                <div class="wrapper50">
+                  <div class="div240" th:text="${customer.clientStatus}"></div>
+                </div>
               </div>
               <div class="item120">
                 <div class="div231">
@@ -292,12 +285,6 @@
                 </div>
                 <div class="string11" th:text="${customer.offlineMeetingPlace}"></div>
               </div>
-              <div class="item126">
-                <div class="div239">Статус клиента</div>
-                <div class="wrapper50">
-                  <div class="div240" th:text="${customer.clientStatus}"></div>
-                </div>
-              </div>
               <div class="item127">
                 <div class="div241">
                   Первичный/изначальный запрос клиента на терапию
@@ -313,6 +300,7 @@
               </div>
               <div class="item129">
                 <div class="div243">Финансовые условия</div>
+                <div class="string13" th:text="${customer.financialConditions}"></div>
               </div>
             </div>
           </div>
@@ -370,19 +358,6 @@
                 <div class="div249">Семейное положение</div>
                 <div class="div250" th:text="${customer.familyStatus}"></div>
               </div>
-              <div class="item135">
-                <div class="div251">
-                  Прием медицинских препаратов оказывающих влияние на
-                  сознание/эмоциональное состояние клиента
-                </div>
-                <input class="string17" placeholder="(string)" type="text" />
-              </div>
-              <div class="item136">
-                <div class="div252">
-                  Предыдущий опыт получения психологической помощи
-                </div>
-                <div class="string18">(string)</div>
-              </div>
               <div class="item137">
                 <div class="div253">
                   Приоритетный канал коммуникации (выпадающий список куда
@@ -397,28 +372,38 @@
                 <div class="div255" th:text="${customer.isSupervision}"></div>
               </div>
               <div class="item139">
-                <div class="div256">ФИО и контакты супервизора</div>
-                <div class="string19" th:text="${customer.supervisorsName}"></div>
-                <div class="button81">
-                  <img
-                    class="feather-icon-chevron-down27"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+                <div class="div256">ФИО супервизора</div>
+                <div class="string19" th:text="${customer.supervisorsName + ' ' + customer.supervisorsSurname + ' ' + customer.supervisorsLastName}"></div>
+              </div>
+              <div class="item139">
+                <div class="div256">Номер телефона супервизора</div>
+                <div class="string19" th:text="${customer.supervisorsContact.getPhone()}"></div>
+              </div>
+              <div class="item139">
+                <div class="div256">Электронная почта супервизора</div>
+                <div class="string19" th:text="${customer.supervisorsContact.getEmail()}"></div>
               </div>
               <div class="item140">
                 <div class="div257">
                   Материал для следующих сеансов из супервизии
                 </div>
                 <div class="string20" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
-                <div class="button82">
-                  <img
-                    class="feather-icon-chevron-down28"
-                    alt=""
-                    src="/images/feathericon--chevrondown.svg"
-                  />
-                </div>
+              </div>
+              <div class="item139">
+                <div class="div256">ФИО котерапевта</div>
+                <div class="string19" th:text="${customer.cotherapistName + ' ' + customer.cotherapistSurname + ' ' + customer.cotherapistLastName}"></div>
+              </div>
+              <div class="item139">
+                <div class="div256">Номер телефона котерапевта</div>
+                <div class="string19" th:text="${customer.cotherapistContact.getPhone()}"></div>
+              </div>
+              <div class="item139">
+                <div class="div256">Электронная почта котерапевта</div>
+                <div class="string19" th:text="${customer.cotherapistContact.getEmail()}"></div>
+              </div>
+              <div class="item141">
+                <div class="div258">Условия распределения гонорара между котерапевтами</div>
+                <div class="string21" th:text="${customer.cotherapistPaymentConditions}"></div>
               </div>
               <div class="item141">
                 <div class="div258">Заметки</div>
