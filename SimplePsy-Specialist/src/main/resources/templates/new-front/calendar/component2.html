@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь с расписанием</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .calendar {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .day {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            height: 100px; /* Высота ячейки */
+            overflow: auto; /* Включаем скролл, если содержимое не помещается */
+        }
+
+        .events {
+            margin-top: 5px;
+            padding: 5px;
+            background-color: #f2f2f2;
+            border-radius: 3px;
+        }
+
+        .week-view .day {
+            height: 100px; /* Высота ячейки для недельного виде */
+        }
+
+        .day-view {
+            margin-top: 10px;
+        }
+
+        .event {
+            margin-bottom: 5px;
+            padding: 5px;
+            background-color: #e1efff;
+            border-radius: 3px;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        <div class="header">
+            <button id="prevBtn">&lt;</button>
+            <div id="viewMode"></div>
+            <button id="nextBtn">&gt;</button>
+            <button id="dayBtn">День</button>
+            <button id="weekBtn">Неделя</button>
+            <button id="monthBtn">Месяц</button>
+        </div>
+        <div id="calendarBody" class="month-view"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarBody = document.getElementById('calendarBody');
+            const viewModeElem = document.getElementById('viewMode');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dayBtn = document.getElementById('dayBtn');
+            const weekBtn = document.getElementById('weekBtn');
+            const monthBtn = document.getElementById('monthBtn');
+
+            let currentDate = new Date();
+            let currentViewMode = 'month'; // month, week, day
+            let eventsData = []; // Массив для хранения данных о событиях
+
+            // Имитация данных о событиях для демонстрации
+            generateRandomEvents();
+
+            renderCalendar(currentDate);
+
+            function renderCalendar(date) {
+                calendarBody.innerHTML = ''; // Очищаем предыдущее содержимое
+
+                switch (currentViewMode) {
+                    case 'month':
+                        renderMonthView(date);
+                        break;
+                    case 'week':
+                        renderWeekView(date);
+                        break;
+                    case 'day':
+                        renderDayView(date);
+                        break;
+                    default:
+                        renderMonthView(date);
+                        break;
+                }
+
+                viewModeElem.textContent = getViewModeTitle(date);
+                disableActiveModeButton();
+            }
+
+            function getViewModeTitle(date) {
+                switch (currentViewMode) {
+                    case 'month':
+                        return date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                    case 'week':
+                        let startOfWeek = getStartOfWeek(date);
+                        let endOfWeek = getEndOfWeek(date);
+                        return `${startOfWeek.getDate()} ${startOfWeek.toLocaleString('default', { month: 'short' })} - ${endOfWeek.getDate()} ${endOfWeek.toLocaleString('default', { month: 'short' })}, ${startOfWeek.getFullYear()}`;
+                    case 'day':
+                        return date.toLocaleString('default', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                    default:
+                        return '';
+                }
+            }
+
+            function renderMonthView(date) {
+                const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+                const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                const daysInMonth = endOfMonth.getDate();
+
+                // Вычисляем высоту ячейки в зависимости от размера экрана
+                const windowHeight = window.innerHeight;
+                const cellHeight = Math.floor(windowHeight / 4); // Приблизительно 4 строки
+
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const day = new Date(date.getFullYear(), date.getMonth(), i);
+                    const dayElement = createDayElement(day);
+                    dayElement.style.height = `${cellHeight}px`; // Устанавливаем высоту ячейки
+                    calendarBody.appendChild(dayElement);
+                }
+            }
+
+            function renderWeekView(date) {
+                const startOfWeek = getStartOfWeek(date);
+
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i);
+                    const dayElement = createDayElement(day);
+                    calendarBody.appendChild(dayElement);
+                }
+            }
+
+            function renderDayView(date) {
+                const dayView = document.createElement('div');
+                dayView.classList.add('day-view');
+
+                const eventsForDay = eventsData.filter(event => isSameDay(event.date, date));
+
+                if (eventsForDay.length > 0) {
+                    eventsForDay.forEach(event => {
+                        const eventItem = document.createElement('div');
+                        eventItem.classList.add('event');
+                        eventItem.textContent = `${event.title} (${formatTime(event.startTime)} - ${formatTime(event.endTime)})`;
+                        dayView.appendChild(eventItem);
+                    });
+                } else {
+                    const noEventsMsg = document.createElement('p');
+                    noEventsMsg.textContent = 'Нет событий для этого дня';
+                    dayView.appendChild(noEventsMsg);
+                }
+
+                calendarBody.appendChild(dayView);
+            }
+
+            function createDayElement(date) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day');
+                dayElement.textContent = date.getDate();
+
+                // Add event listeners to switch to day view
+                dayElement.addEventListener('click', function() {
+                    currentViewMode = 'day';
+                    renderCalendar(date);
+                });
+
+                // Simulate events for demonstration
+                const eventsForDay = eventsData.filter(event => isSameDay(event.date, date));
+                if (eventsForDay.length > 0) {
+                    const eventsIndicator = document.createElement('div');
+                    eventsIndicator.classList.add('events');
+                    eventsIndicator.textContent = `${eventsForDay.length} события`;
+                    dayElement.appendChild(eventsIndicator);
+                }
+
+                return dayElement;
+            }
+
+            function getStartOfWeek(date) {
+                const startOfWeek = new Date(date);
+                startOfWeek.setDate(date.getDate() - date.getDay());
+                return startOfWeek;
+            }
+
+            function getEndOfWeek(date) {
+                const endOfWeek = new Date(date);
+                endOfWeek.setDate(date.getDate() - date.getDay() + 6);
+                return endOfWeek;
+            }
+
+            function disableActiveModeButton() {
+                dayBtn.disabled = currentViewMode === 'day';
+                weekBtn.disabled = currentViewMode === 'week';
+                monthBtn.disabled = currentViewMode === 'month';
+            }
+
+            function generateRandomEvents() {
+                // Генерация случайных данных о событиях для демонстрации
+                const startDate = new Date();
+                const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 30);
+
+                while (startDate < endDate) {
+                    if (Math.random() < 0.8) {
+                        const eventDate = new Date(startDate);
+                        const eventTitle = `Событие ${eventsData.length + 1}`;
+                        const startTime = getRandomTime();
+                        const endTime = new Date(startTime);
+                        endTime.setHours(startTime.getHours() + Math.floor(Math.random() * 4) + 1);
+                        eventsData.push({
+                            date: eventDate,
+                            title: eventTitle,
+                            startTime: startTime,
+                            endTime: endTime
+                        });
+                    }
+                    startDate.setDate(startDate.getDate() + 1);
+                }
+            }
+
+            function isSameDay(date1, date2) {
+                return date1.getFullYear() === date2.getFullYear() &&
+                       date1.getMonth() === date2.getMonth() &&
+                       date1.getDate() === date2.getDate();
+            }
+
+            function formatTime(date) {
+                return `${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
+            }
+
+            function padZero(num) {
+                return num.toString().padStart(2, '0');
+            }
+
+            function getRandomTime() {
+                const hours = Math.floor(Math.random() * 24);
+                const minutes = Math.floor(Math.random() * 60);
+                const date = new Date();
+                date.setHours(hours);
+                date.setMinutes(minutes);
+                date.setSeconds(0);
+                return date;
+            }
+
+            prevBtn.addEventListener('click', function() {
+                switch (currentViewMode) {
+                    case 'month':
+                        currentDate.setMonth(currentDate.getMonth() - 1);
+                        break;
+                    case 'week':
+                        currentDate.setDate(currentDate.getDate() - 7);
+                        break;
+                    case 'day':
+                        currentDate.setDate(currentDate.getDate() - 1);
+                        break;
+                    default:
+                        break;
+                }
+                renderCalendar(currentDate);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                switch (currentViewMode) {
+                    case 'month':
+                        currentDate.setMonth(currentDate.getMonth() + 1);
+                        break;
+                    case 'week':
+                        currentDate.setDate(currentDate.getDate() + 7);
+                        break;
+                    case 'day':
+                        currentDate.setDate(currentDate.getDate() + 1);
+                        break;
+                    default:
+                        break;
+                }
+                renderCalendar(currentDate);
+            });
+
+            dayBtn.addEventListener('click', function() {
+                currentViewMode = 'day';
+                renderCalendar(currentDate);
+            });
+
+            weekBtn.addEventListener('click', function() {
+                currentViewMode = 'week';
+                renderCalendar(currentDate);
+            });
+
+            monthBtn.addEventListener('click', function() {
+                currentViewMode = 'month';
+                renderCalendar(currentDate);
+            });
+        });
+    </script>
+</body>
+</html>

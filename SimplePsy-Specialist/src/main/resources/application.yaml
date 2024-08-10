@@ -2,6 +2,30 @@ spring:
   data:
     mongodb:
       uri: mongodb://psyApp:123@93.95.97.176:27017/psyDb?authSource=admin
+#  zipkin:
+#    baseUrl: http://127.0.0.1:9411/
+#    service:
+#      name: specialist
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: juggeryurnero276@gmail.com
+    password: ghdp rkrl lxng kine
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    sender:
+      email: juggeryurnero276@gmail.com
+
+
+bot:
+  name: "psy_notification_bot"
+  token: "6829037654:AAFsiBStsmIn3bXkM4PU2wtRAZqkxJ7rdTc"
+  owner: 505701273
+
 server:
   address: 0.0.0.0
   port: 8081

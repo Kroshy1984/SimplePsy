@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1, width=device-width"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/create-new-test.css}"/>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+</head>
+<body>
+<div class="div340">
+    <div class="settings9"></div>
+    <div class="inner1">
+        <div class="frame-parent166">
+            <header class="frame-wrapper99">
+                <div class="frame-parent167">
+                    <div class="icon-parent35">
+                        <img
+                                class="icon187"
+                                loading="lazy"
+                                alt=""
+                                src="/images/icon@2x.png"
+                        />
+
+                        <div class="constructor-wrapper6">
+                            <a class="constructor15">Понятная практика</a>
+                        </div>
+                        <div class="icon-parent36">
+                            <img
+                                    class="icon188"
+                                    loading="lazy"
+                                    alt=""
+                                    src="/images/icon-1@2x.png"
+                            />
+
+                            <div class="search-wrapper4">
+                                <b class="search17">Найти клиента...</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame-wrapper100">
+                        <div class="about-us-parent7">
+                            <a class="about-us23">Добавить клиента</a>
+                            <div class="policy-menu">
+                                <a class="news16">Назначить встречу</a>
+                                <b class="user-policy16">Добавить график нерабочих дней </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="icon-parent37">
+                <img class="icon189" alt="" src="/images/icon-2@2x.png"/>
+
+                <div class="new-york-wrapper6">
+                    <b class="new-york15">Ростов-на-Дону</b>
+                </div>
+                <img class="icon190" alt="" src="/images/icon2.svg"/>
+            </div>
+        </div>
+    </div>
+    <main class="frame-parent168">
+        <section class="frame-parent169">
+            <div class="dashboard-menu-content-wrapper">
+                <div class="dashboard-menu-content">
+                    <div class="dashboard-menu-content-inner">
+                        <img
+                                class="frame-child205"
+                                loading="lazy"
+                                alt=""
+                                src="/images/arrow-13.svg"
+                                id="arrowIcon"
+                        />
+                    </div>
+                    <div class="wrapper-user-wrapper3">
+                        <div class="wrapper-user15">
+                            <img
+                                    class="user-icon15"
+                                    loading="lazy"
+                                    alt=""
+                                    src="/images/user@2x.png"
+                                    id="userImage"
+                            />
+                        </div>
+                    </div>
+                    <div class="hello-rosalie-wrapper6">
+                        <b class="hello-rosalie15">Привет, Антон!</b>
+                    </div>
+                    <div class="rosaliericegmailc-wrapper">
+                        <b class="rosaliericegmailc15">
+                            <p class="ponyatpractikagmailcom11">
+                                ponyatpractika@gmail.com
+                            </p>
+                        </b>
+                    </div>
+                    <div class="dashboard-menu-items">
+                        <div class="dashboard-menu-first">
+                            <div class="dashboard43" id="dashboardContainer">
+                                <div class="base111"></div>
+                                <div class="dashboard-menu-first-icon">
+                                    <img
+                                            class="icon191"
+                                            loading="lazy"
+                                            alt=""
+                                            src="/images/icon-3@2x.png"
+                                    />
+                                </div>
+                                <b class="dashboard44">Список клинетов</b>
+                            </div>
+                            <div class="dashboard-menu-second-base">
+                                <div class="base112">
+                                    <div class="calendar-menu-icon">
+                                        <img
+                                                class="icon192"
+                                                loading="lazy"
+                                                alt=""
+                                                src="/images/icon-41@2x.png"
+                                        />
+                                    </div>
+                                    <b class="calendars15">Календарь</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-menu-items1">
+                        <div class="invoice-parent3">
+                            <div class="invoice30" id="invoiceContainer">
+                                <div class="base113"></div>
+                                <div class="icon-wrapper48">
+                                    <img
+                                            class="icon193"
+                                            loading="lazy"
+                                            alt=""
+                                            src="/images/icon-5.svg"
+                                    />
+                                </div>
+                                <b class="invoice31">Уведомления</b>
+                            </div>
+                            <div class="base-parent19">
+                                <div class="base114"></div>
+                                <div class="files-menu-icon">
+                                    <img
+                                            class="icon194"
+                                            loading="lazy"
+                                            alt=""
+                                            src="/images/icon-6.svg"
+                                    />
+                                </div>
+                                <b class="files16">Аналитика</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper57">
+                        <div class="div341" id="container">
+                            <div class="base115"></div>
+                            <b class="dashboard45">Опросники и тесты</b>
+                        </div>
+                    </div>
+                    <div class="wrapper58">
+                        <b class="b158">Заявки</b>
+                    </div>
+                </div>
+            </div>
+            <form id="testForm" onsubmit="sendForm(event)" class="create-test-content-parent">
+                <div class="create-test-content">
+                    <div class="create-test-header">
+                        <div class="create-test-type">
+                            <div class="create-test-type-content">
+                                <button class="rectangle-parent172" type="button">
+                                    <div class="frame-child206"></div>
+                                    <div class="div342">Опрос</div>
+                                </button>
+                                <div class="create-test-type-content-inner">
+                                    <div class="rectangle-parent173">
+                                        <div class="frame-child207"></div>
+                                        <h3 class="h38">Тесты</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rectangle-parent174">
+                            <div class="frame-child208"></div>
+                            <button class="h39" type="submit" style="cursor:pointer;">Создать</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="parent29">
+                    <div class="div343">Название теста</div>
+                    <div class="test-name-input">
+                        <div class="test-name-rect"></div>
+                        <input name="title" class="input21" placeholder="....." type="text"/>
+                    </div>
+                </div>
+                <div id="questions-container">
+                    <div class="frame-wrapper101 question-block">
+                        <div class="rectangle-parent175">
+                            <div class="frame-child209"></div>
+                            <div class="question-content-wrapper">
+                                <div class="question-content1">
+                                    <input name="questions[0].questionText" type="text" class="h214 editable-heading" placeholder="Новый вопрос">
+                                    <div class="answer">
+                                        <input name="questions[0].options[0]" type="text" class="editable-option" placeholder="Да">
+                                    </div>
+                                    <div class="answer">
+                                        <input name="questions[0].options[1]" type="text" class="editable-option" placeholder="Нет">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="addQuestionBtn" class="h215" role="button" style="cursor:pointer;">Добавить вопрос...</h2>
+            </form>
+        </section>
+        <div class="frame-wrapper102">
+            <div class="frame-parent170" id="groupContainer">
+                <div class="rectangle-parent177">
+                    <div class="frame-child214"></div>
+                    <b class="user-avatar1">20.02.2024</b>
+                </div>
+                <div class="rectangle-parent178">
+                    <div class="frame-child215"></div>
+                    <b class="b161">Овсянникова Юля Матвеевна</b>
+                </div>
+            </div>
+        </div>
+        <div class="frame-wrapper103">
+            <div class="frame-parent171" id="groupContainer">
+                <div class="rectangle-parent179">
+                    <div class="frame-child216"></div>
+                    <b class="b162">25.02.2024</b>
+                </div>
+                <div class="rectangle-parent180">
+                    <div class="frame-child217"></div>
+                    <b class="b163">Овсянникова Юля Матвеевна</b>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="item196">
+        <img class="feather-icon-chevron-up25" alt=""/>
+    </div>
+    <div class="feedback-container2">
+        <div class="feedback-row">
+            <img
+                    class="icon195"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-7@2x.png"
+            />
+
+            <div class="feedback-label-parent">
+                <div class="feedback-label3">
+                    <b class="send-feedback15">Обратная связь</b>
+                </div>
+                <img
+                        class="icon196"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-8.svg"
+                />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var arrowIcon = document.getElementById("arrowIcon");
+    if (arrowIcon) {
+      arrowIcon.addEventListener("click", function (e) {
+        window.location.href = "./component14.html";
+      });
+    }
+
+    var userImage = document.getElementById("userImage");
+    if (userImage) {
+      userImage.addEventListener("click", function (e) {
+        window.location.href = "./component4.html";
+      });
+    }
+
+    var dashboardContainer = document.getElementById("dashboardContainer");
+    if (dashboardContainer) {
+      dashboardContainer.addEventListener("click", function (e) {
+        window.location.href = "./component2.html";
+      });
+    }
+
+    var invoiceContainer = document.getElementById("invoiceContainer");
+    if (invoiceContainer) {
+      invoiceContainer.addEventListener("click", function (e) {
+        window.location.href = "./component3.html";
+      });
+    }
+
+    var container = document.getElementById("container");
+    if (container) {
+      container.addEventListener("click", function (e) {
+        window.location.href = "./component14.html";
+      });
+    }
+
+    var groupContainer = document.getElementById("groupContainer");
+    if (groupContainer) {
+      groupContainer.addEventListener("click", function (e) {
+        window.location.href = "./component12.html";
+      });
+    }
+
+    function sendForm(event) {
+        event.preventDefault();
+
+        const form = document.getElementById('testForm');
+        const formData = new FormData(form);
+        const data = {
+            title: formData.get('title'),
+            questions: []
+        };
+
+        document.querySelectorAll('.question-block').forEach((block, index) => {
+            const questionText = formData.get(`questions[${index}].questionText`);
+            const options = [
+                formData.get(`questions[${index}].options[0]`),
+                formData.get(`questions[${index}].options[1]`)
+            ];
+            data.questions.push({
+                questionText,
+                options
+            });
+        });
+
+        fetch('/SimplePsy/V1/scoring/test/creation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())
+            .then(response => {
+                console.log(response);
+                // Перенаправление или отображение результата
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    document.getElementById('addQuestionBtn').addEventListener('click', () => {
+        const questionsContainer = document.getElementById('questions-container');
+        const questionBlocks = document.querySelectorAll('.question-block');
+        const newIndex = questionBlocks.length;
+
+        const newQuestionBlock = document.createElement('div');
+        newQuestionBlock.className = 'frame-wrapper101 question-block';
+        newQuestionBlock.innerHTML = `
+                <div class="rectangle-parent175">
+                    <div class="frame-child209"></div>
+                    <div class="question-content-wrapper">
+                        <div class="question-content1">
+                            <input name="questions[${newIndex}].questionText" type="text" class="h214 editable-heading" placeholder="Новый вопрос">
+                            <div class="answer">
+                                <input name="questions[${newIndex}].options[0]" type="text" class="editable-option" placeholder="Да">
+                            </div>
+                            <div class="answer">
+                                <input name="questions[${newIndex}].options[1]" type="text" class="editable-option" placeholder="Нет">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        questionsContainer.appendChild(newQuestionBlock);
+    });
+</script>
+</body>
+</html>

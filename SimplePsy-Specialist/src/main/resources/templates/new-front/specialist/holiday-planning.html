@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/holiday-planning.css}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="div133">
+      <section class="base-parent12">
+        <div class="base74"></div>
+        <img
+          class="frame-child107"
+          loading="lazy"
+          alt=""
+          src="/images/group-28@2x.png"
+          id="groupIcon"
+        />
+
+        <div class="wrapper40">
+          <div class="div134">Наименование нерабочих дней</div>
+        </div>
+        <div class="button-frame">
+          <div class="button53">
+            <input class="input17" placeholder="Плановый отпуск" type="text" />
+          </div>
+        </div>
+        <div class="frame-parent104">
+          <div class="frame-wrapper65">
+            <div class="parent25">
+              <div class="div135">С</div>
+              <div class="div136">До</div>
+            </div>
+          </div>
+          <div class="frame-parent105">
+            <div class="calendar-grid-wrapper">
+              <div class="calendar-grid2">
+                <div class="grid-row">
+                  <div class="grid-row-child"></div>
+                  <div class="grid-cell">
+                    <div class="day-label">03/20/2024</div>
+                  </div>
+                  <div class="grid-cell-separator">
+                    <div class="vertical-separator"></div>
+                    <div class="grid-cell-separator1">
+                      <div class="day-label1">8:00</div>
+                    </div>
+                    <div class="vertical-separator1"></div>
+                  </div>
+                </div>
+                <div class="grid-row1">
+                  <div class="grid-row-item"></div>
+                  <div class="wrapper41">
+                    <div class="div137">10/20/2024</div>
+                  </div>
+                  <div class="line-parent8">
+                    <div class="frame-child108"></div>
+                    <div class="wrapper42">
+                      <div class="div138">12:00</div>
+                    </div>
+                    <div class="frame-child109"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rectangle-parent86" id="groupContainer">
+              <div class="frame-child110"></div>
+              <h2 class="h22">Добавить график</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      var groupIcon = document.getElementById("groupIcon");
+      if (groupIcon) {
+        groupIcon.addEventListener("click", function (e) {
+          window.location.href = "./frame.html";
+        });
+      }
+      
+      var groupContainer = document.getElementById("groupContainer");
+      if (groupContainer) {
+        groupContainer.addEventListener("click", function (e) {
+          window.location.href = "./frame.html";
+        });
+      }
+      </script>
+  </body>
+</html>

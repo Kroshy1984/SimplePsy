@@ -1,0 +1,52 @@
+.div139 {
+    text-align: left;
+}
+
+.survey-container {
+    position: relative;
+    top: 200px;
+    left: 400px;
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.survey-container input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.survey-container button {
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.survey-container button:hover {
+    background-color: #0056b3;
+}
+
+.survey-option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.survey-option input[type="radio"] {
+    margin-right: 10px;
+}
+
+.add-option-button {
+    margin-top: 10px;
+    display: block;
+}

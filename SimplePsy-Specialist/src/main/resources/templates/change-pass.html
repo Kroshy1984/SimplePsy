@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form id="registrationForm" th:action="@{/SimplePsySpecialist/V1/specialist/changePass}" method="post">
+    <h1>Вход в понятную практику</h1>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" th:name="email" placeholder="email" required>
+
+</form>
+</body>
+</html>

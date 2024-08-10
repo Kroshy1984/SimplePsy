@@ -6,17 +6,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" th:src="@{/js/customer-card.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/customer-card.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/customer-card.css}">
     <title>Customer card</title>
 </head>
 <body>
 <header>
+    <input type="button" id="logout" value="Выйти из аккаунта" onclick="logout()">
     <input type="button" id="back" value="Назад" onclick="showCustomers()">
     <h1>КАРТОЧКА ЗАКАЗЧИКА</h1>
 </header>
-<input type="hidden" name="baseUrl" class="specUrl" th:value="${specUrl}"/>
-<input type="hidden" name="baseUrl" class="scoringUrl" th:value="${scoringUrl}"/>
-<input type="hidden" name="baseUrl" class="notificationUrl" th:value="${notificationUrl}"/>
+<input type="hidden" name="baseUrl" class="specUrl" id="specUrl" th:value="${specUrl}"/>
 <form method="post" th:action="@{/SimplePsySpecialist/V1/specialist/customer-card/update}" th:object="${customer}">
 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 <div class="profile-container">

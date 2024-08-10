@@ -1,12 +1,15 @@
-const specUrl = document.getElementsByClassName("specUrl")
+function logout() {
+    window.location.href = "/SimplePsySpecialist/V1/specialist/logout";
+}
+
 function openCustomers() {
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customers';
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customers';
 }
 
 function openCustomerForm() {
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer-form';
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer-form';
 }
 
 function openSessionForm() {
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/session';
+    window.location.href =  '/SimplePsySpecialist/V1/specialist/session';
 }

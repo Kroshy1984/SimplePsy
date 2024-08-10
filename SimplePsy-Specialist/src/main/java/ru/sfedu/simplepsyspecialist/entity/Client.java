@@ -1,70 +1,218 @@
 package ru.sfedu.simplepsyspecialist.entity;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Document("Client")
 public class Client {
 
-    @NotBlank
-    @Length(max = 255)
-    @Pattern(regexp = "^[А-я]+^[а-я]$")
-    private String id;
+    String id;
+    TypeOfClient typeOfClient;
+    String name;
+    String surname;
+    String middleName;
+    Contact contact;
+    Source source;
+    LocalDate dateOfFirstContact;
+    PreferMeetingFormat preferMeetingFormat;
+    String interactionPlatform;
+    String meetingAddress;
+    String primaryInvoice;
+    PreferTime preferTime;
+    String financialConditions;
+    Gender gender;
+    LocalDate birthDay;
+    String recommendations;
+    MaritalStatus maritalStatus;
+    List<String> problems;
+    List<CompletedScoring> scorings;
+    public Client() {
+    }
 
-    @NotBlank
-    @Length(max = 255)
-    private String status;
+    public Client(String id, String name, String surname, MaritalStatus maritalStatus, TypeOfClient typeOfClient) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.maritalStatus = maritalStatus;
+        this.typeOfClient = typeOfClient;
+    }
 
-    @NotBlank
-    @Length(max = 255)
-    @Pattern(regexp = "^[А-я]+^[а-я]$")
-    private String name;
+    public Client(String id, String name, String surname, Contact contact) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.contact = contact;
+    }
 
-    @NotBlank
-    @Length(max = 255)
-    @Pattern(regexp = "^[А-Я]+^[а-я]$")
-    private String surname;
+    public String getId() {
+        return id;
+    }
 
-    @NotBlank
-    @Length(max = 255)
-    @Pattern(regexp = "^[А-Я]+^[а-я]$")
-    private String middleName;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    @Valid
-    private Contact contact;
+    public String getName() {
+        return name;
+    }
 
-    @NotBlank
-    @Length(max = 255)
-    @Pattern(regexp = "^(Viber|vk|WhatsApp|Telegramm|facebook)$")
-    private String source;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    public static class Contact {
+    public String getSurname() {
+        return surname;
+    }
 
-        @Length(max = 12)
-        private String phone;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-        @Length(max = 320)
-        private String email;
+    public MaritalStatus getMaritalStatus() {
+        return maritalStatus;
+    }
 
+    public void setMaritalStatus(MaritalStatus maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
 
-        @Length(max = 320)
-        private String tg;
+    public TypeOfClient getTypeOfClient() {
+        return typeOfClient;
+    }
 
-        // Геттеры и сеттеры
+    public void setTypeOfClient(TypeOfClient typeOfClient) {
+        this.typeOfClient = typeOfClient;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
+    }
+
+    public PreferMeetingFormat getPreferMeetingFormat() {
+        return preferMeetingFormat;
+    }
+
+    public void setPreferMeetingFormat(PreferMeetingFormat preferMeetingFormat) {
+        this.preferMeetingFormat = preferMeetingFormat;
+    }
+
+    public String getInteractionPlatform() {
+        return interactionPlatform;
+    }
+
+    public void setInteractionPlatform(String interactionPlatform) {
+        this.interactionPlatform = interactionPlatform;
+    }
+
+    public String getMeetingAddress() {
+        return meetingAddress;
+    }
+
+    public void setMeetingAddress(String meetingAddress) {
+        this.meetingAddress = meetingAddress;
+    }
+
+    public String getPrimaryInvoice() {
+        return primaryInvoice;
+    }
+
+    public void setPrimaryInvoice(String primaryInvoice) {
+        this.primaryInvoice = primaryInvoice;
+    }
+
+    public String getFinancialConditions() {
+        return financialConditions;
+    }
+
+    public void setFinancialConditions(String financialConditions) {
+        this.financialConditions = financialConditions;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public String getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(String recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public PreferTime getPreferTime() {
+        return preferTime;
+    }
+
+    public void setPreferTime(PreferTime preferTime) {
+        this.preferTime = preferTime;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public LocalDate getDateOfFirstContact() {
+        return dateOfFirstContact;
+    }
+
+    public void setDateOfFirstContact(LocalDate dateOfFirstContact) {
+        this.dateOfFirstContact = dateOfFirstContact;
+    }
+
+    public LocalDate getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public List<String> getProblems() {
+        return problems;
+    }
+
+    public void addProblem(String problemId) {
+        if(this.problems == null)
+        {
+            problems = new ArrayList<>();
+        }
+        problems.add(problemId);
+    }
+
+    public List<CompletedScoring> getScorings() {
+        return scorings;
+    }
+
+    public void addScoring(CompletedScoring scoring) {
+        if(this.scorings == null)
+        {
+            scorings = new ArrayList<>();
+        }
+        scorings.add(scoring);
     }
 }

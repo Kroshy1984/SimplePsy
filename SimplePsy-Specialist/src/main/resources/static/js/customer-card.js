@@ -1,14 +1,15 @@
-const specUrl = document.getElementsByClassName("specUrl")
-const scoringUrl = document.getElementsByClassName("scoringUrl")
-const notificationUrl = document.getElementsByClassName("notificationUrl")
+function logout() {
+    window.location.href = "/SimplePsySpecialist/V1/specialist/logout";
+}
+
 function showCustomers() {
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customers';
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customers';
 }
 
 function cancelButton() {
     var id = document.getElementById("customerIdInput").value;
     document.getElementById('cancel').style.display = 'none';
-    window.location.href = specUrl + 'SimplePsySpecialist/V1/specialist/customer-card/' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer-card/' + id;
 }
 
 function showButtons() {
@@ -36,6 +37,7 @@ function showButtons() {
 
 function deleteCard()
 {
+    const specUrl = document.getElementById("specUrl").value;
     var id = document.getElementById("customerIdInput").value;
     var url = specUrl + '/SimplePsySpecialist/V1/specialist/delete-customer/' + id;
     var token = document.querySelector("[name='_csrf']").value;
@@ -63,41 +65,7 @@ function deleteCard()
 
 }
 
-function copyUrl() {
-    var id = document.getElementById("customerIdInput").value;
-    var url = scoringUrl + '/SimplePsyScoring/V1/scoring/' + id;
-
-    navigator.clipboard.writeText(url).then(() => alert("Ссылка скопирована"));
-}
-function answersWindow()
-{
-    let id = document.getElementById("customerIdInput").value;
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/scoring/result' + id;
-}
-
-function sendNotification() {
-    var id = document.getElementById("customerIdInput").value;
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var url = notificationUrl + '/emails/scoring-invitation';
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify([id, name, email])
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Success:', data);
-            alert("Ссылка была успешно отправлена!");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
 function showProblemsList() {
     var id = document.getElementById("customerIdInput").value;
-    window.location.href = specUrl + '/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
+    window.location.href = '/SimplePsySpecialist/V1/specialist/customer/problems/' + id;
 }

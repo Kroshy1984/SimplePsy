@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/session-creation.css}" />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+  />
+</head>
+<body>
+<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}" method="post">
+  <img
+          class="cross-sign"
+          loading="lazy"
+          alt=""
+          src="/images/group-282@2x.png"
+          id="groupIcon"
+  />
+  <div class="component10">
+    <b class="add-place10">Тип встречи</b>
+    <label for="session-type"></label>
+    <select id="session-type" th:name="sessionType">
+      <option value="CLIENT" selected>Встреча с клиентом</option>
+      <option value="ANOTHER">Иное</option>
+    </select>
+  </div>
+
+  <div>
+    <img
+            class="appointment-base-child"
+            loading="lazy"
+            alt=""
+            src="/images/icon-1@2x.png"
+    />
+    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList">
+    <datalist id="clientsList"></datalist>
+    <input type="hidden" th:field="*{clientId}" id="clientId">
+  </div>
+
+  <div class="div106">
+    <div class="base71"></div>
+    <label for="session-format" class="add-place6">Формат встречи</label>
+    <select id="session-format" th:name="sessionFormat">
+      <option value="ONLINE" selected>Онлайн</option>
+      <option value="OFFLINE">Оффлайн</option>
+    </select>
+  </div>
+
+  <div>
+    <img
+            class="icon93"
+            loading="lazy"
+            alt=""
+            src="/images/icon-11@2x.png"
+    />
+    <label for="session-date" class="add-date2"></label>
+    <input type="date" id="session-date" th:name="date" placeholder="Дата встречи">
+  </div>
+
+  <div>
+    <img
+            class="icon94"
+            loading="lazy"
+            alt=""
+            src="/images/icon-2@2x.png"
+    />
+    <label for="session-place" class="b108"></label>
+    <input type="text" id="session-place" th:name="place" placeholder="Место проведения встречи">
+  </div>
+
+  <div>
+    <img
+            class="icon95"
+            loading="lazy"
+            alt=""
+            src="/images/icon-31@2x.png"
+    />
+    <label for="session-timestart" class="add-time6">С ...</label>
+    <input type="time" id="session-timestart" th:name="timeStart">
+    <label for="session-timefinish" class="add-time6">ПО ...</label>
+    <input type="time" id="session-timefinish" th:name="timeFinish">
+  </div>
+
+  <div>
+    <label for="payment-type" class="add-time7">Тип оплаты</label>
+    <select id="payment-type" th:name="paymentType">
+      <option value="CASH" selected>Наличная</option>
+      <option value="CASHLESS">Безналичная</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="session-isrepeatable" class="add-place9">Повторять</label>
+    <input id="session-isrepeatable" class="appointment-fields1" type="checkbox" th:name="isRepeatable">
+  </div>
+
+  <div>
+    <label for="session-timesToRepeat" class="add-place8">Повтор</label>
+    <input type="text" id="session-timesToRepeat" th:name="timesToRepeat">
+  </div>
+
+  <div>
+    <label for="session-isnotifiable" class="add-place7">Уведомлять</label>
+    <input type="checkbox" id="session-isnotifiable" th:name="isNotifiable">
+  </div>
+
+  <div>
+    <img
+            class="icon101"
+            loading="lazy"
+            alt=""
+            src="/images/icon-9@2x.png"
+    />
+    <label for="session-notificationtime" class="add-time8">Уведомить за</label>
+    <select id="session-notificationtime" th:name="notificationTime">
+      <option value="24">24</option>
+      <option value="48" selected>48</option>
+      <option value="72">72</option>
+    </select>
+    <b class="add-time9">часа</b>
+  </div>
+  <button type="submit">Создать встречу</button>
+</form>
+
+<script>
+  var groupContainer = document.getElementById("groupContainer");
+  if (groupContainer) {
+    groupContainer.addEventListener("click", function () {
+      window.location.href = "./frame.html";
+    });
+  }
+
+  var groupIcon = document.getElementById("groupIcon");
+  if (groupIcon) {
+    groupIcon.addEventListener("click", function () {
+      window.location.href = "./frame.html";
+    });
+  }
+
+  document.getElementById('clientInput').addEventListener('input', function() {
+    fetch('/SimplePsy/V1/client/findAll')
+            .then(response => response.json())
+            .then(clients => {
+              const dataList = document.getElementById('clientsList');
+              dataList.innerHTML = ''; // очистить текущий список
+
+              clients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.name; // или другой атрибут, который вы хотите отображать
+                option.setAttribute('data-id', client.id); // добавить атрибут data-id
+                dataList.appendChild(option);
+              });
+            })
+            .catch(error => console.error('Ошибка:', error));
+  });
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+</script>
+</body>
+</html>

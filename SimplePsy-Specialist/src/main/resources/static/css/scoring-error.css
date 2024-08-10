@@ -1,0 +1,27 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    top: 1.34em;
+    left: 8px;
+    position: absolute;
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type="button"] {
+    background-color: #E9E9E9;
+    border: none;
+    width: auto;
+    border-radius: 10px;
+    padding: 10px 30px;
+    color: black;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #e2e2e2;
+}

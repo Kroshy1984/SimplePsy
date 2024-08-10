@@ -2,78 +2,168 @@ package ru.sfedu.simplepsyspecialist.entity;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
+import ru.sfedu.simplepsyspecialist.entity.nested.SessionType;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Document("Session")
 public class Session {
 
-    @NotBlank
-    @Pattern(regexp = "^[а-яА-ЯёЁ]+\\s[0-9]{2}/[0-9]{2}/[0-9]{4}$")
-    private String date;
+    @Id
+    private String id;
 
-    @NotBlank
-    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    private String time;
-
-    @NotBlank
-    @Size(min = 1, max = 255)
-    private String typeOfClients;
-    private String timeOfMeeting;
+    private String problem;
 
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    private List<Client> clients;
+    private String specialistId;
+
+    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    private String clientId;
+
+    private Client client;
+    private SessionType sessionType;
+    @NotBlank
+    private LocalDate date;
+    private String place;
+    private LocalTime timeStart;
+    private LocalTime timeFinish;
+    private PaymentType paymentType;
+    private boolean isRepeatable;
+    private String timesToRepeat;
+    private boolean isNotifiable;
+    private String notificationTime;
+
 
     public Session() {
     }
-
-    public Session(String date, String time, String typeOfClients, String timeOfMeeting, List<Client> clients) {
+    public Session(LocalDate date, String problem, String specialistId, String clientId) {
         this.date = date;
-        this.time = time;
-        this.typeOfClients = typeOfClients;
-        this.timeOfMeeting = timeOfMeeting;
-        this.clients = clients;
+        this.problem = problem;
+        this.specialistId = specialistId;
+        this.clientId = clientId;
     }
 
-    public String getDate() {
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public String getSpecialistId() {
+        return specialistId;
+    }
+
+    public void setSpecialistId(String specialistId) {
+        this.specialistId = specialistId;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
+    public String getProblem() {
+        return problem;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setProblem(String problem) {
+        this.problem = problem;
     }
 
-    public String getTypeOfClients() {
-        return typeOfClients;
+    public SessionType getSessionType() {
+        return sessionType;
     }
 
-    public void setTypeOfClients(String typeOfClients) {
-        this.typeOfClients = typeOfClients;
+    public void setSessionType(SessionType sessionType) {
+        this.sessionType = sessionType;
     }
 
-    public String getTimeOfMeeting() {
-        return timeOfMeeting;
+    public String getPlace() {
+        return place;
     }
 
-    public void setTimeOfMeeting(String timeOfMeeting) {
-        this.timeOfMeeting = timeOfMeeting;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
-    public List<Client> getClients() {
-        return clients;
+    public LocalTime getTimeStart() {
+        return timeStart;
     }
 
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
+    public void setTimeStart(LocalTime timeStart) {
+        this.timeStart = timeStart;
+    }
+
+    public LocalTime getTimeFinish() {
+        return timeFinish;
+    }
+
+    public void setTimeFinish(LocalTime timeFinish) {
+        this.timeFinish = timeFinish;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public boolean isRepeatable() {
+        return isRepeatable;
+    }
+
+    public void setRepeatable(boolean repeatable) {
+        isRepeatable = repeatable;
+    }
+
+    public String getTimesToRepeat() {
+        return timesToRepeat;
+    }
+
+    public void setTimesToRepeat(String timesToRepeat) {
+        this.timesToRepeat = timesToRepeat;
+    }
+
+    public boolean isNotifiable() {
+        return isNotifiable;
+    }
+
+    public void setNotifiable(boolean notifiable) {
+        isNotifiable = notifiable;
+    }
+
+    public String getNotificationTime() {
+        return notificationTime;
+    }
+
+    public void setNotificationTime(String notificationTime) {
+        this.notificationTime = notificationTime;
     }
 }

@@ -1,100 +1,26 @@
 version: "3"
 services:
   specialist:
-    build:
-      context: ./SimplePsy-Specialist
-      dockerfile: Dockerfile
+    image: breadlyy/simplepsy-specialist:latest
     ports:
       - "8081:8081"
     environment:
       - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
       - SCORING_SERVICE_URL=http://scoring:8084
       - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087
-  session:
-    build:
-      context: ./Session
-      dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
-    environment:
-      - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
-      - SCORING_SERVICE_URL=http://scoring:8084
-      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087
   scoring:
-    build:
-      context: ./scoring
-      dockerfile: Dockerfile
+    image: breadlyy/simplepsy-scoring:latest
     ports:
       - "8084:8084"
     environment:
       - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
       - SCORING_SERVICE_URL=http://scoring:8084
       - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087
-  problem:
-    build:
-      context: ./problem
-      dockerfile: Dockerfile
-    ports:
-      - "8087:8087"
-    environment:
-      - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
-      - SCORING_SERVICE_URL=http://scoring:8084
-      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087
-  customer:
-    build:
-      context: ./Customer
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
-      - SCORING_SERVICE_URL=http://scoring:8084
-      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087
-  client:
-    build:
-      context: ./Client
-      dockerfile: Dockerfile
-    ports:
-      - "8086:8086"
-    environment:
-      - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
-      - SCORING_SERVICE_URL=http://scoring:8084
-      - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087
   notifications:
-    build:
-      context: ./Notifications
-      dockerfile: Dockerfile
+    image: breadlyy/simplepsy-notification:latest
     ports:
       - "8085:8085"
     environment:
       - CUSTOMER_SERVICE_URL=http://customer:8080
-      - SPECIALIST_SERVICE_URL=http://specialist:8081
-      - SESSION_SERVICE_URL=http://session:8083
       - SCORING_SERVICE_URL=http://scoring:8084
       - NOTIFICATIONS_SERVICE_URL=http://notifications:8085
-      - CLIENT_SERVICE_URL=http://client:8086
-      - PROBLEM_SERVICE_URL=http://problem:8087

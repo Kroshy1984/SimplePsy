@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1, width=device-width"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}"/>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+</head>
+<body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="div139">
+    <div class="sidebar1">
+        <div class="menu">
+            <div class="dashboard23" id="dashboardContainer">
+                <div class="base75"></div>
+                <b class="dashboard24">Список клинетов</b>
+                <img
+                        class="icon115"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-3@2x.png"
+                />
+            </div>
+            <div class="invoice15" id="invoiceContainer">
+                <div class="base76"></div>
+                <b class="invoice16">Уведомления</b>
+                <img
+                        class="icon116"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-5.svg"
+                />
+            </div>
+            <div class="files8">
+                <div class="base77"></div>
+                <b class="files9">Аналитика</b>
+                <img
+                        class="icon117"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-6.svg"
+                />
+            </div>
+            <div class="email3">
+                <div class="base78"></div>
+                <b class="calendars8">Календарь</b>
+                <img
+                        class="icon118"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-4@2x.png"
+                />
+            </div>
+
+            <div class="div140" id="container">
+                <div class="base79"></div>
+                <b class="dashboard25">Опросники и тесты</b>
+            </div>
+            <div class="parent26">
+                <b class="b112">Заявки</b>
+                <div class="rectangle-parent87" id="groupContainer">
+                    <div class="frame-child111"></div>
+                    <div class="frame-child112"></div>
+                    <b class="b113">Овсянникова Юля Матвеевна</b>
+                    <b class="b114">20.02.2024</b>
+                </div>
+                <div class="rectangle-parent88" id="groupContainer1">
+                    <div class="frame-child113"></div>
+                    <div class="frame-child114"></div>
+                    <b class="b115">Овсянникова Кирилл Матвеев</b>
+                    <b class="b116">25.02.2024</b>
+                </div>
+            </div>
+        </div>
+        <div class="feedback3">
+            <b class="send-feedback8">Обратная связь</b>
+            <img
+                    class="icon119"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-7@2x.png"
+            />
+
+            <img
+                    class="icon120"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-8.svg"
+            />
+        </div>
+
+        <div class="head">
+            <div class="wrapper-user8">
+                <img
+                        class="user-icon8"
+                        loading="lazy"
+                        alt=""
+                        src="/images/user@2x.png"
+                        id="userImage"
+                />
+            </div>
+            <b class="hello-rosalie8">Привет, Антон!</b>
+            <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+        </div>
+    </div>
+    <header class="head1">
+        <div class="navigate">
+            <a class="constructor8">Понятная практика</a>
+            <div class="menu1">
+                <b class="news9" id="newsText">Назначить встречу</b>
+                <b class="user-policy9" id="userPolicyText"
+                >Добавить график нерабочих дней
+                </b>
+                <b class="about-us15" id="aboutUsText">Добавить клиента</b>
+            </div>
+            <div class="search8">
+                <b class="search9">Найти клиента...</b>
+                <img
+                        class="icon121"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-1@2x.png"
+                />
+            </div>
+            <div class="city">
+                <b class="new-york8">Ростов-на-Дону</b>
+                <img
+                        class="icon122"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-2@2x.png"
+                />
+            </div>
+            <img
+                    class="icon123"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon@2x.png"
+            />
+        </div>
+    </header>
+        <!-- Sidebar and Header code remains unchanged -->
+
+        <div class="survey-container">
+            <h2>Редактировать опрос</h2>
+            <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/{id}/update}" method="post">
+                <input type="hidden" id="surveyId" name="id" th:value="${scoring.id}">
+                <input type="text" id="surveyTitle" name="title" th:value="${scoring.title}" placeholder="Введите название опроса" required>
+                <div id="questionsContainer">
+                    <div th:each="question, qStat : ${scoring.questions}">
+                        <div class="survey-question" th:id="'question-' + ${qStat.index}">
+                            <label th:for="'question-' + ${qStat.index}">Вопрос:</label>
+                            <input type="text" th:id="'question-' + ${qStat.index}" name="questionText" th:value="${question.questionText}" required>
+                            <div th:id="'optionsContainer-question-' + ${qStat.index}">
+                                <div th:each="option, oStat : ${question.options}">
+                                    <div class="survey-option">
+                                        <input type="radio" th:name="'option-question-' + ${qStat.index}" disabled>
+                                        <input type="text" th:name="'optionText-question-' + ${qStat.index}" th:value="${option}" placeholder="Вариант ответа" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="add-option-button" th:data-question-id="'question-' + ${qStat.index}">Добавить вариант ответа</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.add-option-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const questionId = this.getAttribute('data-question-id');
+                    addOption(questionId);
+                });
+            });
+        });
+
+        function addOption(questionId) {
+            const optionsContainer = document.getElementById(`optionsContainer-${questionId}`);
+            if (optionsContainer) {
+                const newOption = document.createElement("div");
+                newOption.className = "survey-option";
+                newOption.innerHTML = `
+        <input type="radio" name="option-${questionId}" disabled>
+        <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
+      `;
+                optionsContainer.appendChild(newOption);
+            } else {
+                console.error(`Element with id optionsContainer-${questionId} not found.`);
+            }
+        }
+
+        function addQuestion() {
+            const questionsContainer = document.getElementById("questionsContainer");
+            const questionId = `question-${questionsContainer.children.length + 1}`;
+            const newQuestion = document.createElement("div");
+            newQuestion.className = "survey-question";
+            newQuestion.id = questionId;
+            newQuestion.innerHTML = `
+      <label for="${questionId}">Вопрос:</label>
+      <input type="text" id="${questionId}" name="questionText" required>
+      <div id="optionsContainer-${questionId}">
+        <div class="survey-option">
+          <input type="radio" name="option-${questionId}" disabled>
+          <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
+        </div>
+      </div>
+      <button type="button" class="add-option-button" data-question-id="${questionId}">Добавить вариант ответа</button>
+    `;
+            questionsContainer.appendChild(newQuestion);
+
+            newQuestion.querySelector('.add-option-button').addEventListener('click', function () {
+                const questionId = this.getAttribute('data-question-id');
+                addOption(questionId);
+            });
+        }
+
+        document.getElementById("surveyForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("surveyId").value;
+            const title = document.getElementById("surveyTitle").value;
+            const questions = Array.from(document.querySelectorAll(".survey-question")).map(question => {
+                const questionText = question.querySelector("input[name='questionText']").value;
+                const options = Array.from(question.querySelectorAll("input[name^='optionText']")).map(option => option.value);
+                return { questionText, options };
+            });
+            fetch(`/SimplePsy/V1/scoring/test/${id}/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, title, questions }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Survey updated:', data);
+                    // Redirect or show success message
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+</script>
+</body>
+</html>
