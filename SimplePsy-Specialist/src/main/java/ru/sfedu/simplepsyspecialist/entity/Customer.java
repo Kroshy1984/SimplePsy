@@ -20,7 +20,8 @@ public class Customer {
     private TypeOfClient typeOfClient;
     private String name;
     private String surname;
-    private Status status; // TODO: Решить нужно ли это поле
+    private String lastName;
+    private Status status;
     private Contact contact;
     private String description;
     private Sex sex;
@@ -35,7 +36,8 @@ public class Customer {
     private String clientsFirstRequestForTherapy;
     private String fixedTimeForMeeting;
     private String financialConditions;
-    // вторая форма
+
+    // Поля после "Подробнее"
     private LocalDate dateOfBirth;
     private String residentialAddress;
     private String collegialRecommendations;
@@ -45,29 +47,67 @@ public class Customer {
     private boolean isSupervision;
     private String supervisorsName;
     private String supervisorsSurname;
+    private String supervisorsLastName;
     private Contact supervisorsContact;
     private String materialForNextSessionsFromSupervision;
+    private String cotherapistName;
+    private String cotherapistSurname;
+    private String cotherapistLastName;
+    private Contact cotherapistContact;
+    private String cotherapistPaymentConditions;
     private String notes;
     // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
+
     // Поля для пары
-    private String partnersName;
-    private String partnersSurname;
-    private Contact partnersContact;
-    private Sex partnersSex;
+    private String firstClientName;
+    private String firstClientSurname;
+    private String firstClientLastName;
+    private Contact firstClientContact;
+    private Sex firstClientSex;
+    private String firstClientRequestReason;
+    private String firstClientDesiredResult;
+    private String secondClientName;
+    private String secondClientSurname;
+    private String secondClientLastName;
+    private Contact secondClientContact;
+    private Sex secondClientSex;
+    private String secondClientRequestReason;
+    private String secondClientDesiredResult;
+
     // Поля для ребёнка
+    private String childName;
+    private String childSurname;
+    private String childLastName;
+    private Contact childContact;
+    private Sex childSex;
+    private String adultDesiredResult;
+    private String childVisitReason;
+    private String childDesireOfChange;
     private LeadsClient leadsClient;
+    private String parentName;
+    private String parentSurname;
+    private String parentLastName;
+    private Contact parentContact;
+    private Sex parentSex;
+    private String parentCity;
     private String firstParentsName;
     private String firstParentsSurname;
+    private String firstParentsLastName;
     private Contact firstParentsContact;
     private Sex firstParentsSex;
+    private String firstParentsCity;
     private String secondParentsName;
     private String secondParentsSurname;
+    private String secondParentsLastName;
     private Contact secondParentsContact;
     private Sex secondParentsSex;
+    private String secondParentsCity;
     private String trusteesName;
     private String trusteesSurname;
+    private String trusteesLastName;
     private Contact trusteesContact;
     private Sex trusteesSex;
+    private String trusteesCity;
 
     public Customer() {
     }
@@ -88,25 +128,33 @@ public class Customer {
         this.contact = contact;
     }
 
-    public Customer(String id, TypeOfClient typeOfClient, String name, String surname, Status status, Contact contact,
-                    String description, LocalDate dateOfBirth, Sex sex, List<String> problemsId,
+    public Customer(String id, TypeOfClient typeOfClient, String name, String surname, String lastName, Status status,
+                    Contact contact, String description, LocalDate dateOfBirth, Sex sex, List<String> problemsId,
                     TypeOfTreatment typeOfTreatment, LocalDate dateOfFirstRequest, LocalDate dateOfFirstConsultation,
                     PreferredMeetingFormat preferredMeetingFormat, OnlineMeetingPlace onlineMeetingPlace,
                     String offlineMeetingPlace, ClientStatus clientStatus, String clientsFirstRequestForTherapy,
                     String fixedTimeForMeeting, String financialConditions, String residentialAddress,
                     String collegialRecommendations, String specialTermsOfContract, FamilyStatus familyStatus,
                     PriorityCommunicationChannel priorityCommunicationChannel, boolean isSupervision,
-                    String supervisorsName, String supervisorsSurname, Contact supervisorsContact,
-                    String materialForNextSessionsFromSupervision, String notes, String partnersName,
-                    String partnersSurname, Contact partnersContact, Sex partnersSex, LeadsClient leadsClient,
-                    String firstParentsName, String firstParentsSurname, Contact firstParentsContact,
-                    Sex firstParentsSex, String secondParentsName, String secondParentsSurname,
-                    Contact secondParentsContact, Sex secondParentsSex, String trusteesName, String trusteesSurname,
-                    Contact trusteesContact, Sex trusteesSex) {
+                    String supervisorsName, String supervisorsSurname, String supervisorsLastName,
+                    Contact supervisorsContact, String materialForNextSessionsFromSupervision,
+                    String cotherapistName, String cotherapistSurname, String cotherapistLastName, Contact cotherapistContact, String cotherapistPaymentConditions, String notes,
+                    String firstClientName, String firstClientSurname, String firstClientLastName, Contact firstClientContact, Sex firstClientSex,
+                    String firstClientRequestReason, String firstClientDesiredResult,
+                    String secondClientName, String secondClientSurname, String secondClientLastName, Contact secondClientContact, Sex secondClientSex,
+                    String secondClientRequestReason, String secondClientDesiredResult,
+                    String childName, String childSurname, String childLastName, Contact childContact, Sex childSex,
+                    String adultDesiredResult, String childVisitReason, String childDesireOfChange, LeadsClient leadsClient,
+                    String parentName, String parentSurname, String parentLastName, Contact parentContact, Sex parentSex, String parentCity,
+                    String firstParentsName, String firstParentsSurname, String firstParentsLastName, String firstParentsCity,
+                    Contact firstParentsContact, Sex firstParentsSex, String secondParentsName, String secondParentsLastName, String secondParentsCity,
+                    String secondParentsSurname, Contact secondParentsContact, Sex secondParentsSex,
+                    String trusteesName, String trusteesSurname, String trusteesLastName, Contact trusteesContact, Sex trusteesSex, String trusteesCity) {
         this.id = id;
         this.typeOfClient = typeOfClient;
         this.name = name;
         this.surname = surname;
+        this.lastName = lastName;
         this.status = status;
         this.contact = contact;
         this.description = description;
@@ -131,26 +179,62 @@ public class Customer {
         this.isSupervision = isSupervision;
         this.supervisorsName = supervisorsName;
         this.supervisorsSurname = supervisorsSurname;
+        this.supervisorsLastName = supervisorsLastName;
         this.supervisorsContact = supervisorsContact;
         this.materialForNextSessionsFromSupervision = materialForNextSessionsFromSupervision;
+        this.cotherapistName = cotherapistName;
+        this.cotherapistSurname = cotherapistSurname;
+        this.cotherapistLastName = cotherapistLastName;
+        this.cotherapistContact = cotherapistContact;
+        this.cotherapistPaymentConditions = cotherapistPaymentConditions;
         this.notes = notes;
-        this.partnersName = partnersName;
-        this.partnersSurname = partnersSurname;
-        this.partnersContact = partnersContact;
-        this.partnersSex = partnersSex;
+        this.firstClientName = firstClientName;
+        this.firstClientSurname = firstClientSurname;
+        this.firstClientLastName = firstClientLastName;
+        this.firstClientContact = firstClientContact;
+        this.firstClientSex = firstClientSex;
+        this.firstClientRequestReason = firstClientRequestReason;
+        this.firstClientDesiredResult = firstClientDesiredResult;
+        this.secondClientName = secondClientName;
+        this.secondClientSurname = secondClientSurname;
+        this.secondClientLastName = secondClientLastName;
+        this.secondClientContact = secondClientContact;
+        this.secondClientSex = secondClientSex;
+        this.secondClientRequestReason = secondClientRequestReason;
+        this.secondClientDesiredResult = secondClientDesiredResult;
+        this.childName = childName;
+        this.childSurname = childSurname;
+        this.childLastName = childLastName;
+        this.childContact = childContact;
+        this.childSex = childSex;
+        this.adultDesiredResult = adultDesiredResult;
+        this.childVisitReason = childVisitReason;
+        this.childDesireOfChange = childDesireOfChange;
         this.leadsClient = leadsClient;
+        this.parentName = parentName;
+        this.parentSurname = parentSurname;
+        this.parentLastName = parentLastName;
+        this.parentContact = parentContact;
+        this.parentSex = parentSex;
+        this.parentCity = parentCity;
         this.firstParentsName = firstParentsName;
         this.firstParentsSurname = firstParentsSurname;
+        this.firstParentsLastName = firstParentsLastName;
         this.firstParentsContact = firstParentsContact;
         this.firstParentsSex = firstParentsSex;
+        this.firstParentsCity = firstParentsCity;
         this.secondParentsName = secondParentsName;
         this.secondParentsSurname = secondParentsSurname;
+        this.secondParentsLastName = secondParentsLastName;
         this.secondParentsContact = secondParentsContact;
         this.secondParentsSex = secondParentsSex;
+        this.secondParentsCity = secondParentsCity;
         this.trusteesName = trusteesName;
         this.trusteesSurname = trusteesSurname;
+        this.trusteesLastName = trusteesLastName;
         this.trusteesContact = trusteesContact;
         this.trusteesSex = trusteesSex;
+        this.trusteesCity = trusteesCity;
     }
 
     public LocalDate getDateOfFirstRequest() {
@@ -183,6 +267,14 @@ public class Customer {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Status getStatus() {
@@ -378,6 +470,14 @@ public class Customer {
         this.supervisorsSurname = supervisorsSurname;
     }
 
+    public String getSupervisorsLastName() {
+        return supervisorsLastName;
+    }
+
+    public void setSupervisorsLastName(String supervisorsLastName) {
+        this.supervisorsLastName = supervisorsLastName;
+    }
+
     public Contact getSupervisorsContact() {
         return supervisorsContact;
     }
@@ -394,6 +494,46 @@ public class Customer {
         this.materialForNextSessionsFromSupervision = materialForNextSessionsFromSupervision;
     }
 
+    public String getCotherapistName() {
+        return cotherapistName;
+    }
+
+    public void setCotherapistName(String cotherapistName) {
+        this.cotherapistName = cotherapistName;
+    }
+
+    public String getCotherapistSurname() {
+        return cotherapistSurname;
+    }
+
+    public void setCotherapistSurname(String cotherapistSurname) {
+        this.cotherapistSurname = cotherapistSurname;
+    }
+
+    public String getCotherapistLastName() {
+        return cotherapistLastName;
+    }
+
+    public void setCotherapistLastName(String cotherapistLastName) {
+        this.cotherapistLastName = cotherapistLastName;
+    }
+
+    public Contact getCotherapistContact() {
+        return cotherapistContact;
+    }
+
+    public void setCotherapistContact(Contact cotherapistContact) {
+        this.cotherapistContact = cotherapistContact;
+    }
+
+    public String getCotherapistPaymentConditions() {
+        return cotherapistPaymentConditions;
+    }
+
+    public void setCotherapistPaymentConditions(String cotherapistPaymentConditions) {
+        this.cotherapistPaymentConditions = cotherapistPaymentConditions;
+    }
+
     public String getNotes() {
         return notes;
     }
@@ -402,36 +542,180 @@ public class Customer {
         this.notes = notes;
     }
 
-    public String getPartnersName() {
-        return partnersName;
+    public String getFirstClientName() {
+        return firstClientName;
     }
 
-    public void setPartnersName(String partnersName) {
-        this.partnersName = partnersName;
+    public void setFirstClientName(String firstClientName) {
+        this.firstClientName = firstClientName;
     }
 
-    public String getPartnersSurname() {
-        return partnersSurname;
+    public String getFirstClientSurname() {
+        return firstClientSurname;
     }
 
-    public void setPartnersSurname(String partnersSurname) {
-        this.partnersSurname = partnersSurname;
+    public void setFirstClientSurname(String firstClientSurname) {
+        this.firstClientSurname = firstClientSurname;
     }
 
-    public Contact getPartnersContact() {
-        return partnersContact;
+    public String getFirstClientLastName() {
+        return firstClientLastName;
     }
 
-    public void setPartnersContact(Contact partnersContact) {
-        this.partnersContact = partnersContact;
+    public void setFirstClientLastName(String firstClientLastName) {
+        this.firstClientLastName = firstClientLastName;
     }
 
-    public Sex getPartnersSex() {
-        return partnersSex;
+    public Contact getFirstClientContact() {
+        return firstClientContact;
     }
 
-    public void setPartnersSex(Sex partnersSex) {
-        this.partnersSex = partnersSex;
+    public void setFirstClientContact(Contact firstClientContact) {
+        this.firstClientContact = firstClientContact;
+    }
+
+    public Sex getFirstClientSex() {
+        return firstClientSex;
+    }
+
+    public void setFirstClientSex(Sex firstClientSex) {
+        this.firstClientSex = firstClientSex;
+    }
+
+    public String getFirstClientRequestReason() {
+        return firstClientRequestReason;
+    }
+
+    public void setFirstClientRequestReason(String firstClientRequestReason) {
+        this.firstClientRequestReason = firstClientRequestReason;
+    }
+
+    public String getFirstClientDesiredResult() {
+        return firstClientDesiredResult;
+    }
+
+    public void setFirstClientDesiredResult(String firstClientDesiredResult) {
+        this.firstClientDesiredResult = firstClientDesiredResult;
+    }
+
+    public String getSecondClientName() {
+        return secondClientName;
+    }
+
+    public void setSecondClientName(String secondClientName) {
+        this.secondClientName = secondClientName;
+    }
+
+    public String getSecondClientSurname() {
+        return secondClientSurname;
+    }
+
+    public void setSecondClientSurname(String secondClientSurname) {
+        this.secondClientSurname = secondClientSurname;
+    }
+
+    public String getSecondClientLastName() {
+        return secondClientLastName;
+    }
+
+    public void setSecondClientLastName(String secondClientLastName) {
+        this.secondClientLastName = secondClientLastName;
+    }
+
+    public Contact getSecondClientContact() {
+        return secondClientContact;
+    }
+
+    public void setSecondClientContact(Contact secondClientContact) {
+        this.secondClientContact = secondClientContact;
+    }
+
+    public Sex getSecondClientSex() {
+        return secondClientSex;
+    }
+
+    public void setSecondClientSex(Sex secondClientSex) {
+        this.secondClientSex = secondClientSex;
+    }
+
+    public String getSecondClientRequestReason() {
+        return secondClientRequestReason;
+    }
+
+    public void setSecondClientRequestReason(String secondClientRequestReason) {
+        this.secondClientRequestReason = secondClientRequestReason;
+    }
+
+    public String getSecondClientDesiredResult() {
+        return secondClientDesiredResult;
+    }
+
+    public void setSecondClientDesiredResult(String secondClientDesiredResult) {
+        this.secondClientDesiredResult = secondClientDesiredResult;
+    }
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public void setChildName(String childName) {
+        this.childName = childName;
+    }
+
+    public String getChildSurname() {
+        return childSurname;
+    }
+
+    public void setChildSurname(String childSurname) {
+        this.childSurname = childSurname;
+    }
+
+    public String getChildLastName() {
+        return childLastName;
+    }
+
+    public void setChildLastName(String childLastName) {
+        this.childLastName = childLastName;
+    }
+
+    public Contact getChildContact() {
+        return childContact;
+    }
+
+    public void setChildContact(Contact childContact) {
+        this.childContact = childContact;
+    }
+
+    public Sex getChildSex() {
+        return childSex;
+    }
+
+    public void setChildSex(Sex childSex) {
+        this.childSex = childSex;
+    }
+
+    public String getAdultDesiredResult() {
+        return adultDesiredResult;
+    }
+
+    public void setAdultDesiredResult(String adultDesiredResult) {
+        this.adultDesiredResult = adultDesiredResult;
+    }
+
+    public String getChildVisitReason() {
+        return childVisitReason;
+    }
+
+    public void setChildVisitReason(String childVisitReason) {
+        this.childVisitReason = childVisitReason;
+    }
+
+    public String getChildDesireOfChange() {
+        return childDesireOfChange;
+    }
+
+    public void setChildDesireOfChange(String childDesireOfChange) {
+        this.childDesireOfChange = childDesireOfChange;
     }
 
     public LeadsClient getLeadsClient() {
@@ -440,6 +724,54 @@ public class Customer {
 
     public void setLeadsClient(LeadsClient leadsClient) {
         this.leadsClient = leadsClient;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public String getParentSurname() {
+        return parentSurname;
+    }
+
+    public void setParentSurname(String parentSurname) {
+        this.parentSurname = parentSurname;
+    }
+
+    public String getParentLastName() {
+        return parentLastName;
+    }
+
+    public void setParentLastName(String parentLastName) {
+        this.parentLastName = parentLastName;
+    }
+
+    public Contact getParentContact() {
+        return parentContact;
+    }
+
+    public void setParentContact(Contact parentContact) {
+        this.parentContact = parentContact;
+    }
+
+    public Sex getParentSex() {
+        return parentSex;
+    }
+
+    public void setParentSex(Sex parentSex) {
+        this.parentSex = parentSex;
+    }
+
+    public String getParentCity() {
+        return parentCity;
+    }
+
+    public void setParentCity(String parentCity) {
+        this.parentCity = parentCity;
     }
 
     public String getFirstParentsName() {
@@ -458,6 +790,14 @@ public class Customer {
         this.firstParentsSurname = firstParentsSurname;
     }
 
+    public String getFirstParentsLastName() {
+        return firstParentsLastName;
+    }
+
+    public void setFirstParentsLastName(String firstParentsLastName) {
+        this.firstParentsLastName = firstParentsLastName;
+    }
+
     public Contact getFirstParentsContact() {
         return firstParentsContact;
     }
@@ -472,6 +812,14 @@ public class Customer {
 
     public void setFirstParentsSex(Sex firstParentsSex) {
         this.firstParentsSex = firstParentsSex;
+    }
+
+    public String getFirstParentsCity() {
+        return firstParentsCity;
+    }
+
+    public void setFirstParentsCity(String firstParentsCity) {
+        this.firstParentsCity = firstParentsCity;
     }
 
     public String getSecondParentsName() {
@@ -490,6 +838,14 @@ public class Customer {
         this.secondParentsSurname = secondParentsSurname;
     }
 
+    public String getSecondParentsLastName() {
+        return secondParentsLastName;
+    }
+
+    public void setSecondParentsLastName(String secondParentsLastName) {
+        this.secondParentsLastName = secondParentsLastName;
+    }
+
     public Contact getSecondParentsContact() {
         return secondParentsContact;
     }
@@ -500,6 +856,14 @@ public class Customer {
 
     public Sex getSecondParentsSex() {
         return secondParentsSex;
+    }
+
+    public String getSecondParentsCity() {
+        return secondParentsCity;
+    }
+
+    public void setSecondParentsCity(String secondParentsCity) {
+        this.secondParentsCity = secondParentsCity;
     }
 
     public void setSecondParentsSex(Sex secondParentsSex) {
@@ -522,6 +886,14 @@ public class Customer {
         this.trusteesSurname = trusteesSurname;
     }
 
+    public String getTrusteesLastName() {
+        return trusteesLastName;
+    }
+
+    public void setTrusteesLastName(String trusteesLastName) {
+        this.trusteesLastName = trusteesLastName;
+    }
+
     public Contact getTrusteesContact() {
         return trusteesContact;
     }
@@ -536,6 +908,14 @@ public class Customer {
 
     public void setTrusteesSex(Sex trusteesSex) {
         this.trusteesSex = trusteesSex;
+    }
+
+    public String getTrusteesCity() {
+        return trusteesCity;
+    }
+
+    public void setTrusteesCity(String trusteesCity) {
+        this.trusteesCity = trusteesCity;
     }
 
     public void addProblem(String problemId) {
