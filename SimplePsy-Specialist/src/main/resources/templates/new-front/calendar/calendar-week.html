@@ -50,7 +50,7 @@
               <div class="about-us-news-button-wrapper">
                 <div class="about-us-news-button">
                   <b class="about-us1" id="aboutUsText">Добавить клиента</b>
-                  <b class="news1" id="newsText">Назначить встречу</b>
+                  <b class="news10" id="newsText">Назначить встречу</b>
                 </div>
               </div>
               <div class="user-policy-wrapper">
@@ -527,7 +527,12 @@
         </section>
       </main>
     </div>
-
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="modal-body"></div>
+      </div>
+    </div>
     <script>
       var aboutUsText = document.getElementById("aboutUsText");
       if (aboutUsText) {
@@ -591,6 +596,36 @@
           window.location.href = "./component12.html";
         });
       }
+      // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+    // Функция для открытия модального окна
+    function openModal() {
+      fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+        .then(response => response.text())
+        .then(data => {
+          modalBody.innerHTML = data;
+          modal.style.display = 'block';
+        })
+        .catch(error => console.error('Ошибка загрузки:', error));
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
       </script>
   </body>
 </html>

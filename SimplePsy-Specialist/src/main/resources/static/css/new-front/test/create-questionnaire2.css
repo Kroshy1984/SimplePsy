@@ -1200,3 +1200,45 @@
     gap: var(--gap-107xl);
   }
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+}
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.news10:hover {
+  background-color: #d3d3d3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translateY(2px);
+}
+.news10:active {
+  background-color: #a9a9a9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transform: translateY(4px);
+}

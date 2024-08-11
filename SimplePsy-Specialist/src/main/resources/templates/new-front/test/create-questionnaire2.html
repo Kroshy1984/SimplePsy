@@ -50,7 +50,7 @@
                 <div class="about-us-parent8">
                   <a class="about-us25">Добавить клиента</a>
                   <div class="news-parent2">
-                    <a class="news18">Назначить встречу</a>
+                    <a class="news10">Назначить встречу</a>
                     <b class="user-policy18">Добавить график нерабочих дней </b>
                   </div>
                 </div>
@@ -307,7 +307,12 @@
         </div>
       </div>
     </div>
-
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="modal-body"></div>
+      </div>
+    </div>
     <script>
       var userImage = document.getElementById("userImage");
       if (userImage) {
@@ -361,6 +366,36 @@
     <input type="text" id="option${answerOptionsContainer.children.length + 1}-text" name="option${answerOptionsContainer.children.length + 1}-text"><br><br>
   `;
         answerOptionsContainer.appendChild(newOption);
+      });
+      // Открытие модального окна создания сессии
+      document.addEventListener('DOMContentLoaded', function() {
+      // Получаем элементы
+      var modal = document.getElementById('modal');
+      var modalBody = document.getElementById('modal-body');
+      var closeBtn = document.querySelector('.close-btn');
+      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+      // Функция для открытия модального окна
+      function openModal() {
+          fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+          .then(response => response.text())
+          .then(data => {
+              modalBody.innerHTML = data;
+              modal.style.display = 'block';
+          })
+          .catch(error => console.error('Ошибка загрузки:', error));
+      }
+
+      // Функция для закрытия модального окна
+      function closeModal() {
+          modal.style.display = 'none';
+      }
+
+      // Событие клика для открытия модального окна
+      appointLink.addEventListener('click', openModal);
+
+      // Событие клика для закрытия модального окна
+      closeBtn.addEventListener('click', closeModal);
       });
       </script>
   </body>

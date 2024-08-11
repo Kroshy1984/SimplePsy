@@ -161,7 +161,18 @@ public class CustomerController {
         Customer customer = customerService.findById(customerId);
         customer.setId(customerId);
         model.addAttribute("customer", customer);
-        return "new-front/customer/customer-card";
+        switch (customer.getTypeOfClient()) {
+            case ADULT -> {
+                return "new-front/customer/customer-card-adult";
+            }
+            case COUPLE -> {
+                return "new-front/customer/customer-card-couple";
+            }
+            case CHILD -> {
+                return "new-front/customer/customer-card-child";
+            }
+        }
+        return "new-front/customer/customer-card-adult";
     }
 
     @PostMapping("/customers/new")
