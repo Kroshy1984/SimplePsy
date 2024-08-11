@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+</head>
+<body>
+<style>
+    /* Container for the form */
+    .container {
+        position: relative;
+        top: 20%;
+        left: 30%;
+        width: 50%;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form heading */
+    .container h2 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Form styling */
+    #test-edit-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Individual form groups */
+    #test-edit-form > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Labels */
+    #test-edit-form label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    /* Textareas */
+    #test-edit-form textarea {
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+        background-color: #fff;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Textarea focus effect */
+    #test-edit-form textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Submit button */
+    #test-edit-form button[type="submit"] {
+        align-self: center;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Submit button hover effect */
+    #test-edit-form button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+<div class="div139">
+    <div class="sidebar1">
+        <div class="menu">
+            <div class="dashboard23" id="dashboardContainer">
+                <div class="base75"></div>
+                <b class="dashboard24">Список клинетов</b>
+                <img
+                        class="icon115"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-3@2x.png"
+                />
+            </div>
+            <div class="invoice15" id="invoiceContainer">
+                <div class="base76"></div>
+                <b class="invoice16">Уведомления</b>
+                <img
+                        class="icon116"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-5.svg"
+                />
+            </div>
+            <div class="files8">
+                <div class="base77"></div>
+                <b class="files9">Аналитика</b>
+                <img
+                        class="icon117"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-6.svg"
+                />
+            </div>
+            <div class="email3">
+                <div class="base78"></div>
+                <b class="calendars8">Календарь</b>
+                <img
+                        class="icon118"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-4@2x.png"
+                />
+            </div>
+
+            <div class="div140" id="container">
+                <div class="base79"></div>
+                <b class="dashboard25">Опросники и тесты</b>
+            </div>
+            <div class="parent26">
+                <b class="b112">Заявки</b>
+                <div class="rectangle-parent87" id="groupContainer">
+                    <div class="frame-child111"></div>
+                    <div class="frame-child112"></div>
+                    <b class="b113">Овсянникова Юля Матвеевна</b>
+                    <b class="b114">20.02.2024</b>
+                </div>
+                <div class="rectangle-parent88" id="groupContainer1">
+                    <div class="frame-child113"></div>
+                    <div class="frame-child114"></div>
+                    <b class="b115">Овсянникова Кирилл Матвеев</b>
+                    <b class="b116">25.02.2024</b>
+                </div>
+            </div>
+        </div>
+        <div class="feedback3">
+            <b class="send-feedback8">Обратная связь</b>
+            <img
+                    class="icon119"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-7@2x.png"
+            />
+
+            <img
+                    class="icon120"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-8.svg"
+            />
+        </div>
+
+        <div class="head">
+            <div class="wrapper-user8">
+                <img
+                        class="user-icon8"
+                        loading="lazy"
+                        alt=""
+                        src="/images/user@2x.png"
+                        id="userImage"
+                />
+            </div>
+            <b class="hello-rosalie8">Привет, Антон!</b>
+            <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+        </div>
+    </div>
+    <header class="head1">
+        <div class="navigate">
+            <a class="constructor8">Понятная практика</a>
+            <div class="menu1">
+                <b class="news9" id="newsText">Назначить встречу</b>
+                <b class="user-policy9" id="userPolicyText"
+                >Добавить график нерабочих дней
+                </b>
+                <b class="about-us15" id="aboutUsText">Добавить клиента</b>
+            </div>
+            <div class="search8">
+                <b class="search9">Найти клиента...</b>
+                <img
+                        class="icon121"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-1@2x.png"
+                />
+            </div>
+            <div class="city">
+                <b class="new-york8">Ростов-на-Дону</b>
+                <img
+                        class="icon122"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-2@2x.png"
+                />
+            </div>
+            <img
+                    class="icon123"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon@2x.png"
+            />
+        </div>
+    </header>
+    <div class="container">
+        <h2>Заметка о ходе работы</h2>
+        <form id="test-edit-form" th:action="@{/SimplePsy/V1/session/report/create}" th:object="${report}" method="post">
+            <input type="hidden" th:value="${sessionId}" name="sessionId">
+            <div>
+                <label for="requestForSessionByClient">Запрос на сессию со стороны клиента</label>
+                <textarea id="requestForSessionByClient" th:field="*{requestForSessionByClient}"></textarea>
+            </div>
+
+            <div>
+                <label for="specialistCondition">Состояние терапевта в начале сессии</label>
+                <textarea id="specialistCondition" th:field="*{specialistCondition}"></textarea>
+            </div>
+
+            <div>
+                <label for="sessionTopics">Основные темы, затронутые в ходе сеанса</label>
+                <textarea id="sessionTopics" th:field="*{sessionTopics}"></textarea>
+            </div>
+
+            <div>
+                <label for="clientInsides">Значимые фразы, инсайты клиента</label>
+                <textarea id="clientInsides" th:field="*{clientInsides}"></textarea>
+            </div>
+
+            <div>
+                <label for="clientsEmotions">Основные эмоции клиента</label>
+                <textarea id="clientsEmotions" th:field="*{clientsEmotions}"></textarea>
+            </div>
+
+            <div>
+                <label for="specialistEmotions">Основные проявленные эмоции терапевта</label>
+                <textarea id="specialistEmotions" th:field="*{specialistEmotions}"></textarea>
+            </div>
+
+            <div>
+                <label for="unmanifestedSpecialistEmotions">Непроявленные эмоции терапевта</label>
+                <textarea id="unmanifestedSpecialistEmotions" th:field="*{unmanifestedSpecialistEmotions}"></textarea>
+            </div>
+
+            <div>
+                <label for="techniquesAndMethodsUsed">Применяемые техники и методы</label>
+                <textarea id="techniquesAndMethodsUsed" th:field="*{techniquesAndMethodsUsed}"></textarea>
+            </div>
+
+            <div>
+                <label for="clientsSessionResistance">Основные препятствия и способы сопротивления процессу терапии со стороны клиента</label>
+                <textarea id="clientsSessionResistance" th:field="*{clientsSessionResistance}"></textarea>
+            </div>
+
+            <div>
+                <label for="specialistFinalStatus">Состояние терапевта по завершению сессии</label>
+                <textarea id="specialistFinalStatus" th:field="*{specialistFinalStatus}"></textarea>
+            </div>
+
+            <div>
+                <label for="plansForNextSession">План и/или мысли на следующую сессию</label>
+                <textarea id="plansForNextSession" th:field="*{plansForNextSession}"></textarea>
+            </div>
+
+            <div>
+                <label for="difficultiesForRequestingSuperVisa">Трудности и потенциальные темы для запроса на супервизию</label>
+                <textarea id="difficultiesForRequestingSuperVisa" th:field="*{difficultiesForRequestingSuperVisa}"></textarea>
+            </div>
+
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+<script>
+    var dashboardContainer = document.getElementById("dashboardContainer");
+    if (dashboardContainer) {
+        dashboardContainer.addEventListener("click", function (e) {
+            window.location.href = "./component2.html";
+        });
+    }
+
+    var invoiceContainer = document.getElementById("invoiceContainer");
+    if (invoiceContainer) {
+        invoiceContainer.addEventListener("click", function (e) {
+            window.location.href = "./component3.html";
+        });
+    }
+
+    var container = document.getElementById("container");
+    if (container) {
+        container.addEventListener("click", function (e) {
+            window.location.href = "./component2.html";
+        });
+    }
+
+    var groupContainer = document.getElementById("groupContainer");
+    if (groupContainer) {
+        groupContainer.addEventListener("click", function (e) {
+            window.location.href = "./component6.html";
+        });
+    }
+
+    var groupContainer1 = document.getElementById("groupContainer1");
+    if (groupContainer1) {
+        groupContainer1.addEventListener("click", function (e) {
+            window.location.href = "./component6.html";
+        });
+    }
+
+    var userImage = document.getElementById("userImage");
+    if (userImage) {
+        userImage.addEventListener("click", function (e) {
+            window.location.href = "./component4.html";
+        });
+    }
+
+    var newsText = document.getElementById("newsText");
+    if (newsText) {
+        newsText.addEventListener("click", function (e) {
+            // Please sync "Модальное окно "Назначить встречу" Тип встерча = Встреча с клиентом" to the project
+        });
+    }
+
+    var userPolicyText = document.getElementById("userPolicyText");
+    if (userPolicyText) {
+        userPolicyText.addEventListener("click", function (e) {
+            // Please sync "Модальное окно "Добавить график  нерабочих дней "" to the project
+        });
+    }
+
+    var aboutUsText = document.getElementById("aboutUsText");
+    if (aboutUsText) {
+        aboutUsText.addEventListener("click", function (e) {
+            // Please sync "Модальное окно "Добавить клиента"" to the project
+        });
+    }
+    var dashboardContainer = document.getElementById("dashboardContainer");
+    if (dashboardContainer) {
+        dashboardContainer.addEventListener("click", function (e) {
+            window.location.href = "./component2.html";
+        });
+    }
+    var invoiceContainer = document.getElementById("invoiceContainer");
+    if (invoiceContainer) {
+        invoiceContainer.addEventListener("click", function (e) {
+            window.location.href = "./component3.html";
+        });
+    }
+    var container = document.getElementById("container");
+    if (container) {
+        container.addEventListener("click", function (e) {
+            window.location.href = "./component2.html";
+        });
+    }
+    var groupContainer = document.getElementById("groupContainer");
+    if (groupContainer) {
+        groupContainer.addEventListener("click", function (e) {
+            window.location.href = "./component6.html";
+        });
+    }
+    var groupContainer1 = document.getElementById("groupContainer1");
+    if (groupContainer1) {
+        groupContainer1.addEventListener("click", function (e) {
+            window.location.href = "./component6.html";
+        });
+    }
+    var userImage = document.getElementById("userImage");
+    if (userImage) {
+        userImage.addEventListener("click", function (e) {
+            window.location.href = "./component4.html";
+        });
+    }
+</script>
+</body>
+</html>

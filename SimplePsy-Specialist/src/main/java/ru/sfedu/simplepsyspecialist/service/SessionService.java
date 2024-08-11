@@ -56,4 +56,8 @@ public class SessionService {
         Client client = clientService.findById(clientId);
         return client;
     }
+
+    public Session findById(String sessionId) {
+        return sessionRepository.findById(sessionId).get();
+    }
 }

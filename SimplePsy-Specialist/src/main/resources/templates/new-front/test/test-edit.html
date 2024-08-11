@@ -22,15 +22,6 @@
         margin: 20px;
     }
 
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
     label {
         display: block;
         margin-bottom: 5px;
@@ -51,6 +42,87 @@
     }
 
     button:hover {
+        background-color: #0056b3;
+    }
+    .container {
+        position: relative;
+        top: 20%;
+        left: 30%;
+        width: 50%;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form heading */
+    .container h2 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Form styling */
+    #surveyForm {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Individual form groups */
+    #surveyForm > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Labels */
+    #surveyForm label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    /* Textareas */
+    #surveyForm textarea {
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+        background-color: #fff;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Textarea focus effect */
+    #surveyForm textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Submit button */
+    #surveyForm button[type="submit"] {
+        align-self: center;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Submit button hover effect */
+    #surveyForm button[type="submit"]:hover {
         background-color: #0056b3;
     }
 </style>
@@ -187,7 +259,7 @@
     </header>
         <!-- Sidebar and Header code remains unchanged -->
 
-        <div class="survey-container">
+        <div class="container">
             <h2>Редактировать опрос</h2>
             <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/{id}/update}" method="post">
                 <input type="hidden" id="surveyId" name="id" th:value="${scoring.id}">
@@ -200,7 +272,7 @@
                             <div th:id="'optionsContainer-question-' + ${qStat.index}">
                                 <div th:each="option, oStat : ${question.options}">
                                     <div class="survey-option">
-                                        <input type="radio" th:name="'option-question-' + ${qStat.index}" disabled>
+                                        <input th:name="'option-question-' + ${qStat.index}" disabled>
                                         <input type="text" th:name="'optionText-question-' + ${qStat.index}" th:value="${option}" placeholder="Вариант ответа" required>
                                     </div>
                                 </div>
@@ -213,7 +285,6 @@
                 <button type="submit">Сохранить изменения</button>
             </form>
         </div>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.add-option-button').forEach(button => {
@@ -230,7 +301,7 @@
                 const newOption = document.createElement("div");
                 newOption.className = "survey-option";
                 newOption.innerHTML = `
-        <input type="radio" name="option-${questionId}" disabled>
+        <input name="option-${questionId}" disabled>
         <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
       `;
                 optionsContainer.appendChild(newOption);
@@ -250,7 +321,7 @@
       <input type="text" id="${questionId}" name="questionText" required>
       <div id="optionsContainer-${questionId}">
         <div class="survey-option">
-          <input type="radio" name="option-${questionId}" disabled>
+          <input name="option-${questionId}" disabled>
           <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
         </div>
       </div>

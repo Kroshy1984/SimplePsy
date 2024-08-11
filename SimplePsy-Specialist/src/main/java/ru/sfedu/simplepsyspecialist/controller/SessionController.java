@@ -6,13 +6,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.entity.nested.Report;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -184,5 +182,24 @@ public class SessionController {
     @GetMapping("/calendar")
     public String getCalendar(Model model) {
         return "/new-front/calendar/calendar";
+    }
+    @GetMapping("report/create/{sessionId}")
+    public String createReportForm(@PathVariable String sessionId, Model model)
+    {
+        Report report = new Report();
+        Session session = sessionService.findById(sessionId);
+        model.addAttribute("report", report);
+        model.addAttribute("sessionId", sessionId);
+        return "new-front/session/report-create";
+    }
+    @PostMapping("report/create")
+    public String createReport(@RequestParam String sessionId, @ModelAttribute Report report)
+    {
+        System.out.println(sessionId);
+        Session session = sessionService.findById(sessionId);
+        System.out.println(report.getRequestForSessionByClient());
+        session.setReports(report);
+        sessionService.createSession(session);
+        return "new-front/session/report-create";
     }
 }
