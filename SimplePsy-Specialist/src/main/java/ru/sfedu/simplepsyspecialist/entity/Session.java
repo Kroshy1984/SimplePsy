@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
+import ru.sfedu.simplepsyspecialist.entity.nested.Report;
 import ru.sfedu.simplepsyspecialist.entity.nested.SessionType;
 
 import java.time.LocalDate;
@@ -36,7 +37,7 @@ public class Session {
     private String timesToRepeat;
     private boolean isNotifiable;
     private String notificationTime;
-
+    private Report report;
 
     public Session() {
     }
@@ -165,5 +166,13 @@ public class Session {
 
     public void setNotificationTime(String notificationTime) {
         this.notificationTime = notificationTime;
+    }
+
+    public Report getReports() {
+        return report;
+    }
+
+    public void setReports(Report report) {
+        this.report = report;
     }
 }

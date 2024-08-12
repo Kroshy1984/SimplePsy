@@ -38,6 +38,7 @@ public class Specialist {
     private String middleName;
 
     private String email;
+    private String phone;
 
     private SpecialistRole specialistRole = SpecialistRole.USER_ROLE;
 
@@ -50,14 +51,25 @@ public class Specialist {
 
     private List<String> customerIds;
 
+    private String specialization;
+    private String description;
+    private String education;
+    private String city;
+
 //    @Valid
 //    private List<ClientEntry> clients;
 
-    public Specialist(String name, String surname, String username, String password) {
+    public Specialist(String name, String surname, String username, String phone, String password,
+                      String specialization, String description, String education, String city) {
         this.name = name;
         this.surname = surname;
         this.username = username;
+        this.phone = phone;
         this.password = password;
+        this.specialization = specialization;
+        this.description = description;
+        this.education = education;
+        this.city = city;
     }
 
     public Specialist(String username, String password) {
@@ -148,8 +160,48 @@ public class Specialist {
         this.username = username;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public List<String> getCustomerIds() {
         return customerIds;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void addCustomerId(String customerId) {

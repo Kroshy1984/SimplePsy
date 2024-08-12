@@ -211,8 +211,8 @@
                     <div id="common-fields">
                         <div class="form-section">
                             <label for="full-name">ФИО клиента</label>
-                            <input type="text" id="full-name" th:name="name">
-                            <input type="text" th:name="surname">
+                            <input type="text" id="full-name" th:name="surname">
+                            <input type="text" th:name="name">
                             <input type="text" th:name="lastName">
                         </div>
 
@@ -249,8 +249,8 @@
                     <div id="couple-fields" class="hidden">
                         <div class="form-section">
                             <label for="full-name-1">ФИО первого клиента</label>
-                            <input type="text" id="full-name-1" th:name="firstClientName">
-                            <input type="text" th:name="firstClientSurname">
+                            <input type="text" id="full-name-1" th:name="firstClientSurname">
+                            <input type="text" th:name="firstClientName">
                             <input type="text" th:name="firstClientLastName">
                         </div>
 
@@ -284,8 +284,8 @@
 
                         <div class="form-section">
                             <label for="full-name-2">ФИО второго клиента</label>
-                            <input type="text" id="full-name-2" th:name="secondClientName">
-                            <input type="text" th:name="secondClientSurname">
+                            <input type="text" id="full-name-2" th:name="secondClientSurname">
+                            <input type="text" th:name="secondClientName">
                             <input type="text" th:name="secondClientLastName">
                         </div>
 
@@ -321,8 +321,8 @@
                     <div id="child-fields" class="hidden">
                         <div class="form-section">
                             <label for="child-full-name">ФИО ребенка</label>
-                            <input type="text" id="child-full-name" th:name="childName">
-                            <input type="text" th:name="childSurname">
+                            <input type="text" id="child-full-name" th:name="childSurname">
+                            <input type="text" th:name="childName">
                             <input type="text" th:name="childLastName">
                         </div>
 
@@ -371,9 +371,9 @@
                         <div id="parent-fields">
                             <div class="form-section">
                                 <label for="parent-full-name">ФИО родителя</label>
-                                <input type="text" id="parent-full-name" th:name="parentName">
-                                <input type="text" th:name="parentsSurname">
-                                <input type="text" th:name="parentsLastName">
+                                <input type="text" id="parent-full-name" th:name="parentSurname">
+                                <input type="text" th:name="parentName">
+                                <input type="text" th:name="parentLastName">
                             </div>
 
                             <div class="form-section">
@@ -396,15 +396,15 @@
 
                             <div class="form-section">
                                 <label for="parent1-city">Город родителя</label>
-                                <input type="email" id="parent-city" th:name="parentCity">
+                                <input type="text" id="parent-city" th:name="parentCity">
                             </div>
                         </div>
 
                         <div id="both-parents-fields" class="hidden">
                             <div class="form-section">
                                 <label for="parent1-full-name">ФИО первого родителя</label>
-                                <input type="text" id="parent1-full-name" th:name="firstParentsName">
-                                <input type="text" th:name="firstParentsSurname">
+                                <input type="text" id="parent1-full-name" th:name="firstParentsSurname">
+                                <input type="text" th:name="firstParentsName">
                                 <input type="text" th:name="firstParentsLastName">
                             </div>
 
@@ -428,13 +428,13 @@
 
                             <div class="form-section">
                                 <label for="parent1-city">Город первого родителя</label>
-                                <input type="email" id="parent1-city" th:name="firstParentsCity">
+                                <input type="text" id="parent1-city" th:name="firstParentsCity">
                             </div>
 
                             <div class="form-section">
                                 <label for="parent2-full-name">ФИО второго родителя</label>
-                                <input type="text" id="parent2-full-name" th:name="secondParentsName">
-                                <input type="text" th:name="secondParentsSurname">
+                                <input type="text" id="parent2-full-name" th:name="secondParentsSurname">
+                                <input type="text" th:name="secondParentsName">
                                 <input type="text" th:name="secondParentsLastName">
                             </div>
 
@@ -458,15 +458,15 @@
 
                             <div class="form-section">
                                 <label for="parent2-city">Город второго родителя</label>
-                                <input type="email" id="parent2-city" th:name="secondParentsCity">
+                                <input type="text" id="parent2-city" th:name="secondParentsCity">
                             </div>
                         </div>
 
                         <div id="guardian-fields" class="hidden">
                             <div class="form-section">
                                 <label for="guardian-full-name">ФИО попечителя</label>
-                                <input type="text" id="guardian-full-name" th:name="trusteesName">
-                                <input type="text" th:name="trusteesSurname">
+                                <input type="text" id="guardian-full-name" th:name="trusteesSurname">
+                                <input type="text" th:name="trusteesName">
                                 <input type="text" th:name="trusteesLastName">
                             </div>
 
@@ -490,7 +490,7 @@
 
                             <div class="form-section">
                                 <label for="guardian-city">Город попечителя</label>
-                                <input type="email" id="guardian-city" th:name="trusteesCity">
+                                <input type="text" id="guardian-city" th:name="trusteesCity">
                             </div>
                         </div>
                     </div>
@@ -611,7 +611,7 @@
 
                         <div class="form-section">
                             <label for="supervision">Берётся ли супервизия на данного клиента</label>
-                            <select id="supervision" th:name="isSupervision">
+                            <select id="supervision" th:name="supervised">
                                 <option value="YES">Да</option>
                                 <option value="NO">Нет</option>
                             </select>
@@ -619,8 +619,8 @@
 
                         <div class="form-section">
                             <label for="supervisor-info">ФИО супервизора</label>
-                            <input type="text" id="supervisor-info" th:name="supervisorsName">
-                            <input type="text" th:name="supervisorsSurname">
+                            <input type="text" id="supervisor-info" th:name="supervisorsSurname">
+                            <input type="text" th:name="supervisorsName">
                             <input type="text" th:name="supervisorsLastName">
                         </div>
                         <div class="form-section">
@@ -638,8 +638,8 @@
 
                         <div class="form-section">
                             <label for="cotherapist-info">ФИО котерапевта</label>
-                            <input type="text" id="cotherapist-info" th:name="cotherapistName">
-                            <input type="text" th:name="cotherapistSurname">
+                            <input type="text" id="cotherapist-info" th:name="cotherapistSurname">
+                            <input type="text" th:name="cotherapistName">
                             <input type="text" th:name="cotherapistLastName">
                         </div>
                         <div class="form-section">

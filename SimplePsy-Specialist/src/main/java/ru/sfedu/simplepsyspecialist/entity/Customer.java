@@ -44,7 +44,7 @@ public class Customer {
     private String specialTermsOfContract;
     private FamilyStatus familyStatus;
     private PriorityCommunicationChannel priorityCommunicationChannel;
-    private boolean isSupervision;
+    private Supervised supervised;
     private String supervisorsName;
     private String supervisorsSurname;
     private String supervisorsLastName;
@@ -135,7 +135,7 @@ public class Customer {
                     String offlineMeetingPlace, ClientStatus clientStatus, String clientsFirstRequestForTherapy,
                     String fixedTimeForMeeting, String financialConditions, String residentialAddress,
                     String collegialRecommendations, String specialTermsOfContract, FamilyStatus familyStatus,
-                    PriorityCommunicationChannel priorityCommunicationChannel, boolean isSupervision,
+                    PriorityCommunicationChannel priorityCommunicationChannel, Supervised supervised,
                     String supervisorsName, String supervisorsSurname, String supervisorsLastName,
                     Contact supervisorsContact, String materialForNextSessionsFromSupervision,
                     String cotherapistName, String cotherapistSurname, String cotherapistLastName, Contact cotherapistContact, String cotherapistPaymentConditions, String notes,
@@ -176,7 +176,7 @@ public class Customer {
         this.specialTermsOfContract = specialTermsOfContract;
         this.familyStatus = familyStatus;
         this.priorityCommunicationChannel = priorityCommunicationChannel;
-        this.isSupervision = isSupervision;
+        this.supervised = supervised;
         this.supervisorsName = supervisorsName;
         this.supervisorsSurname = supervisorsSurname;
         this.supervisorsLastName = supervisorsLastName;
@@ -446,12 +446,12 @@ public class Customer {
         this.priorityCommunicationChannel = priorityCommunicationChannel;
     }
 
-    public boolean isSupervision() {
-        return isSupervision;
+    public Supervised getSupervised() {
+        return supervised;
     }
 
-    public void setSupervision(boolean supervision) {
-        isSupervision = supervision;
+    public void setSupervised(Supervised supervised) {
+        this.supervised = supervised;
     }
 
     public String getSupervisorsName() {

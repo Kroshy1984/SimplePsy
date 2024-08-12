@@ -289,4 +289,13 @@ public class SpecialistService {
         specialist.setPassword(password);
         specialistRepository.save(specialist);
     }
+
+    public void updateSpecialist(Specialist specialist) {
+        String id = specialist.getId();
+        Specialist oldSpecialist = specialistRepository.findById(id).get();
+        specialist.setPassword(oldSpecialist.getPassword());
+        specialist.setUsername(oldSpecialist.getUsername());
+        specialist.setSpecialistRole(oldSpecialist.getSpecialistRole());
+        specialistRepository.save(specialist);
+    }
 }

@@ -1,3 +1,35 @@
+button {
+  width: 200px;
+}
+
+input {
+  border: none;
+  background-color: var(--grey-blue-98);
+}
+
+textarea {
+  padding: 10px;
+  width: 100%; !important;
+  border: 3px solid var(--grey-blue-95);
+  border-radius: var(--br-xl);
+  background-color: var(--white);
+  resize: none;
+}
+
+textarea:focus {
+  border: 3px solid var(--grey-blue-95);
+  border-radius: var(--br-xl);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+p {
+  display: inline;
+  margin: 0;
+}
+
 .settings {
   width: 16px;
   height: 4px;
@@ -189,6 +221,7 @@
 }
 .hello-rosalie-wrapper1 {
   display: flex;
+  gap: 5px;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
@@ -207,7 +240,6 @@
   display: inline-block;
 }
 .frame-parent50 {
-  align-items: flex-start;
   gap: var(--gap-8xs);
 }
 .frame-parent50,
@@ -259,7 +291,6 @@
   min-width: 263px;
 }
 .div61 {
-  align-self: stretch;
   position: relative;
   font-size: var(--font-size-7xl);
 }
@@ -757,7 +788,6 @@
 }
 .div65 {
   height: 150px;
-  width: 819.5px;
   position: relative;
   display: inline-block;
   flex-shrink: 0;
@@ -777,10 +807,9 @@
   flex: 1;
   border-radius: var(--br-xl);
   background-color: var(--white);
-  border: 3px solid var(--grey-blue-95);
-  padding: var(--padding-mini) var(--padding-lg) var(--padding-lgi);
 }
 .frame-wrapper36 {
+  width: 1000px;
   align-self: stretch;
   padding: 0 0 var(--padding-9xs) var(--padding-10xs);
   color: var(--color-slategray-200);
@@ -818,7 +847,6 @@
 }
 .div67 {
   height: 300.4px;
-  width: 1101.1px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -836,12 +864,11 @@
 .rectangle-parent46 {
   border-radius: var(--br-xl);
   background-color: var(--white);
-  border: 3px solid var(--grey-blue-95);
   flex-direction: row;
-  padding: var(--padding-xl) var(--padding-15xl) var(--padding-4xs);
   color: var(--color-slategray-200);
 }
 .frame-parent57 {
+  width: 1000px;
   flex-direction: column;
   padding: 0 0 9.1px;
   gap: var(--gap-sm);
@@ -878,7 +905,7 @@
   padding-left: var(--padding-16xl);
 }
 .oulu-university-container {
-  height: 240px;
+  height: 306px;
   width: 1137.9px;
   position: relative;
   display: flex;
@@ -891,10 +918,8 @@
   align-self: stretch;
   border-radius: var(--br-xl);
   background-color: var(--white);
-  border: 3px solid var(--grey-blue-95);
   box-sizing: border-box;
   flex-direction: row;
-  padding: var(--padding-18xl) var(--padding-base);
   color: var(--color-slategray-200);
 }
 .frame-wrapper37,
@@ -911,6 +936,7 @@
   gap: var(--gap-sm);
 }
 .frame-wrapper37 {
+  width: 1000px;
   align-self: stretch;
   flex-direction: row;
   padding: 0 var(--padding-12xs);
@@ -1023,7 +1049,6 @@
   border: 3px solid var(--grey-blue-95);
   padding: var(--padding-5xs) var(--padding-9xs) var(--padding-4xs);
   background-color: var(--color-lightslategray-100);
-  width: 219px;
   border-radius: var(--br-xl);
   box-sizing: border-box;
   display: flex;
@@ -1047,6 +1072,7 @@
   max-width: 100%;
 }
 .rectangle-parent48 {
+  width: 1000px;
   align-self: stretch;
   border-radius: var(--br-xl);
   background-color: var(--color-gray);
@@ -1146,7 +1172,6 @@
   border: 3px solid var(--grey-blue-95);
   padding: var(--padding-8xs) var(--padding-xs) var(--padding-xs);
   background-color: var(--color-lightslategray-100);
-  flex: 0.8746;
   border-radius: var(--br-xl);
   box-sizing: border-box;
   display: flex;

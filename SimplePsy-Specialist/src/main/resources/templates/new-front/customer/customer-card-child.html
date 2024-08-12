@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-child.css}" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -235,7 +235,7 @@
                     </div>
                     <div class="item114">
                         <div class="div223">ФИО ребенка</div>
-                        <div class="string10" th:text="${customer.childName + ' ' + customer.childSurname + ' ' + customer.childLastName}">
+                        <div class="string10" th:text="${customer.childSurname + ' ' + customer.childName + ' ' + customer.childLastName}">
                         </div>
                     </div>
                     <div class="item115">
@@ -265,96 +265,106 @@
                     </div>
                     <div class="item117">
                         <div class="div226">Кто приводит клиента</div>
-                        <div class="div227" th:text="${customer.leadsClient}"></div>
+                        <div class="div227" id="who-brings" th:value="${customer.leadsClient}" th:text="${customer.leadsClient}"></div>
                     </div>
-                    <div class="item114">
-                        <div class="div223">ФИО родителя</div>
-                        <div class="string10" th:text="${customer.parentName + ' ' + customer.parentSurname + ' ' + customer.parentLastName}">
+
+                    <div id="parent-fields">
+                        <div class="item114">
+                            <div class="div223">ФИО родителя</div>
+                            <div class="string10" th:text="${customer.parentSurname + ' ' + customer.parentName + ' ' + customer.parentLastName}">
+                            </div>
+                        </div>
+                        <div class="item115">
+                            <div class="div224">Номер телефона родителя</div>
+                            <div class="int4" th:text="${customer.parentContact.phone}"></div>
+                        </div>
+                        <div class="item116">
+                            <div class="div225">Почта родителя</div>
+                            <div class="kirraaagmailcom-string1" th:text="${customer.parentContact.email}">
+                            </div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Пол родителя</div>
+                            <div class="div227" th:text="${customer.parentSex}"></div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Город родителя</div>
+                            <div class="div227" th:text="${customer.parentCity}"></div>
                         </div>
                     </div>
-                    <div class="item115">
-                        <div class="div224">Номер телефона родителя</div>
-                        <div class="int4" th:text="${customer.parentContact.phone}"></div>
-                    </div>
-                    <div class="item116">
-                        <div class="div225">Почта родителя</div>
-                        <div class="kirraaagmailcom-string1" th:text="${customer.parentContact.email}">
+
+                    <div id="both-parents-fields" class="hidden">
+                        <div class="item114">
+                            <div class="div223">ФИО первого родителя</div>
+                            <div class="string10" th:text="${customer.firstParentsSurname + ' ' + customer.firstParentsName + ' ' + customer.firstParentsLastName}">
+                            </div>
+                        </div>
+                        <div class="item115">
+                            <div class="div224">Номер телефона первого родителя</div>
+                            <div class="int4" th:text="${customer.firstParentsContact.phone}"></div>
+                        </div>
+                        <div class="item116">
+                            <div class="div225">Почта первого родителя</div>
+                            <div class="kirraaagmailcom-string1" th:text="${customer.firstParentsContact.email}">
+                            </div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Пол первого родителя</div>
+                            <div class="div227" th:text="${customer.firstParentsSex}"></div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Город первого родителя</div>
+                            <div class="div227" th:text="${customer.firstParentsCity}"></div>
+                        </div>
+                        <div class="item114">
+                            <div class="div223">ФИО второго родителя</div>
+                            <div class="string10" th:text="${customer.secondParentsSurname + ' ' + customer.secondParentsName + ' ' + customer.secondParentsLastName}">
+                            </div>
+                        </div>
+                        <div class="item115">
+                            <div class="div224">Номер телефона второго родителя</div>
+                            <div class="int4" th:text="${customer.secondParentsContact.phone}"></div>
+                        </div>
+                        <div class="item116">
+                            <div class="div225">Почта второго родителя</div>
+                            <div class="kirraaagmailcom-string1" th:text="${customer.secondParentsContact.email}">
+                            </div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Пол второго родителя</div>
+                            <div class="div227" th:text="${customer.secondParentsSex}"></div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Город второго родителя</div>
+                            <div class="div227" th:text="${customer.secondParentsCity}"></div>
                         </div>
                     </div>
-                    <div class="item117">
-                        <div class="div226">Пол родителя</div>
-                        <div class="div227" th:text="${customer.parentSex}"></div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Город родителя</div>
-                        <div class="div227" th:text="${customer.parentCity}"></div>
-                    </div>
-                    <div class="item114">
-                        <div class="div223">ФИО первого родителя</div>
-                        <div class="string10" th:text="${customer.parentName + ' ' + customer.parentSurname + ' ' + customer.parentLastName}">
+
+                    <div id="guardian-fields" class="hidden">
+                        <div class="item114">
+                            <div class="div223">ФИО попечителя</div>
+                            <div class="string10" th:text="${customer.trusteesSurname + ' ' + customer.trusteesName + ' ' + customer.trusteesLastName}">
+                            </div>
+                        </div>
+                        <div class="item115">
+                            <div class="div224">Номер телефона попечителя</div>
+                            <div class="int4" th:text="${customer.trusteesContact.phone}"></div>
+                        </div>
+                        <div class="item116">
+                            <div class="div225">Почта попечителя</div>
+                            <div class="kirraaagmailcom-string1" th:text="${customer.trusteesContact.email}">
+                            </div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Пол попечителя</div>
+                            <div class="div227" th:text="${customer.trusteesSex}"></div>
+                        </div>
+                        <div class="item117">
+                            <div class="div226">Город попечителя</div>
+                            <div class="div227" th:text="${customer.trusteesCity}"></div>
                         </div>
                     </div>
-                    <div class="item115">
-                        <div class="div224">Номер телефона первого родителя</div>
-                        <div class="int4" th:text="${customer.parentContact.phone}"></div>
-                    </div>
-                    <div class="item116">
-                        <div class="div225">Почта первого родителя</div>
-                        <div class="kirraaagmailcom-string1" th:text="${customer.parentContact.email}">
-                        </div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Пол первого родителя</div>
-                        <div class="div227" th:text="${customer.parentSex}"></div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Город первого родителя</div>
-                        <div class="div227" th:text="${customer.parentCity}"></div>
-                    </div>
-                    <div class="item114">
-                        <div class="div223">ФИО второго родителя</div>
-                        <div class="string10" th:text="${customer.parentName + ' ' + customer.parentSurname + ' ' + customer.parentLastName}">
-                        </div>
-                    </div>
-                    <div class="item115">
-                        <div class="div224">Номер телефона второго родителя</div>
-                        <div class="int4" th:text="${customer.parentContact.phone}"></div>
-                    </div>
-                    <div class="item116">
-                        <div class="div225">Почта второго родителя</div>
-                        <div class="kirraaagmailcom-string1" th:text="${customer.parentContact.email}">
-                        </div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Пол второго родителя</div>
-                        <div class="div227" th:text="${customer.parentSex}"></div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Город второго родителя</div>
-                        <div class="div227" th:text="${customer.parentCity}"></div>
-                    </div>
-                    <div class="item114">
-                        <div class="div223">ФИО попечителя</div>
-                        <div class="string10" th:text="${customer.trusteesName + ' ' + customer.trusteesSurname + ' ' + customer.trusteesLastName}">
-                        </div>
-                    </div>
-                    <div class="item115">
-                        <div class="div224">Номер телефона попечителя</div>
-                        <div class="int4" th:text="${customer.trusteesContact.phone}"></div>
-                    </div>
-                    <div class="item116">
-                        <div class="div225">Почта попечителя</div>
-                        <div class="kirraaagmailcom-string1" th:text="${customer.trusteesContact.email}">
-                        </div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Пол попечителя</div>
-                        <div class="div227" th:text="${customer.trusteesSex}"></div>
-                    </div>
-                    <div class="item117">
-                        <div class="div226">Город попечителя</div>
-                        <div class="div227" th:text="${customer.trusteesCity}"></div>
-                    </div>
+
                     <div class="item120">
                         <div class="div231">
                             Каким способом обратился клиент/попечитель
@@ -471,29 +481,33 @@
                         <div class="div254">
                             Берется ли супервизия на данного клиента
                         </div>
-                        <div class="div255" th:text="${customer.isSupervision}"></div>
+                        <div class="div255" id="is-supervised" th:value="${customer.supervised}" th:text="${customer.supervised}"></div>
                     </div>
-                    <div class="item139">
-                        <div class="div256">ФИО супервизора</div>
-                        <div class="string19" th:text="${customer.supervisorsName + ' ' + customer.supervisorsSurname + ' ' + customer.supervisorsLastName}"></div>
-                    </div>
-                    <div class="item139">
-                        <div class="div256">Номер телефона супервизора</div>
-                        <div class="string19" th:text="${customer.supervisorsContact.getPhone()}"></div>
-                    </div>
-                    <div class="item139">
-                        <div class="div256">Электронная почта супервизора</div>
-                        <div class="string19" th:text="${customer.supervisorsContact.getEmail()}"></div>
-                    </div>
-                    <div class="item140">
-                        <div class="div257">
-                            Материал для следующих сеансов из супервизии
+
+                    <div id="supervisor-fields">
+                        <div class="item139">
+                            <div class="div256">ФИО супервизора</div>
+                            <div class="string19" th:text="${customer.supervisorsSurname + ' ' + customer.supervisorsName + ' ' + customer.supervisorsLastName}"></div>
                         </div>
-                        <div class="string20" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
+                        <div class="item139">
+                            <div class="div256">Номер телефона супервизора</div>
+                            <div class="string19" th:text="${customer.supervisorsContact.getPhone()}"></div>
+                        </div>
+                        <div class="item139">
+                            <div class="div256">Электронная почта супервизора</div>
+                            <div class="string19" th:text="${customer.supervisorsContact.getEmail()}"></div>
+                        </div>
+                        <div class="item140">
+                            <div class="div257">
+                                Материал для следующих сеансов из супервизии
+                            </div>
+                            <div class="string20" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
+                        </div>
                     </div>
+
                     <div class="item139">
                         <div class="div256">ФИО котерапевта</div>
-                        <div class="string19" th:text="${customer.cotherapistName + ' ' + customer.cotherapistSurname + ' ' + customer.cotherapistLastName}"></div>
+                        <div class="string19" th:text="${customer.cotherapistSurname + ' ' + customer.cotherapistName + ' ' + customer.cotherapistLastName}"></div>
                     </div>
                     <div class="item139">
                         <div class="div256">Номер телефона котерапевта</div>
@@ -566,6 +580,22 @@
             window.location.href = "./component13.html";
         });
     }
+
+    function updateFields() {
+        const whoBrings = document.getElementById('who-brings').getAttribute('value');
+        document.getElementById('parent-fields').style.display = whoBrings === 'PARENT' ? 'block' : 'none';
+        document.getElementById('both-parents-fields').style.display = whoBrings === 'BOTH_PARENTS' ? 'block' : 'none';
+        document.getElementById('guardian-fields').style.display = whoBrings === 'GUARDIAN' ? 'block' : 'none';
+    }
+
+    function checkSupervisorFields() {
+        const supervised = document.getElementById('is-supervised').getAttribute('value');
+        document.getElementById('supervisor-fields').style.display = supervised === 'YES' ? 'block' : 'none';
+    }
+
+    // Initialize form
+    updateFields();
+    checkSupervisorFields();
 </script>
 </body>
 </html>

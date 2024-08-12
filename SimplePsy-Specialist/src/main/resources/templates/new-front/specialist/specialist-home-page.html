@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/specialist-home-page.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/specialist/specialist-home-page.css}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -65,10 +65,12 @@
           />
 
           <div class="new-york-frame">
-            <b class="new-york5">Ростов-на-Дону</b>
+            <b th:text="${specialist.city}" class="new-york5">Ростов-на-Дону</b>
           </div>
         </div>
       </header>
+      <form method="post" th:action="@{/SimplePsy/V1/specialist/personal-info/update}" th:object="${specialist}"
+            enctype="multipart/form-data">
       <main class="frame-parent48">
         <section class="frame-wrapper31">
           <div class="frame-parent49">
@@ -84,12 +86,12 @@
                 </div>
                 <div class="frame-parent50">
                   <div class="hello-rosalie-wrapper1">
-                    <b class="hello-rosalie5">Привет, Антон!</b>
+                    <b class="hello-rosalie5">Привет, </b>
+                    <b th:text="${specialist.name}" class="hello-rosalie5" ></b>
+                    <b class="hello-rosalie5">!</b>
                   </div>
                   <b class="rosaliericegmailc5">
-                    <p class="ponyatpractikagmailcom">
-                      ponyatpractika@gmail.com
-                    </p>
+                    <p th:text="${specialist.username}" class="ponyatpractikagmailcom"></p>
                   </b>
                 </div>
               </div>
@@ -102,24 +104,27 @@
                   alt=""
                   src="/images/7a99876162ed413580236815850cd2e21152x1536-1@2x.png"
                 />
-
-                <div class="wrapper18">
-                  <div class="div60">Специализация</div>
-                </div>
               </div>
+
               <div class="frame-wrapper33">
                 <div class="parent8">
-                  <div class="div61">Фоминичев Антон Валерьевич</div>
+                  <input th:value="${specialist.surname}" class="div61" type="text" id="surname"
+                         name="surname" placeholder="Фамилия" disabled>
+                  <input th:value="${specialist.name}" class="div61" type="text" id="name"
+                         name="name" placeholder="Имя" disabled>
+                  <input th:value="${specialist.middleName}" class="div61" type="text" id="middleName"
+                         name="middleName" placeholder="Отчество" disabled>
                   <div class="div62">
-                    <p class="p29">г. Ростов-на-Дону</p>
+                    <input class="p29" th:value="${specialist.city}" type="text" id="city"
+                           name="city" placeholder="Город" disabled>
                   </div>
                   <div class="div63">
-                    <p class="p30">+89064275682</p>
+                    <input class="p30" th:value="${specialist.phone}" type="tel" id="phone"
+                           name="phone" placeholder="Номер телефона" disabled>
                   </div>
                   <div class="ponyatpractikagmailcom1">
-                    <p class="ponyatpractikagmailcom2">
-                      ponyatpractika@gmail.com
-                    </p>
+                    <input class="ponyatpractikagmailcom2" th:value="${specialist.username}" type="email" id="email"
+                           name="username" placeholder="Почта" disabled>
                   </div>
                 </div>
               </div>
@@ -222,20 +227,13 @@
               </div>
             </div>
             <div class="frame-parent56">
+              <div class="wrapper18">
+                <div class="div60">Специализация</div>
+              </div>
               <div class="frame-wrapper36">
                 <div class="rectangle-parent45">
                   <div class="frame-child48"></div>
-                  <div class="div65">
-                    <ul class="ul">
-                      <li class="li">Индивидуальная терапия</li>
-                      <li class="li1">Работа с группой</li>
-                      <li class="li2">
-                        Телесно-ориентированная терапия и психосоматика
-                      </li>
-                      <li class="li3">Организационное консультирование</li>
-                      <li>Работа с системами в гештальт-подходе</li>
-                    </ul>
-                  </div>
+                  <textarea th:text="${specialist.specialization}" name="specialization" class="div65" disabled></textarea>
                 </div>
               </div>
               <div class="frame-parent57">
@@ -246,18 +244,7 @@
                 </div>
                 <div class="rectangle-parent46">
                   <div class="frame-child49"></div>
-                  <div class="div67">
-                    Практикую в гештальт-подходе с 2010 года. Верю в изначальную
-                    способность человека развиваться и углубляться во время
-                    трудных жизненных ситуаций и кризисов. Работаю с
-                    внутриличностными конфликтами, кризисами идентичности,
-                    связанными с резким изменением жизненного уклада,
-                    трудностями и задачами развития отношений в паре или
-                    организации. Имею опыт создания и управления несколькими
-                    бизнесами, регулярно консультирую предпринимателей и команды
-                    стартап-проектов, управляю инвестициями фонда венчурного
-                    строительства.
-                  </div>
+                  <textarea th:text="${specialist.description}" name="description" class="div67" disabled></textarea>
                 </div>
               </div>
               <div class="frame-wrapper37">
@@ -266,27 +253,7 @@
                   <div class="rectangle-parent47">
                     <div class="frame-child50"></div>
                     <div class="oulu-university-container">
-                      <ul class="oulu-university-20">
-                        <li class="oulu-university">
-                          2008 — Oulu University (Финляндия)
-                        </li>
-                        <li class="li4">
-                          2009 — Южный федеральный университет, специальность
-                          «Психолог. Преподаватель высшей школы», бакалавр
-                        </li>
-                        <li class="eagt">
-                          2009–2017 — Московский гештальт-институт,
-                          гештальт-терапевт, супервизор (европейский
-                          образовательный стандарт EAGT)
-                        </li>
-                        <li class="li5">
-                          2011 — Южный федеральный университет, специальность
-                          «Психолог. Преподаватель высшей школы», магистр
-                        </li>
-                        <li>
-                          2011–2014 — Южный федеральный университет, аспирантура
-                        </li>
-                      </ul>
+                      <textarea th:text="${specialist.education}" name="education" class="div67" disabled></textarea>
                     </div>
                   </div>
                 </div>
@@ -319,30 +286,28 @@
               <div class="frame-wrapper39">
                 <div class="rectangle-parent48">
                   <div class="frame-child51"></div>
-                  <button class="rectangle-parent49">
-                    <div class="frame-child52"></div>
-                    <div class="div70">+ Добавить фото</div>
-                  </button>
+                  <label for="file-upload" class="rectangle-parent49">+ Добавить фото</label>
+                  <input id="file-upload" name="diploma" type="file" accept="image/*">
                 </div>
               </div>
             </div>
           </div>
           <div class="save-edit-buttons-wrapper">
             <div class="save-edit-buttons">
-              <div class="save-edit-buttons-inner">
-                <div class="rectangle-parent50">
-                  <div class="frame-child53"></div>
-                  <div class="div71">Редактировать</div>
-                </div>
-              </div>
-              <button class="rectangle-parent51">
-                <div class="frame-child54"></div>
+              <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
+                <div class="div72">Отменить</div>
+              </button>
+              <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
+                <div class="div72">Редактировать</div>
+              </button>
+              <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
                 <div class="div72">Сохранить</div>
               </button>
             </div>
           </div>
         </section>
       </main>
+      </form>
     </div>
 
     <script>
@@ -352,40 +317,67 @@
           window.location.href = "./component2.html";
         });
       }
-      
+
       var baseContainer = document.getElementById("baseContainer");
       if (baseContainer) {
         baseContainer.addEventListener("click", function (e) {
           window.location.href = "./frame.html";
         });
       }
-      
+
       var invoiceContainer = document.getElementById("invoiceContainer");
       if (invoiceContainer) {
         invoiceContainer.addEventListener("click", function (e) {
           window.location.href = "./component3.html";
         });
       }
-      
+
       var container = document.getElementById("container");
       if (container) {
         container.addEventListener("click", function (e) {
           window.location.href = "./component14.html";
         });
       }
-      
+
       var groupContainer = document.getElementById("groupContainer");
       if (groupContainer) {
         groupContainer.addEventListener("click", function (e) {
           window.location.href = "./component12.html";
         });
       }
-      
+
       var groupContainer1 = document.getElementById("groupContainer1");
       if (groupContainer1) {
         groupContainer1.addEventListener("click", function (e) {
           window.location.href = "./component12.html";
         });
+      }
+
+      function showInputs() {
+        // Находим элементы, которые нужно изменить
+        var inputsToEnable = document.querySelectorAll('input[disabled]');
+        var inputsFieldSetToEnable = document.querySelectorAll('textarea');
+        var saveButton = document.getElementById('save');
+        var editButton = document.getElementById('edit');
+        var cancelButton = document.getElementById('cancel');
+
+        // Убираем атрибут disabled у всех найденных элементов
+        inputsToEnable.forEach(function (input) {
+          input.removeAttribute('disabled');
+        });
+        inputsFieldSetToEnable.forEach(function (input) {
+          input.removeAttribute('disabled');
+        });
+
+        // Показываем кнопки
+        saveButton.style.display = 'inline-block';
+        editButton.style.display = 'none';
+        cancelButton.style.display = 'inline-block';
+      }
+
+      function cancelButton() {
+        document.getElementById('cancel').style.display = 'none';
+        window.location.href = '/SimplePsy/V1/specialist/personal-info';
       }
       </script>
   </body>
