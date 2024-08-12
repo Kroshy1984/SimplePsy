@@ -346,4 +346,20 @@ public class SpecialistController {
         return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
 
+    @GetMapping("/personal-info")
+    public String getPersonalInfo(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        model.addAttribute("specialist", specialist);
+        return "new-front/specialist/specialist-home-page";
+    }
+
+    @PostMapping("/personal-info/update")
+    public String updatePersonalInfo(@AuthenticationPrincipal UserDetails userDetails,
+                                     @ModelAttribute("specialist") Specialist specialist) {
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        specialist.setId(specialistId);
+        specialistService.updateSpecialist(specialist);
+        return "redirect:/SimplePsy/V1/specialist/personal-info";
+    }
+
 }

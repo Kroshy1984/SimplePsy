@@ -1,3 +1,7 @@
+#parent-fields, #both-parents-fields, #guardian-fields, #supervisor-fields {
+  width: 100%;
+}
+
 .feather-icon-chevron-up21,
 .settings6 {
   width: 16px;
@@ -579,7 +583,6 @@
   align-self: stretch;
   align-items: flex-end;
   flex-shrink: 0;
-  debug_commit: 69da668;
   cursor: pointer;
 }
 .frame-child170 {
@@ -648,7 +651,6 @@
   align-self: stretch;
   align-items: flex-end;
   flex-shrink: 0;
-  debug_commit: 69da668;
   cursor: pointer;
 }
 .applications-content,

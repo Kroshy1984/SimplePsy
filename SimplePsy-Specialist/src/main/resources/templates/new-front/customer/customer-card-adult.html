@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-adult.css}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -231,7 +231,7 @@
               </div>
               <div class="item114">
                 <div class="div223">ФИО клиента</div>
-                <div class="string10" th:text="${customer.name + ' ' + customer.surname + ' ' + customer.lastName}">
+                <div class="string10" th:text="${customer.surname + ' ' + customer.name + ' ' + customer.lastName}">
                 </div>
               </div>
               <div class="item115">
@@ -369,29 +369,33 @@
                 <div class="div254">
                   Берется ли супервизия на данного клиента
                 </div>
-                <div class="div255" th:text="${customer.isSupervision}"></div>
+                <div class="div255" id="is-supervised" th:value="${customer.supervised}" th:text="${customer.supervised}"></div>
               </div>
-              <div class="item139">
-                <div class="div256">ФИО супервизора</div>
-                <div class="string19" th:text="${customer.supervisorsName + ' ' + customer.supervisorsSurname + ' ' + customer.supervisorsLastName}"></div>
-              </div>
-              <div class="item139">
-                <div class="div256">Номер телефона супервизора</div>
-                <div class="string19" th:text="${customer.supervisorsContact.getPhone()}"></div>
-              </div>
-              <div class="item139">
-                <div class="div256">Электронная почта супервизора</div>
-                <div class="string19" th:text="${customer.supervisorsContact.getEmail()}"></div>
-              </div>
-              <div class="item140">
-                <div class="div257">
-                  Материал для следующих сеансов из супервизии
+
+              <div id="supervisor-fields">
+                <div class="item139">
+                  <div class="div256">ФИО супервизора</div>
+                  <div class="string19" th:text="${customer.supervisorsSurname + ' ' + customer.supervisorsName + ' ' + customer.supervisorsLastName}"></div>
                 </div>
-                <div class="string20" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
+                <div class="item139">
+                  <div class="div256">Номер телефона супервизора</div>
+                  <div class="string19" th:text="${customer.supervisorsContact.getPhone()}"></div>
+                </div>
+                <div class="item139">
+                  <div class="div256">Электронная почта супервизора</div>
+                  <div class="string19" th:text="${customer.supervisorsContact.getEmail()}"></div>
+                </div>
+                <div class="item140">
+                  <div class="div257">
+                    Материал для следующих сеансов из супервизии
+                  </div>
+                  <div class="string20" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
+                </div>
               </div>
+
               <div class="item139">
                 <div class="div256">ФИО котерапевта</div>
-                <div class="string19" th:text="${customer.cotherapistName + ' ' + customer.cotherapistSurname + ' ' + customer.cotherapistLastName}"></div>
+                <div class="string19" th:text="${customer.cotherapistSurname + ' ' + customer.cotherapistName + ' ' + customer.cotherapistLastName}"></div>
               </div>
               <div class="item139">
                 <div class="div256">Номер телефона котерапевта</div>
@@ -464,6 +468,14 @@
           window.location.href = "./component13.html";
         });
       }
+
+      function checkSupervisorFields() {
+        const supervised = document.getElementById('is-supervised').getAttribute('value');
+        document.getElementById('supervisor-fields').style.display = supervised === 'YES' ? 'block' : 'none';
+      }
+
+      // Initialize form
+      checkSupervisorFields();
       </script>
   </body>
 </html>
