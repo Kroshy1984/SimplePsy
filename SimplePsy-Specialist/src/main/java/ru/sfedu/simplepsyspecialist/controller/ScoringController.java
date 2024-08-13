@@ -13,6 +13,7 @@ import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -110,6 +111,8 @@ public class ScoringController {
     public String createQuestionnaire(@RequestBody Scoring scoring)
     {
         scoring.setType(TypeOfScoring.QUESTIONER);
+        scoring.setDate(new Date());
+        System.out.println(scoring.getDate());
         scoringService.save(scoring);
         return "new-front/test/create-questionnaire1";
     }
@@ -141,6 +144,8 @@ public class ScoringController {
     @PostMapping("test/creation")
     public String createTest(@RequestBody Scoring scoring) {
         System.out.println(scoring.getTitle());
+        scoring.setDate(new Date());
+        System.out.println(scoring.getDate());
         scoring.getQuestions().forEach(question -> {
             System.out.println("Question: " + question.getQuestionText());
             question.getOptions().forEach(option -> System.out.println("Option: " + option));

@@ -199,4 +199,8 @@ public class CustomerService {
         }
         return customers;
     }
+
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
+    }
 }

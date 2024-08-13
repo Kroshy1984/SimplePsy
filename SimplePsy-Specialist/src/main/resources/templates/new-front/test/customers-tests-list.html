@@ -16,6 +16,72 @@
     />
 </head>
 <body>
+<style>
+    .component-191 ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .component-191 li {
+        margin-bottom: 20px;
+    }
+    .oprosnik {
+        position: relative;
+        font-size: var(--bold-16-size);
+        line-height: 18px;
+        font-weight: 700;
+        font-family: var(--bold-10);
+        color: #5C80FF;
+        text-align: center;
+        z-index: 1;
+    }
+    .scoring-item {
+        background-color: #f7f7f7;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .scoring-type {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .button-type {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .button-type:hover {
+        background-color: #3e8e41;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background-color: #3e8e41;
+    }
+</style>
 <div class="div189">
     <div class="settings4"></div>
     <section class="frame-parent108">
@@ -193,93 +259,26 @@
                                         </div>
                                     </div>
                                     <div class="component-19-parent">
-                                        <div class="component-191">
-                                            <div class="frame-parent112">
+                                        <ul class="component-191">
+                                            <li class="frame-parent112" th:each="scoring : ${scorings}">
                                                 <div class="rectangle-parent103">
-                                                    <b class="test-list-dividers">20.02.2024</b>
+                                                    <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers">20.02.2024</b>
                                                     <div class="frame-child129"></div>
                                                 </div>
                                                 <div class="test-list-names">
                                                     <div class="test-list-names-child"></div>
-                                                    <h2 class="h23">Тест по завершению терапии</h2>
+                                                    <h2 class="h23" th:text="${scoring.title}"></h2>
                                                     <div class="test-list-icons">
                                                         <button class="rectangle-parent104">
                                                             <div class="frame-child130"></div>
-                                                            <b class="b121">Тест</b>
+                                                            <b class="oprosnik" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).QUESTIONER}">Опросник</b>
+                                                            <b class="b121" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).TEST}">Тест</b>
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="frame-parent113">
-                                                <div class="rectangle-parent105">
-                                                    <div class="frame-child131"></div>
-                                                    <b class="test-list-dividers">20.02.2024</b>
-                                                </div>
-                                                <div class="rectangle-parent106">
-                                                    <div class="frame-child132"></div>
-                                                    <h2 class="h24">Опрос по завершению терапии</h2>
-                                                    <div class="frame-wrapper66">
-                                                        <button class="rectangle-parent107">
-                                                            <div class="frame-child133"></div>
-                                                            <b class="b123">Опрос</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="frame-parent114">
-                                                <div class="rectangle-parent108">
-                                                    <div class="frame-child134"></div>
-                                                    <b class="test-list-dividers">20.02.2024</b>
-                                                </div>
-                                                <div class="rectangle-parent109">
-                                                    <div class="frame-child135"></div>
-                                                    <h2 class="h25">Тест (промежуточный резульат)</h2>
-                                                    <div class="frame-wrapper67">
-                                                        <div class="rectangle-parent113">
-                                                            <div class="frame-child136"></div>
-                                                            <b class="b125">Тест</b>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="frame-parent115">
-                                                <div class="rectangle-parent111">
-                                                    <div class="frame-child137"></div>
-                                                    <b class="test-list-dividers">20.02.2024</b>
-                                                </div>
-                                                <div class="rectangle-parent112">
-                                                    <div class="frame-child138"></div>
-                                                    <h2 class="h26">
-                                                        Тестирование итогу первой встречи
-                                                    </h2>
-                                                    <div class="frame-wrapper68">
-                                                        <button class="rectangle-parent113">
-                                                            <div class="frame-child139"></div>
-                                                            <b class="b127">Тест</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="frame-parent116">
-                                                <div class="rectangle-parent114">
-                                                    <div class="frame-child140"></div>
-                                                    <b class="test-list-dividers">20.02.2024</b>
-                                                </div>
-                                                <div class="rectangle-parent115">
-                                                    <div class="frame-child141"></div>
-                                                    <h2 class="h27">
-                                                        Опрос о причинах обращения для взрослого
-                                                    </h2>
-                                                    <div class="frame-wrapper69">
-                                                        <button class="rectangle-parent116">
-                                                            <div class="frame-child142"></div>
-                                                            <b class="b129">Опрос</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <form class="search-bar-container-parent">
+                                            </li>
+                                        </ul>
+                                        <form class="search-bar-container-parent" id="searchForm">
                                             <div class="search-bar-container">
                                                 <div class="search-bar-container-child"></div>
                                                 <div class="search-bar-container-inner">
@@ -298,11 +297,6 @@
                                                 <div class="filter-options">
                                                     <div class="filter-dropdown">
                                                         <div class="component17">
-                                                            <button class="item103">
-                                                                <div class="filter-dropdown-values">
-                                                                    <div class="div194">Анкета</div>
-                                                                </div>
-                                                            </button>
                                                             <button class="item104">
                                                                 <div class="div195">Опрос</div>
                                                             </button>
@@ -546,6 +540,84 @@
       groupContainer.addEventListener("click", function (e) {
         window.location.href = "./frame13.html";
       });
+    }
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Получение значений из формы
+        const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
+        const selectedType = document.querySelector('.component17 .item104.active')?.innerText.toLowerCase();
+        const startDate = document.querySelector('.xxxxxxxx').value;
+        const endDate = document.querySelector('.xxxxxxxx1').value;
+
+        // Преобразование дат в формат YYYY-MM-DD
+        const parseDate = (dateStr) => {
+            const [day, month, year] = dateStr.split('.');
+            return `${year}-${month}-${day}`;
+        };
+
+        const listItems = document.querySelectorAll('#testList li');
+
+        listItems.forEach(item => {
+            const title = item.getAttribute('data-title').toLowerCase();
+            const type = item.getAttribute('data-type').toLowerCase();
+            const date = item.getAttribute('data-date');
+
+            let matchesSearch = title.includes(searchQuery);
+            let matchesType = !selectedType || type === selectedType;
+            let matchesDate = (!startDate || date >= parseDate(startDate)) && (!endDate || date <= parseDate(endDate));
+
+            if (matchesSearch && matchesType && matchesDate) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+
+    // Пример сортировки списка по названию
+    function sortListByTitle() {
+        const list = document.getElementById('testList');
+        const items = Array.from(list.getElementsByTagName('li'));
+
+        items.sort((a, b) => {
+            const titleA = a.getAttribute('data-title').toLowerCase();
+            const titleB = b.getAttribute('data-title').toLowerCase();
+
+            return titleA.localeCompare(titleB);
+        });
+
+        items.forEach(item => list.appendChild(item));
+    }
+
+    // Пример сортировки списка по типу
+    function sortListByType() {
+        const list = document.getElementById('testList');
+        const items = Array.from(list.getElementsByTagName('li'));
+
+        items.sort((a, b) => {
+            const typeA = a.getAttribute('data-type').toLowerCase();
+            const typeB = b.getAttribute('data-type').toLowerCase();
+
+            return typeA.localeCompare(typeB);
+        });
+
+        items.forEach(item => list.appendChild(item));
+    }
+
+    // Пример сортировки списка по дате
+    function sortListByDate() {
+        const list = document.getElementById('testList');
+        const items = Array.from(list.getElementsByTagName('li'));
+
+        items.sort((a, b) => {
+            const dateA = new Date(a.getAttribute('data-date'));
+            const dateB = new Date(b.getAttribute('data-date'));
+
+            return dateA - dateB;
+        });
+
+        items.forEach(item => list.appendChild(item));
     }
 </script>
 </body>

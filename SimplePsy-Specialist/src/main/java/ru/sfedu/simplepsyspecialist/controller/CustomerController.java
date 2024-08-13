@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Problem;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
+import ru.sfedu.simplepsyspecialist.service.ScoringService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,10 +22,12 @@ import java.util.NoSuchElementException;
 public class CustomerController {
 
     private CustomerService customerService;
+    private ScoringService scoringService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, ScoringService scoringService) {
         this.customerService = customerService;
+        this.scoringService = scoringService;
     }
 
 //    @GetMapping("/search")
@@ -187,5 +191,15 @@ public class CustomerController {
         System.out.println(newCustomer.getDateOfBirth());
         System.out.println(newCustomer.getSex());
         return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
+    }
+    @GetMapping("/customers-test")
+    public String getCustomersTestsList(Model model) {
+        List<Scoring> scorings = scoringService.findAll();
+        scorings.stream().forEach(scoring -> {
+            System.out.println(scoring.getTitle());
+            System.out.println(scoring.getType().toString());
+        });
+        model.addAttribute("scorings", scorings);
+        return "new-front/test/customers-tests-list";
     }
 }
