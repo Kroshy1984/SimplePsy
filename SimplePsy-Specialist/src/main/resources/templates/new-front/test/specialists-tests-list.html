@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/specialists-tests-list.css}" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="test2.css" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -141,7 +141,7 @@
                     <b class="search12">Найти клиента...</b>
                     <div class="about-us-parent5">
                         <a class="about-us18">Добавить клиента</a>
-                        <a class="news12">Назначить встречу</a>
+                        <a class="news10">Назначить встречу</a>
                     </div>
                 </div>
                 <div class="frame-parent128">
@@ -370,132 +370,204 @@
         </div>
     </div>
 </div>
-
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+<div id="modal1" class="modal1">
+    <div class="modal-content1">
+        <span class="close-btn1">&times;</span>
+        <div id="modal-body1"></div>
+    </div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.item103, .item104, .item105');
 
     buttons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            // Удаляем класс active у всех кнопок
-            buttons.forEach(btn => btn.classList.remove('active'));
+      button.addEventListener('click', function(event) {
+          // Удаляем класс active у всех кнопок
+          buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Добавляем класс active к нажатой кнопке
-            this.classList.add('active');
+          // Добавляем класс active к нажатой кнопке
+          this.classList.add('active');
 
-            // Предотвращаем потерю фокуса после клика
-            event.preventDefault();
-            this.blur(); // Сбрасываем фокус
-        });
+          // Предотвращаем потерю фокуса после клика
+          event.preventDefault();
+          this.blur(); // Сбрасываем фокус
+      });
     });
     });
     document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.querySelector('.xxxxxxxx');
 
     dateInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+      let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
 
-        // Ограничиваем ввод до 8 цифр
-        if (value.length > 8) {
-            value = value.slice(0, 8);
-        }
+      // Ограничиваем ввод до 8 цифр
+      if (value.length > 8) {
+          value = value.slice(0, 8);
+      }
 
-        if (e.inputType === 'deleteContentBackward') {
-            // Если это действие удаления, то не вставляем точки
-            return;
-        }
+      if (e.inputType === 'deleteContentBackward') {
+          // Если это действие удаления, то не вставляем точки
+          return;
+      }
 
-        // Форматируем значение в формат dd.mm.yyyy
-        if (value.length >= 2 && value.length <= 4) {
-            value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
-        } else if (value.length > 4) {
-            value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
-        }
+      // Форматируем значение в формат dd.mm.yyyy
+      if (value.length >= 2 && value.length <= 4) {
+          value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
+      } else if (value.length > 4) {
+          value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
+      }
 
-        e.target.value = value;
+      e.target.value = value;
     });
 
     dateInput.addEventListener('keydown', function(e) {
-        // Разрешаем удаление точек при нажатии Backspace
-        if (e.key === 'Backspace' && this.value.endsWith('.')) {
-            this.value = this.value.slice(0, -1);
-        }
+      // Разрешаем удаление точек при нажатии Backspace
+      if (e.key === 'Backspace' && this.value.endsWith('.')) {
+          this.value = this.value.slice(0, -1);
+      }
     });
-});
-      document.addEventListener('DOMContentLoaded', function() {
+    });
+    document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.querySelector('.xxxxxxxx1');
 
     dateInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+      let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
 
-        // Ограничиваем ввод до 8 цифр
-        if (value.length > 8) {
-            value = value.slice(0, 8);
-        }
+      // Ограничиваем ввод до 8 цифр
+      if (value.length > 8) {
+          value = value.slice(0, 8);
+      }
 
-        if (e.inputType === 'deleteContentBackward') {
-            // Если это действие удаления, то не вставляем точки
-            return;
-        }
+      if (e.inputType === 'deleteContentBackward') {
+          // Если это действие удаления, то не вставляем точки
+          return;
+      }
 
-        // Форматируем значение в формат dd.mm.yyyy
-        if (value.length >= 2 && value.length <= 4) {
-            value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
-        } else if (value.length > 4) {
-            value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
-        }
+      // Форматируем значение в формат dd.mm.yyyy
+      if (value.length >= 2 && value.length <= 4) {
+          value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
+      } else if (value.length > 4) {
+          value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
+      }
 
-        e.target.value = value;
+      e.target.value = value;
     });
 
     dateInput.addEventListener('keydown', function(e) {
-        // Разрешаем удаление точек при нажатии Backspace
-        if (e.key === 'Backspace' && this.value.endsWith('.')) {
-            this.value = this.value.slice(0, -1);
-        }
+      // Разрешаем удаление точек при нажатии Backspace
+      if (e.key === 'Backspace' && this.value.endsWith('.')) {
+          this.value = this.value.slice(0, -1);
+      }
     });
-});
-      var userImage = document.getElementById("userImage");
-      if (userImage) {
-        userImage.addEventListener("click", function (e) {
-          window.location.href = "./frame5.html";
-        });
-      }
+    });
+    var userImage = document.getElementById("userImage");
+    if (userImage) {
+      userImage.addEventListener("click", function (e) {
+        window.location.href = "./frame5.html";
+      });
+    }
 
-      var baseContainer = document.getElementById("baseContainer");
-      if (baseContainer) {
-        baseContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
+    var baseContainer = document.getElementById("baseContainer");
+    if (baseContainer) {
+      baseContainer.addEventListener("click", function (e) {
+        window.location.href = "./frame.html";
+      });
+    }
 
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame4.html";
-        });
-      }
+    var invoiceContainer = document.getElementById("invoiceContainer");
+    if (invoiceContainer) {
+      invoiceContainer.addEventListener("click", function (e) {
+        window.location.href = "./frame4.html";
+      });
+    }
 
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame13.html";
-        });
-      }
+    var groupContainer = document.getElementById("groupContainer");
+    if (groupContainer) {
+      groupContainer.addEventListener("click", function (e) {
+        window.location.href = "./frame13.html";
+      });
+    }
 
-      var groupContainer1 = document.getElementById("groupContainer1");
-      if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-          window.location.href = "./frame13.html";
-        });
-      }
+    var groupContainer1 = document.getElementById("groupContainer1");
+    if (groupContainer1) {
+      groupContainer1.addEventListener("click", function (e) {
+        window.location.href = "./frame13.html";
+      });
+    }
 
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame19.html";
-        });
-      }
+    var groupContainer = document.getElementById("groupContainer");
+    if (groupContainer) {
+      groupContainer.addEventListener("click", function (e) {
+        window.location.href = "./frame19.html";
+      });
+    }
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+    // Функция для открытия модального окна
+    function openModal() {
+      fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+        .then(response => response.text())
+        .then(data => {
+          modalBody.innerHTML = data;s
+          modal.style.display = 'block';
+        })
+        .catch(error => console.error('Ошибка загрузки:', error));
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
+
+    // Открытие модального окна создания ссылки
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal1');
+    var modalBody = document.getElementById('modal-body1');
+    var closeBtn = document.querySelector('.close-btn1');
+    var appointLink = document.querySelector('.div203'); // Элемент "Скопировать ссылку"
+
+    // Функция для открытия модального окна
+    function openModal() {
+      fetch('copy-link.html')
+        .then(response => response.text())
+        .then(data => {
+          modalBody.innerHTML = data;
+          modal.style.display = 'block';
+        })
+        .catch(error => console.error('Ошибка загрузки:', error));
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
 </script>
 </body>
 </html>
