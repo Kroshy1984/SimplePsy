@@ -99,13 +99,16 @@
             <div class="frame-parent51">
               <div class="a998761-62ed-4135-8023-6815850-parent">
                 <img
-                  class="a998761-62ed-4135-8023-6815850-icon"
-                  loading="lazy"
-                  alt=""
-                  src="/images/7a99876162ed413580236815850cd2e21152x1536-1@2x.png"
+                        id="avatarImg"
+                        class="a998761-62ed-4135-8023-6815850-icon"
+                        loading="lazy"
+                        alt="Аватарка"
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                        style="cursor: pointer;"
+                        onclick="document.getElementById('avatarInput').click();"
                 />
+                <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
               </div>
-
               <div class="frame-wrapper33">
                 <div class="parent8">
                   <input th:value="${specialist.surname}" class="div61" type="text" id="surname"
@@ -287,7 +290,7 @@
                 <div class="rectangle-parent48">
                   <div class="frame-child51"></div>
                   <label for="file-upload" class="rectangle-parent49">+ Добавить фото</label>
-                  <input id="file-upload" name="diploma" type="file" accept="image/*">
+                  <input id="file-upload" name="diploma" type="file" accept="image/*" multiple>
                 </div>
               </div>
             </div>
@@ -379,6 +382,35 @@
         document.getElementById('cancel').style.display = 'none';
         window.location.href = '/SimplePsy/V1/specialist/personal-info';
       }
-      </script>
+      document.getElementById('avatarInput').addEventListener('change', function() {
+        var file = this.files[0];
+        if (file) {
+          var formData = new FormData();
+          formData.append('avatar', file);
+
+          fetch('/SimplePsy/V1/specialist/personal-info/avatar', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          })
+                  .then(response => response.json()) // предположим, что сервер вернет JSON с обновленным URL аватарки
+                  .then(data => {
+                    if (data.success) {
+                      // Обновляем изображение аватарки на странице
+                      document.getElementById('avatarImg').src = data.avatarUrl;
+                    } else {
+                      alert('Ошибка при обновлении аватарки. Попробуйте снова.');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('Ошибка при обновлении аватарки. Попробуйте снова.');
+                  });
+        }
+      });
+
+    </script>
   </body>
 </html>

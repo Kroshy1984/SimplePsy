@@ -37,6 +37,8 @@ public class Specialist {
     @Pattern(regexp = "^[А-Я]+^[а-я]$")
     private String middleName;
 
+    private List<byte[]> diplomas;
+    private byte[] avatar;
     private String email;
     private String phone;
 
@@ -213,5 +215,27 @@ public class Specialist {
     public void deleteCustomerById(String customerId)
     {
         customerIds.remove(customerId);
+    }
+
+    public List<byte[]> getDiplomas() {
+        return diplomas;
+    }
+
+    public void addDiplomas(byte[] diploma) {
+        if (diplomas == null)
+            diplomas = new ArrayList<>();
+        diplomas.add(diploma);
+    }
+
+    public void setDiplomas(List<byte[]> diplomas) {
+        this.diplomas = diplomas;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
     }
 }

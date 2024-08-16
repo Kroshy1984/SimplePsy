@@ -3,7 +3,9 @@ package ru.sfedu.simplepsyspecialist.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,15 +15,14 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -349,17 +350,65 @@ public class SpecialistController {
     @GetMapping("/personal-info")
     public String getPersonalInfo(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        // Debug: Выводим в консоль информацию о специалисте
+        if (specialist.getAvatar() != null) {
+            System.out.println("Аватарка загружена, размер: " + specialist.getAvatar().length + " байт");
+        } else {
+            System.out.println("Аватарка не найдена");
+        }
+
         model.addAttribute("specialist", specialist);
         return "new-front/specialist/specialist-home-page";
     }
 
+
     @PostMapping("/personal-info/update")
     public String updatePersonalInfo(@AuthenticationPrincipal UserDetails userDetails,
-                                     @ModelAttribute("specialist") Specialist specialist) {
+                                     @ModelAttribute("specialist") Specialist specialist,
+                                     @RequestParam(value = "diploma", required = false)  List<MultipartFile> multipartFiles) throws IOException {
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
         specialist.setId(specialistId);
-        specialistService.updateSpecialist(specialist);
+        System.out.println(multipartFiles.size());
+        specialistService.updateSpecialist(specialist, multipartFiles);
         return "redirect:/SimplePsy/V1/specialist/personal-info";
+    }
+    @PostMapping(value = "/personal-info/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateAvatar(@AuthenticationPrincipal UserDetails userDetails,
+                                                            @RequestParam("avatar") MultipartFile avatarFile) {
+        Map<String, Object> response = new HashMap<>();
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        try {
+            byte[] avatarBytes = avatarFile.getBytes();
+            specialist.setAvatar(avatarBytes);
+            specialistService.save(specialist);
+
+            // Предположим, что вы генерируете новый URL для аватарки, который будет возвращен на фронтенд
+            String avatarUrl = "/path/to/avatar/" + specialist.getId() + "/avatar.jpg";
+
+            response.put("success", true);
+            response.put("avatarUrl", avatarUrl);
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            response.put("success", false);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    @GetMapping("/avatar/{id}")
+    public ResponseEntity<byte[]> getAvatar(@PathVariable String id) {
+        Specialist specialist = specialistService.findById(id);
+        byte[] avatar = specialist.getAvatar();
+
+        if (avatar == null) {
+            // Если аватарки нет, можно вернуть изображение по умолчанию или статус 404
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(avatar, headers, HttpStatus.OK);
     }
 
 }

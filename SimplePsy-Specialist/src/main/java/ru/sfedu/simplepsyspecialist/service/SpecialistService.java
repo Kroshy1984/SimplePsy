@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
@@ -12,6 +13,7 @@ import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
 import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -290,12 +292,20 @@ public class SpecialistService {
         specialistRepository.save(specialist);
     }
 
-    public void updateSpecialist(Specialist specialist) {
+    public void updateSpecialist(Specialist specialist, List<MultipartFile> multipartFiles) throws IOException {
         String id = specialist.getId();
         Specialist oldSpecialist = specialistRepository.findById(id).get();
         specialist.setPassword(oldSpecialist.getPassword());
         specialist.setUsername(oldSpecialist.getUsername());
+        System.out.println(oldSpecialist.getDiplomas().size());
+        System.out.println(multipartFiles.size());
         specialist.setSpecialistRole(oldSpecialist.getSpecialistRole());
+        for (MultipartFile file : multipartFiles) {
+            // Логика сохранения файла
+            oldSpecialist.addDiplomas(file.getBytes());
+        }
+        specialist.setDiplomas(oldSpecialist.getDiplomas());
+        System.out.println(specialist.getDiplomas().size());
         specialistRepository.save(specialist);
     }
 }

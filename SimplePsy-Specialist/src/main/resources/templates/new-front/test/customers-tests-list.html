@@ -259,8 +259,8 @@
                                         </div>
                                     </div>
                                     <div class="component-19-parent">
-                                        <ul class="component-191">
-                                            <li class="frame-parent112" th:each="scoring : ${scorings}">
+                                        <ul class="component-191" id="testList">
+                                            <li class="frame-parent112" th:each="scoring : ${scorings}" th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
                                                 <div class="rectangle-parent103">
                                                     <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers">20.02.2024</b>
                                                     <div class="frame-child129"></div>
@@ -280,18 +280,13 @@
                                         </ul>
                                         <form class="search-bar-container-parent" id="searchForm">
                                             <div class="search-bar-container">
-                                                <div class="search-bar-container-child"></div>
                                                 <div class="search-bar-container-inner">
                                                     <div class="rectangle-parent117">
                                                         <div class="frame-child143"></div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon141">
                                                             <path d="M 10 2 C 5.589844 2 2 5.589844 2 10 C 2 14.410156 5.589844 18 10 18 C 11.785156 18 13.433594 17.40625 14.734375 16.40625 L 19.292969 20.96875 L 20.707031 19.554688 L 16.144531 14.996094 C 17.144531 13.695312 17.738281 12.046875 17.738281 10.261719 C 17.738281 5.589844 14.410156 2 10 2 Z M 10 4 C 13.300781 4 16 6.699219 16 10 C 16 13.300781 13.300781 16 10 16 C 6.699219 16 4 13.300781 4 10 C 4 6.699219 6.699219 4 10 4 Z" fill="silver"/>
                                                         </svg>
-                                                        <input
-                                                                class="search-input-area"
-                                                                placeholder="Поиск "
-                                                                type="text"
-                                                        />
+                                                        <input class="search-input-area" placeholder="Поиск" type="text" />
                                                     </div>
                                                 </div>
                                                 <div class="filter-options">
@@ -575,50 +570,94 @@
         });
     });
 
-    // Пример сортировки списка по названию
-    function sortListByTitle() {
-        const list = document.getElementById('testList');
-        const items = Array.from(list.getElementsByTagName('li'));
 
-        items.sort((a, b) => {
-            const titleA = a.getAttribute('data-title').toLowerCase();
-            const titleB = b.getAttribute('data-title').toLowerCase();
 
-            return titleA.localeCompare(titleB);
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('.search-input-area');
+        const listItems = document.querySelectorAll('#testList li');
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.toLowerCase();
+
+            listItems.forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                const type = item.getAttribute('data-type').toLowerCase();
+                const date = item.getAttribute('data-date');
+
+                // Check if the title includes the search query
+                if (title.includes(query)) {
+                    item.style.display = ''; // Show the item
+                } else {
+                    item.style.display = 'none'; // Hide the item
+                }
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.item104, .item105');
+        const listItems = document.querySelectorAll('#testList > li');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Удаляем активный класс со всех кнопок
+                buttons.forEach(btn => btn.classList.remove('active'));
+
+                // Добавляем активный класс на текущую кнопку
+                this.classList.add('active');
+
+                // Получаем тип (опрос или тест) из кнопки
+                const selectedType = this.innerText.toLowerCase();
+
+                // Фильтрация списка
+                listItems.forEach(item => {
+                    const itemType = item.getAttribute('data-type').toLowerCase();
+                    if (itemType === selectedType) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
         });
 
-        items.forEach(item => list.appendChild(item));
-    }
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-    // Пример сортировки списка по типу
-    function sortListByType() {
-        const list = document.getElementById('testList');
-        const items = Array.from(list.getElementsByTagName('li'));
+            const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
+            const startDate = document.querySelector('.xxxxxxxx').value;
+            const endDate = document.querySelector('.xxxxxxxx1').value;
 
-        items.sort((a, b) => {
-            const typeA = a.getAttribute('data-type').toLowerCase();
-            const typeB = b.getAttribute('data-type').toLowerCase();
+            const parseDate = (dateStr) => {
+                const [day, month, year] = dateStr.split('.');
+                return new Date(`${year}-${month}-${day}`);
+            };
 
-            return typeA.localeCompare(typeB);
+            const start = startDate ? parseDate(startDate) : null;
+            const end = endDate ? parseDate(endDate) : null;
+
+            listItems.forEach(item => {
+                const itemTitle = item.getAttribute('data-title').toLowerCase();
+                const itemDate = new Date(item.getAttribute('data-date'));
+
+                let matchesQuery = itemTitle.includes(searchQuery);
+                let matchesDate = true;
+
+                if (start && end) {
+                    matchesDate = itemDate >= start && itemDate <= end;
+                } else if (start) {
+                    matchesDate = itemDate >= start;
+                } else if (end) {
+                    matchesDate = itemDate <= end;
+                }
+
+                if (matchesQuery && matchesDate) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         });
-
-        items.forEach(item => list.appendChild(item));
-    }
-
-    // Пример сортировки списка по дате
-    function sortListByDate() {
-        const list = document.getElementById('testList');
-        const items = Array.from(list.getElementsByTagName('li'));
-
-        items.sort((a, b) => {
-            const dateA = new Date(a.getAttribute('data-date'));
-            const dateB = new Date(b.getAttribute('data-date'));
-
-            return dateA - dateB;
-        });
-
-        items.forEach(item => list.appendChild(item));
-    }
+    });
 </script>
 </body>
 </html>
