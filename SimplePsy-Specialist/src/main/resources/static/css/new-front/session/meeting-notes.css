@@ -299,7 +299,6 @@
 .b100 {
   position: relative;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .b100 {
   width: 170px;
@@ -337,7 +336,6 @@
   line-height: 25px;
   display: inline-block;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 3;
 }
 .about-us-frame,
@@ -1439,7 +1437,6 @@
   width: 226px;
   align-items: flex-end;
   flex-shrink: 0;
-  debug_commit: 69da668;
   cursor: pointer;
 }
 .frame-child98 {
@@ -1480,7 +1477,6 @@
   justify-content: flex-start;
   padding: 6.1px 4.3px 6.2px;
   flex-shrink: 0;
-  debug_commit: 69da668;
   cursor: pointer;
 }
 .frame-wrapper61 {
@@ -1656,7 +1652,6 @@
   height: 76.6px;
   background-color: var(--white);
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-child101 {
   width: 239.2px;
@@ -1692,7 +1687,6 @@
   justify-content: flex-start;
   padding: 9.2px 12.4px 15.1px;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-child102 {
   position: relative;
@@ -1719,7 +1713,6 @@
   justify-content: flex-start;
   padding: var(--padding-4xs) var(--padding-xs) 15.3px;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-parent103,
 .frame-wrapper64,
@@ -1734,7 +1727,6 @@
   justify-content: flex-start;
   gap: 29.8px;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-wrapper64 {
   width: 513px;

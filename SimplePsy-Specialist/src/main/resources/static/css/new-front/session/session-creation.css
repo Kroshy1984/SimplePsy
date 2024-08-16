@@ -2,10 +2,6 @@ label {
   font-weight: bold;
 }
 
-.cross-sign {
-  float: right;
-}
-
 button {
   padding: 10px;
   background-color: #007BFF;

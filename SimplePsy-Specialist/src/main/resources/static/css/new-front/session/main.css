@@ -33,7 +33,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 1;
 }
 .methodology-image {
@@ -55,7 +54,6 @@
   line-height: 10.6px;
   font-weight: 500;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 2;
 }
 .methodology-content,

@@ -1105,7 +1105,6 @@
   font-weight: 500;
   font-family: inherit;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .wrapper28 {
   display: flex;
@@ -1141,7 +1140,6 @@
   padding: var(--padding-10xs-8) 0 var(--padding-10xs-8) var(--padding-10xs);
   box-sizing: border-box;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 1;
 }
 .frame-child72 {
@@ -1165,7 +1163,6 @@
   flex-direction: row;
   justify-content: flex-start;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .rectangle-parent63 {
   flex: 1;
@@ -1474,7 +1471,6 @@
   padding: 0 var(--padding-xl) 0 0;
   box-sizing: border-box;
   flex-shrink: 0;
-  debug_commit: 69da668;
   cursor: pointer;
 }
 .frame-child78 {
@@ -1559,7 +1555,6 @@
   align-items: flex-start;
   justify-content: space-between;
   flex-shrink: 0;
-  debug_commit: 69da668;
   gap: var(--gap-xl);
 }
 .frame-parent75,
@@ -1677,7 +1672,7 @@
   }
   .div73 {
     height: auto;
-    min-height: 1022;
+    min-height: 1022px;
   }
 }
 @media screen and (max-width: 800px) {

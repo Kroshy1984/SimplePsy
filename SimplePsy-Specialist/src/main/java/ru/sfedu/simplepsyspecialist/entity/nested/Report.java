@@ -1,5 +1,7 @@
 package ru.sfedu.simplepsyspecialist.entity.nested;
 
+import java.util.List;
+
 public class Report {
     private String requestForSessionByClient;
     private String specialistCondition;
@@ -13,6 +15,7 @@ public class Report {
     private String specialistFinalStatus;
     private String plansForNextSession;
     private String difficultiesForRequestingSuperVisa;
+    private List<ProjectiveMethod> projectiveMethods;
 
     public Report() {
     }
@@ -111,5 +114,13 @@ public class Report {
 
     public void setDifficultiesForRequestingSuperVisa(String difficultiesForRequestingSuperVisa) {
         this.difficultiesForRequestingSuperVisa = difficultiesForRequestingSuperVisa;
+    }
+
+    public List<ProjectiveMethod> getProjectiveMethods() {
+        return projectiveMethods;
+    }
+
+    public void setProjectiveMethods(List<ProjectiveMethod> projectiveMethods) {
+        this.projectiveMethods = projectiveMethods;
     }
 }
