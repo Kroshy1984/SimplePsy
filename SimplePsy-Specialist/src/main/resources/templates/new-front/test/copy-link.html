@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="component17.css" />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+</head>
+<body>
+<div class="div334">
+    <section class="base-parent17">
+        <!-- Кнопка. Нужно сделать дизайн ей. да
+          <div class="rectangle-parent160">
+          <div class="frame-child186"></div>
+          <div class="frame-child187"></div>
+        </div> -->
+        <div class="frame-wrapper87">
+            <div class="frame-parent152">
+                <div class="frame-wrapper88">
+                    <div class="rectangle-parent161">
+                        <div class="frame-child188"></div>
+                        <div class="client-name-field-parent">
+                            <div class="client-name-field">
+                                <input class="input1" placeholder="Введите ФИО клиента" type="text"/>
+                            </div>
+                            <div class="icon-wrapper43">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame-wrapper88 frame-wrapper88-fix-bottom">
+                    <div class="rectangle-parent161">
+                        <div class="frame-child188"></div>
+                        <div class="client-name-field-parent">
+                            <div class="client-name-field">
+                                <div class="input-container">
+                                    <input class="input2" id="inputField" placeholder="Ссылка для конкретного клиента" type="text" readonly />
+                                    <button class="copy-btn" onclick="copyText()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <rect x="6" y="6" width="8" height="8" stroke="currentColor" fill="none" rx="1" ry="1" stroke-width="1.1"></rect>
+                                            <path d="M4 12V4h8" stroke="currentColor" fill="none" stroke-linejoin="round" stroke-width="1.1"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    function copyText() {
+      // Получаем элемент input
+      var inputField = document.getElementById("inputField");
+
+      // Выделяем текст в поле ввода
+      inputField.select();
+      inputField.setSelectionRange(0, 99999); // Для мобильных устройств
+
+      // Копируем текст в буфер обмена
+      document.execCommand("copy");
+    }
+</script>
+</body>
+</html>
