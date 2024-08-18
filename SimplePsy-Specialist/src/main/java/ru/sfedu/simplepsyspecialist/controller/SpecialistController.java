@@ -410,5 +410,32 @@ public class SpecialistController {
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(avatar, headers, HttpStatus.OK);
     }
+    @GetMapping("/diploma/{specialistId}/{diplomaIndex}")
+    public ResponseEntity<byte[]> getDiplomaImage(@PathVariable String specialistId, @PathVariable int diplomaIndex) {
+        System.out.println("Specialist id and img index: " + specialistId + " " + diplomaIndex);
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("Specialist id in method getDiplomaImage: " + specialist);
+        System.out.println("name: " + specialist.getName());
+        byte[] image = specialist.getDiplomas().get(diplomaIndex);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+    @DeleteMapping("/diploma/{specialistId}/{diplomaIndex}")
+    public ResponseEntity<Void> deleteDiploma(@PathVariable String specialistId, @PathVariable int diplomaIndex) {
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("Specialist id and img index: " + specialistId + " " + diplomaIndex);
+        System.out.println("Specialist id in method getDiplomaImage: " + specialist);
+        if (specialist != null && diplomaIndex >= 0 && diplomaIndex < specialist.getDiplomas().size()) {
+            // Удаление диплома по индексу
+            specialist.getDiplomas().remove(diplomaIndex);
+            specialistService.save(specialist); // Сохранение изменений
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 }

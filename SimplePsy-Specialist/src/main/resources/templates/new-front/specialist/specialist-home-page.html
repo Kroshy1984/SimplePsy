@@ -1,416 +1,499 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/specialist/specialist-home-page.css}" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
-    />
-  </head>
-  <body>
-    <div class="div59">
-      <div class="settings"></div>
-      <header class="frame-parent47">
-        <div class="frame-wrapper29">
-          <nav class="frame-nav">
-            <div class="icon-parent10">
-              <img
-                class="icon63"
-                loading="lazy"
-                alt=""
-                src="/images/icon@2x.png"
-              />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/specialist/specialist-home-page.css}" />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+  />
+</head>
+<body>
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+</style>
 
-              <div class="constructor-frame">
-                <a class="constructor5">Понятная практика</a>
-              </div>
-              <div class="icon-parent11">
-                <img
-                  class="icon64"
+<div class="div59">
+  <div class="settings"></div>
+  <header class="frame-parent47">
+    <div class="frame-wrapper29">
+      <nav class="frame-nav">
+        <div class="icon-parent10">
+          <img
+                  class="icon63"
                   loading="lazy"
                   alt=""
-                  src="/images/icon-1@2x.png"
-                />
-
-                <div class="search-container">
-                  <b class="search5">Найти клиента...</b>
-                </div>
-              </div>
-            </div>
-            <div class="frame-wrapper30">
-              <div class="about-us-parent">
-                <b class="about-us5">Добавить клиента</b>
-                <b class="news5">Назначить встречу</b>
-              </div>
-            </div>
-            <div class="user-policy-frame">
-              <b class="user-policy5">Добавить график нерабочих дней </b>
-            </div>
-          </nav>
-        </div>
-        <div class="icon-parent12">
-          <img
-            class="icon65"
-            loading="lazy"
-            alt=""
-            src="/images/icon-2@2x.png"
+                  src="/images/icon@2x.png"
           />
 
-          <div class="new-york-frame">
-            <b th:text="${specialist.city}" class="new-york5">Ростов-на-Дону</b>
+          <div class="constructor-frame">
+            <a class="constructor5">Понятная практика</a>
+          </div>
+          <div class="icon-parent11">
+            <img
+                    class="icon64"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-1@2x.png"
+            />
+
+            <div class="search-container">
+              <b class="search5">Найти клиента...</b>
+            </div>
           </div>
         </div>
-      </header>
-      <form method="post" th:action="@{/SimplePsy/V1/specialist/personal-info/update}" th:object="${specialist}"
-            enctype="multipart/form-data">
-      <main class="frame-parent48">
-        <section class="frame-wrapper31">
-          <div class="frame-parent49">
-            <div class="frame-wrapper32">
-              <div class="wrapper-user-parent">
-                <div class="wrapper-user5">
-                  <img
-                    class="user-icon5"
-                    loading="lazy"
-                    alt=""
-                    src="/images/user@2x.png"
-                  />
-                </div>
-                <div class="frame-parent50">
-                  <div class="hello-rosalie-wrapper1">
-                    <b class="hello-rosalie5">Привет, </b>
-                    <b th:text="${specialist.name}" class="hello-rosalie5" ></b>
-                    <b class="hello-rosalie5">!</b>
-                  </div>
-                  <b class="rosaliericegmailc5">
-                    <p th:text="${specialist.username}" class="ponyatpractikagmailcom"></p>
-                  </b>
-                </div>
-              </div>
-            </div>
-            <div class="frame-parent51">
-              <div class="a998761-62ed-4135-8023-6815850-parent">
-                <img
-                        id="avatarImg"
-                        class="a998761-62ed-4135-8023-6815850-icon"
-                        loading="lazy"
-                        alt="Аватарка"
-                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
-                        style="cursor: pointer;"
-                        onclick="document.getElementById('avatarInput').click();"
-                />
-                <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
-              </div>
-              <div class="frame-wrapper33">
-                <div class="parent8">
-                  <input th:value="${specialist.surname}" class="div61" type="text" id="surname"
-                         name="surname" placeholder="Фамилия" disabled>
-                  <input th:value="${specialist.name}" class="div61" type="text" id="name"
-                         name="name" placeholder="Имя" disabled>
-                  <input th:value="${specialist.middleName}" class="div61" type="text" id="middleName"
-                         name="middleName" placeholder="Отчество" disabled>
-                  <div class="div62">
-                    <input class="p29" th:value="${specialist.city}" type="text" id="city"
-                           name="city" placeholder="Город" disabled>
-                  </div>
-                  <div class="div63">
-                    <input class="p30" th:value="${specialist.phone}" type="tel" id="phone"
-                           name="phone" placeholder="Номер телефона" disabled>
-                  </div>
-                  <div class="ponyatpractikagmailcom1">
-                    <input class="ponyatpractikagmailcom2" th:value="${specialist.username}" type="email" id="email"
-                           name="username" placeholder="Почта" disabled>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="frame-wrapper30">
+          <div class="about-us-parent">
+            <b class="about-us5">Добавить клиента</b>
+            <b class="news5">Назначить встречу</b>
           </div>
-        </section>
-        <section class="frame-parent52">
-          <div class="frame-parent53">
-            <div class="frame-wrapper34">
-              <div class="dashboard-header-items-parent">
-                <div class="dashboard-header-items">
-                  <div class="dashboard14" id="dashboardContainer">
-                    <div class="base54"></div>
-                    <div class="icon-wrapper13">
-                      <img
-                        class="icon66"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-3@2x.png"
-                      />
-                    </div>
-                    <b class="dashboard15">Список клинетов</b>
-                  </div>
-                  <div class="dashboard-content-items">
-                    <div class="base55" id="baseContainer">
-                      <div class="icon-wrapper14">
-                        <img
-                          class="icon67"
-                          loading="lazy"
-                          alt=""
-                          src="/images/icon-41@2x.png"
-                        />
-                      </div>
-                      <b class="calendars5">Календарь</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="dashboard-header-items1">
-                  <div class="invoice9" id="invoiceContainer">
-                    <div class="base56"></div>
-                    <div class="icon-wrapper15">
-                      <img
-                        class="icon68"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-5.svg"
-                      />
-                    </div>
-                    <b class="invoice10">Уведомления</b>
-                  </div>
-                  <div class="base-parent7">
-                    <div class="base57"></div>
-                    <div class="icon-wrapper16">
-                      <img
-                        class="icon69"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-6.svg"
-                      />
-                    </div>
-                    <b class="files5">Аналитика</b>
-                  </div>
-                </div>
-                <div class="wrapper19">
-                  <div class="div64" id="container">
-                    <div class="base58"></div>
-                    <b class="dashboard16">Опросники и тесты</b>
-                  </div>
-                </div>
-                <div class="frame-wrapper35">
-                  <div class="frame-parent54">
-                    <div class="wrapper20">
-                      <b class="b78">Заявки</b>
-                    </div>
-                    <div
-                      class="applications-header-dividers-parent"
-                      id="groupContainer"
-                    >
-                      <div class="applications-header-dividers">
-                        <div class="applications-header-dividers-child"></div>
-                        <b class="applications-divider">20.02.2024</b>
-                      </div>
-                      <div class="rectangle-parent42">
-                        <div class="frame-child45"></div>
-                        <b class="b79">Овсянникова Юля Матвеевна</b>
-                      </div>
-                    </div>
-                    <div class="frame-parent55" id="groupContainer1">
-                      <div class="rectangle-parent43">
-                        <div class="frame-child46"></div>
-                        <b class="b80">25.02.2024</b>
-                      </div>
-                      <div class="rectangle-parent44">
-                        <div class="frame-child47"></div>
-                        <b class="b81">Овсянникова Юля Матвеевна</b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="frame-parent56">
-              <div class="wrapper18">
-                <div class="div60">Специализация</div>
-              </div>
-              <div class="frame-wrapper36">
-                <div class="rectangle-parent45">
-                  <div class="frame-child48"></div>
-                  <textarea th:text="${specialist.specialization}" name="specialization" class="div65" disabled></textarea>
-                </div>
-              </div>
-              <div class="frame-parent57">
-                <div class="wrapper21">
-                  <div class="div66">
-                    Описание профессиональной деятельности
-                  </div>
-                </div>
-                <div class="rectangle-parent46">
-                  <div class="frame-child49"></div>
-                  <textarea th:text="${specialist.description}" name="description" class="div67" disabled></textarea>
-                </div>
-              </div>
-              <div class="frame-wrapper37">
-                <div class="parent9">
-                  <div class="div68">Образование</div>
-                  <div class="rectangle-parent47">
-                    <div class="frame-child50"></div>
-                    <div class="oulu-university-container">
-                      <textarea th:text="${specialist.education}" name="education" class="div67" disabled></textarea>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="div69">Дипломы</div>
-            </div>
-          </div>
-          <div class="frame-wrapper38">
-            <div class="frame-parent58">
-              <div class="icon-parent13">
-                <img
-                  class="icon70"
-                  loading="lazy"
-                  alt=""
-                  src="/images/icon-7@2x.png"
-                />
-
-                <div class="frame-parent59">
-                  <div class="send-feedback-wrapper3">
-                    <b class="send-feedback5">Обратная связь</b>
-                  </div>
-                  <img
-                    class="icon71"
-                    loading="lazy"
-                    alt=""
-                    src="/images/icon-8.svg"
-                  />
-                </div>
-              </div>
-              <div class="frame-wrapper39">
-                <div class="rectangle-parent48">
-                  <div class="frame-child51"></div>
-                  <label for="file-upload" class="rectangle-parent49">+ Добавить фото</label>
-                  <input id="file-upload" name="diploma" type="file" accept="image/*" multiple>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="save-edit-buttons-wrapper">
-            <div class="save-edit-buttons">
-              <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
-                <div class="div72">Отменить</div>
-              </button>
-              <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
-                <div class="div72">Редактировать</div>
-              </button>
-              <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
-                <div class="div72">Сохранить</div>
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-      </form>
+        </div>
+        <div class="user-policy-frame">
+          <b class="user-policy5">Добавить график нерабочих дней </b>
+        </div>
+      </nav>
     </div>
+    <div class="icon-parent12">
+      <img
+              class="icon65"
+              loading="lazy"
+              alt=""
+              src="/images/icon-2@2x.png"
+      />
 
-    <script>
-      var dashboardContainer = document.getElementById("dashboardContainer");
-      if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-          window.location.href = "./component2.html";
-        });
-      }
+      <div class="new-york-frame">
+        <b th:text="${specialist.city}" class="new-york5">Ростов-на-Дону</b>
+      </div>
+    </div>
+  </header>
+  <form method="post" th:action="@{/SimplePsy/V1/specialist/personal-info/update}" th:object="${specialist}"
+        enctype="multipart/form-data">
+    <main class="frame-parent48">
+      <section class="frame-wrapper31">
+        <div class="frame-parent49">
+          <div class="frame-wrapper32">
+            <div class="wrapper-user-parent">
+              <div class="wrapper-user5">
+                <img
+                        class="user-icon5"
+                        loading="lazy"
+                        alt=""
+                        src="/images/user@2x.png"
+                />
+              </div>
+              <div class="frame-parent50">
+                <div class="hello-rosalie-wrapper1">
+                  <b class="hello-rosalie5">Привет, </b>
+                  <b th:text="${specialist.name}" class="hello-rosalie5" ></b>
+                  <b class="hello-rosalie5">!</b>
+                </div>
+                <b class="rosaliericegmailc5">
+                  <p th:text="${specialist.username}" class="ponyatpractikagmailcom"></p>
+                </b>
+              </div>
+            </div>
+          </div>
+          <div class="frame-parent51">
+            <div class="a998761-62ed-4135-8023-6815850-parent">
+              <img
+                      id="avatarImg"
+                      class="a998761-62ed-4135-8023-6815850-icon"
+                      loading="lazy"
+                      alt="Аватарка"
+                      th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                      style="cursor: pointer;"
+                      onclick="document.getElementById('avatarInput').click();"
+              />
+              <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
+            </div>
+            <div class="frame-wrapper33">
+              <div class="parent8">
+                <input th:value="${specialist.surname}" class="div61" type="text" id="surname"
+                       name="surname" placeholder="Фамилия" disabled>
+                <input th:value="${specialist.name}" class="div61" type="text" id="name"
+                       name="name" placeholder="Имя" disabled>
+                <input th:value="${specialist.middleName}" class="div61" type="text" id="middleName"
+                       name="middleName" placeholder="Отчество" disabled>
+                <div class="div62">
+                  <input class="p29" th:value="${specialist.city}" type="text" id="city"
+                         name="city" placeholder="Город" disabled>
+                </div>
+                <div class="div63">
+                  <input class="p30" th:value="${specialist.phone}" type="tel" id="phone"
+                         name="phone" placeholder="Номер телефона" disabled>
+                </div>
+                <div class="ponyatpractikagmailcom1">
+                  <input class="ponyatpractikagmailcom2" th:value="${specialist.username}" type="email" id="email"
+                         name="username" placeholder="Почта" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="frame-parent52">
+        <div class="frame-parent53">
+          <div class="frame-wrapper34">
+            <div class="dashboard-header-items-parent">
+              <div class="dashboard-header-items">
+                <div class="dashboard14" id="dashboardContainer">
+                  <div class="base54"></div>
+                  <div class="icon-wrapper13">
+                    <img
+                            class="icon66"
+                            loading="lazy"
+                            alt=""
+                            src="/images/icon-3@2x.png"
+                    />
+                  </div>
+                  <b class="dashboard15">Список клинетов</b>
+                </div>
+                <div class="dashboard-content-items">
+                  <div class="base55" id="baseContainer">
+                    <div class="icon-wrapper14">
+                      <img
+                              class="icon67"
+                              loading="lazy"
+                              alt=""
+                              src="/images/icon-41@2x.png"
+                      />
+                    </div>
+                    <b class="calendars5">Календарь</b>
+                  </div>
+                </div>
+              </div>
+              <div class="dashboard-header-items1">
+                <div class="invoice9" id="invoiceContainer">
+                  <div class="base56"></div>
+                  <div class="icon-wrapper15">
+                    <img
+                            class="icon68"
+                            loading="lazy"
+                            alt=""
+                            src="/images/icon-5.svg"
+                    />
+                  </div>
+                  <b class="invoice10">Уведомления</b>
+                </div>
+                <div class="base-parent7">
+                  <div class="base57"></div>
+                  <div class="icon-wrapper16">
+                    <img
+                            class="icon69"
+                            loading="lazy"
+                            alt=""
+                            src="/images/icon-6.svg"
+                    />
+                  </div>
+                  <b class="files5">Аналитика</b>
+                </div>
+              </div>
+              <div class="wrapper19">
+                <div class="div64" id="container">
+                  <div class="base58"></div>
+                  <b class="dashboard16">Опросники и тесты</b>
+                </div>
+              </div>
+              <div class="frame-wrapper35">
+                <div class="frame-parent54">
+                  <div class="wrapper20">
+                    <b class="b78">Заявки</b>
+                  </div>
+                  <div
+                          class="applications-header-dividers-parent"
+                          id="groupContainer"
+                  >
+                    <div class="applications-header-dividers">
+                      <div class="applications-header-dividers-child"></div>
+                      <b class="applications-divider">20.02.2024</b>
+                    </div>
+                    <div class="rectangle-parent42">
+                      <div class="frame-child45"></div>
+                      <b class="b79">Овсянникова Юля Матвеевна</b>
+                    </div>
+                  </div>
+                  <div class="frame-parent55" id="groupContainer1">
+                    <div class="rectangle-parent43">
+                      <div class="frame-child46"></div>
+                      <b class="b80">25.02.2024</b>
+                    </div>
+                    <div class="rectangle-parent44">
+                      <div class="frame-child47"></div>
+                      <b class="b81">Овсянникова Юля Матвеевна</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-parent56">
+            <div class="wrapper18">
+              <div class="div60">Специализация</div>
+            </div>
+            <div class="frame-wrapper36">
+              <div class="rectangle-parent45">
+                <div class="frame-child48"></div>
+                <textarea th:text="${specialist.specialization}" name="specialization" class="div65" disabled></textarea>
+              </div>
+            </div>
+            <div class="frame-parent57">
+              <div class="wrapper21">
+                <div class="div66">
+                  Описание профессиональной деятельности
+                </div>
+              </div>
+              <div class="rectangle-parent46">
+                <div class="frame-child49"></div>
+                <textarea th:text="${specialist.description}" name="description" class="div67" disabled></textarea>
+              </div>
+            </div>
+            <div class="frame-wrapper37">
+              <div class="parent9">
+                <div class="div68">Образование</div>
+                <div class="rectangle-parent47">
+                  <div class="frame-child50"></div>
+                  <div class="oulu-university-container">
+                    <textarea th:text="${specialist.education}" name="education" class="div67" disabled></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="div69">Дипломы</div>
+          </div>
+        </div>
+        <div class="frame-wrapper38">
+          <div class="frame-parent58">
+            <div class="icon-parent13">
+              <img
+                      class="icon70"
+                      loading="lazy"
+                      alt=""
+                      src="/images/icon-7@2x.png"
+              />
 
-      var baseContainer = document.getElementById("baseContainer");
-      if (baseContainer) {
-        baseContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
+              <div class="frame-parent59">
+                <div class="send-feedback-wrapper3">
+                  <b class="send-feedback5">Обратная связь</b>
+                </div>
+                <img
+                        class="icon71"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-8.svg"
+                />
+              </div>
+            </div>
+            <div class="frame-wrapper39">
+              <div class="rectangle-parent48">
+                <div class="frame-child51"></div>
+                <label for="file-upload" class="rectangle-parent49">+ Добавить фото</label>
+                <input id="file-upload" name="diploma" type="file" accept="image/*" multiple>
+                <div th:each="diploma, iterStat : ${specialist.diplomas}" style="position: relative; display: inline-block;">
+                  <img th:src="@{'/SimplePsy/V1/specialist/diploma/' + ${specialist.id} + '/' + ${iterStat.index}}"
+                       alt="Диплом"
+                       th:data-specialist-id="${specialist.id}"
+                       th:data-diploma-index="${iterStat.index}" />
+                  <!-- Крестик для удаления -->
+                  <span style="position: absolute; top: 5px; left: 5px; cursor: pointer; color: red;"
+                        class="delete-diploma">
+        &times;
+    </span>
+                </div>
 
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./component3.html";
-        });
-      }
 
-      var container = document.getElementById("container");
-      if (container) {
-        container.addEventListener("click", function (e) {
-          window.location.href = "./component14.html";
-        });
-      }
 
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="save-edit-buttons-wrapper">
+          <div class="save-edit-buttons">
+            <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
+              <div class="div72">Отменить</div>
+            </button>
+            <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
+              <div class="div72">Редактировать</div>
+            </button>
+            <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
+              <div class="div72">Сохранить</div>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </form>
+</div>
 
-      var groupContainer1 = document.getElementById("groupContainer1");
-      if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
+<script>
+  var dashboardContainer = document.getElementById("dashboardContainer");
+  if (dashboardContainer) {
+    dashboardContainer.addEventListener("click", function (e) {
+      window.location.href = "./component2.html";
+    });
+  }
 
-      function showInputs() {
-        // Находим элементы, которые нужно изменить
-        var inputsToEnable = document.querySelectorAll('input[disabled]');
-        var inputsFieldSetToEnable = document.querySelectorAll('textarea');
-        var saveButton = document.getElementById('save');
-        var editButton = document.getElementById('edit');
-        var cancelButton = document.getElementById('cancel');
+  var baseContainer = document.getElementById("baseContainer");
+  if (baseContainer) {
+    baseContainer.addEventListener("click", function (e) {
+      window.location.href = "./frame.html";
+    });
+  }
 
-        // Убираем атрибут disabled у всех найденных элементов
-        inputsToEnable.forEach(function (input) {
-          input.removeAttribute('disabled');
-        });
-        inputsFieldSetToEnable.forEach(function (input) {
-          input.removeAttribute('disabled');
-        });
+  var invoiceContainer = document.getElementById("invoiceContainer");
+  if (invoiceContainer) {
+    invoiceContainer.addEventListener("click", function (e) {
+      window.location.href = "./component3.html";
+    });
+  }
 
-        // Показываем кнопки
-        saveButton.style.display = 'inline-block';
-        editButton.style.display = 'none';
-        cancelButton.style.display = 'inline-block';
-      }
+  var container = document.getElementById("container");
+  if (container) {
+    container.addEventListener("click", function (e) {
+      window.location.href = "./component14.html";
+    });
+  }
 
-      function cancelButton() {
-        document.getElementById('cancel').style.display = 'none';
-        window.location.href = '/SimplePsy/V1/specialist/personal-info';
-      }
-      document.getElementById('avatarInput').addEventListener('change', function() {
-        var file = this.files[0];
-        if (file) {
-          var formData = new FormData();
-          formData.append('avatar', file);
+  var groupContainer = document.getElementById("groupContainer");
+  if (groupContainer) {
+    groupContainer.addEventListener("click", function (e) {
+      window.location.href = "./component12.html";
+    });
+  }
 
-          fetch('/SimplePsy/V1/specialist/personal-info/avatar', {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'X-Requested-With': 'XMLHttpRequest'
-            }
-          })
-                  .then(response => response.json()) // предположим, что сервер вернет JSON с обновленным URL аватарки
-                  .then(data => {
-                    if (data.success) {
-                      // Обновляем изображение аватарки на странице
-                      document.getElementById('avatarImg').src = data.avatarUrl;
-                    } else {
-                      alert('Ошибка при обновлении аватарки. Попробуйте снова.');
-                    }
-                  })
-                  .catch(error => {
-                    console.error('Ошибка:', error);
-                    alert('Ошибка при обновлении аватарки. Попробуйте снова.');
-                  });
+  var groupContainer1 = document.getElementById("groupContainer1");
+  if (groupContainer1) {
+    groupContainer1.addEventListener("click", function (e) {
+      window.location.href = "./component12.html";
+    });
+  }
+
+  function showInputs() {
+    // Находим элементы, которые нужно изменить
+    var inputsToEnable = document.querySelectorAll('input[disabled]');
+    var inputsFieldSetToEnable = document.querySelectorAll('textarea');
+    var saveButton = document.getElementById('save');
+    var editButton = document.getElementById('edit');
+    var cancelButton = document.getElementById('cancel');
+
+    // Убираем атрибут disabled у всех найденных элементов
+    inputsToEnable.forEach(function (input) {
+      input.removeAttribute('disabled');
+    });
+    inputsFieldSetToEnable.forEach(function (input) {
+      input.removeAttribute('disabled');
+    });
+
+    // Показываем кнопки
+    saveButton.style.display = 'inline-block';
+    editButton.style.display = 'none';
+    cancelButton.style.display = 'inline-block';
+  }
+
+  function cancelButton() {
+    document.getElementById('cancel').style.display = 'none';
+    window.location.href = '/SimplePsy/V1/specialist/personal-info';
+  }
+  document.getElementById('avatarInput').addEventListener('change', function() {
+    var file = this.files[0];
+    if (file) {
+      var formData = new FormData();
+      formData.append('avatar', file);
+
+      fetch('/SimplePsy/V1/specialist/personal-info/avatar', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
         }
+      })
+              .then(response => response.json()) // предположим, что сервер вернет JSON с обновленным URL аватарки
+              .then(data => {
+                if (data.success) {
+                  // Обновляем изображение аватарки на странице
+                  document.getElementById('avatarImg').src = data.avatarUrl;
+                } else {
+                  alert('Ошибка при обновлении аватарки. Попробуйте снова.');
+                }
+              })
+              .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка при обновлении аватарки. Попробуйте снова.');
+              });
+    }
+  });
+  document.querySelectorAll('.diploma-img').forEach(function(img) {
+    img.addEventListener('click', function() {
+      var modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '">';
+      document.body.appendChild(modal);
+      modal.addEventListener('click', function() {
+        modal.remove();
       });
+    });
+  });
+  // Функция для удаления диплома
+  function deleteDiploma(specialistId, diplomaIndex) {
+    if (confirm('Вы уверены, что хотите удалить это изображение?')) {
+      fetch(`/SimplePsy/V1/specialist/diploma/` + specialistId + `/` + diplomaIndex, {
+        method: 'DELETE', // Метод DELETE, так как это удаление
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+              .then(response => {
+                if (response.ok) {
+                  // Обновляем страницу или удаляем изображение из DOM
+                  location.reload();
+                } else {
+                  alert('Ошибка при удалении изображения.');
+                }
+              })
+              .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка при удалении изображения.');
+              });
+    }
+  }
 
-    </script>
-  </body>
+  // Привязка события клика к крестикам для удаления
+  document.querySelectorAll('.delete-diploma').forEach(span => {
+    span.addEventListener('click', function() {
+      // Получаем родительский элемент <div>
+      const parentDiv = this.closest('div');
+
+      // Получаем ID специалиста и индекс диплома
+      const specialistId = parentDiv.querySelector('img').getAttribute('data-specialist-id');
+      const diplomaIndex = parentDiv.querySelector('img').getAttribute('data-diploma-index');
+
+      // Вызываем функцию удаления
+      deleteDiploma(specialistId, diplomaIndex);
+    });
+  });
+
+
+</script>
+</body>
 </html>
