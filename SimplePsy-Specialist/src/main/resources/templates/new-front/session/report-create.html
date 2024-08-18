@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/report-create.css}" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -16,91 +17,6 @@
     />
 </head>
 <body>
-<style>
-    /* Container for the form */
-    .container {
-        position: relative;
-        top: 20%;
-        left: 30%;
-        width: 50%;
-        margin: 20px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Form heading */
-    .container h2 {
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    /* Form styling */
-    #test-edit-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    /* Individual form groups */
-    #test-edit-form > div {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Labels */
-    #test-edit-form label {
-        font-size: 16px;
-        font-weight: 500;
-        color: #555;
-        margin-bottom: 8px;
-    }
-
-    /* Textareas */
-    #test-edit-form textarea {
-        width: 100%;
-        height: 60px;
-        padding: 10px;
-        font-size: 14px;
-        font-family: 'Roboto', sans-serif;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        resize: vertical;
-        background-color: #fff;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Textarea focus effect */
-    #test-edit-form textarea:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-
-    /* Submit button */
-    #test-edit-form button[type="submit"] {
-        align-self: center;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: 700;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    /* Submit button hover effect */
-    #test-edit-form button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
-
-</style>
 <div class="div139">
     <div class="sidebar1">
         <div class="menu">
@@ -296,9 +212,37 @@
                 <textarea id="difficultiesForRequestingSuperVisa" th:field="*{difficultiesForRequestingSuperVisa}"></textarea>
             </div>
 
-            <button type="submit">Сохранить</button>
+            <div class="frame-wrapper47">
+                <div class="frame-parent71">
+                    <div class="wrapper28">
+                        <h2 class="h21">Проективные методики</h2>
+                    </div>
+                    <div class="frame-parent72" th:each="method:${projectiveMethods}">
+                        <div class="rectangle-parent62">
+                            <div class="frame-child71"></div>
+                            <b class="b94" th:text="${method.getDate()}"></b>
+                        </div>
+                        <div class="rectangle-parent63">
+                            <div class="frame-child72"></div>
+                            <b class="div76" th:text="${method.getName()}"></b>
+                        </div>
+                    </div>
+                    <div class="rectangle-parent78">
+                        <a class="add-method">+ Добавить методику</a>
+                    </div>
+                </div>
+            </div>
+
+            <button class="submit-note" type="submit">Сохранить</button>
         </form>
     </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+</div>
 <script>
     var dashboardContainer = document.getElementById("dashboardContainer");
     if (dashboardContainer) {
@@ -398,6 +342,37 @@
             window.location.href = "./component4.html";
         });
     }
+
+    // Открытие модального окна создания проективной методики
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.add-method'); // Элемент "Добавить методику"
+
+    // Функция для открытия модального окна
+    function openModal() {
+        fetch('http://localhost:8081/SimplePsy/V1/session/report/create/projective-method')
+            .then(response => response.text())
+            .then(data => {
+                modalBody.innerHTML = data;
+                modal.style.display = 'block';
+            })
+            .catch(error => console.error('Ошибка загрузки:', error));
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
 </script>
 </body>
 </html>

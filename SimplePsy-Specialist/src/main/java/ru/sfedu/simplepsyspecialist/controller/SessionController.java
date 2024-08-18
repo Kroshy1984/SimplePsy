@@ -189,6 +189,7 @@ public class SessionController {
         Report report = new Report();
         Session session = sessionService.findById(sessionId);
         model.addAttribute("report", report);
+        model.addAttribute("projectiveMethods", session.getReports().getProjectiveMethods());
         model.addAttribute("sessionId", sessionId);
         return "new-front/session/report-create";
     }
@@ -201,5 +202,13 @@ public class SessionController {
         session.setReports(report);
         sessionService.createSession(session);
         return "new-front/session/report-create";
+    }
+
+    @GetMapping("report/create/projective-method")
+    public String getProjectiveMethod(Model model) {
+        Session session = new Session();
+        //session.setClient(new Client());
+        model.addAttribute("session", session);
+        return "new-front/session/root";
     }
 }
