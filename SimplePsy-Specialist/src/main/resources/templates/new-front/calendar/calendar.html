@@ -196,7 +196,13 @@
                   <button id="nextBtn">&gt;</button>
                 </div>
               </div>
-              <div id="calendarBody" class="month-view grid"></div>
+              <div id="calendarBody" class="month-view grid">
+
+              </div>
+              <script th:inline="javascript">
+                // Передача данных о сессиях из Thymeleaf в JavaScript
+                let sessionsData = /*[[${meetings}]]*/ [];
+              </script>
             </div>
           </div>
         </section>
@@ -267,59 +273,93 @@
                 }
             }
 
-            function renderMonthView(date) {
-                const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-                const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-                const daysInMonth = endOfMonth.getDate();
+          function renderMonthView(date) {
+            const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+            const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            const daysInMonth = endOfMonth.getDate();
 
-                // Заполнение сетки для отображения дней
-                for (let i = 0; i < startOfMonth.getDay(); i++) {
-                    const emptyCell = document.createElement('div');
-                    emptyCell.classList.add('day');
-                    calendarBody.appendChild(emptyCell);
-                }
-
-                for (let i = 1; i <= daysInMonth; i++) {
-                    const day = new Date(date.getFullYear(), date.getMonth(), i);
-                    const dayElement = createDayElement(day);
-                    calendarBody.appendChild(dayElement);
-                }
+            // Заполнение сетки для отображения дней
+            for (let i = 0; i < startOfMonth.getDay(); i++) {
+              const emptyCell = document.createElement('div');
+              emptyCell.classList.add('day');
+              calendarBody.appendChild(emptyCell);
             }
 
-            function renderWeekView(date) {
-                const startOfWeek = getStartOfWeek(date);
+            for (let i = 1; i <= daysInMonth; i++) {
+              const day = new Date(date.getFullYear(), date.getMonth(), i);
+              const dayElement = createDayElement(day);
 
-                for (let i = 0; i < 7; i++) {
-                    const day = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i);
-                    const dayElement = createDayElement(day);
-                    calendarBody.appendChild(dayElement);
-                }
+              // Отображение сессий
+              const sessionsForDay = sessionsData.filter(session => isSameDay(new Date(session.date), day));
+              if (sessionsForDay.length > 0) {
+                sessionsForDay.forEach(session => {
+                  const sessionElement = document.createElement('div');
+                  sessionElement.classList.add('session');
+                  sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.client.name} ${session.client.surname}`;
+                  dayElement.appendChild(sessionElement);
+                });
+              }
+
+              calendarBody.appendChild(dayElement);
+            }
+          }
+          function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                    date1.getMonth() === date2.getMonth() &&
+                    date1.getDate() === date2.getDate();
+          }
+
+          function isSameHour(date1, date2, hour) {
+            return isSameDay(date1, date2) && date1.getHours() === hour;
+          }
+
+
+          function renderWeekView(date) {
+            const startOfWeek = getStartOfWeek(date);
+
+            for (let i = 0; i < 7; i++) {
+              const day = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i);
+              const dayElement = createDayElement(day);
+
+              const sessionsForDay = sessionsData.filter(session => isSameDay(new Date(session.date), day));
+              if (sessionsForDay.length > 0) {
+                sessionsForDay.forEach(session => {
+                  const sessionElement = document.createElement('div');
+                  sessionElement.classList.add('session');
+                  sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.client.name} ${session.client.surname}`;
+                  dayElement.appendChild(sessionElement);
+                });
+              }
+
+              calendarBody.appendChild(dayElement);
+            }
+          }
+
+          function renderDayView(date) {
+            const dayView = document.createElement('div');
+            dayView.classList.add('day-view');
+
+            for (let hour = 0; hour < 24; hour++) {
+              const hourElement = document.createElement('div');
+              hourElement.classList.add('hour');
+              hourElement.textContent = `${hour}:00`;
+
+              const sessionsForHour = sessionsData.filter(session => isSameHour(new Date(session.date), date, hour));
+              if (sessionsForHour.length > 0) {
+                sessionsForHour.forEach(session => {
+                  const sessionElement = document.createElement('div');
+                  sessionElement.classList.add('session');
+                  sessionElement.textContent = `${session.client.name} ${session.client.surname} (${session.timeStart} - ${session.timeFinish})`;
+                  hourElement.appendChild(sessionElement);
+                });
+              }
+
+              dayView.appendChild(hourElement);
             }
 
-            function renderDayView(date) {
-                const dayView = document.createElement('div');
-                dayView.classList.add('day-view');
+            calendarBody.appendChild(dayView);
+          }
 
-                for (let hour = 0; hour < 24; hour++) {
-                    const hourElement = document.createElement('div');
-                    hourElement.classList.add('hour');
-                    hourElement.textContent = `${hour}:00`;
-
-                    const eventsForHour = eventsData.filter(event => isSameHour(event.date, date, hour));
-                    if (eventsForHour.length > 0) {
-                        eventsForHour.forEach(event => {
-                            const eventItem = document.createElement('div');
-                            eventItem.classList.add('event');
-                            eventItem.textContent = `${event.title} (${formatTime(event.startTime)} - ${formatTime(event.endTime)})`;
-                            hourElement.appendChild(eventItem);
-                        });
-                    }
-
-                    dayView.appendChild(hourElement);
-                }
-
-                calendarBody.appendChild(dayView);
-            }
 
             function createDayElement(date) {
                 const dayElement = document.createElement('div');
@@ -364,25 +404,7 @@
             }
 
             function generateEvents() {
-                // Создание событий для демонстрации
-                eventsData.push({
-                    date: new Date(new Date().setHours(9, 0, 0, 0)),
-                    title: 'Встреча с клиентом',
-                    startTime: new Date(new Date().setHours(9, 0, 0, 0)),
-                    endTime: new Date(new Date().setHours(10, 0, 0, 0))
-                });
-                eventsData.push({
-                    date: new Date(new Date().setDate(new Date().getDate() + 1)),
-                    title: 'Презентация проекта',
-                    startTime: new Date(new Date().setHours(11, 0, 0, 0)),
-                    endTime: new Date(new Date().setHours(12, 0, 0, 0))
-                });
-                eventsData.push({
-                    date: new Date(new Date().setDate(new Date().getDate() + 2)),
-                    title: 'Обед с партнерами',
-                    startTime: new Date(new Date().setHours(13, 0, 0, 0)),
-                    endTime: new Date(new Date().setHours(14, 0, 0, 0))
-                });
+
             }
 
             function isSameDay(date1, date2) {

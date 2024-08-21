@@ -62,6 +62,23 @@ public class SessionService {
         return sessionRepository.findById(sessionId).get();
     }
 
+    public List<Session> findAll() {
+        return sessionRepository.findAll();
+    }
+
+    public List<Session> findAllSessionsBySpecialistId(String specialistId) {
+        List<Session> allASessions = sessionRepository.findAll();
+        List<Session> sessions = new ArrayList<>();
+        for (int i = 0; i < allASessions.size(); i++) {
+            System.out.println("session from allSessions: " + allASessions.get(i).getId());
+            if (allASessions.get(i).getSpecialistId().equals(specialistId)) {
+                System.out.println("adding " + allASessions.get(i).getId());
+                sessions.add(allASessions.get(i));
+            }
+        }
+        return sessions;
+    }
+
     public void saveSession(Session session) {
         String id = session.getId();
         Session oldSession = sessionRepository.findById(id).get();

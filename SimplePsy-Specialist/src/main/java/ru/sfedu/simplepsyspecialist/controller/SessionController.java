@@ -18,8 +18,11 @@ import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.YearMonth;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/SimplePsy/V1/session")
@@ -108,19 +111,18 @@ public class SessionController {
         return "new-front/session/session-creation";
     }
 
-    // TODO: Сделать создание встречи
     @PostMapping("/create-session")
     public String createNewSession(Session session,
                                    @AuthenticationPrincipal UserDetails userDetails) {
 //        System.out.println(session.getClient().getName());
         System.out.println(session.getPlace());
         System.out.println(session.getDate());
-        System.out.println(session.getClientId());
+        //System.out.println(session.getClientId());
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
         session.setSpecialistId(specialistId);
         Client client = clientService.findById(session.getClientId());
         session.setClient(client);
-        sessionService.saveSession(session);
+        sessionService.createSession(session);
 //        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 //        System.out.println("Specialist found!");
 //        String specialist_id = specialist.getId();
@@ -182,7 +184,24 @@ public class SessionController {
     }
 
     @GetMapping("/calendar")
-    public String getCalendar(Model model) {
+    public String getCalendar(@AuthenticationPrincipal UserDetails userDetails,
+                              Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        System.out.println("specialistId: " + specialist.getId());
+        List<Session> sessions = sessionService.findAllSessionsBySpecialistId(specialist.getId());
+        // Получаем текущий месяц и год
+        YearMonth yearMonth = YearMonth.now();
+        LocalDate firstDayOfMonth = yearMonth.atDay(1);
+        LocalDate lastDayOfMonth = yearMonth.atEndOfMonth();
+
+        // Генерируем список дней для отображения
+        List<LocalDate> daysInMonth = IntStream.rangeClosed(1, lastDayOfMonth.getDayOfMonth())
+                .mapToObj(day -> yearMonth.atDay(day))
+                .collect(Collectors.toList());
+
+        model.addAttribute("daysInMonth", daysInMonth);
+        model.addAttribute("meetings", sessions);
+
         return "/new-front/calendar/calendar";
     }
     @GetMapping("report/{sessionId}")
