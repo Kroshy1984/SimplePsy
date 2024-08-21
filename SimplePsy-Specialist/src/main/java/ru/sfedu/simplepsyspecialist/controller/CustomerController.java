@@ -2,14 +2,18 @@ package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
+import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,11 +27,13 @@ public class CustomerController {
 
     private CustomerService customerService;
     private ScoringService scoringService;
+    private SpecialistService specialistService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, ScoringService scoringService) {
+    public CustomerController(CustomerService customerService, ScoringService scoringService, SpecialistService specialistService) {
         this.customerService = customerService;
         this.scoringService = scoringService;
+        this.specialistService = specialistService;
     }
 
 //    @GetMapping("/search")
@@ -180,13 +186,17 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> createNewCustomer(Customer customer) throws IOException {
+    public ResponseEntity<String> createNewCustomer(@AuthenticationPrincipal UserDetails userDetails,
+                                                    Customer customer) throws IOException {
         //System.out.println("Got the new customer:\n" + name);
         customer.cleanAttributes();
         System.out.println(customer.getSurname());
         System.out.println(customer.getDateOfBirth());
         System.out.println(customer.getSex());
         Customer newCustomer = customerService.saveCustomer(customer);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        specialist.addCustomerId(customer.getId());
+        specialistService.save(specialist);
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
         System.out.println(newCustomer.getSex());

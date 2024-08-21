@@ -1,3 +1,10 @@
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin: auto auto 20px;
+}
+
 .icon42 {
   height: 30px;
   width: 30px;
@@ -492,7 +499,6 @@
 .b25 {
   width: 476px;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 356%;
 }
 .client-age-label {
@@ -511,7 +517,6 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }
@@ -637,7 +642,6 @@
   line-height: 20px;
   font-weight: 700;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }
@@ -702,7 +706,6 @@
   padding: var(--padding-12xs) var(--padding-smi) 0;
   position: relative;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 1;
 }
 .frame-wrapper16 {
@@ -874,7 +877,6 @@
 .b31 {
   width: 476px;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 356%;
 }
 .wrapper9 {
@@ -893,7 +895,6 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }
@@ -1036,7 +1037,6 @@
   line-height: 20px;
   font-weight: 700;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }
@@ -1100,7 +1100,6 @@
   padding: var(--padding-12xs) var(--padding-smi) 0;
   position: relative;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 1;
 }
 .frame-wrapper18 {
@@ -1728,7 +1727,6 @@
 .b44 {
   width: 476px;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 356%;
 }
 .wrapper13 {
@@ -1747,7 +1745,6 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }
@@ -1919,7 +1916,6 @@
 .b49 {
   width: 476px;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 356%;
 }
 .wrapper14 {
@@ -1938,7 +1934,6 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }
@@ -2178,7 +2173,6 @@
 .b56 {
   width: 476px;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 356%;
 }
 .wrapper15 {
@@ -2197,7 +2191,6 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  debug_commit: 69da668;
   white-space: nowrap;
   z-index: 1;
 }

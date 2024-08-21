@@ -235,8 +235,9 @@
                 </div>
               </div>
               <div class="client-info-wrapper">
+                <h2>Список клиентов</h2>
                 <div class="client-info1">
-                  <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.getId()}" id="groupContainer1">
+                  <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.id}" id="groupContainer1">
                     <div class="rectangle-parent21">
                       <div class="frame-child24"></div>
                       <b class="b47">
@@ -249,12 +250,16 @@
                     <div class="rectangle-parent22">
                       <div class="frame-child25"></div>
                       <div class="parent1">
-                        <b class="b48" th:text="${customer.getName()}"></b>
+                        <div th:switch="${customer.typeOfClient}">
+                          <b class="b48" th:case="${customer.typeOfClient.ADULT}" th:text="${customer.surname + ' ' + customer.name + ' ' + customer.lastName}"></b>
+                          <b class="b48" th:case="${customer.typeOfClient.COUPLE}" th:text="${customer.firstClientSurname + ' ' + customer.firstClientName + ' ' + customer.firstClientLastName}"></b>
+                          <b class="b48" th:case="${customer.typeOfClient.CHILD}" th:text="${customer.childSurname + ' ' + customer.childName + ' ' + customer.childLastName}"></b>
+                        </div>
                         <div class="frame-parent25">
                           <div class="wrapper14">
                             <b class="b49">Возраст: 20</b>
                           </div>
-                          <b class="client-age-space" th:text="${customer.getContact().getPhone()}"></b>
+                          <b class="client-age-space" th:text="${customer.contact.phone}"></b>
                         </div>
                       </div>
                       <div class="frame-parent26">
@@ -262,11 +267,11 @@
                           <div class="frame-parent27">
                             <div class="rectangle-parent23">
                               <div class="frame-child26"></div>
-                              <b class="b50">Регулярный</b>
+                              <b class="b50" th:text="${customer.clientStatus}"></b>
                             </div>
                             <div class="rectangle-parent24">
                               <div class="frame-child27"></div>
-                              <b class="b51">Офлайн</b>
+                              <b class="b51" th:text="${customer.preferredMeetingFormat}"></b>
                             </div>
                           </div>
                         </div>
@@ -278,8 +283,8 @@
                         />
                       </div>
                       <div class="parent2">
-                        <b class="b52">Взрослый</b>
-                        <b class="helloworldgmailcom3" th:text="${customer.getContact().getEmail()}"></b>
+                        <b class="b52" th:text="${customer.typeOfClient}"></b>
+                        <b class="helloworldgmailcom3" th:text="${customer.contact.email}"></b>
                       </div>
                     </div>
                   </div>
