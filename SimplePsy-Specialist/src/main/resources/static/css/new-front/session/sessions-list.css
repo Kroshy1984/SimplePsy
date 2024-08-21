@@ -68,6 +68,7 @@
 .about-us6,
 .news10,
 .user-policy6 {
+  cursor: pointer;
   position: relative;
   line-height: 25px;
 }
@@ -612,7 +613,7 @@
   bottom: 0;
 }
 .frame-child57 {
-  width: 525.9px;
+  width: 510px;
   right: 0.1px;
   border-radius: 0 var(--br-3xs) var(--br-3xs) 0;
   background-color: var(--grey-blue-95);

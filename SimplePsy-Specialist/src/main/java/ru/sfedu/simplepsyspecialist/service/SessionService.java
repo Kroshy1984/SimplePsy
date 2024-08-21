@@ -79,11 +79,13 @@ public class SessionService {
         return sessions;
     }
 
-    public void saveSession(Session session) {
+    public void updateSession(Session session) {
         String id = session.getId();
         Session oldSession = sessionRepository.findById(id).get();
         session.setId(oldSession.getId());
-        session.addProjectiveMethods(oldSession.getProjectiveMethods());
+        if (oldSession.getProjectiveMethods() != null) {
+            session.addProjectiveMethods(oldSession.getProjectiveMethods());
+        }
         sessionRepository.save(session);
     }
 }

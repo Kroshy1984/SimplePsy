@@ -17,8 +17,8 @@ import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -208,6 +208,13 @@ public class SessionController {
     public String getReportForm(@PathVariable String sessionId, Model model)
     {
         Session session = sessionService.findById(sessionId);
+        if (session.getReport() == null) {
+            Report report = new Report();
+            model.addAttribute("report", report);
+            model.addAttribute("projectiveMethods", session.getProjectiveMethods());
+            model.addAttribute("sessionId", sessionId);
+            return "new-front/session/report-create";
+        }
         Report report = session.getReport();
         model.addAttribute("report", report);
         model.addAttribute("projectiveMethods", session.getProjectiveMethods());
@@ -238,7 +245,7 @@ public class SessionController {
         Session session = sessionService.findById(sessionId);
         session.setProjectiveMethods(new ArrayList<>());
         session.addProjectiveMethod(projectiveMethod);
-        sessionService.saveSession(session);
+        sessionService.updateSession(session);
         return "redirect:/SimplePsy/V1/session/report/" + sessionId;
     }
 }
