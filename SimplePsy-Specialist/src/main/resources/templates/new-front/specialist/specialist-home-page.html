@@ -16,25 +16,6 @@
   />
 </head>
 <body>
-<style>
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  .modal img {
-    max-width: 90%;
-    max-height: 90%;
-  }
-</style>
-
 <div class="div59">
   <div class="settings"></div>
   <header class="frame-parent47">
@@ -415,6 +396,7 @@
     document.getElementById('cancel').style.display = 'none';
     window.location.href = '/SimplePsy/V1/specialist/personal-info';
   }
+
   document.getElementById('avatarInput').addEventListener('change', function() {
     var file = this.files[0];
     if (file) {

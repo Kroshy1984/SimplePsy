@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/projective-method.css}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="root">
+      <section class="methodology">
+        <form id="sessionForm" th:object="${projectiveMethod}" th:action="@{/SimplePsy/V1/session/report/projective-method}" method="post">
+          <input type="hidden" th:value="${sessionId}" name="sessionId">
+          <div class="base70"></div>
+          <div class="div101">Название методики</div>
+
+          <div class="instructions-parent">
+            <div class="instructions">
+              <div class="drawing-area">
+                <input type="text" name="name" class="div102" required>
+              </div>
+            </div>
+
+            <!-- TODO: Сделать загрузку изображений -->
+            <div class="method-container">
+            </div>
+
+            <div class="image-input-wrapper">
+              <div class="image-input">
+                <div class="image-preview"></div>
+                <div class="input-fields">
+                  <div class="add-technique-button">
+                    <label for="file-upload" class="div105">Добавить фото</label>
+                    <input id="file-upload" name="image" type="file" accept="image/*">
+                  </div>
+                  <button type="submit" class="add-technique-button">
+                    <div class="div105">Добавить методику</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script>
+      var groupIcon = document.getElementById("groupIcon");
+      if (groupIcon) {
+        groupIcon.addEventListener("click", function (e) {
+          window.location.href = "./frame.html";
+        });
+      }
+
+      var groupContainer = document.getElementById("groupContainer");
+      if (groupContainer) {
+        groupContainer.addEventListener("click", function (e) {
+          window.location.href = "./component6.html";
+        });
+      }
+      </script>
+  </body>
+</html>

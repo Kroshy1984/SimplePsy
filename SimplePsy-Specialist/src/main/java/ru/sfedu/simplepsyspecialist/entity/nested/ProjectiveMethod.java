@@ -1,24 +1,40 @@
 package ru.sfedu.simplepsyspecialist.entity.nested;
 
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectiveMethod {
 
+    @Id
+    private String id;
     private String name;
     private LocalDate date;
-    private byte[] image;
+    private List<byte[]> images;
 
-    public ProjectiveMethod() {}
-
-    public ProjectiveMethod(String name, LocalDate date) {
-        this.name = name;
-        this.date = date;
+    public ProjectiveMethod() {
+        this.date = LocalDate.now();
     }
 
-    public ProjectiveMethod(String name, LocalDate date, byte[] image) {
+    public ProjectiveMethod(String name) {
         this.name = name;
-        this.date = date;
-        this.image = image;
+        this.date = LocalDate.now();
+    }
+
+    public ProjectiveMethod(String name, List<byte[]> images) {
+        this.name = name;
+        this.date = LocalDate.now();
+        this.images = images;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,11 +53,17 @@ public class ProjectiveMethod {
         this.date = date;
     }
 
-    public byte[] getImage() {
-        return image;
+    public List<byte[]> getImages() {
+        return images;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImages(List<byte[]> images) {
+        this.images = images;
+    }
+
+    public void addImage(byte[] image) {
+        if (images == null)
+            images = new ArrayList<>();
+        images.add(image);
     }
 }

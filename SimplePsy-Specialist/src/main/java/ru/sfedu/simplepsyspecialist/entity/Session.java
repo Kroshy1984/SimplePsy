@@ -5,11 +5,13 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
+import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
 import ru.sfedu.simplepsyspecialist.entity.nested.Report;
 import ru.sfedu.simplepsyspecialist.entity.nested.SessionType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Document("Session")
 public class Session {
@@ -38,6 +40,7 @@ public class Session {
     private boolean isNotifiable;
     private String notificationTime;
     private Report report;
+    private List<ProjectiveMethod> projectiveMethods;
 
     public Session() {
     }
@@ -168,11 +171,27 @@ public class Session {
         this.notificationTime = notificationTime;
     }
 
-    public Report getReports() {
+    public Report getReport() {
         return report;
     }
 
-    public void setReports(Report report) {
+    public void setReport(Report report) {
         this.report = report;
+    }
+
+    public List<ProjectiveMethod> getProjectiveMethods() {
+        return projectiveMethods;
+    }
+
+    public void setProjectiveMethods(List<ProjectiveMethod> projectiveMethods) {
+        this.projectiveMethods = projectiveMethods;
+    }
+
+    public void addProjectiveMethod(ProjectiveMethod projectiveMethod) {
+        this.projectiveMethods.add(projectiveMethod);
+    }
+
+    public void addProjectiveMethods(List<ProjectiveMethod> projectiveMethods) {
+        this.projectiveMethods.addAll(projectiveMethods);
     }
 }

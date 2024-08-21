@@ -1,3 +1,56 @@
+.save-edit-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    width: 589px;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: var(--bold-18-size);
+    color: var(--color-slategray-500);
+}
+
+.save-edit-buttons {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 100%;
+    justify-content: flex-start;
+    gap: 22px;
+}
+
+.rectangle-parent51 {
+    cursor: pointer;
+    border: 3px solid var(--grey-blue-95);
+    padding: var(--padding-8xs) var(--padding-xs) var(--padding-xs);
+    background-color: var(--color-lightslategray-100);
+    border-radius: var(--br-xl);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-width: 155px;
+}
+
+.rectangle-parent51:hover {
+    background-color: var(--color-slategray-300);
+    border: 3px solid var(--color-lightgray);
+    box-sizing: border-box;
+}
+
+.div72 {
+    flex: 1;
+    position: relative;
+    font-size: var(--bold-18-size);
+    line-height: 150%;
+    font-weight: 500;
+    font-family: var(--bold-10);
+    color: var(--color-slategray-500);
+    text-align: center;
+    z-index: 1;
+}
+
 /* Container for the form */
 .container {
     position: relative;
@@ -6,8 +59,6 @@
     width: 35%;
     padding: 20px;
     background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Form heading */
@@ -34,6 +85,7 @@
 
 /* Labels */
 #test-edit-form label {
+    text-align: left;
     font-size: 16px;
     font-weight: 500;
     color: #555;
@@ -49,7 +101,7 @@
     font-family: 'Roboto', sans-serif;
     border: 1px solid #ddd;
     border-radius: 5px;
-    resize: vertical;
+    resize: none;
     background-color: #fff;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -57,27 +109,8 @@
 /* Textarea focus effect */
 #test-edit-form textarea:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Submit button */
-#test-edit-form button[type="submit"] {
-    align-self: center;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-/* Submit button hover effect */
-#test-edit-form button[type="submit"]:hover {
-    background-color: #0056b3;
+    border-color: #000000;
+    box-shadow: 0 0 5px rgba(2, 2, 2, 0.5);
 }
 
 .modal {
@@ -99,7 +132,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .close-btn {
@@ -155,7 +188,7 @@
 
 .frame-wrapper47 {
     position: absolute;
-    left: 600px;
+    left: 650px;
     align-self: stretch;
     flex-direction: row;
     justify-content: flex-end;
@@ -185,19 +218,19 @@
     align-self: stretch;
     cursor: pointer;
     text-align: center;
-    font-size: var(--font-size-7xs);
+    font-size: 10px;
     color: var(--white);
 }
 
 .rectangle-parent62 {
-    width: 57.1px;
+    align-items: center;
+    width: 65px;
     border-radius: var(--br-5xs) 0 0 var(--br-5xs);
     background-color: var(--color-slategray-100);
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     justify-content: flex-start;
-    padding: var(--padding-10xs-8) 0 var(--padding-10xs-8) var(--padding-10xs);
+    padding: 1px 1px 1px 1px;
     box-sizing: border-box;
     flex-shrink: 0;
     z-index: 1;
@@ -207,16 +240,14 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    flex-shrink: 0;
     flex: 1;
     border-radius: 0 var(--br-3xs) var(--br-3xs) 0;
     background-color: var(--grey-blue-95);
     align-items: flex-start;
     padding: 6.7px var(--padding-13xl) var(--padding-6xs-4);
-    white-space: nowrap;
-    margin-left: -36.3px;
     font-size: var(--bold-12-size);
     color: var(--color-slategray-500);
+    align-items: center;
 }
 
 .b94 {

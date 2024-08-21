@@ -151,7 +151,7 @@
             </div>
             <div class="component-19-wrapper">
               <div class="component-19">
-                <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.getId()}" id="groupContainer">
+                <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.getId()}" onclick="goTo(this)">
                   <div class="frame-child57"></div>
                   <div class="frame-child58"></div>
                   <b class="b82" th:text="${newSession.getDate()}"></b>
@@ -164,7 +164,7 @@
           </div>
           <div class="frame-parent69">
             <div class="frame-parent70">
-              <div class="rectangle-parent60" id="groupContainer">
+              <div class="rectangle-parent60">
                 <div class="frame-child69"></div>
                 <h3 class="h3">Опросники и тесты</h3>
               </div>
@@ -190,7 +190,7 @@
                   <div class="wrapper28">
                     <h2 class="h21">Проективные методики</h2>
                   </div>
-                  <div class="frame-parent72" id="groupContainer">
+                  <div class="frame-parent72">
                     <div class="rectangle-parent62">
                       <div class="frame-child71"></div>
                       <b class="b94">20.02.2024</b>
@@ -232,7 +232,7 @@
               <b class="b95">Заявки</b>
             </div>
             <div class="frame-parent76">
-              <div class="frame-parent77" id="groupContainer">
+              <div class="frame-parent77">
                 <div class="rectangle-parent67">
                   <div class="frame-child76"></div>
                   <b class="b96">20.02.2024</b>
@@ -243,7 +243,7 @@
                 </div>
               </div>
               <div class="frame-parent78">
-                <div class="frame-parent79" id="groupContainer">
+                <div class="frame-parent79">
                   <div class="rectangle-parent69">
                     <div class="frame-child78"></div>
                     <b class="b98">25.02.2024</b>
@@ -326,12 +326,10 @@
         });
       }
 
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
+      function goTo(obj) {
+        window.location.href = "./report/" + obj.getAttribute("data-card-id");
       }
+
       // Открытие модального окна создания сессии
       document.addEventListener('DOMContentLoaded', function() {
       // Получаем элементы

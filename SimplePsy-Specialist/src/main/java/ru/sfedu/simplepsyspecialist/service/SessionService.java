@@ -35,6 +35,7 @@ public class SessionService {
         System.out.println("sessions's list: " + sessions);
         return listOfSessions;
     }
+
     public void createSession(Session session) {
         sessionRepository.save(session);
     }
@@ -59,5 +60,13 @@ public class SessionService {
 
     public Session findById(String sessionId) {
         return sessionRepository.findById(sessionId).get();
+    }
+
+    public void saveSession(Session session) {
+        String id = session.getId();
+        Session oldSession = sessionRepository.findById(id).get();
+        session.setId(oldSession.getId());
+        session.addProjectiveMethods(oldSession.getProjectiveMethods());
+        sessionRepository.save(session);
     }
 }

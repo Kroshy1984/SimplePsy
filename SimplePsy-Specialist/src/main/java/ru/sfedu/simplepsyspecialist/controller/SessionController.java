@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
 import ru.sfedu.simplepsyspecialist.entity.nested.Report;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -118,7 +120,7 @@ public class SessionController {
         session.setSpecialistId(specialistId);
         Client client = clientService.findById(session.getClientId());
         session.setClient(client);
-        sessionService.createSession(session);
+        sessionService.saveSession(session);
 //        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 //        System.out.println("Specialist found!");
 //        String specialist_id = specialist.getId();
@@ -183,32 +185,41 @@ public class SessionController {
     public String getCalendar(Model model) {
         return "/new-front/calendar/calendar";
     }
-    @GetMapping("report/create/{sessionId}")
-    public String createReportForm(@PathVariable String sessionId, Model model)
+    @GetMapping("report/{sessionId}")
+    public String getReportForm(@PathVariable String sessionId, Model model)
     {
-        Report report = new Report();
         Session session = sessionService.findById(sessionId);
+        Report report = session.getReport();
         model.addAttribute("report", report);
-        model.addAttribute("projectiveMethods", session.getReports().getProjectiveMethods());
+        model.addAttribute("projectiveMethods", session.getProjectiveMethods());
         model.addAttribute("sessionId", sessionId);
         return "new-front/session/report-create";
     }
-    @PostMapping("report/create")
-    public String createReport(@RequestParam String sessionId, @ModelAttribute Report report)
+    @PostMapping("report")
+    public String saveReport(@RequestParam("sessionId") String sessionId, @ModelAttribute Report report)
     {
         System.out.println(sessionId);
         Session session = sessionService.findById(sessionId);
         System.out.println(report.getRequestForSessionByClient());
-        session.setReports(report);
+        session.setReport(report);
         sessionService.createSession(session);
-        return "new-front/session/report-create";
+        return "redirect:/SimplePsy/V1/session/report/" + sessionId;
     }
 
-    @GetMapping("report/create/projective-method")
-    public String getProjectiveMethod(Model model) {
-        Session session = new Session();
-        //session.setClient(new Client());
-        model.addAttribute("session", session);
-        return "new-front/session/root";
+    @GetMapping("report/{sessionId}/projective-method")
+    public String getProjectiveMethod(@PathVariable String sessionId, Model model) {
+        ProjectiveMethod projectiveMethod = new ProjectiveMethod();
+        model.addAttribute("projectiveMethod", projectiveMethod);
+        model.addAttribute("sessionId", sessionId);
+        return "new-front/session/projective-method";
+    }
+
+    @PostMapping("report/projective-method")
+    public String createProjectiveMethod(@RequestParam("sessionId") String sessionId, @ModelAttribute ProjectiveMethod projectiveMethod) {
+        Session session = sessionService.findById(sessionId);
+        session.setProjectiveMethods(new ArrayList<>());
+        session.addProjectiveMethod(projectiveMethod);
+        sessionService.saveSession(session);
+        return "redirect:/SimplePsy/V1/session/report/" + sessionId;
     }
 }
