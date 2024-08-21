@@ -1,10 +1,20 @@
 package ru.sfedu.simplepsyspecialist.entity.nested;
 
 public enum OnlineMeetingPlace {
-    ZOOM,
-    TELEMOST,
-    GOOGLE_MEET,
-    TELEGRAM,
-    WHATSAPP,
-    SKYPE
+    ZOOM("Zoom"),
+    TELEMOST("Телемост"),
+    GOOGLE_MEET("GoogleMeet"),
+    TELEGRAM("Telegram"),
+    WHATSAPP("WhatsApp"),
+    SKYPE("Skype");
+
+    private String translation;
+
+    OnlineMeetingPlace(String translation) {
+        this.translation = translation;
+    }
+
+    public String getTranslation() {
+        return translation;
+    }
 }

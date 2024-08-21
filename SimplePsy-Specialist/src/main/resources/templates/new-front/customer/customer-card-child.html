@@ -227,11 +227,11 @@
                 <div class="component19">
                     <div class="item113">
                         <div class="div221">Тип клиента</div>
-                        <div class="div222" th:text="${customer.typeOfClient}"></div>
+                        <div class="div222" th:text="${customer.typeOfClient.translation}"></div>
                     </div>
                     <div class="item113">
                         <div class="div221">Статус клиента</div>
-                        <div class="div222" th:text="${customer.clientStatus}"></div>
+                        <div class="div222" th:text="${customer.clientStatus.translation}"></div>
                     </div>
                     <div class="item114">
                         <div class="div223">ФИО ребенка</div>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="item117">
                         <div class="div226">Пол ребенка</div>
-                        <div class="div227" th:text="${customer.childSex}"></div>
+                        <div class="div227" th:text="${customer.childSex.translation}"></div>
                     </div>
                     <div class="item117">
                         <div class="div226">Запрос взрослого на терапию: желаемый результат от прохождения терапии</div>
@@ -265,7 +265,7 @@
                     </div>
                     <div class="item117">
                         <div class="div226">Кто приводит клиента</div>
-                        <div class="div227" id="who-brings" th:value="${customer.leadsClient}" th:text="${customer.leadsClient}"></div>
+                        <div class="div227" id="who-brings" th:value="${customer.leadsClient}" th:text="${customer.leadsClient.translation}"></div>
                     </div>
 
                     <div id="parent-fields">
@@ -285,7 +285,7 @@
                         </div>
                         <div class="item117">
                             <div class="div226">Пол родителя</div>
-                            <div class="div227" th:text="${customer.parentSex}"></div>
+                            <div class="div227" th:text="${customer.parentSex.translation}"></div>
                         </div>
                         <div class="item117">
                             <div class="div226">Город родителя</div>
@@ -310,7 +310,7 @@
                         </div>
                         <div class="item117">
                             <div class="div226">Пол первого родителя</div>
-                            <div class="div227" th:text="${customer.firstParentsSex}"></div>
+                            <div class="div227" th:text="${customer.firstParentsSex.translation}"></div>
                         </div>
                         <div class="item117">
                             <div class="div226">Город первого родителя</div>
@@ -332,7 +332,7 @@
                         </div>
                         <div class="item117">
                             <div class="div226">Пол второго родителя</div>
-                            <div class="div227" th:text="${customer.secondParentsSex}"></div>
+                            <div class="div227" th:text="${customer.secondParentsSex.translation}"></div>
                         </div>
                         <div class="item117">
                             <div class="div226">Город второго родителя</div>
@@ -357,7 +357,7 @@
                         </div>
                         <div class="item117">
                             <div class="div226">Пол попечителя</div>
-                            <div class="div227" th:text="${customer.trusteesSex}"></div>
+                            <div class="div227" th:text="${customer.trusteesSex.translation}"></div>
                         </div>
                         <div class="item117">
                             <div class="div226">Город попечителя</div>
@@ -369,7 +369,7 @@
                         <div class="div231">
                             Каким способом обратился клиент/попечитель
                         </div>
-                        <div class="div232" th:text="${customer.typeOfTreatment}"></div>
+                        <div class="div232" th:text="${customer.typeOfTreatment.translation}"></div>
                     </div>
                     <div class="item121">
                         <div class="div233">
@@ -383,13 +383,13 @@
                     </div>
                     <div class="item123">
                         <div class="div235">Предпочтительный формат встречи</div>
-                        <div class="div236" th:text="${customer.preferredMeetingFormat}"></div>
+                        <div class="div236" th:text="${customer.preferredMeetingFormat.translation}"></div>
                     </div>
                     <div class="item124">
                         <div class="div237">
                             Для онлайн выбрать/указать площадку взаимодействия
                         </div>
-                        <div class="zoom1" th:text="${customer.onlineMeetingPlace}"></div>
+                        <div class="zoom1" th:text="${customer.onlineMeetingPlace.translation}"></div>
                     </div>
                     <div class="item125">
                         <div class="div238">
@@ -468,20 +468,20 @@
                     </div>
                     <div class="item134">
                         <div class="div249">Семейное положение</div>
-                        <div class="div250" th:text="${customer.familyStatus}"></div>
+                        <div class="div250" th:text="${customer.familyStatus.translation}"></div>
                     </div>
                     <div class="item137">
                         <div class="div253">
                             Приоритетный канал коммуникации (выпадающий список куда
                             писать)
                         </div>
-                        <div class="telegram3" th:text="${customer.priorityCommunicationChannel}"></div>
+                        <div class="telegram3" th:text="${customer.priorityCommunicationChannel.translation}"></div>
                     </div>
                     <div class="item138">
                         <div class="div254">
                             Берется ли супервизия на данного клиента
                         </div>
-                        <div class="div255" id="is-supervised" th:value="${customer.supervised}" th:text="${customer.supervised}"></div>
+                        <div class="div255" id="is-supervised" th:value="${customer.supervised}" th:text="${customer.supervised.translation}"></div>
                     </div>
 
                     <div id="supervisor-fields">

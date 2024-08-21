@@ -210,7 +210,7 @@
       <th:block th:each="scoring : ${scorings}">
         <div class="list-item">
           <span class="list-item-title" th:text="${scoring.title}"></span>
-          <a class="list-item-button" th:text="${scoring.type == 'TEST' ? 'Тест' : 'Опрос'}"
+          <a class="list-item-button" th:text="${scoring.type.translation}"
              th:href="@{test/edit/{id}(id=${scoring.id})}"></a>
         </div>
       </th:block>

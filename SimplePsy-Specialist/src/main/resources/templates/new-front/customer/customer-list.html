@@ -237,7 +237,7 @@
               <div class="client-info-wrapper">
                 <h2>Список клиентов</h2>
                 <div class="client-info1">
-                  <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.id}" id="groupContainer1">
+                  <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.id}" id="groupContainer1" onclick="goTo(this)">
                     <div class="rectangle-parent21">
                       <div class="frame-child24"></div>
                       <b class="b47">
@@ -267,11 +267,11 @@
                           <div class="frame-parent27">
                             <div class="rectangle-parent23">
                               <div class="frame-child26"></div>
-                              <b class="b50" th:text="${customer.clientStatus}"></b>
+                              <b class="b50" th:text="${customer.clientStatus.translation}"></b>
                             </div>
                             <div class="rectangle-parent24">
                               <div class="frame-child27"></div>
-                              <b class="b51" th:text="${customer.preferredMeetingFormat}"></b>
+                              <b class="b51" th:text="${customer.preferredMeetingFormat.translation}"></b>
                             </div>
                           </div>
                         </div>
@@ -283,7 +283,7 @@
                         />
                       </div>
                       <div class="parent2">
-                        <b class="b52" th:text="${customer.typeOfClient}"></b>
+                        <b class="b52" th:text="${customer.typeOfClient.translation}"></b>
                         <b class="helloworldgmailcom3" th:text="${customer.contact.email}"></b>
                       </div>
                     </div>
@@ -322,53 +322,8 @@
     </div>
 
     <script>
-      var userImage = document.getElementById("userImage");
-      if (userImage) {
-        userImage.addEventListener("click", function (e) {
-          window.location.href = "./component4.html";
-        });
-      }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      
-      var emailContainer = document.getElementById("emailContainer");
-      if (emailContainer) {
-        emailContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
-      
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./component3.html";
-        });
-      }
-      
-      var container = document.getElementById("container");
-      if (container) {
-        container.addEventListener("click", function (e) {
-          window.location.href = "./component2.html";
-        });
-      }
-      
-      var groupContainer1 = document.getElementById("groupContainer1");
-      if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      
-      var groupContainer2 = document.getElementById("groupContainer2");
-      if (groupContainer2) {
-        groupContainer2.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
+      function goTo(obj) {
+        window.location.href = "/SimplePsy/V1/customer/customer-card/" + obj.getAttribute("data-card-id");
       }
       </script>
   </body>
