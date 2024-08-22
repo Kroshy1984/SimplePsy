@@ -18,52 +18,49 @@
 </head>
 <body>
 <div class="div139">
-    <div class="sidebar1">
+    <div class="sidebar1 sidebar1-fix-width">
         <div class="menu">
-            <div class="dashboard23" id="dashboardContainer">
-                <div class="base75"></div>
-                <b class="dashboard24">Список клинетов</b>
-                <img
-                        class="icon115"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-3@2x.png"
-                />
-            </div>
-            <div class="invoice15" id="invoiceContainer">
-                <div class="base76"></div>
-                <b class="invoice16">Уведомления</b>
-                <img
-                        class="icon116"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-5.svg"
-                />
-            </div>
-            <div class="files8">
-                <div class="base77"></div>
-                <b class="files9">Аналитика</b>
-                <img
-                        class="icon117"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-6.svg"
-                />
-            </div>
-            <div class="email3">
-                <div class="base78"></div>
-                <b class="calendars8">Календарь</b>
-                <img
-                        class="icon118"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-4@2x.png"
-                />
-            </div>
-
-            <div class="div140" id="container">
-                <div class="base79"></div>
-                <b class="dashboard25">Опросники и тесты</b>
+            <div class="frame-wrapper73">
+                <div class="frame-parent122">
+                    <div class="frame-parent123">
+                        <div class="client-list-wrapper">
+                            <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                            <div class="icon-wrapper33">
+                                <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
+                            </div>
+                            <b class="client-list">Список клиентов</b>
+                        </div>
+                        <div class="base-frame">
+                            <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                <div class="icon-wrapper34">
+                                    <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
+                                </div>
+                                <b class="calendar">Календарь</b>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="frame-parent123">
+                        <div class="notifications-wrapper">
+                            <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                            <div class="icon-wrapper33">
+                                <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
+                            </div>
+                            <b class="notifications">Уведомления</b>
+                        </div>
+                        <div class="base-frame">
+                            <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                <div class="icon-wrapper34">
+                                    <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                                </div>
+                                <b class="analytics">Аналитика</b>
+                            </button>
+                        </div>
+                        <div class="tests-wrapper">
+                            <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                            <b class="surveys-tests">Опросники и тесты</b>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="parent26">
                 <b class="b112">Заявки</b>
@@ -266,6 +263,12 @@
         </div>
     </div>
 </div>
+<div id="modal1" class="modal1">
+    <div class="modal-content1">
+        <span class="close-btn1">&times;</span>
+        <div id="modal-body1"></div>
+    </div>
+</div>
 <script>
     var dashboardContainer = document.getElementById("dashboardContainer");
     if (dashboardContainer) {
@@ -425,6 +428,36 @@
         document.getElementById('cancel').style.display = 'none';
         window.location.href = '/SimplePsy/V1/session/report/' + sessionId;
     }
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+      // Получаем элементы
+      var modal = document.getElementById('modal');
+      var modalBody = document.getElementById('modal-body');
+      var closeBtn = document.querySelector('.close-btn');
+      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+      // Функция для открытия модального окна
+      function openModal() {
+        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+          .then(response => response.text())
+          .then(data => {
+            modalBody.innerHTML = data;s
+            modal.style.display = 'block';
+          })
+          .catch(error => console.error('Ошибка загрузки:', error));
+      }
+
+      // Функция для закрытия модального окна
+      function closeModal() {
+        modal.style.display = 'none';
+      }
+
+      // Событие клика для открытия модального окна
+      appointLink.addEventListener('click', openModal);
+
+      // Событие клика для закрытия модального окна
+      closeBtn.addEventListener('click', closeModal);
+      });
 </script>
 </body>
 </html>

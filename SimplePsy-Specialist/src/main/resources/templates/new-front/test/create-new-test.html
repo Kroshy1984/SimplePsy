@@ -101,67 +101,46 @@
                             </p>
                         </b>
                     </div>
-                    <div class="dashboard-menu-items">
-                        <div class="dashboard-menu-first">
-                            <div class="dashboard43" id="dashboardContainer">
-                                <div class="base111"></div>
-                                <div class="dashboard-menu-first-icon">
-                                    <img
-                                            class="icon191"
-                                            loading="lazy"
-                                            alt=""
-                                            src="/images/icon-3@2x.png"
-                                    />
-                                </div>
-                                <b class="dashboard44">Список клинетов</b>
-                            </div>
-                            <div class="dashboard-menu-second-base">
-                                <div class="base112">
-                                    <div class="calendar-menu-icon">
-                                        <img
-                                                class="icon192"
-                                                loading="lazy"
-                                                alt=""
-                                                src="/images/icon-41@2x.png"
-                                        />
+                    <div class="frame-wrapper73">
+                        <div class="frame-parent122">
+                            <div class="frame-parent123">
+                                <div class="client-list-wrapper">
+                                    <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                                    <div class="icon-wrapper33">
+                                        <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
                                     </div>
-                                    <b class="calendars15">Календарь</b>
+                                    <b class="client-list">Список клиентов</b>
+                                </div>
+                                <div class="base-frame">
+                                    <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                        <div class="icon-wrapper34">
+                                            <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
+                                        </div>
+                                        <b class="calendar">Календарь</b>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-menu-items1">
-                        <div class="invoice-parent3">
-                            <div class="invoice30" id="invoiceContainer">
-                                <div class="base113"></div>
-                                <div class="icon-wrapper48">
-                                    <img
-                                            class="icon193"
-                                            loading="lazy"
-                                            alt=""
-                                            src="/images/icon-5.svg"
-                                    />
+                            <div class="frame-parent123">
+                                <div class="notifications-wrapper">
+                                    <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                                    <div class="icon-wrapper33">
+                                        <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
+                                    </div>
+                                    <b class="notifications">Уведомления</b>
                                 </div>
-                                <b class="invoice31">Уведомления</b>
-                            </div>
-                            <div class="base-parent19">
-                                <div class="base114"></div>
-                                <div class="files-menu-icon">
-                                    <img
-                                            class="icon194"
-                                            loading="lazy"
-                                            alt=""
-                                            src="/images/icon-6.svg"
-                                    />
+                                <div class="base-frame">
+                                    <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                        <div class="icon-wrapper34">
+                                            <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                                        </div>
+                                        <b class="analytics">Аналитика</b>
+                                    </button>
                                 </div>
-                                <b class="files16">Аналитика</b>
+                                <div class="tests-wrapper">
+                                    <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                                    <b class="surveys-tests">Опросники и тесты</b>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="wrapper57">
-                        <div class="div341" id="container">
-                            <div class="base115"></div>
-                            <b class="dashboard45">Опросники и тесты</b>
                         </div>
                     </div>
                     <div class="wrapper58">
@@ -207,10 +186,10 @@
                                 <div class="question-content1">
                                     <input name="questions[0].questionText" type="text" class="h214 editable-heading" placeholder="Новый вопрос">
                                     <div class="answer">
-                                        <input name="questions[0].options[0]" type="text" class="editable-option" value="Да">
+                                        <input name="questions[0].options[0]" type="text" class="editable-option" placeholder="Да">
                                     </div>
                                     <div class="answer">
-                                        <input name="questions[0].options[1]" type="text" class="editable-option" value="Нет">
+                                        <input name="questions[0].options[1]" type="text" class="editable-option" placeholder="Нет">
                                     </div>
                                 </div>
                             </div>
@@ -373,10 +352,10 @@
                         <div class="question-content1">
                             <input name="questions[${newIndex}].questionText" type="text" class="h214 editable-heading" placeholder="Новый вопрос">
                             <div class="answer">
-                                <input name="questions[${newIndex}].options[0]" type="text" class="editable-option" value="Да">
+                                <input name="questions[${newIndex}].options[0]" type="text" class="editable-option" placeholder="Да">
                             </div>
                             <div class="answer">
-                                <input name="questions[${newIndex}].options[1]" type="text" class="editable-option" value="Нет">
+                                <input name="questions[${newIndex}].options[1]" type="text" class="editable-option" placeholder="Нет">
                             </div>
                         </div>
                     </div>

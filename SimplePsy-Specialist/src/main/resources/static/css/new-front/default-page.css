@@ -556,3 +556,6 @@
   font-size: var(--bold-12-size);
   color: var(--grey-blue-80);
 }
+.sidebar1-fix-width{
+  width: 240px;
+}
