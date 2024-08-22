@@ -138,23 +138,6 @@
     });
   }
 
-  document.getElementById('clientInput').addEventListener('input', function() {
-    fetch('/SimplePsy/V1/client/findAll')
-            .then(response => response.json())
-            .then(clients => {
-              const dataList = document.getElementById('clientsList');
-              dataList.innerHTML = '';
-
-              clients.forEach(client => {
-                const option = document.createElement('option');
-                option.value = client.name;
-                option.setAttribute('data-id', client.id);
-                dataList.appendChild(option);
-              });
-            })
-            .catch(error => console.error('Ошибка:', error));
-  });
-
   document.getElementById('clientInput').addEventListener('change', function() {
     const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
     if (selectedOption) {

@@ -320,20 +320,76 @@
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
 
     // Функция для открытия модального окна
-    function openModal() {
-      fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
-        .then(response => response.text())
-        .then(data => {
-          modalBody.innerHTML = data;s
-          modal.style.display = 'block';
-        })
-        .catch(error => console.error('Ошибка загрузки:', error));
-    }
+      function openModal() {
+        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                  modalBody.innerHTML = data;
+                  modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
 
-    // Функция для закрытия модального окна
-    function closeModal() {
-      modal.style.display = 'none';
+        fetch('/SimplePsy/V1/client/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                  const dataList = document.getElementById('clientsList');
+                  dataList.innerHTML = '';
+
+                  const script = document.createElement('script');
+                  script.id = 'dynamic-script';
+                  script.textContent = `
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
     }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+                  document.body.appendChild(script);
+                  clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.name;
+                    option.setAttribute('data-id', client.id);
+                    dataList.appendChild(option);
+                  });
+                })
+                .catch(error => console.error('Ошибка:', error));
+
+
+      }
+
+      // Функция для закрытия модального окна
+      function closeModal() {
+        modal.style.display = 'none';
+        const script = document.getElementById('dynamic-script');
+        if (script) {
+          script.remove();
+          console.log('Скрипт удалён');
+        } else {
+          console.log('Скрипт не найден');
+        }
+      }
 
     // Событие клика для открытия модального окна
     appointLink.addEventListener('click', openModal);

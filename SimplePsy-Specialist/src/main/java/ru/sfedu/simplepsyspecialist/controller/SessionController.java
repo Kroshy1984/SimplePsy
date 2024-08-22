@@ -61,45 +61,6 @@ public class SessionController {
                 "SessionController in method searchAllSessions: " + sessions);
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
-//    @PostMapping("/new")
-//    public  ResponseEntity<String> createNewSession(
-//            @RequestParam("clientId") String clientId,
-//            @RequestParam("specialistId") String specialistId,
-//            @RequestParam("problem") String problem,
-//            @RequestParam("date") LocalDateTime date
-//           ) {
-//        System.out.println("clientId: " + clientId);
-//        System.out.println("specialistId: " + specialistId);
-//        System.out.println("problem: " + problem);
-//        System.out.println("date: " + date);
-//        sessionService.createSession(clientId, specialistId, problem, date);
-//        return ResponseEntity.ok("Session successfully created");
-//    }
-    @GetMapping("/calendar-day")
-    public String getCalendarDayBySpecialistId(
-    //        @AuthenticationPrincipal UserDetails userDetails
-    ) {
-//        System.out.println(userDetails.getUsername());
-//        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-//        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
-        return "new-front/calendar/calendar";
-    }
-    @GetMapping("/calendar-week")
-    public String getCalendarWeekBySpecialistId(
-            @AuthenticationPrincipal UserDetails userDetails) {
-        System.out.println(userDetails.getUsername());
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
-        return "new-front/calendar/calendar-week";
-    }
-    @GetMapping("/calendar-month")
-    public String getCalendarMonthBySpecialistId(
-            @AuthenticationPrincipal UserDetails userDetails) {
-        System.out.println(userDetails.getUsername());
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
-        return "new-front/calendar/calendar-week1";
-    }
 
     @GetMapping("/session-form")
     public String getSessionForm(Model model) {
@@ -257,16 +218,39 @@ public class SessionController {
         return "new-front/calendar/holiday";
     }
     @PostMapping("/holiday")
-    public ResponseEntity<String> getHolidayForm(Session session,
+    public String getHolidayForm(Session session,
                                  @AuthenticationPrincipal UserDetails userDetails)
     {
         System.out.println(session.getDate());
         System.out.println(session.getEndDate());
 
-        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
-        session.setSpecialistId(specialistId);
-        sessionService.createSession(session);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        String specialistId = specialist.getId();
 
-        return ResponseEntity.ok("ok");
+        session.setClientId(specialistId);
+        session.setSpecialistId(specialistId);
+        Client client = new Client();
+        client.setName(session.getTitle());
+        client.setSurname(" ");
+        session.setClient(client);
+        LocalDate startDate = session.getDate();
+        LocalDate endDate = session.getEndDate();
+        int days = endDate.getDayOfYear() - startDate.getDayOfYear();
+        System.out.println(days);
+        sessionService.createSession(session);
+        for (int i = 1; i < days+1; i++) {
+            Session nextSession = new Session();
+            nextSession.setSpecialistId(session.getSpecialistId());
+            nextSession.setClient(client);
+            nextSession.setClientId(specialistId);
+            nextSession.setTitle(session.getTitle());
+            nextSession.setDate(startDate.plusDays(i));
+            nextSession.setTimeStart(session.getTimeStart());
+            nextSession.setTimeFinish(session.getTimeFinish());
+
+            System.out.println(nextSession.getDate());
+            sessionService.createSession(nextSession);
+        }
+        return "redirect:/SimplePsy/V1/session/calendar";
     }
 }

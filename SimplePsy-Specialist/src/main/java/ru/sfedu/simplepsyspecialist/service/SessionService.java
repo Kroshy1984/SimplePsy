@@ -37,6 +37,7 @@ public class SessionService {
     }
 
     public void createSession(Session session) {
+        System.out.println("saving session");
         sessionRepository.save(session);
     }
 
