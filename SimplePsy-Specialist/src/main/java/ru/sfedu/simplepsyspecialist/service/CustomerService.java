@@ -42,16 +42,7 @@ public class CustomerService {
     }
 
     public Customer findById(String id) {
-        Customer customer = customerRepository.findById(id).get();
-        if (customer == null) {
-            throw new NotFoundException(String.format("Customer not found with id %s", id));
-        }
-        else
-        {
-            System.out.println(String.format("Found the customer with id and name:\n%s: %s",
-                    customer.getId(), customer.getName()));
-        }
-        return customer;
+       return customerRepository.findById(id).get();
     }
 
     public Customer saveCustomer(Customer customer) {

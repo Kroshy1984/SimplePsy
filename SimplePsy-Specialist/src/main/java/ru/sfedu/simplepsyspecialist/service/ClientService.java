@@ -23,6 +23,7 @@ public class ClientService {
     }
 
     public Client save(Client client) {
+        System.out.println("saving client");
         return clientRepository.save(client);
     }
 

@@ -9,7 +9,8 @@ import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.CompletedScoring;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
-import ru.sfedu.simplepsyspecialist.entity.mapper.CustomerToClientMapper;
+import ru.sfedu.simplepsyspecialist.entity.nested.Gender;
+import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
 import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
@@ -30,9 +31,12 @@ public class ScoringController {
     CustomerService customerService;
 
     @Autowired
-    public ScoringController(ScoringService scoringService, ClientService clientService) {
+    public ScoringController(ScoringService scoringService,
+                             CustomerService customerService,
+                             ClientService clientService) {
         this.scoringService = scoringService;
         this.clientService = clientService;
+        this.customerService = customerService;
     }
 
 //    @GetMapping("/userForm")
@@ -90,15 +94,6 @@ public class ScoringController {
         return null;
     }
 
-    @PostMapping("/find-customer/byProblemId/{problemId}")
-    public ResponseEntity<String> sendProblemId(@PathVariable String problemId,
-                                                @RequestParam("scoringId") String scoringId) {
-        System.out.println("In method sendProblemId\nGot the problemId " + problemId);
-        System.out.println("The scoringId is " + scoringId);
-        scoringService.saveCustomersScoring(problemId, scoringId);
-        scoringService.sendProblemId(problemId);
-        return ResponseEntity.ok("Success");
-    }
 //    @GetMapping("/getScoringAnswers")
 //    public ResponseEntity<List<String>> getScoringAnswers(@RequestParam("scoringId") String scoringId)
 //    {
@@ -135,15 +130,29 @@ public class ScoringController {
     @PostMapping("/submit")
     public String submitScoring(@RequestBody CompletedScoring completedScoring) {
         System.out.println("Scoring title: " + completedScoring.getTitle());
+        System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
 
-        Client client = CustomerToClientMapper.INSTANCE.customerToClient(customer);
+        Client client = new Client();
+        client.setId(customer.getId());
+        client.setTypeOfClient(customer.getTypeOfClient());
+        client.setName(customer.getName());
+        client.setSurname(customer.getSurname());
+        client.setMiddleName(customer.getLastName()); // Используем lastName как middleName
+        client.setContact(customer.getContact());
+        client.setFinancialConditions(customer.getFinancialConditions());
+        client.setGender(customer.getSex() != null ? convertSexToGender(customer.getSex()) : null);
+        client.setBirthDay(customer.getDateOfBirth());
+        client.setRecommendations(customer.getCollegialRecommendations());
 
         client.addScoring(completedScoring);
         client.addScoring(completedScoring);
         clientService.save(client);
         return "new-front/test/create-questionnaire1";
     }
+
+
+
     @GetMapping("test/creation")
     public String createTestForm()
     {
@@ -178,10 +187,17 @@ public class ScoringController {
     @PostMapping("test/submit")
     public String submitTest(@RequestBody CompletedScoring completedScoring) {
         System.out.println("Scoring title: " + completedScoring.getTitle());
+        System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
 
-        Client client = CustomerToClientMapper.INSTANCE.customerToClient(customer);
+        Client client = new Client();
+        client.setTypeOfClient(customer.getTypeOfClient());
+        client.setName(customer.getName());
+        client.setSurname(customer.getSurname());
 
+        client.setContact(customer.getContact());
+
+        client.addScoring(completedScoring);
         client.addScoring(completedScoring);
         clientService.save(client);
         return "new-front/test/create-questionnaire1";
@@ -212,5 +228,16 @@ public class ScoringController {
         scoringService.save(scoring);
         return "redirect:/list"; // перенаправление на список тестов или другой нужный маршрут
     }
-
+    private static Gender convertSexToGender(Sex sex) {
+        // Преобразуем Sex в Gender в зависимости от вашей логики
+        if (sex == null) {
+            return null;
+        }
+        switch (sex) {
+            case FEMALE:
+                return Gender.FEMALE;
+            default:
+                return Gender.MALE;
+        }
+    }
 }
