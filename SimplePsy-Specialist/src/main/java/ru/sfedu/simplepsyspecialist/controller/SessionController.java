@@ -248,4 +248,25 @@ public class SessionController {
         sessionService.updateSession(session);
         return "redirect:/SimplePsy/V1/session/report/" + sessionId;
     }
+
+    @GetMapping("/holiday")
+    public String getHolidayForm(Model model)
+    {
+        Session session = new Session();
+        model.addAttribute("session", session);
+        return "new-front/calendar/holiday";
+    }
+    @PostMapping("/holiday")
+    public ResponseEntity<String> getHolidayForm(Session session,
+                                 @AuthenticationPrincipal UserDetails userDetails)
+    {
+        System.out.println(session.getDate());
+        System.out.println(session.getEndDate());
+
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        session.setSpecialistId(specialistId);
+        sessionService.createSession(session);
+
+        return ResponseEntity.ok("ok");
+    }
 }

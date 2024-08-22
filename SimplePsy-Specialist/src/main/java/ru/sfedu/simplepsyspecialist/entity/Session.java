@@ -29,8 +29,10 @@ public class Session {
 
     private Client client;
     private SessionType sessionType;
+    private String title;
     @NotBlank
     private LocalDate date;
+    private LocalDate endDate;
     private String place;
     private LocalTime timeStart;
     private LocalTime timeFinish;
@@ -49,6 +51,12 @@ public class Session {
         this.problem = problem;
         this.specialistId = specialistId;
         this.clientId = clientId;
+    }
+
+    public Session(String title, LocalDate date, LocalDate endDate) {
+        this.title = title;
+        this.date = date;
+        this.endDate = endDate;
     }
 
     public Client getClient() {
@@ -89,6 +97,14 @@ public class Session {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getProblem() {
@@ -193,5 +209,13 @@ public class Session {
 
     public void addProjectiveMethods(List<ProjectiveMethod> projectiveMethods) {
         this.projectiveMethods.addAll(projectiveMethods);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -18,49 +18,52 @@
 </head>
 <body>
 <div class="div139">
-    <div class="sidebar1 sidebar1-fix-width">
+    <div class="sidebar1">
         <div class="menu">
-            <div class="frame-wrapper73">
-                <div class="frame-parent122">
-                    <div class="frame-parent123">
-                        <div class="client-list-wrapper">
-                            <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
-                            <div class="icon-wrapper33">
-                                <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
-                            </div>
-                            <b class="client-list">Список клиентов</b>
-                        </div>
-                        <div class="base-frame">
-                            <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
-                                <div class="icon-wrapper34">
-                                    <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
-                                </div>
-                                <b class="calendar">Календарь</b>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="frame-parent123">
-                        <div class="notifications-wrapper">
-                            <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
-                            <div class="icon-wrapper33">
-                                <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
-                            </div>
-                            <b class="notifications">Уведомления</b>
-                        </div>
-                        <div class="base-frame">
-                            <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
-                                <div class="icon-wrapper34">
-                                    <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
-                                </div>
-                                <b class="analytics">Аналитика</b>
-                            </button>
-                        </div>
-                        <div class="tests-wrapper">
-                            <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
-                            <b class="surveys-tests">Опросники и тесты</b>
-                        </div>
-                    </div>
-                </div>
+            <div class="dashboard23" id="dashboardContainer">
+                <div class="base75"></div>
+                <b class="dashboard24">Список клинетов</b>
+                <img
+                        class="icon115"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-3@2x.png"
+                />
+            </div>
+            <div class="invoice15" id="invoiceContainer">
+                <div class="base76"></div>
+                <b class="invoice16">Уведомления</b>
+                <img
+                        class="icon116"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-5.svg"
+                />
+            </div>
+            <div class="files8">
+                <div class="base77"></div>
+                <b class="files9">Аналитика</b>
+                <img
+                        class="icon117"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-6.svg"
+                />
+            </div>
+            <div class="email3">
+                <div class="base78"></div>
+                <b class="calendars8">Календарь</b>
+                <img
+                        class="icon118"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-4@2x.png"
+                />
+            </div>
+
+            <div class="div140" id="container">
+                <div class="base79"></div>
+                <b class="dashboard25">Опросники и тесты</b>
             </div>
             <div class="parent26">
                 <b class="b112">Заявки</b>
@@ -147,78 +150,66 @@
     </header>
     <div class="container">
         <h2>Заметка о ходе работы</h2>
-        <form id="test-edit-form" th:action="@{/SimplePsy/V1/session/report}" th:object="${report}" method="post">
-            <input type="hidden" th:value="${sessionId}" name="sessionId" id="sessionId">
+        <form id="test-edit-form" th:action="@{/SimplePsy/V1/session/report/create}" th:object="${report}" method="post">
+            <input type="hidden" th:value="${sessionId}" name="sessionId">
             <div>
                 <label for="requestForSessionByClient">Запрос на сессию со стороны клиента</label>
-                <textarea id="requestForSessionByClient" th:text="${report.requestForSessionByClient}"
-                          name="requestForSessionByClient" disabled></textarea>
+                <textarea id="requestForSessionByClient" th:field="*{requestForSessionByClient}"></textarea>
             </div>
 
             <div>
                 <label for="specialistCondition">Состояние терапевта в начале сессии</label>
-                <textarea id="specialistCondition" th:text="${report.specialistCondition}"
-                          name="specialistCondition" disabled></textarea>
+                <textarea id="specialistCondition" th:field="*{specialistCondition}"></textarea>
             </div>
 
             <div>
                 <label for="sessionTopics">Основные темы, затронутые в ходе сеанса</label>
-                <textarea id="sessionTopics" th:text="${report.sessionTopics}"
-                          name="sessionTopics" disabled></textarea>
+                <textarea id="sessionTopics" th:field="*{sessionTopics}"></textarea>
             </div>
 
             <div>
                 <label for="clientInsides">Значимые фразы, инсайты клиента</label>
-                <textarea id="clientInsides" th:text="${report.clientInsides}"
-                          name="clientInsides" disabled></textarea>
+                <textarea id="clientInsides" th:field="*{clientInsides}"></textarea>
             </div>
 
             <div>
                 <label for="clientsEmotions">Основные эмоции клиента</label>
-                <textarea id="clientsEmotions" th:text="${report.clientsEmotions}"
-                          name="clientsEmotions" disabled></textarea>
+                <textarea id="clientsEmotions" th:field="*{clientsEmotions}"></textarea>
             </div>
 
             <div>
                 <label for="specialistEmotions">Основные проявленные эмоции терапевта</label>
-                <textarea id="specialistEmotions" th:text="${report.specialistEmotions}"
-                          name="specialistEmotions" disabled></textarea>
+                <textarea id="specialistEmotions" th:field="*{specialistEmotions}"></textarea>
             </div>
 
             <div>
                 <label for="unmanifestedSpecialistEmotions">Непроявленные эмоции терапевта</label>
-                <textarea id="unmanifestedSpecialistEmotions" th:text="${report.unmanifestedSpecialistEmotions}"
-                          name="unmanifestedSpecialistEmotions" disabled></textarea>
+                <textarea id="unmanifestedSpecialistEmotions" th:field="*{unmanifestedSpecialistEmotions}"></textarea>
             </div>
 
             <div>
                 <label for="techniquesAndMethodsUsed">Применяемые техники и методы</label>
-                <textarea id="techniquesAndMethodsUsed" th:text="${report.techniquesAndMethodsUsed}"
-                          name="techniquesAndMethodsUsed" disabled></textarea>
+                <textarea id="techniquesAndMethodsUsed" th:field="*{techniquesAndMethodsUsed}"></textarea>
             </div>
 
             <div>
                 <label for="clientsSessionResistance">Основные препятствия и способы сопротивления процессу терапии со стороны клиента</label>
-                <textarea id="clientsSessionResistance" th:text="${report.clientsSessionResistance}"
-                          name="clientsSessionResistance" disabled></textarea>
+                <textarea id="clientsSessionResistance" th:field="*{clientsSessionResistance}"></textarea>
             </div>
 
             <div>
                 <label for="specialistFinalStatus">Состояние терапевта по завершению сессии</label>
-                <textarea id="specialistFinalStatus" th:text="${report.specialistFinalStatus}"
-                          name="specialistFinalStatus" disabled></textarea>
+                <textarea id="specialistFinalStatus" th:field="*{specialistFinalStatus}"></textarea>
             </div>
 
             <div>
                 <label for="plansForNextSession">План и/или мысли на следующую сессию</label>
-                <textarea id="plansForNextSession" th:text="${report.plansForNextSession}"
-                          name="plansForNextSession" disabled></textarea>
+                <textarea id="plansForNextSession" th:field="*{plansForNextSession}"></textarea>
             </div>
 
             <div>
                 <label for="difficultiesForRequestingSuperVisa">Трудности и потенциальные темы для запроса на супервизию</label>
-                <textarea id="difficultiesForRequestingSuperVisa" th:text="${report.difficultiesForRequestingSuperVisa}"
-                          name="difficultiesForRequestingSuperVisa" disabled></textarea>
+                <textarea id="difficultiesForRequestingSuperVisa" th:field="*{difficultiesForRequestingSuperVisa}"></textarea>
             </div>
 
             <div class="frame-wrapper47">
@@ -229,11 +220,11 @@
                     <div class="frame-parent72" th:each="method:${projectiveMethods}">
                         <div class="rectangle-parent62">
                             <div class="frame-child71"></div>
-                            <b class="b94" th:text="${method.date}"></b>
+                            <b class="b94" th:text="${method.getDate()}"></b>
                         </div>
                         <div class="rectangle-parent63">
                             <div class="frame-child72"></div>
-                            <b class="div76" th:text="${method.name}"></b>
+                            <b class="div76" th:text="${method.getName()}"></b>
                         </div>
                     </div>
                     <div class="rectangle-parent78">
@@ -241,19 +232,8 @@
                     </div>
                 </div>
             </div>
-            <div class="save-edit-buttons-wrapper">
-                <div class="save-edit-buttons">
-                    <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
-                        <div class="div72">Отменить</div>
-                    </button>
-                    <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
-                        <div class="div72">Редактировать</div>
-                    </button>
-                    <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
-                        <div class="div72">Сохранить</div>
-                    </button>
-                </div>
-            </div>
+
+            <button class="submit-note" type="submit">Сохранить</button>
         </form>
     </div>
     <div id="modal" class="modal">
@@ -261,12 +241,6 @@
             <span class="close-btn">&times;</span>
             <div id="modal-body"></div>
         </div>
-    </div>
-</div>
-<div id="modal1" class="modal1">
-    <div class="modal-content1">
-        <span class="close-btn1">&times;</span>
-        <div id="modal-body1"></div>
     </div>
 </div>
 <script>
@@ -447,17 +421,17 @@
           .catch(error => console.error('Ошибка загрузки:', error));
       }
 
-      // Функция для закрытия модального окна
-      function closeModal() {
+    // Функция для закрытия модального окна
+    function closeModal() {
         modal.style.display = 'none';
-      }
+    }
 
-      // Событие клика для открытия модального окна
-      appointLink.addEventListener('click', openModal);
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
 
-      // Событие клика для закрытия модального окна
-      closeBtn.addEventListener('click', closeModal);
-      });
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
 </script>
 </body>
 </html>

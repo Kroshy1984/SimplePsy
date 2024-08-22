@@ -55,6 +55,10 @@ public class ClientService {
     }
 
     public List<Client> findAll() {
-        return clientRepository.findAll();
+        List<Client> clients = clientRepository.findAll();
+        for (Client c : clients) {
+            System.out.println(c.getId());
+        }
+        return clients;
     }
 }

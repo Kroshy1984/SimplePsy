@@ -16,7 +16,7 @@
   />
 </head>
 <body>
-<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}" method="post">
+<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}"  onsubmit="return validateForm()" method="post" >
   <div class="component10">
     <b class="add-place10">Тип встречи</b>
     <label for="session-type"></label>
@@ -122,7 +122,7 @@
   </div>
   <button type="submit">Создать встречу</button>
 </form>
-
+<div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
 <script>
   var groupContainer = document.getElementById("groupContainer");
   if (groupContainer) {
@@ -143,12 +143,12 @@
             .then(response => response.json())
             .then(clients => {
               const dataList = document.getElementById('clientsList');
-              dataList.innerHTML = ''; // очистить текущий список
+              dataList.innerHTML = '';
 
               clients.forEach(client => {
                 const option = document.createElement('option');
-                option.value = client.name; // или другой атрибут, который вы хотите отображать
-                option.setAttribute('data-id', client.id); // добавить атрибут data-id
+                option.value = client.name;
+                option.setAttribute('data-id', client.id);
                 dataList.appendChild(option);
               });
             })
@@ -162,6 +162,45 @@
       document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
     }
   });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('input', function() {
+    fetch('/SimplePsy/V1/client/findAll')
+            .then(response => response.json())
+            .then(clients => {
+              const dataList = document.getElementById('clientsList');
+              dataList.innerHTML = ''; // очистить текущий список
+
+              clients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.name; // или другой атрибут, который вы хотите отображать
+                option.setAttribute('data-id', client.id); // добавить атрибут data-id
+                dataList.appendChild(option);
+              });
+            })
+            .catch(error => console.error('Ошибка:', error));
+  });
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });
+
 </script>
 </body>
 </html>
