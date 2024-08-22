@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/projective-method.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/main.css}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -16,55 +16,67 @@
     />
   </head>
   <body>
-    <div class="root">
-      <section class="methodology">
-        <form id="sessionForm" th:object="${projectiveMethod}" th:action="@{/SimplePsy/V1/session/report/projective-method}" method="post">
-          <input type="hidden" th:value="${sessionId}" name="sessionId">
-          <div class="base70"></div>
-          <div class="div101">Название методики</div>
+    <div class="main1">
+      <div class="content1">
+        <div class="base64"></div>
 
-          <div class="instructions-parent">
-            <div class="instructions">
-              <div class="drawing-area">
-                <input type="text" name="name" class="div102" required>
-              </div>
-            </div>
-
-            <!-- TODO: Сделать загрузку изображений -->
-            <div class="method-container">
-            </div>
-
-            <div class="image-input-wrapper">
-              <div class="image-input">
-                <div class="image-preview"></div>
-                <div class="input-fields">
-                  <div class="add-technique-button">
-                    <label for="file-upload" class="div105">Добавить фото</label>
-                    <input id="file-upload" name="image" type="file" accept="image/*">
-                  </div>
-                  <button type="submit" class="add-technique-button">
-                    <div class="div105">Добавить методику</div>
-                  </button>
-                </div>
-              </div>
+        <div class="parent10">
+          <div class="div80">Название методики</div>
+          <div class="methodology-content">
+            <div class="methodology-illustration">
+              <div class="methodology-image"></div>
+              <div class="div81">Дом, дерево, человек</div>
             </div>
           </div>
-        </form>
-      </section>
+        </div>
+        <div class="single-image-parent">
+          <div class="single-image">
+            <img
+              class="image-10-icon"
+              loading="lazy"
+              alt=""
+              src="/images/image-10@2x.png"
+            />
+
+            <div class="image-caption">
+              <div class="image-description">20.02.2024</div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="gallery-item">
+              <img
+                class="image-11-icon"
+                alt=""
+                src="/images/image-11@2x.png"
+              />
+
+              <div class="gallery-item-caption">
+                <div class="gallery-description">20.03.2024</div>
+              </div>
+            </div>
+            <div class="gallery-item1">
+              <img
+                class="image-12-icon"
+                alt=""
+                src="/images/image-12@2x.png"
+              />
+
+              <input
+                class="gallery-item-child"
+                placeholder="20.04.2024"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
       var groupIcon = document.getElementById("groupIcon");
       if (groupIcon) {
         groupIcon.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
-
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component6.html";
+          window.location.href = "./component5.html";
         });
       }
       </script>

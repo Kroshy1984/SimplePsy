@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="global.css" />
-    <link rel="stylesheet" href="test2.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/specialists-tests-list.css}" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -57,48 +57,41 @@
                 <div class="frame-wrapper73">
                     <div class="frame-parent122">
                         <div class="frame-parent123">
-                            <div class="base-parent14">
-                                <div class="base90"></div>
+                            <div class="client-list-wrapper">
+                                <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
                                 <div class="icon-wrapper33">
-                                    <img
-                                            class="icon146"
-                                            alt=""
-                                            src="./public/icon-3@2x.png"
-                                    />
+                                    <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
                                 </div>
-                                <b class="dashboard32">Список клиентов</b>
+                                <b class="client-list">Список клиентов</b>
                             </div>
                             <div class="base-frame">
-                                <div class="base91" id="baseContainer">
+                                <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
                                     <div class="icon-wrapper34">
-                                        <img
-                                                class="icon147"
-                                                alt=""
-                                                src="./public/icon-41@2x.png"
-                                        />
+                                        <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
                                     </div>
-                                    <b class="calendars11">Календарь</b>
-                                </div>
+                                    <b class="calendar">Календарь</b>
+                                </button>
                             </div>
                         </div>
-                        <div class="invoice-parent1">
-                            <div class="invoice22" id="invoiceContainer">
-                                <div class="base92"></div>
-                                <div class="icon-wrapper35">
-                                    <img class="icon148" alt="" src="./public/icon-5.svg" />
+                        <div class="frame-parent123">
+                            <div class="notifications-wrapper">
+                                <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                                <div class="icon-wrapper33">
+                                    <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
                                 </div>
-                                <b class="invoice23">Уведомления</b>
-                                <div class="base-parent15">
-                                    <div class="base93"></div>
-                                    <b class="dashboard33">Опросники и тесты</b>
-                                </div>
+                                <b class="notifications">Уведомления</b>
                             </div>
-                            <div class="invoice-icons">
-                                <div class="base94"></div>
-                                <div class="icon-wrapper36">
-                                    <img class="icon149" alt="" src="./public/icon-6.svg" />
-                                </div>
-                                <b class="files12">Аналитика</b>
+                            <div class="base-frame">
+                                <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                    <div class="icon-wrapper34">
+                                        <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                                    </div>
+                                    <b class="analytics">Аналитика</b>
+                                </button>
+                            </div>
+                            <div class="tests-wrapper">
+                                <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                                <b class="surveys-tests">Опросники и тесты</b>
                             </div>
                         </div>
                     </div>
@@ -547,20 +540,58 @@
     var appointLink = document.querySelector('.div203'); // Элемент "Скопировать ссылку"
 
     // Функция для открытия модального окна
-    function openModal() {
-      fetch('copy-link.html')
-        .then(response => response.text())
-        .then(data => {
-          modalBody.innerHTML = data;
-          modal.style.display = 'block';
-        })
-        .catch(error => console.error('Ошибка загрузки:', error));
-    }
+        function openModal() {
+            fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                    modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
 
-    // Функция для закрытия модального окна
-    function closeModal() {
-      modal.style.display = 'none';
-    }
+            fetch('/SimplePsy/V1/client/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                    const dataList = document.getElementById('clientsList');
+                    dataList.innerHTML = '';
+
+                    clients.forEach(client => {
+                        const option = document.createElement('option');
+                        option.value = client.name;
+                        option.setAttribute('data-id', client.id);
+                        dataList.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка:', error));
+
+            const script = document.createElement('script');
+            script.id = 'dynamic-script';
+            script.textContent = `
+                   document.getElementById('clientInput').addEventListener('change', function() {
+        const selectedOption = Array.from(document.getElementById('clientsList').options)
+                .find(option => option.value === this.value);
+        if (selectedOption) {
+          const clientId = selectedOption.getAttribute('data-id');
+          document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+          document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+        } else {
+          document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+        }
+      });`;
+            document.body.appendChild(script);
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+            const script = document.getElementById('dynamic-script');
+            if (script) {
+                script.remove();
+                console.log('Скрипт удалён');
+            } else {
+                console.log('Скрипт не найден');
+            }
+        }
 
     // Событие клика для открытия модального окна
     appointLink.addEventListener('click', openModal);

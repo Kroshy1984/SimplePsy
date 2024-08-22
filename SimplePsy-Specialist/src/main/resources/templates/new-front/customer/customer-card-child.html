@@ -54,7 +54,7 @@
                             <div class="about-content">
                                 <a class="about-us19">Добавить клиента</a>
                                 <div class="news-container">
-                                    <a class="news13">Назначить встречу</a>
+                                    <a class="news10">Назначить встречу</a>
                                     <b class="user-policy13"
                                     >Добавить график нерабочих дней
                                     </b>
@@ -100,64 +100,47 @@
                         </div>
                     </div>
                     <div class="navigation-content-parent">
-                        <div class="navigation-content">
-                            <div class="dashboard-parent1">
-                                <div class="dashboard34" id="dashboardContainer">
-                                    <div class="base95"></div>
-                                    <div class="icon-wrapper38">
-                                        <img
-                                                class="icon160"
-                                                loading="lazy"
-                                                alt=""
-                                                src="/images/icon-3@2x.png"
-                                        />
-                                    </div>
-                                    <b class="dashboard35">Список клинетов</b>
-                                    <div class="email5" id="emailContainer">
-                                        <div class="base96">
-                                            <div class="icon-wrapper39">
-                                                <img
-                                                        class="icon161"
-                                                        loading="lazy"
-                                                        alt=""
-                                                        src="/images/icon-41@2x.png"
-                                                />
-                                            </div>
-                                            <b class="calendars12">Календарь</b>
+                        <div class="frame-wrapper73">
+                            <div class="frame-parent122">
+                                <div class="frame-parent123">
+                                    <div class="client-list-wrapper">
+                                        <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                                        <div class="icon-wrapper33">
+                                            <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
                                         </div>
+                                        <b class="client-list">Список клиентов</b>
+                                    </div>
+                                    <div class="base-frame">
+                                        <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                            <div class="icon-wrapper34">
+                                                <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
+                                            </div>
+                                            <b class="calendar">Календарь</b>
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="invoice-menu1">
-                                    <div class="invoice24" id="invoiceContainer">
-                                        <div class="base97"></div>
-                                        <div class="icon-wrapper40">
-                                            <img
-                                                    class="icon162"
-                                                    loading="lazy"
-                                                    alt=""
-                                                    src="/images/icon-5.svg"
-                                            />
+                                <div class="frame-parent123">
+                                    <div class="notifications-wrapper">
+                                        <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                                        <div class="icon-wrapper33">
+                                            <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
                                         </div>
-                                        <b class="invoice25">Уведомления</b>
+                                        <b class="notifications">Уведомления</b>
                                     </div>
-                                    <div class="invoice-base1">
-                                        <div class="base98"></div>
-                                        <div class="icon-wrapper41">
-                                            <img
-                                                    class="icon163"
-                                                    loading="lazy"
-                                                    alt=""
-                                                    src="/images/icon-6.svg"
-                                            />
-                                        </div>
-                                        <b class="files13">Аналитика</b>
+                                    <div class="base-frame">
+                                        <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                            <div class="icon-wrapper34">
+                                                <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                                            </div>
+                                            <b class="analytics">Аналитика</b>
+                                        </button>
+                                    </div>
+                                    <div class="tests-wrapper">
+                                        <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                                        <b class="surveys-tests">Опросники и тесты</b>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="base-parent16">
-                            <div class="base99"></div>
-                            <b class="dashboard36">Опросники и тесты</b>
                         </div>
                         <div class="applications-content-wrapper">
                             <div class="applications-content">
@@ -530,7 +513,12 @@
         </div>
     </section>
 </div>
-
+<div id="modal1" class="modal1">
+    <div class="modal-content1">
+        <span class="close-btn1">&times;</span>
+        <div id="modal-body1"></div>
+    </div>
+</div>
 <script>
     var userImage = document.getElementById("userImage");
     if (userImage) {
@@ -596,6 +584,86 @@
     // Initialize form
     updateFields();
     checkSupervisorFields();
+
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+      // Получаем элементы
+      var modal = document.getElementById('modal');
+      var modalBody = document.getElementById('modal-body');
+      var closeBtn = document.querySelector('.close-btn');
+      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+      // Функция для открытия модального окна
+        function openModal() {
+            fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                    modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
+
+            fetch('/SimplePsy/V1/client/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                    const dataList = document.getElementById('clientsList');
+                    dataList.innerHTML = '';
+
+                    const script = document.createElement('script');
+                    script.id = 'dynamic-script';
+                    script.textContent = `
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+                    document.body.appendChild(script);
+                    clients.forEach(client => {
+                        const option = document.createElement('option');
+                        option.value = client.name;
+                        option.setAttribute('data-id', client.id);
+                        dataList.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка:', error));
+
+
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+            const script = document.getElementById('dynamic-script');
+            if (script) {
+                script.remove();
+                console.log('Скрипт удалён');
+            } else {
+                console.log('Скрипт не найден');
+            }
+        }
 </script>
 </body>
 </html>

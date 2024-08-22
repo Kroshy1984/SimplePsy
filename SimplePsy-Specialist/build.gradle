@@ -22,7 +22,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 //    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
 //    implementation group: 'io.micrometer', name: 'micrometer-tracing-bridge-brave'
 //    implementation group: 'io.zipkin.reporter2', name: 'zipkin-reporter-brave'
@@ -35,9 +34,8 @@ dependencies {
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.0.Final'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.2.0'
-
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 }
 
 tasks.named('test') {

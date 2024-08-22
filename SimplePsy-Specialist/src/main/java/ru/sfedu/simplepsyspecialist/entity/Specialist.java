@@ -1,18 +1,15 @@
 package ru.sfedu.simplepsyspecialist.entity;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder
+
 @Document("Specialist")
 public class Specialist {
 
@@ -43,10 +40,6 @@ public class Specialist {
     private String phone;
 
     private SpecialistRole specialistRole = SpecialistRole.USER_ROLE;
-
-    @DBRef
-    @Valid
-    private List<Calendar> calendar;
 
     private String notification;
     private String password;
@@ -120,14 +113,6 @@ public class Specialist {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Calendar> getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(List<Calendar> calendar) {
-        this.calendar = calendar;
     }
 
     public String getNotification() {

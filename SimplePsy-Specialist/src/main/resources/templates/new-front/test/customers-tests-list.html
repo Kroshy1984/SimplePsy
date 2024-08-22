@@ -123,64 +123,45 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="dashboard-navigation-wrapper">
-                                <div class="dashboard-navigation">
-                                    <div class="navigation-options">
-                                        <div class="navigation-items-container">
-                                            <div class="dashboard29" id="dashboardContainer">
-                                                <div class="base85"></div>
-                                                <div class="icon-wrapper29">
-                                                    <img
-                                                            class="icon135"
-                                                            alt=""
-                                                            src="./public/icon-3@2x.png"
-                                                    />
-                                                </div>
-                                                <b class="dashboard30">Список клиентов</b>
+                            <div class="frame-wrapper73">
+                                <div class="frame-parent122">
+                                    <div class="frame-parent123">
+                                        <div class="client-list-wrapper">
+                                            <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                                            <div class="icon-wrapper33">
+                                                <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
                                             </div>
-                                            <div class="calendar-item">
-                                                <div class="base86" id="baseContainer">
-                                                    <div class="icon-wrapper30">
-                                                        <img
-                                                                class="icon136"
-                                                                alt=""
-                                                                src="./public/icon-41@2x.png"
-                                                        />
-                                                    </div>
-                                                    <b class="calendars10">Календарь</b>
+                                            <b class="client-list">Список клиентов</b>
+                                        </div>
+                                        <div class="base-frame">
+                                            <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                                <div class="icon-wrapper34">
+                                                    <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
                                                 </div>
-                                            </div>
+                                                <b class="calendar">Календарь</b>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="navigation-options1">
-                                        <div class="invoice-container">
-                                            <div class="invoice20" id="invoiceContainer">
-                                                <div class="base87"></div>
-                                                <div class="icon-wrapper31">
-                                                    <img
-                                                            class="icon137"
-                                                            alt=""
-                                                            src="./public/icon-5.svg"
-                                                    />
-                                                </div>
-                                                <b class="invoice21">Уведомления</b>
+                                    <div class="frame-parent123">
+                                        <div class="notifications-wrapper">
+                                            <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                                            <div class="icon-wrapper33">
+                                                <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
                                             </div>
-                                            <div class="base-parent13">
-                                                <div class="base88"></div>
-                                                <div class="icon-wrapper32">
-                                                    <img
-                                                            class="icon138"
-                                                            alt=""
-                                                            src="./public/icon-6.svg"
-                                                    />
-                                                </div>
-                                                <b class="files11">Аналитика</b>
-                                            </div>
+                                            <b class="notifications">Уведомления</b>
                                         </div>
-                                    </div>
-                                    <div class="div190" id="container">
-                                        <div class="base89"></div>
-                                        <b class="dashboard31">Опросники и тесты</b>
+                                        <div class="base-frame">
+                                            <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                                <div class="icon-wrapper34">
+                                                    <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                                                </div>
+                                                <b class="analytics">Аналитика</b>
+                                            </button>
+                                        </div>
+                                        <div class="tests-wrapper">
+                                            <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                                            <b class="surveys-tests">Опросники и тесты</b>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -200,7 +181,7 @@
                                         <div class="search-dropdown-items">
                                             <a class="about-us17">Добавить клиента</a>
                                             <div class="policy-items">
-                                                <a class="news11">Назначить встречу</a>
+                                                <a class="news10">Назначить встречу</a>
                                                 <b class="user-policy11"
                                                 >Добавить график нерабочих дней
                                                 </b>
@@ -329,7 +310,7 @@
                                                     <div class="search-button-container">
                                                         <div class="rectangle-parent119">
                                                             <div class="frame-child145"></div>
-                                                            <div class="div199">Найти</div>
+                                                            <button class="div199">Найти</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -399,7 +380,12 @@
         </div>
     </div>
 </div>
-
+<div id="modal1" class="modal1">
+    <div class="modal-content1">
+        <span class="close-btn1">&times;</span>
+        <div id="modal-body1"></div>
+    </div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.item103, .item104, .item105');
@@ -658,6 +644,36 @@
             });
         });
     });
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+      // Получаем элементы
+      var modal = document.getElementById('modal');
+      var modalBody = document.getElementById('modal-body');
+      var closeBtn = document.querySelector('.close-btn');
+      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+      // Функция для открытия модального окна
+      function openModal() {
+        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+          .then(response => response.text())
+          .then(data => {
+            modalBody.innerHTML = data;s
+            modal.style.display = 'block';
+          })
+          .catch(error => console.error('Ошибка загрузки:', error));
+      }
+
+      // Функция для закрытия модального окна
+      function closeModal() {
+        modal.style.display = 'none';
+      }
+
+      // Событие клика для открытия модального окна
+      appointLink.addEventListener('click', openModal);
+
+      // Событие клика для закрытия модального окна
+      closeBtn.addEventListener('click', closeModal);
+      });
 </script>
 </body>
 </html>

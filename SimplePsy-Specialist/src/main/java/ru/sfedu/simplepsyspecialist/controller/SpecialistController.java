@@ -105,10 +105,6 @@ public class SpecialistController {
 //    return "redirect:/SimplePsy/V1/specialist/calendar";
 //}
 
-    @GetMapping("/calendar")
-    public String getCalendar() {
-        return "calendar";
-    }
 
     /*@PostMapping("/search")
     public void handleGetRequest(
@@ -236,37 +232,6 @@ public class SpecialistController {
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/find-customer-form")
-    public String getFindCustomerForm() {
-        return "find-customer";
-    }
-
-    @PostMapping("/find-customer-form")
-    public String getCustomerByContactData(@AuthenticationPrincipal UserDetails userDetails,
-                                           @RequestParam("data") String data) {
-        String customerId = specialistService.findCustomerByContactData(data);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-
-        if (Objects.equals(customerId, "Customer not found")) {
-            return "redirect:/SimplePsy/V1/specialist/customer-form";
-        }
-
-        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
-            if (Objects.equals(customerId, specialist.getCustomerIds().get(i))) {
-                return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerId;
-            }
-        }
-        return "redirect:/SimplePsy/V1/specialist/customer-form";
-    }
-
-    @GetMapping("customer/problem/new/{customerId}")
-    public String customerNewProblem(@PathVariable String customerId,
-                                     Model model)
-    {
-        System.out.println("In method customerNewProblem providing customerId " + customerId + " to the model");
-        model.addAttribute("customerId", customerId);
-        return "problem-form";
-    }
 
     @PostMapping("customer/problem/new")
     public String customerNewProblem(@RequestParam("customerId") String customerId,
