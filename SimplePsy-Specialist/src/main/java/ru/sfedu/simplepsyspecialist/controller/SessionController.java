@@ -18,12 +18,12 @@ import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 @Controller
 @RequestMapping("/SimplePsy/V1/session")
 public class SessionController {
@@ -208,22 +208,35 @@ public class SessionController {
     public String getReportForm(@PathVariable String sessionId, Model model)
     {
         Session session = sessionService.findById(sessionId);
+        Client client = session.getClient();
         System.out.println("Дата встречи: " + session.getDate());
         System.out.println("Время встречи: " + session.getTimeStart() + session.getTimeFinish());
         System.out.println("Тип оплаты: " + session.getPaymentType());
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String formattedDate = session.getDate().format(dateFormatter);
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        String formattedTimeStart = session.getTimeStart().format(timeFormatter);
+        String formattedTimeFinish = session.getTimeFinish().format(timeFormatter);
+        model.addAttribute("formattedTimeStart", formattedTimeStart);
+        model.addAttribute("formattedTimeFinish", formattedTimeFinish);
+        model.addAttribute("formattedDate", formattedDate);
+
+        model.addAttribute("projectiveMethods", session.getProjectiveMethods());
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("paymentType", session.getPaymentType().getTranslation());
+        model.addAttribute("session", session);
+        model.addAttribute("client", client);
+
         if (session.getReport() == null) {
             Report report = new Report();
             model.addAttribute("report", report);
-            model.addAttribute("projectiveMethods", session.getProjectiveMethods());
-            model.addAttribute("sessionId", sessionId);
-            model.addAttribute("session", session);
             return "new-front/session/report-create";
         }
         Report report = session.getReport();
         model.addAttribute("report", report);
-        model.addAttribute("projectiveMethods", session.getProjectiveMethods());
-        model.addAttribute("sessionId", sessionId);
-        model.addAttribute("session", session);
+
         return "new-front/session/report-create";
     }
     @PostMapping("report")

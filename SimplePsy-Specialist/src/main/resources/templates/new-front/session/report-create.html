@@ -158,17 +158,19 @@
                         <div class="parent11">
                             <b class="b100">Встреча</b>
                             <div class="about-us-wrapper">
-                                <b class="about-us8" th:text="'Дата встречи: ' + ${session.date}"></b>
+                                <b class="about-us8" th:text="'Дата встречи: ' + ${formattedDate}"></b>
                             </div>
                             <div class="about-us-frame">
-                                <b class="about-us9" th:text="'Время встречи: с ' + ${session.timeStart} + ' по ' + ${session.timeFinish}"></b>
+                                <b class="about-us9" th:text="'Время встречи: с ' + ${formattedTimeStart} + ' по ' + ${formattedTimeFinish}"></b>
                             </div>
+
                         </div>
                     </div>
                     <div class="about-us-parent1">
                         <b class="about-us10">
                             <p class="p33">Тип оплаты:</p>
-                            <p class="p34" th:text="${session.paymentType}"></p>
+                            <p class="p34" th:text="${paymentType}"></p>
+
                         </b>
                         <b class="about-us11">
                             <p class="p35">Итоговая сумма:</p>
@@ -189,9 +191,9 @@
                     </div>
                     <div class="frame-wrapper54">
                         <div class="about-us-parent3">
-                            <b class="about-us14" th:text="${session.client.surname + ' ' + session.client.name}">Фамилия Имя Отчество</b>
-                            <b class="news8" th:text="${session.client.contact.phone}">Номер телефона</b>
-                            <b class="user-policy8" th:text="${session.client.contact.email}">E-mail</b>
+                            <b class="about-us14" th:text="${client.name + ' ' + client.surname}">Фамилия Имя Отчество</b>
+                            <b class="news8" th:text="${client.contact.phone}">Номер телефона</b>
+                            <b class="user-policy8" th:text="${client.contact.email}">E-mail</b>
                         </div>
                     </div>
                 </div>
