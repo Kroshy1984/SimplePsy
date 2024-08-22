@@ -7,9 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.CompletedScoring;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.entity.mapper.CustomerToClientMapper;
 import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
+import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class ScoringController {
     public List<String> answers = new ArrayList<>();
     ScoringService scoringService;
     ClientService clientService;
+    CustomerService customerService;
 
     @Autowired
     public ScoringController(ScoringService scoringService, ClientService clientService) {
@@ -131,7 +135,11 @@ public class ScoringController {
     @PostMapping("/submit")
     public String submitScoring(@RequestBody CompletedScoring completedScoring) {
         System.out.println("Scoring title: " + completedScoring.getTitle());
-        Client client = clientService.findById(completedScoring.getCustomerId());
+        Customer customer = customerService.findById(completedScoring.getCustomerId());
+
+        Client client = CustomerToClientMapper.INSTANCE.customerToClient(customer);
+
+        client.addScoring(completedScoring);
         client.addScoring(completedScoring);
         clientService.save(client);
         return "new-front/test/create-questionnaire1";
@@ -170,7 +178,10 @@ public class ScoringController {
     @PostMapping("test/submit")
     public String submitTest(@RequestBody CompletedScoring completedScoring) {
         System.out.println("Scoring title: " + completedScoring.getTitle());
-        Client client = clientService.findById(completedScoring.getCustomerId());
+        Customer customer = customerService.findById(completedScoring.getCustomerId());
+
+        Client client = CustomerToClientMapper.INSTANCE.customerToClient(customer);
+
         client.addScoring(completedScoring);
         clientService.save(client);
         return "new-front/test/create-questionnaire1";
