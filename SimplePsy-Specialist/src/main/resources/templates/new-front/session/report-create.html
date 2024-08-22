@@ -149,6 +149,54 @@
         </div>
     </header>
     <div class="container">
+        <div class="frame-wrapper52">
+            <div class="frame-parent83">
+                <img class="frame-child80" alt="" src="/images/group-35.svg" />
+
+                <div class="frame-parent84">
+                    <div class="frame-wrapper53">
+                        <div class="parent11">
+                            <b class="b100">Встреча</b>
+                            <div class="about-us-wrapper">
+                                <b class="about-us8" th:text="'Дата встречи: ' + ${session.date}"></b>
+                            </div>
+                            <div class="about-us-frame">
+                                <b class="about-us9" th:text="'Время встречи: с ' + ${session.timeStart} + ' по ' + ${session.timeFinish}"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-us-parent1">
+                        <b class="about-us10">
+                            <p class="p33">Тип оплаты:</p>
+                            <p class="p34" th:text="${session.paymentType}"></p>
+                        </b>
+                        <b class="about-us11">
+                            <p class="p35">Итоговая сумма:</p>
+                            <p class="p36">5000</p>
+                        </b>
+                    </div>
+                </div>
+                <div class="frame-parent85">
+                    <div class="about-us-parent2">
+                        <b class="about-us12">
+                            <p class="p37">Дата следующей встречи:</p>
+                            <p class="p38">27.03.2024</p>
+                        </b>
+                        <b class="about-us13">
+                            <p class="p39">Время следующей встречи:</p>
+                            <p class="p40">с 18:00 по 20:00</p>
+                        </b>
+                    </div>
+                    <div class="frame-wrapper54">
+                        <div class="about-us-parent3">
+                            <b class="about-us14" th:text="${session.client.surname + ' ' + session.client.name}">Фамилия Имя Отчество</b>
+                            <b class="news8" th:text="${session.client.contact.phone}">Номер телефона</b>
+                            <b class="user-policy8" th:text="${session.client.contact.email}">E-mail</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <h2>Заметка о ходе работы</h2>
         <form id="test-edit-form" th:action="@{/SimplePsy/V1/session/report}" th:object="${report}" method="post">
             <input type="hidden" th:value="${sessionId}" name="sessionId" id="sessionId">

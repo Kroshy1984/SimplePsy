@@ -208,17 +208,22 @@ public class SessionController {
     public String getReportForm(@PathVariable String sessionId, Model model)
     {
         Session session = sessionService.findById(sessionId);
+        System.out.println("Дата встречи: " + session.getDate());
+        System.out.println("Время встречи: " + session.getTimeStart() + session.getTimeFinish());
+        System.out.println("Тип оплаты: " + session.getPaymentType());
         if (session.getReport() == null) {
             Report report = new Report();
             model.addAttribute("report", report);
             model.addAttribute("projectiveMethods", session.getProjectiveMethods());
             model.addAttribute("sessionId", sessionId);
+            model.addAttribute("session", session);
             return "new-front/session/report-create";
         }
         Report report = session.getReport();
         model.addAttribute("report", report);
         model.addAttribute("projectiveMethods", session.getProjectiveMethods());
         model.addAttribute("sessionId", sessionId);
+        model.addAttribute("session", session);
         return "new-front/session/report-create";
     }
     @PostMapping("report")
