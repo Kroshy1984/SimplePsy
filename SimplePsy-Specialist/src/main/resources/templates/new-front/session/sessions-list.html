@@ -135,11 +135,11 @@
       <div class="frame-parent66">
         <div class="frame-parent67">
           <div class="frame-parent68">
-            <button class="rectangle-parent52" id="groupButton">
+            <button class="rectangle-parent52" id="groupButton" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
               <div class="frame-child55"></div>
-              <div class="div74">Карта клиента</div>
+              <div class="div74">Опросники и тесты</div>
             </button>
-            <button class="rectangle-parent53">
+            <button class="rectangle-parent53" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
               <div class="frame-child56"></div>
               <div class="div75">Список встреч</div>
             </button>
@@ -159,9 +159,9 @@
         </div>
         <div class="frame-parent69">
           <div class="frame-parent70">
-            <div class="rectangle-parent60">
+            <div class="rectangle-parent60" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
               <div class="frame-child69"></div>
-              <h3 class="h3">Опросники и тесты</h3>
+              <h3 class="h3">Список клиентов</h3>
             </div>
             <div class="frame-wrapper46">
               <div class="rectangle-parent61">
@@ -283,20 +283,6 @@
     if (dashboardContainer) {
       dashboardContainer.addEventListener("click", function (e) {
         window.location.href = "./component2.html";
-      });
-    }
-
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-      invoiceContainer.addEventListener("click", function (e) {
-        window.location.href = "./component3.html";
-      });
-    }
-
-    var groupButton = document.getElementById("groupButton");
-    if (groupButton) {
-      groupButton.addEventListener("click", function (e) {
-        window.location.href = "./component12.html";
       });
     }
 

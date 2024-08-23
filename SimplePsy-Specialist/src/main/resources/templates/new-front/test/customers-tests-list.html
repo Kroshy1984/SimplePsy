@@ -146,14 +146,14 @@
                                         <div class="notifications-wrapper">
                                             <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
                                             <div class="icon-wrapper33">
-                                                <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
+                                                <img class="icon146" alt="" src="/images/icon-5.svg" />
                                             </div>
                                             <b class="notifications">Уведомления</b>
                                         </div>
                                         <div class="base-frame">
                                             <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
                                                 <div class="icon-wrapper34">
-                                                    <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                                                    <img class="icon147" alt="" src="/images/icon-6.svg"/>
                                                 </div>
                                                 <b class="analytics">Аналитика</b>
                                             </button>
@@ -188,15 +188,15 @@
                                             </div>
                                         </div>
                                         <div class="frame-parent110">
-                                            <button class="rectangle-parent99" id="groupButton">
+                                            <button class="rectangle-parent99" id="groupButton" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
                                                 <div class="frame-child125"></div>
-                                                <div class="div191">Карта клиента</div>
+                                                <div class="div191">Список клиентов</div>
                                             </button>
-                                            <button class="rectangle-parent100">
+                                            <button class="rectangle-parent100" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
                                                 <div class="frame-child126"></div>
                                                 <div class="div192">Список встреч</div>
                                             </button>
-                                            <div class="rectangle-parent101" id="groupContainer">
+                                            <div class="rectangle-parent101" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
                                                 <div class="frame-child127"></div>
                                                 <h3 class="h33">Опросники и тесты</h3>
                                             </div>
@@ -270,57 +270,14 @@
                                                         <input class="search-input-area" placeholder="Поиск" type="text" />
                                                     </div>
                                                 </div>
-                                                <div class="filter-options">
-                                                    <div class="filter-dropdown">
-                                                        <div class="component17">
-                                                            <button class="item104">
-                                                                <div class="div195">Опрос</div>
-                                                            </button>
-                                                            <button class="item105">
-                                                                <div class="div196">Тест</div>
-                                                            </button>
-                                                        </div>
-                                                        <div class="search-button">
-                                                            <div class="frame-parent117">
-                                                                <div class="frame-wrapper70">
-                                                                    <div class="frame-parent118">
-                                                                        <div class="wrapper45">
-                                                                            <div class="div197">с</div>
-                                                                        </div>
-                                                                        <div class="rectangle-parent118">
-                                                                            <div class="frame-child144"></div>
-                                                                            <input type="text" class="xxxxxxxx" placeholder="xx.xx.xxxx">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="preposition-container-parent">
-                                                                    <div class="preposition-container">
-                                                                        <div class="div198">по</div>
-                                                                    </div>
-                                                                    <div class="preposition-background">
-                                                                        <div
-                                                                                class="preposition-background-child"
-                                                                        ></div>
-                                                                        <input type="text" class="xxxxxxxx1" placeholder="xx.xx.xxxx">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="search-button-container">
-                                                        <div class="rectangle-parent119">
-                                                            <div class="frame-child145"></div>
-                                                            <button class="div199">Найти</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="my-materials-container">
                                                 <button
                                                         class="rectangle-parent120"
                                                         id="groupButton6"
-                                                >
+                                                        onclick="window.location.href='/SimplePsy/V1/scoring/test/creation';">
                                                     <div class="frame-child146"></div>
+
                                                     <div class="div200">
                                                         Перейти к моим материалам
                                                     </div>
@@ -488,31 +445,10 @@
       });
     }
 
-    var container = document.getElementById("container");
-    if (container) {
-      container.addEventListener("click", function (e) {
-        window.location.href = "./frame15.html";
-      });
-    }
-
-    var groupButton = document.getElementById("groupButton");
-    if (groupButton) {
-      groupButton.addEventListener("click", function (e) {
-        window.location.href = "./frame13.html";
-      });
-    }
-
     var groupContainer = document.getElementById("groupContainer");
     if (groupContainer) {
       groupContainer.addEventListener("click", function (e) {
         window.location.href = "./frame14.html";
-      });
-    }
-
-    var groupButton6 = document.getElementById("groupButton6");
-    if (groupButton6) {
-      groupButton6.addEventListener("click", function (e) {
-        window.location.href = "./frame15.html";
       });
     }
 

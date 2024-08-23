@@ -18,7 +18,6 @@ import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -122,23 +121,6 @@ public class CustomerController {
         customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer successfully deleted");
     }
-
-    @GetMapping("/update-status")
-    public void createCustomers(@RequestParam String customerId) {
-        customerService.updateStatus(customerId);
-    }
-
-    @GetMapping("/findCustomerByContactData")
-    public ResponseEntity<String> findCustomerByContactData(@RequestParam("data") String data)
-    {
-        try {
-            Customer customer = customerService.findByContactData(data);
-            return ResponseEntity.ok(customer.getId());
-        } catch (NullPointerException | NoSuchElementException e) {
-            return ResponseEntity.ok("Customer not found");
-        }
-
-    }
     @PostMapping("/problem/new")
     public ResponseEntity<String> customerNewProblem(@RequestParam("customerId") String customerId,
                                                      @RequestParam("problemId") String problemId)
@@ -186,9 +168,9 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> createNewCustomer(@AuthenticationPrincipal UserDetails userDetails,
+    public String createNewCustomer(@AuthenticationPrincipal UserDetails userDetails,
                                                     Customer customer) throws IOException {
-        //System.out.println("Got the new customer:\n" + name);
+
         customer.cleanAttributes();
         System.out.println(customer.getSurname());
         System.out.println(customer.getDateOfBirth());
@@ -200,7 +182,7 @@ public class CustomerController {
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
         System.out.println(newCustomer.getSex());
-        return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
     @GetMapping("/customers-test")
     public String getCustomersTestsList(Model model) {

@@ -150,16 +150,13 @@ public class ScoringController {
         clientService.save(client);
         return "new-front/test/create-questionnaire1";
     }
-
-
-
     @GetMapping("test/creation")
     public String createTestForm()
     {
         return "new-front/test/create-new-test";
     }
     @PostMapping("test/creation")
-    public String createTest(@RequestBody Scoring scoring) {
+    public void createTest(@RequestBody Scoring scoring) {
         System.out.println(scoring.getTitle());
         scoring.setDate(new Date());
         System.out.println(scoring.getDate());
@@ -169,7 +166,7 @@ public class ScoringController {
         });
         scoring.setType(TypeOfScoring.TEST);
         scoringService.save(scoring);
-        return "new-front/test/create-new-test";
+        //return "new-front/test/create-new-test";
     }
 
     @GetMapping("/test/{testId}/{customerId}")
@@ -207,7 +204,7 @@ public class ScoringController {
     {
         List<Scoring> scorings = scoringService.findAll();
         model.addAttribute("scorings", scorings);
-        return "new-front/test/tests-list";
+        return "new-front/test/customers-tests-list";
     }
     @GetMapping("test/edit/{scoringId}")
     public String testEdit(Model model,
