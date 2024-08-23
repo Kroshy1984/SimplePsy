@@ -18,6 +18,7 @@ import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -172,19 +173,23 @@ public class SessionController {
         System.out.println("Дата встречи: " + session.getDate());
         System.out.println("Время встречи: " + session.getTimeStart() + session.getTimeFinish());
         System.out.println("Тип оплаты: " + session.getPaymentType());
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String formattedDate = session.getDate().format(dateFormatter);
+        model.addAttribute("formattedDate", formattedDate);
+
+        model.addAttribute("projectiveMethods", session.getProjectiveMethods());
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("sessionDTO", session);
+
         if (session.getReport() == null) {
             Report report = new Report();
             model.addAttribute("report", report);
-            model.addAttribute("projectiveMethods", session.getProjectiveMethods());
-            model.addAttribute("sessionId", sessionId);
-            model.addAttribute("session", session);
             return "new-front/session/report-create";
         }
         Report report = session.getReport();
         model.addAttribute("report", report);
-        model.addAttribute("projectiveMethods", session.getProjectiveMethods());
-        model.addAttribute("sessionId", sessionId);
-        model.addAttribute("session", session);
+
         return "new-front/session/report-create";
     }
     @PostMapping("report")

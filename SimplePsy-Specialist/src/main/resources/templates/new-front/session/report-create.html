@@ -158,17 +158,17 @@
                         <div class="parent11">
                             <b class="b100">Встреча</b>
                             <div class="about-us-wrapper">
-                                <b class="about-us8" th:text="'Дата встречи: ' + ${session.date}"></b>
+                                <b class="about-us8" th:text="'Дата встречи: ' + ${formattedDate}"></b>
                             </div>
                             <div class="about-us-frame">
-                                <b class="about-us9" th:text="'Время встречи: с ' + ${session.timeStart} + ' по ' + ${session.timeFinish}"></b>
+                                <b class="about-us9" th:text="'Время встречи: с ' + ${sessionDTO.timeStart} + ' по ' + ${sessionDTO.timeFinish}"></b>
                             </div>
                         </div>
                     </div>
                     <div class="about-us-parent1">
                         <b class="about-us10">
                             <p class="p33">Тип оплаты:</p>
-                            <p class="p34" th:text="${session.paymentType}"></p>
+                            <p class="p34" th:text="${sessionDTO.paymentType.translation}"></p>
                         </b>
                         <b class="about-us11">
                             <p class="p35">Итоговая сумма:</p>
@@ -189,75 +189,87 @@
                     </div>
                     <div class="frame-wrapper54">
                         <div class="about-us-parent3">
-                            <b class="about-us14" th:text="${session.client.surname + ' ' + session.client.name}">Фамилия Имя Отчество</b>
-                            <b class="news8" th:text="${session.client.contact.phone}">Номер телефона</b>
-                            <b class="user-policy8" th:text="${session.client.contact.email}">E-mail</b>
+                            <b class="about-us14" th:text="${sessionDTO.client.name + ' ' + sessionDTO.client.surname}">Фамилия Имя Отчество</b>
+                            <b class="news8" th:text="${sessionDTO.client.contact.phone}">Номер телефона</b>
+                            <b class="user-policy8" th:text="${sessionDTO.client.contact.email}">E-mail</b>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <h2>Заметка о ходе работы</h2>
-        <form id="test-edit-form" th:action="@{/SimplePsy/V1/session/report/create}" th:object="${report}" method="post">
-            <input type="hidden" th:value="${sessionId}" name="sessionId">
+        <form id="test-edit-form" th:action="@{/SimplePsy/V1/session/report}" th:object="${report}" method="post">
+            <input type="hidden" th:value="${sessionId}" name="sessionId" id="sessionId">
             <div>
                 <label for="requestForSessionByClient">Запрос на сессию со стороны клиента</label>
-                <textarea id="requestForSessionByClient" th:field="*{requestForSessionByClient}"></textarea>
+                <textarea id="requestForSessionByClient" th:text="${report.requestForSessionByClient}"
+                          name="requestForSessionByClient" disabled></textarea>
             </div>
 
             <div>
                 <label for="specialistCondition">Состояние терапевта в начале сессии</label>
-                <textarea id="specialistCondition" th:field="*{specialistCondition}"></textarea>
+                <textarea id="specialistCondition" th:text="${report.specialistCondition}"
+                          name="specialistCondition" disabled></textarea>
             </div>
 
             <div>
                 <label for="sessionTopics">Основные темы, затронутые в ходе сеанса</label>
-                <textarea id="sessionTopics" th:field="*{sessionTopics}"></textarea>
+                <textarea id="sessionTopics" th:text="${report.sessionTopics}"
+                          name="sessionTopics" disabled></textarea>
             </div>
 
             <div>
                 <label for="clientInsides">Значимые фразы, инсайты клиента</label>
-                <textarea id="clientInsides" th:field="*{clientInsides}"></textarea>
+                <textarea id="clientInsides" th:text="${report.clientInsides}"
+                          name="clientInsides" disabled></textarea>
             </div>
 
             <div>
                 <label for="clientsEmotions">Основные эмоции клиента</label>
-                <textarea id="clientsEmotions" th:field="*{clientsEmotions}"></textarea>
+                <textarea id="clientsEmotions" th:text="${report.clientsEmotions}"
+                          name="clientsEmotions" disabled></textarea>
             </div>
 
             <div>
                 <label for="specialistEmotions">Основные проявленные эмоции терапевта</label>
-                <textarea id="specialistEmotions" th:field="*{specialistEmotions}"></textarea>
+                <textarea id="specialistEmotions" th:text="${report.specialistEmotions}"
+                          name="specialistEmotions" disabled></textarea>
             </div>
 
             <div>
                 <label for="unmanifestedSpecialistEmotions">Непроявленные эмоции терапевта</label>
-                <textarea id="unmanifestedSpecialistEmotions" th:field="*{unmanifestedSpecialistEmotions}"></textarea>
+                <textarea id="unmanifestedSpecialistEmotions" th:text="${report.unmanifestedSpecialistEmotions}"
+                          name="unmanifestedSpecialistEmotions" disabled></textarea>
             </div>
 
             <div>
                 <label for="techniquesAndMethodsUsed">Применяемые техники и методы</label>
-                <textarea id="techniquesAndMethodsUsed" th:field="*{techniquesAndMethodsUsed}"></textarea>
+                <textarea id="techniquesAndMethodsUsed" th:text="${report.techniquesAndMethodsUsed}"
+                          name="techniquesAndMethodsUsed" disabled></textarea>
             </div>
 
             <div>
                 <label for="clientsSessionResistance">Основные препятствия и способы сопротивления процессу терапии со стороны клиента</label>
-                <textarea id="clientsSessionResistance" th:field="*{clientsSessionResistance}"></textarea>
+                <textarea id="clientsSessionResistance" th:text="${report.clientsSessionResistance}"
+                          name="clientsSessionResistance" disabled></textarea>
             </div>
 
             <div>
                 <label for="specialistFinalStatus">Состояние терапевта по завершению сессии</label>
-                <textarea id="specialistFinalStatus" th:field="*{specialistFinalStatus}"></textarea>
+                <textarea id="specialistFinalStatus" th:text="${report.specialistFinalStatus}"
+                          name="specialistFinalStatus" disabled></textarea>
             </div>
 
             <div>
                 <label for="plansForNextSession">План и/или мысли на следующую сессию</label>
-                <textarea id="plansForNextSession" th:field="*{plansForNextSession}"></textarea>
+                <textarea id="plansForNextSession" th:text="${report.plansForNextSession}"
+                          name="plansForNextSession" disabled></textarea>
             </div>
 
             <div>
                 <label for="difficultiesForRequestingSuperVisa">Трудности и потенциальные темы для запроса на супервизию</label>
-                <textarea id="difficultiesForRequestingSuperVisa" th:field="*{difficultiesForRequestingSuperVisa}"></textarea>
+                <textarea id="difficultiesForRequestingSuperVisa" th:text="${report.difficultiesForRequestingSuperVisa}"
+                          name="difficultiesForRequestingSuperVisa" disabled></textarea>
             </div>
 
             <div class="frame-wrapper47">
@@ -268,11 +280,11 @@
                     <div class="frame-parent72" th:each="method:${projectiveMethods}">
                         <div class="rectangle-parent62">
                             <div class="frame-child71"></div>
-                            <b class="b94" th:text="${method.getDate()}"></b>
+                            <b class="b94" th:text="${method.date}"></b>
                         </div>
                         <div class="rectangle-parent63">
                             <div class="frame-child72"></div>
-                            <b class="div76" th:text="${method.getName()}"></b>
+                            <b class="div76" th:text="${method.name}"></b>
                         </div>
                     </div>
                     <div class="rectangle-parent78">
@@ -280,8 +292,19 @@
                     </div>
                 </div>
             </div>
-
-            <button class="submit-note" type="submit">Сохранить</button>
+            <div class="save-edit-buttons-wrapper">
+                <div class="save-edit-buttons">
+                    <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
+                        <div class="div72">Отменить</div>
+                    </button>
+                    <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
+                        <div class="div72">Редактировать</div>
+                    </button>
+                    <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
+                        <div class="div72">Сохранить</div>
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
     <div id="modal" class="modal">

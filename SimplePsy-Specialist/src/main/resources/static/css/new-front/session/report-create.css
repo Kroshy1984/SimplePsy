@@ -1,3 +1,241 @@
+.frame-parent83,
+.frame-wrapper52 {
+    width: 1175px;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.frame-parent83 {
+    height: 145px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: var(--padding-lgi) var(--padding-6xs) var(--padding-3xl)
+    var(--padding-3xl);
+    position: relative;
+    gap: 33px;
+    z-index: 1;
+}
+
+.frame-wrapper52 {
+    text-align: left;
+    color: var(--grey-blue-60);
+    height: 157px;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-xs);
+}
+
+.frame-child80 {
+    height: 100%;
+    width: 85%;
+    position: absolute;
+    margin: 0 !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+.about-us-parent1,
+.frame-parent84 {
+    height: 102px;
+    width: 217px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-11xs);
+}
+
+.frame-parent84 {
+    height: 104px;
+    width: 520px;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.about-us-frame,
+.frame-wrapper53,
+.parent11 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.frame-wrapper53,
+.parent11 {
+    height: 103px;
+    flex-direction: column;
+}
+
+.frame-wrapper53 {
+    height: 104px;
+    padding: var(--padding-12xs) 0 0;
+    box-sizing: border-box;
+}
+
+.about-us8,
+.b100 {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.b100 {
+    width: 170px;
+    height: 53.7px;
+    font-size: var(--font-size-13xl);
+    line-height: 24px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.about-us8 {
+    height: 25px;
+    width: 213px;
+    line-height: 25px;
+    display: inline-block;
+    z-index: 2;
+}
+
+.about-us-wrapper {
+    width: 223px;
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    margin-top: -0.3px;
+}
+
+.about-us-frame {
+    height: 25px;
+    flex-direction: row;
+    box-sizing: border-box;
+    margin-top: -0.3px;
+}
+
+.about-us9 {
+    height: 25px;
+    position: relative;
+    line-height: 25px;
+    display: inline-block;
+    flex-shrink: 0;
+    z-index: 3;
+}
+
+.about-us10 {
+    width: 205px;
+    height: 50px;
+    position: relative;
+    line-height: 25px;
+    display: inline-block;
+}
+
+.p33,
+.p34 {
+    margin: 0;
+}
+
+.p35,
+.p36 {
+    margin: 0;
+}
+.about-us11 {
+    width: 217px;
+    height: 50px;
+    position: relative;
+    line-height: 25px;
+    display: inline-block;
+    z-index: 2;
+}
+
+.about-us-parent3,
+.frame-parent85,
+.frame-wrapper54 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.frame-wrapper54 {
+    height: 78px;
+    width: 230px;
+    flex-direction: column;
+    box-sizing: border-box;
+    color: var(--grey-blue-60);
+}
+
+.frame-parent85 {
+    height: 104px;
+    width: 481px;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.about-us-parent2 {
+    height: 104px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+}
+
+.p37,
+.p38 {
+    margin: 0;
+}
+.about-us12 {
+    height: 50px;
+    position: relative;
+    line-height: 25px;
+    display: inline-block;
+    z-index: 2;
+}
+.p39,
+.p40 {
+    margin: 0;
+}
+.about-us13 {
+    height: 50px;
+    position: relative;
+    line-height: 25px;
+    display: inline-block;
+    z-index: 2;
+}
+
+.about-us-parent3 {
+    width: 230px;
+    height: 75px;
+    flex-direction: column;
+}
+
+.about-us14,
+.news8,
+.user-policy8 {
+    width: 230px;
+    height: 25px;
+    position: relative;
+    line-height: 25px;
+    display: inline-block;
+    z-index: 1;
+}
+
+.news8,
+.user-policy8 {
+    width: 118px;
+}
+.user-policy8 {
+    width: 158px;
+}
+
 .save-edit-buttons-wrapper {
   display: flex;
   flex-direction: row;
@@ -283,6 +521,7 @@
 .submit-note {
     display: block;
 }
+
 .news10{
   position: relative;
   line-height: 25px;

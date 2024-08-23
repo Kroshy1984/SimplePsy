@@ -146,12 +146,12 @@
           </div>
           <div class="component-19-wrapper">
             <div class="component-19">
-              <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.getId()}" onclick="goTo(this)">
+              <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.id}" onclick="goTo(this)">
                 <div class="frame-child57"></div>
                 <div class="frame-child58"></div>
-                <b class="b82" th:text="${newSession.getDate()}"></b>
+                <b class="b82" th:text="${newSession.date}"></b>
                 <div class="wrapper22">
-                  <b class="b83" th:text="${newSession.getClient().getName()}"></b>
+                  <b class="b83" th:text="${newSession.client.name + ' ' + newSession.client.surname}"></b>
                 </div>
               </div>
             </div>

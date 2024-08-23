@@ -436,7 +436,7 @@
 .user-policy9 {
   position: absolute;
   left: calc(50% + 250px);
-  white-space: pre-wrap;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 .about-us15 {
