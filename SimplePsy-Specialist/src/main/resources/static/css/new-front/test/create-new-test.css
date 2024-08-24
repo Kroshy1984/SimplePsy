@@ -791,7 +791,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-child207,
 .rectangle-parent172:hover {
@@ -832,7 +831,6 @@
   flex-direction: row;
   padding: var(--padding-11xs) var(--padding-12xs) var(--padding-7xs);
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .create-test-type-content,
 .create-test-type-content-inner,
@@ -844,7 +842,6 @@
 .create-test-type-content-inner {
   flex: 1;
   flex-direction: column;
-  padding: var(--padding-11xs) 0 0;
 }
 .create-test-type-content {
   align-self: stretch;
@@ -925,7 +922,6 @@
   color: var(--grey-blue-50);
   text-align: left;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .test-name-rect {
   position: absolute;
@@ -963,7 +959,6 @@
   height: 40px;
   position: relative;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 100%;
 }
 .parent29 {
@@ -999,7 +994,6 @@
   text-align: left;
   display: inline-block;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 1;
 }
 .first-answer-variant-icon {
@@ -1115,7 +1109,6 @@
   justify-content: flex-start;
   gap: var(--gap-lg);
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .first-answer,
 .question-content-wrapper,

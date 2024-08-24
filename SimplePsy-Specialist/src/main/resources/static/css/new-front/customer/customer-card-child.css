@@ -133,7 +133,6 @@
   align-self: stretch;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
   justify-content: space-between;
   max-width: 100%;
   gap: var(--gap-xl);

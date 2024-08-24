@@ -1755,7 +1755,7 @@ h2 {
   color: var(--white);
 }
 .client-list-item {
-  width: 250px;
+  width: 239px;
   flex-direction: column;
 }
 .last-meeting-container-child {
