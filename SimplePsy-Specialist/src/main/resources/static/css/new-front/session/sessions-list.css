@@ -547,7 +547,6 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  min-width: 219px;
   white-space: nowrap;
 }
 .frame-child56,
@@ -1086,6 +1085,7 @@
   max-width: 100%;
 }
 .rectangle-parent61 {
+  flex-direction: column;
   width: 322px;
   border-radius: var(--br-xl);
   background-color: var(--white);
@@ -1352,9 +1352,11 @@
   justify-content: flex-start;
 }
 .frame-parent69 {
+  position: relative;
+  top: 100px;
   width: 483px;
   flex-direction: column;
-  gap: 72.4px;
+  gap: 72px;
   min-width: 483px;
   max-width: 100%;
   font-size: var(--bold-18-size);

@@ -436,6 +436,11 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.wide {
+  width: 296px;
+  height: 50px;
+}
+
 .icon-frame, .icon-wrapper1, .icon-wrapper2, .icon-wrapper3 {
   margin-bottom: 10px;
 }

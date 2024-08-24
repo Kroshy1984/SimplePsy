@@ -101,46 +101,19 @@
                 <b class="rosaliericegmailc3">rosalie.rice@gmail.com</b>
               </div>
             </div>
-            <div class="client-actions-parent">
-              <div class="client-actions">
-                <div class="action-button">
-                  <div class="button-content">
-                    <img
-                            class="image-2-icon3"
-                            loading="lazy"
-                            alt=""
-                            src="/images/image-2@2x.png"
-                    />
-
-                    <div class="button-label">
-                      <div class="button30">
-                        <input
-                                class="input5"
-                                placeholder="Поиск по клиентам "
-                                type="text"
-                        />
-                      </div>
-                      <div class="session-info">
-                        <div class="last-session-date">
-                          <img
-                                  class="image-4-icon"
-                                  loading="lazy"
-                                  alt=""
-                                  src="/images/image-4@2x.png"
-                          />
-
-                          <div class="last-session-date-label">
-                            <div class="div45">Дата последней встречи</div>
-                          </div>
-                        </div>
-                        <div class="total-sessions">
-                          <div class="div46">Кол-во проведённых сеансов</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="frame-parent110">
+              <div class="rectangle-parent101" id="groupButton" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
+                <div class="frame-child125"></div>
+                <h3 class="h33">Список клиентов</h3>
               </div>
+              <button class="rectangle-parent100" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
+                <div class="frame-child126"></div>
+                <div class="div192">Список встреч</div>
+              </button>
+              <button class="rectangle-parent100" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
+                <div class="frame-child126"></div>
+                <div class="div192">Опросники и тесты</div>
+              </button>
             </div>
           </div>
           <div class="client-list-item-parent">
@@ -151,14 +124,14 @@
                     <div class="client-list-wrapper">
                       <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
                       <div class="icon-wrapper33">
-                        <img class="icon146" alt="" src="../../../../static/images/icon-3@2x.png" />
+                        <img class="icon146" alt="" src="/images/icon-3@2x.png" />
                       </div>
                       <b class="client-list">Список клиентов</b>
                     </div>
                     <div class="base-frame">
                       <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
                         <div class="icon-wrapper34">
-                          <img class="icon147" alt="" src="../../../../static/images/icon-41@2x.png"/>
+                          <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
                         </div>
                         <b class="calendar">Календарь</b>
                       </button>
@@ -168,14 +141,14 @@
                     <div class="notifications-wrapper">
                       <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
                       <div class="icon-wrapper33">
-                        <img class="icon146" alt="" src="../../../../static/images/icon-5.svg" />
+                        <img class="icon146" alt="" src="/images/icon-5.svg" />
                       </div>
                       <b class="notifications">Уведомления</b>
                     </div>
                     <div class="base-frame">
                       <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
                         <div class="icon-wrapper34">
-                          <img class="icon147" alt="" src="../../../../static/images/icon-6.svg"/>
+                          <img class="icon147" alt="" src="/images/icon-6.svg"/>
                         </div>
                         <b class="analytics">Аналитика</b>
                       </button>
@@ -216,6 +189,47 @@
               </div>
             </div>
             <div class="client-info-wrapper">
+              <div class="client-actions-parent">
+                <div class="client-actions">
+                  <div class="action-button">
+                    <div class="button-content">
+                      <img
+                              class="image-2-icon3"
+                              loading="lazy"
+                              alt=""
+                              src="/images/image-2@2x.png"
+                      />
+
+                      <div class="button-label">
+                        <div class="button30">
+                          <input
+                                  class="input5"
+                                  placeholder="Поиск по клиентам "
+                                  type="text"
+                          />
+                        </div>
+                        <div class="session-info">
+                          <div class="last-session-date">
+                            <img
+                                    class="image-4-icon"
+                                    loading="lazy"
+                                    alt=""
+                                    src="/images/image-4@2x.png"
+                            />
+
+                            <div class="last-session-date-label">
+                              <div class="div45">Дата последней встречи</div>
+                            </div>
+                          </div>
+                          <div class="total-sessions">
+                            <div class="div46">Кол-во проведённых сеансов</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <h2>Список клиентов</h2>
               <div class="client-info1">
                 <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.id}" id="groupContainer1" onclick="goTo(this)">
@@ -274,9 +288,6 @@
           </div>
         </div>
       </section>
-      <div class="separator-wrapper">
-        <div class="separator">1 2 ....... 23</div>
-      </div>
     </main>
     <div class="feedback-frame">
       <div class="feedback1">

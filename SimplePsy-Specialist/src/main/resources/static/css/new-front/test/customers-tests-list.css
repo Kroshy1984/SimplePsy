@@ -678,7 +678,6 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  min-width: 129px;
   white-space: nowrap;
 }
 .frame-child126,
@@ -2018,7 +2017,6 @@
 .search-input4 {
   display: flex;
   justify-content: flex-start;
-  max-width: 100%;
 }
 .frame-parent111 {
   flex: 1;
