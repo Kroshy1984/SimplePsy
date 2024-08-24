@@ -71,6 +71,7 @@
   font-weight: 700;
   color: inherit;
   white-space: nowrap;
+  cursor: pointer;
 }
 .user-policy10 {
   width: 311px;

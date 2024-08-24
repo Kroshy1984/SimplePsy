@@ -39,47 +39,7 @@ public class ScoringController {
         this.customerService = customerService;
     }
 
-//    @GetMapping("/userForm")
-//    public String userForm(Model model)
-//    {
-//
-//        model.addAttribute("questions", Scoring.getUserData());
-//        return "userForm";
-//    }
 
-    /*@GetMapping("/checkboxQuestions")
-    public String checkboxQuestions(Model model) {
-        model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
-        return "checkboxQuestions";
-    }*/
-
-//    @PostMapping("/saveAnswers")
-//    public ResponseEntity<String> saveAnswers(@RequestBody String[] answers,
-//                                              @RequestParam("scoringId") String scoringId) {
-//        System.out.println("In method saveAnswers got the scoring id " + scoringId);
-//        this.answers.clear();
-//        this.answers.addAll(List.of(answers));
-//        scoringService.save(scoringId, this.answers);
-//        return ResponseEntity.ok(scoringId);
-////        return "redirect:/SimplePsy/V1/scoring/done";
-//    }
-
-    // TODO: Исправить добавление пустых скорингов
-    // Возвращаем скоринг
-//    @GetMapping("{problemId}")
-//    public String getScoring(@PathVariable String problemId,
-//                             Model model) {
-//        String scoringId = scoringService.saveScoring(new Scoring()).getId();
-//        String clientUrl = System.getenv().getOrDefault("CLIENT_SERVICE_URL", "http://localhost:8086");
-//        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
-//        model.addAttribute("clientUrl", clientUrl);
-//        model.addAttribute("scoringUrl", scoringUrl);
-//        model.addAttribute("scoringId", scoringId);
-//        model.addAttribute("problemId", problemId);
-//        model.addAttribute("textQuestions", Scoring.getTextQuestions());
-//        model.addAttribute("checkboxQuestions", Scoring.getCheckboxQuestions());
-//        return "questionnaire";
-//    }
 
     @GetMapping("/done")
     public String done()
@@ -94,13 +54,6 @@ public class ScoringController {
         return null;
     }
 
-//    @GetMapping("/getScoringAnswers")
-//    public ResponseEntity<List<String>> getScoringAnswers(@RequestParam("scoringId") String scoringId)
-//    {
-//        System.out.println("In method getScoringAnswers got the scoringId: " + scoringId);
-//        List<String> answers = scoringService.getScoringAnswers(scoringId);
-//        return ResponseEntity.ok(answers);
-//    }
     @GetMapping("/creation")
     public String createQuestionnaireForm()
     {

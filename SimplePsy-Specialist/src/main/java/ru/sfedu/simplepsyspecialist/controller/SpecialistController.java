@@ -149,8 +149,6 @@ public class SpecialistController {
                 }
             }
         }
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
         model.addAttribute("customers", specialistCustomers);
         return "new-front/customer/customer-list";
     }

@@ -202,11 +202,7 @@
 
                       <div class="button-label">
                         <div class="button30">
-                          <input
-                                  class="input5"
-                                  placeholder="Поиск по клиентам "
-                                  type="text"
-                          />
+                          <input class="input5" placeholder="Поиск по клиентам " type="text" oninput="filterCustomers(this.value)">
                         </div>
                         <div class="session-info">
                           <div class="last-session-date">
@@ -232,23 +228,23 @@
               </div>
               <h2>Список клиентов</h2>
               <div class="client-info1">
-                <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.id}" id="groupContainer1" onclick="goTo(this)">
-                  <div class="rectangle-parent21">
-                    <div class="frame-child24"></div>
-                    <b class="b47">
-                      <p class="p12">Последняя встреча:</p>
-                      <p class="p13">20.02.2024</p>
-                      <p class="p14">Всего встреч:</p>
-                      <p class="p15">9</p>
-                    </b>
-                  </div>
+                <div class="frame-parent24" id="groupContainer1" data-client-name="${customer.surname} ${customer.name} ${customer.lastName}" th:each="customer : ${customers}">
+<!--                  <div class="rectangle-parent21">-->
+<!--                  <div class="frame-child24"></div>-->
+<!--                  <b class="b47">-->
+<!--                    <p class="p12">Последняя встреча:</p>-->
+<!--                    <p class="p13">20.02.2024</p>-->
+<!--                    <p class="p14">Всего встреч:</p>-->
+<!--                    <p class="p15">9</p>-->
+<!--                  </b>-->
+<!--                </div>-->
                   <div class="rectangle-parent22">
                     <div class="frame-child25"></div>
                     <div class="parent1">
                       <div th:switch="${customer.typeOfClient}">
-                        <b class="b48" th:case="${customer.typeOfClient.ADULT}" th:text="${customer.surname + ' ' + customer.name + ' ' + customer.lastName}"></b>
-                        <b class="b48" th:case="${customer.typeOfClient.COUPLE}" th:text="${customer.firstClientSurname + ' ' + customer.firstClientName + ' ' + customer.firstClientLastName}"></b>
-                        <b class="b48" th:case="${customer.typeOfClient.CHILD}" th:text="${customer.childSurname + ' ' + customer.childName + ' ' + customer.childLastName}"></b>
+                        <b class="b48 customer-name" th:case="${customer.typeOfClient.ADULT}" th:text="${customer.surname + ' ' + customer.name + ' ' + customer.lastName}"></b>
+                        <b class="b48 customer-name" th:case="${customer.typeOfClient.COUPLE}" th:text="${customer.firstClientSurname + ' ' + customer.firstClientName + ' ' + customer.firstClientLastName}"></b>
+                        <b class="b48 customer-name" th:case="${customer.typeOfClient.CHILD}" th:text="${customer.childSurname + ' ' + customer.childName + ' ' + customer.childLastName}"></b>
                       </div>
                       <div class="frame-parent25">
                         <div class="wrapper14">
@@ -312,10 +308,10 @@
       </div>
     </div>
   </div>
-  <div id="modal1" class="modal1">
-    <div class="modal-content1">
-      <span class="close-btn1">&times;</span>
-      <div id="modal-body1"></div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body"></div>
     </div>
   </div>
   <script>
@@ -408,6 +404,37 @@
     // Событие клика для закрытия модального окна
     closeBtn.addEventListener('click', closeModal);
     });
+
+    var  addClientBtn = document.querySelector('.about-us3');
+    addClientBtn.addEventListener('click', openAddClientPage);
+
+    function openAddClientPage()
+    {
+      window.location.href = '/SimplePsy/V1/customer/customer-form';
+    }
+    // Получаем элементы
+    const searchInput = document.querySelector('.input5');
+    const clientListItems = document.querySelectorAll('.frame-parent24');
+
+    // Добавляем обработчик события для поля ввода поиска
+    searchInput.addEventListener('input', function() {
+      const searchQuery = this.value.toLowerCase();
+
+      clientListItems.forEach(item => {
+        // Получаем имя клиента из элемента
+        const clientName = item.querySelector('.b48').textContent.toLowerCase();
+
+        // Проверяем, содержит ли имя клиента введенный поисковый запрос
+        if (clientName.includes(searchQuery)) {
+          // Отображаем элемент
+          item.style.display = 'block';
+        } else {
+          // Скрываем элемент
+          item.style.display = 'none';
+        }
+      });
+    });
+
   </script>
   </body>
 </html>

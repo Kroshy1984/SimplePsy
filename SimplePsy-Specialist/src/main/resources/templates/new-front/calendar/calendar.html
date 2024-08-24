@@ -522,6 +522,7 @@
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
     var  holidayBtn = document.querySelector('.user-policy10');
+
     // Функция для открытия модального окна
     function openModal() {
       fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
@@ -596,6 +597,12 @@
 
     appointLink.addEventListener('click', openModal);
     holidayBtn.addEventListener('click', openHolidayModal);
+
+    var  addClientBtn = document.querySelector('.about-us16');
+    addClientBtn.addEventListener('click', () =>
+    {
+      window.location.href = '/SimplePsy/V1/customer/customer-form';
+    });
 
     closeBtn.addEventListener('click', closeModal);
   });

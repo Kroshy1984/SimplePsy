@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, width=device-width"/>
@@ -170,14 +170,14 @@
                         <div class="frame-child119"></div>
                         <div class="div142">Карта клиента</div>
                     </button>
-                    <button class="rectangle-parent94">
+                    <button class="rectangle-parent94" onclick="window.location = '/SimplePsy/V1/session/sessions'">
                         <div class="frame-child120"></div>
                         <div class="div143">Список встреч</div>
                     </button>
-                    <div class="rectangle-parent95" id="groupContainer">
-                        <div class="frame-child121"></div>
-                        <div class="div144">Опросники и тесты</div>
-                    </div>
+                    <button class="rectangle-parent94" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
+                        <div class="frame-child120"></div>
+                        <div class="div143">Опросники и тесты</div>
+                    </button>
                 </div>
             </div>
             <div class="action-buttons">
@@ -673,55 +673,6 @@
     </div>
 </div>
 <script>
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-        userImage.addEventListener("click", function () {
-            window.location.href = "./component4.html";
-        });
-    }
-
-    var emailContainer = document.getElementById("emailContainer");
-    if (emailContainer) {
-        emailContainer.addEventListener("click", function () {
-            window.location.href = "./frame.html";
-        });
-    }
-
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function () {
-            window.location.href = "./component2.html";
-        });
-    }
-
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function () {
-            window.location.href = "./component3.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function () {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer1 = document.getElementById("groupContainer1");
-    if (groupContainer1) {
-        groupContainer1.addEventListener("click", function () {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function () {
-            window.location.href = "./component13.html";
-        });
-    }
-
     function updateForm() {
         const clientType = document.getElementById('client-type').value;
         document.getElementById('common-fields').style.display = clientType === 'ADULT' ? 'block' : 'none';
@@ -747,54 +698,6 @@
     updateGuardianFields();
     updateMeetingFields();
 
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-        userImage.addEventListener("click", function () {
-            window.location.href = "./component4.html";
-        });
-    }
-
-    var emailContainer = document.getElementById("emailContainer");
-    if (emailContainer) {
-        emailContainer.addEventListener("click", function () {
-            window.location.href = "./frame.html";
-        });
-    }
-
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function () {
-            window.location.href = "./component2.html";
-        });
-    }
-
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function () {
-            window.location.href = "./component3.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function () {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer1 = document.getElementById("groupContainer1");
-    if (groupContainer1) {
-        groupContainer1.addEventListener("click", function () {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function () {
-            window.location.href = "./component13.html";
-        });
-    }
 
     // Открытие модального окна создания сессии
     document.addEventListener('DOMContentLoaded', function() {
@@ -882,6 +785,12 @@
     // Событие клика для закрытия модального окна
     closeBtn.addEventListener('click', closeModal);
   });
+
+    var  addClientBtn = document.querySelector('.about-us16');
+    addClientBtn.addEventListener('click', () =>
+    {
+        window.location.href = '/SimplePsy/V1/customer/customer-form';
+    });
 </script>
 </body>
 </html>
