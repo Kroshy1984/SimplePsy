@@ -60,7 +60,6 @@
         }
 
         .close-btn {
-            position: absolute;
             top: 10px;
             right: 10px;
             cursor: pointer;
@@ -71,8 +70,6 @@
 </head>
 <body>
 <div class="container">
-    <span class="close-btn">&times;</span>
-    <h2>Наименование нерабочих дней</h2>
     <form th:action="@{/SimplePsy/V1/session/holiday}" th:object="${session}" method="post">
         <div class="input-group">
             <label for="title">Название:</label>

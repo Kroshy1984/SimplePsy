@@ -56,7 +56,7 @@ public class SpecialistController {
         System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.registerNewSpecialist(specialist);
-        return "redirect:/SimplePsy/V1/specialist/sessions";
+        return "redirect:/SimplePsy/V1/session/calendar";
     }
 
     @GetMapping("/login")

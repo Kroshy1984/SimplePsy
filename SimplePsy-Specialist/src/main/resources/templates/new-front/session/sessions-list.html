@@ -267,34 +267,6 @@
     </div>
   </div>
   <script>
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-      userImage.addEventListener("click", function (e) {
-        window.location.href = "./component4.html";
-      });
-    }
-
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-      dashboardContainer.addEventListener("click", function (e) {
-        window.location.href = "./component2.html";
-      });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-      groupContainer.addEventListener("click", function (e) {
-        window.location.href = "./component6.html";
-      });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-      groupContainer.addEventListener("click", function (e) {
-        window.location.href = "./component13.html";
-      });
-    }
-
     var groupContainer = document.getElementById("groupContainer");
     if (groupContainer) {
       groupContainer.addEventListener("click", function (e) {
@@ -313,7 +285,7 @@
     var modalBody = document.getElementById('modal-body');
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-
+    var holidayBtn = document.querySelector('.user-policy6');
     // Функция для открытия модального окна
       function openModal() {
         fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
@@ -388,7 +360,7 @@
 
     // Событие клика для открытия модального окна
     appointLink.addEventListener('click', openModal);
-
+    holidayBtn.addEventListener('click', openHolidayModal);
     // Событие клика для закрытия модального окна
     closeBtn.addEventListener('click', closeModal);
     });
@@ -398,6 +370,34 @@
     {
       window.location.href = '/SimplePsy/V1/customer/customer-form';
     });
+    function openHolidayModal()
+    {
+      const modal = document.getElementById("modal");
+      const modalBody = document.getElementById("modal-body");
+
+      fetch('/SimplePsy/V1/session/holiday')
+              .then(response => response.text())
+              .then(html => {
+                modalBody.innerHTML = html;
+                modal.style.display = "block";
+
+                // Добавляем обработчик закрытия модального окна
+                document.querySelector('.close-modal').onclick = function() {
+                  modal.style.display = "none";
+                };
+              })
+              .catch(error => {
+                console.error('Error loading modal content:', error);
+              });
+    }
+
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("holidayModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   </script>
   </body>
 </html>

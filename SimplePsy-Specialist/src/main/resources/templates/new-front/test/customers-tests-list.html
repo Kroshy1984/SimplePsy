@@ -241,7 +241,7 @@
                                     </div>
                                     <div class="component-19-parent">
                                         <ul class="component-191" id="testList">
-                                            <li class="frame-parent112" th:each="scoring : ${scorings}" th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
+                                            <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}" th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}" onclick="goTo(this)">
                                                 <div class="rectangle-parent103">
                                                     <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers">20.02.2024</b>
                                                     <div class="frame-child129"></div>
@@ -291,51 +291,13 @@
                         <img class="icon142" alt="" src="/images/icon.svg" />
                     </div>
                 </div>
-                <div class="wrapper46">
-                    <b class="b130">Заявки</b>
-                </div>
-            </div>
-            <div class="application-entry">
-                <div class="empty-field-parent" id="groupContainer">
-                    <div class="empty-field">
-                        <div class="empty-field-child"></div>
-                        <b class="placeholder18">20.02.2024</b>
-                    </div>
-                    <div class="applicant-name-field">
-                        <div class="applicant-name-field-child"></div>
-                        <b class="b131">Овсянникова Юля Матвеевна</b>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="second-application-entry">
-            <div class="second-empty-field-parent" id="groupContainer">
-                <div class="second-empty-field">
-                    <div class="second-empty-field-child"></div>
-                    <b class="second-placeholder">25.02.2024</b>
-                </div>
-                <div class="second-applicant-name">
-                    <div class="second-applicant-name-child"></div>
-                    <b class="b132">Овсянникова Юля Матвеевна</b>
-                </div>
             </div>
         </div>
     </section>
     <div class="item106">
         <img class="feather-icon-chevron-up18" alt="" />
     </div>
-    <div class="feedback-container-wrapper">
-        <div class="feedback-container1">
-            <img class="icon143" alt="" src="/images/icon-7@2x.png" />
 
-            <div class="feedback-button1">
-                <div class="feedback-label1">
-                    <b class="send-feedback10">Обратная связь</b>
-                </div>
-                <img class="icon144" alt="" src="/images/icon-8.svg" />
-            </div>
-        </div>
-    </div>
 </div>
 <div id="modal" class="modal">
     <div class="modal-content">
@@ -344,6 +306,9 @@
     </div>
 </div>
 <script>
+    function goTo(obj) {
+        window.location.href = "/SimplePsy/V1/scoring/test/edit/" + obj.getAttribute("data-card-id");
+    }
     document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.item103, .item104, .item105');
 
@@ -547,7 +512,7 @@
       var modalBody = document.getElementById('modal-body');
       var closeBtn = document.querySelector('.close-btn');
       var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-
+      var holidayBtn = document.querySelector('.user-policy11');
       // Функция для открытия модального окна
       function openModal() {
         fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
@@ -566,7 +531,7 @@
 
       // Событие клика для открытия модального окна
       appointLink.addEventListener('click', openModal);
-
+      holidayBtn.addEventListener('click', openHolidayModal);
       // Событие клика для закрытия модального окна
       closeBtn.addEventListener('click', closeModal);
       });
@@ -576,6 +541,27 @@
     {
         window.location.href = '/SimplePsy/V1/customer/customer-form';
     });
+    function openHolidayModal()
+    {
+        const modal = document.getElementById("modal");
+        const modalBody = document.getElementById("modal-body");
+
+        fetch('/SimplePsy/V1/session/holiday')
+            .then(response => response.text())
+            .then(html => {
+                modalBody.innerHTML = html;
+                modal.style.display = "block";
+
+                // Добавляем обработчик закрытия модального окна
+                document.querySelector('.close-modal').onclick = function() {
+                    modal.style.display = "none";
+                };
+            })
+            .catch(error => {
+                console.error('Error loading modal content:', error);
+            });
+    }
+
 </script>
 </body>
 </html>

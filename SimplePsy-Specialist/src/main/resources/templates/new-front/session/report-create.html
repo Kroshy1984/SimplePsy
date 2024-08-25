@@ -22,7 +22,7 @@
         <div class="menu">
             <div class="dashboard23" id="dashboardContainer">
                 <div class="base75"></div>
-                <b class="dashboard24">Список клинетов</b>
+                <b class="dashboard24" onclick="window.location.href = '/SimplePsy/V1/specialist/customers'">Список клинетов</b>
                 <img
                         class="icon115"
                         loading="lazy"
@@ -51,7 +51,7 @@
                 />
             </div>
             <div class="email3">
-                <div class="base78"></div>
+                <div class="base78" onclick="window.location.href = '/SimplePsy/V1/session/calendar'"></div>
                 <b class="calendars8">Календарь</b>
                 <img
                         class="icon118"
@@ -315,47 +315,7 @@
     </div>
 </div>
 <script>
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-            window.location.href = "./component2.html";
-        });
-    }
 
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-            window.location.href = "./component3.html";
-        });
-    }
-
-    var container = document.getElementById("container");
-    if (container) {
-        container.addEventListener("click", function (e) {
-            window.location.href = "./component2.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer1 = document.getElementById("groupContainer1");
-    if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-        userImage.addEventListener("click", function (e) {
-            window.location.href = "./component4.html";
-        });
-    }
 
     var newsText = document.getElementById("newsText");
     if (newsText) {
@@ -377,43 +337,8 @@
             // Please sync "Модальное окно "Добавить клиента"" to the project
         });
     }
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-            window.location.href = "./component2.html";
-        });
-    }
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-            window.location.href = "./component3.html";
-        });
-    }
-    var container = document.getElementById("container");
-    if (container) {
-        container.addEventListener("click", function (e) {
-            window.location.href = "./component2.html";
-        });
-    }
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
-    var groupContainer1 = document.getElementById("groupContainer1");
-    if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-        userImage.addEventListener("click", function (e) {
-            window.location.href = "./component4.html";
-        });
-    }
 
+    var holidayBtn = document.querySelector('.user-policy9');
     // Открытие модального окна создания проективной методики
     document.addEventListener('DOMContentLoaded', function() {
     // Получаем элементы
@@ -565,6 +490,27 @@
     {
         window.location.href = '/SimplePsy/V1/customer/customer-form';
     });
+    holidayBtn.addEventListener('click', openHolidayModal)
+    function openHolidayModal()
+    {
+        const modal = document.getElementById("modal");
+        const modalBody = document.getElementById("modal-body");
+
+        fetch('/SimplePsy/V1/session/holiday')
+            .then(response => response.text())
+            .then(html => {
+                modalBody.innerHTML = html;
+                modal.style.display = "block";
+
+                // Добавляем обработчик закрытия модального окна
+                document.querySelector('.close-modal').onclick = function() {
+                    modal.style.display = "none";
+                };
+            })
+            .catch(error => {
+                console.error('Error loading modal content:', error);
+            });
+    }
 </script>
 </body>
 </html>
