@@ -763,7 +763,7 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  min-width: 129px;
+  width: 190px;
   white-space: nowrap;
 }
 .frame-child120,
@@ -796,7 +796,7 @@
   border: 3px solid var(--grey-blue-95);
   padding: var(--padding-mid) var(--padding-lg);
   background-color: var(--white);
-  width: 174px;
+  width: 206px;
   border-radius: var(--br-xl);
   box-sizing: border-box;
   display: flex;
