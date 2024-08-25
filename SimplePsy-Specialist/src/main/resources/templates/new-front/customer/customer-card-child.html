@@ -55,9 +55,7 @@
                                 <a class="about-us19">Добавить клиента</a>
                                 <div class="news-container">
                                     <a class="news10">Назначить встречу</a>
-                                    <b class="user-policy13"
-                                    >Добавить график нерабочих дней
-                                    </b>
+                                    <a class="user-policy13">Добавить график нерабочих дней</a>
                                 </div>
                             </div>
                         </div>
@@ -177,15 +175,15 @@
             <div class="client-card-actions">
                 <div class="client-card-actions-content">
                     <div class="frame-parent148">
-                        <button class="rectangle-parent146">
+                        <button class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
                             <div class="frame-child172"></div>
-                            <a class="a">Карта клиента</a>
+                            <a class="a">Список клиентов</a>
                         </button>
-                        <button class="rectangle-parent147">
+                        <button class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
                             <div class="frame-child173"></div>
                             <a class="a1">Список встреч</a>
                         </button>
-                        <div class="rectangle-parent148" id="groupContainer">
+                        <div class="rectangle-parent148" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
                             <div class="frame-child174"></div>
                             <div class="div217">Опросники и тесты</div>
                         </div>
@@ -520,55 +518,6 @@
     </div>
 </div>
 <script>
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-        userImage.addEventListener("click", function (e) {
-            window.location.href = "./component4.html";
-        });
-    }
-
-    var emailContainer = document.getElementById("emailContainer");
-    if (emailContainer) {
-        emailContainer.addEventListener("click", function (e) {
-            window.location.href = "./frame.html";
-        });
-    }
-
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-            window.location.href = "./component2.html";
-        });
-    }
-
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-            window.location.href = "./component3.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer1 = document.getElementById("groupContainer1");
-    if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-            window.location.href = "./component13.html";
-        });
-    }
-
     function updateFields() {
         const whoBrings = document.getElementById('who-brings').getAttribute('value');
         document.getElementById('parent-fields').style.display = whoBrings === 'PARENT' ? 'block' : 'none';
@@ -587,13 +536,13 @@
 
     // Открытие модального окна создания сессии
     document.addEventListener('DOMContentLoaded', function() {
-      // Получаем элементы
-      var modal = document.getElementById('modal');
-      var modalBody = document.getElementById('modal-body');
-      var closeBtn = document.querySelector('.close-btn');
-      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+        // Получаем элементы
+        var modal = document.getElementById('modal');
+        var modalBody = document.getElementById('modal-body');
+        var closeBtn = document.querySelector('.close-btn');
+        var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
 
-      // Функция для открытия модального окна
+        // Функция для открытия модального окна
         function openModal() {
             fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
                 .then(response => response.text())
@@ -664,6 +613,7 @@
                 console.log('Скрипт не найден');
             }
         }
+    })
 </script>
 </body>
 </html>

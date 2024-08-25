@@ -1,3 +1,7 @@
+.about-us19, .news10, .user-policy13 {
+  cursor: pointer;
+}
+
 #parent-fields, #both-parents-fields, #guardian-fields, #supervisor-fields {
   width: 100%;
 }
@@ -1530,8 +1534,8 @@
   justify-content: flex-start;
 }
 .component19 {
+  height: auto;
   align-self: stretch;
-  height: 816px;
   align-items: flex-start;
   max-width: 100%;
   text-align: left;

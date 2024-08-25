@@ -190,4 +190,9 @@ public class ScoringController {
                 return Gender.MALE;
         }
     }
+
+    @GetMapping("test/copy-link")
+    public String getCopyLink() {
+        return "new-front/test/copy-link";
+    }
 }

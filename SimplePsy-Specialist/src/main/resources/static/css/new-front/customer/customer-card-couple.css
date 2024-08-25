@@ -1,3 +1,7 @@
+.about-us19, .news10, .user-policy13 {
+  cursor: pointer;
+}
+
 #parent-fields, #both-parents-fields, #guardian-fields, #supervisor-fields {
   width: 100%;
 }

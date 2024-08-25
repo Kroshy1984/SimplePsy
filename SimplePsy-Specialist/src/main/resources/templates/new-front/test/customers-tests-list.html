@@ -241,7 +241,7 @@
                                     </div>
                                     <div class="component-19-parent">
                                         <ul class="component-191" id="testList">
-                                            <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}" th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}" onclick="goTo(this)">
+                                            <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}" th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
                                                 <div class="rectangle-parent103">
                                                     <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers">20.02.2024</b>
                                                     <div class="frame-child129"></div>
@@ -250,10 +250,13 @@
                                                     <div class="test-list-names-child"></div>
                                                     <h2 class="h23" th:text="${scoring.title}"></h2>
                                                     <div class="test-list-icons">
-                                                        <button class="rectangle-parent104">
+                                                        <button class="rectangle-parent104" th:data-card-id="${scoring.id}" onclick="goTo(this)">
                                                             <div class="frame-child130"></div>
                                                             <b class="oprosnik" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).QUESTIONER}">Опросник</b>
                                                             <b class="b121" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).TEST}">Тест</b>
+                                                        </button>
+                                                        <button class="copy-button" onclick="openCopyLinkModal(this)">
+                                                            <b class="copy-button-text">Копировать ссылку</b>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -513,12 +516,13 @@
       var closeBtn = document.querySelector('.close-btn');
       var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
       var holidayBtn = document.querySelector('.user-policy11');
+      var copyLinkBtn = document.querySelector('.copy-button');
       // Функция для открытия модального окна
       function openModal() {
         fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
           .then(response => response.text())
           .then(data => {
-            modalBody.innerHTML = data;s
+            modalBody.innerHTML = data;
             modal.style.display = 'block';
           })
           .catch(error => console.error('Ошибка загрузки:', error));
@@ -532,6 +536,7 @@
       // Событие клика для открытия модального окна
       appointLink.addEventListener('click', openModal);
       holidayBtn.addEventListener('click', openHolidayModal);
+      copyLinkBtn.addEventListener('click', openCopyLinkModal);
       // Событие клика для закрытия модального окна
       closeBtn.addEventListener('click', closeModal);
       });
@@ -560,6 +565,20 @@
             .catch(error => {
                 console.error('Error loading modal content:', error);
             });
+    }
+
+    function openCopyLinkModal()
+    {
+        const modal = document.getElementById("modal");
+        const modalBody = document.getElementById("modal-body");
+
+        fetch('http://localhost:8081/SimplePsy/V1/scoring/test/copy-link')
+            .then(response => response.text())
+            .then(data => {
+                modalBody.innerHTML = data;
+                modal.style.display = 'block';
+            })
+            .catch(error => console.error('Ошибка загрузки:', error));
     }
 
 </script>

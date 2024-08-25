@@ -863,7 +863,6 @@ b {
 .button-L:hover, .button-C:hover, .button-R:hover {
   cursor: pointer;
   background-color: var(--color-gainsboro-100);
-    solid var(--color-gainsboro-200);
   box-sizing: border-box;
 }
 
@@ -987,7 +986,6 @@ b {
 .month-year button:hover{
   cursor: pointer;
   background-color: var(--color-gainsboro-100);
-    solid var(--color-gainsboro-200);
   box-sizing: border-box;
 }
 

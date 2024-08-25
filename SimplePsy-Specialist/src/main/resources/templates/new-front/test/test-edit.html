@@ -18,11 +18,6 @@
 </head>
 <body>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-
     label {
         display: block;
         margin-bottom: 5px;
@@ -223,11 +218,9 @@
         <div class="navigate">
             <a class="constructor8">Понятная практика</a>
             <div class="menu1">
-                <b class="news10">Назначить встречу</b>
-                <b class="user-policy9" id="userPolicyText"
-                >Добавить график нерабочих дней
-                </b>
                 <b class="about-us15" id="aboutUsText">Добавить клиента</b>
+                <b class="news10">Назначить встречу</b>
+                <b class="user-policy9" id="userPolicyText">Добавить график нерабочих дней</b>
             </div>
             <div class="search8">
                 <b class="search9">Найти клиента...</b>
@@ -377,7 +370,7 @@
         fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
           .then(response => response.text())
           .then(data => {
-            modalBody.innerHTML = data;s
+            modalBody.innerHTML = data;
             modal.style.display = 'block';
           })
           .catch(error => console.error('Ошибка загрузки:', error));

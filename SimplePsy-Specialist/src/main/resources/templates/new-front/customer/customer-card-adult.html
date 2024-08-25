@@ -55,6 +55,14 @@
               </div>
             </div>
           </div>
+          <div class="icon-parent31">
+            <img class="icon158" alt="" src="/images/icon-2@2x.png" />
+
+            <div class="new-york-wrapper4">
+              <b class="new-york12">Ростов-на-Дону</b>
+            </div>
+            <img class="icon159" alt="" src="/images/icon2.svg" />
+          </div>
         </div>
       </header>
       <div class="user-panel-content-parent">
@@ -161,15 +169,15 @@
         <div class="client-card-actions">
           <div class="client-card-actions-content">
             <div class="frame-parent148">
-              <button class="rectangle-parent146">
+              <button class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
                 <div class="frame-child172"></div>
-                <a class="a">Карта клиента</a>
+                <a class="a">Список клиентов</a>
               </button>
-              <button class="rectangle-parent147">
+              <button class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
                 <div class="frame-child173"></div>
                 <a class="a1">Список встреч</a>
               </button>
-              <div class="rectangle-parent148" id="groupContainer">
+              <div class="rectangle-parent148" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
                 <div class="frame-child174"></div>
                 <div class="div217">Опросники и тесты</div>
               </div>
@@ -399,55 +407,6 @@
     </div>
   </div>
   <script>
-    var userImage = document.getElementById("userImage");
-    if (userImage) {
-      userImage.addEventListener("click", function (e) {
-        window.location.href = "./component4.html";
-      });
-    }
-
-    var emailContainer = document.getElementById("emailContainer");
-    if (emailContainer) {
-      emailContainer.addEventListener("click", function (e) {
-        window.location.href = "./frame.html";
-      });
-    }
-
-    var dashboardContainer = document.getElementById("dashboardContainer");
-    if (dashboardContainer) {
-      dashboardContainer.addEventListener("click", function (e) {
-        window.location.href = "./component2.html";
-      });
-    }
-
-    var invoiceContainer = document.getElementById("invoiceContainer");
-    if (invoiceContainer) {
-      invoiceContainer.addEventListener("click", function (e) {
-        window.location.href = "./component3.html";
-      });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-      groupContainer.addEventListener("click", function (e) {
-        window.location.href = "./component6.html";
-      });
-    }
-
-    var groupContainer1 = document.getElementById("groupContainer1");
-    if (groupContainer1) {
-      groupContainer1.addEventListener("click", function (e) {
-        window.location.href = "./component6.html";
-      });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-      groupContainer.addEventListener("click", function (e) {
-        window.location.href = "./component13.html";
-      });
-    }
-
     function checkSupervisorFields() {
       const supervised = document.getElementById('is-supervised').getAttribute('value');
       document.getElementById('supervisor-fields').style.display = supervised === 'YES' ? 'block' : 'none';

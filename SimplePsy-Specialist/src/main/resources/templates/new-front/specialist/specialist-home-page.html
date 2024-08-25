@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-  <link rel="stylesheet" href="global.css" />
-  <link rel="stylesheet" href="test.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/specialist/specialist-home-page.css}" />
   <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -316,46 +316,60 @@
   </div>
 </div>
 <script>
-  var dashboardContainer = document.getElementById("dashboardContainer");
-  if (dashboardContainer) {
-    dashboardContainer.addEventListener("click", function (e) {
-      window.location.href = "./component2.html";
-    });
+  // Получаем элементы
+  var modal = document.getElementById('modal');
+  var modalBody = document.getElementById('modal-body');
+  var closeBtn = document.querySelector('.close-btn');
+  var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+  var holidayBtn = document.querySelector('.user-policy5');
+
+  // Функция для открытия модального окна
+  function openModal() {
+    fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+            .then(response => response.text())
+            .then(data => {
+              modalBody.innerHTML = data;
+              modal.style.display = 'block';
+            })
+            .catch(error => console.error('Ошибка загрузки:', error));
   }
 
-  var baseContainer = document.getElementById("baseContainer");
-  if (baseContainer) {
-    baseContainer.addEventListener("click", function (e) {
-      window.location.href = "./frame.html";
-    });
+  // Функция для закрытия модального окна
+  function closeModal() {
+    modal.style.display = 'none';
   }
 
-  var invoiceContainer = document.getElementById("invoiceContainer");
-  if (invoiceContainer) {
-    invoiceContainer.addEventListener("click", function (e) {
-      window.location.href = "./component3.html";
-    });
-  }
+  // Событие клика для открытия модального окна
+  appointLink.addEventListener('click', openModal);
+  holidayBtn.addEventListener('click', openHolidayModal);
+  // Событие клика для закрытия модального окна
+  closeBtn.addEventListener('click', closeModal);
 
-  var container = document.getElementById("container");
-  if (container) {
-    container.addEventListener("click", function (e) {
-      window.location.href = "./component14.html";
-    });
-  }
 
-  var groupContainer = document.getElementById("groupContainer");
-  if (groupContainer) {
-    groupContainer.addEventListener("click", function (e) {
-      window.location.href = "./component12.html";
-    });
-  }
+  var addClientBtn = document.querySelector('.about-us5');
+  addClientBtn.addEventListener('click', () =>
+  {
+    window.location.href = '/SimplePsy/V1/customer/customer-form';
+  });
 
-  var groupContainer1 = document.getElementById("groupContainer1");
-  if (groupContainer1) {
-    groupContainer1.addEventListener("click", function (e) {
-      window.location.href = "./component12.html";
-    });
+  function openHolidayModal() {
+    const modal = document.getElementById("modal");
+    const modalBody = document.getElementById("modal-body");
+
+    fetch('/SimplePsy/V1/session/holiday')
+            .then(response => response.text())
+            .then(html => {
+              modal.innerHTML = html;
+              modalBody.style.display = "block";
+
+              // Добавляем обработчик закрытия модального окна
+              document.querySelector('.close-modal').onclick = function() {
+                modal.style.display = "none";
+              };
+            })
+            .catch(error => {
+              console.error('Error loading modal content:', error);
+            });
   }
 
   function showInputs() {
@@ -461,42 +475,6 @@
       // Вызываем функцию удаления
       deleteDiploma(specialistId, diplomaIndex);
     });
-  });
-  // Открытие модального окна создания сессии
-  document.addEventListener('DOMContentLoaded', function() {
-      // Получаем элементы
-      var modal = document.getElementById('modal');
-      var modalBody = document.getElementById('modal-body');
-      var closeBtn = document.querySelector('.close-btn');
-      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-
-      // Функция для открытия модального окна
-      function openModal() {
-        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
-          .then(response => response.text())
-          .then(data => {
-            modalBody.innerHTML = data;s
-            modal.style.display = 'block';
-          })
-          .catch(error => console.error('Ошибка загрузки:', error));
-      }
-
-      // Функция для закрытия модального окна
-      function closeModal() {
-        modal.style.display = 'none';
-      }
-
-      // Событие клика для открытия модального окна
-      appointLink.addEventListener('click', openModal);
-
-      // Событие клика для закрытия модального окна
-      closeBtn.addEventListener('click', closeModal);
-      });
-
-  var  addClientBtn = document.querySelector('.about-us5');
-  addClientBtn.addEventListener('click', () =>
-  {
-    window.location.href = '/SimplePsy/V1/customer/customer-form';
   });
 </script>
 </body>

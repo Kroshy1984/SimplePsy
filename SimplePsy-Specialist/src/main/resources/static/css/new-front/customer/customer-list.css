@@ -5,6 +5,10 @@ h2 {
   margin: auto auto 20px;
 }
 
+.about-us3, .news10, .user-policy3 {
+  cursor: pointer;
+}
+
 .frame-parent110,
 .search-dropdown,
 .search-options {
@@ -442,7 +446,6 @@ h2 {
 .div46 {
   align-self: stretch;
   position: relative;
-  z-index: 2;
 }
 .session-info,
 .total-sessions {
@@ -1348,6 +1351,7 @@ h2 {
   color: var(--color-slategray-200);
 }
 .user-greeting-parent {
+  padding-bottom: 75px;
   width: 1144.5px;
   flex-direction: row;
   justify-content: space-between;

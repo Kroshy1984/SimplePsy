@@ -1,3 +1,45 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.copy-button {
+  border: 3px solid var(--color-lightgray);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: var(--padding-11xs) var(--padding-9xl);
+  background-color: var(--white);
+  border-radius: var(--br-xl);
+  flex-direction: row;
+  z-index: 1;
+}
+
+.copy-button:hover {
+  background-color: var(--color-gainsboro-100);
+}
+
+.copy-button-text {
+  position: relative;
+  font-size: var(--bold-16-size);
+  line-height: 18px;
+  font-weight: 700;
+  font-family: var(--bold-10);
+  color: var(--color-slategray-500);
+  text-align: center;
+  z-index: 1;
+}
+
 .frame-wrapper73 {
   align-self: stretch;
   flex-direction: row;
@@ -608,7 +650,8 @@
   color: var(--grey-blue-80);
 }
 .about-us17,
-.news10 {
+.news10,
+.user-policy11 {
   text-decoration: none;
   position: relative;
   line-height: 25px;
@@ -835,7 +878,6 @@
   position: relative;
   object-fit: cover;
   min-height: 27px;
-  z-index: 2;
 }
 .frame-child128 {
   height: 23px;
@@ -929,7 +971,7 @@
 .test-list-dividers {
   width: 70px;
   position: relative;
-  line-height: 24px;
+  line-height: 46px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -937,10 +979,10 @@
   flex-shrink: 0;
   transform: rotate(-90deg);
   z-index: 1;
-  margin-top: 23px;
+  margin-top: 25px;
 }
 .rectangle-parent103 {
-  height: 76px;
+  height: 99px;
   width: 41px;
   border-radius: var(--br-5xs) 0 0 var(--br-5xs);
   background-color: var(--color-slategray-100);
@@ -999,8 +1041,8 @@
 .rectangle-parent104,
 .test-list-icons {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 10px;
 }
 .rectangle-parent104 {
   cursor: pointer;
@@ -1015,9 +1057,9 @@
 .rectangle-parent107:hover {
   border: 3px solid var(--color-burlywood);
 }
+
 .test-list-icons {
   flex-direction: column;
-  padding: var(--padding-10xl) 0 0;
 }
 .frame-parent112,
 .test-list-names {
