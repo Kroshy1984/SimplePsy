@@ -212,6 +212,7 @@ p {
   top: 10px;
   height: 100%;
   transform: scale(1.462);
+  cursor: pointer;
 }
 .wrapper-user5 {
   width: 145px;

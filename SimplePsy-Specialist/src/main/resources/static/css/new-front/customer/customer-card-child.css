@@ -734,7 +734,6 @@
   border: 3px solid var(--grey-blue-95);
   padding: var(--padding-mid) var(--padding-13xl);
   background-color: var(--color-lightsteelblue-100);
-  flex: 0.6812;
   border-radius: var(--br-xl);
   box-sizing: border-box;
   display: flex;
@@ -830,6 +829,9 @@
   min-width: 123px;
   white-space: nowrap;
   cursor: pointer;
+}
+.rectangle-parent148:hover {
+  background-color: var(--color-gainsboro-100);
 }
 .client-card-actions-content,
 .frame-parent148 {

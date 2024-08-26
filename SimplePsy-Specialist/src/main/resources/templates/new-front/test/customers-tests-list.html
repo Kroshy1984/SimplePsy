@@ -109,6 +109,7 @@
                                                 alt=""
                                                 src="/images/user@2x.png"
                                                 id="userImage"
+                                                onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                                         />
                                     </div>
                                     <div class="user-info1">
@@ -567,7 +568,7 @@
             });
     }
 
-    function openCopyLinkModal()
+    function openCopyLinkModal(obj)
     {
         const modal = document.getElementById("modal");
         const modalBody = document.getElementById("modal-body");

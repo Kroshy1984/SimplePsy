@@ -103,6 +103,7 @@
                 alt=""
                 src="/images/user@2x.png"
                 id="userImage"
+                onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
         />
       </div>
       <b class="hello-rosalie8">Привет, Антон!</b>
@@ -179,104 +180,6 @@
   </div>
 </div>
 <script>
-  var dashboardContainer = document.getElementById("dashboardContainer");
-  if (dashboardContainer) {
-    dashboardContainer.addEventListener("click", function (e) {
-      window.location.href = "./component2.html";
-    });
-  }
-
-  var invoiceContainer = document.getElementById("invoiceContainer");
-  if (invoiceContainer) {
-    invoiceContainer.addEventListener("click", function (e) {
-      window.location.href = "./component3.html";
-    });
-  }
-
-  var container = document.getElementById("container");
-  if (container) {
-    container.addEventListener("click", function (e) {
-      window.location.href = "./component2.html";
-    });
-  }
-
-  var groupContainer = document.getElementById("groupContainer");
-  if (groupContainer) {
-    groupContainer.addEventListener("click", function (e) {
-      window.location.href = "./component6.html";
-    });
-  }
-
-  var groupContainer1 = document.getElementById("groupContainer1");
-  if (groupContainer1) {
-    groupContainer1.addEventListener("click", function (e) {
-      window.location.href = "./component6.html";
-    });
-  }
-
-  var userImage = document.getElementById("userImage");
-  if (userImage) {
-    userImage.addEventListener("click", function (e) {
-      window.location.href = "./component4.html";
-    });
-  }
-
-  var newsText = document.getElementById("newsText");
-  if (newsText) {
-    newsText.addEventListener("click", function (e) {
-      // Please sync "Модальное окно "Назначить встречу" Тип встерча = Встреча с клиентом" to the project
-    });
-  }
-
-  var userPolicyText = document.getElementById("userPolicyText");
-  if (userPolicyText) {
-    userPolicyText.addEventListener("click", function (e) {
-      // Please sync "Модальное окно "Добавить график  нерабочих дней "" to the project
-    });
-  }
-
-  var aboutUsText = document.getElementById("aboutUsText");
-  if (aboutUsText) {
-    aboutUsText.addEventListener("click", function (e) {
-      // Please sync "Модальное окно "Добавить клиента"" to the project
-    });
-  }
-  var dashboardContainer = document.getElementById("dashboardContainer");
-  if (dashboardContainer) {
-    dashboardContainer.addEventListener("click", function (e) {
-      window.location.href = "./component2.html";
-    });
-  }
-  var invoiceContainer = document.getElementById("invoiceContainer");
-  if (invoiceContainer) {
-    invoiceContainer.addEventListener("click", function (e) {
-      window.location.href = "./component3.html";
-    });
-  }
-  var container = document.getElementById("container");
-  if (container) {
-    container.addEventListener("click", function (e) {
-      window.location.href = "./component2.html";
-    });
-  }
-  var groupContainer = document.getElementById("groupContainer");
-  if (groupContainer) {
-    groupContainer.addEventListener("click", function (e) {
-      window.location.href = "./component6.html";
-    });
-  }
-  var groupContainer1 = document.getElementById("groupContainer1");
-  if (groupContainer1) {
-    groupContainer1.addEventListener("click", function (e) {
-      window.location.href = "./component6.html";
-    });
-  }
-  var userImage = document.getElementById("userImage");
-  if (userImage) {
-    userImage.addEventListener("click", function (e) {
-      window.location.href = "./component4.html";
-    });
-  }
   function addOption(questionId) {
     const optionsContainer = document.getElementById(`optionsContainer-${questionId}`);
     const newOption = document.createElement("div");
