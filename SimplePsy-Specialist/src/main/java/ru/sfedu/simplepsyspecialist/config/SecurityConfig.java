@@ -54,7 +54,8 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/SimplePsy/V1/session/calendar")
                         .permitAll())
                 .logout((logout) -> logout.logoutUrl("/logout").permitAll())
-                .csrf(csrf -> csrf.disable());
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable());
 //        httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().permitAll()).csrf(csrf -> csrf.disable());
         return httpSecurity.build();
     }
