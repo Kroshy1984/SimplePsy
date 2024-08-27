@@ -164,7 +164,7 @@ public class SessionController {
         model.addAttribute("daysInMonth", daysInMonth);
         model.addAttribute("meetings", sessions);
 
-        return "/new-front/calendar/calendar";
+        return "new-front/calendar/calendar";
     }
     @GetMapping("report/{sessionId}")
     public String getReportForm(@PathVariable String sessionId, Model model)

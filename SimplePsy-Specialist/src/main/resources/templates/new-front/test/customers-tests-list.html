@@ -242,7 +242,8 @@
                                     </div>
                                     <div class="component-19-parent">
                                         <ul class="component-191" id="testList">
-                                            <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}" th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
+                                            <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}"
+                                                th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
                                                 <div class="rectangle-parent103">
                                                     <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers">20.02.2024</b>
                                                     <div class="frame-child129"></div>
@@ -253,10 +254,14 @@
                                                     <div class="test-list-icons">
                                                         <button class="rectangle-parent104" th:data-card-id="${scoring.id}" onclick="goTo(this)">
                                                             <div class="frame-child130"></div>
-                                                            <b class="oprosnik" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).QUESTIONER}">Опросник</b>
-                                                            <b class="b121" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).TEST}">Тест</b>
+                                                            <b class="oprosnik" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).QUESTIONER}">
+                                                                Опросник
+                                                            </b>
+                                                            <b class="b121" th:if="${scoring.type == T(ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring).TEST}">
+                                                                Тест
+                                                            </b>
                                                         </button>
-                                                        <button class="copy-button" onclick="openCopyLinkModal(this)">
+                                                        <button class="copy-button" th:data-scoring-id="${scoring.id}" onclick="openCopyLinkModal(this)">
                                                             <b class="copy-button-text">Копировать ссылку</b>
                                                         </button>
                                                     </div>
@@ -309,7 +314,75 @@
         <div id="modal-body"></div>
     </div>
 </div>
-<script>
+<script defer>
+    var copyLinkBtn = document.querySelector('.copy-button');
+
+    copyLinkBtn.addEventListener('click', openCopyLinkModal);
+    function openCopyLinkModal(buttonElement) {
+        const scoringId = buttonElement.getAttribute('data-scoring-id');
+        const modal = document.getElementById("modal");
+        const modalBody = document.getElementById("modal-body");
+
+        // Загружаем HTML для модального окна
+        fetch('/SimplePsy/V1/scoring/test/copy-link')
+            .then(response => response.text())
+            .then(data => {
+                modalBody.innerHTML = data;
+                modal.style.display = 'block'; // Открываем модальное окно
+            })
+            .catch(error => console.error('Ошибка загрузки:', error));
+
+        // Загружаем список клиентов и добавляем необходимые обработчики событий
+        fetch('/SimplePsy/V1/client/findAll')
+            .then(response => response.json())
+            .then(clients => {
+                const dataList = document.getElementById('clientsList');
+                dataList.innerHTML = '';
+
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.name;
+                    option.setAttribute('data-id', client.id);
+                    dataList.appendChild(option);
+                });
+
+                // Установка текущего теста
+                currentTestId = scoringId;
+
+                // Обработчик изменения в поле выбора клиента
+                document.getElementById('clientInput').addEventListener('change', function() {
+                    const selectedOption = Array.from(document.getElementById('clientsList').options)
+                        .find(option => option.value === this.value);
+                    if (selectedOption) {
+                        const clientId = selectedOption.getAttribute('data-id');
+                        document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+                        document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке
+                    } else {
+                        document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если клиент не найден
+                    }
+                });
+
+                // Обработчик для генерации ссылки
+                document.getElementById('generateUriButton').addEventListener('click', function() {
+                    const clientId = document.getElementById('clientId').value;
+                    if (!clientId || !currentTestId) {
+                        alert("Пожалуйста, выберите клиента и тест.");
+                        return;
+                    }
+                    const uri = `http://93.95.97.176:8081/SimplePsy/V1/scoring/test/${scoringId}/${clientId}`;
+                    document.getElementById('inputField').value = uri;
+                });
+                document.getElementById('generateUriButton').addEventListener('click', function() {
+                    var inputField = document.getElementById("inputField");
+                    inputField.select();
+                    inputField.setSelectionRange(0, 99999);
+                    document.execCommand("copy");
+                    alert("Ссылка скопирована в буфер обмена");
+                });
+            })
+            .catch(error => console.error('Ошибка:', error));
+    }
+
     function goTo(obj) {
         window.location.href = "/SimplePsy/V1/scoring/test/edit/" + obj.getAttribute("data-card-id");
     }
@@ -330,139 +403,178 @@
       });
     });
     });
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    // const dateInput = document.querySelector('.xxxxxxxx');
+    //
+    // dateInput.addEventListener('input', function(e) {
+    //   let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+    //
+    //   if (e.inputType === 'deleteContentBackward') {
+    //       // Если это действие удаления, то не вставляем точки
+    //       return;
+    //   }
+    //
+    //   // Форматируем значение в формат dd.mm.yyyy
+    //   if (value.length >= 2 && value.length <= 4) {
+    //       value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
+    //   } else if (value.length > 4) {
+    //       value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
+    //   }
+    //
+    //   e.target.value = value;
+    // });
+    //
+    // dateInput.addEventListener('keydown', function(e) {
+    //   // Разрешаем удаление точек при нажатии Backspace
+    //   if (e.key === 'Backspace' && this.value.endsWith('.')) {
+    //       this.value = this.value.slice(0, -1);
+    //   }
+    // });
+    // });
     document.addEventListener('DOMContentLoaded', function() {
-    const dateInput = document.querySelector('.xxxxxxxx');
+        // const dateInput = document.querySelector('.xxxxxxxx1');
+        //
+        // dateInput.addEventListener('input', function(e) {
+        //   let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+        //
+        //   if (e.inputType === 'deleteContentBackward') {
+        //       // Если это действие удаления, то не вставляем точки
+        //       return;
+        //   }
+        //
+        //   // Форматируем значение в формат dd.mm.yyyy
+        //   if (value.length >= 2 && value.length <= 4) {
+        //       value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
+        //   } else if (value.length > 4) {
+        //       value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
+        //   }
+        //
+        //   e.target.value = value;
+        // });
+        //
+        // dateInput.addEventListener('keydown', function(e) {
+        //   // Разрешаем удаление точек при нажатии Backspace
+        //   if (e.key === 'Backspace' && this.value.endsWith('.')) {
+        //       this.value = this.value.slice(0, -1);
+        //   }
+        // });
+        // });
 
-    dateInput.addEventListener('input', function(e) {
-      let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-      if (e.inputType === 'deleteContentBackward') {
-          // Если это действие удаления, то не вставляем точки
-          return;
-      }
+            // Получение значений из формы
+            const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
+            const selectedType = document.querySelector('.component17 .item104.active')?.innerText.toLowerCase();
+            //const startDate = document.querySelector('.xxxxxxxx').value;
+            //const endDate = document.querySelector('.xxxxxxxx1').value;
 
-      // Форматируем значение в формат dd.mm.yyyy
-      if (value.length >= 2 && value.length <= 4) {
-          value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
-      } else if (value.length > 4) {
-          value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
-      }
+            // Преобразование дат в формат YYYY-MM-DD
+            const parseDate = (dateStr) => {
+                const [day, month, year] = dateStr.split('.');
+                return `${year}-${month}-${day}`;
+            };
 
-      e.target.value = value;
-    });
-
-    dateInput.addEventListener('keydown', function(e) {
-      // Разрешаем удаление точек при нажатии Backspace
-      if (e.key === 'Backspace' && this.value.endsWith('.')) {
-          this.value = this.value.slice(0, -1);
-      }
-    });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-    const dateInput = document.querySelector('.xxxxxxxx1');
-
-    dateInput.addEventListener('input', function(e) {
-      let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
-
-      if (e.inputType === 'deleteContentBackward') {
-          // Если это действие удаления, то не вставляем точки
-          return;
-      }
-
-      // Форматируем значение в формат dd.mm.yyyy
-      if (value.length >= 2 && value.length <= 4) {
-          value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
-      } else if (value.length > 4) {
-          value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
-      }
-
-      e.target.value = value;
-    });
-
-    dateInput.addEventListener('keydown', function(e) {
-      // Разрешаем удаление точек при нажатии Backspace
-      if (e.key === 'Backspace' && this.value.endsWith('.')) {
-          this.value = this.value.slice(0, -1);
-      }
-    });
-    });
-
-    document.getElementById('searchForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Получение значений из формы
-        const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
-        const selectedType = document.querySelector('.component17 .item104.active')?.innerText.toLowerCase();
-        const startDate = document.querySelector('.xxxxxxxx').value;
-        const endDate = document.querySelector('.xxxxxxxx1').value;
-
-        // Преобразование дат в формат YYYY-MM-DD
-        const parseDate = (dateStr) => {
-            const [day, month, year] = dateStr.split('.');
-            return `${year}-${month}-${day}`;
-        };
-
-        const listItems = document.querySelectorAll('#testList li');
-
-        listItems.forEach(item => {
-            const title = item.getAttribute('data-title').toLowerCase();
-            const type = item.getAttribute('data-type').toLowerCase();
-            const date = item.getAttribute('data-date');
-
-            let matchesSearch = title.includes(searchQuery);
-            let matchesType = !selectedType || type === selectedType;
-            let matchesDate = (!startDate || date >= parseDate(startDate)) && (!endDate || date <= parseDate(endDate));
-
-            if (matchesSearch && matchesType && matchesDate) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.querySelector('.search-input-area');
-        const listItems = document.querySelectorAll('#testList li');
-
-        searchInput.addEventListener('input', function() {
-            const query = searchInput.value.toLowerCase();
+            const listItems = document.querySelectorAll('#testList li');
 
             listItems.forEach(item => {
                 const title = item.getAttribute('data-title').toLowerCase();
                 const type = item.getAttribute('data-type').toLowerCase();
                 const date = item.getAttribute('data-date');
 
-                // Check if the title includes the search query
-                if (title.includes(query)) {
-                    item.style.display = ''; // Show the item
+                let matchesSearch = title.includes(searchQuery);
+                let matchesType = !selectedType || type === selectedType;
+                let matchesDate = (!startDate || date >= parseDate(startDate)) && (!endDate || date <= parseDate(endDate));
+
+                if (matchesSearch && matchesType && matchesDate) {
+                    item.style.display = 'block';
                 } else {
-                    item.style.display = 'none'; // Hide the item
+                    item.style.display = 'none';
                 }
             });
         });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.item104, .item105');
-        const listItems = document.querySelectorAll('#testList > li');
 
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Удаляем активный класс со всех кнопок
-                buttons.forEach(btn => btn.classList.remove('active'));
 
-                // Добавляем активный класс на текущую кнопку
-                this.classList.add('active');
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.querySelector('.search-input-area');
+            const listItems = document.querySelectorAll('#testList li');
 
-                // Получаем тип (опрос или тест) из кнопки
-                const selectedType = this.innerText.toLowerCase();
+            searchInput.addEventListener('input', function () {
+                const query = searchInput.value.toLowerCase();
 
-                // Фильтрация списка
                 listItems.forEach(item => {
-                    const itemType = item.getAttribute('data-type').toLowerCase();
-                    if (itemType === selectedType) {
+                    const title = item.getAttribute('data-title').toLowerCase();
+                    const type = item.getAttribute('data-type').toLowerCase();
+                    const date = item.getAttribute('data-date');
+
+                    // Check if the title includes the search query
+                    if (title.includes(query)) {
+                        item.style.display = ''; // Show the item
+                    } else {
+                        item.style.display = 'none'; // Hide the item
+                    }
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.item104, .item105');
+            const listItems = document.querySelectorAll('#testList > li');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Удаляем активный класс со всех кнопок
+                    buttons.forEach(btn => btn.classList.remove('active'));
+
+                    // Добавляем активный класс на текущую кнопку
+                    this.classList.add('active');
+
+                    // Получаем тип (опрос или тест) из кнопки
+                    const selectedType = this.innerText.toLowerCase();
+
+                    // Фильтрация списка
+                    listItems.forEach(item => {
+                        const itemType = item.getAttribute('data-type').toLowerCase();
+                        if (itemType === selectedType) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            document.getElementById('searchForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
+                //const startDate = document.querySelector('.xxxxxxxx').value;
+                //const endDate = document.querySelector('.xxxxxxxx1').value;
+
+                const parseDate = (dateStr) => {
+                    const [day, month, year] = dateStr.split('.');
+                    return new Date(`${year}-${month}-${day}`);
+                };
+
+                //const start = startDate ? parseDate(startDate) : null;
+                // const end = endDate ? parseDate(endDate) : null;
+
+                listItems.forEach(item => {
+                    const itemTitle = item.getAttribute('data-title').toLowerCase();
+                    const itemDate = new Date(item.getAttribute('data-date'));
+
+                    let matchesQuery = itemTitle.includes(searchQuery);
+                    let matchesDate = true;
+
+                    // if (start && end) {
+                    //     matchesDate = itemDate >= start && itemDate <= end;
+                    // } else if (start) {
+                    //     matchesDate = itemDate >= start;
+                    // } else if (end) {
+                    //     matchesDate = itemDate <= end;
+                    // }
+
+                    if (matchesQuery && matchesDate) {
                         item.style.display = '';
                     } else {
                         item.style.display = 'none';
@@ -471,117 +583,129 @@
             });
         });
 
-        document.getElementById('searchForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        // Открытие модального окна создания сессии
+        document.addEventListener('DOMContentLoaded', function () {
+            // Получаем элементы
+            var modal = document.getElementById('modal');
+            var modalBody = document.getElementById('modal-body');
+            var closeBtn = document.querySelector('.close-btn');
+            var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+            var holidayBtn = document.querySelector('.user-policy11');
 
-            const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
-            const startDate = document.querySelector('.xxxxxxxx').value;
-            const endDate = document.querySelector('.xxxxxxxx1').value;
 
-            const parseDate = (dateStr) => {
-                const [day, month, year] = dateStr.split('.');
-                return new Date(`${year}-${month}-${day}`);
-            };
+            // Функция для открытия модального окна
+            function openModal() {
+                fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+                    .then(response => response.text())
+                    .then(data => {
+                        modalBody.innerHTML = data;
+                        modal.style.display = 'block';
+                    })
+                    .catch(error => console.error('Ошибка загрузки:', error));
+            }
 
-            const start = startDate ? parseDate(startDate) : null;
-            const end = endDate ? parseDate(endDate) : null;
+            // Функция для закрытия модального окна
+            function closeModal() {
+                modal.style.display = 'none';
+            }
 
-            listItems.forEach(item => {
-                const itemTitle = item.getAttribute('data-title').toLowerCase();
-                const itemDate = new Date(item.getAttribute('data-date'));
+            // Событие клика для открытия модального окна
+            appointLink.addEventListener('click', openModal);
+            holidayBtn.addEventListener('click', openHolidayModal);
 
-                let matchesQuery = itemTitle.includes(searchQuery);
-                let matchesDate = true;
-
-                if (start && end) {
-                    matchesDate = itemDate >= start && itemDate <= end;
-                } else if (start) {
-                    matchesDate = itemDate >= start;
-                } else if (end) {
-                    matchesDate = itemDate <= end;
-                }
-
-                if (matchesQuery && matchesDate) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            // Событие клика для закрытия модального окна
+            closeBtn.addEventListener('click', closeModal);
         });
-    });
-    // Открытие модального окна создания сессии
-    document.addEventListener('DOMContentLoaded', function() {
-      // Получаем элементы
-      var modal = document.getElementById('modal');
-      var modalBody = document.getElementById('modal-body');
-      var closeBtn = document.querySelector('.close-btn');
-      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-      var holidayBtn = document.querySelector('.user-policy11');
-      var copyLinkBtn = document.querySelector('.copy-button');
-      // Функция для открытия модального окна
-      function openModal() {
-        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
-          .then(response => response.text())
-          .then(data => {
-            modalBody.innerHTML = data;
-            modal.style.display = 'block';
-          })
-          .catch(error => console.error('Ошибка загрузки:', error));
-      }
 
-      // Функция для закрытия модального окна
-      function closeModal() {
-        modal.style.display = 'none';
-      }
+        var addClientBtn = document.querySelector('.about-us17');
+        addClientBtn.addEventListener('click', () => {
+            window.location.href = '/SimplePsy/V1/customer/customer-form';
+        });
 
-      // Событие клика для открытия модального окна
-      appointLink.addEventListener('click', openModal);
-      holidayBtn.addEventListener('click', openHolidayModal);
-      copyLinkBtn.addEventListener('click', openCopyLinkModal);
-      // Событие клика для закрытия модального окна
-      closeBtn.addEventListener('click', closeModal);
-      });
+        function openHolidayModal() {
+            const modal = document.getElementById("modal");
+            const modalBody = document.getElementById("modal-body");
 
-    var  addClientBtn = document.querySelector('.about-us17');
-    addClientBtn.addEventListener('click', () =>
-    {
-        window.location.href = '/SimplePsy/V1/customer/customer-form';
-    });
-    function openHolidayModal()
-    {
-        const modal = document.getElementById("modal");
-        const modalBody = document.getElementById("modal-body");
+            fetch('/SimplePsy/V1/session/holiday')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
 
-        fetch('/SimplePsy/V1/session/holiday')
-            .then(response => response.text())
-            .then(html => {
-                modalBody.innerHTML = html;
-                modal.style.display = "block";
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function () {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
 
-                // Добавляем обработчик закрытия модального окна
-                document.querySelector('.close-modal').onclick = function() {
-                    modal.style.display = "none";
-                };
-            })
-            .catch(error => {
-                console.error('Error loading modal content:', error);
+        function openModal(testId) {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('generatedLink').value = ''; // Очистка предыдущей ссылки
+
+            document.getElementById('clientInput').addEventListener('input', function () {
+                const selectedOption = Array.from(document.getElementById('clientsList').options)
+                    .find(option => option.value === this.value);
+                if (selectedOption) {
+                    const clientId = selectedOption.getAttribute('data-id');
+                    document.getElementById('clientId').value = clientId; // Установка clientId
+                    generateLink(testId, clientId); // Генерация ссылки
+                }
             });
-    }
+        }
 
-    function openCopyLinkModal(obj)
-    {
-        const modal = document.getElementById("modal");
-        const modalBody = document.getElementById("modal-body");
 
-        fetch('http://localhost:8081/SimplePsy/V1/scoring/test/copy-link')
-            .then(response => response.text())
-            .then(data => {
-                modalBody.innerHTML = data;
-                modal.style.display = 'block';
-            })
-            .catch(error => console.error('Ошибка загрузки:', error));
-    }
 
+        // Закрытие модального окна
+        document.querySelector('.close-btn').onclick = function () {
+            document.getElementById('modal').style.display = 'none';
+        };
+
+        // Генерация ссылки
+        function generateLink(testId, clientId) {
+            const link = `/SimplePsy/V1/scoring/test/${testId}/${clientId}`;
+            document.getElementById('generatedLink').value = link;
+        }
+
+        // Валидация формы перед копированием ссылки
+        function validateForm() {
+            const clientId = document.getElementById('clientId').value;
+            if (!clientId) {
+                document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+                return false; // Отменяем отправку формы
+            }
+            navigator.clipboard.writeText(document.getElementById('generatedLink').value);
+            document.getElementById('modal').style.display = 'none'; // Закрытие модального окна
+            return true; // Разрешаем отправку формы
+        }
+
+        // Закрытие модального окна при нажатии вне его
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('modal')) {
+                document.getElementById('modal').style.display = 'none';
+            }
+        }
+
+        // Загрузка списка клиентов
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/SimplePsy/V1/client/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                    const dataList = document.getElementById('clientsList');
+                    dataList.innerHTML = '';
+                    clients.forEach(client => {
+                        const option = document.createElement('option');
+                        option.value = client.name;
+                        option.setAttribute('data-id', client.id);
+                        dataList.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка:', error));
+        });
+    })
 </script>
 </body>
 </html>

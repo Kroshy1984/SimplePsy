@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/copy-link.css}" />
     <link
@@ -16,13 +15,8 @@
     />
 </head>
 <body>
-<div class="div334">
+<div class="div334" id="copyLinkModal"> <!-- Добавлен id для модального окна -->
     <section class="base-parent17">
-        <!-- Кнопка. Нужно сделать дизайн ей. да
-          <div class="rectangle-parent160">
-          <div class="frame-child186"></div>
-          <div class="frame-child187"></div>
-        </div> -->
         <div class="frame-wrapper87">
             <div class="frame-parent152">
                 <div class="frame-wrapper88">
@@ -30,10 +24,11 @@
                         <div class="frame-child188"></div>
                         <div class="client-name-field-parent">
                             <div class="client-name-field">
-                                <input class="input1" placeholder="Введите ФИО клиента" type="text"/>
+                                <input class="input1" id="clientInput" placeholder="Введите ФИО клиента" type="text" list="clientsList"/>
+                                <datalist id="clientsList"></datalist>
+                                <input type="hidden" id="clientId">
                             </div>
-                            <div class="icon-wrapper43">
-                            </div>
+                            <div class="icon-wrapper43"></div>
                         </div>
                     </div>
                 </div>
@@ -55,22 +50,85 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Кнопка для генерации URI -->
+                <div class="frame-wrapper88 frame-wrapper88-fix-bottom">
+                    <div class="rectangle-parent161">
+                        <div class="frame-child188"></div>
+                        <div class="client-name-field-parent">
+                            <div class="client-name-field">
+                                <button id="generateUriButton" class="generate-uri-btn">Сгенерировать ссылку</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 </div>
-<script>
-    function copyText() {
-      // Получаем элемент input
-      var inputField = document.getElementById("inputField");
+<script defer>
+    let currentTestId = null;
 
-      // Выделяем текст в поле ввода
-      inputField.select();
-      inputField.setSelectionRange(0, 99999); // Для мобильных устройств
-
-      // Копируем текст в буфер обмена
-      document.execCommand("copy");
+    function openCopyLinkModal(testId) {
+        currentTestId = testId;
+        document.getElementById('copyLinkModal').style.display = 'block'; // Открыть модальное окно
     }
+
+    function loadClients() {
+        fetch('/SimplePsy/V1/client/findAll')
+            .then(response => response.json())
+            .then(clients => {
+                const clientsList = document.getElementById('clientsList');
+                clientsList.innerHTML = '';
+
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.name;
+                    option.setAttribute('data-id', client.id);
+                    clientsList.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Ошибка при загрузке клиентов:', error));
+
+        document.getElementById('clientInput').removeEventListener('focus', loadClients);
+    }
+
+    document.getElementById('clientInput').addEventListener('focus', loadClients);
+
+    document.getElementById('clientInput').addEventListener('change', function() {
+        const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+
+        if (selectedOption) {
+            const clientId = selectedOption.getAttribute('data-id');
+            document.getElementById('clientId').value = clientId;
+            document.getElementById('error-message').style.display = 'none';
+        } else {
+            document.getElementById('clientId').value = '';
+        }
+    });
+
+    function generateUri() {
+        const clientId = document.getElementById('clientId').value;
+        if (!clientId || !currentTestId) {
+            alert("Пожалуйста, выберите клиента и тест.");
+            return;
+        }
+        const uri = `/SimplePsy/V1/scoring/test/${currentTestId}/${clientId}`;
+        document.getElementById('inputField').value = uri;
+    }
+
+    function copyText() {
+        var inputField = document.getElementById("inputField");
+        inputField.select();
+        inputField.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Ссылка скопирована в буфер обмена");
+    }
+
+    document.getElementById('generateUriButton').addEventListener('click', generateUri);
+
 </script>
 </body>
 </html>
