@@ -302,9 +302,13 @@ public class SpecialistService {
         specialist.setSpecialistRole(oldSpecialist.getSpecialistRole());
         for (MultipartFile file : multipartFiles) {
             // Логика сохранения файла
-            oldSpecialist.addDiplomas(file.getBytes());
+            if (!file.isEmpty()) {
+                oldSpecialist.addDiplomas(file.getBytes());
+            }
         }
         specialist.setDiplomas(oldSpecialist.getDiplomas());
+        specialist.setCustomerIds(oldSpecialist.getCustomerIds());
+        specialist.setAvatar(oldSpecialist.getAvatar());
         System.out.println(specialist.getDiplomas().size());
         specialistRepository.save(specialist);
     }

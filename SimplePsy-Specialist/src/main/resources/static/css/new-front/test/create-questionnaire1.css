@@ -257,7 +257,7 @@
 }
 
 .create-test-content {
-  position: relative;
+  position: absolute;
   top: 140px;
   right: 90px;
   align-self: stretch;

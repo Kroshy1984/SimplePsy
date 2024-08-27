@@ -183,9 +183,7 @@
                                             <a class="about-us17">Добавить клиента</a>
                                             <div class="policy-items">
                                                 <a class="news10">Назначить встречу</a>
-                                                <b class="user-policy11"
-                                                >Добавить график нерабочих дней
-                                                </b>
+                                                <b class="user-policy11">Добавить график нерабочих дней</b>
                                             </div>
                                         </div>
                                         <div class="frame-parent110">
@@ -386,8 +384,7 @@
     function goTo(obj) {
         window.location.href = "/SimplePsy/V1/scoring/test/edit/" + obj.getAttribute("data-card-id");
     }
-    document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.item103, .item104, .item105');
+    let buttons = document.querySelectorAll('.item103, .item104, .item105');
 
     buttons.forEach(button => {
       button.addEventListener('click', function(event) {
@@ -401,7 +398,6 @@
           event.preventDefault();
           this.blur(); // Сбрасываем фокус
       });
-    });
     });
 
     // document.addEventListener('DOMContentLoaded', function() {
@@ -432,7 +428,6 @@
     //   }
     // });
     // });
-    document.addEventListener('DOMContentLoaded', function() {
         // const dateInput = document.querySelector('.xxxxxxxx1');
         //
         // dateInput.addEventListener('input', function(e) {
@@ -458,7 +453,6 @@
         //   if (e.key === 'Backspace' && this.value.endsWith('.')) {
         //       this.value = this.value.slice(0, -1);
         //   }
-        // });
         // });
 
         document.getElementById('searchForm').addEventListener('submit', function (event) {
@@ -495,52 +489,45 @@
             });
         });
 
+        const searchInput = document.querySelector('.search-input-area');
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const searchInput = document.querySelector('.search-input-area');
-            const listItems = document.querySelectorAll('#testList li');
+        searchInput.addEventListener('input', function () {
+            const query = searchInput.value.toLowerCase();
 
-            searchInput.addEventListener('input', function () {
-                const query = searchInput.value.toLowerCase();
+            listItems.forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                const type = item.getAttribute('data-type').toLowerCase();
+                const date = item.getAttribute('data-date');
 
-                listItems.forEach(item => {
-                    const title = item.getAttribute('data-title').toLowerCase();
-                    const type = item.getAttribute('data-type').toLowerCase();
-                    const date = item.getAttribute('data-date');
-
-                    // Check if the title includes the search query
-                    if (title.includes(query)) {
-                        item.style.display = ''; // Show the item
-                    } else {
-                        item.style.display = 'none'; // Hide the item
-                    }
-                });
+                // Check if the title includes the search query
+                if (title.includes(query)) {
+                    item.style.display = ''; // Show the item
+                } else {
+                    item.style.display = 'none'; // Hide the item
+                }
             });
         });
-        document.addEventListener('DOMContentLoaded', function () {
-            const buttons = document.querySelectorAll('.item104, .item105');
-            const listItems = document.querySelectorAll('#testList > li');
+        buttons = document.querySelectorAll('.item104, .item105');
 
-            buttons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Удаляем активный класс со всех кнопок
-                    buttons.forEach(btn => btn.classList.remove('active'));
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Удаляем активный класс со всех кнопок
+                buttons.forEach(btn => btn.classList.remove('active'));
 
-                    // Добавляем активный класс на текущую кнопку
-                    this.classList.add('active');
+                // Добавляем активный класс на текущую кнопку
+                this.classList.add('active');
 
-                    // Получаем тип (опрос или тест) из кнопки
-                    const selectedType = this.innerText.toLowerCase();
+                // Получаем тип (опрос или тест) из кнопки
+                const selectedType = this.innerText.toLowerCase();
 
-                    // Фильтрация списка
-                    listItems.forEach(item => {
-                        const itemType = item.getAttribute('data-type').toLowerCase();
-                        if (itemType === selectedType) {
-                            item.style.display = '';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
+                // Фильтрация списка
+                listItems.forEach(item => {
+                    const itemType = item.getAttribute('data-type').toLowerCase();
+                    if (itemType === selectedType) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
                 });
             });
 
@@ -583,48 +570,62 @@
             });
         });
 
-        // Открытие модального окна создания сессии
-        document.addEventListener('DOMContentLoaded', function () {
-            // Получаем элементы
-            var modal = document.getElementById('modal');
-            var modalBody = document.getElementById('modal-body');
-            var closeBtn = document.querySelector('.close-btn');
-            var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-            var holidayBtn = document.querySelector('.user-policy11');
+        // Получаем элементы
+        var modal = document.getElementById('modal');
+        var modalBody = document.getElementById('modal-body');
+        var closeBtn = document.querySelector('.close-btn');
+        var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+        var holidayBtn = document.querySelector('.user-policy11');
 
 
-            // Функция для открытия модального окна
-            function openModal() {
-                fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
-                    .then(response => response.text())
-                    .then(data => {
-                        modalBody.innerHTML = data;
-                        modal.style.display = 'block';
-                    })
-                    .catch(error => console.error('Ошибка загрузки:', error));
-            }
+        // Функция для открытия модального окна
+        function openModal() {
+            fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                    modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
 
-            // Функция для закрытия модального окна
-            function closeModal() {
-                modal.style.display = 'none';
-            }
+            fetch('/SimplePsy/V1/client/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                    const dataList = document.getElementById('clientsList');
+                    dataList.innerHTML = '';
 
-            // Событие клика для открытия модального окна
-            appointLink.addEventListener('click', openModal);
-            holidayBtn.addEventListener('click', openHolidayModal);
+                    clients.forEach(client => {
+                        const option = document.createElement('option');
+                        option.value = client.name;
+                        option.setAttribute('data-id', client.id);
+                        dataList.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка:', error));
 
-            // Событие клика для закрытия модального окна
-            closeBtn.addEventListener('click', closeModal);
-        });
+            const script = document.createElement('script');
+            script.id = 'dynamic-script';
+            script.textContent = `
+               document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+            document.body.appendChild(script);
+        }
 
-        var addClientBtn = document.querySelector('.about-us17');
-        addClientBtn.addEventListener('click', () => {
-            window.location.href = '/SimplePsy/V1/customer/customer-form';
-        });
+        // Функция для закрытия модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+        }
 
         function openHolidayModal() {
-            const modal = document.getElementById("modal");
-            const modalBody = document.getElementById("modal-body");
 
             fetch('/SimplePsy/V1/session/holiday')
                 .then(response => response.text())
@@ -642,22 +643,14 @@
                 });
         }
 
-        function openModal(testId) {
-            document.getElementById('modal').style.display = 'block';
-            document.getElementById('generatedLink').value = ''; // Очистка предыдущей ссылки
+        appointLink.addEventListener('click', openModal);
+        holidayBtn.addEventListener('click', openHolidayModal);
+        closeBtn.addEventListener('click', closeModal);
 
-            document.getElementById('clientInput').addEventListener('input', function () {
-                const selectedOption = Array.from(document.getElementById('clientsList').options)
-                    .find(option => option.value === this.value);
-                if (selectedOption) {
-                    const clientId = selectedOption.getAttribute('data-id');
-                    document.getElementById('clientId').value = clientId; // Установка clientId
-                    generateLink(testId, clientId); // Генерация ссылки
-                }
-            });
-        }
-
-
+        var addClientBtn = document.querySelector('.about-us17');
+        addClientBtn.addEventListener('click', () => {
+            window.location.href = '/SimplePsy/V1/customer/customer-form';
+        });
 
         // Закрытие модального окна
         document.querySelector('.close-btn').onclick = function () {
@@ -688,24 +681,6 @@
                 document.getElementById('modal').style.display = 'none';
             }
         }
-
-        // Загрузка списка клиентов
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/SimplePsy/V1/client/findAll')
-                .then(response => response.json())
-                .then(clients => {
-                    const dataList = document.getElementById('clientsList');
-                    dataList.innerHTML = '';
-                    clients.forEach(client => {
-                        const option = document.createElement('option');
-                        option.value = client.name;
-                        option.setAttribute('data-id', client.id);
-                        dataList.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Ошибка:', error));
-        });
-    })
 </script>
 </body>
 </html>

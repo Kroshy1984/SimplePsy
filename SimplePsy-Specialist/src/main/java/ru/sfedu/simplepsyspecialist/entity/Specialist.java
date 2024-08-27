@@ -159,6 +159,10 @@ public class Specialist {
         return customerIds;
     }
 
+    public void setCustomerIds(List<String> customerIds) {
+        this.customerIds = customerIds;
+    }
+
     public String getSpecialization() {
         return specialization;
     }
