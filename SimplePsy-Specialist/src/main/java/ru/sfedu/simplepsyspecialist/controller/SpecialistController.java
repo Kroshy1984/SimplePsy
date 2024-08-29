@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,9 +22,8 @@ import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -370,9 +368,8 @@ public class SpecialistController {
         byte[] avatar = specialist.getAvatar();
 
         if (avatar == null) {
-            Resource resource = new ClassPathResource("static/images/user-logo.jpg");
-            File file = resource.getFile();
-            avatar = Files.readAllBytes(file.toPath());
+            InputStream is = new ClassPathResource("static/images/user-logo.jpg").getInputStream();
+            avatar = is.readAllBytes();
         }
 
         HttpHeaders headers = new HttpHeaders();
