@@ -195,18 +195,6 @@
   justify-content: flex-start;
   padding: var(--padding-5xs);
 }
-.user-icon6 {
-  height: 100%;
-  flex: 1;
-  overflow: hidden;
-  cursor: pointer;
-  object-fit: contain;
-  position: absolute;
-  left: -7px;
-  top: 10px;
-  width: 100%;
-  transform: scale(1.462);
-}
 .wrapper-user6 {
   height: 130px;
   flex: 1;
@@ -234,10 +222,10 @@
 }
 .hello-rosalie-wrapper2 {
   display: flex;
+  gap: 5px;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 var(--padding-5xl);
 }
 .ponyatpractikagmailcom3 {
   margin: 0;
@@ -505,7 +493,7 @@
 .frame-parent63 {
   align-self: stretch;
   flex: 1;
-  align-items: flex-end;
+  align-items: center;
 }
 .frame-wrapper42 {
   height: 633px;

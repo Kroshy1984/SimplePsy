@@ -385,7 +385,7 @@
 }
 .wrapper-user-parent1 {
   align-self: stretch;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--gap-21xl);
 }
 .navigation-right {
@@ -650,7 +650,7 @@
 }
 .frame-parent109 {
   width: 240px;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--gap-31xl);
 }
 .navigation-items2 {

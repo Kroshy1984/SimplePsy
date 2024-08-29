@@ -103,11 +103,7 @@
         />
 
         <div class="location-name1">
-          <select>
-            <option value="Rostov" selected>Rostov na Donu</option>
-            <option value="Moskva">Moskva</option>
-            <option value="Krasnodar">Krasnodar</option>
-          </select>
+          <b th:text="${specialist.city}" class="specialist-city"></b>
         </div>
       </div>
     </header>
@@ -127,10 +123,10 @@
             <div class="user-button">
               <div class="wrapper-user1">
                 <img
-                        class="user-icon1"
+                        class="user-icon"
                         loading="lazy"
                         alt=""
-                        src="/images/user@2x.png"
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                         id="userImage"
                         onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                 />
@@ -140,10 +136,14 @@
         </div>
         <div class="frame-wrapper9">
           <div class="frame-parent9">
-            <div class="hello-rosalie-wrapper">
-              <b class="hello-rosalie1">Привет, Антон!</b>
+            <div class="hello-wrapper">
+              <b class="hello">Привет, </b>
+              <b th:text="${specialist.name}" class="hello" ></b>
+              <b class="hello">!</b>
             </div>
-            <b class="rosaliericegmailc1">rosalie.rice@gmail.com</b>
+            <b class="specialist-email">
+              <p th:text="${specialist.username}" class="specialist-email-content"></p>
+            </b>
           </div>
         </div>
         <div class="frame-parent10">

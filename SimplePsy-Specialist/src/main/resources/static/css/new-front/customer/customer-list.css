@@ -307,18 +307,6 @@ h2 {
   box-sizing: border-box;
   max-width: 100%;
 }
-.user-icon3 {
-  height: 100%;
-  flex: 1;
-  overflow: hidden;
-  cursor: pointer;
-  object-fit: contain;
-  position: absolute;
-  left: -7px;
-  top: 10px;
-  width: 100%;
-  transform: scale(1.462);
-}
 .wrapper-user3 {
   height: 130px;
   flex: 1;
@@ -336,7 +324,6 @@ h2 {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 0 0 var(--padding-9xs);
 }
 .hello-rosalie3 {
   position: relative;
@@ -345,10 +332,10 @@ h2 {
 }
 .hello-rosalie-container {
   display: flex;
+  gap: 5px;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 var(--padding-smi);
 }
 .rosaliericegmailc3 {
   position: relative;
@@ -367,6 +354,7 @@ h2 {
   gap: var(--gap-8xs);
 }
 .user-greeting {
+  align-items: center;
   height: 230px;
   width: 149.5px;
   gap: var(--gap-21xl);

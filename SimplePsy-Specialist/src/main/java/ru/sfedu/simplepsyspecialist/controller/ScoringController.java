@@ -2,19 +2,19 @@ package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.Client;
-import ru.sfedu.simplepsyspecialist.entity.CompletedScoring;
-import ru.sfedu.simplepsyspecialist.entity.Customer;
-import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.entity.nested.Gender;
 import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
 import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
+import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,14 +29,17 @@ public class ScoringController {
     ScoringService scoringService;
     ClientService clientService;
     CustomerService customerService;
+    SpecialistService specialistService;
 
     @Autowired
     public ScoringController(ScoringService scoringService,
                              CustomerService customerService,
-                             ClientService clientService) {
+                             ClientService clientService,
+                             SpecialistService specialistService) {
         this.scoringService = scoringService;
         this.clientService = clientService;
         this.customerService = customerService;
+        this.specialistService = specialistService;
     }
 
 
@@ -55,18 +58,21 @@ public class ScoringController {
     }
 
     @GetMapping("/creation")
-    public String createQuestionnaireForm()
+    public String createQuestionnaireForm(@AuthenticationPrincipal UserDetails userDetails,
+                                          Model model)
     {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        model.addAttribute("specialist", specialist);
         return "new-front/test/create-questionnaire1";
     }
     @PostMapping("/creation")
-    public String createQuestionnaire(@RequestBody Scoring scoring)
+    public void createQuestionnaire(@RequestBody Scoring scoring)
     {
+
         scoring.setType(TypeOfScoring.QUESTIONER);
         scoring.setDate(new Date());
         System.out.println(scoring.getDate());
         scoringService.save(scoring);
-        return "new-front/test/create-questionnaire1";
     }
     @GetMapping("/questionnaire/{questionnaireId}/{customerId}")
     public String getQuestionnaire(@PathVariable String questionnaireId,
@@ -104,8 +110,11 @@ public class ScoringController {
         return "new-front/test/create-questionnaire1";
     }
     @GetMapping("test/creation")
-    public String createTestForm()
+    public String createTestForm(@AuthenticationPrincipal UserDetails userDetails,
+                                 Model model)
     {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        model.addAttribute("specialist", specialist);
         return "new-front/test/create-new-test";
     }
     @PostMapping("test/creation")
@@ -119,13 +128,12 @@ public class ScoringController {
         });
         scoring.setType(TypeOfScoring.TEST);
         scoringService.save(scoring);
-        //return "new-front/test/create-new-test";
     }
 
     @GetMapping("/test/{testId}/{customerId}")
     public String getTest(@PathVariable String testId,
-                                   @PathVariable String customerId,
-                                   Model model)
+                          @PathVariable String customerId,
+                          Model model)
     {
         Scoring scoring = scoringService.findById(testId);
         System.out.println(scoring.getQuestions().get(0).getQuestionText());
@@ -153,20 +161,26 @@ public class ScoringController {
         return "new-front/test/create-questionnaire1";
     }
     @GetMapping("/list")
-    public String getList(Model model)
+    public String getList(@AuthenticationPrincipal UserDetails userDetails,
+                          Model model)
     {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Scoring> scorings = scoringService.findAll();
         model.addAttribute("scorings", scorings);
+        model.addAttribute("specialist", specialist);
         return "new-front/test/customers-tests-list";
     }
     @GetMapping("test/edit/{scoringId}")
-    public String testEdit(Model model,
+    public String testEdit(@AuthenticationPrincipal UserDetails userDetails,
+                           Model model,
                            @PathVariable String scoringId)
     {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         Scoring scoring = scoringService.findById(scoringId);
         if (scoring.getQuestions() == null) {
             scoring.setQuestions(new ArrayList<>());
         }
+        model.addAttribute("specialist", specialist);
         model.addAttribute("scoring", scoring);
         return "new-front/test/test-edit";
     }

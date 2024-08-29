@@ -133,6 +133,7 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Customer> customers = specialistService.getAllCustomers();
         List<Customer> specialistCustomers = new ArrayList<>();
+        model.addAttribute("specialist", specialist);
 
         if (specialist.getCustomerIds() == null) {
             System.out.println("No customers were found for this specialist!");

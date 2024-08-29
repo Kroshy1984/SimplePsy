@@ -203,16 +203,24 @@
         <div class="head">
             <div class="wrapper-user8">
                 <img
-                        class="user-icon8"
+                        class="user-icon"
                         loading="lazy"
                         alt=""
-                        src="/images/user@2x.png"
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                         id="userImage"
                         onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                 />
             </div>
-            <b class="hello-rosalie8">Привет, Антон!</b>
-            <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+            <div class="frame-parent50">
+                <div class="hello-wrapper">
+                    <b class="hello">Привет, </b>
+                    <b th:text="${specialist.name}" class="hello" ></b>
+                    <b class="hello">!</b>
+                </div>
+                <b class="specialist-email">
+                    <p th:text="${specialist.username}" class="specialist-email-content"></p>
+                </b>
+            </div>
         </div>
     </div>
     <header class="head1">
@@ -233,13 +241,13 @@
                 />
             </div>
             <div class="city">
-                <b class="new-york8">Ростов-на-Дону</b>
                 <img
                         class="icon122"
                         loading="lazy"
                         alt=""
                         src="/images/icon-2@2x.png"
                 />
+                <b th:text="${specialist.city}" class="specialist-city"></b>
             </div>
             <img
                     class="icon123"
@@ -365,6 +373,7 @@
       var modalBody = document.getElementById('modal-body');
       var closeBtn = document.querySelector('.close-btn');
       var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+      var holidayBtn = document.querySelector('.user-policy9');
 
       // Функция для открытия модального окна
       function openModal() {
@@ -377,6 +386,26 @@
           .catch(error => console.error('Ошибка загрузки:', error));
       }
 
+        function openHolidayModal() {
+            const modal = document.getElementById("modal");
+            const modalBody = document.getElementById("modal-body");
+
+            fetch('/SimplePsy/V1/session/holiday')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
+
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
+
       // Функция для закрытия модального окна
       function closeModal() {
         modal.style.display = 'none';
@@ -384,7 +413,7 @@
 
       // Событие клика для открытия модального окна
       appointLink.addEventListener('click', openModal);
-
+      holidayBtn.addEventListener('click', openHolidayModal);
       // Событие клика для закрытия модального окна
       closeBtn.addEventListener('click', closeModal);
       });

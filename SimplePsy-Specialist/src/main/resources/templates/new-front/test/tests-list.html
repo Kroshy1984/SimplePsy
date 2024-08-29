@@ -153,16 +153,22 @@
     <div class="head">
       <div class="wrapper-user8">
         <img
-                class="user-icon8"
+                class="user-icon"
                 loading="lazy"
                 alt=""
-                src="/images/user@2x.png"
+                th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                 id="userImage"
                 onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
         />
       </div>
-      <b class="hello-rosalie8">Привет, Антон!</b>
-      <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+      <div class="hello-wrapper">
+        <b class="hello">Привет, </b>
+        <b th:text="${specialist.name}" class="hello" ></b>
+        <b class="hello">!</b>
+      </div>
+      <b class="specialist-email">
+        <p th:text="${specialist.username}" class="specialist-email-content"></p>
+      </b>
     </div>
   </div>
   <header class="head1">
@@ -185,7 +191,7 @@
         />
       </div>
       <div class="city">
-        <b class="new-york8">Ростов-на-Дону</b>
+        <b th:text="${specialist.city}" class="specialist-city"></b>
         <img
                 class="icon122"
                 loading="lazy"

@@ -280,3 +280,45 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+.user-icon {
+  width: 130px;
+  height: 130px;
+  border-radius: var(--br-81xl);
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.hello {
+  position: relative;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.hello-wrapper {
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.specialist-email {
+  height: 50px;
+  position: relative;
+  font-size: var(--bold-13-size);
+  line-height: 25px;
+  font-weight: 700;
+  color: var(--grey-blue-80);
+  display: inline-block;
+}
+
+.specialist-email-content {
+  margin: 0;
+}
+
+.specialist-city {
+  position: relative;
+  line-height: 25px;
+  font-weight: 700;
+}

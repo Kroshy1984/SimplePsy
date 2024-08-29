@@ -61,7 +61,7 @@
                 <img class="icon189" alt="" src="/images/icon-2@2x.png"/>
 
                 <div class="new-york-wrapper6">
-                    <b class="new-york15">Ростов-на-Дону</b>
+                    <b th:text="${specialist.city}" class="specialist-city"></b>
                 </div>
             </div>
         </div>
@@ -80,26 +80,28 @@
                         />
                     </div>
                     <div class="wrapper-user-wrapper3">
-                        <div class="wrapper-user15">
-                            <img
-                                    class="user-icon15"
-                                    loading="lazy"
-                                    alt=""
-                                    src="/images/user@2x.png"
-                                    id="userImage"
-                                    onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
-                            />
+                        <div class="wrapper-user-parent">
+                            <div class="wrapper-user15">
+                                <img
+                                        class="user-icon"
+                                        loading="lazy"
+                                        alt=""
+                                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                                        id="userImage"
+                                        onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
+                                />
+                            </div>
+                            <div class="frame-parent50">
+                                <div class="hello-wrapper">
+                                    <b class="hello">Привет, </b>
+                                    <b th:text="${specialist.name}" class="hello" ></b>
+                                    <b class="hello">!</b>
+                                </div>
+                                <b class="specialist-email">
+                                    <p th:text="${specialist.username}" class="specialist-email-content"></p>
+                                </b>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hello-rosalie-wrapper6">
-                        <b class="hello-rosalie15">Привет, Антон!</b>
-                    </div>
-                    <div class="rosaliericegmailc-wrapper">
-                        <b class="rosaliericegmailc15">
-                            <p class="ponyatpractikagmailcom11">
-                                ponyatpractika@gmail.com
-                            </p>
-                        </b>
                     </div>
                     <div class="frame-wrapper73">
                         <div class="frame-parent122">
@@ -289,12 +291,11 @@
             .then(response => response.text())
             .then(response => {
                 console.log(response);
-                // Перенаправление или отображение результата
+                window.location = "/SimplePsy/V1/scoring/list";
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        window.location = "/SimplePsy/V1/scoring/list";
     }
 
     document.getElementById('addQuestionBtn').addEventListener('click', () => {

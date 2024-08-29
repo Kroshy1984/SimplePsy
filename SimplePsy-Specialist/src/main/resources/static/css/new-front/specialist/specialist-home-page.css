@@ -203,17 +203,6 @@ p {
   color: var(--grey-blue-60);
   font-family: var(--bold-10);
 }
-.user-icon5 {
-  width: 100%;
-  flex: 1;
-  object-fit: contain;
-  position: absolute;
-  left: -7px;
-  top: 10px;
-  height: 100%;
-  transform: scale(1.462);
-  cursor: pointer;
-}
 .wrapper-user5 {
   width: 145px;
   flex: 1;
@@ -260,7 +249,7 @@ p {
 }
 .wrapper-user-parent {
   flex: 1;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--gap-21xl);
 }
 .frame-wrapper32 {
@@ -274,7 +263,7 @@ p {
   height: 200px;
   position: relative;
   border-radius: var(--br-81xl);
-  object-fit: contain;
+  object-fit: cover;
 }
 .div60 {
   width: 221.8px;

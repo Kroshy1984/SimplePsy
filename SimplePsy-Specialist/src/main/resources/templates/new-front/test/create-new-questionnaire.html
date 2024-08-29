@@ -59,7 +59,7 @@
               <img class="icon179" alt="" src="/images/icon-2@2x.png" />
 
               <div class="new-york-wrapper5">
-                <b class="new-york14">Ростов-на-Дону</b>
+                <b th:text="${specialist.city}" class="specialist-city"></b>
               </div>
               <img class="icon180" alt="" src="/images/icon2.svg" />
             </div>
@@ -81,22 +81,22 @@
               <div class="user-header-content">
                 <div class="wrapper-user14">
                   <img
-                          class="user-icon14"
+                          class="user-icon"
                           loading="lazy"
                           alt=""
-                          src="/images/user@2x.png"
+                          th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                           id="userImage"
                           onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                   />
                 </div>
                 <div class="user-name-row-parent">
-                  <div class="user-name-row">
-                    <b class="hello-rosalie14">Привет, Антон!</b>
+                  <div class="hello-wrapper">
+                    <b class="hello">Привет, </b>
+                    <b th:text="${specialist.name}" class="hello" ></b>
+                    <b class="hello">!</b>
                   </div>
-                  <b class="rosaliericegmailc14">
-                    <p class="ponyatpractikagmailcom10">
-                      ponyatpractika@gmail.com
-                    </p>
+                  <b class="specialist-email">
+                    <p th:text="${specialist.username}" class="specialist-email-content"></p>
                   </b>
                 </div>
               </div>

@@ -206,6 +206,7 @@
   align-items: flex-start;
 }
 .icon-parent4 {
+  align-items: center;
   justify-content: flex-start;
   gap: var(--gap-mini);
 }
@@ -266,7 +267,6 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-end;
-  padding: 0 var(--padding-9xl) 0 0;
 }
 .settings-parent {
   flex-direction: column;
@@ -725,7 +725,7 @@ b {
 }
 .frame-parent8 {
   align-self: stretch;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--gap-21xl);
 }
 .frame-wrapper7 {

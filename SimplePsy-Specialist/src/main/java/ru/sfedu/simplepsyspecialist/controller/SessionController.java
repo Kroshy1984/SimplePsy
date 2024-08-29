@@ -64,10 +64,12 @@ public class SessionController {
     }
 
     @GetMapping("/session-form")
-    public String getSessionForm(Model model) {
+    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         Session session = new Session();
         //session.setClient(new Client());
         model.addAttribute("session", session);
+        model.addAttribute("specialist", specialist);
         String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         model.addAttribute("specUrl", specUrl);
         return "new-front/session/session-creation";
@@ -95,7 +97,7 @@ public class SessionController {
     }
 
     @GetMapping("/sessions")
-    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String getSessionList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
 
@@ -115,6 +117,7 @@ public class SessionController {
             }
         }*/
         model.addAttribute("sessions", sessions);
+        model.addAttribute("specialist", specialist);
 
         /*String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
         model.addAttribute("specUrl", specUrl);
@@ -161,14 +164,18 @@ public class SessionController {
                 .mapToObj(day -> yearMonth.atDay(day))
                 .collect(Collectors.toList());
 
+        model.addAttribute("specialist", specialist);
         model.addAttribute("daysInMonth", daysInMonth);
         model.addAttribute("meetings", sessions);
 
         return "new-front/calendar/calendar";
     }
     @GetMapping("report/{sessionId}")
-    public String getReportForm(@PathVariable String sessionId, Model model)
+    public String getReportForm(@AuthenticationPrincipal UserDetails userDetails,
+                                @PathVariable String sessionId,
+                                Model model)
     {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         Session session = sessionService.findById(sessionId);
         System.out.println("Дата встречи: " + session.getDate());
         System.out.println("Время встречи: " + session.getTimeStart() + session.getTimeFinish());
@@ -181,6 +188,7 @@ public class SessionController {
         model.addAttribute("projectiveMethods", session.getProjectiveMethods());
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("sessionDTO", session);
+        model.addAttribute("specialist", specialist);
 
         if (session.getReport() == null) {
             Report report = new Report();
@@ -204,7 +212,8 @@ public class SessionController {
     }
 
     @GetMapping("report/{sessionId}/projective-method")
-    public String getProjectiveMethod(@PathVariable String sessionId, Model model) {
+    public String getProjectiveMethod(@PathVariable String sessionId,
+                                      Model model) {
         ProjectiveMethod projectiveMethod = new ProjectiveMethod();
         model.addAttribute("projectiveMethod", projectiveMethod);
         model.addAttribute("sessionId", sessionId);

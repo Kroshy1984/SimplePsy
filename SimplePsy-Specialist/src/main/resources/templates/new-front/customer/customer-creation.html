@@ -51,9 +51,8 @@
                 <img class="icon126" alt="" src="/images/icon-2@2x.png"/>
 
                 <div class="location-name1">
-                    <b class="new-york9">Ростов-на-Дону</b>
+                    <b th:text="${specialist.city}" class="specialist-city"></b>
                 </div>
-                <img class="icon127" alt="" src="/images/icon2.svg"/>
             </div>
         </div>
     </header>
@@ -65,9 +64,10 @@
             <div class="profile-header">
                 <div class="wrapper-user-wrapper1">
                     <div class="wrapper-user9">
-                        <img class="user-icon9"
+                        <img
+                             class="user-icon"
                              loading="lazy" alt=""
-                             src="/images/user@2x.png"
+                             th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                              id="userImage"
                              onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"/>
                     </div>
@@ -75,13 +75,13 @@
                 <div class="profile-info">
                     <div class="user-info-container">
                         <div class="user-greeting1">
-                            <div class="hello-rosalie-wrapper3">
-                                <b class="hello-rosalie9">Привет, Антон!</b>
+                            <div class="hello-wrapper">
+                                <b class="hello">Привет, </b>
+                                <b th:text="${specialist.name}" class="hello" ></b>
+                                <b class="hello">!</b>
                             </div>
-                            <b class="rosaliericegmailc9">
-                                <p class="ponyatpractikagmailcom5">
-                                    ponyatpractika@gmail.com
-                                </p>
+                            <b class="specialist-email">
+                                <p th:text="${specialist.username}" class="specialist-email-content"></p>
                             </b>
                         </div>
                     </div>

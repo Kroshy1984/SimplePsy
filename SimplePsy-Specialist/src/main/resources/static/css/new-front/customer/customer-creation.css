@@ -665,7 +665,7 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-start;
   padding: 0 0 489px;
   gap: var(--gap-base);
@@ -721,7 +721,7 @@
 }
 .profile-header {
   align-self: stretch;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--gap-21xl);
 }
 .profile-content {

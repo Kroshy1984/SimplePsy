@@ -142,17 +142,23 @@ public class CustomerController {
         }
     }
     @GetMapping("/customer-form")
-    public String getClientForm(Model model) {
+    public String getClientForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         model.addAttribute("customerDTO", new Customer());
+        model.addAttribute("specialist", specialist);
         return "new-front/customer/customer-creation";
     }
 
     @GetMapping("/customer-card/{customerId}")
-    public String getCustomerCard(@PathVariable String customerId, Model model) {
+    public String getCustomerCard(@AuthenticationPrincipal UserDetails userDetails,
+                                  @PathVariable String customerId,
+                                  Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
         Customer customer = customerService.findById(customerId);
         customer.setId(customerId);
         model.addAttribute("customer", customer);
+        model.addAttribute("specialist", specialist);
         switch (customer.getTypeOfClient()) {
             case ADULT -> {
                 return "new-front/customer/customer-card-adult";
@@ -185,12 +191,14 @@ public class CustomerController {
         return "redirect:/SimplePsy/V1/specialist/customers";
     }
     @GetMapping("/customers-test")
-    public String getCustomersTestsList(Model model) {
+    public String getCustomersTestsList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Scoring> scorings = scoringService.findAll();
         scorings.stream().forEach(scoring -> {
             System.out.println(scoring.getTitle());
             System.out.println(scoring.getType().toString());
         });
+        model.addAttribute("specialist", specialist);
         model.addAttribute("scorings", scorings);
         return "new-front/test/customers-tests-list";
     }

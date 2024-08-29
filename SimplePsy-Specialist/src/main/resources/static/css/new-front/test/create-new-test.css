@@ -1,3 +1,19 @@
+.frame-parent50 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+}
+
+.wrapper-user-parent {
+  flex: 1;
+  align-items: center;
+  gap: var(--gap-21xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .frame-wrapper73 {
   align-self: stretch;
   flex-direction: row;
@@ -782,7 +798,7 @@
   width: 240px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 }
 .dashboard-menu-content {
@@ -1358,7 +1374,7 @@
   gap: 68px;
   max-width: 100%;
   text-align: center;
-  font-size: var(--bold-12-size);
+  font-size: var(--bold-16-size);
   color: var(--grey-blue-60);
   font-family: var(--bold-10);
 }

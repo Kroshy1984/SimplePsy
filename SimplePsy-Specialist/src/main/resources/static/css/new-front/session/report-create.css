@@ -1,3 +1,10 @@
+.frame-parent50 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--gap-8xs);
+}
+
 .frame-parent83,
 .frame-wrapper52 {
     width: 1175px;

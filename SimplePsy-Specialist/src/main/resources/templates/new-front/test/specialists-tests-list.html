@@ -35,22 +35,22 @@
                     <div class="wrapper-user-parent2">
                         <div class="wrapper-user11">
                             <img
-                                    class="user-icon11"
+                                    class="user-icon"
                                     loading="lazy"
                                     alt=""
-                                    src="./public/user@2x.png"
+                                    th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                                     id="userImage"
                                     onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                             />
                         </div>
                         <div class="frame-parent121">
-                            <div class="hello-rosalie-wrapper4">
-                                <b class="hello-rosalie11">Привет, Антон!</b>
+                            <div class="hello-wrapper">
+                                <b class="hello">Привет, </b>
+                                <b th:text="${specialist.name}" class="hello" ></b>
+                                <b class="hello">!</b>
                             </div>
-                            <b class="rosaliericegmailc11">
-                                <p class="ponyatpractikagmailcom7">
-                                    ponyatpractika@gmail.com
-                                </p>
+                            <b class="specialist-email">
+                                <p th:text="${specialist.username}" class="specialist-email-content"></p>
                             </b>
                         </div>
                     </div>
@@ -261,7 +261,7 @@
                         <img class="icon151" alt="" src="./public/icon-2@2x.png" />
 
                         <div class="new-york-wrapper3">
-                            <b class="new-york11">Ростов-на-Дону</b>
+                            <b th:text="${specialist.city}" class="specialist-city"></b>
                         </div>
                     </div>
                 </div>
@@ -345,7 +345,6 @@
                     </div>
                 </div>
             </div>
-            <img class="icon153" alt="" src="./public/icon.svg" />
         </div>
     </main>
     <div class="item111">

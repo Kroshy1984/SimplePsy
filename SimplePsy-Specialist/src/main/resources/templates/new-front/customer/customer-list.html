@@ -65,7 +65,7 @@
         />
 
         <div class="location-details">
-          <b class="new-york3">Ростов-на-Дону</b>
+          <b th:text="${specialist.city}" class="specialist-city"></b>
         </div>
       </div>
     </div>
@@ -86,20 +86,24 @@
             <div class="wrapper-user-wrapper">
               <div class="wrapper-user3">
                 <img
-                        class="user-icon3"
+                        class="user-icon"
                         loading="lazy"
                         alt=""
-                        src="/images/user@2x.png"
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                         id="userImage"
                         onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                 />
               </div>
             </div>
             <div class="user-email1">
-              <div class="hello-rosalie-container">
-                <b class="hello-rosalie3">Привет, Антон!</b>
+              <div class="hello-wrapper">
+                <b class="hello">Привет, </b>
+                <b th:text="${specialist.name}" class="hello" ></b>
+                <b class="hello">!</b>
               </div>
-              <b class="rosaliericegmailc3">rosalie.rice@gmail.com</b>
+              <b class="specialist-email">
+                <p th:text="${specialist.username}" class="specialist-email-content"></p>
+              </b>
             </div>
           </div>
           <div class="frame-parent110">

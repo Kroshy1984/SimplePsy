@@ -65,7 +65,7 @@
       />
 
       <div class="new-york-frame">
-        <b th:text="${specialist.city}" class="new-york5">Ростов-на-Дону</b>
+        <b th:text="${specialist.city}" class="specialist-city"></b>
       </div>
     </div>
   </header>
@@ -78,21 +78,21 @@
             <div class="wrapper-user-parent">
               <div class="wrapper-user5">
                 <img
-                        class="user-icon5"
+                        class="user-icon"
                         loading="lazy"
                         alt=""
-                        src="/images/user@2x.png"
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                         onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                 />
               </div>
               <div class="frame-parent50">
-                <div class="hello-rosalie-wrapper1">
-                  <b class="hello-rosalie5">Привет, </b>
-                  <b th:text="${specialist.name}" class="hello-rosalie5" ></b>
-                  <b class="hello-rosalie5">!</b>
+                <div class="hello-wrapper">
+                  <b class="hello">Привет, </b>
+                  <b th:text="${specialist.name}" class="hello" ></b>
+                  <b class="hello">!</b>
                 </div>
-                <b class="rosaliericegmailc5">
-                  <p th:text="${specialist.username}" class="ponyatpractikagmailcom"></p>
+                <b class="specialist-email">
+                  <p th:text="${specialist.username}" class="specialist-email-content"></p>
                 </b>
               </div>
             </div>

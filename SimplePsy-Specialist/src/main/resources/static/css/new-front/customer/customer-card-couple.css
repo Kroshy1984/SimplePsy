@@ -699,7 +699,7 @@
 }
 .frame-parent144 {
   align-self: stretch;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--gap-21xl);
 }
 .user-panel-content {
