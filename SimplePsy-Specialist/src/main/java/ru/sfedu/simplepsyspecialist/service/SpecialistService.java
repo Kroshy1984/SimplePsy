@@ -297,7 +297,6 @@ public class SpecialistService {
         Specialist oldSpecialist = specialistRepository.findById(id).get();
         specialist.setPassword(oldSpecialist.getPassword());
         specialist.setUsername(oldSpecialist.getUsername());
-        System.out.println(oldSpecialist.getDiplomas().size());
         System.out.println(multipartFiles.size());
         specialist.setSpecialistRole(oldSpecialist.getSpecialistRole());
         for (MultipartFile file : multipartFiles) {
@@ -309,7 +308,6 @@ public class SpecialistService {
         specialist.setDiplomas(oldSpecialist.getDiplomas());
         specialist.setCustomerIds(oldSpecialist.getCustomerIds());
         specialist.setAvatar(oldSpecialist.getAvatar());
-        System.out.println(specialist.getDiplomas().size());
         specialistRepository.save(specialist);
     }
 }

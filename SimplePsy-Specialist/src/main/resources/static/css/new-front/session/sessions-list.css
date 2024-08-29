@@ -242,7 +242,7 @@
 .frame-parent64,
 .frame-wrapper43 {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 .frame-parent64 {
   flex-direction: column;

@@ -3,6 +3,8 @@ package ru.sfedu.simplepsyspecialist.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -368,7 +370,8 @@ public class SpecialistController {
         byte[] avatar = specialist.getAvatar();
 
         if (avatar == null) {
-            File file = new File("SimplePsy-Specialist/src/main/resources/static/images/user-logo.jpg");
+            Resource resource = new ClassPathResource("static/images/user-logo.jpg");
+            File file = resource.getFile();
             avatar = Files.readAllBytes(file.toPath());
         }
 
