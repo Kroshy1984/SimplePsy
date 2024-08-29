@@ -1,17 +1,29 @@
-FROM openjdk:17-alpine as build
+# Указываем базовый образ с OpenJDK 17
+FROM eclipse-temurin:17-jdk AS build
 
+# Устанавливаем рабочую директорию в контейнере
 WORKDIR /app
 
-COPY . .
+# Копируем файлы build.gradle, settings.gradle и зависимости в контейнер
+COPY build.gradle settings.gradle /app/
 
-RUN ./gradlew clean build --no-daemon
+# Загружаем зависимости
+RUN ./gradlew build --no-daemon -x test || return 0
 
-FROM openjdk:17-alpine
+# Копируем остальные исходные файлы проекта
+COPY . /app
 
+# Собираем приложение
+RUN ./gradlew bootJar --no-daemon
+
+# Сборка минимального образа для запуска приложения
+FROM eclipse-temurin:17-jdk-alpine
+
+# Устанавливаем рабочую директорию в контейнере
 WORKDIR /app
 
-COPY --from=build /app/build/libs/SimplePsy-Specialist-0.0.1-SNAPSHOT.jar app.jar
+# Копируем собранный jar файл из предыдущего этапа
+COPY --from=build /app/build/libs/*.jar app.jar
 
-EXPOSE 8081
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Указываем точку входа для запуска приложения
+ENTRYPOINT ["java","-jar","/app/app.jar"]

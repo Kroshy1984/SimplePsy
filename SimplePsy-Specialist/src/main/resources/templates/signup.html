@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="page-content">
-    <form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsySpecialist/V1/specialist/signup}" method="post">
+    <form id="registrationForm" th:object="${specialist}" th:action="@{/SimplePsy/V1/specialist/signup}" method="post">
         <h1>Регистрация в Понятной практике</h1>
-        <div class="login">Уже есть аккаунт? <a th:href="@{/SimplePsySpecialist/V1/specialist/login}">Войти</a></div>
+        <div class="login">Уже есть аккаунт? <a th:href="@{/SimplePsy/V1/specialist/login}">Войти</a></div>
 
         <label for="firstName">Имя *</label>
         <input type="text" id="firstName" th:name="name" th:field="*{name}" placeholder="Имя" required>

@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
@@ -12,6 +13,7 @@ import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
 import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -187,7 +189,7 @@ public class SpecialistService {
             System.out.println("sessionDTOS.size(): " + sessionDTOS.size());
             for (int j = 0; j < sessionDTOS.size(); j++) {
                 System.out.println("Date of session: " + sessionDTOS.get(j).getDate());
-                System.out.println("Client name " + sessionDTOS.get(j).getClient().getName());
+              //  System.out.println("Client name " + sessionDTOS.get(j).getClient().getName());
             }
         }
         return sessionsByDayOfWeek;
@@ -287,6 +289,25 @@ public class SpecialistService {
         Specialist specialist = specialistRepository.findById(specialistId).get();
         String password = passwordEncoder.encode(newPassword);
         specialist.setPassword(password);
+        specialistRepository.save(specialist);
+    }
+
+    public void updateSpecialist(Specialist specialist, List<MultipartFile> multipartFiles) throws IOException {
+        String id = specialist.getId();
+        Specialist oldSpecialist = specialistRepository.findById(id).get();
+        specialist.setPassword(oldSpecialist.getPassword());
+        specialist.setUsername(oldSpecialist.getUsername());
+        System.out.println(multipartFiles.size());
+        specialist.setSpecialistRole(oldSpecialist.getSpecialistRole());
+        for (MultipartFile file : multipartFiles) {
+            // Логика сохранения файла
+            if (!file.isEmpty()) {
+                oldSpecialist.addDiplomas(file.getBytes());
+            }
+        }
+        specialist.setDiplomas(oldSpecialist.getDiplomas());
+        specialist.setCustomerIds(oldSpecialist.getCustomerIds());
+        specialist.setAvatar(oldSpecialist.getAvatar());
         specialistRepository.save(specialist);
     }
 }

@@ -3,8 +3,11 @@ package ru.sfedu.simplepsyspecialist.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,22 +17,20 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.*;
-import ru.sfedu.simplepsyspecialist.entity.nested.Contact;
-import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
+import org.springframework.web.multipart.MultipartFile;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
+import ru.sfedu.simplepsyspecialist.entity.Problem;
+import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Objects;
+import java.nio.file.Files;
+import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
-@RequestMapping("/SimplePsySpecialist/V1/specialist")
+@RequestMapping("/SimplePsy/V1/specialist")
 public class SpecialistController {
 
     @Autowired
@@ -59,7 +60,7 @@ public class SpecialistController {
         System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.registerNewSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+        return "redirect:/SimplePsy/V1/session/calendar";
     }
 
     @GetMapping("/login")
@@ -73,7 +74,7 @@ public class SpecialistController {
         System.out.println("Got the specialist's  username: " + specialist.getUsername());
         System.out.println("Got the specialist's  password: " + specialist.getPassword());
         specialistService.authorizeSpecialist(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
+        return "redirect:/SimplePsy/V1/specialist/sessions";
     }
     @GetMapping("/changePass")
     public String changePass(Model model)
@@ -97,7 +98,7 @@ public class SpecialistController {
                                  @RequestParam("password") String password)
     {
         specialistService.setNewPassword(specialistId, password);
-        return "redirect:/SimplePsySpecialist/V1/specialist/login";
+        return "redirect:/SimplePsy/V1/specialist/login";
     }
 //@PostMapping("/login")
 //public String login(@ModelAttribute("specialist") Specialist specialist)
@@ -105,13 +106,9 @@ public class SpecialistController {
 //    System.out.println(specialist.getEmail());
 //    System.out.println(specialist.getPassword());
 //    specialistService.authorizeSpecialist(specialist);
-//    return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
+//    return "redirect:/SimplePsy/V1/specialist/calendar";
 //}
 
-    @GetMapping("/calendar")
-    public String getCalendar() {
-        return "calendar";
-    }
 
     /*@PostMapping("/search")
     public void handleGetRequest(
@@ -132,64 +129,7 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         String specialist_id = specialist.getId();
         specialistService.sendRequestToSession(specialist_id, startDate, endDate);
-        return "redirect:/SimplePsySpecialist/V1/specialist/calendar";
-    }
-
-    @GetMapping("/session")
-    public String getSessionForm(Model model) {
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
-        return "session";
-    }
-
-    @PostMapping("/session")
-    public String createNewSession(@AuthenticationPrincipal UserDetails userDetails,
-                                   @RequestParam("email") String email,
-                                   @RequestParam("problem") String problem,
-                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
-        System.out.println(email);
-        System.out.println(problem);
-        System.out.println(date);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        System.out.println("Specialist found!");
-        String specialist_id = specialist.getId();
-        System.out.println(specialist_id);
-        specialistService.createNewSession(email, specialist_id, problem, date);
-        System.out.println("Session was created");
-        return "redirect:/SimplePsySpecialist/V1/specialist/sessions";
-    }
-
-    @GetMapping("/sessions")
-    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<Session> sessionDTOS = specialistService.getAllSessions(specialist.getId());
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessionDTOS);
-        List<Session> meetingsByMonday = meetingsByDay.get(0);
-        System.out.println(meetingsByMonday.size());
-        List<Session> meetingsByDayTuesday = meetingsByDay.get(1);
-        System.out.println(meetingsByDayTuesday.size());
-        List<Session> meetingsByDayWednesday = meetingsByDay.get(2);
-        System.out.println(meetingsByDayWednesday.size());
-        List<Session> meetingsByDayThursday = meetingsByDay.get(3);
-        System.out.println(meetingsByDayThursday.size());
-        List<Session> meetingsByDayFriday = meetingsByDay.get(4);
-        System.out.println(meetingsByDayFriday.size());
-        List<Session> meetingsByDaySaturday = meetingsByDay.get(5);
-        System.out.println(meetingsByDaySaturday.size());
-        List<Session> meetingsByDaySunDay = meetingsByDay.get(6);
-        System.out.println(meetingsByDaySunDay.size());
-        model.addAttribute("meetingsByMonday", meetingsByMonday);
-        model.addAttribute("meetingsByDayTuesday", meetingsByDayTuesday);
-        model.addAttribute("meetingsByDayWednesday", meetingsByDayWednesday);
-        model.addAttribute("meetingsByDayThursday", meetingsByDayThursday);
-        model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
-        model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
-        model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
-        System.out.println(specUrl);
-        model.addAttribute("specUrl", specUrl);
-
-        return "sessions";
+        return "redirect:/SimplePsy/V1/specialist/calendar";
     }
 
     @GetMapping("/customers")
@@ -197,11 +137,12 @@ public class SpecialistController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Customer> customers = specialistService.getAllCustomers();
         List<Customer> specialistCustomers = new ArrayList<>();
+        model.addAttribute("specialist", specialist);
 
         if (specialist.getCustomerIds() == null) {
             System.out.println("No customers were found for this specialist!");
             model.addAttribute("customers", specialistCustomers);
-            return "customer-list";
+            return "new-front/customer/customer-list";
         }
 
         for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
@@ -213,10 +154,8 @@ public class SpecialistController {
                 }
             }
         }
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
         model.addAttribute("customers", specialistCustomers);
-        return "customer-list";
+        return "new-front/customer/customer-list";
     }
     @GetMapping("/clients")
     public String getClientsList(@AuthenticationPrincipal UserDetails userDetails, Model model)
@@ -243,16 +182,6 @@ public class SpecialistController {
         model.addAttribute("clients", clients);
         return "client-list";
     }
-    @GetMapping("/customer-card/{customerId}")
-    public String getCustomerCard(@PathVariable String customerId, Model model) {
-        System.out.println("In method getCustomerCard got the customerId: " + customerId);
-        Customer customer = specialistService.findCustomerById(customerId);
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        customer.setId(customerId);
-        model.addAttribute("specUrl", specUrl);
-        model.addAttribute("customer", customer);
-        return "customer-card";
-    }
 
     @PostMapping("/customer-card/update")
     public String updateCustomerCard(@ModelAttribute("customer") Customer customerDTO,
@@ -261,7 +190,7 @@ public class SpecialistController {
         System.out.println("Customer's id: " + customerId);
         customerDTO.setId(customerId);
         specialistService.updateCustomer(customerDTO);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerDTO.getId();
+        return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerDTO.getId();
     }
 
     @PostMapping("/delete-customer/{id}")
@@ -269,40 +198,27 @@ public class SpecialistController {
                                  @AuthenticationPrincipal UserDetails userDetails) {
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
         specialistService.deleteCustomerById(customerId, specialistId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
 
     @PostMapping("/customers/new")
-    public String createNewCustomer(@RequestParam("name") String name,
-                                    @RequestParam("surname") String surname,
-                                    @RequestParam("dateOfBirth") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
-                                    @RequestParam("gender") String gender,
-                                    @RequestParam("contact.phone") String phone,
-                                    @RequestParam("contact.email") String email,
-                                    @RequestParam("contact.tg") String tg,
-                                    @RequestParam("problem") String problem,
+    public String createNewCustomer(@RequestBody Customer customer,
                                     @AuthenticationPrincipal UserDetails userDetails) throws IOException {
-        System.out.println("Got the new customer:\n" + name);
-        System.out.println(surname);
-        System.out.println(dateOfBirth);
-        System.out.println(gender);
-        System.out.println(phone);
-        System.out.println(email);
-        System.out.println(tg);
-        System.out.println(problem);
-        Contact contact = new Contact(phone, email, tg);
-        Sex sex = gender.equals("MALE") ? Sex.MALE : Sex.FEMALE;
-        String customerId = specialistService.saveCustomer(new Customer(name, surname, dateOfBirth, sex , contact), problem);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        specialist.addCustomerId(customerId);
-        specialistService.save(specialist);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customers";
-    }
-
-    @GetMapping("/customer-form")
-    public String getClientForm(Model model) {
-        model.addAttribute("customerDTO", new Customer());
-        return "customer-form";
+        //System.out.println("Got the new customer:\n" + name);
+        System.out.println(customer.getSurname());
+        System.out.println(customer.getDateOfBirth());
+        System.out.println(customer.getSex());
+        System.out.println(customer.getContact().getPhone());
+//        System.out.println(email);
+//        System.out.println(tg);
+//        System.out.println(problem);
+//        Contact contact = new Contact(phone, email, tg);
+//        Sex sex = gender.equals("MALE") ? Sex.MALE : Sex.FEMALE;
+//        String customerId = specialistService.saveCustomer(new Customer(name, surname, dateOfBirth, sex , contact), problem);
+//        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+//        specialist.addCustomerId(customerId);
+//        specialistService.save(specialist);
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
 
     @GetMapping("/find-customer/byProblemId")
@@ -319,37 +235,6 @@ public class SpecialistController {
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/find-customer-form")
-    public String getFindCustomerForm() {
-        return "find-customer";
-    }
-
-    @PostMapping("/find-customer-form")
-    public String getCustomerByContactData(@AuthenticationPrincipal UserDetails userDetails,
-                                           @RequestParam("data") String data) {
-        String customerId = specialistService.findCustomerByContactData(data);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-
-        if (Objects.equals(customerId, "Customer not found")) {
-            return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
-        }
-
-        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
-            if (Objects.equals(customerId, specialist.getCustomerIds().get(i))) {
-                return "redirect:/SimplePsySpecialist/V1/specialist/customer-card/" + customerId;
-            }
-        }
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer-form";
-    }
-
-    @GetMapping("customer/problem/new/{customerId}")
-    public String customerNewProblem(@PathVariable String customerId,
-                                     Model model)
-    {
-        System.out.println("In method customerNewProblem providing customerId " + customerId + " to the model");
-        model.addAttribute("customerId", customerId);
-        return "problem-form";
-    }
 
     @PostMapping("customer/problem/new")
     public String customerNewProblem(@RequestParam("customerId") String customerId,
@@ -357,7 +242,7 @@ public class SpecialistController {
     {
         System.out.println("In Post mappping method customerNewProblem \ngot customerId: " + customerId + " and problem: " + problem);
         specialistService.addCustomerProblem(customerId, problem);
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
+        return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
 
     @GetMapping("customer/problems/{customerId}")
@@ -375,50 +260,50 @@ public class SpecialistController {
         return "problems-list";
     }
 
-    @GetMapping("/customer/scoring/{problemId}")
-    public String scoringAnswers(@PathVariable String problemId,
-                                 Model model)
-    {
-        System.out.println("In method scoringAnswers");
-        List<String> textQuestions = Scoring.getTextQuestions();
-        List<String> checkboxQuestions = Scoring.getCheckboxQuestions();
-        List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
-        if (answers == null) {
-            return "scoring-error";
-        }
-
-        LinkedHashMap<String, String> textQuestionsAnswers = new LinkedHashMap<>();
-        for (int i = 0; i < textQuestions.size(); i++) {
-            textQuestionsAnswers.put(textQuestions.get(i), answers.get(i+1));
-        }
-
-        LinkedHashMap<String, String> checkboxQuestionsAnswers = new LinkedHashMap<>();
-        for (int i = 0; i < checkboxQuestions.size(); i++) {
-            checkboxQuestionsAnswers.put(checkboxQuestions.get(i), answers.get(i+15));
-        }
-
-        String customerId = specialistService.findCustomerByProblemId(problemId).getId();
-
-        model.addAttribute("problemId", problemId);
-        model.addAttribute("customerId", customerId);
-        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
-        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
-        return "scoring-answers";
-    }
+//    @GetMapping("/customer/scoring/{problemId}")
+//    public String scoringAnswers(@PathVariable String problemId,
+//                                 Model model)
+//    {
+//        System.out.println("In method scoringAnswers");
+//        List<String> textQuestions = Scoring.getTextQuestions();
+//        List<String> checkboxQuestions = Scoring.getCheckboxQuestions();
+//        List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
+//        if (answers == null) {
+//            return "scoring-error";
+//        }
+//
+//        LinkedHashMap<String, String> textQuestionsAnswers = new LinkedHashMap<>();
+//        for (int i = 0; i < textQuestions.size(); i++) {
+//            textQuestionsAnswers.put(textQuestions.get(i), answers.get(i+1));
+//        }
+//
+//        LinkedHashMap<String, String> checkboxQuestionsAnswers = new LinkedHashMap<>();
+//        for (int i = 0; i < checkboxQuestions.size(); i++) {
+//            checkboxQuestionsAnswers.put(checkboxQuestions.get(i), answers.get(i+15));
+//        }
+//
+//        String customerId = specialistService.findCustomerByProblemId(problemId).getId();
+//
+//        model.addAttribute("problemId", problemId);
+//        model.addAttribute("customerId", customerId);
+//        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
+//        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
+//        return "scoring-answers";
+//    }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
-        return "redirect:/SimplePsySpecialist/V1/specialist/login";
+        return "redirect:/SimplePsy/V1/specialist/login";
     }
     @PostMapping("/scoring/approve/{problemId}")
     public String approveScoring(@PathVariable("problemId") String problemId)
     {
         System.out.println("In method approveScoring got the problemId: " + problemId);
         specialistService.approveScoring(problemId);
-        return "redirect:/SimplePsySpecialist/V1/specialist/clients";
+        return "redirect:/SimplePsy/V1/specialist/clients";
     }
 
     @PostMapping("/scoring/cancel/{problemId}")
@@ -427,7 +312,99 @@ public class SpecialistController {
         System.out.println("In method cancelScoring got the problemId: " + problemId);
         specialistService.cancelScoring(problemId);
         String customerId = specialistService.findCustomerByProblemId(problemId).getId();
-        return "redirect:/SimplePsySpecialist/V1/specialist/customer/problems/" + customerId;
+        return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
+
+    @GetMapping("/personal-info")
+    public String getPersonalInfo(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        // Debug: Выводим в консоль информацию о специалисте
+        if (specialist.getAvatar() != null) {
+            System.out.println("Аватарка загружена, размер: " + specialist.getAvatar().length + " байт");
+        } else {
+            System.out.println("Аватарка не найдена");
+        }
+
+        model.addAttribute("specialist", specialist);
+        return "new-front/specialist/specialist-home-page";
+    }
+
+
+    @PostMapping("/personal-info/update")
+    public String updatePersonalInfo(@AuthenticationPrincipal UserDetails userDetails,
+                                     @ModelAttribute("specialist") Specialist specialist,
+                                     @RequestParam(value = "diploma", required = false)  List<MultipartFile> multipartFiles) throws IOException {
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        specialist.setId(specialistId);
+        System.out.println(multipartFiles.size());
+        specialistService.updateSpecialist(specialist, multipartFiles);
+        return "redirect:/SimplePsy/V1/specialist/personal-info";
+    }
+    @PostMapping(value = "/personal-info/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateAvatar(@AuthenticationPrincipal UserDetails userDetails,
+                                                            @RequestParam("avatar") MultipartFile avatarFile) {
+        Map<String, Object> response = new HashMap<>();
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        try {
+            byte[] avatarBytes = avatarFile.getBytes();
+            specialist.setAvatar(avatarBytes);
+            specialistService.save(specialist);
+
+            // Предположим, что вы генерируете новый URL для аватарки, который будет возвращен на фронтенд
+            String avatarUrl = "/path/to/avatar/" + specialist.getId() + "/avatar.jpg";
+
+            response.put("success", true);
+            response.put("avatarUrl", avatarUrl);
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            response.put("success", false);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    @GetMapping("/avatar/{id}")
+    public ResponseEntity<byte[]> getAvatar(@PathVariable String id) throws IOException {
+        Specialist specialist = specialistService.findById(id);
+        byte[] avatar = specialist.getAvatar();
+
+        if (avatar == null) {
+            Resource resource = new ClassPathResource("static/images/user-logo.jpg");
+            File file = resource.getFile();
+            avatar = Files.readAllBytes(file.toPath());
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(avatar, headers, HttpStatus.OK);
+    }
+    @GetMapping("/diploma/{specialistId}/{diplomaIndex}")
+    public ResponseEntity<byte[]> getDiplomaImage(@PathVariable String specialistId, @PathVariable int diplomaIndex) {
+        System.out.println("Specialist id and img index: " + specialistId + " " + diplomaIndex);
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("Specialist id in method getDiplomaImage: " + specialist);
+        System.out.println("name: " + specialist.getName());
+        byte[] image = specialist.getDiplomas().get(diplomaIndex);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+    @DeleteMapping("/diploma/{specialistId}/{diplomaIndex}")
+    public ResponseEntity<Void> deleteDiploma(@PathVariable String specialistId, @PathVariable int diplomaIndex) {
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("Specialist id and img index: " + specialistId + " " + diplomaIndex);
+        System.out.println("Specialist id in method getDiplomaImage: " + specialist);
+        if (specialist != null && diplomaIndex >= 0 && diplomaIndex < specialist.getDiplomas().size()) {
+            // Удаление диплома по индексу
+            specialist.getDiplomas().remove(diplomaIndex);
+            specialistService.save(specialist); // Сохранение изменений
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 }

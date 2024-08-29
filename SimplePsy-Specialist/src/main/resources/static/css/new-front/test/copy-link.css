@@ -1,0 +1,379 @@
+.body {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: var(--shadows-gray-blue-5-120b);
+  border-radius: var(--br-mini);
+  background-color: var(--white);
+}
+.frame-child186,
+.frame-child187 {
+  position: absolute;
+  top: 1.77px;
+  left: 20.8px;
+  border-radius: var(--br-11xl);
+  background-color: var(--color-lightslategray-200);
+  width: 2.6px;
+  height: 17.6px;
+  transform: rotate(-43deg);
+  transform-origin: 0 0;
+}
+.frame-child187 {
+  top: 14.27px;
+  left: 21.75px;
+  transform: rotate(-133deg);
+  z-index: 1;
+}
+.rectangle-parent160 {
+  width: 34.6px;
+  height: 14.6px;
+  position: relative;
+  z-index: 1;
+}
+.frame-child188 {
+  align-self: stretch;
+  width: 338px;
+  position: relative;
+  border-radius: var(--br-xl);
+  background-color: var(--color-lightslategray-400);
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  display: none;
+  max-width: 100%;
+}
+.input335 {
+  flex: 1;
+  position: relative;
+  line-height: 150%;
+  z-index: 2;
+  border: none;
+  background: none;
+  font: inherit;
+  padding: 0;
+}
+.div336 {
+  z-index: 4;
+  margin-left: -191px;
+  flex: 1;
+  position: relative;
+  line-height: 150%;
+  z-index: 2;
+}
+.client-name-field {
+  width: 100%; /* Обеспечиваем, что блок растягивается на всю ширину */
+  display: flex;
+  align-items: center;
+}
+
+.icon176 {
+  width: 10.4px;
+  height: 6.1px;
+  position: relative;
+  object-fit: contain;
+  z-index: 2;
+}
+.icon-wrapper43 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+}
+.client-name-field-parent,
+.frame-wrapper88,
+.rectangle-parent161 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+.client-name-field-parent {
+  flex: 1;
+  border-radius: var(--br-xl);
+  background-color: var(--color-lightslategray-400);
+  border: 1px solid var(--grey-blue-95);
+  justify-content: space-between;
+  padding: var(--padding-11xs) var(--padding-4xs) var(--padding-11xs)
+    var(--padding-7xs);
+  max-width: 102%;
+  flex-shrink: 0;
+  gap: var(--gap-xl);
+  z-index: 3;
+}
+.frame-wrapper88,
+.rectangle-parent161 {
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.rectangle-parent161 {
+  flex: 1;
+  border-radius: var(--br-xl);
+  background-color: var(--color-lightslategray-400);
+  border: 2px solid var(--grey-blue-95);
+  z-index: 1;
+  margin-bottom: 10px;
+}
+.frame-wrapper88 {
+  align-self: stretch;
+  padding: 0 0 0 var(--padding-12xs);
+  margin-bottom: 50px;
+}
+.frame-wrapper88-fix-bottom {
+  margin-bottom: 0px;
+}
+.feather-icon-chevron-up23 {
+  height: 24px;
+  width: 24px;
+  position: relative;
+}
+.item191 {
+  align-self: stretch;
+  border: 1px solid var(--grey-blue-95);
+  display: none;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-7xs) var(--padding-5xs);
+}
+.feather-icon-plus15 {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  display: none;
+}
+.div337 {
+  width: 215px;
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.item192,
+.wrapper54 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.wrapper54 {
+  flex: 1;
+  padding: 0;
+}
+.item192 {
+  align-self: stretch;
+  height: 30px;
+  border: 3px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  padding: var(--padding-5xs) var(--padding-8xs) var(--padding-9xs)
+    var(--padding-5xs);
+  gap: var(--gap-9xs);
+}
+.feather-icon-check26,
+.input19 {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  display: none;
+}
+.input19 {
+  width: 189px;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-rubik);
+  font-size: var(--bold-10-size);
+  background-color: transparent;
+  height: 15px;
+  line-height: 150%;
+  color: var(--grey-blue-60);
+  text-align: left;
+  display: inline-block;
+  padding: 0;
+}
+.item193 {
+  align-self: stretch;
+  height: 24px;
+  background-color: var(--white);
+  border: 3px solid var(--grey-blue-95);
+  flex-direction: row;
+  align-items: center;
+  padding: var(--padding-10xs) var(--padding-6xs) var(--padding-10xs)
+    var(--padding-5xs);
+  gap: var(--gap-9xs);
+}
+.component21,
+.item193,
+.item194 {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.item194 {
+  border: 3px solid var(--grey-blue-95);
+  outline: 0;
+  background-color: var(--white);
+  align-self: stretch;
+  height: 24px;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--padding-5xs);
+  min-width: 126px;
+}
+.component21 {
+  align-items: flex-start;
+}
+.component21 {
+  height: 83px;
+  flex: 1;
+  box-shadow: var(--default-m);
+  overflow: hidden;
+  flex-direction: column;
+  padding: 0 var(--padding-3xs) var(--padding-sm) 0;
+  z-index: 1;
+}
+.frame-child190 {
+  height: 25px;
+  width: 338px;
+  position: relative;
+  border-radius: var(--br-xl);
+  background-color: var(--color-lightslategray-400);
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  display: none;
+  max-width: 100%;
+}
+.input1, .input2 {
+  border: 0;
+  outline: 0;
+  font-family: var(--bold-10);
+  font-size: 13px;
+  background-color: transparent;
+  height: 17px;
+  position: relative;
+  line-height: 150%;
+  color: var(--grey-blue-60);
+  text-align: left;
+  display: inline-block;
+  padding: 0;
+  z-index: 3;
+}
+.input1 {
+  width: 100%;
+  z-index: 3;
+}
+.input2 {
+  width: calc(100% - 20px); /* Поле ввода занимает всё доступное пространство, минус ширина кнопки */
+  z-index: 10;
+}
+.rectangle-parent162 {
+  align-self: stretch;
+  border-radius: var(--br-xl);
+  background-color: var(--color-lightslategray-400);
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--padding-12xs) var(--padding-mid) var(--padding-12xs)
+    var(--padding-2xs);
+  max-width: 100%;
+  gap: var(--gap-xl);
+  z-index: 2;
+  margin-top: -7px;
+}
+.frame-parent153 {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: var(--grey-blue-60);
+  font-family: var(--font-rubik);
+}
+.frame-parent152,
+.frame-parent153,
+.frame-wrapper87 {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.frame-parent152 {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.frame-wrapper87 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 var(--padding-12xl) 0 var(--padding-6xs);
+  box-sizing: border-box;
+}
+.base-parent17,
+.div334 {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+.base-parent17 {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  box-sizing: border-box;
+  gap: 7.5px;
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--bold-10-size);
+  color: var(--color-slategray-800);
+  font-family: var(--bold-10);
+}
+.div334 {
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 450px) {
+  .component21 {
+    height: 83px;
+  }
+}
+.input-container {
+  position: relative;
+  width: 100%; /* Контейнер также должен растягиваться на всю ширину */
+  display: flex;
+}
+
+.copy-btn {
+  width: 16px; /* Ширина кнопки */
+  height: 16px; /* Высота кнопки */
+  position: absolute;
+  right: 0;
+  top: 45%;
+  transform: translateY(-50%);
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: transparent; /* Убираем фон кнопки */
+  padding: 0; /* Убираем внутренние отступы */
+  cursor: pointer;
+  font-size: var(--bold-10-size);
+  z-index: 10;
+}
+
+.copy-btn:hover {
+  background-color: transparent; /* Убираем фон при наведении */
+}
+
+.copy-btn svg {
+  width: 16px; /* Настроить размер иконки */
+  height: 16px; /* Настроить размер иконки */
+  color: black;
+}
+/* Цвет текста плейсхолдера в поле input1 */
+.input1::placeholder, .input2::placeholder {
+  color: var(--color-slategray-800); /* Изменяем цвет плейсхолдера */
+}

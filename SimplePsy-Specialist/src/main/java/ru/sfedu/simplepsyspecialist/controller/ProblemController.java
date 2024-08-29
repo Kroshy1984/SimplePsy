@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/SimplePsyProblem/V1/problem")
+@RequestMapping("/SimplePsy/V1/problem")
 public class ProblemController {
     private ProblemService problemService;
 
@@ -51,13 +51,13 @@ public class ProblemController {
         problemService.saveCustomersScoring(problemId, scoringId);
         return ResponseEntity.ok("Problem with id " + problemId + " successfully saved scoring with id " + scoringId);
     }
-    @GetMapping("/getScoringAnswersByProblemId")
-    public ResponseEntity<List<String>> getScoringAnswersByProblemId(@RequestParam("problemId") String problemId)
-    {
-        System.out.println("In method getScoringAnswersByProblemId got the problemId: " + problemId );
-        List<String> answers = problemService.getScoringAnswers(problemId);
-        return ResponseEntity.ok(answers);
-    }
+//    @GetMapping("/getScoringAnswersByProblemId")
+//    public ResponseEntity<List<String>> getScoringAnswersByProblemId(@RequestParam("problemId") String problemId)
+//    {
+//        System.out.println("In method getScoringAnswersByProblemId got the problemId: " + problemId );
+//        List<String> answers = problemService.getScoringAnswers(problemId);
+//        return ResponseEntity.ok(answers);
+//    }
 
     @PostMapping("/cancel/{problemId}")
     public ResponseEntity<String> cancelScoring (@PathVariable String problemId) {

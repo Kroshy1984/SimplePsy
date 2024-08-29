@@ -348,7 +348,6 @@
 }
 .user-icon8,
 .wrapper-user8 {
-  position: absolute;
   cursor: pointer;
 }
 .user-icon8 {
@@ -389,6 +388,11 @@
   position: absolute;
 }
 .head {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-21xl);
   top: 0;
   left: 0;
   width: 233px;
@@ -436,7 +440,7 @@
 .user-policy9 {
   position: absolute;
   left: calc(50% + 250px);
-  white-space: pre-wrap;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 .about-us15 {
@@ -491,13 +495,8 @@
   font-weight: 700;
 }
 .icon122 {
-  position: absolute;
   height: 100%;
   width: 20.69%;
-  top: 0;
-  right: 84.83%;
-  bottom: 0;
-  left: -5.52%;
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
@@ -509,6 +508,10 @@
   height: 30px;
 }
 .city {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-mini);
   top: 8px;
   right: 40px;
   width: 145px;
@@ -555,4 +558,8 @@
   text-align: center;
   font-size: var(--bold-12-size);
   color: var(--grey-blue-80);
+  overflow: hidden;
+}
+.sidebar1-fix-width{
+  width: 240px;
 }

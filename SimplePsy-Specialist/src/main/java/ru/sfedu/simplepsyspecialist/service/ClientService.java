@@ -7,6 +7,8 @@ import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.nested.Status;
 import ru.sfedu.simplepsyspecialist.repo.ClientRepository;
 
+import java.util.List;
+
 @Service
 public class ClientService {
     ClientRepository clientRepository;
@@ -21,6 +23,7 @@ public class ClientService {
     }
 
     public Client save(Client client) {
+        System.out.println("saving client");
         return clientRepository.save(client);
     }
 
@@ -50,5 +53,13 @@ public class ClientService {
     public void changeCustomerStatusOnCustomer(String problemId) {
         Customer customer = customerService.findByProblemId(problemId);
         customer.setStatus(Status.CUSTOMER);
+    }
+
+    public List<Client> findAll() {
+        List<Client> clients = clientRepository.findAll();
+        for (Client c : clients) {
+            System.out.println(c.getId());
+        }
+        return clients;
     }
 }

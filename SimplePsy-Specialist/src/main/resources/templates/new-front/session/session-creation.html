@@ -1,279 +1,189 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="../../../static/css/new-front/global.css" />
-    <link rel="stylesheet" href="../../../static/css/new-front/session/session-creation.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
-    />
-  </head>
-  <body>
-    <div class="div106">
-      <section class="appointment-base">
-        <div class="base71"></div>
-        <b class="add-place6">Формат встречи</b>
-        <img class="icon92" loading="lazy" alt="" src="../public/icon1@2x.png" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/session-creation.css}" />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+  />
+</head>
+<body>
+<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}"  onsubmit="return validateForm()" method="post" >
+  <div class="component10">
+    <b class="add-place10">Тип встречи</b>
+    <label for="session-type"></label>
+    <select id="session-type" th:name="sessionType">
+      <option value="CLIENT" selected>Встреча с клиентом</option>
+      <option value="ANOTHER">Иное</option>
+    </select>
+  </div>
 
-        <div class="line70"></div>
-        <div class="line71"></div>
-        <div class="line72"></div>
-        <div class="line73"></div>
-        <b class="add-date2">Дата встречи</b>
-        <img
-          class="icon93"
-          loading="lazy"
-          alt=""
-          src="../public/icon-11@2x.png"
-        />
-
-        <img
-          class="icon94"
-          loading="lazy"
-          alt=""
-          src="../public/icon-2@2x.png"
-        />
-
-        <b class="add-time6">С ... ПО ...</b>
-        <img
-          class="icon95"
-          loading="lazy"
-          alt=""
-          src="../public/icon-31@2x.png"
-        />
-
-        <img class="icon96" loading="lazy" alt="" src="../public/icon1@2x.png" />
-
-        <b class="add-members3">
-          <p class="p43">Найти клиента</p>
-        </b>
-        <img
-          class="icon97"
-          loading="lazy"
-          alt=""
-          src="../public/icon-1@2x.png"
-        />
-
-        <div class="icon-parent22">
-          <img
-            class="icon98"
+  <div>
+    <img
+            class="appointment-base-child"
             loading="lazy"
             alt=""
-            src="../public/icon1@2x.png"
-          />
+            src="/images/icon-1@2x.png"
+    />
+    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList">
+    <datalist id="clientsList"></datalist>
+    <input type="hidden" th:field="*{clientId}" id="clientId">
+  </div>
 
-          <div class="component7">
-            <div class="item41">
-              <img class="feather-icon-chevron-up8" alt="" />
-            </div>
-            <div class="item42">
-              <img
-                class="feather-icon-check9"
-                alt=""
-                src="../public/feathericon--check.svg"
-              />
+  <div class="div106">
+    <div class="base71"></div>
+    <label for="session-format" class="add-place6">Формат встречи</label>
+    <select id="session-format" th:name="sessionFormat">
+      <option value="ONLINE" selected>Онлайн</option>
+      <option value="OFFLINE">Оффлайн</option>
+    </select>
+  </div>
 
-              <div class="div107">Наличная</div>
-            </div>
-            <div class="item43">
-              <img
-                class="feather-icon-check10"
-                alt=""
-                src="../public/feathericon--check.svg"
-              />
-
-              <div class="div108">Безналичная</div>
-            </div>
-          </div>
-        </div>
-        <div class="parent22">
-          <div class="div109">Встреча с клиентом</div>
-          <img
-            class="icon99"
+  <div>
+    <img
+            class="icon93"
             loading="lazy"
             alt=""
-            src="../public/icon1@2x.png"
-          />
-        </div>
-        <div class="line74"></div>
-        <div class="button31">
-          <div class="div110">48</div>
-        </div>
-        <input class="appointment-fields" type="checkbox" />
+            src="/images/icon-11@2x.png"
+    />
+    <label for="session-date" class="add-date2"></label>
+    <input type="date" id="session-date" th:name="date" placeholder="Дата встречи">
+  </div>
 
-        <b class="add-place7">Уведомлять</b>
-        <div class="rectangle-parent83" id="groupContainer">
-          <div class="frame-child104"></div>
-          <h3 class="h32">Создать встречу</h3>
-          <div class="component8">
-            <div class="item44">
-              <img class="feather-icon-chevron-up9" alt="" />
-            </div>
-            <div class="item45">
-              <img
-                class="feather-icon-check11"
-                alt=""
-                src="../public/feathericon--check.svg"
-              />
+  <div>
+    <img
+            class="icon94"
+            loading="lazy"
+            alt=""
+            src="/images/icon-2@2x.png"
+    />
+    <label for="session-place" class="b108"></label>
+    <input type="text" id="session-place" th:name="place" placeholder="Место проведения встречи">
+  </div>
 
-              <div class="empty-meeting-options">24</div>
-            </div>
-            <div class="item46">
-              <img
-                class="feather-icon-check12"
-                alt=""
-                src="../public/feathericon--check.svg"
-              />
+  <div>
+    <img
+            class="icon95"
+            loading="lazy"
+            alt=""
+            src="/images/icon-31@2x.png"
+    />
+    <label for="session-timestart" class="add-time6">С ...</label>
+    <input type="time" id="session-timestart" th:name="timeStart">
+    <label for="session-timefinish" class="add-time6">ПО ...</label>
+    <input type="time" id="session-timefinish" th:name="timeFinish">
+  </div>
 
-              <input class="input10" placeholder="48" type="text" />
-            </div>
-            <div class="item47">
-              <img
-                class="feather-icon-check13"
-                alt=""
-                src="../public/feathericon--check.svg"
-              />
+  <div>
+    <label for="payment-type" class="add-time7">Тип оплаты</label>
+    <select id="payment-type" th:name="paymentType">
+      <option value="CASH" selected>Наличная</option>
+      <option value="CASHLESS">Безналичная</option>
+    </select>
+  </div>
 
-              <div class="div111">72</div>
-            </div>
-          </div>
-        </div>
-        <div class="parent23">
-          <b class="b108">Место проведения встречи </b>
-          <div class="component9">
-            <div class="item48">
-              <img class="feather-icon-chevron-up10" alt="" />
-            </div>
-            <div class="item49">
-              <img
-                class="feather-icon-plus6"
-                alt=""
-                src="../public/feathericon--plus.svg"
-              />
+  <div>
+    <label for="session-isrepeatable" class="add-place9">Повторять</label>
+      <input id="session-isrepeatable" class="appointment-fields1" type="checkbox" th:name="isRepeatable">
+  </div>
 
-              <div class="wrapper37">
-                <div class="div112">Онлайн</div>
-              </div>
-            </div>
-            <div class="item50">
-              <img
-                class="feather-icon-check14"
-                alt=""
-                src="../public/feathericon--check1.svg"
-              />
+  <div>
+    <label for="session-timesToRepeat" class="add-place8">Повтор</label>
+    <input type="text" id="session-timesToRepeat" th:name="timesToRepeat">
+  </div>
 
-              <div class="div113">Офлайн</div>
-            </div>
-          </div>
-        </div>
-        <b class="add-time7">Тип оплаты</b>
-        <b class="add-place8">Повтор</b>
-        <div class="button32">
-          <input class="input11" placeholder="2" type="text" />
-        </div>
-        <div class="button33">
-          <div class="div114">Неделя</div>
-        </div>
-        <img
-          class="icon100"
-          loading="lazy"
-          alt=""
-          src="../public/icon1@2x.png"
-        />
+  <div>
+    <label for="session-isnotifiable" class="add-place7">Уведомлять</label>
+    <input type="checkbox" id="session-isnotifiable" th:name="isNotifiable">
+  </div>
 
-        <div class="group-button4">
-          <div class="button-14">
-            <div class="button34">П</div>
-          </div>
-          <div class="button-24">
-            <div class="button35">В</div>
-          </div>
-          <div class="button-35">
-            <div class="button36">С</div>
-          </div>
-          <div class="button-45">
-            <div class="button37">Ч</div>
-          </div>
-        </div>
-        <div class="button-36">
-          <div class="button38">Ч</div>
-        </div>
-        <div class="button-51">
-          <div class="button39">СБ</div>
-        </div>
-        <div class="button-61">
-          <div class="button40">ПТ</div>
-        </div>
-        <div class="button-46">
-          <div class="button41">ВС</div>
-        </div>
-        <input class="appointment-fields1" type="checkbox" />
+  <div>
+    <img
+            class="icon101"
+            loading="lazy"
+            alt=""
+            src="/images/icon-9@2x.png"
+    />
+    <label for="session-notificationtime" class="add-time8">Уведомить за</label>
+    <select id="session-notificationtime" th:name="notificationTime">
+      <option value="24">24</option>
+      <option value="48" selected>48</option>
+      <option value="72">72</option>
+    </select>
+    <b class="add-time9">часа</b>
+  </div>
+  <button type="submit">Создать встречу</button>
+</form>
+<div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
+<script>
+  var groupContainer = document.getElementById("groupContainer");
+  if (groupContainer) {
+    groupContainer.addEventListener("click", function () {
+      window.location.href = "./frame.html";
+    });
+  }
 
-        <b class="add-place9">Повторять</b>
-        <b class="add-time8">Уведомить за</b>
-        <img
-          class="icon101"
-          loading="lazy"
-          alt=""
-          src="../public/icon-9@2x.png"
-        />
+  var groupIcon = document.getElementById("groupIcon");
+  if (groupIcon) {
+    groupIcon.addEventListener("click", function () {
+      window.location.href = "./frame.html";
+    });
+  }
 
-        <b class="add-time9">часа</b>
-        <img
-          class="appointment-base-child"
-          loading="lazy"
-          alt=""
-          src="../public/group-282@2x.png"
-          id="groupIcon"
-        />
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
 
-        <b class="add-place10">Тип встречи</b>
-        <div class="component10">
-          <div class="item51">
-            <img
-              class="feather-icon-plus7"
-              alt=""
-              src="../public/feathericon--plus.svg"
-            />
+  document.getElementById('clientInput').addEventListener('input', function() {
+    fetch('/SimplePsy/V1/client/findAll')
+            .then(response => response.json())
+            .then(clients => {
+              const dataList = document.getElementById('clientsList');
+              dataList.innerHTML = ''; // очистить текущий список
 
-            <div class="wrapper38">
-              <div class="div115">Встреча с клиентом</div>
-            </div>
-          </div>
-          <div class="item52">
-            <img
-              class="feather-icon-check15"
-              alt=""
-              src="../public/feathericon--check.svg"
-            />
+              clients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.name; // или другой атрибут, который вы хотите отображать
+                option.setAttribute('data-id', client.id); // добавить атрибут data-id
+                dataList.appendChild(option);
+              });
+            })
+            .catch(error => console.error('Ошибка:', error));
+  });
 
-            <input class="input12" placeholder="Иное" type="text" />
-          </div>
-        </div>
-      </section>
-    </div>
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });
 
-    <script>
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
-      
-      var groupIcon = document.getElementById("groupIcon");
-      if (groupIcon) {
-        groupIcon.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
-      </script>
-  </body>
+</script>
+</body>
 </html>

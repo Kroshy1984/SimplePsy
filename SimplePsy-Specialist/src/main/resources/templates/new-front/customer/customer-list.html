@@ -1,598 +1,442 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="../../../static/css/new-front/global.css" />
-    <link rel="stylesheet" href="../../../static/css/new-front/customer/customer-list.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
-    />
-  </head>
-  <body>
-    <div class="div44">
-      <header class="left-sidebar">
-        <div class="client-tile-parent">
-          <div class="client-tile">
-            <nav class="client-info">
-              <div class="client-name">
-                <img
-                  class="icon42"
-                  loading="lazy"
-                  alt=""
-                  src="../public/icon@2x.png"
-                />
-
-                <div class="client-details">
-                  <a class="constructor3">Понятная практика</a>
-                </div>
-                <div class="client-search">
-                  <img
-                    class="icon43"
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-list.css}" />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+  />
+</head>
+<body>
+<div class="div44">
+  <header class="left-sidebar">
+    <div class="client-tile-parent">
+      <div class="client-tile">
+        <nav class="client-info">
+          <div class="client-name">
+            <img
+                    class="icon42"
                     loading="lazy"
                     alt=""
-                    src="../public/icon-1@2x.png"
-                  />
-
-                  <div class="search-input2">
-                    <b class="search3">Найти клиента...</b>
-                  </div>
-                </div>
-              </div>
-              <div class="about-us-news-link1">
-                <div class="about-us-news-button1">
-                  <b class="about-us3">Добавить клиента</b>
-                  <b class="news3">Назначить встречу</b>
-                </div>
-              </div>
-              <div class="user-policy-link1">
-                <b class="user-policy3">Добавить график нерабочих дней </b>
-              </div>
-            </nav>
-          </div>
-          <div class="icon-parent5">
-            <img
-              class="icon44"
-              loading="lazy"
-              alt=""
-              src="../public/icon-2@2x.png"
+                    src="/images/icon@2x.png"
             />
 
-            <div class="location-details">
-              <b class="new-york3">Ростов-на-Дону</b>
+            <div class="client-details">
+              <a class="constructor3">Понятная практика</a>
             </div>
-          </div>
-        </div>
-      </header>
-      <main class="user-panel1">
-        <section class="settings-link-parent">
-          <div class="settings-link">
-            <img
-              class="settings-icon2"
-              loading="lazy"
-              alt=""
-              src="../public/settings@2x.png"
-            />
-          </div>
-          <div class="user-profile2">
-            <div class="user-greeting-parent">
-              <div class="user-greeting">
-                <div class="wrapper-user-wrapper">
-                  <div class="wrapper-user3">
-                    <img
-                      class="user-icon3"
+            <div class="client-search">
+              <img
+                      class="icon43"
                       loading="lazy"
                       alt=""
-                      src="../public/user@2x.png"
-                      id="userImage"
-                    />
-                  </div>
-                </div>
-                <div class="user-email1">
-                  <div class="hello-rosalie-container">
-                    <b class="hello-rosalie3">Привет, Антон!</b>
-                  </div>
-                  <b class="rosaliericegmailc3">rosalie.rice@gmail.com</b>
-                </div>
-              </div>
-              <div class="client-actions-parent">
-                <div class="client-actions">
-                  <div class="action-button">
-                    <div class="button-content">
-                      <img
-                        class="image-2-icon3"
-                        loading="lazy"
-                        alt=""
-                        src="../public/image-2@2x.png"
-                      />
+                      src="/images/icon-1@2x.png"
+              />
 
-                      <div class="button-label">
-                        <div class="button30">
-                          <input
-                            class="input5"
-                            placeholder="Поиск по клиентам "
-                            type="text"
-                          />
-                        </div>
-                        <div class="session-info">
-                          <div class="last-session-date">
-                            <img
-                              class="image-4-icon"
-                              loading="lazy"
-                              alt=""
-                              src="../public/image-4@2x.png"
-                            />
-
-                            <div class="last-session-date-label">
-                              <div class="div45">Дата последней встречи</div>
-                            </div>
-                          </div>
-                          <div class="total-sessions">
-                            <div class="div46">Кол-во проведённых сеансов</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="client-statistics">
-                    <div class="item25">
-                      <div class="div47">Новые клиенты</div>
-                    </div>
-                    <div class="item26">
-                      <div class="div48">Онлайн</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="last-session-header">
-                  <div class="last-session-title-parent" id="groupContainer">
-                    <div class="last-session-title">
-                      <div class="last-session-title-child"></div>
-                      <b class="b23">
-                        <p class="p">Последняя встреча:</p>
-                        <p class="p1">20.02.2024</p>
-                        <p class="p2">Всего встреч:</p>
-                        <p class="p3">9</p>
-                      </b>
-                    </div>
-                    <div class="last-session-content">
-                      <div class="last-session-content-child"></div>
-                      <div class="client-data">
-                        <div class="client-name-age">
-                          <b class="b24">Иванова Елизавета Станиславовна</b>
-                          <div class="client-age-label-parent">
-                            <div class="client-age-label">
-                              <b class="b25">Возраст: 20</b>
-                            </div>
-                            <b class="age-placeholder">+7 961 906 77 08</b>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="client-type-label-parent">
-                        <div class="client-type-label">
-                          <div class="client-type-value">
-                            <b class="b26">Взрослый</b>
-                          </div>
-                          <div class="frame-parent17">
-                            <div class="rectangle-parent11">
-                              <div class="frame-child14"></div>
-                              <b class="b27">Регулярный</b>
-                            </div>
-                            <div class="item27">
-                              <div class="div49">Регулярный</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="helloworldgmailcom-parent">
-                          <b class="helloworldgmailcom">helloworld@gmail.com</b>
-                          <div class="frame-wrapper16">
-                            <div class="rectangle-parent12">
-                              <div class="frame-child15"></div>
-                              <b class="b28">Взрослый</b>
-                              <div class="item28">
-                                <div class="div50">По запросу</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item29">
-                      <div class="div51">Офлайн</div>
-                    </div>
-                    <div class="item30">
-                      <div class="div52">Завершен</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="last-session-header1">
-                  <div class="frame-parent18" id="groupContainer">
-                    <div class="rectangle-parent13">
-                      <div class="frame-child16"></div>
-                      <b class="b29">
-                        <p class="p4">Последняя встреча:</p>
-                        <p class="p5">20.02.2024</p>
-                        <p class="p6">Всего встреч:</p>
-                        <p class="p7">9</p>
-                      </b>
-                    </div>
-                    <div class="rectangle-parent14">
-                      <div class="frame-child17"></div>
-                      <div class="frame-wrapper17">
-                        <div class="group">
-                          <b class="b30">Иванова Елизавета Станиславовна</b>
-                          <div class="frame-parent19">
-                            <div class="wrapper9">
-                              <b class="b31">Возраст: 20</b>
-                            </div>
-                            <b class="b32">+7 961 906 77 08</b>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="frame-parent20">
-                        <div class="frame-parent21">
-                          <div class="wrapper10">
-                            <b class="b33">Взрослый</b>
-                          </div>
-                          <div class="frame-parent22">
-                            <div class="rectangle-parent15">
-                              <div class="frame-child18"></div>
-                              <b class="b34">Регулярный</b>
-                            </div>
-                            <div class="icon-parent6">
-                              <img
-                                class="icon45"
-                                loading="lazy"
-                                alt=""
-                                src="../public/icon-33@2x.png"
-                              />
-
-                              <div class="item31">
-                                <div class="div53">Взрослый</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="helloworldgmailcom-group">
-                          <b class="helloworldgmailcom1"
-                            >helloworld@gmail.com</b
-                          >
-                          <div class="frame-wrapper18">
-                            <div class="rectangle-parent16">
-                              <div class="frame-child19"></div>
-                              <b class="b35">Офлайн</b>
-                              <div class="item32">
-                                <div class="div54">Ребёнок</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item33">
-                      <div class="div55">Заявка</div>
-                    </div>
-                    <div class="item34">
-                      <input class="input6" placeholder="Пара" type="text" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="client-list-item-parent">
-              <div class="client-list-item">
-                <div class="client-navigation">
-                  <div class="email" id="emailContainer">
-                    <div class="base44">
-                      <div class="email-icon">
-                        <img
-                          class="icon46"
-                          loading="lazy"
-                          alt=""
-                          src="../public/icon-41@2x.png"
-                        />
-                      </div>
-                      <b class="calendars3">Календарь</b>
-                    </div>
-                    <div class="dashboard-base">
-                      <div class="base45"></div>
-                      <div class="icon-wrapper6">
-                        <img
-                          class="icon47"
-                          loading="lazy"
-                          alt=""
-                          src="../public/icon-52@2x.png"
-                        />
-                      </div>
-                      <b class="dashboard9">Список клинетов</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="invoice-menu-wrapper">
-                  <div class="invoice-menu">
-                    <div class="invoice6" id="invoiceContainer">
-                      <div class="base46"></div>
-                      <div class="icon-wrapper7">
-                        <img
-                          class="icon48"
-                          loading="lazy"
-                          alt=""
-                          src="../public/icon-5.svg"
-                        />
-                      </div>
-                      <b class="invoice7">Уведомления</b>
-                    </div>
-                    <div class="invoice-base">
-                      <div class="base47"></div>
-                      <div class="icon-wrapper8">
-                        <img
-                          class="icon49"
-                          loading="lazy"
-                          alt=""
-                          src="../public/icon-6.svg"
-                        />
-                      </div>
-                      <b class="files3">Аналитика</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="wrapper11">
-                  <div class="div56" id="container">
-                    <div class="base48"></div>
-                    <b class="dashboard10">Опросники и тесты</b>
-                  </div>
-                </div>
-                <div class="wrapper12">
-                  <b class="b36">Заявки</b>
-                </div>
-                <div class="client-header">
-                  <div class="client-name-separator-parent" id="groupContainer">
-                    <div class="client-name-separator">
-                      <div class="client-name-separator-child"></div>
-                      <b class="b37">20.02.2024</b>
-                    </div>
-                    <div class="client-name-value">
-                      <div class="client-name-value-child"></div>
-                      <b class="b38">Овсянникова Юля Матвеевна</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="client-header1">
-                  <div class="frame-parent23" id="groupContainer">
-                    <div class="rectangle-parent17">
-                      <div class="frame-child20"></div>
-                      <b class="b39">25.02.2024</b>
-                    </div>
-                    <div class="rectangle-parent18">
-                      <div class="frame-child21"></div>
-                      <b class="b40">Овсянникова Юля Матвеевна</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="client-info-wrapper">
-                <div class="client-info1">
-                  <div
-                    class="last-meeting-container-parent"
-                    id="groupContainer"
-                  >
-                    <div class="last-meeting-container">
-                      <div class="last-meeting-container-child"></div>
-                      <b class="b41">
-                        <p class="p8">Последняя встреча:</p>
-                        <p class="p9">20.02.2024</p>
-                        <p class="p10">Всего встреч:</p>
-                        <p class="p11">9</p>
-                      </b>
-                    </div>
-                    <div class="client-name-age-container">
-                      <div class="client-name-age-container-child"></div>
-                      <div class="client-name-age1">
-                        <b class="b42">Ребёнок</b>
-                        <b class="helloworldgmailcom2">helloworld@gmail.com</b>
-                      </div>
-                      <div class="client-status-container">
-                        <b class="b43">Иванова Елизавета Станиславовна</b>
-                        <div class="client-age-icon-container">
-                          <div class="wrapper13">
-                            <b class="b44">Возраст: 15</b>
-                          </div>
-                          <b class="client-age-duplicate">+7 961 906 77 08</b>
-                        </div>
-                      </div>
-                      <div class="client-type-email-icon-contain">
-                        <div class="rectangle-parent19">
-                          <div class="frame-child22"></div>
-                          <b class="b45">Регулярный</b>
-                        </div>
-                        <div class="rectangle-parent20">
-                          <div class="frame-child23"></div>
-                          <b class="b46">Офлайн</b>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="frame-parent24" id="groupContainer1">
-                    <div class="rectangle-parent21">
-                      <div class="frame-child24"></div>
-                      <b class="b47">
-                        <p class="p12">Последняя встреча:</p>
-                        <p class="p13">20.02.2024</p>
-                        <p class="p14">Всего встреч:</p>
-                        <p class="p15">9</p>
-                      </b>
-                    </div>
-                    <div class="rectangle-parent22">
-                      <div class="frame-child25"></div>
-                      <div class="parent1">
-                        <b class="b48">Иванова Елизавета Станиславовна</b>
-                        <div class="frame-parent25">
-                          <div class="wrapper14">
-                            <b class="b49">Возраст: 20</b>
-                          </div>
-                          <b class="client-age-space">+7 961 906 77 08</b>
-                        </div>
-                      </div>
-                      <div class="frame-parent26">
-                        <div class="frame-wrapper19">
-                          <div class="frame-parent27">
-                            <div class="rectangle-parent23">
-                              <div class="frame-child26"></div>
-                              <b class="b50">Регулярный</b>
-                            </div>
-                            <div class="rectangle-parent24">
-                              <div class="frame-child27"></div>
-                              <b class="b51">Офлайн</b>
-                            </div>
-                          </div>
-                        </div>
-                        <img
-                          class="icon50"
-                          loading="lazy"
-                          alt=""
-                          src="../public/icon-33@2x.png"
-                        />
-                      </div>
-                      <div class="parent2">
-                        <b class="b52">Взрослый</b>
-                        <b class="helloworldgmailcom3">helloworld@gmail.com</b>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="frame-parent28" id="groupContainer2">
-                    <div class="rectangle-parent25">
-                      <div class="frame-child28"></div>
-                      <b class="b53">
-                        <p class="p16">Последняя встреча:</p>
-                        <p class="p17">20.02.2024</p>
-                        <p class="p18">Всего встреч:</p>
-                        <p class="p19">9</p>
-                      </b>
-                    </div>
-                    <div class="rectangle-parent26">
-                      <div class="frame-child29"></div>
-                      <div class="parent3">
-                        <b class="b54">Взрослый</b>
-                        <b class="helloworldgmailcom4">helloworld@gmail.com</b>
-                      </div>
-                      <div class="parent4">
-                        <b class="b55">Иванова Елизавета Станиславовна</b>
-                        <div class="frame-parent29">
-                          <div class="wrapper15">
-                            <b class="b56">Возраст: 20</b>
-                          </div>
-                          <b class="b57">+7 961 906 77 08</b>
-                        </div>
-                      </div>
-                      <div class="frame-parent30">
-                        <div class="frame-wrapper20">
-                          <div class="frame-parent31">
-                            <div class="rectangle-parent27">
-                              <div class="frame-child30"></div>
-                              <b class="b58">Регулярный</b>
-                            </div>
-                            <div class="rectangle-parent28">
-                              <div class="frame-child31"></div>
-                              <b class="b59">Офлайн</b>
-                            </div>
-                          </div>
-                        </div>
-                        <img
-                          class="icon51"
-                          loading="lazy"
-                          alt=""
-                          src="../public/icon-33@2x.png"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="search-input2">
+                <b class="search3">Найти клиента...</b>
               </div>
             </div>
           </div>
-        </section>
-        <div class="separator-wrapper">
-          <div class="separator">1 2 ....... 23</div>
-        </div>
-      </main>
-      <div class="feedback-frame">
-        <div class="feedback1">
-          <img
-            class="icon52"
-            loading="lazy"
-            alt=""
-            src="../public/icon-7@2x.png"
-          />
-
-          <div class="frame-parent32">
-            <div class="send-feedback-wrapper1">
-              <b class="send-feedback3">Обратная связь</b>
+          <div class="about-us-news-link1">
+            <div class="about-us-news-button1">
+              <b class="about-us3">Добавить клиента</b>
+              <b class="news10">Назначить встречу</b>
             </div>
-            <img
-              class="icon53"
-              loading="lazy"
-              alt=""
-              src="../public/icon-8.svg"
-            />
           </div>
+          <div class="user-policy-link1">
+            <b class="user-policy3">Добавить график нерабочих дней </b>
+          </div>
+        </nav>
+      </div>
+      <div class="icon-parent5">
+        <img
+                class="icon44"
+                loading="lazy"
+                alt=""
+                src="/images/icon-2@2x.png"
+        />
+
+        <div class="location-details">
+          <b th:text="${specialist.city}" class="specialist-city"></b>
         </div>
       </div>
     </div>
+  </header>
+  <main class="user-panel1">
+    <section class="settings-link-parent">
+      <div class="settings-link">
+        <img
+                class="settings-icon2"
+                loading="lazy"
+                alt=""
+                src="/images/settings@2x.png"
+        />
+      </div>
+      <div class="user-profile2">
+        <div class="user-greeting-parent">
+          <div class="user-greeting">
+            <div class="wrapper-user-wrapper">
+              <div class="wrapper-user3">
+                <img
+                        class="user-icon"
+                        loading="lazy"
+                        alt=""
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                        id="userImage"
+                        onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
+                />
+              </div>
+            </div>
+            <div class="user-email1">
+              <div class="hello-wrapper">
+                <b class="hello">Привет, </b>
+                <b th:text="${specialist.name}" class="hello" ></b>
+                <b class="hello">!</b>
+              </div>
+              <b class="specialist-email">
+                <p th:text="${specialist.username}" class="specialist-email-content"></p>
+              </b>
+            </div>
+          </div>
+          <div class="frame-parent110">
+            <div class="rectangle-parent101" id="groupButton" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
+              <div class="frame-child125"></div>
+              <h3 class="h33">Список клиентов</h3>
+            </div>
+            <button class="rectangle-parent100" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
+              <div class="frame-child126"></div>
+              <div class="div192">Список встреч</div>
+            </button>
+            <button class="rectangle-parent100" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
+              <div class="frame-child126"></div>
+              <div class="div192">Опросники и тесты</div>
+            </button>
+          </div>
+        </div>
+        <div class="client-list-item-parent">
+          <div class="client-list-item">
+            <div class="frame-wrapper73">
+              <div class="frame-parent122">
+                <div class="frame-parent123">
+                  <div class="client-list-wrapper">
+                    <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                    <div class="icon-wrapper33">
+                      <img class="icon146" alt="" src="/images/icon-3@2x.png" />
+                    </div>
+                    <b class="client-list">Список клиентов</b>
+                  </div>
+                  <div class="base-frame">
+                    <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                      <div class="icon-wrapper34">
+                        <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
+                      </div>
+                      <b class="calendar">Календарь</b>
+                    </button>
+                  </div>
+                </div>
+                <div class="frame-parent123">
+                  <div class="notifications-wrapper">
+                    <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                    <div class="icon-wrapper33">
+                      <img class="icon146" alt="" src="/images/icon-5.svg" />
+                    </div>
+                    <b class="notifications">Уведомления</b>
+                  </div>
+                  <div class="base-frame">
+                    <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                      <div class="icon-wrapper34">
+                        <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                      </div>
+                      <b class="analytics">Аналитика</b>
+                    </button>
+                  </div>
+                  <div class="tests-wrapper">
+                    <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                    <b class="surveys-tests">Опросники и тесты</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="client-info-wrapper">
+            <div class="client-actions-parent">
+              <div class="client-actions">
+                <div class="action-button">
+                  <div class="button-content">
+                    <img
+                            class="image-2-icon3"
+                            loading="lazy"
+                            alt=""
+                            src="/images/image-2@2x.png"
+                    />
 
-    <script>
-      var userImage = document.getElementById("userImage");
-      if (userImage) {
-        userImage.addEventListener("click", function (e) {
-          window.location.href = "./component4.html";
-        });
+                    <div class="button-label">
+                      <div class="button30">
+                        <input
+                                class="input5"
+                                placeholder="Поиск по клиентам "
+                                type="text"
+                        />
+                      </div>
+                      <div class="session-info">
+                        <div class="last-session-date">
+                          <img
+                                  class="image-4-icon"
+                                  loading="lazy"
+                                  alt=""
+                                  src="/images/image-4@2x.png"
+                          />
+
+                          <div class="last-session-date-label">
+                            <div class="div45">Дата последней встречи</div>
+                          </div>
+                        </div>
+                        <div class="total-sessions">
+                          <div class="div46">Кол-во проведённых сеансов</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2>Список клиентов</h2>
+            <div class="client-info1">
+              <div class="frame-parent24" th:each="customer:${customers}" th:data-card-id="${customer.id}" id="groupContainer1" onclick="goTo(this)">
+<!--                <div class="rectangle-parent21">-->
+<!--                  <div class="frame-child24"></div>-->
+<!--                  <b class="b47">-->
+<!--                    <p class="p12">Последняя встреча:</p>-->
+<!--                    <p class="p13">20.02.2024</p>-->
+<!--                    <p class="p14">Всего встреч:</p>-->
+<!--                    <p class="p15">9</p>-->
+<!--                  </b>-->
+<!--                </div>-->
+                <div class="rectangle-parent22">
+                  <div class="frame-child25"></div>
+                  <div class="parent1">
+                    <div th:switch="${customer.typeOfClient}">
+                      <b class="b48 customer-name" th:case="${customer.typeOfClient.ADULT}" th:text="${customer.surname + ' ' + customer.name + ' ' + customer.lastName}"></b>
+                      <b class="b48 customer-name" th:case="${customer.typeOfClient.COUPLE}" th:text="${customer.firstClientSurname + ' ' + customer.firstClientName + ' ' + customer.firstClientLastName}"></b>
+                      <b class="b48 customer-name" th:case="${customer.typeOfClient.CHILD}" th:text="${customer.childSurname + ' ' + customer.childName + ' ' + customer.childLastName}"></b>
+                    </div>
+                    <div class="frame-parent25">
+                      <div class="wrapper14">
+                        <b class="b49">Возраст: 20</b>
+                      </div>
+                      <b class="client-age-space" th:text="${customer.contact.phone}"></b>
+                    </div>
+                  </div>
+                  <div class="frame-parent26">
+                    <div class="frame-wrapper19">
+                      <div class="frame-parent27">
+                        <div class="rectangle-parent23">
+                          <div class="frame-child26"></div>
+                          <b class="b50" th:text="${customer.clientStatus.translation}"></b>
+                        </div>
+                        <div class="rectangle-parent24">
+                          <div class="frame-child27"></div>
+                          <b class="b51" th:text="${customer.preferredMeetingFormat.translation}"></b>
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                            class="icon50"
+                            loading="lazy"
+                            alt=""
+                            src="/images/icon-33@2x.png"
+                    />
+                  </div>
+                  <div class="parent2">
+                    <b class="b52" th:text="${customer.typeOfClient.translation}"></b>
+                    <b class="helloworldgmailcom3" th:text="${customer.contact.email}"></b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="feedback-frame">
+    <div class="feedback1">
+      <img
+              class="icon52"
+              loading="lazy"
+              alt=""
+              src="/images/icon-7@2x.png"
+      />
+
+      <div class="frame-parent32">
+        <div class="send-feedback-wrapper1">
+          <b class="send-feedback3">Обратная связь</b>
+        </div>
+        <img
+                class="icon53"
+                loading="lazy"
+                alt=""
+                src="/images/icon-8.svg"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+<script>
+  function goTo(obj) {
+    window.location.href = "/SimplePsy/V1/customer/customer-card/" + obj.getAttribute("data-card-id");
+  }
+  // Открытие модального окна создания сессии
+  document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+    var holidayBtn = document.querySelector('.user-policy3');
+    // Функция для открытия модального окна
+    function openModal() {
+      fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+              .then(response => response.text())
+              .then(data => {
+                modalBody.innerHTML = data;
+                modal.style.display = 'block';
+              })
+              .catch(error => console.error('Ошибка загрузки:', error));
+
+      fetch('/SimplePsy/V1/client/findAll')
+              .then(response => response.json())
+              .then(clients => {
+                const dataList = document.getElementById('clientsList');
+                dataList.innerHTML = '';
+
+                const script = document.createElement('script');
+                script.id = 'dynamic-script';
+                script.textContent = `
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+                document.body.appendChild(script);
+                clients.forEach(client => {
+                  const option = document.createElement('option');
+                  option.value = client.name;
+                  option.setAttribute('data-id', client.id);
+                  dataList.appendChild(option);
+                });
+              })
+              .catch(error => console.error('Ошибка:', error));
+
+
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+      modal.style.display = 'none';
+      const script = document.getElementById('dynamic-script');
+      if (script) {
+        script.remove();
+        console.log('Скрипт удалён');
+      } else {
+        console.log('Скрипт не найден');
       }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+    holidayBtn.addEventListener('click', openHolidayModal);
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+  });
+
+  var  addClientBtn = document.querySelector('.about-us3');
+  addClientBtn.addEventListener('click', openAddClientPage);
+
+  function openAddClientPage()
+  {
+    window.location.href = '/SimplePsy/V1/customer/customer-form';
+  }
+  // Получаем элементы
+  const searchInput = document.querySelector('.input5');
+  const clientListItems = document.querySelectorAll('.frame-parent24');
+
+  // Добавляем обработчик события для поля ввода поиска
+  searchInput.addEventListener('input', function() {
+    const searchQuery = this.value.toLowerCase();
+
+    clientListItems.forEach(item => {
+      // Получаем имя клиента из элемента
+      const clientName = item.querySelector('.b48').textContent.toLowerCase();
+
+      // Проверяем, содержит ли имя клиента введенный поисковый запрос
+      if (clientName.includes(searchQuery)) {
+        // Отображаем элемент
+        item.style.display = 'block';
+      } else {
+        // Скрываем элемент
+        item.style.display = 'none';
       }
-      
-      var emailContainer = document.getElementById("emailContainer");
-      if (emailContainer) {
-        emailContainer.addEventListener("click", function (e) {
-          window.location.href = "./frame.html";
-        });
-      }
-      
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./component3.html";
-        });
-      }
-      
-      var container = document.getElementById("container");
-      if (container) {
-        container.addEventListener("click", function (e) {
-          window.location.href = "./component2.html";
-        });
-      }
-      
-      var groupContainer1 = document.getElementById("groupContainer1");
-      if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      
-      var groupContainer2 = document.getElementById("groupContainer2");
-      if (groupContainer2) {
-        groupContainer2.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      </script>
-  </body>
+    });
+  });
+
+  function openHolidayModal()
+  {
+    const modal = document.getElementById("modal");
+    const modalBody = document.getElementById("modal-body");
+
+    fetch('/SimplePsy/V1/session/holiday')
+            .then(response => response.text())
+            .then(html => {
+              modalBody.innerHTML = html;
+              modal.style.display = "block";
+
+              // Добавляем обработчик закрытия модального окна
+              document.querySelector('.close-modal').onclick = function() {
+                modal.style.display = "none";
+              };
+            })
+            .catch(error => {
+              console.error('Error loading modal content:', error);
+            });
+  }
+
+</script>
+</body>
 </html>

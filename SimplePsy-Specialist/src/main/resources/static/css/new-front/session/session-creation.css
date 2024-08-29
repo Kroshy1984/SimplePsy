@@ -1,3 +1,36 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+img {
+  width: 40px;
+}
+
+label {
+  font-weight: bold;
+}
+
+button {
+  padding: 10px;
+  background-color: #007BFF;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 .base19 {
   position: absolute;
   top: 0;
@@ -1059,9 +1092,5 @@
   .meeting-details {
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .event-details2 {
-    height: auto;
-    min-height: 581;
   }
 }

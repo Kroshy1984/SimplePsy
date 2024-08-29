@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="../../../static/css/new-front/global.css" />
-    <link rel="stylesheet" href="../../../static/css/new-front/test/create-new-questionnaire.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/create-new-questionnaire.css}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -16,146 +16,146 @@
     />
   </head>
   <body>
-    <div class="div338">
-      <div class="settings8"></div>
-      <section class="frame-parent154">
-        <header class="frame-wrapper89">
-          <div class="frame-parent155">
-            <div class="icon-parent32">
+  <div class="div338">
+    <div class="settings8"></div>
+    <section class="frame-parent154">
+      <header class="frame-wrapper89">
+        <div class="frame-parent155">
+          <div class="icon-parent32">
+            <img
+                    class="icon177"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon@2x.png"
+            />
+
+            <div class="constructor-wrapper5">
+              <a class="constructor14">Понятная практика</a>
+            </div>
+            <div class="icon-parent33">
               <img
-                class="icon177"
-                loading="lazy"
-                alt=""
-                src="../public/icon@2x.png"
+                      class="icon178"
+                      loading="lazy"
+                      alt=""
+                      src="/images/icon-1@2x.png"
               />
 
-              <div class="constructor-wrapper5">
-                <a class="constructor14">Понятная практика</a>
-              </div>
-              <div class="icon-parent33">
-                <img
-                  class="icon178"
-                  loading="lazy"
-                  alt=""
-                  src="../public/icon-1@2x.png"
-                />
-
-                <div class="search-wrapper3">
-                  <b class="search16">Найти клиента...</b>
-                </div>
-              </div>
-            </div>
-            <div class="frame-wrapper90">
-              <div class="about-us-parent6">
-                <a class="about-us22">Добавить клиента</a>
-                <div class="news-parent1">
-                  <a class="news15">Назначить встречу</a>
-                  <b class="user-policy15">Добавить график нерабочих дней </b>
-                </div>
-              </div>
-            </div>
-            <div class="frame-wrapper91">
-              <div class="icon-parent34">
-                <img class="icon179" alt="" src="../public/icon-2@2x.png" />
-
-                <div class="new-york-wrapper5">
-                  <b class="new-york14">Ростов-на-Дону</b>
-                </div>
-                <img class="icon180" alt="" src="../public/icon2.svg" />
+              <div class="search-wrapper3">
+                <b class="search16">Найти клиента...</b>
               </div>
             </div>
           </div>
-        </header>
-        <div class="vector-parent">
-          <img
-            class="arrow-icon"
-            loading="lazy"
-            alt=""
-            src="../public/arrow-13.svg"
-            id="arrowIcon"
-          />
+          <div class="frame-wrapper90">
+            <div class="about-us-parent6">
+              <a class="about-us22">Добавить клиента</a>
+              <div class="news-parent1">
+                <a class="news10">Назначить встречу</a>
+                <b class="user-policy15">Добавить график нерабочих дней </b>
+              </div>
+            </div>
+          </div>
+          <div class="frame-wrapper91">
+            <div class="icon-parent34">
+              <img class="icon179" alt="" src="/images/icon-2@2x.png" />
 
-          <div class="user-panel-content1">
-            <div class="frame-parent156">
-              <div class="user-header-content-wrapper">
-                <div class="user-header-content">
-                  <div class="wrapper-user14">
-                    <img
-                      class="user-icon14"
-                      loading="lazy"
-                      alt=""
-                      src="../public/user@2x.png"
-                      id="userImage"
-                    />
+              <div class="new-york-wrapper5">
+                <b th:text="${specialist.city}" class="specialist-city"></b>
+              </div>
+              <img class="icon180" alt="" src="/images/icon2.svg" />
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="vector-parent">
+        <img
+                class="arrow-icon"
+                loading="lazy"
+                alt=""
+                src="/images/arrow-13.svg"
+                id="arrowIcon"
+        />
+
+        <div class="user-panel-content1">
+          <div class="frame-parent156">
+            <div class="user-header-content-wrapper">
+              <div class="user-header-content">
+                <div class="wrapper-user14">
+                  <img
+                          class="user-icon"
+                          loading="lazy"
+                          alt=""
+                          th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                          id="userImage"
+                          onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
+                  />
+                </div>
+                <div class="user-name-row-parent">
+                  <div class="hello-wrapper">
+                    <b class="hello">Привет, </b>
+                    <b th:text="${specialist.name}" class="hello" ></b>
+                    <b class="hello">!</b>
                   </div>
-                  <div class="user-name-row-parent">
-                    <div class="user-name-row">
-                      <b class="hello-rosalie14">Привет, Антон!</b>
+                  <b class="specialist-email">
+                    <p th:text="${specialist.username}" class="specialist-email-content"></p>
+                  </b>
+                </div>
+              </div>
+            </div>
+            <div class="frame-parent157">
+              <div class="frame-wrapper92">
+                <div class="frame-parent158">
+                  <div class="parent27">
+                    <h2 class="h211">Название теста</h2>
+                    <div class="test-description-content-wrapper">
+                      <div class="test-description-content">
+                        <div class="description-background"></div>
+                        <h2 class="h212">Тест по завершению терапии</h2>
+                      </div>
                     </div>
-                    <b class="rosaliericegmailc14">
-                      <p class="ponyatpractikagmailcom10">
-                        ponyatpractika@gmail.com
-                      </p>
-                    </b>
+                  </div>
+                  <div class="frame-wrapper93">
+                    <div class="frame-parent159">
+                      <div class="rectangle-parent163">
+                        <div class="frame-child191"></div>
+                        <h3 class="h36">Удалить материал</h3>
+                      </div>
+                      <div class="rectangle-parent164">
+                        <div class="frame-child192"></div>
+                        <h3 class="h37">Сохранить</h3>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="frame-parent157">
-                <div class="frame-wrapper92">
-                  <div class="frame-parent158">
-                    <div class="parent27">
-                      <h2 class="h211">Название теста</h2>
-                      <div class="test-description-content-wrapper">
-                        <div class="test-description-content">
-                          <div class="description-background"></div>
-                          <h2 class="h212">Тест по завершению терапии</h2>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="frame-wrapper93">
-                      <div class="frame-parent159">
-                        <div class="rectangle-parent163">
-                          <div class="frame-child191"></div>
-                          <h3 class="h36">Удалить материал</h3>
-                        </div>
-                        <div class="rectangle-parent164">
-                          <div class="frame-child192"></div>
-                          <h3 class="h37">Сохранить</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="frame-wrapper94">
-                  <div class="rectangle-parent165">
-                    <div class="frame-child193"></div>
-                    <div class="question-content">
-                      <div class="question-header">
-                        <div class="parent28">
-                          <h2 class="h213">Как вы переживаете боль?</h2>
-                          <div class="frame-wrapper95">
-                            <div class="frame-parent160">
-                              <div class="ellipse-wrapper">
-                                <div class="ellipse-div"></div>
-                              </div>
-                              <div class="vector-group">
-                                <img
-                                  class="rectangle-icon"
-                                  alt=""
-                                  src="../public/rectangle-307.svg"
-                                />
+              <div class="frame-wrapper94">
+                <div class="rectangle-parent165">
+                  <div class="frame-child193"></div>
+                  <div class="question-content">
+                    <div class="question-header">
+                      <div class="parent28">
+                        <h2 class="h213">Как вы переживаете боль?</h2>
+                        <div class="frame-wrapper95">
+                          <div class="frame-parent160">
+                            <div class="ellipse-wrapper">
+                              <div class="ellipse-div"></div>
+                            </div>
+                            <div class="vector-group">
+                              <img
+                                      class="rectangle-icon"
+                                      alt=""
+                                      src="/images/rectangle-307.svg"
+                              />
 
-                                <b class="b151">Резко негативно</b>
-                                <div class="frame-wrapper96">
-                                  <div class="frame-parent161">
-                                    <div class="rectangle-parent166">
-                                      <div class="frame-child194"></div>
-                                      <div class="frame-child195"></div>
-                                    </div>
-                                    <div class="rectangle-parent167">
-                                      <div class="frame-child196"></div>
-                                      <div class="frame-child197"></div>
-                                    </div>
+                              <b class="b151">Резко негативно</b>
+                              <div class="frame-wrapper96">
+                                <div class="frame-parent161">
+                                  <div class="rectangle-parent166">
+                                    <div class="frame-child194"></div>
+                                    <div class="frame-child195"></div>
+                                  </div>
+                                  <div class="rectangle-parent167">
+                                    <div class="frame-child196"></div>
+                                    <div class="frame-child197"></div>
                                   </div>
                                 </div>
                               </div>
@@ -163,211 +163,184 @@
                           </div>
                         </div>
                       </div>
-                      <img
-                        class="image-14-icon"
-                        loading="lazy"
-                        alt=""
-                        src="../public/image-14@2x.png"
-                      />
                     </div>
-                    <div class="frame-wrapper97">
-                      <div class="frame-parent162">
-                        <div class="ellipse-container">
-                          <div class="frame-child198"></div>
-                        </div>
-                        <div class="vector-container">
-                          <img
-                            class="frame-child199"
+                    <img
+                            class="image-14-icon"
+                            loading="lazy"
                             alt=""
-                            src="../public/rectangle-307.svg"
-                          />
+                            src="/images/image-14@2x.png"
+                    />
+                  </div>
+                  <div class="frame-wrapper97">
+                    <div class="frame-parent162">
+                      <div class="ellipse-container">
+                        <div class="frame-child198"></div>
+                      </div>
+                      <div class="vector-container">
+                        <img
+                                class="frame-child199"
+                                alt=""
+                                src="/images/rectangle-307.svg"
+                        />
 
-                          <b class="b152">Позитивно</b>
-                          <div class="frame-wrapper98">
-                            <div class="rectangle-parent168">
-                              <div class="frame-child200"></div>
-                              <div class="frame-child201"></div>
-                            </div>
+                        <b class="b152">Позитивно</b>
+                        <div class="frame-wrapper98">
+                          <div class="rectangle-parent168">
+                            <div class="frame-child200"></div>
+                            <div class="frame-child201"></div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <b class="b153">Добавить вопрос...</b>
+              </div>
+              <b class="b153">Добавить вопрос...</b>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-content-parent">
+          <div class="frame-wrapper73">
+            <div class="frame-parent122">
+              <div class="frame-parent123">
+                <div class="client-list-wrapper">
+                  <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                  <div class="icon-wrapper33">
+                    <img class="icon146" alt="" src="/images/icon-3@2x.png" />
+                  </div>
+                  <b class="client-list">Список клиентов</b>
+                </div>
+                <div class="base-frame">
+                  <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                    <div class="icon-wrapper34">
+                      <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
+                    </div>
+                    <b class="calendar">Календарь</b>
+                  </button>
+                </div>
+              </div>
+              <div class="frame-parent123">
+                <div class="notifications-wrapper">
+                  <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                  <div class="icon-wrapper33">
+                    <img class="icon146" alt="" src="/images/icon-5.svg" />
+                  </div>
+                  <b class="notifications">Уведомления</b>
+                </div>
+                <div class="base-frame">
+                  <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                    <div class="icon-wrapper34">
+                      <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                    </div>
+                    <b class="analytics">Аналитика</b>
+                  </button>
+                </div>
+                <div class="tests-wrapper">
+                  <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                  <b class="surveys-tests">Опросники и тесты</b>
+                </div>
               </div>
             </div>
           </div>
-          <div class="sidebar-content-parent">
-            <div class="sidebar-content">
-              <div class="navigation-items3">
-                <div class="dashboard40" id="dashboardContainer">
-                  <div class="base106"></div>
-                  <div class="icon-wrapper44">
-                    <img
-                      class="icon181"
-                      loading="lazy"
-                      alt=""
-                      src="../public/icon-3@2x.png"
-                    />
-                  </div>
-                  <b class="dashboard41">Список клинетов</b>
+          <div class="user-profile-content-wrapper">
+            <div class="user-profile-content">
+              <div class="wrapper56">
+                <b class="b154">Заявки</b>
+              </div>
+              <div class="frame-parent163" id="groupContainer">
+                <div class="rectangle-parent169">
+                  <div class="frame-child202"></div>
+                  <b class="user-initial-separator">20.02.2024</b>
                 </div>
-                <div class="calendar-item1">
-                  <div class="base107">
-                    <div class="icon-wrapper45">
-                      <img
-                        class="icon182"
-                        loading="lazy"
-                        alt=""
-                        src="../public/icon-41@2x.png"
-                      />
-                    </div>
-                    <b class="calendars14">Календарь</b>
-                  </div>
+                <div class="patient-name">
+                  <div class="patient-name-child"></div>
+                  <b class="b155">Овсянникова Юля Матвеевна</b>
                 </div>
               </div>
-            </div>
-            <div class="sidebar-content1">
-              <div class="invoice-parent2">
-                <div class="invoice28" id="invoiceContainer">
-                  <div class="base108"></div>
-                  <div class="icon-wrapper46">
-                    <img
-                      class="icon183"
-                      loading="lazy"
-                      alt=""
-                      src="../public/icon-5.svg"
-                    />
-                  </div>
-                  <b class="invoice29">Уведомления</b>
+              <div class="frame-parent164" id="groupContainer1">
+                <div class="rectangle-parent170">
+                  <div class="frame-child203"></div>
+                  <b class="b156">25.02.2024</b>
                 </div>
-                <div class="base-parent18">
-                  <div class="base109"></div>
-                  <div class="icon-wrapper47">
-                    <img
-                      class="icon184"
-                      loading="lazy"
-                      alt=""
-                      src="../public/icon-6.svg"
-                    />
-                  </div>
-                  <b class="files15">Аналитика</b>
-                </div>
-              </div>
-            </div>
-            <div class="wrapper55">
-              <div class="div339" id="container">
-                <div class="base110"></div>
-                <b class="dashboard42">Опросники и тесты</b>
-              </div>
-            </div>
-            <div class="user-profile-content-wrapper">
-              <div class="user-profile-content">
-                <div class="wrapper56">
-                  <b class="b154">Заявки</b>
-                </div>
-                <div class="frame-parent163" id="groupContainer">
-                  <div class="rectangle-parent169">
-                    <div class="frame-child202"></div>
-                    <b class="user-initial-separator">20.02.2024</b>
-                  </div>
-                  <div class="patient-name">
-                    <div class="patient-name-child"></div>
-                    <b class="b155">Овсянникова Юля Матвеевна</b>
-                  </div>
-                </div>
-                <div class="frame-parent164" id="groupContainer1">
-                  <div class="rectangle-parent170">
-                    <div class="frame-child203"></div>
-                    <b class="b156">25.02.2024</b>
-                  </div>
-                  <div class="rectangle-parent171">
-                    <div class="frame-child204"></div>
-                    <b class="b157">Овсянникова Юля Матвеевна</b>
-                  </div>
+                <div class="rectangle-parent171">
+                  <div class="frame-child204"></div>
+                  <b class="b157">Овсянникова Юля Матвеевна</b>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <div class="item195">
-        <img class="feather-icon-chevron-up24" alt="" />
       </div>
-      <div class="feedback4">
-        <div class="feedback-content1">
-          <img
-            class="icon185"
-            loading="lazy"
-            alt=""
-            src="../public/icon-7@2x.png"
-          />
+    </section>
+    <div class="item195">
+      <img class="feather-icon-chevron-up24" alt="" />
+    </div>
+    <div class="feedback4">
+      <div class="feedback-content1">
+        <img
+                class="icon185"
+                loading="lazy"
+                alt=""
+                src="/images/icon-7@2x.png"
+        />
 
-          <div class="frame-parent165">
-            <div class="send-feedback-wrapper8">
-              <b class="send-feedback14">Обратная связь</b>
-            </div>
-            <img
-              class="icon186"
-              loading="lazy"
-              alt=""
-              src="../public/icon-8.svg"
-            />
+        <div class="frame-parent165">
+          <div class="send-feedback-wrapper8">
+            <b class="send-feedback14">Обратная связь</b>
           </div>
+          <img
+                  class="icon186"
+                  loading="lazy"
+                  alt=""
+                  src="/images/icon-8.svg"
+          />
         </div>
       </div>
     </div>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  <script>
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
 
-    <script>
-      var arrowIcon = document.getElementById("arrowIcon");
-      if (arrowIcon) {
-        arrowIcon.addEventListener("click", function (e) {
-          window.location.href = "./component14.html";
-        });
-      }
-      
-      var userImage = document.getElementById("userImage");
-      if (userImage) {
-        userImage.addEventListener("click", function (e) {
-          window.location.href = "./component4.html";
-        });
-      }
-      
-      var dashboardContainer = document.getElementById("dashboardContainer");
-      if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-          window.location.href = "./component2.html";
-        });
-      }
-      
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./component3.html";
-        });
-      }
-      
-      var container = document.getElementById("container");
-      if (container) {
-        container.addEventListener("click", function (e) {
-          window.location.href = "./component14.html";
-        });
-      }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      
-      var groupContainer1 = document.getElementById("groupContainer1");
-      if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      </script>
+    // Функция для открытия модального окна
+    function openModal() {
+        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+        .then(response => response.text())
+        .then(data => {
+            modalBody.innerHTML = data;
+            modal.style.display = 'block';
+        })
+        .catch(error => console.error('Ошибка загрузки:', error));
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
+
+    var  addClientBtn = document.querySelector('.about-us22');
+    addClientBtn.addEventListener('click', () =>
+    {
+      window.location.href = '/SimplePsy/V1/customer/customer-form';
+    });
+  </script>
   </body>
 </html>

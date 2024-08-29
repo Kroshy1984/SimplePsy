@@ -44,12 +44,12 @@ public class ProblemService {
         problemRepository.save(problem);
     }
 
-    public List<String> getScoringAnswers(String problemId) {
-        String scoringId = problemRepository.findById(problemId).get().getScoringId();
-        List<String> answers = scoringService.getScoringAnswers(scoringId);
-        System.out.println("Got the result in method getScoringAnswersByProblemId: " + answers);
-        return answers;
-    }
+//    public List<String> getScoringAnswers(String problemId) {
+//        String scoringId = problemRepository.findById(problemId).get().getScoringId();
+//        List<String> answers = scoringService.getScoringAnswers(scoringId);
+//        System.out.println("Got the result in method getScoringAnswersByProblemId: " + answers);
+//        return answers;
+//    }
 
     public void cancelProblemById(String problemId) {
         Problem problemToUpdate = problemRepository.findById(problemId).orElseThrow();

@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @Configuration
@@ -37,18 +42,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((request) -> request
-                        .requestMatchers("/SimplePsySpecialist/V1/specialist/signup").permitAll()
-                        .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer").permitAll()
-                        .requestMatchers("/SimplePsySpecialist/V1/specialist/find-customer/byProblemId").permitAll()
-                        .requestMatchers("/SimplePsySpecialist/V1/specialist/changePass**").permitAll()
-                        .requestMatchers("/SimplePsySpecialist/V1/specialist/setNewPassword/**").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/signup").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/find-customer").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/find-customer/byProblemId").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/changePass**").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/setNewPassword/**").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/**/*.css")).permitAll()
-                        .anyRequest().authenticated()).
-                formLogin((form) -> form.loginPage("/SimplePsySpecialist/V1/specialist/login").permitAll()
-                        .defaultSuccessUrl("/SimplePsySpecialist/V1/specialist/sessions")
+                        .requestMatchers("/SimplePsy/V1/client/findAll").permitAll() // Разрешить доступ к этому URL
+                        .anyRequest().authenticated())
+                .formLogin((form) -> form.loginPage("/SimplePsy/V1/specialist/login").permitAll()
+                        .defaultSuccessUrl("/SimplePsy/V1/session/calendar")
                         .permitAll())
-                .logout((logout) -> logout.logoutUrl("/logout").permitAll());
+                .logout((logout) -> logout.logoutUrl("/logout").permitAll())
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable());
+//        httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().permitAll()).csrf(csrf -> csrf.disable());
         return httpSecurity.build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Замените на ваш домен
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }

@@ -1,3 +1,279 @@
+.frame-parent50 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+}
+
+.wrapper-user-parent {
+  flex: 1;
+  align-items: center;
+  gap: var(--gap-21xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.frame-wrapper73 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 var(--padding-12xs) var(--padding-base) 0;
+  font-size: var(--bold-12-size);
+  color: var(--grey-blue-80);
+}
+.frame-parent122,
+.frame-wrapper73 {
+  display: flex;
+  align-items: flex-start;
+}
+.frame-parent122 {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.frame-wrapper73 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 var(--padding-12xs) var(--padding-base) 0;
+  font-size: var(--bold-12-size);
+  color: var(--grey-blue-80);
+}
+
+.frame-parent123 {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.client-list-wrapper,
+.notifications-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xl) var(--padding-2xs) var(--padding-xl);
+  position: relative;
+  gap: var(--gap-xl);
+}
+.base90 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: -2px;
+  bottom: -2px;
+  left: 0;
+  border-radius: var(--br-mini) 0 0 0;
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  z-index: 9;
+  transition: background-color 0.3s, border 0.3s, box-shadow 0.3s;
+}
+.base90:focus {
+  outline: none; /* Убирает выделение кнопки */
+}
+.fix-angle-base90{
+  border-radius: 0;
+}
+.calendar-wrapper {
+  width: 122px;
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-5xl) var(--padding-5xl) var(--padding-xl)
+    var(--padding-11xl);
+  gap: var(--gap-xl);
+  font-family: inherit; /* Наследует шрифт от родителя */
+  font-size: inherit; /* Наследует размер шрифта от родителя */
+  font-weight: bold;
+  color: inherit; /* Наследует цвет шрифта от родителя */
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 9;
+  transition: background-color 0.3s, border 0.3s, box-shadow 0.3s;
+}
+.base90, .calendar-wrapper {
+  width: 120px; /* Объединение размеров */
+  height: 120px; /* Объединение размеров */
+  align-items: center; /* Центрирование содержимого */
+  justify-content: center; /* Центрирование содержимого */
+}
+.calendar-wrapper:hover,
+.base94:hover,
+.base90:hover,
+.notifications-wrapper:hover .notifications {
+  border-radius: var(--br-mini);
+  background-color: white;
+  border-color: white !important;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.calendar-wrapper:hover,
+.base90:hover,
+.notifications-wrapper:hover .notifications {
+  transform: scale(1.1);
+}
+
+.base94:hover {
+  transform: scale(1.07);
+}
+
+.base90,
+.calendar-wrapper,
+.base94,
+.notifications-wrapper .notifications {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, outline 0.3s ease, font-weight 0.3s ease, color 0.3s ease;
+}
+
+/* Комбинированные селекторы */
+.client-list-wrapper:hover .client-list,
+.client-list-wrapper:hover .icon-wrapper33 img,
+.tests-wrapper:hover .surveys-tests,
+.notifications-wrapper:hover .notifications,
+.notifications-wrapper:hover .icon-wrapper33 img {
+  font-weight: bold;
+  color: inherit;
+  transform: scale(1.1);
+  transition: transform 0.3s ease, font-weight 0.3s ease, color 0.3s ease;
+}
+
+/* Дополнительные стили для иконок и текста */
+.client-list-wrapper .icon-wrapper33 img,
+.tests-wrapper .surveys-tests,
+.notifications-wrapper .icon-wrapper33 img {
+  transition: transform 0.3s ease, font-weight 0.3s ease, color 0.3s ease;
+}
+.icon-wrapper33 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-15xl);
+  z-index: 11;
+}
+.client-list,
+.notifications {
+  position: relative;
+  line-height: 20px;
+  font-weight: 700;
+  z-index: 11;
+}
+
+.client-list{
+  padding-left: 1px;
+}
+
+.icon-wrapper33, .client-list, .icon-wrapper34, .calendar, .icon-wrapper35, .notifications, .icon149, .surveys-tests {
+  pointer-events: none; /* Отключаем взаимодействие с мышью */
+}
+
+.icon146 {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.base-frame,
+.frame-parent123 {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.base-frame {
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: -120px;
+  text-align: left;
+}
+.icon-wrapper34 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 4px var(--padding-2xl) 0 var(--padding-smi);
+}
+.icon147 {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  object-fit: cover;
+  z-index: 3;
+}
+.calendar{
+  padding-right: 5px;
+}
+.calendar,
+.surveys-tests {
+  position: relative;
+  line-height: 20px;
+  font-weight: 700;
+  z-index: 3;
+}
+.notifications {
+  position: relative;
+  line-height: 20px;
+  font-weight: 700;
+  z-index: 10;
+  padding-left: 13px;
+}
+.analytics {
+  position: relative;
+  line-height: 20px;
+  font-weight: 700;
+  z-index: 1;
+  padding-right: 6px;
+}
+.tests-wrapper {
+  flex: 0.7821;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 40px var(--padding-10xl) var(--padding-xl) 0;
+  position: relative;
+  gap: var(--gap-xl);
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.base94 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: -2px;
+  bottom: -2px;
+  left: 0;
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
+  transition: background-color 0.3s, border 0.3s, box-shadow 0.3s;
+  background-color: transparent;
+  cursor: pointer;
+  transform: none;
+}
+.surveys-tests {
+  position: absolute;
+  padding-right: 20px;
+  top: 20px;
+  left: 25.1px;
+  line-height: 20px;
+  display: inline-block;
+  width: 196.8px;
+  z-index: 11;
+}
 .settings9 {
   width: 16px;
   height: 4px;
@@ -64,7 +340,8 @@
   max-width: 100%;
 }
 .about-us23,
-.news16 {
+.news10 {
+  cursor: pointer;
   text-decoration: none;
   position: relative;
   line-height: 25px;
@@ -238,6 +515,7 @@
   font-weight: 700;
 }
 .hello-rosalie-wrapper6 {
+  width: 240px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -517,9 +795,10 @@
 }
 .dashboard-menu-content,
 .dashboard-menu-content-wrapper {
+  width: 240px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 }
 .dashboard-menu-content {
@@ -528,7 +807,6 @@
 }
 .dashboard-menu-content-wrapper {
   height: 670px;
-  width: 298px;
   padding: var(--padding-mid) 0 0;
   box-sizing: border-box;
 }
@@ -567,7 +845,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-child207,
 .rectangle-parent172:hover {
@@ -608,7 +885,6 @@
   flex-direction: row;
   padding: var(--padding-11xs) var(--padding-12xs) var(--padding-7xs);
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .create-test-type-content,
 .create-test-type-content-inner,
@@ -620,7 +896,6 @@
 .create-test-type-content-inner {
   flex: 1;
   flex-direction: column;
-  padding: var(--padding-11xs) 0 0;
 }
 .create-test-type-content {
   align-self: stretch;
@@ -657,6 +932,9 @@
   color: var(--color-slategray-500);
   text-align: center;
   z-index: 1;
+  border: none; /* Убирает рамку вокруг кнопки */
+  background: transparent; /* Прозрачный фон, если не требуется стиль фона */
+  cursor: pointer; /* Изменяет курсор на указатель */
 }
 .rectangle-parent174 {
   width: 203px;
@@ -698,7 +976,6 @@
   color: var(--grey-blue-50);
   text-align: left;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .test-name-rect {
   position: absolute;
@@ -736,7 +1013,6 @@
   height: 40px;
   position: relative;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 100%;
 }
 .parent29 {
@@ -772,7 +1048,6 @@
   text-align: left;
   display: inline-block;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 1;
 }
 .first-answer-variant-icon {
@@ -781,7 +1056,7 @@
   position: relative;
   border-radius: 50%;
   background-color: var(--color-lime);
-  border: 0 solid var(--color-darkslategray);
+  border: 2px solid var(--color-darkslategray);
   box-sizing: border-box;
   z-index: 1;
 }
@@ -799,21 +1074,6 @@
   border-radius: var(--br-xl);
   display: none;
   max-width: 100%;
-}
-.b159 {
-  height: 29px;
-  width: 322px;
-  position: relative;
-  font-size: var(--font-size-xl);
-  line-height: 24px;
-  display: flex;
-  font-family: var(--bold-10);
-  color: var(--grey-blue-60);
-  text-align: left;
-  align-items: center;
-  flex-shrink: 0;
-  max-width: calc(100% - 34px);
-  z-index: 2;
 }
 .first-answer-input-rect,
 .first-answer-input-rect1 {
@@ -903,7 +1163,6 @@
   justify-content: flex-start;
   gap: var(--gap-lg);
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .first-answer,
 .question-content-wrapper,
@@ -951,13 +1210,13 @@
   max-width: 100%;
   row-gap: 20px;
 }
-.second-question-variant-child {
+.second-answer-variant-icon {
   width: 24px;
   height: 24px;
   position: relative;
   border-radius: 50%;
   background-color: var(--color-firebrick);
-  border: 0 solid var(--color-darkslategray);
+  border: 2px solid var(--color-darkslategray);
   box-sizing: border-box;
   z-index: 1;
 }
@@ -1115,7 +1374,7 @@
   gap: 68px;
   max-width: 100%;
   text-align: center;
-  font-size: var(--bold-12-size);
+  font-size: var(--bold-16-size);
   color: var(--grey-blue-60);
   font-family: var(--bold-10);
 }
@@ -1448,4 +1707,54 @@
   .frame-parent169 {
     gap: var(--gap-mid);
   }
+}
+.editable-heading, .editable-option {
+  border: none;  /* Убирает стандартную границу input */
+  outline: none;  /* Убирает стандартную рамку при фокусе */
+  font-family: inherit; /* Наследует семейство шрифтов */
+  color: inherit; /* Наследует цвет текста */
+  cursor: text; /* Указывает, что элемент редактируемый */
+}
+
+.editable-heading::placeholder {
+  color: var(--grey-blue-60);
+}
+
+.editable-option::placeholder {
+  color: var(--grey-blue-60);
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+}
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.news10:active {
+  transform: translateY(2px);
 }

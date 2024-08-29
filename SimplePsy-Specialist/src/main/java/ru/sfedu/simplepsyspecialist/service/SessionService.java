@@ -5,7 +5,7 @@ import ru.sfedu.simplepsyspecialist.entity.Client;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.repo.SessionRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +23,10 @@ public class SessionService {
     public List<Session> findByDate(String start_date, String end_date, String specialist_id) {
         return sessionRepository.findSessionsByDateBetweenAndSpecialistId(start_date, end_date, specialist_id).orElse(null);
     }
-    public List<LocalDateTime> findAllBySpecialistId(String specialist_id) {
+    public List<LocalDate> findAllBySpecialistId(String specialist_id) {
         System.out.println("received specialist_id: " + specialist_id);
         List<Session> sessions = sessionRepository.findAllBySpecialistId(specialist_id).orElse(null);
-        List<LocalDateTime> listOfSessions = new ArrayList<>();
+        List<LocalDate> listOfSessions = new ArrayList<>();
 
         for (int i = 0; i < sessions.size(); i++) {
                 listOfSessions.add(sessions.get(i).getDate());
@@ -35,9 +35,9 @@ public class SessionService {
         System.out.println("sessions's list: " + sessions);
         return listOfSessions;
     }
-    public void createSession(String clientId, String specialistId,
-                              String problem, LocalDateTime date) {
-        Session session = new Session(date, problem, specialistId, clientId);
+
+    public void createSession(Session session) {
+        System.out.println("saving session");
         sessionRepository.save(session);
     }
 
@@ -57,5 +57,36 @@ public class SessionService {
         System.out.println("ClientDTO id: " + clientId);
         Client client = clientService.findById(clientId);
         return client;
+    }
+
+    public Session findById(String sessionId) {
+        return sessionRepository.findById(sessionId).get();
+    }
+
+    public List<Session> findAll() {
+        return sessionRepository.findAll();
+    }
+
+    public List<Session> findAllSessionsBySpecialistId(String specialistId) {
+        List<Session> allASessions = sessionRepository.findAll();
+        List<Session> sessions = new ArrayList<>();
+        for (int i = 0; i < allASessions.size(); i++) {
+            System.out.println("session from allSessions: " + allASessions.get(i).getId());
+            if (allASessions.get(i).getSpecialistId().equals(specialistId)) {
+                System.out.println("adding " + allASessions.get(i).getId());
+                sessions.add(allASessions.get(i));
+            }
+        }
+        return sessions;
+    }
+
+    public void updateSession(Session session) {
+        String id = session.getId();
+        Session oldSession = sessionRepository.findById(id).get();
+        session.setId(oldSession.getId());
+        if (oldSession.getProjectiveMethods() != null) {
+            session.addProjectiveMethods(oldSession.getProjectiveMethods());
+        }
+        sessionRepository.save(session);
     }
 }
