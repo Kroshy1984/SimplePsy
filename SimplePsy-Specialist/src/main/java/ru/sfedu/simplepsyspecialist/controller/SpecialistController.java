@@ -21,7 +21,9 @@ import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -361,13 +363,13 @@ public class SpecialistController {
         }
     }
     @GetMapping("/avatar/{id}")
-    public ResponseEntity<byte[]> getAvatar(@PathVariable String id) {
+    public ResponseEntity<byte[]> getAvatar(@PathVariable String id) throws IOException {
         Specialist specialist = specialistService.findById(id);
         byte[] avatar = specialist.getAvatar();
 
         if (avatar == null) {
-            // Если аватарки нет, можно вернуть изображение по умолчанию или статус 404
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            File file = new File("SimplePsy-Specialist/src/main/resources/static/images/user-logo.jpg");
+            avatar = Files.readAllBytes(file.toPath());
         }
 
         HttpHeaders headers = new HttpHeaders();

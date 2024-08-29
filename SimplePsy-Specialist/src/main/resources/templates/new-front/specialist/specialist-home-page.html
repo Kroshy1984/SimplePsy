@@ -275,13 +275,16 @@
                 <div class="frame-child51"></div>
                 <label for="file-upload" class="rectangle-parent49">+ Добавить фото</label>
                 <input id="file-upload" name="diploma" type="file" accept="image/*" multiple>
-                <div th:each="diploma, iterStat : ${specialist.diplomas}" style="position: relative; display: inline-block;">
-                  <img th:src="@{'/SimplePsy/V1/specialist/diploma/' + ${specialist.id} + '/' + ${iterStat.index}}"
-                       alt="Диплом"
-                       th:data-specialist-id="${specialist.id}"
-                       th:data-diploma-index="${iterStat.index}" />
+                <div class="diploma-div" th:each="diploma, iterStat : ${specialist.diplomas}">
+                  <a rel="nofollow" target="_blank" th:href="@{'/SimplePsy/V1/specialist/diploma/' + ${specialist.id} + '/' + ${iterStat.index}}">
+                    <img th:src="@{'/SimplePsy/V1/specialist/diploma/' + ${specialist.id} + '/' + ${iterStat.index}}"
+                         alt="Диплом"
+                         th:data-specialist-id="${specialist.id}"
+                         th:data-diploma-index="${iterStat.index}"
+                         class="diploma-img"/>
+                  </a>
                   <!-- Крестик для удаления -->
-                  <span style="position: absolute; top: 5px; left: 5px; cursor: pointer; color: red;"
+                  <span style="position: absolute; top: -11px; right: -8px; cursor: pointer; color: red;"
                         class="delete-diploma">
         &times;
     </span>
@@ -417,7 +420,7 @@
               .then(data => {
                 if (data.success) {
                   // Обновляем изображение аватарки на странице
-                  document.getElementById('avatarImg').src = data.avatarUrl;
+                  location.reload();
                 } else {
                   alert('Ошибка при обновлении аватарки. Попробуйте снова.');
                 }

@@ -1,3 +1,16 @@
+.diploma-div {
+  position: relative;
+  display: inline-block;
+  width: 130px;
+  height: 90px;
+}
+
+.diploma-img {
+  object-fit: cover;
+  width: 130px;
+  height: 90px;
+}
+
 .news10, .user-policy5, .about-us5 {
   cursor: pointer;
 }
@@ -331,7 +344,6 @@ p {
 }
 .frame-wrapper33 {
   flex: 1;
-  padding: var(--padding-sm) 0 0;
   box-sizing: border-box;
   min-width: 498px;
   max-width: 100%;
@@ -937,7 +949,7 @@ p {
   width: 1000px;
   align-self: stretch;
   flex-direction: row;
-  padding: 0 var(--padding-12xs);
+  padding: 0 var(--padding-12xs) 9px var(--padding-12xs);
   box-sizing: border-box;
 }
 .div69 {
@@ -1065,6 +1077,7 @@ p {
 .frame-wrapper39,
 .rectangle-parent48 {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   box-sizing: border-box;
   max-width: 100%;
@@ -1077,7 +1090,8 @@ p {
   border: 3px solid var(--grey-blue-95);
   flex-direction: row;
   justify-content: flex-start;
-  padding: var(--padding-2xs) var(--padding-4xs) 62px;
+  padding: 20px 20px 60px;
+  gap: 30px;
 }
 .frame-wrapper39 {
   flex: 1;
