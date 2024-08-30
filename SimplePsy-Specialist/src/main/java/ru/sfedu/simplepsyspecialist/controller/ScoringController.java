@@ -47,7 +47,7 @@ public class ScoringController {
     @GetMapping("/done")
     public String done()
     {
-        return "done";
+        return "new-front/test/done";
     }
 
     @GetMapping("/result/{id}")
@@ -87,7 +87,7 @@ public class ScoringController {
         return "new-front/test/questionnaire";
     }
     @PostMapping("/submit")
-    public String submitScoring(@RequestBody CompletedScoring completedScoring) {
+    public ResponseEntity<String> submitScoring(@RequestBody CompletedScoring completedScoring) {
         System.out.println("Scoring title: " + completedScoring.getTitle());
         System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
@@ -105,9 +105,8 @@ public class ScoringController {
         client.setRecommendations(customer.getCollegialRecommendations());
 
         client.addScoring(completedScoring);
-        client.addScoring(completedScoring);
         clientService.save(client);
-        return "new-front/test/create-questionnaire1";
+        return ResponseEntity.ok("Success");
     }
     @GetMapping("test/creation")
     public String createTestForm(@AuthenticationPrincipal UserDetails userDetails,
@@ -141,24 +140,6 @@ public class ScoringController {
         model.addAttribute("title", scoring.getTitle());
         model.addAttribute("customerId", customerId);
         return "new-front/test/questionnaire";
-    }
-    @PostMapping("test/submit")
-    public String submitTest(@RequestBody CompletedScoring completedScoring) {
-        System.out.println("Scoring title: " + completedScoring.getTitle());
-        System.out.println("Customer id: " + completedScoring.getCustomerId());
-        Customer customer = customerService.findById(completedScoring.getCustomerId());
-
-        Client client = new Client();
-        client.setTypeOfClient(customer.getTypeOfClient());
-        client.setName(customer.getName());
-        client.setSurname(customer.getSurname());
-
-        client.setContact(customer.getContact());
-
-        client.addScoring(completedScoring);
-        client.addScoring(completedScoring);
-        clientService.save(client);
-        return "new-front/test/create-questionnaire1";
     }
     @GetMapping("/list")
     public String getList(@AuthenticationPrincipal UserDetails userDetails,

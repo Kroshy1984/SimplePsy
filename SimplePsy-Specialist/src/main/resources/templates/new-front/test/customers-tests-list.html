@@ -316,7 +316,7 @@
 
     copyLinkBtn.addEventListener('click', openCopyLinkModal);
     function openCopyLinkModal(buttonElement) {
-        const scoringId = buttonElement.getAttribute('data-scoring-id');
+        const scoringId = buttonElement.getAttribute("data-scoring-id");
         const modal = document.getElementById("modal");
         const modalBody = document.getElementById("modal-body");
 
@@ -347,34 +347,38 @@
                 currentTestId = scoringId;
 
                 // Обработчик изменения в поле выбора клиента
-                document.getElementById('clientInput').addEventListener('change', function() {
+                document.getElementById('clientInput').addEventListener('input', function() {
                     const selectedOption = Array.from(document.getElementById('clientsList').options)
                         .find(option => option.value === this.value);
                     if (selectedOption) {
                         const clientId = selectedOption.getAttribute('data-id');
                         document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
-                        document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке
+                        if (!clientId || !currentTestId) {
+
+                            alert("Пожалуйста, выберите клиента и тест.");
+                            return;
+                        }
+                        let uri = `http://93.95.97.176:8081/SimplePsy/V1/scoring/test/${currentTestId}/${clientId}`;
+                        console.log("ClientId has been changed");
+                        console.log(uri)
+                        document.getElementById('inputField').value = uri;
                     } else {
                         document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если клиент не найден
+                        document.getElementById('inputField').value = '';
                     }
                 });
 
-                // Обработчик для генерации ссылки
-                document.getElementById('generateUriButton').addEventListener('click', function() {
-                    const clientId = document.getElementById('clientId').value;
-                    if (!clientId || !currentTestId) {
-                        alert("Пожалуйста, выберите клиента и тест.");
-                        return;
-                    }
-                    const uri = `http://93.95.97.176:8081/SimplePsy/V1/scoring/test/${scoringId}/${clientId}`;
-                    document.getElementById('inputField').value = uri;
-                });
-                document.getElementById('generateUriButton').addEventListener('click', function() {
+                // Обработка кнопки копирования ссылки
+                document.querySelector('.copy-btn').addEventListener('click', function() {
                     var inputField = document.getElementById("inputField");
-                    inputField.select();
-                    inputField.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    alert("Ссылка скопирована в буфер обмена");
+                    if (inputField.value === '') {
+                        alert("Поле копирования пустое");
+                    } else {
+                        inputField.select();
+                        inputField.setSelectionRange(0, 99999);
+                        document.execCommand("copy");
+                        alert("Ссылка скопирована в буфер обмена");
+                    }
                 });
             })
             .catch(error => console.error('Ошибка:', error));

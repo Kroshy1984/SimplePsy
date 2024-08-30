@@ -39,7 +39,7 @@
                             <div class="client-name-field">
                                 <div class="input-container">
                                     <input class="input2" id="inputField" placeholder="Ссылка для конкретного клиента" type="text" readonly />
-                                    <button class="copy-btn" onclick="copyText()">
+                                    <button class="copy-btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                             <rect x="6" y="6" width="8" height="8" stroke="currentColor" fill="none" rx="1" ry="1" stroke-width="1.1"></rect>
                                             <path d="M4 12V4h8" stroke="currentColor" fill="none" stroke-linejoin="round" stroke-width="1.1"></path>
@@ -50,85 +50,9 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Кнопка для генерации URI -->
-                <div class="frame-wrapper88 frame-wrapper88-fix-bottom">
-                    <div class="rectangle-parent161">
-                        <div class="frame-child188"></div>
-                        <div class="client-name-field-parent">
-                            <div class="client-name-field">
-                                <button id="generateUriButton" class="generate-uri-btn">Сгенерировать ссылку</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 </div>
-<script defer>
-    let currentTestId = null;
-
-    function openCopyLinkModal(testId) {
-        currentTestId = testId;
-        document.getElementById('copyLinkModal').style.display = 'block'; // Открыть модальное окно
-    }
-
-    function loadClients() {
-        fetch('/SimplePsy/V1/client/findAll')
-            .then(response => response.json())
-            .then(clients => {
-                const clientsList = document.getElementById('clientsList');
-                clientsList.innerHTML = '';
-
-                clients.forEach(client => {
-                    const option = document.createElement('option');
-                    option.value = client.name;
-                    option.setAttribute('data-id', client.id);
-                    clientsList.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Ошибка при загрузке клиентов:', error));
-
-        document.getElementById('clientInput').removeEventListener('focus', loadClients);
-    }
-
-    document.getElementById('clientInput').addEventListener('focus', loadClients);
-
-    document.getElementById('clientInput').addEventListener('change', function() {
-        const selectedOption = Array.from(document.getElementById('clientsList').options)
-            .find(option => option.value === this.value);
-
-        if (selectedOption) {
-            const clientId = selectedOption.getAttribute('data-id');
-            document.getElementById('clientId').value = clientId;
-            document.getElementById('error-message').style.display = 'none';
-        } else {
-            document.getElementById('clientId').value = '';
-        }
-    });
-
-    function generateUri() {
-        const clientId = document.getElementById('clientId').value;
-        if (!clientId || !currentTestId) {
-            alert("Пожалуйста, выберите клиента и тест.");
-            return;
-        }
-        const uri = `/SimplePsy/V1/scoring/test/${currentTestId}/${clientId}`;
-        document.getElementById('inputField').value = uri;
-    }
-
-    function copyText() {
-        var inputField = document.getElementById("inputField");
-        inputField.select();
-        inputField.setSelectionRange(0, 99999);
-        document.execCommand("copy");
-        alert("Ссылка скопирована в буфер обмена");
-    }
-
-    document.getElementById('generateUriButton').addEventListener('click', generateUri);
-
-</script>
 </body>
 </html>

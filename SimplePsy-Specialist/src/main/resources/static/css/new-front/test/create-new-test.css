@@ -948,6 +948,13 @@
   justify-content: flex-start;
   padding: var(--padding-11xs-8) var(--padding-4xs) 0 var(--padding-smi);
 }
+
+.rectangle-parent174:hover {
+  background-color: var(--color-gainsboro-100);
+  border: 3px solid var(--color-lightgray);
+  box-sizing: border-box;
+}
+
 .create-test-content,
 .create-test-header {
   display: flex;
