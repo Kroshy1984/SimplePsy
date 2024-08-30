@@ -291,6 +291,7 @@
             <div id="modal-body"></div>
         </div>
     </div>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.add-option-button').forEach(button => {
@@ -360,7 +361,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Survey updated:', data);
-                    // Redirect or show success message
+                    window.location.href="/SimplePsy/V1/scoring/list";
                 })
                 .catch(error => {
                     console.error('Error:', error);

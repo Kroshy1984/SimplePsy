@@ -189,7 +189,7 @@ public class ScoringController {
     public String updateTest(@PathVariable String id, @RequestBody Scoring scoring) {
         scoring.setId(id);
         scoring.getQuestions().forEach(question -> System.out.println(question.getQuestionText()));
-        scoringService.save(scoring);
+        scoringService.update(scoring);
         return "redirect:/list"; // перенаправление на список тестов или другой нужный маршрут
     }
     private static Gender convertSexToGender(Sex sex) {

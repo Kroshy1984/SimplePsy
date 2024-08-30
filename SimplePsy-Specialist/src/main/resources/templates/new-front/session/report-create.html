@@ -333,7 +333,7 @@
 
     // Функция для открытия модального окна
     function openModal() {
-        fetch('http://localhost:8081/SimplePsy/V1/session/report/' + sessionId + '/projective-method')
+        fetch('/SimplePsy/V1/session/report/' + sessionId + '/projective-method')
             .then(response => response.text())
             .then(data => {
                 modalBody.innerHTML = data;
