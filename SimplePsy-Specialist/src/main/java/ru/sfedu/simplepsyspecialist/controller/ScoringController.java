@@ -91,19 +91,22 @@ public class ScoringController {
         System.out.println("Scoring title: " + completedScoring.getTitle());
         System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
+        Client client = clientService.findById(customer.getId());
 
-        Client client = new Client();
-        client.setId(customer.getId());
-        client.setTypeOfClient(customer.getTypeOfClient());
-        client.setName(customer.getName());
-        client.setSurname(customer.getSurname());
-        client.setMiddleName(customer.getLastName()); // Используем lastName как middleName
-        client.setContact(customer.getContact());
-        client.setFinancialConditions(customer.getFinancialConditions());
-        client.setGender(customer.getSex() != null ? convertSexToGender(customer.getSex()) : null);
-        client.setBirthDay(customer.getDateOfBirth());
-        client.setRecommendations(customer.getCollegialRecommendations());
-
+        if (client == null)
+        {
+            client = new Client();
+            client.setId(customer.getId());
+            client.setTypeOfClient(customer.getTypeOfClient());
+            client.setName(customer.getName());
+            client.setSurname(customer.getSurname());
+            client.setMiddleName(customer.getLastName()); // Используем lastName как middleName
+            client.setContact(customer.getContact());
+            client.setFinancialConditions(customer.getFinancialConditions());
+            client.setGender(customer.getSex() != null ? convertSexToGender(customer.getSex()) : null);
+            client.setBirthDay(customer.getDateOfBirth());
+            client.setRecommendations(customer.getCollegialRecommendations());
+        }
         client.addScoring(completedScoring);
         clientService.save(client);
         return ResponseEntity.ok("Success");

@@ -202,4 +202,9 @@ public class CustomerController {
         model.addAttribute("scorings", scorings);
         return "new-front/test/customers-tests-list";
     }
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Customer>> findAllCustomer()
+    {
+        return ResponseEntity.ok(customerService.findAll());
+    }
 }

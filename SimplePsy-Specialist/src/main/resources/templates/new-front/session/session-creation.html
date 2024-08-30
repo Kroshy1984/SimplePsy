@@ -156,7 +156,7 @@
   }
 
   document.getElementById('clientInput').addEventListener('input', function() {
-    fetch('/SimplePsy/V1/client/findAll')
+    fetch('/SimplePsy/V1/customer/findAll')
             .then(response => response.json())
             .then(clients => {
               const dataList = document.getElementById('clientsList');
@@ -165,6 +165,7 @@
               clients.forEach(client => {
                 const option = document.createElement('option');
                 option.value = client.name; // или другой атрибут, который вы хотите отображать
+
                 option.setAttribute('data-id', client.id); // добавить атрибут data-id
                 dataList.appendChild(option);
               });

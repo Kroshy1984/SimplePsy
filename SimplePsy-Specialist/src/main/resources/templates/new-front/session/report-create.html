@@ -399,7 +399,7 @@
                 })
                 .catch(error => console.error('Ошибка загрузки:', error));
 
-            fetch('/SimplePsy/V1/client/findAll')
+            fetch('/SimplePsy/V1/customer/findAll')
                 .then(response => response.json())
                 .then(clients => {
                     const dataList = document.getElementById('clientsList');
