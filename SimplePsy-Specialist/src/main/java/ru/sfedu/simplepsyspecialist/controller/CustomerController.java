@@ -188,6 +188,7 @@ public class CustomerController {
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
         System.out.println(newCustomer.getSex());
+
         return "redirect:/SimplePsy/V1/specialist/customers";
     }
     @GetMapping("/customers-test")
@@ -205,6 +206,9 @@ public class CustomerController {
     @GetMapping("/findAll")
     public ResponseEntity<List<Customer>> findAllCustomer()
     {
-        return ResponseEntity.ok(customerService.findAll());
+        List<Customer> customers = customerService.findAll();
+        System.out.println("Clients list:");
+        customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
+        return ResponseEntity.ok(customers);
     }
 }

@@ -164,8 +164,21 @@
 
               clients.forEach(client => {
                 const option = document.createElement('option');
-                option.value = client.name; // или другой атрибут, который вы хотите отображать
-
+                switch (customer.typeOfClient) {
+                  case 'ADULT':
+                    option.value = customer.name + ' ' +customer.surname;
+                    break;
+                  case 'CHILD':
+                    option.value = customer.childName + ' ' + customer.childSurname;
+                    break;
+                  case 'COUPLE':
+                    option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                    break;
+                  default:
+                    // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                    console.log('Unknown client type');
+                    break;
+                }
                 option.setAttribute('data-id', client.id); // добавить атрибут data-id
                 dataList.appendChild(option);
               });

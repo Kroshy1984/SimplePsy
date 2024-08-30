@@ -68,8 +68,6 @@ public class SessionController {
         Session session = new Session();
         //session.setClient(new Client());
         model.addAttribute("session", session);
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
         return "new-front/session/session-creation";
     }
 
