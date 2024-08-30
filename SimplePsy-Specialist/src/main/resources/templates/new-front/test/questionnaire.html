@@ -78,7 +78,7 @@
 
   // Функция для открытия модального окна
     function openModal() {
-      fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+      fetch('/SimplePsy/V1/session/session-form')
               .then(response => response.text())
               .then(data => {
                 modalBody.innerHTML = data;
