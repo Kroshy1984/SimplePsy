@@ -61,9 +61,9 @@ public class CustomerController {
     public ResponseEntity<String> newCustomer(@RequestBody Customer customer)
     {
         System.out.println("Got the new customer:\n" + customer.getName());
-        System.out.println(customer.getContact().getEmail());
+        System.out.println(customer.getId());
         System.out.println(customer.getName());
-        System.out.println(customer.getProblemsId());
+        System.out.println(customer.getContact().getPhone());
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
         return ResponseEntity.ok(newCustomerId);
