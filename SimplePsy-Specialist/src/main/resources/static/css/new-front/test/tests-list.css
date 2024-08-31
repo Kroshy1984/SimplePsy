@@ -2018,9 +2018,6 @@
   text-decoration: none;
   cursor: pointer;
 }
-.news10:active {
-  transform: translateY(2px);
-}
 .frame-wrapper73 {
   align-self: stretch;
   flex-direction: row;

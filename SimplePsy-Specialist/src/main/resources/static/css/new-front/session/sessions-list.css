@@ -78,6 +78,14 @@
   position: relative;
   line-height: 25px;
 }
+
+.about-us6:hover,
+.news10:hover,
+.user-policy6:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .about-us6,
 .news10 {
   text-decoration: none;
@@ -117,7 +125,7 @@
   justify-content: flex-end;
   padding: 0 0 var(--padding-11xs);
   box-sizing: border-box;
-  font-size: var(--bold-16-size);
+  font-size: var(--bold-13-size);
   color: var(--grey-blue-60);
 }
 .frame-parent61 {
@@ -1735,9 +1743,6 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.news10:active {
-  transform: translateY(2px);
-}
 .frame-wrapper73 {
   align-self: stretch;
   flex-direction: row;

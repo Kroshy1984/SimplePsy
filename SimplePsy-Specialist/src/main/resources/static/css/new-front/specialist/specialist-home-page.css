@@ -15,6 +15,13 @@
   cursor: pointer;
 }
 
+.about-us5:hover,
+.news10:hover,
+.user-policy5:hover {
+  color: black;
+  cursor: pointer;
+}
+
 button {
   width: 200px;
 }
@@ -1367,9 +1374,6 @@ p {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-}
-.news10:active {
-  transform: translateY(2px);
 }
 .frame-wrapper73 {
   align-self: stretch;

@@ -703,9 +703,14 @@
   color: inherit;
   cursor: pointer;
 }
-.news10:active {
-  transform: translateY(2px);
+
+.about-us17:hover,
+.news10:hover,
+.user-policy11:hover {
+  color: black;
+  cursor: pointer;
 }
+
 .user-policy11 {
   width: 311px;
   position: relative;
@@ -861,7 +866,6 @@
   flex-direction: row;
   gap: 17.9px;
   text-align: center;
-  font-size: var(--bold-18-size);
 }
 .search-dropdown,
 .search-options {
@@ -875,7 +879,7 @@
   width: 683px;
   padding: var(--padding-8xs) 0 0;
   box-sizing: border-box;
-  font-size: var(--bold-16-size);
+  font-size: var(--bold-13-size);
 }
 .icon140 {
   height: 30px;

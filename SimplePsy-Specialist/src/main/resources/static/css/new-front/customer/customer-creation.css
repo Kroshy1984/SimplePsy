@@ -70,7 +70,8 @@
   max-width: 100%;
 }
 .about-us16,
-.news10 {
+.news10,
+.user-policy10 {
   text-decoration: none;
   position: relative;
   line-height: 25px;
@@ -79,6 +80,14 @@
   white-space: nowrap;
   cursor: pointer;
 }
+
+.about-us16:hover,
+.news10:hover,
+.user-policy10:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .user-policy10 {
   width: 311px;
   position: relative;
@@ -113,7 +122,7 @@
   justify-content: flex-end;
   padding: 0 0 var(--padding-11xs);
   box-sizing: border-box;
-  font-size: var(--bold-16-size);
+  font-size: var(--bold-13-size);
   color: var(--grey-blue-60);
 }
 .main-area {
@@ -2222,10 +2231,6 @@ button:hover {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-.news10:active {
-  transform: translateY(2px);
 }
 
 .frame-wrapper73 {
