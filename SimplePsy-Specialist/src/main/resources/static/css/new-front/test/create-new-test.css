@@ -295,6 +295,12 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor15:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper6 {
   display: flex;
   flex-direction: column;

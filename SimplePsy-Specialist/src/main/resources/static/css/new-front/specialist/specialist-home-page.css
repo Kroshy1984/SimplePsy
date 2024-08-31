@@ -73,6 +73,12 @@ p {
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor5:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-frame {
   display: flex;
   flex-direction: column;

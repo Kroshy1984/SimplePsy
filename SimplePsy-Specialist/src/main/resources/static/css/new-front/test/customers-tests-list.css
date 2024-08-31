@@ -320,6 +320,12 @@
   font-weight: 700;
   color: inherit;
 }
+
+.constructor10:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .icon-parent26 {
   align-self: stretch;
   display: flex;

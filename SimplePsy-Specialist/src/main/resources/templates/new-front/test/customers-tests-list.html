@@ -98,7 +98,7 @@
                                         src="/images/icon@2x.png"
                                 />
 
-                                <a class="constructor10">Понятная практика</a>
+                                <a class="constructor10" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
                             </div>
                             <div class="navigation-right">
                                 <div class="wrapper-user-parent1">
@@ -363,7 +363,7 @@
                 // Обработчик изменения в поле выбора клиента
                 document.getElementById('clientInput').addEventListener('input', function() {
                     const selectedOption = Array.from(document.getElementById('clientsList').options)
-                        .find(option => option.value === this.value);
+                        .find(option => option.value.toLowerCase() === this.value.toLowerCase());
                     if (selectedOption) {
                         const clientId = selectedOption.getAttribute('data-id');
                         document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля

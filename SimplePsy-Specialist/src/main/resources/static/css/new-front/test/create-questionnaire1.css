@@ -506,6 +506,12 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor17:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper7 {
   display: flex;
   flex-direction: column;
@@ -749,7 +755,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
-  debug_commit: 448091;
 }
 .rectangle-parent187:hover {
   background-color: rgba(133, 148, 179, 0.13);
@@ -783,7 +788,6 @@
   flex-direction: row;
   padding: var(--padding-11xs) var(--padding-12xs) var(--padding-7xs);
   flex-shrink: 0;
-  debug_commit: 448091;
 }
 .frame-parent183,
 .frame-wrapper107,
@@ -1208,7 +1212,6 @@
   position: relative;
   line-height: 150%;
   flex-shrink: 0;
-  debug_commit: 448091;
 }
 .wrapper60 {
   align-self: stretch;
@@ -1281,7 +1284,6 @@
   flex-direction: row;
   align-items: flex-end;
   flex-shrink: 0;
-  debug_commit: 448091;
   cursor: pointer;
   font-size: var(--font-size-7xs);
   color: var(--white);
