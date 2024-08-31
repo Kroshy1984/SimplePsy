@@ -58,7 +58,7 @@ public class CustomerController {
 //    }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newCustomer(@RequestBody Customer customer)
+    public ResponseEntity<String> newCustomer(@ModelAttribute("customer") Customer customer)
     {
         System.out.println("Got the new customer:\n" + customer.getName());
         System.out.println(customer.getId());

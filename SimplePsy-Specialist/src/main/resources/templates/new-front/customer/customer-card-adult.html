@@ -1,442 +1,469 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-adult.css}" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
-    />
-  </head>
-  <body>
-  <div class="div216">
-    <div class="settings6"></div>
-    <div class="item112">
-      <img class="feather-icon-chevron-up21" alt="" />
-    </div>
-    <section class="frame-parent141">
-      <header class="frame-wrapper85">
-        <div class="frame-parent142">
-          <div class="frame-wrapper86">
-            <div class="frame-parent143">
-              <div class="icon-parent29">
-                <img
-                        class="icon156"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon@2x.png"
-                />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-creation.css}"/>
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+  />
+</head>
+<body>
+<div class="div141">
+  <div class="settings3"></div>
+  <header class="app-container">
+    <div class="page-content">
+      <div class="content-layout">
+        <div class="main-area">
+          <div class="sidebar-container">
+            <img class="icon124" loading="lazy" alt="" src="/images/icon@2x.png"/>
 
-                <div class="constructor-wrapper4">
-                  <a class="constructor12">Понятная практика</a>
-                </div>
-                <div class="icon-parent30">
-                  <img
-                          class="icon157"
-                          loading="lazy"
-                          alt=""
-                          src="/images/icon-1@2x.png"
-                  />
+            <div class="constructor-wrapper3">
+              <a class="constructor9">Понятная практика</a>
+            </div>
+            <div class="icon-parent23">
+              <img class="icon125" loading="lazy" alt="" src="/images/icon-1@2x.png"/>
 
-                  <div class="search-wrapper2">
-                    <b class="search13">Найти клиента...</b>
-                  </div>
-                </div>
-              </div>
-              <div class="about-content-wrapper">
-                <div class="about-content">
-                  <div class="news-container">
-                    <a class="about-us19" onclick="window.location.href = '/SimplePsy/V1/customer/customer-form'">Добавить клиента</a>
-                    <a class="news10">Назначить встречу</a>
-                    <b class="user-policy10">Добавить график нерабочих дней</b>
-                  </div>
-                </div>
-          </div>
-          <div class="icon-parent31">
-            <img class="icon158" alt="" src="/images/icon-2@2x.png" />
-
-            <div class="new-york-wrapper4">
-              <b th:text="${specialist.city}" class="specialist-city"></b>
-            </div>
-          </div>
-        </div>
-      </header>
-      <div class="user-panel-content-parent">
-        <div class="user-panel-content">
-          <div class="frame-parent144">
-            <div class="wrapper-user-wrapper2">
-              <div class="wrapper-user12">
-                <img
-                        class="user-icon"
-                        loading="lazy"
-                        alt=""
-                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
-                        id="userImage"
-                        onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
-                />
-              </div>
-            </div>
-            <div class="user-names-content-wrapper">
-              <div class="user-names-content">
-                <div class="hello-wrapper">
-                  <b class="hello">Привет, </b>
-                  <b th:text="${specialist.name}" class="hello" ></b>
-                  <b class="hello">!</b>
-                </div>
-                <b class="specialist-email">
-                  <p th:text="${specialist.username}" class="specialist-email-content"></p>
-                </b>
-              </div>
-            </div>
-            <div class="navigation-content-parent">
-              <div class="frame-wrapper73">
-                <div class="frame-parent122">
-                  <div class="frame-parent123">
-                    <div class="client-list-wrapper">
-                      <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
-                      <div class="icon-wrapper33">
-                        <img class="icon146" alt="" src="/images/icon-3@2x.png" />
-                      </div>
-                      <b class="client-list">Список клиентов</b>
-                    </div>
-                    <div class="base-frame">
-                      <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
-                        <div class="icon-wrapper34">
-                          <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
-                        </div>
-                        <b class="calendar">Календарь</b>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="frame-parent123">
-                    <div class="notifications-wrapper">
-                      <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
-                      <div class="icon-wrapper33">
-                        <img class="icon146" alt="" src="/images/icon-5.svg" />
-                      </div>
-                      <b class="notifications">Уведомления</b>
-                    </div>
-                    <div class="base-frame">
-                      <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
-                        <div class="icon-wrapper34">
-                          <img class="icon147" alt="" src="/images/icon-6.svg"/>
-                        </div>
-                        <b class="analytics">Аналитика</b>
-                      </button>
-                    </div>
-                    <div class="tests-wrapper">
-                      <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
-                      <b class="surveys-tests">Опросники и тесты</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="applications-content-wrapper">
-                <div class="applications-content">
-                  <div class="wrapper49">
-                    <b class="b143">Заявки</b>
-                  </div>
-                  <div class="frame-parent145">
-                    <div class="frame-parent146" id="groupContainer">
-                      <div class="rectangle-parent142">
-                        <div class="frame-child168"></div>
-                        <b class="application-item-icon">20.02.2024</b>
-                      </div>
-                      <div class="rectangle-parent143">
-                        <div class="frame-child169"></div>
-                        <b class="b144">Овсянникова Юля Матвеевна</b>
-                      </div>
-                    </div>
-                    <div class="frame-parent147" id="groupContainer1">
-                      <div class="rectangle-parent144">
-                        <div class="frame-child170"></div>
-                        <b class="b145">25.02.2024</b>
-                      </div>
-                      <div class="rectangle-parent145">
-                        <div class="frame-child171"></div>
-                        <b class="b146">Овсянникова Юля Матвеевна</b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="search-input3">
+                <b class="search10">Найти клиента...</b>
               </div>
             </div>
           </div>
-        </div>
-        <div class="client-card-actions">
-          <div class="client-card-actions-content">
-            <div class="frame-parent148">
-              <button class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
-                <div class="frame-child172"></div>
-                <a class="a">Список клиентов</a>
-              </button>
-              <button class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
-                <div class="frame-child173"></div>
-                <a class="a1">Список встреч</a>
-              </button>
-              <div class="rectangle-parent148" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
-                <div class="frame-child174"></div>
-                <div class="div217">Опросники и тесты</div>
+          <div class="main-area-inner">
+            <div class="about-us-parent4">
+              <a class="about-us16">Добавить клиента</a>
+              <div class="legal-links">
+                <a class="news10">Назначить встречу</a>
+                <b class="user-policy10">Добавить график нерабочих дней </b>
               </div>
-            </div>
-          </div>
-          <div class="client-card-actions-inner">
-            <div class="frame-parent149">
-              <div class="rectangle-parent149">
-                <div class="frame-child175"></div>
-                <div class="div218">Редактировать</div>
-              </div>
-              <div class="rectangle-parent150">
-                <div class="frame-child176"></div>
-                <div class="div219">Сохранить</div>
-              </div>
-              <div class="rectangle-parent151">
-                <div class="frame-child177"></div>
-                <div class="div220">Ссылка на анкету</div>
-              </div>
-            </div>
-          </div>
-          <div class="component19">
-            <div class="item113">
-              <div class="div221">Тип клиента</div>
-              <div class="div222" th:text="${customer.typeOfClient.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">ФИО клиента</div>
-              <div class="div222" th:text="${customer.surname + ' ' + customer.name + ' ' + customer.lastName}">
-              </div>
-            </div>
-            <div class="item113">
-              <div class="div221">Номер телефона</div>
-              <div class="div222" th:text="${customer.contact.phone}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Почта</div>
-              <div class="div222" th:text="${customer.contact.email}">
-              </div>
-            </div>
-            <div class="item113">
-              <div class="div221">Пол</div>
-              <div class="div222" th:text="${customer.sex.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Статус клиента</div>
-              <div class="div222" th:text="${customer.clientStatus.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Каким способом обратился клиент/попечитель
-              </div>
-              <div class="div222" th:text="${customer.typeOfTreatment.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Дата первого обращения (запрос на консультацию)
-              </div>
-              <div class="div222" th:text="${customer.dateOfFirstRequest}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Дата первой консультации</div>
-              <div class="div222" th:text="${customer.dateOfFirstConsultation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Предпочтительный формат встречи</div>
-              <div class="div222" th:text="${customer.preferredMeetingFormat.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Для онлайн выбрать/указать площадку взаимодействия
-              </div>
-              <div class="div222" th:text="${customer.onlineMeetingPlace.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Для оффлайн выбрать адрес проведения встречи
-              </div>
-              <div class="div222" th:text="${customer.offlineMeetingPlace}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Первичный/изначальный запрос клиента на терапию
-              </div>
-              <div class="div222" th:text="${customer.clientsFirstRequestForTherapy}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Фиксированное время/день недели для встречи (если да, то
-                указать)
-              </div>
-              <div class="div222" th:text="${customer.fixedTimeForMeeting}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Финансовые условия</div>
-              <div class="div222" th:text="${customer.financialConditions}"></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <section class="footer-content-wrapper">
-      <div class="footer-content">
-        <div class="feedback-content-wrapper">
-          <div class="feedback-content">
+      <div class="icon-parent24">
+        <img class="icon126" alt="" src="/images/icon-2@2x.png"/>
+
+        <div class="location-name1">
+          <b th:text="${specialist.city}" class="specialist-city"></b>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="item72">
+    <img class="feather-icon-chevron-up16" alt=""/>
+  </div>
+  <main class="profile-container">
+    <div class="profile-content">
+      <div class="profile-header">
+        <div class="wrapper-user-wrapper1">
+          <div class="wrapper-user9">
             <img
-                    class="icon164"
-                    loading="lazy"
-                    alt=""
-                    src="/images/icon-7@2x.png"
-            />
-
-            <div class="frame-parent150">
-              <div class="send-feedback-wrapper6">
-                <b class="send-feedback12">Обратная связь</b>
+                    class="user-icon"
+                    loading="lazy" alt=""
+                    th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                    id="userImage"
+                    onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"/>
+          </div>
+        </div>
+        <div class="profile-info">
+          <div class="user-info-container">
+            <div class="user-greeting1">
+              <div class="hello-wrapper">
+                <b class="hello">Привет, </b>
+                <b th:text="${specialist.name}" class="hello" ></b>
+                <b class="hello">!</b>
               </div>
-              <img
-                      class="icon165"
-                      loading="lazy"
-                      alt=""
-                      src="/images/icon-8.svg"
-              />
+              <b class="specialist-email">
+                <p th:text="${specialist.username}" class="specialist-email-content"></p>
+              </b>
+            </div>
+          </div>
+          <div class="frame-wrapper73">
+            <div class="frame-parent122">
+              <div class="frame-parent123">
+                <div class="client-list-wrapper">
+                  <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                  <div class="icon-wrapper33">
+                    <img class="icon146" alt="" src="/images/icon-3@2x.png" />
+                  </div>
+                  <b class="client-list">Список клиентов</b>
+                </div>
+                <div class="base-frame">
+                  <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                    <div class="icon-wrapper34">
+                      <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
+                    </div>
+                    <b class="calendar">Календарь</b>
+                  </button>
+                </div>
+              </div>
+              <div class="frame-parent123">
+                <div class="notifications-wrapper">
+                  <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                  <div class="icon-wrapper33">
+                    <img class="icon146" alt="" src="/images/icon-5.svg" />
+                  </div>
+                  <b class="notifications">Уведомления</b>
+                </div>
+                <div class="base-frame">
+                  <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                    <div class="icon-wrapper34">
+                      <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                    </div>
+                    <b class="analytics">Аналитика</b>
+                  </button>
+                </div>
+                <div class="tests-wrapper">
+                  <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                  <b class="surveys-tests">Опросники и тесты</b>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="client-name-container-wrapper">
+            <div class="client-name-container">
+              <div class="applications1">
+                <b class="b117">Заявки</b>
+              </div>
+              <!--                            <div class="frame-parent106" id="groupContainer">-->
+              <!--                                <div class="rectangle-parent89">-->
+              <!--                                    <div class="frame-child115"></div>-->
+              <!--                                    <b class="empty">20.02.2024</b>-->
+              <!--                                </div>-->
+              <!--                                <div class="rectangle-parent90">-->
+              <!--                                    <div class="frame-child116"></div>-->
+              <!--                                    <b class="b118">Овсянникова Юля Матвеевна</b>-->
+              <!--                                </div>-->
+              <!--                            </div>-->
+              <div class="frame-parent107" id="groupContainer1">
+                <div class="rectangle-parent91">
+                  <div class="frame-child117"></div>
+                  <b class="b119">25.02.2024</b>
+                </div>
+                <div class="rectangle-parent92">
+                  <div class="frame-child118"></div>
+                  <b class="b120">Овсянникова Юля Матвеевна</b>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="client-details-content-parent">
-          <div class="client-details-content">
-            <div class="div244">Подробнее....</div>
-          </div>
-          <div class="client-details-form">
-            <div class="item113">
-              <div class="div221">Дата рождения</div>
-              <div class="div222" th:text="${customer.dateOfBirth}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Адрес проживания</div>
-              <div class="div222" th:text="${customer.residentialAddress}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Коллегиальные рекомендации (поле для заполнения кто вас
-                порекомендовал клиенту)
-              </div>
-              <div class="div222" th:text="${customer.collegialRecommendations}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Особые условия контракта</div>
-              <div class="div222" th:text="${customer.specialTermsOfContract}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Семейное положение</div>
-              <div class="div222" th:text="${customer.familyStatus.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Приоритетный канал коммуникации (выпадающий список куда
-                писать)
-              </div>
-              <div class="div222" th:text="${customer.priorityCommunicationChannel.translation}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">
-                Берется ли супервизия на данного клиента
-              </div>
-              <div class="div222" id="is-supervised" th:value="${customer.supervised}" th:text="${customer.supervised.translation}"></div>
-            </div>
+        <div class="icon-parent25">
+          <img class="icon132" loading="lazy" alt="" src="/images/icon-7@2x.png"/>
 
-            <div id="supervisor-fields">
-              <div class="item113">
-                <div class="div221">ФИО супервизора</div>
-                <div class="div222" th:text="${customer.supervisorsSurname + ' ' + customer.supervisorsName + ' ' + customer.supervisorsLastName}"></div>
-              </div>
-              <div class="item113">
-                <div class="div221">Номер телефона супервизора</div>
-                <div class="div222" th:text="${customer.supervisorsContact.getPhone()}"></div>
-              </div>
-              <div class="item113">
-                <div class="div221">Электронная почта супервизора</div>
-                <div class="div222" th:text="${customer.supervisorsContact.getEmail()}"></div>
-              </div>
-              <div class="item113">
-                <div class="div221">
-                  Материал для следующих сеансов из супервизии
-                </div>
-                <div class="div222" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
-              </div>
+          <div class="feedback-link-parent">
+            <div class="feedback-link1">
+              <b class="send-feedback9">Обратная связь</b>
             </div>
-
-            <div class="item113">
-              <div class="div221">ФИО котерапевта</div>
-              <div class="div222" th:text="${customer.cotherapistSurname + ' ' + customer.cotherapistName + ' ' + customer.cotherapistLastName}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Номер телефона котерапевта</div>
-              <div class="div222" th:text="${customer.cotherapistContact.getPhone()}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Электронная почта котерапевта</div>
-              <div class="div222" th:text="${customer.cotherapistContact.getEmail()}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Условия распределения гонорара между котерапевтами</div>
-              <div class="div222" th:text="${customer.cotherapistPaymentConditions}"></div>
-            </div>
-            <div class="item113">
-              <div class="div221">Заметки</div>
-              <div class="div222" th:text="${customer.notes}"></div>
-            </div>
+            <img class="icon133" loading="lazy" alt="" src="/images/icon-8.svg"/>
           </div>
         </div>
       </div>
-    </section>
-  </div>
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <div id="modal-body"></div>
     </div>
+    <section class="client-tabs-parent">
+      <div class="client-tabs">
+        <div class="client-tabs-container">
+          <button class="rectangle-parent93">
+            <div class="frame-child119"></div>
+            <div class="div142">Карта клиента</div>
+          </button>
+          <button class="rectangle-parent94" onclick="window.location = '/SimplePsy/V1/session/sessions'">
+            <div class="frame-child120"></div>
+            <div class="div143">Список встреч</div>
+          </button>
+          <button class="rectangle-parent94" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
+            <div class="frame-child120"></div>
+            <div class="div143">Опросники и тесты</div>
+          </button>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <div class="action-buttons-container">
+          <div class="rectangle-parent96">
+            <div class="frame-child122"></div>
+            <div class="div145" onclick="toggleEdit()">Редактировать</div>
+          </div>
+          <div class="rectangle-parent97">
+            <div class="frame-child123"></div>
+            <div class="div146">Сохранить</div>
+          </div>
+          <div class="rectangle-parent98">
+
+            <div class="frame-child124"></div>
+            <div class="div147">Ссылка на анкету</div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <form id="client-form1" th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post">
+          <input th:field="*{id}" hidden="hidden" disabled>
+          <input type="text" th:name="typeOfClient" th:field="*{typeOfClient}" hidden="hidden" disabled>
+          <div id="common-fields">
+            <div class="form-section">
+              <label for="full-name">ФИО клиента</label>
+              <input type="text" id="full-name" th:field="*{surname}" th:name="surname" disabled>
+              <input type="text" th:field="*{name}" th:name="name" disabled>
+              <input type="text" th:field="*{lastName}" th:name="lastName" disabled>
+            </div>
+
+            <div class="form-section">
+              <label for="phone-number">Номер телефона</label>
+              <input type="tel" id="phone-number" th:field="*{contact.phone}" th:name="contact.phone" disabled>
+            </div>
+
+            <div class="form-section">
+              <label for="email">Почта</label>
+              <input type="email" id="email" th:field="*{contact.email}" th:name="contact.email" disabled>
+            </div>
+
+            <div class="form-section">
+              <label for="gender">Пол</label>
+              <select id="gender" th:field="*{sex}" th:name="sex" disabled>
+                <option value="MALE">Мужской</option>
+                <option value="FEMALE">Женский</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="form-section">
+            <label for="client-status">Статус клиента</label>
+            <select id="client-status" th:field="*{clientStatus}" th:name="clientStatus" disabled>
+              <option value="REGULAR">Регулярный</option>
+              <option value="ON_REQUEST">По запросу</option>
+              <option value="COMPLETED">Завершён</option>
+              <option value="APPLICATION">Заявка</option>
+            </select>
+          </div>
+
+
+          <div class="form-section">
+            <label for="contact-method">Каким способом обратился клиент/попечитель?</label>
+            <select id="contact-method" th:field="*{typeOfTreatment}" th:name="typeOfTreatment" disabled>
+              <option value="MESSENGER">Мессенжер</option>
+              <option value="SOCIAL_NETWORK">Социальная сеть</option>
+              <option value="AGGREGATOR">Агрегатор</option>
+            </select>
+          </div>
+
+          <div class="form-section">
+            <label for="first-contact-date">Дата первого обращения (запрос на консультацию)</label>
+            <input type="date" id="first-contact-date" th:field="*{dateOfFirstRequest}" th:name="dateOfFirstRequest" disabled>
+          </div>
+
+          <div class="form-section">
+            <label for="first-consultation-date">Дата первой консультации</label>
+            <input type="date" id="first-consultation-date" th:field="*{dateOfFirstConsultation}" th:name="dateOfFirstConsultation" disabled>
+          </div>
+
+          <div class="form-section">
+            <label for="meeting-format">Предпочтительный формат встречи</label>
+            <select id="meeting-format" th:field="*{preferredMeetingFormat}" th:name="preferredMeetingFormat" onchange="updateMeetingFields()" disabled>
+              <option value="ONLINE" selected>Онлайн</option>
+              <option value="OFFLINE">Оффлайн</option>
+            </select>
+          </div>
+
+          <div id="online-platforms">
+            <div class="form-section">
+              <label for="online-platform">Выбрать/указать площадку взаимодействия</label>
+              <select id="online-platform" th:field="*{onlineMeetingPlace}" th:name="onlineMeetingPlace" disabled>
+                <option value="ZOOM">Zoom</option>
+                <option value="TELEMOST">Телемост</option>
+                <option value="GOOGLE_MEET">Google Meet</option>
+                <option value="TELEGRAM">Telegram</option>
+                <option value="WHATSAPP">WhatsApp</option>
+                <option value="SKYPE">Skype</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="offline-address" class="hidden">
+            <div class="form-section">
+              <label for="meeting-address">Адрес проведения встречи</label>
+              <input type="text" id="meeting-address" th:field="*{offlineMeetingPlace}" th:name="offlineMeetingPlace" disabled>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <label for="initial-request">Первичный/изначальный запрос клиента на терапию</label>
+            <textarea id="initial-request" th:field="*{clientsFirstRequestForTherapy}" th:name="clientsFirstRequestForTherapy" disabled></textarea>
+          </div>
+
+          <div class="form-section">
+            <label for="fixed-time">Фиксированное время/день недели для встречи (если да, то
+              указать)</label>
+            <input type="text" id="fixed-time" th:field="*{fixedTimeForMeeting}" th:name="fixedTimeForMeeting" disabled>
+          </div>
+
+          <div class="form-section">
+            <label for="financial-terms">Финансовые условия</label>
+            <textarea id="financial-terms" th:field="*{financialConditions}" th:name="financialConditions" disabled></textarea>
+          </div>
+
+          <div>
+            <h3>Подробнее...</h3>
+            <div class="form-section">
+              <label for="birth-date">Дата рождения</label>
+              <input type="date" id="birth-date" th:field="*{dateOfBirth}" th:name="dateOfBirth" disabled>
+            </div>
+
+            <div class="form-section">
+              <label for="address">Адрес проживания</label>
+              <input type="text" id="address" th:field="*{residentialAddress}" th:name="residentialAddress" disabled>
+            </div>
+
+            <div class="form-section">
+              <label for="referrals">Коллегиальные рекомендации (поле для заполнения кто вас
+                порекомендовал клиенту)</label>
+              <textarea id="referrals" th:field="*{collegialRecommendations}" th:name="collegialRecommendations" disabled></textarea>
+            </div>
+
+            <div class="form-section">
+              <label for="contract-conditions">Особые условия контракта</label>
+              <textarea id="contract-conditions" th:field="*{specialTermsOfContract}" th:name="specialTermsOfContract" disabled></textarea>
+            </div>
+
+            <div class="form-section">
+              <label for="marital-status">Семейное положение</label>
+              <select id="marital-status" th:field="*{familyStatus}" th:name="familyStatus" disabled>
+                <option value="MARRIED">Женат/Замужем</option>
+                <option value="SINGLE">Холост/Незамужем</option>
+                <option value="DIVORCED">В разводе</option>
+                <option value="WIDOWED">Вдовец/Вдова</option>
+                <option value="COHABITATION">Сожительство/Несостоявшийся брак</option>
+                <option value="MARRIAGE_WITH_SEPARATE_HOUSING">Официальный брак с раздельным проживанием
+                </option>
+                <option value="LONELY">Одиночество/Не в постоянных отношениях</option>
+                <option value="FAMILY_WITH_CHILDREN">Семьи с детьми</option>
+              </select>
+            </div>
+
+            <div class="form-section">
+              <label for="preferred-communication-channel">Приоритетный канал коммуникации</label>
+              <select id="preferred-communication-channel" th:field="*{priorityCommunicationChannel}" th:name="priorityCommunicationChannel" disabled>
+                <option value="TELEGRAM">Telegram</option>
+                <option value="WHATSAPP">WhatsApp</option>
+                <option value="VIBER">Viber</option>
+                <option value="SKYPE">Skype</option>
+                <option value="EMAIL">Почта</option>
+                <option value="SNAPCHAT">Snapchat</option>
+              </select>
+            </div>
+
+            <div class="form-section">
+              <label for="supervision">Берётся ли супервизия на данного клиента</label>
+              <select id="supervision" th:field="*{supervised}" th:name="supervised" disabled>
+                <option value="YES">Да</option>
+                <option value="NO">Нет</option>
+              </select>
+            </div>
+
+            <div class="form-section">
+              <label for="supervisor-info">ФИО супервизора</label>
+              <input type="text" id="supervisor-info" th:field="*{supervisorsSurname}" th:name="supervisorsSurname" disabled>
+              <input type="text" th:field="*{supervisorsName}" th:name="supervisorsName" disabled>
+              <input type="text" th:field="*{supervisorsLastName}" th:name="supervisorsLastName" disabled>
+            </div>
+            <div class="form-section">
+              <label for="supervisor-phone">Номер телефона супервизора</label>
+              <input type="tel" id="supervisor-phone" th:field="*{supervisorsContact.phone}" th:name="supervisorsContact.phone" disabled>
+            </div>
+            <div class="form-section">
+              <label for="supervisor-email">Электронная почта супервизора</label>
+              <input type="email" id="supervisor-email" th:field="*{supervisorsContact.email}" th:name="supervisorsContact.email" disabled>
+            </div>
+            <div class="form-section">
+              <label for="supervision-material">Материал для следующих сеансов из супервизии</label>
+              <textarea id="supervision-material"th:field="*{materialForNextSessionsFromSupervision}" th:name="materialForNextSessionsFromSupervision" disabled></textarea>
+            </div>
+
+            <div class="form-section">
+              <label for="cotherapist-info">ФИО котерапевта</label>
+              <input type="text" id="cotherapist-info" th:field="*{cotherapistSurname}" th:name="cotherapistSurname" disabled>
+              <input type="text" th:field="*{cotherapistName}" th:name="cotherapistName" disabled>
+              <input type="text" th:field="*{cotherapistLastName}" th:name="cotherapistLastName" disabled>
+            </div>
+            <div class="form-section">
+              <label for="cotherapist-phone">Номер телефона котерапевта</label>
+              <input type="tel" id="cotherapist-phone" th:field="*{cotherapistContact.phone}" th:name="cotherapistContact.phone" disabled>
+            </div>
+            <div class="form-section">
+              <label for="cotherapist-email">Электронная почта котерапевта</label>
+              <input type="email" id="cotherapist-email" th:field="*{cotherapistContact.email}" th:name="cotherapistContact.email" disabled>
+            </div>
+            <div class="form-section">
+              <label for="cotherapist-payment-conditions">Условия распределения гонорара между котерапевтами</label>
+              <textarea id="cotherapist-payment-conditions" th:field="*{cotherapistPaymentConditions}" th:name="cotherapistPaymentConditions" disabled></textarea>
+            </div>
+
+            <div class="form-section">
+              <label for="notes">Заметки</label>
+              <textarea id="notes" th:field="*{notes}" th:name="notes" disabled></textarea>
+            </div>
+          </div>
+          <button id="saveButton" style="display: none" type="submit">Отправить</button>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <div id="modal-body"></div>
   </div>
-  <script>
-    function checkSupervisorFields() {
-      const supervised = document.getElementById('is-supervised').getAttribute('value');
-      document.getElementById('supervisor-fields').style.display = supervised === 'YES' ? 'block' : 'none';
-    }
+</div>
+<script>
+  function toggleEdit() {
+    document.querySelectorAll('input').forEach(function(input) {
+      input.removeAttribute('disabled');
+    });
+    document.querySelectorAll('select').forEach(function(input) {
+      input.removeAttribute('disabled');
+    });
+    document.querySelectorAll('textarea').forEach(function(input) {
+      input.removeAttribute('disabled');
+    });
+    document.getElementById('saveButton').style.display = 'block';
+  }
 
-    // Initialize form
-    checkSupervisorFields();
 
-    // Открытие модального окна создания сессии
-    document.addEventListener('DOMContentLoaded', function() {
+
+  // Открытие модального окна создания сессии
+  document.addEventListener('DOMContentLoaded', function() {
     // Получаем элементы
     var modal = document.getElementById('modal');
     var modalBody = document.getElementById('modal-body');
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-    var holidayBtn = document.querySelector('.user-policy10');
+    var  holidayBtn = document.querySelector('.user-policy10');
     // Функция для открытия модального окна
-      function openModal() {
-        fetch('/SimplePsy/V1/session/session-form')
-                .then(response => response.text())
-                .then(data => {
-                  modalBody.innerHTML = data;
-                  modal.style.display = 'block';
-                })
-                .catch(error => console.error('Ошибка загрузки:', error));
+    function openModal() {
+      fetch('/SimplePsy/V1/session/session-form')
+              .then(response => response.text())
+              .then(data => {
+                modalBody.innerHTML = data;
+                modal.style.display = 'block';
+              })
+              .catch(error => console.error('Ошибка загрузки:', error));
 
-        fetch('/SimplePsy/V1/customer/findAll')
-                .then(response => response.json())
-                .then(clients => {
-                  const dataList = document.getElementById('clientsList');
-                  dataList.innerHTML = '';
+      fetch('/SimplePsy/V1/customer/findAll')
+              .then(response => response.json())
+              .then(clients => {
+                const dataList = document.getElementById('clientsList');
+                dataList.innerHTML = '';
 
-                  const script = document.createElement('script');
-                  script.id = 'dynamic-script';
-                  script.textContent = `
+                const script = document.createElement('script');
+                script.id = 'dynamic-script';
+                script.textContent = `
   document.getElementById('clientInput').addEventListener('change', function() {
     const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
     if (selectedOption) {
@@ -465,78 +492,76 @@
       document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
     }
   });`;
-                  document.body.appendChild(script);
-                  clients.forEach(client => {
-                    const option = document.createElement('option');
-                    switch (customer.typeOfClient) {
-                      case 'ADULT':
-                        option.value = customer.name + ' ' +customer.surname;
-                        break;
-                      case 'CHILD':
-                        option.value = customer.childName + ' ' + customer.childSurname;
-                        break;
-                      case 'COUPLE':
-                        option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
-                        break;
-                      default:
-                        // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
-                        console.log('Unknown client type');
-                        break;
-                    }
-                    option.setAttribute('data-id', customer.id);
-                    dataList.appendChild(option);
-                  });
-                })
-                .catch(error => console.error('Ошибка:', error));
-
-
-      }
-
-      // Функция для закрытия модального окна
-      function closeModal() {
-        modal.style.display = 'none';
-        const script = document.getElementById('dynamic-script');
-        if (script) {
-          script.remove();
-          console.log('Скрипт удалён');
-        } else {
-          console.log('Скрипт не найден');
-        }
-      }
-
-      function openHolidayModal()
-      {
-        const modal = document.getElementById("modal");
-        const modalBody = document.getElementById("modal-body");
-
-        fetch('/SimplePsy/V1/session/holiday')
-                .then(response => response.text())
-                .then(html => {
-                  modalBody.innerHTML = html;
-                  modal.style.display = "block";
-
-                  // Добавляем обработчик закрытия модального окна
-                  document.querySelector('.close-modal').onclick = function() {
-                    modal.style.display = "none";
-                  };
-                })
-                .catch(error => {
-                  console.error('Error loading modal content:', error);
+                document.body.appendChild(script);
+                clients.forEach(customer => {
+                  const option = document.createElement('option');
+                  switch (customer.typeOfClient) {
+                    case 'ADULT':
+                      option.value = customer.name + ' ' +customer.surname;
+                      break;
+                    case 'CHILD':
+                      option.value = customer.childName + ' ' + customer.childSurname;
+                      break;
+                    case 'COUPLE':
+                      option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                      break;
+                    default:
+                      // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                      console.log('Unknown client type');
+                      break;
+                  }
+                  option.setAttribute('data-id', customer.id);
+                  dataList.appendChild(option);
                 });
-      }
+              })
+              .catch(error => console.error('Ошибка:', error));
 
-      // Закрытие модального окна при клике вне его содержимого
-      window.onclick = function(event) {
-        const modal = document.getElementById("modal");
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
 
-      appointLink.addEventListener('click', openModal);
-      holidayBtn.addEventListener('click', openHolidayModal);
-      closeBtn.addEventListener('click', closeModal);
-    });
-  </script>
-  </body>
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+      modal.style.display = 'none';
+      const script = document.getElementById('dynamic-script');
+      if (script) {
+        script.remove();
+        console.log('Скрипт удалён');
+      } else {
+        console.log('Скрипт не найден');
+      }
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+    holidayBtn.addEventListener('click', openHolidayModal);
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+  });
+  function openHolidayModal()
+  {
+    const modal = document.getElementById("modal");
+    const modalBody = document.getElementById("modal-body");
+
+    fetch('/SimplePsy/V1/session/holiday')
+            .then(response => response.text())
+            .then(html => {
+              modalBody.innerHTML = html;
+              modal.style.display = "block";
+
+              // Добавляем обработчик закрытия модального окна
+              document.querySelector('.close-modal').onclick = function() {
+                modal.style.display = "none";
+              };
+            })
+            .catch(error => {
+              console.error('Error loading modal content:', error);
+            });
+  }
+  var  addClientBtn = document.querySelector('.about-us16');
+  addClientBtn.addEventListener('click', () =>
+  {
+    window.location.href = '/SimplePsy/V1/customer/customer-form';
+  });
+</script>
+</body>
 </html>
