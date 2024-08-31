@@ -427,6 +427,12 @@
   line-height: 30px;
   color: var(--grey-blue-50);
 }
+
+.constructor8:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .news9 {
   left: calc(50% + 79px);
 }
@@ -437,6 +443,15 @@
   line-height: 25px;
   cursor: pointer;
 }
+
+.about-us15:hover,
+.news9:hover,
+.news10:hover,
+.user-policy9:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .user-policy9 {
   position: absolute;
   left: calc(50% + 250px);

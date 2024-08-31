@@ -1237,8 +1237,3 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transform: translateY(2px);
 }
-.news10:active {
-  background-color: #a9a9a9;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  transform: translateY(4px);
-}

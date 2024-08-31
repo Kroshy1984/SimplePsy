@@ -279,6 +279,12 @@
     font-weight: 700;
     color: inherit;
   }
+
+  .constructor11:hover {
+    color: black;
+    cursor: pointer;
+  }
+
   .icon-parent27 {
     align-self: stretch;
     display: flex;
@@ -927,7 +933,6 @@
     font-weight: 700;
     font-family: inherit;
     flex-shrink: 0;
-    debug_commit: 69da668;
   }
   .wrapper48 {
     flex: 1;
@@ -975,7 +980,6 @@
     border-radius: var(--br-xl);
     flex-direction: row;
     flex-shrink: 0;
-    debug_commit: 69da668;
     z-index: 1;
   }
   .rectangle-parent141:hover {
@@ -1036,7 +1040,6 @@
     justify-content: flex-start;
     gap: var(--gap-4xs);
     flex-shrink: 0;
-    debug_commit: 69da668;
     margin-left: -22px;
     text-align: center;
     font-size: var(--bold-10-size);
@@ -1183,7 +1186,6 @@
     justify-content: flex-start;
     padding: var(--padding-12xs) var(--padding-12xs) var(--padding-11xs);
     flex-shrink: 0;
-    debug_commit: 69da668;
     cursor: pointer;
     z-index: 1;
   }

@@ -72,6 +72,12 @@
   line-height: 30px;
   display: inline-block;
 }
+
+.constructor7:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper2 {
   height: 30px;
   width: 177px;
@@ -142,9 +148,6 @@
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-}
-.news10:active {
-  transform: translateY(2px);
 }
 
 .user-policy7 {

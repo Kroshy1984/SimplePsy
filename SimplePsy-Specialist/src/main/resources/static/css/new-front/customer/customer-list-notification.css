@@ -2635,9 +2635,6 @@ h2 {
   text-decoration: none;
   color: inherit;
 }
-.news10:active {
-  transform: translateY(2px);
-}
 .frame-wrapper73 {
   align-self: stretch;
   flex-direction: row;

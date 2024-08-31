@@ -404,7 +404,6 @@ button:hover {
   padding: var(--padding-3xs) var(--padding-smi) var(--padding-3xs)
     var(--padding-xl);
   flex-shrink: 0;
-  debug_commit: bf4bc93;
 }
 .button11 {
   position: relative;
@@ -426,7 +425,6 @@ button:hover {
   padding: var(--padding-3xs) var(--padding-smi) var(--padding-3xs)
     var(--padding-mini);
   flex-shrink: 0;
-  debug_commit: bf4bc93;
   color: var(--grey-blue-60);
 }
 .button12 {
@@ -449,7 +447,6 @@ button:hover {
   padding: var(--padding-3xs) var(--padding-smi) var(--padding-3xs)
     var(--padding-mini);
   flex-shrink: 0;
-  debug_commit: bf4bc93;
 }
 .button13 {
   position: relative;
@@ -505,7 +502,6 @@ button:hover {
   line-height: 150%;
   display: inline-block;
   flex-shrink: 0;
-  debug_commit: bf4bc93;
 }
 .item7 {
   width: 45px;
@@ -631,7 +627,6 @@ button:hover {
   padding: var(--padding-3xs) var(--padding-2xs) var(--padding-3xs)
     var(--padding-smi);
   flex-shrink: 0;
-  debug_commit: bf4bc93;
   z-index: 1;
 }
 .button15 {
@@ -654,7 +649,6 @@ button:hover {
   justify-content: flex-start;
   padding: var(--padding-3xs) var(--padding-4xs);
   flex-shrink: 0;
-  debug_commit: bf4bc93;
   z-index: 1;
 }
 .button-pair-container {

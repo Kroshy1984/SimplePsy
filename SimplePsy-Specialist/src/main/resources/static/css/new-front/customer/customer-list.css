@@ -9,6 +9,13 @@ h2 {
   cursor: pointer;
 }
 
+.about-us3:hover,
+.news10:hover,
+.user-policy3:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .frame-parent110,
 .search-dropdown,
 .search-options {
@@ -136,6 +143,12 @@ h2 {
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor3:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .client-details {
   display: flex;
   flex-direction: column;
@@ -2740,9 +2753,6 @@ h2 {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-}
-.news10:active {
-  transform: translateY(2px);
 }
 .frame-wrapper73 {
   align-self: stretch;
