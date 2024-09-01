@@ -678,6 +678,7 @@ b {
   position: relative;
   line-height: 20px;
   font-weight: 700;
+  font-size: var(--bold-12-size);
 }
 .send-feedback-container {
   display: flex;

@@ -5,8 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Client;
+import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.ClientService;
+import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -14,10 +17,12 @@ import java.util.List;
 @RequestMapping("/SimplePsy/V1/client")
 public class ClientController {
     ClientService clientService;
+    SpecialistService specialistService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, SpecialistService specialistService) {
         this.clientService = clientService;
+        this.specialistService = specialistService;
     }
 
 //    @ResponseStatus(HttpStatus.OK)
@@ -81,5 +86,25 @@ public class ClientController {
     public ResponseEntity<List<Client>> findAllClients()
     {
         return ResponseEntity.ok(clientService.findAll());
+    }
+
+    @GetMapping("/findAll/{specialistId}")
+    public ResponseEntity<List<Client>> findAllCustomer(@PathVariable String specialistId)
+    {
+        System.out.println("currentSpecialistId: " + specialistId);
+        Specialist specialist = specialistService.findById(specialistId);
+        List<String> customerIds = specialist.getCustomerIds();
+        List<Client> customers = new ArrayList<>();
+        for (String customerId : customerIds) {
+            Client client = clientService.findById(customerId);
+            if (client == null) {
+                continue;
+            } else {
+                customers.add(clientService.findById(customerId));
+            }
+        }
+        System.out.println("Customers list:");
+        customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
+        return ResponseEntity.ok(customers);
     }
 }

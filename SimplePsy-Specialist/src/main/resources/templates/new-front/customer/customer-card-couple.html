@@ -16,6 +16,8 @@
   />
 </head>
 <body>
+<form th:action="@{/SimplePsy/V1/customer/new}" th:object="${customer}" method="post">
+<input th:name="${customer.id}" th:field="*{id}" hidden="hidden" disabled>
 <div class="div216">
   <div class="settings6"></div>
   <div class="item112">
@@ -198,10 +200,9 @@
               <div class="frame-child175"></div>
               <div class="div218">Редактировать</div>
             </div>
-            <div class="rectangle-parent150">
-              <div class="frame-child176"></div>
+            <button type="submit" class="rectangle-parent150">
               <div class="div219">Сохранить</div>
-            </div>
+            </button>
             <div class="rectangle-parent151">
               <div class="frame-child177"></div>
               <div class="div220">Ссылка на анкету</div>
@@ -211,115 +212,141 @@
         <div class="component19">
           <div class="item113">
             <div class="div221">Тип клиента</div>
-            <div class="div222" th:text="${customer.typeOfClient.translation}"></div>
+            <input class="div222" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Статус клиента</div>
-            <div class="div222" th:text="${customer.clientStatus.translation}"></div>
+            <select class="div222" id="client-status" th:name="${customer.clientStatus}" th:field="*{clientStatus}">
+              <option value="REGULAR">Регулярный</option>
+              <option value="ON_REQUEST">По запросу</option>
+              <option value="COMPLETED">Завершён</option>
+              <option value="APPLICATION">Заявка</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">ФИО первого клиента</div>
-            <div class="div222" th:text="${customer.firstClientSurname + ' ' + customer.firstClientName + ' ' + customer.firstClientLastName}">
-            </div>
+            <input class="div222" th:name="${customer.firstClientSurname}" th:field="*{firstClientSurname}">
+            <input class="div222" th:name="${customer.firstClientName}" th:field="*{firstClientName}">
+            <input class="div222" th:name="${customer.firstClientLastName}" th:field="*{firstClientLastName}">
           </div>
           <div class="item113">
             <div class="div221">Номер телефона первого клиента</div>
-            <div class="div222" th:text="${customer.firstClientContact.phone}"></div>
+            <input class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}">
           </div>
           <div class="item113">
             <div class="div221">Почта первого клиента</div>
-            <div class="div222" th:text="${customer.firstClientContact.email}">
-            </div>
+            <input class="div222" th:name="${customer.firstClientContact.email}" th:field="*{firstClientContact.email}">
           </div>
           <div class="item113">
             <div class="div221">Пол первого клиента</div>
-            <div class="div222" th:text="${customer.firstClientSex.translation}"></div>
+            <select class="div222" id="gender-1" th:name="${customer.firstClientSex}" th:field="*{firstClientSex}">
+              <option value="MALE">Мужской</option>
+              <option value="FEMALE">Женский</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">Запрос первого клиента на терапию: причина обращения</div>
-            <div class="div222" th:text="${customer.firstClientRequestReason}"></div>
+            <textarea class="div222" th:name="${customer.firstClientRequestReason}" th:field="*{firstClientRequestReason}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">Запрос первого клиента на терапию: желаемый результат от прохождения терапии</div>
-            <div class="div222" th:text="${customer.firstClientDesiredResult}"></div>
+            <textarea class="div222" th:name="${customer.firstClientDesiredResult}" th:field="*{firstClientDesiredResult}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">ФИО второго клиента</div>
-            <div class="div222" th:text="${customer.secondClientSurname + ' ' + customer.secondClientName + ' ' + customer.secondClientLastName}">
-            </div>
+            <input class="div222" th:name="${customer.secondClientSurname}" th:field="*{secondClientSurname}">
+            <input class="div222" th:name="${customer.secondClientName}" th:field="*{secondClientName}">
+            <input class="div222" th:name="${customer.secondClientLastName}" th:field="*{secondClientLastName}">
           </div>
           <div class="item113">
             <div class="div221">Номер телефона второго клиента</div>
-            <div class="div222" th:text="${customer.secondClientContact.phone}"></div>
+            <input class="div222" th:name="${customer.secondClientContact.phone}" th:field="*{secondClientContact.phone}">
           </div>
           <div class="item113">
             <div class="div221">Почта второго клиента</div>
-            <div class="div222" th:text="${customer.secondClientContact.email}">
-            </div>
+            <input class="div222" th:name="${customer.secondClientContact.email}" th:field="*{secondClientContact.email}">
           </div>
           <div class="item113">
             <div class="div221">Пол второго клиента</div>
-            <div class="div222" th:text="${customer.secondClientSex.translation}"></div>
+            <select class="div222" id="gender-2" th:name="${customer.secondClientSex}" th:field="*{secondClientSex}">
+              <option value="MALE">Мужской</option>
+              <option value="FEMALE">Женский</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">Запрос второго клиента на терапию: причина обращения</div>
-            <div class="div222" th:text="${customer.secondClientRequestReason}"></div>
+            <textarea class="div222" th:name="${customer.secondClientRequestReason}" th:field="*{secondClientRequestReason}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">Запрос второго клиента на терапию: желаемый результат от прохождения терапии</div>
-            <div class="div222" th:text="${customer.secondClientDesiredResult}"></div>
+            <textarea class="div222" th:name="${customer.secondClientDesiredResult}" th:field="*{secondClientDesiredResult}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">
               Каким способом обратился клиент/попечитель
             </div>
-            <div class="div222" th:text="${customer.typeOfTreatment.translation}"></div>
+            <select class="div222" id="contact-method" th:name="${customer.typeOfTreatment}" th:field="*{typeOfTreatment}">
+              <option value="MESSENGER">Мессенджер</option>
+              <option value="SOCIAL_NETWORK">Социальная сеть</option>
+              <option value="AGGREGATOR">Агрегатор</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">
               Дата первого обращения (запрос на консультацию)
             </div>
-            <div class="div222" th:text="${customer.dateOfFirstRequest}"></div>
+            <input type="date" class="div222" th:name="${customer.dateOfFirstRequest}" th:field="*{dateOfFirstRequest}">
           </div>
           <div class="item113">
             <div class="div221">Дата первой консультации</div>
-            <div class="div222" th:text="${customer.dateOfFirstConsultation}"></div>
+            <input type="date" class="div222" th:name="${customer.dateOfFirstConsultation}" th:field="*{dateOfFirstConsultation}">
           </div>
           <div class="item113">
             <div class="div221">Предпочтительный формат встречи</div>
-            <div class="div222" th:text="${customer.preferredMeetingFormat.translation}"></div>
+            <select class="div222" id="meeting-format" th:name="${customer.preferredMeetingFormat}" th:field="*{preferredMeetingFormat}">
+              <option value="ONLINE" selected>Онлайн</option>
+              <option value="OFFLINE">Оффлайн</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">
               Для онлайн выбрать/указать площадку взаимодействия
             </div>
-            <div class="div222" th:text="${customer.onlineMeetingPlace.translation}"></div>
+            <select class="div222" id="online-platform" th:name="${customer.onlineMeetingPlace}" th:field="*{onlineMeetingPlace}">
+              <option value="ZOOM">Zoom</option>
+              <option value="TELEMOST">Телемост</option>
+              <option value="GOOGLE_MEET">Google Meet</option>
+              <option value="TELEGRAM">Telegram</option>
+              <option value="WHATSAPP">WhatsApp</option>
+              <option value="SKYPE">Skype</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">
               Для оффлайн выбрать адрес проведения встречи
             </div>
-            <div class="div222" th:text="${customer.offlineMeetingPlace}"></div>
+            <input class="div222" th:name="${customer.offlineMeetingPlace}" th:field="*{offlineMeetingPlace}">
           </div>
           <div class="item113">
             <div class="div221">
               Первичный/изначальный запрос клиента на терапию
             </div>
-            <div class="div222" th:text="${customer.clientsFirstRequestForTherapy}"></div>
+            <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}" th:field="*{clientsFirstRequestForTherapy}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">
               Фиксированное время/день недели для встречи (если да, то
               указать)
             </div>
-            <div class="div222" th:text="${customer.fixedTimeForMeeting}"></div>
+            <input class="div222" th:name="${customer.fixedTimeForMeeting}" th:field="*{fixedTimeForMeeting}">
           </div>
           <div class="item113">
             <div class="div221">Финансовые условия</div>
-            <div class="div222" th:text="${customer.financialConditions}"></div>
+            <textarea class="div222" th:name="${customer.financialConditions}" th:field="*{financialConditions}"></textarea>
           </div>
-        </div>
+        </input>
       </div>
+    </div>
     </div>
   </section>
   <section class="footer-content-wrapper">
@@ -353,81 +380,104 @@
         <div class="client-details-form">
           <div class="item113">
             <div class="div221">Дата рождения</div>
-            <div class="div222" th:text="${customer.dateOfBirth}"></div>
+            <input type="date" class="div222" th:name="${customer.dateOfBirth}" th:field="*{dateOfBirth}">
           </div>
           <div class="item113">
             <div class="div221">Адрес проживания</div>
-            <div class="div222" th:text="${customer.residentialAddress}"></div>
+            <input class="div222" th:name="${customer.residentialAddress}" th:field="*{residentialAddress}">
           </div>
           <div class="item113">
             <div class="div221">
               Коллегиальные рекомендации (поле для заполнения кто вас
               порекомендовал клиенту)
             </div>
-            <div class="div222" th:text="${customer.collegialRecommendations}"></div>
+            <textarea class="div222" th:name="${customer.collegialRecommendations}" th:field="*{collegialRecommendations}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">Особые условия контракта</div>
-            <div class="div222" th:text="${customer.specialTermsOfContract}"></div>
+            <textarea class="div222" th:name="${customer.specialTermsOfContract}" th:field="*{specialTermsOfContract}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">Семейное положение</div>
-            <div class="div222" th:text="${customer.familyStatus.translation}"></div>
+            <select class="div222" id="marital-status" th:name="${customer.familyStatus}" th:field="*{familyStatus}">
+              <option value="MARRIED">Женат/Замужем</option>
+              <option value="SINGLE">Холост/Незамужем</option>
+              <option value="DIVORCED">В разводе</option>
+              <option value="WIDOWED">Вдовец/Вдова</option>
+              <option value="COHABITATION">Сожительство/Несостоявшийся брак</option>
+              <option value="MARRIAGE_WITH_SEPARATE_HOUSING">Официальный брак с раздельным проживанием</option>
+              <option value="LONELY">Одиночество/Не в постоянных отношениях</option>
+              <option value="FAMILY_WITH_CHILDREN">Семьи с детьми</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">
               Приоритетный канал коммуникации (выпадающий список куда
               писать)
             </div>
-            <div class="div222" th:text="${customer.priorityCommunicationChannel.translation}"></div>
+            <select class="div222" id="preferred-communication-channel" th:name="${customer.priorityCommunicationChannel}" th:field="*{priorityCommunicationChannel}">
+              <option value="TELEGRAM">Telegram</option>
+              <option value="WHATSAPP">WhatsApp</option>
+              <option value="VIBER">Viber</option>
+              <option value="SKYPE">Skype</option>
+              <option value="EMAIL">Почта</option>
+              <option value="SNAPCHAT">Snapchat</option>
+            </select>
           </div>
           <div class="item113">
             <div class="div221">
               Берется ли супервизия на данного клиента
             </div>
-            <div class="div222" id="is-supervised" th:value="${customer.supervised}" th:text="${customer.supervised.translation}"></div>
+            <select class="div222" id="is-supervised" th:name="${customer.supervised}" th:field="*{supervised}">
+              <option value="YES">Да</option>
+              <option value="NO">Нет</option>
+            </select>
           </div>
 
           <div id="supervisor-fields">
             <div class="item113">
               <div class="div221">ФИО супервизора</div>
-              <div class="div222" th:text="${customer.supervisorsSurname + ' ' + customer.supervisorsName + ' ' + customer.supervisorsLastName}"></div>
+              <input class="div222" type="text" id="supervisor-info" th:name="${customer.supervisorsSurname}" th:field="*{supervisorsSurname}">
+              <input class="div222" type="text" th:name="${customer.supervisorsName}" th:field="*{supervisorsName}">
+              <input class="div222" type="text" th:name="${customer.supervisorsLastName}" th:field="*{supervisorsLastName}">
             </div>
             <div class="item113">
               <div class="div221">Номер телефона супервизора</div>
-              <div class="div222" th:text="${customer.supervisorsContact.getPhone()}"></div>
+              <input class="div222" type="tel" id="supervisor-phone" th:name="${customer.supervisorsContact.phone}" th:field="*{supervisorsContact.phone}">
             </div>
             <div class="item113">
               <div class="div221">Электронная почта супервизора</div>
-              <div class="div222" th:text="${customer.supervisorsContact.getEmail()}"></div>
+              <input type="email" class="div222" th:name="${customer.supervisorsContact.email}" th:field="*{supervisorsContact.email}">
             </div>
             <div class="item113">
               <div class="div221">
                 Материал для следующих сеансов из супервизии
               </div>
-              <div class="div222" th:text="${customer.materialForNextSessionsFromSupervision}"></div>
+              <textarea class="div222" th:name="${customer.materialForNextSessionsFromSupervision}" th:field="*{materialForNextSessionsFromSupervision}"></textarea>
             </div>
           </div>
 
           <div class="item113">
             <div class="div221">ФИО котерапевта</div>
-            <div class="div222" th:text="${customer.cotherapistSurname + ' ' + customer.cotherapistName + ' ' + customer.cotherapistLastName}"></div>
+            <input class="div222" type="text" id="cotherapist-info" th:name="${customer.cotherapistSurname}" th:field="*{cotherapistSurname}">
+            <input class="div222" type="text" th:name="${customer.cotherapistName}" th:field="*{cotherapistName}">
+            <input class="div222" type="text" th:name="${customer.cotherapistLastName}" th:field="*{cotherapistLastName}">
           </div>
           <div class="item113">
             <div class="div221">Номер телефона котерапевта</div>
-            <div class="div222" th:text="${customer.cotherapistContact.getPhone()}"></div>
+            <input type="tel" class="div222" th:name="${customer.cotherapistContact.phone}" th:field="*{cotherapistContact.phone}">
           </div>
           <div class="item113">
             <div class="div221">Электронная почта котерапевта</div>
-            <div class="div222" th:text="${customer.cotherapistContact.getEmail()}"></div>
+            <input type="email" class="div222" th:name="${customer.cotherapistContact.email}" th:field="*{cotherapistContact.email}">
           </div>
           <div class="item113">
             <div class="div221">Условия распределения гонорара между котерапевтами</div>
-            <div class="div222" th:text="${customer.cotherapistPaymentConditions}"></div>
+            <textarea class="div222" th:name="${customer.cotherapistPaymentConditions}" th:field="*{cotherapistPaymentConditions}"></textarea>
           </div>
           <div class="item113">
             <div class="div221">Заметки</div>
-            <div class="div222" th:text="${customer.notes}"></div>
+            <textarea class="div222" th:name="${customer.notes}" th:field="*{notes}"></textarea>
           </div>
         </div>
       </div>
@@ -440,6 +490,7 @@
     </div>
   </div>
 </div>
+</form>
 
 <script>
   function checkSupervisorFields() {

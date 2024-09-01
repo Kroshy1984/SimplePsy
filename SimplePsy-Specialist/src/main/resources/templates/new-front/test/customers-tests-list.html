@@ -166,6 +166,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="feedback-item">
+                                <div class="feedback-button">
+                                    <img
+                                            class="icon30"
+                                            loading="lazy"
+                                            alt=""
+                                            src="/images/icon-7@2x.png"
+                                    />
+
+                                    <div class="frame-parent13" onclick="alert('Эта кнопка находится в разработке')">
+                                        <div class="send-feedback-container">
+                                            <b class="send-feedback1">Обратная связь</b>
+                                        </div>
+                                        <img
+                                                class="icon31"
+                                                loading="lazy"
+                                                alt=""
+                                                src="/images/icon-8.svg"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="notification-icon">
@@ -610,7 +633,7 @@
                 })
                 .catch(error => console.error('Ошибка загрузки:', error));
 
-            fetch('/SimplePsy/V1/customer/findAll')
+            fetch(`/SimplePsy/V1/client/findAll/${currentSpecialistId}`)
                 .then(response => response.json())
                 .then(clients => {
                     const dataList = document.getElementById('clientsList');
