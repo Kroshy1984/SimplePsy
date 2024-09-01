@@ -35,7 +35,7 @@
               />
 
               <div class="constructor-wrapper4">
-                <a class="constructor12">Понятная практика</a>
+                <a class="constructor12" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
               </div>
               <div class="icon-parent30">
                 <img
@@ -458,7 +458,7 @@
 
     // Функция для открытия модального окна
     function openModal() {
-      fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+      fetch('/SimplePsy/V1/session/session-form')
               .then(response => response.text())
               .then(data => {
                 modalBody.innerHTML = data;
@@ -466,7 +466,7 @@
               })
               .catch(error => console.error('Ошибка загрузки:', error));
 
-      fetch('/SimplePsy/V1/client/findAll')
+      fetch('/SimplePsy/V1/customer/findAll')
               .then(response => response.json())
               .then(clients => {
                 const dataList = document.getElementById('clientsList');
@@ -504,10 +504,24 @@
     }
   });`;
                 document.body.appendChild(script);
-                clients.forEach(client => {
+                clients.forEach(customer => {
                   const option = document.createElement('option');
-                  option.value = client.name;
-                  option.setAttribute('data-id', client.id);
+                  switch (customer.typeOfClient) {
+                    case 'ADULT':
+                      option.value = customer.name + ' ' +customer.surname;
+                      break;
+                    case 'CHILD':
+                      option.value = customer.childName + ' ' + customer.childSurname;
+                      break;
+                    case 'COUPLE':
+                      option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                      break;
+                    default:
+                      // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                      console.log('Unknown client type');
+                      break;
+                  }
+                  option.setAttribute('data-id', customer.id);
                   dataList.appendChild(option);
                 });
               })

@@ -303,6 +303,12 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor14:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper5 {
   display: flex;
   flex-direction: column;
@@ -541,7 +547,6 @@
   font-weight: 500;
   font-family: inherit;
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .description-background {
   position: absolute;
@@ -588,7 +593,6 @@
   padding: 0 var(--padding-xl) 0 0;
   box-sizing: border-box;
   flex-shrink: 0;
-  debug_commit: 69da668;
   color: var(--grey-blue-60);
 }
 .parent27 {
@@ -721,7 +725,6 @@
   font-family: inherit;
   display: inline-block;
   flex-shrink: 0;
-  debug_commit: 69da668;
   max-width: 100%;
 }
 .ellipse-div {
@@ -847,7 +850,6 @@
   justify-content: flex-start;
   gap: var(--gap-lg);
   flex-shrink: 0;
-  debug_commit: 69da668;
 }
 .frame-wrapper95,
 .parent28,
@@ -1683,7 +1685,4 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-.news10:active {
-  transform: translateY(2px);
 }

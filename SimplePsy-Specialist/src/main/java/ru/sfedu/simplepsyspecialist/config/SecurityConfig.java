@@ -42,6 +42,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((request) -> request
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/SimplePsy/V1/scoring/test/{testId}/{customerId}").permitAll()
+                        .requestMatchers("/SimplePsy/V1/scoring/done").permitAll()
+                        .requestMatchers("/SimplePsy/V1/scoring/submit").permitAll()
                         .requestMatchers("/SimplePsy/V1/specialist/signup").permitAll()
                         .requestMatchers("/SimplePsy/V1/specialist/find-customer").permitAll()
                         .requestMatchers("/SimplePsy/V1/specialist/find-customer/byProblemId").permitAll()
@@ -63,7 +67,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Замените на ваш домен
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081")); // Замените на ваш домен
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

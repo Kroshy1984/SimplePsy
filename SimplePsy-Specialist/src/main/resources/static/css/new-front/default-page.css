@@ -427,6 +427,12 @@
   line-height: 30px;
   color: var(--grey-blue-50);
 }
+
+.constructor8:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .news9 {
   left: calc(50% + 79px);
 }
@@ -437,6 +443,15 @@
   line-height: 25px;
   cursor: pointer;
 }
+
+.about-us15:hover,
+.news9:hover,
+.news10:hover,
+.user-policy9:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .user-policy9 {
   position: absolute;
   left: calc(50% + 250px);
@@ -536,7 +551,7 @@
   font-family: var(--bold-10);
 }
 .head1 {
-  position: absolute;
+  position: relative;
   width: calc(100% - 101px);
   top: 35px;
   right: 29px;
@@ -558,7 +573,6 @@
   text-align: center;
   font-size: var(--bold-12-size);
   color: var(--grey-blue-80);
-  overflow: hidden;
 }
 .sidebar1-fix-width{
   width: 240px;

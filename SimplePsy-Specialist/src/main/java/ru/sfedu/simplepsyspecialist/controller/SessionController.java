@@ -64,14 +64,10 @@ public class SessionController {
     }
 
     @GetMapping("/session-form")
-    public String getSessionForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+    public String getSessionForm(Model model) {
         Session session = new Session();
         //session.setClient(new Client());
         model.addAttribute("session", session);
-        model.addAttribute("specialist", specialist);
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
         return "new-front/session/session-creation";
     }
 

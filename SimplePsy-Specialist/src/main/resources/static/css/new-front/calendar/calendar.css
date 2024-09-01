@@ -30,6 +30,12 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor1:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper {
   display: flex;
   flex-direction: column;
@@ -73,7 +79,6 @@
   justify-content: flex-end;
   padding: 0 0 var(--padding-11xs);
   box-sizing: border-box;
-  font-size: var(--bold-16-size);
   color: var(--grey-blue-60);
 }
 

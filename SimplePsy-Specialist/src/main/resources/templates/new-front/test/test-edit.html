@@ -225,7 +225,7 @@
     </div>
     <header class="head1">
         <div class="navigate">
-            <a class="constructor8">Понятная практика</a>
+            <a class="constructor8" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
             <div class="menu1">
                 <b class="about-us15" id="aboutUsText">Добавить клиента</b>
                 <b class="news10">Назначить встречу</b>
@@ -291,6 +291,7 @@
             <div id="modal-body"></div>
         </div>
     </div>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.add-option-button').forEach(button => {
@@ -360,7 +361,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Survey updated:', data);
-                    // Redirect or show success message
+                    window.location.href="/SimplePsy/V1/scoring/list";
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -377,7 +378,7 @@
 
       // Функция для открытия модального окна
       function openModal() {
-        fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+        fetch('/SimplePsy/V1/session/session-form')
           .then(response => response.text())
           .then(data => {
             modalBody.innerHTML = data;

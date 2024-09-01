@@ -295,6 +295,12 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor15:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper6 {
   display: flex;
   flex-direction: column;
@@ -340,7 +346,8 @@
   max-width: 100%;
 }
 .about-us23,
-.news10 {
+.news10,
+.user-policy16 {
   cursor: pointer;
   text-decoration: none;
   position: relative;
@@ -349,6 +356,14 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.about-us23:hover,
+.news10:hover,
+.user-policy16:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .user-policy16 {
   width: 311px;
   position: relative;
@@ -383,7 +398,6 @@
   justify-content: flex-end;
   padding: 0 0 var(--padding-11xs);
   box-sizing: border-box;
-  font-size: var(--bold-16-size);
   color: var(--grey-blue-60);
 }
 .frame-parent167 {
@@ -406,7 +420,7 @@
   min-width: 801px;
   max-width: 100%;
   text-align: left;
-  font-size: var(--bold-18-size);
+  font-size: var(--bold-13-size);
   color: var(--grey-blue-50);
   font-family: var(--bold-10);
 }
@@ -948,6 +962,13 @@
   justify-content: flex-start;
   padding: var(--padding-11xs-8) var(--padding-4xs) 0 var(--padding-smi);
 }
+
+.rectangle-parent174:hover {
+  background-color: var(--color-gainsboro-100);
+  border: 3px solid var(--color-lightgray);
+  box-sizing: border-box;
+}
+
 .create-test-content,
 .create-test-header {
   display: flex;
@@ -1754,7 +1775,4 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-.news10:active {
-  transform: translateY(2px);
 }

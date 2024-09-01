@@ -26,15 +26,13 @@ public class ScoringService {
     }
 
     public Scoring save(Scoring scoring) {
-//        Scoring scoring = scoringRepository.findById(scoringId).get();
-//
-//        System.out.println("Found the scoring with id: " + scoring.getId());
-////        scoring.setAnswers(answers);
-////        System.out.println("Ответы: " + scoring.getAnswers());
-//        Scoring resultScoring = scoringRepository.save(scoring);
-//        List<Scoring> scoringsWithEmptyAnswers = scoringRepository.findScoringsWithEmptyAnswers();
-//        scoringRepository.deleteAll(scoringsWithEmptyAnswers);
+        return scoringRepository.save(scoring);
+    }
 
+    public Scoring update(Scoring scoring) {
+        Scoring oldScoring = scoringRepository.findById(scoring.getId()).orElseThrow();
+        scoring.setType(oldScoring.getType());
+        scoring.setDate(oldScoring.getDate());
         return scoringRepository.save(scoring);
     }
 

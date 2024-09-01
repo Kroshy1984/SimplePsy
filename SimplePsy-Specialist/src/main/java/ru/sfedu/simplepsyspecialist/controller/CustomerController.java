@@ -58,12 +58,9 @@ public class CustomerController {
 //    }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newCustomer(@RequestBody Customer customer)
+    public ResponseEntity<String> newCustomer(@ModelAttribute("customer") Customer customer)
     {
-        System.out.println("Got the new customer:\n" + customer.getName());
-        System.out.println(customer.getContact().getEmail());
-        System.out.println(customer.getName());
-        System.out.println(customer.getProblemsId());
+        System.out.println("Got the customer with id:\n" + customer.getId());
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
         return ResponseEntity.ok(newCustomerId);
@@ -188,6 +185,7 @@ public class CustomerController {
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
         System.out.println(newCustomer.getSex());
+
         return "redirect:/SimplePsy/V1/specialist/customers";
     }
     @GetMapping("/customers-test")
@@ -201,5 +199,13 @@ public class CustomerController {
         model.addAttribute("specialist", specialist);
         model.addAttribute("scorings", scorings);
         return "new-front/test/customers-tests-list";
+    }
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Customer>> findAllCustomer()
+    {
+        List<Customer> customers = customerService.findAll();
+        System.out.println("Clients list:");
+        customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
+        return ResponseEntity.ok(customers);
     }
 }

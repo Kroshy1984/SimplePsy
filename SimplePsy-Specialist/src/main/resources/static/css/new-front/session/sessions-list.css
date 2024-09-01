@@ -21,6 +21,12 @@
   color: inherit;
   white-space: nowrap;
 }
+
+.constructor6:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .constructor-wrapper1 {
   display: flex;
   flex-direction: column;
@@ -72,6 +78,14 @@
   position: relative;
   line-height: 25px;
 }
+
+.about-us6:hover,
+.news10:hover,
+.user-policy6:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .about-us6,
 .news10 {
   text-decoration: none;
@@ -111,7 +125,7 @@
   justify-content: flex-end;
   padding: 0 0 var(--padding-11xs);
   box-sizing: border-box;
-  font-size: var(--bold-16-size);
+  font-size: var(--bold-13-size);
   color: var(--grey-blue-60);
 }
 .frame-parent61 {
@@ -640,7 +654,6 @@
   box-sizing: border-box;
 }
 .wrapper22 {
-  width: 253px;
   flex-direction: column;
   padding: var(--padding-7xs) 0 0;
   margin-left: -22.5px;
@@ -654,6 +667,7 @@
   padding: var(--padding-10xs) 0;
   position: relative;
   cursor: pointer;
+  gap: 20px;
 }
 .frame-child59,
 .frame-child60 {
@@ -1729,9 +1743,6 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.news10:active {
-  transform: translateY(2px);
-}
 .frame-wrapper73 {
   align-self: stretch;
   flex-direction: row;
