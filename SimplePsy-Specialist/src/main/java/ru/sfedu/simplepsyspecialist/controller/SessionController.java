@@ -75,6 +75,7 @@ public class SessionController {
     public String createNewSession(Session session,
                                    @AuthenticationPrincipal UserDetails userDetails) {
 //        System.out.println(session.getClient().getName());
+        System.out.println("ClientId in createNewSession: " + session.getClientId());
         System.out.println(session.getPlace());
         System.out.println(session.getDate());
         //System.out.println(session.getClientId());

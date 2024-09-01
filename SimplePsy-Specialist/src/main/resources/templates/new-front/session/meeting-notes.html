@@ -29,9 +29,12 @@
             </div>
             <div class="icon-parent19">
               <img class="icon83" alt="" src="/images/icon-1@2x.png" />
-
+              <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
               <div class="search-wrapper1">
-                <b class="search7">Найти клиента...</b>
+                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+                <datalist id="customerList">
+
+                </datalist>
               </div>
             </div>
           </div>
@@ -522,6 +525,43 @@
                 console.error('Error loading modal content:', error);
               });
     }
+    const customerSearch = document.getElementById('customerSearch');
+    const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
+    customerSearch.addEventListener('input', function () {
+      const query = customerSearch.value;
+
+      if (query.length > 2) { // Запрашиваем данные только если введено больше 2 символов
+        fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+                .then(response => response.json())
+                .then(customers => {
+                  const filteredCustomers = customers.filter(customer =>
+                          customer.name.toLowerCase().includes(query.toLowerCase()) ||
+                          customer.surname.toLowerCase().includes(query.toLowerCase())
+                  );
+
+                  const dataList = document.getElementById('customerList');
+                  dataList.innerHTML = ''; // Очищаем предыдущие результаты
+
+                  filteredCustomers.forEach(customer => {
+                    const option = document.createElement('option');
+                    option.value = `${customer.name} ${customer.surname}`;
+                    option.dataset.id = customer.id;
+                    dataList.appendChild(option);
+                  });
+                });
+      }
+    });
+
+    customerSearch.addEventListener('change', function () {
+      const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+              .find(option => option.value === customerSearch.value);
+
+      if (selectedOption) {
+        const customerId = selectedOption.dataset.id;
+        window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
+      }
+    });
   </script>
   </body>
 </html>

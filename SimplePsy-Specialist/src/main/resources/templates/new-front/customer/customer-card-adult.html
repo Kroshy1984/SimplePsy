@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1, width=device-width"/>
 
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-creation.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-adult.css}"/>
   <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -41,9 +41,12 @@
                           alt=""
                           src="/images/icon-1@2x.png"
                   />
-
+                  <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
                   <div class="search-wrapper2">
-                    <b class="search13">Найти клиента...</b>
+                    <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+                    <datalist id="customerList">
+
+                    </datalist>
                   </div>
                 </div>
               </div>
@@ -212,30 +215,30 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="component19">
         <form id="client-form1" th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post">
-          <input th:field="*{id}" hidden="hidden" disabled>
-          <input type="text" th:name="typeOfClient" th:field="*{typeOfClient}" hidden="hidden" disabled>
+          <input class="div222" th:field="*{id}" hidden="hidden" disabled>
+          <input class="div222" type="text" th:name="typeOfClient" th:field="*{typeOfClient}" hidden="hidden" disabled>
           <div id="common-fields">
-            <div class="form-section">
-              <label for="full-name">ФИО клиента</label>
-              <input type="text" id="full-name" th:field="*{surname}" th:name="surname" disabled>
-              <input type="text" th:field="*{name}" th:name="name" disabled>
-              <input type="text" th:field="*{lastName}" th:name="lastName" disabled>
+            <div class="item113">
+              <div class="div221">ФИО клиента</div>
+              <input class="div222" type="text" id="full-name" th:field="*{surname}" th:name="surname" disabled>
+              <input class="div222" type="text" th:field="*{name}" th:name="name" disabled>
+              <input class="div222" type="text" th:field="*{lastName}" th:name="lastName" disabled>
             </div>
 
-            <div class="form-section">
-              <label for="phone-number">Номер телефона</label>
-              <input type="tel" id="phone-number" th:field="*{contact.phone}" th:name="contact.phone" disabled>
+            <div class="item113">
+              <div class="div221">Номер телефона</div>
+              <input class="div222" type="tel" id="phone-number" th:field="*{contact.phone}" th:name="contact.phone" disabled>
             </div>
 
-            <div class="form-section">
-              <label for="email">Почта</label>
-              <input type="email" id="email" th:field="*{contact.email}" th:name="contact.email" disabled>
+            <div class="item113">
+              <div class="div221">Почта</div>
+              <input class="div222" type="email" id="email" th:field="*{contact.email}" th:name="contact.email" disabled>
             </div>
 
-            <div class="form-section">
-              <label for="gender">Пол</label>
+            <div class="item113">
+              <div class="div221">Пол</div>
               <select id="gender" th:field="*{sex}" th:name="sex" disabled>
                 <option value="MALE">Мужской</option>
                 <option value="FEMALE">Женский</option>
@@ -244,7 +247,7 @@
 
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="client-status">Статус клиента</label>
             <select id="client-status" th:field="*{clientStatus}" th:name="clientStatus" disabled>
               <option value="REGULAR">Регулярный</option>
@@ -255,7 +258,7 @@
           </div>
 
 
-          <div class="form-section">
+          <div class="item113">
             <label for="contact-method">Каким способом обратился клиент/попечитель?</label>
             <select id="contact-method" th:field="*{typeOfTreatment}" th:name="typeOfTreatment" disabled>
               <option value="MESSENGER">Мессенжер</option>
@@ -264,17 +267,17 @@
             </select>
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="first-contact-date">Дата первого обращения (запрос на консультацию)</label>
-            <input type="date" id="first-contact-date" th:field="*{dateOfFirstRequest}" th:name="dateOfFirstRequest" disabled>
+            <input class="div222" type="date" id="first-contact-date" th:field="*{dateOfFirstRequest}" th:name="dateOfFirstRequest" disabled>
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="first-consultation-date">Дата первой консультации</label>
-            <input type="date" id="first-consultation-date" th:field="*{dateOfFirstConsultation}" th:name="dateOfFirstConsultation" disabled>
+            <input class="div222" type="date" id="first-consultation-date" th:field="*{dateOfFirstConsultation}" th:name="dateOfFirstConsultation" disabled>
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="meeting-format">Предпочтительный формат встречи</label>
             <select id="meeting-format" th:field="*{preferredMeetingFormat}" th:name="preferredMeetingFormat" onchange="updateMeetingFields()" disabled>
               <option value="ONLINE" selected>Онлайн</option>
@@ -283,7 +286,7 @@
           </div>
 
           <div id="online-platforms">
-            <div class="form-section">
+            <div class="item113">
               <label for="online-platform">Выбрать/указать площадку взаимодействия</label>
               <select id="online-platform" th:field="*{onlineMeetingPlace}" th:name="onlineMeetingPlace" disabled>
                 <option value="ZOOM">Zoom</option>
@@ -297,52 +300,52 @@
           </div>
 
           <div id="offline-address" class="hidden">
-            <div class="form-section">
+            <div class="item113">
               <label for="meeting-address">Адрес проведения встречи</label>
-              <input type="text" id="meeting-address" th:field="*{offlineMeetingPlace}" th:name="offlineMeetingPlace" disabled>
+              <input class="div222" type="text" id="meeting-address" th:field="*{offlineMeetingPlace}" th:name="offlineMeetingPlace" disabled>
             </div>
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="initial-request">Первичный/изначальный запрос клиента на терапию</label>
             <textarea id="initial-request" th:field="*{clientsFirstRequestForTherapy}" th:name="clientsFirstRequestForTherapy" disabled></textarea>
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="fixed-time">Фиксированное время/день недели для встречи (если да, то
               указать)</label>
-            <input type="text" id="fixed-time" th:field="*{fixedTimeForMeeting}" th:name="fixedTimeForMeeting" disabled>
+            <input class="div222" type="text" id="fixed-time" th:field="*{fixedTimeForMeeting}" th:name="fixedTimeForMeeting" disabled>
           </div>
 
-          <div class="form-section">
+          <div class="item113">
             <label for="financial-terms">Финансовые условия</label>
             <textarea id="financial-terms" th:field="*{financialConditions}" th:name="financialConditions" disabled></textarea>
           </div>
-
+          <div class="client-details-content-parent">
           <div>
             <h3>Подробнее...</h3>
-            <div class="form-section">
+            <div class="item113">
               <label for="birth-date">Дата рождения</label>
-              <input type="date" id="birth-date" th:field="*{dateOfBirth}" th:name="dateOfBirth" disabled>
+              <input class="div222" type="date" id="birth-date" th:field="*{dateOfBirth}" th:name="dateOfBirth" disabled>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="address">Адрес проживания</label>
-              <input type="text" id="address" th:field="*{residentialAddress}" th:name="residentialAddress" disabled>
+              <input class="div222" type="text" id="address" th:field="*{residentialAddress}" th:name="residentialAddress" disabled>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="referrals">Коллегиальные рекомендации (поле для заполнения кто вас
                 порекомендовал клиенту)</label>
               <textarea id="referrals" th:field="*{collegialRecommendations}" th:name="collegialRecommendations" disabled></textarea>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="contract-conditions">Особые условия контракта</label>
               <textarea id="contract-conditions" th:field="*{specialTermsOfContract}" th:name="specialTermsOfContract" disabled></textarea>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="marital-status">Семейное положение</label>
               <select id="marital-status" th:field="*{familyStatus}" th:name="familyStatus" disabled>
                 <option value="MARRIED">Женат/Замужем</option>
@@ -357,7 +360,7 @@
               </select>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="preferred-communication-channel">Приоритетный канал коммуникации</label>
               <select id="preferred-communication-channel" th:field="*{priorityCommunicationChannel}" th:name="priorityCommunicationChannel" disabled>
                 <option value="TELEGRAM">Telegram</option>
@@ -369,7 +372,7 @@
               </select>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="supervision">Берётся ли супервизия на данного клиента</label>
               <select id="supervision" th:field="*{supervised}" th:name="supervised" disabled>
                 <option value="YES">Да</option>
@@ -377,48 +380,49 @@
               </select>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="supervisor-info">ФИО супервизора</label>
-              <input type="text" id="supervisor-info" th:field="*{supervisorsSurname}" th:name="supervisorsSurname" disabled>
-              <input type="text" th:field="*{supervisorsName}" th:name="supervisorsName" disabled>
-              <input type="text" th:field="*{supervisorsLastName}" th:name="supervisorsLastName" disabled>
+              <input class="div222" type="text" id="supervisor-info" th:field="*{supervisorsSurname}" th:name="supervisorsSurname" disabled>
+              <input class="div222" type="text" th:field="*{supervisorsName}" th:name="supervisorsName" disabled>
+              <input class="div222" type="text" th:field="*{supervisorsLastName}" th:name="supervisorsLastName" disabled>
             </div>
-            <div class="form-section">
+            <div class="item113">
               <label for="supervisor-phone">Номер телефона супервизора</label>
-              <input type="tel" id="supervisor-phone" th:field="*{supervisorsContact.phone}" th:name="supervisorsContact.phone" disabled>
+              <input class="div222" type="tel" id="supervisor-phone" th:field="*{supervisorsContact.phone}" th:name="supervisorsContact.phone" disabled>
             </div>
-            <div class="form-section">
+            <div class="item113">
               <label for="supervisor-email">Электронная почта супервизора</label>
-              <input type="email" id="supervisor-email" th:field="*{supervisorsContact.email}" th:name="supervisorsContact.email" disabled>
+              <input class="div222" type="email" id="supervisor-email" th:field="*{supervisorsContact.email}" th:name="supervisorsContact.email" disabled>
             </div>
-            <div class="form-section">
+            <div class="item113">
               <label for="supervision-material">Материал для следующих сеансов из супервизии</label>
               <textarea id="supervision-material"th:field="*{materialForNextSessionsFromSupervision}" th:name="materialForNextSessionsFromSupervision" disabled></textarea>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="cotherapist-info">ФИО котерапевта</label>
-              <input type="text" id="cotherapist-info" th:field="*{cotherapistSurname}" th:name="cotherapistSurname" disabled>
-              <input type="text" th:field="*{cotherapistName}" th:name="cotherapistName" disabled>
-              <input type="text" th:field="*{cotherapistLastName}" th:name="cotherapistLastName" disabled>
+              <input class="div222" type="text" id="cotherapist-info" th:field="*{cotherapistSurname}" th:name="cotherapistSurname" disabled>
+              <input class="div222" type="text" th:field="*{cotherapistName}" th:name="cotherapistName" disabled>
+              <input class="div222" type="text" th:field="*{cotherapistLastName}" th:name="cotherapistLastName" disabled>
             </div>
-            <div class="form-section">
+            <div class="item113">
               <label for="cotherapist-phone">Номер телефона котерапевта</label>
-              <input type="tel" id="cotherapist-phone" th:field="*{cotherapistContact.phone}" th:name="cotherapistContact.phone" disabled>
+              <input class="div222" type="tel" id="cotherapist-phone" th:field="*{cotherapistContact.phone}" th:name="cotherapistContact.phone" disabled>
             </div>
-            <div class="form-section">
+            <div class="item113">
               <label for="cotherapist-email">Электронная почта котерапевта</label>
-              <input type="email" id="cotherapist-email" th:field="*{cotherapistContact.email}" th:name="cotherapistContact.email" disabled>
+              <input class="div222" type="email" id="cotherapist-email" th:field="*{cotherapistContact.email}" th:name="cotherapistContact.email" disabled>
             </div>
-            <div class="form-section">
+            <div class="item113">
               <label for="cotherapist-payment-conditions">Условия распределения гонорара между котерапевтами</label>
               <textarea id="cotherapist-payment-conditions" th:field="*{cotherapistPaymentConditions}" th:name="cotherapistPaymentConditions" disabled></textarea>
             </div>
 
-            <div class="form-section">
+            <div class="item113">
               <label for="notes">Заметки</label>
               <textarea id="notes" th:field="*{notes}" th:name="notes" disabled></textarea>
             </div>
+          </div>
           </div>
           <button id="saveButton" style="display: none" type="submit">Отправить</button>
         </form>
@@ -572,6 +576,43 @@
   addClientBtn.addEventListener('click', () =>
   {
     window.location.href = '/SimplePsy/V1/customer/customer-form';
+  });
+  const customerSearch = document.getElementById('customerSearch');
+  const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
+  customerSearch.addEventListener('input', function () {
+    const query = customerSearch.value;
+
+    if (query.length > 2) { // Запрашиваем данные только если введено больше 2 символов
+      fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+              .then(response => response.json())
+              .then(customers => {
+                const filteredCustomers = customers.filter(customer =>
+                        customer.name.toLowerCase().includes(query.toLowerCase()) ||
+                        customer.surname.toLowerCase().includes(query.toLowerCase())
+                );
+
+                const dataList = document.getElementById('customerList');
+                dataList.innerHTML = ''; // Очищаем предыдущие результаты
+
+                filteredCustomers.forEach(customer => {
+                  const option = document.createElement('option');
+                  option.value = `${customer.name} ${customer.surname}`;
+                  option.dataset.id = customer.id;
+                  dataList.appendChild(option);
+                });
+              });
+    }
+  });
+
+  customerSearch.addEventListener('change', function () {
+    const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+            .find(option => option.value === customerSearch.value);
+
+    if (selectedOption) {
+      const customerId = selectedOption.dataset.id;
+      window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
+    }
   });
 </script>
 </body>

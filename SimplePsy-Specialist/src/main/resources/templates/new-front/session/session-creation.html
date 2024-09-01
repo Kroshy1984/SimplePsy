@@ -35,7 +35,7 @@
     />
     <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList">
     <datalist id="clientsList"></datalist>
-    <input type="hidden" th:field="*{clientId}" id="clientId">
+    <input type="hidden" th:name="${clientId}" th:field="*{clientId}" id="clientId">
   </div>
 
   <div class="div106">

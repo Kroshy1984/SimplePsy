@@ -92,9 +92,9 @@ public class ScoringController {
         System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
         Client client = clientService.findById(customer.getId());
-
         if (client == null)
         {
+            System.out.println("creating new client");
             client = new Client();
             client.setId(customer.getId());
             client.setTypeOfClient(customer.getTypeOfClient());

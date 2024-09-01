@@ -200,6 +200,20 @@ public class CustomerController {
         model.addAttribute("scorings", scorings);
         return "new-front/test/customers-tests-list";
     }
+    @GetMapping("/findAll/{specialistId}")
+    public ResponseEntity<List<Customer>> findAllCustomer(@PathVariable String specialistId)
+    {
+        System.out.println("currentSpecialistId: " + specialistId);
+        Specialist specialist = specialistService.findById(specialistId);
+        List<String> customerIds = specialist.getCustomerIds();
+        List<Customer> customers = new ArrayList<>();
+        for (String customerId : customerIds) {
+            customers.add(customerService.findById(customerId));
+        }
+        System.out.println("Customers list:");
+        customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
+        return ResponseEntity.ok(customers);
+    }
     @GetMapping("/findAll")
     public ResponseEntity<List<Customer>> findAllCustomer()
     {

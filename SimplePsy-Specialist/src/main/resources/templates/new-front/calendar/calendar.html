@@ -16,44 +16,6 @@
   />
 </head>
 <body>
-<!--  <style>-->
-<!--    /*.modal {*/-->
-<!--    /*  display: none;*/-->
-<!--    /*  position: fixed;*/-->
-<!--    /*  left: 0;*/-->
-<!--    /*  top: 0;*/-->
-<!--    /*  width: 100%;*/-->
-<!--    /*  height: 100%;*/-->
-<!--    /*  overflow: auto;*/-->
-<!--    /*  background-color: rgba(0, 0, 0, 0.5);*/-->
-<!--    /*}*/-->
-
-<!--    /*!* Контент модального окна *!*/-->
-<!--    /*.modal-content {*/-->
-<!--    /*  background-color: #fff;*/-->
-<!--    /*  margin: 15% auto;*/-->
-<!--    /*  padding: 20px;*/-->
-<!--    /*  border: 1px solid #888;*/-->
-<!--    /*  width: 400px;*/-->
-<!--    /*  border-radius: 10px;*/-->
-<!--    /*}*/-->
-
-<!--    /* Кнопка закрытия модального окна */-->
-<!--    .close-modal {-->
-<!--      color: #6B7A99;-->
-<!--      float: right;-->
-<!--      font-size: 28px;-->
-<!--      font-weight: bold;-->
-<!--      cursor: pointer;-->
-<!--    }-->
-
-<!--    .close-modal:hover,-->
-<!--    .close-modal:focus {-->
-<!--      color: black;-->
-<!--      text-decoration: none;-->
-<!--      cursor: pointer;-->
-<!--    }-->
-<!--  </style>-->
 <div class="div37">
   <div class="line34"></div>
   <div class="image-11"></div>
@@ -79,9 +41,13 @@
                       alt=""
                       src="/images/icon-1@2x.png"
               />
-
+              <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
               <div class="search-input">
-                <input type="text" class = "search1" placeholder="Найти клиента...">
+                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+                <datalist id="customerList">
+
+                </datalist>
+
               </div>
             </div>
           </div>
@@ -248,7 +214,7 @@
     <div id="modal-body"></div>
   </div>
 </div>
-<script>
+<script defer>
   document.addEventListener('DOMContentLoaded', function() {
     const calendarBody = document.getElementById('calendarBody');
     const viewModeElem = document.getElementById('viewMode');
@@ -528,7 +494,7 @@
               })
               .catch(error => console.error('Ошибка загрузки:', error));
 
-      fetch('/SimplePsy/V1/customer/findAll')
+      fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
               .then(response => response.json())
               .then(clients => {
                 const dataList = document.getElementById('clientsList');
@@ -636,6 +602,43 @@
               console.error('Error loading modal content:', error);
             });
   }
+  const searchInput = document.getElementById('customerSearch');
+  const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
+  searchInput.addEventListener('input', function () {
+    const query = searchInput.value;
+
+    if (query.length > 2) { // Запрашиваем данные только если введено больше 2 символов
+      fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+              .then(response => response.json())
+              .then(customers => {
+                const filteredCustomers = customers.filter(customer =>
+                        customer.name.toLowerCase().includes(query.toLowerCase()) ||
+                        customer.surname.toLowerCase().includes(query.toLowerCase())
+                );
+
+                const dataList = document.getElementById('customerList');
+                dataList.innerHTML = ''; // Очищаем предыдущие результаты
+
+                filteredCustomers.forEach(customer => {
+                  const option = document.createElement('option');
+                  option.value = `${customer.name} ${customer.surname}`;
+                  option.dataset.id = customer.id;
+                  dataList.appendChild(option);
+                });
+              });
+    }
+  });
+
+  searchInput.addEventListener('change', function () {
+    const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+            .find(option => option.value === searchInput.value);
+
+    if (selectedOption) {
+      const customerId = selectedOption.dataset.id;
+      window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
+    }
+  });
 </script>
 </body>
 </html>

@@ -32,9 +32,12 @@ public class ClientService {
     }
 
     public Client findById(String clientId) {
-        Client client = clientRepository.findById(clientId).get();
-        System.out.println("found the Client name: " + client.getName());
-        return client;
+        return clientRepository.findById(clientId)
+                .map(client -> {
+                    System.out.println("found the Client name: " + client.getName());
+                    return client;
+                })
+                .orElse(null);
     }
 
     public Client getClientByCustomerId(String customerId) {
