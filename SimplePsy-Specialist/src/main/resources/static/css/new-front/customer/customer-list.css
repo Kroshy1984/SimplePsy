@@ -2569,6 +2569,9 @@ h2 {
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+.frame-parent32:hover {
+  cursor: pointer;
+}
 .div44,
 .feedback-frame,
 .feedback1 {

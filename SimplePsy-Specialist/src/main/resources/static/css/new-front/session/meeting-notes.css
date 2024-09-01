@@ -1638,6 +1638,9 @@
   flex-direction: row;
   gap: var(--gap-26xl);
 }
+.frame-parent102:hover{
+    cursor: pointer;
+}
 .frame-wrapper63,
 .icon-parent21 {
   width: 210px;

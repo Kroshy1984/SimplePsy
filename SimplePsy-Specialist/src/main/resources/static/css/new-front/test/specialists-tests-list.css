@@ -1856,6 +1856,9 @@
     justify-content: space-between;
     gap: var(--gap-xl);
   }
+  .feedback-button2:hover{
+      cursor: pointer;
+  }
   .div201,
   .footer,
   .footer-left {

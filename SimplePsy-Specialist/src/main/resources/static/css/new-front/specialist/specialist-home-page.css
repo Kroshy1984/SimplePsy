@@ -1028,6 +1028,9 @@ p {
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+.frame-parent59:hover{
+    cursor: pointer;
+}
 .icon-parent13 {
   width: 210px;
   justify-content: flex-start;
