@@ -1623,6 +1623,9 @@
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+.frame-parent80:hover{
+    cursor: pointer;
+}
 .frame-parent74,
 .icon-parent17 {
   display: flex;

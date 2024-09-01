@@ -333,3 +333,55 @@
 .sidebar1-fix-width{
   width: 240px;
 }
+.feedback-item {
+  padding-top: 925px;
+  padding-left: calc(50% - 100px);
+  width: 230px;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  text-align: left;
+}
+.feedback-button {
+  flex: 1;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+}
+.frame-parent13 {
+  flex: 1;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.frame-parent13:hover{
+  cursor: pointer;
+}
+.feedback-button,
+.feedback-item,
+.frame-parent13 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.icon30 {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  object-fit: cover;
+  min-height: 30px;
+}
+.send-feedback-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-8xs) 0 0;
+}
+.send-feedback1 {
+  position: relative;
+  line-height: 20px;
+  font-weight: 700;
+}
+.icon31 {
+  height: 30px;
+  width: 30px;
+  position: relative;
+}

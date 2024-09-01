@@ -705,9 +705,7 @@ b {
 }
 
 .frame-parent13:hover{
-  background-color: var(--color-gainsboro-100);
   cursor: pointer;
-
 }
 
 .feedback-button {

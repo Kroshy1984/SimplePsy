@@ -720,6 +720,9 @@
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+.feedback-link-parent:hover {
+  cursor: pointer;
+}
 .icon-parent25 {
   width: 210px;
   justify-content: flex-start;

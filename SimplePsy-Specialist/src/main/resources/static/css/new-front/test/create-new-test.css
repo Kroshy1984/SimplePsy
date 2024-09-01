@@ -1601,6 +1601,9 @@
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+.feedback-label-parent:hover{
+    cursor: pointer;
+}
 .div340,
 .feedback-container2,
 .feedback-row {

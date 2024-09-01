@@ -1537,6 +1537,9 @@
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+.frame-parent165:hover{
+    cursor: pointer;
+}
 .div338,
 .feedback-content1,
 .feedback4 {
