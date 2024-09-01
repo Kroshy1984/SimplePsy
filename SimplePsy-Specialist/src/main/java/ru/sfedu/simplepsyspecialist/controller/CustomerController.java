@@ -58,12 +58,12 @@ public class CustomerController {
 //    }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newCustomer(@ModelAttribute("customer") Customer customer)
+    public String newCustomer(@ModelAttribute("customer") Customer customer)
     {
         System.out.println("Got the customer with id:\n" + customer.getId());
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
-        return ResponseEntity.ok(newCustomerId);
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
     @PostMapping("/update")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer)

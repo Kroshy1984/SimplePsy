@@ -17,7 +17,7 @@
 </head>
 <body>
 <form th:action="@{/SimplePsy/V1/customer/new}" th:object="${customer}" method="post">
-<input th:name="${customer.id}" th:field="*{id}" hidden="hidden" disabled>
+<input th:name="${customer.id}" th:field="*{id}" hidden="hidden">
 <div class="div216">
   <div class="settings6"></div>
   <div class="item112">
@@ -212,7 +212,7 @@
         <div class="component19">
           <div class="item113">
             <div class="div221">Тип клиента</div>
-            <input class="div222" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
+            <input class="div222" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}">
           </div>
           <div class="item113">
             <div class="div221">Статус клиента</div>
@@ -231,7 +231,7 @@
           </div>
           <div class="item113">
             <div class="div221">Номер телефона первого клиента</div>
-            <input class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}">
+            <input class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}" required>
           </div>
           <div class="item113">
             <div class="div221">Почта первого клиента</div>

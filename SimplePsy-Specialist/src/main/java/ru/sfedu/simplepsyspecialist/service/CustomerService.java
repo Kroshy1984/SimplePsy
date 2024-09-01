@@ -42,7 +42,12 @@ public class CustomerService {
     }
 
     public Customer findById(String id) {
-       return customerRepository.findById(id).get();
+        return customerRepository.findById(id)
+                .map(client -> {
+                    System.out.println("found the Client name: " + client.getName());
+                    return client;
+                })
+                .orElse(null);
     }
 
     public Customer saveCustomer(Customer customer) {

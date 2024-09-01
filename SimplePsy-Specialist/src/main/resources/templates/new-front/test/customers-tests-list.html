@@ -358,7 +358,7 @@
             .catch(error => console.error('Ошибка загрузки:', error));
 
         // Загружаем список клиентов и добавляем необходимые обработчики событий
-        fetch('/SimplePsy/V1/customer/findAll')
+        fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
             .then(response => response.json())
             .then(clients => {
                 const dataList = document.getElementById('clientsList');
