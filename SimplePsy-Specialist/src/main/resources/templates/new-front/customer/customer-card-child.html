@@ -198,7 +198,7 @@
                     <div class="frame-parent149">
                         <div class="rectangle-parent149">
                             <div class="frame-child175"></div>
-                            <div class="div218">Редактировать</div>
+                            <div class="div218" onclick="toggleEdit()">Редактировать</div>
                         </div>
                         <div class="rectangle-parent150">
                             <div class="frame-child176"></div>
@@ -215,53 +215,50 @@
                 <div class="component19">
                     <div class="item113">
                         <div class="div221">Тип клиента</div>
-                        <input class="div222" th:name="${customer.typeOfClient.translation}"  th:field="*{typeOfClient}">
+                        <div class="div222" th:text="${customer.typeOfClient.translation}"></div>
                     </div>
                     <div class="item113">
                         <div class="div221">Статус клиента</div>
-                        <select id="client-status" th:field="*{clientStatus}" th:name="clientStatus" disabled>
-                            <option value="REGULAR">Регулярный</option>
-                            <option value="ON_REQUEST">По запросу</option>
-                            <option value="COMPLETED">Завершён</option>
-                            <option value="APPLICATION">Заявка</option>
+                        <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}">
+                            <option value="CHILD">Ребенок</option>
                         </select>
                     </div>
                     <div class="item113">
                         <div class="div221">ФИО ребенка</div>
-                        <input class="div222" th:name="${customer.childSurname}" th:field="*{childSurname}">
-                        <input class="div222" th:name="${customer.childName}" th:field="*{childName}">
-                        <input class="div222" th:name="${customer.childLastName}" th:field="*{childLastName}">
+                        <input class="div222" th:name="${customer.childSurname}" th:field="*{childSurname}" disabled>
+                        <input class="div222" th:name="${customer.childName}" th:field="*{childName}" disabled>
+                        <input class="div222" th:name="${customer.childLastName}" th:field="*{childLastName}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Номер телефона ребенка</div>
-                        <input class="div222" th:name="${customer.childContact.phone}" th:field="*{childContact.phone}">
+                        <input class="div222" th:name="${customer.childContact.phone}" th:field="*{childContact.phone}" disabled>
                     <div class="item113">
                         <div class="div221">Почта ребенка</div>
-                        <input class="div222" th:name="${customer.childContact.email}"  th:field="*{childContact.email}">
+                        <input class="div222" th:name="${customer.childContact.email}"  th:field="*{childContact.email}" disabled>
                         </input>
                     </div>
                     <div class="item113">
                         <div class="div221">Пол ребенка</div>
-                        <select id="child-gender" th:name="childSex" th:field="*{childSex}">
+                        <select id="child-gender" th:name="childSex" th:field="*{childSex}" disabled>
                             <option value="MALE">Мужской</option>
                             <option value="FEMALE">Женский</option>
                         </select>
                     </div>
                     <div class="item113">
                         <div class="div221">Запрос взрослого на терапию: желаемый результат от прохождения терапии</div>
-                        <input class="div222" th:name="${customer.adultDesiredResult}"  th:field="*{adultDesiredResult}">
+                        <input class="div222" th:name="${customer.adultDesiredResult}"  th:field="*{adultDesiredResult}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Как ребенок объясняет причину своего посещения психолога</div>
-                        <input class="div222" th:name="${customer.childVisitReason}"  th:field="*{childVisitReason}">
+                        <input class="div222" th:name="${customer.childVisitReason}"  th:field="*{childVisitReason}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Что сам ребенок хотел изменить, если хотел?</div>
-                        <input class="div222" th:name="${customer.childDesireOfChange}"  th:field="*{childDesireOfChange}">
+                        <input class="div222" th:name="${customer.childDesireOfChange}"  th:field="*{childDesireOfChange}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Кто приводит клиента</div>
-                        <select id="who-brings" th:name="leadsClient" th:field="*{leadsClient}">
+                        <select id="who-brings" th:name="leadsClient" th:field="*{leadsClient}" disabled>
                             <option value="PARENT">Родитель</option>
                             <option value="BOTH_PARENTS">Оба родителя</option>
                             <option value="GUARDIAN">Попечитель</option>
@@ -271,50 +268,49 @@
                     <div id="parent-fields">
                         <div class="item113">
                             <div class="div221">ФИО родителя</div>
-                            <input class="div222" th:name="${customer.parentSurname}" th:field="*{parentSurname}">
-                            <input class="div222" th:name="${customer.parentName}" th:field="*{parentName}">
-                            <input class="div222" th:name="${customer.parentLastName}" th:field="*{parentLastName}">
+                            <input class="div222" th:name="${customer.parentSurname}" th:field="*{parentSurname}" disabled>
+                            <input class="div222" th:name="${customer.parentName}" th:field="*{parentName}" disabled>
+                            <input class="div222" th:name="${customer.parentLastName}" th:field="*{parentLastName}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Номер телефона родителя</div>
-                            <input class="div222" th:name="${customer.parentContact.phone}"  th:field="*{parentContact.phone}">
+                            <input class="div222" th:name="${customer.parentContact.phone}"  th:field="*{parentContact.phone}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Почта родителя</div>
-                            <input class="div222" th:name="${customer.parentContact.email}"  th:field="*{parentContact.email}">
-                            </input>
+                            <input class="div222" th:name="${customer.parentContact.email}"  th:field="*{parentContact.email}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Пол родителя</div>
-                            <select id="parent-gender" th:name="parentSex" th:field="*{parentSex}">
+                            <select id="parent-gender" th:name="parentSex" th:field="*{parentSex}" disabled>
                                 <option value="MALE">Мужской</option>
                                 <option value="FEMALE">Женский</option>
                             </select>
                         </div>
                         <div class="item113">
                             <div class="div221">Город родителя</div>
-                            <input class="div222" th:name="${customer.parentCity}"  th:field="*{parentCity}">
+                            <input class="div222" th:name="${customer.parentCity}"  th:field="*{parentCity}" disabled>
                         </div>
                     </div>
 
                     <div id="both-parents-fields" class="hidden">
                         <div class="item113">
                             <div class="div221">ФИО первого родителя</div>
-                            <input class="div222" th:name="${customer.firstParentsSurname}" th:field="*{firstParentsSurname}">
-                            <input class="div222" th:name="${customer.firstParentsName}" th:field="*{firstParentsName}">
-                            <input class="div222" th:name="${customer.firstParentsLastName}" th:field="*{firstParentsLastName}">
+                            <input class="div222" th:name="${customer.firstParentsSurname}" th:field="*{firstParentsSurname}" disabled>
+                            <input class="div222" th:name="${customer.firstParentsName}" th:field="*{firstParentsName}" disabled>
+                            <input class="div222" th:name="${customer.firstParentsLastName}" th:field="*{firstParentsLastName}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Номер телефона первого родителя</div>
-                            <input class="div222" th:name="${customer.firstParentsContact.phone}"  th:field="*{firstParentsContact.phone}">
+                            <input class="div222" th:name="${customer.firstParentsContact.phone}"  th:field="*{firstParentsContact.phone}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Почта первого родителя</div>
-                            <input class="div222" th:name="${customer.firstParentsContact.email}"  th:field="*{firstParentsContact.email}">
+                            <input class="div222" th:name="${customer.firstParentsContact.email}"  th:field="*{firstParentsContact.email}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Пол первого родителя</div>
-                            <input class="div222" th:name="${customer.firstParentsSex.translation}"  th:field="*{firstParentsSex}">
+                            <input class="div222" th:name="${customer.firstParentsSex}"  th:field="*{firstParentsSex}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Город первого родителя</div>
@@ -322,59 +318,67 @@
                         </div>
                         <div class="item113">
                             <div class="div221">ФИО второго родителя</div>
-                            <input class="div222" th:name="${customer.secondParentsSurname}" th:field="*{secondParentsSurname}">
-                            <input class="div222" th:name="${customer.secondParentsName}" th:field="*{secondParentsName}">
-                            <input class="div222" th:name="${customer.secondParentsLastName}" th:field="*{secondParentsLastName}">
+                            <input class="div222" th:name="${customer.secondParentsSurname}" th:field="*{secondParentsSurname}" disabled>
+                            <input class="div222" th:name="${customer.secondParentsName}" th:field="*{secondParentsName}" disabled>
+                            <input class="div222" th:name="${customer.secondParentsLastName}" th:field="*{secondParentsLastName}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Номер телефона второго родителя</div>
-                            <input class="div222" th:name="${customer.secondParentsContact.phone}"  th:field="*{secondParentsContact.phone}">
+                            <input class="div222" th:name="${customer.secondParentsContact.phone}"  th:field="*{secondParentsContact.phone}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Почта второго родителя</div>
-                            <input class="div222" th:name="${customer.secondParentsContact.email}"  th:field="*{secondParentsContact.email}">
+                            <input class="div222" th:name="${customer.secondParentsContact.email}"  th:field="*{secondParentsContact.email}" disabled>
                             </input>
                         </div>
                         <div class="item113">
                             <div class="div221">Пол второго родителя</div>
-                            <input class="div222" th:name="${customer.secondParentsSex.translation}"  th:field="*{secondParentsSex}">
+                            <input class="div222" th:name="${customer.secondParentsSex}"  th:field="*{secondParentsSex}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Город второго родителя</div>
-                            <input class="div222" th:name="${customer.secondParentsCity}"  th:field="*{secondParentsCity}">
+                            <input class="div222" th:name="${customer.secondParentsCity}"  th:field="*{secondParentsCity}" disabled>
                         </div>
                     </div>
 
                     <div id="guardian-fields" class="hidden">
                         <div class="item113">
                             <div class="div221">ФИО попечителя</div>
-                            <input class="div222" th:name="${customer.trusteesSurname}" th:field="*{trusteesSurname}">
-                            <input class="div222" th:name="${customer.trusteesName}" th:field="*{trusteesName}">
-                            <input class="div222" th:name="${customer.trusteesLastName}" th:field="*{trusteesLastName}">
+                            <input class="div222" th:name="${customer.trusteesSurname}" th:field="*{trusteesSurname}" disabled>
+                            <input class="div222" th:name="${customer.trusteesName}" th:field="*{trusteesName}" disabled>
+                            <input class="div222" th:name="${customer.trusteesLastName}" th:field="*{trusteesLastName}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Номер телефона попечителя</div>
-                            <input class="div222" th:name="${customer.trusteesContact.phone}"  th:field="*{trusteesContact.phone}">
+                            <input class="div222" th:name="${customer.trusteesContact.phone}"  th:field="*{trusteesContact.phone}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Почта попечителя</div>
-                            <input class="div222" th:name="${customer.trusteesContact.email}"  th:field="*{trusteesContact.email}">
+                            <input class="div222" th:name="${customer.trusteesContact.email}"  th:field="*{trusteesContact.email}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Пол попечителя</div>
-                            <input class="div222" th:name="${customer.trusteesSex.translation}"  th:field="*{trusteesSex}">
+                            <input class="div222" th:name="${customer.trusteesSex}"  th:field="*{trusteesSex}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Город попечителя</div>
-                            <input class="div222" th:name="${customer.trusteesCity}"  th:field="*{trusteesCity}">
+                            <input class="div222" th:name="${customer.trusteesCity}"  th:field="*{trusteesCity}" disabled>
                         </div>
                     </div>
-
+                        <div class="item113">
+                            <div class="div221">Статус клиента</div>
+                            <select id="client-status" th:name="${customer.clientStatus}"  th:field="*{clientStatus}" disabled>
+                                <option value="REGULAR">Регулярный</option>
+                                <option value="ON_REQUEST">По запросу</option>
+                                <option value="COMPLETED">Завершён</option>
+                                <option value="APPLICATION">Заявка</option>
+                            </select>
+                        </div>
                     <div class="item113">
                         <div class="div221">
                             Каким способом обратился клиент/попечитель
                         </div>
-                        <select id="contact-method" th:name="typeOfTreatment" th:field="*{typeOfTreatment}">
+                        <select id="contact-method" th:name="typeOfTreatment" th:field="*{typeOfTreatment}" disabled>
                             <option value="MESSENGER">Мессенджер</option>
                             <option value="SOCIAL_NETWORK">Социальная сеть</option>
                             <option value="AGGREGATOR">Агрегатор</option>
@@ -384,15 +388,15 @@
                         <div class="div221">
                             Дата первого обращения (запрос на консультацию)
                         </div>
-                        <input class="div222" th:name="${customer.dateOfFirstRequest}"  th:field="*{dateOfFirstRequest}">
+                        <input class="div222" th:name="${customer.dateOfFirstRequest}"  th:field="*{dateOfFirstRequest}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Дата первой консультации</div>
-                        <input class="div222" th:name="${customer.dateOfFirstConsultation}"  th:field="*{dateOfFirstConsultation}">
+                        <input class="div222" th:name="${customer.dateOfFirstConsultation}"  th:field="*{dateOfFirstConsultation}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Предпочтительный формат встречи</div>
-                        <select id="meeting-format" th:name="preferredMeetingFormat"  th:field="*{preferredMeetingFormat}">
+                        <select id="meeting-format" th:name="preferredMeetingFormat"  th:field="*{preferredMeetingFormat}" disabled>
                             <option value="ONLINE" selected>Онлайн</option>
                             <option value="OFFLINE">Оффлайн</option>
                         </select>
@@ -401,7 +405,7 @@
                         <div class="div221">
                             Для онлайн выбрать/указать площадку взаимодействия
                         </div>
-                        <select id="online-platform" th:name="onlineMeetingPlace" th:field="*{onlineMeetingPlace}">
+                        <select id="online-platform" th:name="onlineMeetingPlace" th:field="*{onlineMeetingPlace}" disabled>
                             <option value="ZOOM">Zoom</option>
                             <option value="TELEMOST">Телемост</option>
                             <option value="GOOGLE_MEET">Google Meet</option>
@@ -414,26 +418,26 @@
                         <div class="div221">
                             Для оффлайн выбрать адрес проведения встречи
                         </div>
-                        <input class="div222" th:name="${customer.offlineMeetingPlace}"  th:field="*{offlineMeetingPlace}">
+                        <input class="div222" th:name="${customer.offlineMeetingPlace}"  th:field="*{offlineMeetingPlace}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">
                             Первичный/изначальный запрос клиента на терапию
                         </div>
-                        <input class="div222" th:name="${customer.clientsFirstRequestForTherapy}"  th:field="*{clientsFirstRequestForTherapy}">
+                        <input class="div222" th:name="${customer.clientsFirstRequestForTherapy}"  th:field="*{clientsFirstRequestForTherapy}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">
                             Фиксированное время/день недели для встречи (если да, то
                             указать)
                         </div>
-                        <input class="div222" th:name="${customer.fixedTimeForMeeting}"  th:field="*{fixedTimeForMeeting}">
+                        <input class="div222" th:name="${customer.fixedTimeForMeeting}"  th:field="*{fixedTimeForMeeting}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Финансовые условия</div>
-                        <input class="div222" th:name="${customer.financialConditions}"  th:field="*{financialConditions}">
+                        <input class="div222" th:name="${customer.financialConditions}"  th:field="*{financialConditions}" disabled>
                     </div>
-                </div>
+                 </div>
             </div>
         </div>
         </div>
@@ -469,26 +473,26 @@
                 <div class="client-details-form">
                     <div class="item113">
                         <div class="div221">Дата рождения</div>
-                        <input class="div222" th:name="${customer.dateOfBirth}"  th:field="*{dateOfBirth}">
+                        <input class="div222" th:name="${customer.dateOfBirth}"  th:field="*{dateOfBirth}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Адрес проживания</div>
-                        <input class="div222" th:name="${customer.residentialAddress}"  th:field="*{residentialAddress}">
+                        <input class="div222" th:name="${customer.residentialAddress}"  th:field="*{residentialAddress}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">
                             Коллегиальные рекомендации (поле для заполнения кто вас
                             порекомендовал клиенту)
                         </div>
-                        <input class="div222" th:name="${customer.collegialRecommendations}"  th:field="*{collegialRecommendations}">
+                        <input class="div222" th:name="${customer.collegialRecommendations}"  th:field="*{collegialRecommendations}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Особые условия контракта</div>
-                        <input class="div222" th:name="${customer.specialTermsOfContract}"  th:field="*{specialTermsOfContract}">
+                        <input class="div222" th:name="${customer.specialTermsOfContract}"  th:field="*{specialTermsOfContract}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Семейное положение</div>
-                        <select id="marital-status" th:name="familyStatus" th:field="*{familyStatus}">
+                        <select id="marital-status" th:name="familyStatus" th:field="*{familyStatus}" disabled>
                             <option value="MARRIED">Женат/Замужем</option>
                             <option value="SINGLE">Холост/Незамужем</option>
                             <option value="DIVORCED">В разводе</option>
@@ -505,7 +509,7 @@
                             Приоритетный канал коммуникации (выпадающий список куда
                             писать)
                         </div>
-                        <select id="preferred-communication-channel" th:name="priorityCommunicationChannel" th:field="*{priorityCommunicationChannel}">
+                        <select id="preferred-communication-channel" th:name="priorityCommunicationChannel" th:field="*{priorityCommunicationChannel}" disabled>
                             <option value="TELEGRAM">Telegram</option>
                             <option value="WHATSAPP">WhatsApp</option>
                             <option value="VIBER">Viber</option>
@@ -518,7 +522,7 @@
                         <div class="div221">
                             Берется ли супервизия на данного клиента
                         </div>
-                        <select id="supervision" th:name="supervised" th:field="*{supervised}">
+                        <select id="supervision" th:name="supervised" th:field="*{supervised}" disabled>
                             <option value="YES">Да</option>
                             <option value="NO">Нет</option>
                         </select>
@@ -527,47 +531,47 @@
                     <div id="supervisor-fields">
                         <div class="item113">
                             <div class="div221">ФИО супервизора</div>
-                            <input class="div222" th:name="${customer.supervisorsSurname}" th:field="*{supervisorsSurname}">
-                            <input class="div222" th:name="${customer.supervisorsName}" th:field="*{supervisorsName}">
-                            <input class="div222" th:name="${customer.supervisorsLastName}" th:field="*{supervisorsLastName}">
+                            <input class="div222" th:name="${customer.supervisorsSurname}" th:field="*{supervisorsSurname}" disabled>
+                            <input class="div222" th:name="${customer.supervisorsName}" th:field="*{supervisorsName}" disabled>
+                            <input class="div222" th:name="${customer.supervisorsLastName}" th:field="*{supervisorsLastName}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Номер телефона супервизора</div>
-                            <input class="div222" th:name="${customer.supervisorsContact.phone}"  th:field="*{supervisorsContact.phone}">
+                            <input class="div222" th:name="${customer.supervisorsContact.phone}"  th:field="*{supervisorsContact.phone}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">Электронная почта супервизора</div>
-                            <input class="div222" th:name="${customer.supervisorsContact.email}"  th:field="*{supervisorsContact.email}">
+                            <input class="div222" th:name="${customer.supervisorsContact.email}"  th:field="*{supervisorsContact.email}" disabled>
                         </div>
                         <div class="item113">
                             <div class="div221">
                                 Материал для следующих сеансов из супервизии
                             </div>
-                            <input class="div222" th:name="${customer.materialForNextSessionsFromSupervision}"  th:field="*{materialForNextSessionsFromSupervision}">
+                            <input class="div222" th:name="${customer.materialForNextSessionsFromSupervision}"  th:field="*{materialForNextSessionsFromSupervision}" disabled>
                         </div>
                     </div>
 
                     <div class="item113">
                         <div class="div221">ФИО котерапевта</div>
-                        <input class="div222" th:name="${customer.cotherapistSurname}" th:field="*{cotherapistSurname}">
-                        <input class="div222" th:name="${customer.cotherapistName}" th:field="*{cotherapistName}">
-                        <input class="div222" th:name="${customer.cotherapistLastName}" th:field="*{cotherapistLastName}">
+                        <input class="div222" th:name="${customer.cotherapistSurname}" th:field="*{cotherapistSurname}" disabled>
+                        <input class="div222" th:name="${customer.cotherapistName}" th:field="*{cotherapistName}" disabled>
+                        <input class="div222" th:name="${customer.cotherapistLastName}" th:field="*{cotherapistLastName}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Номер телефона котерапевта</div>
-                        <input class="div222" th:name="${customer.cotherapistContact.phone}"  th:field="*{cotherapistContact.phone}">
+                        <input class="div222" th:name="${customer.cotherapistContact.phone}"  th:field="*{cotherapistContact.phone}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Электронная почта котерапевта</div>
-                        <input class="div222" th:name="${customer.cotherapistContact.email}"  th:field="*{cotherapistContact.email}">
+                        <input class="div222" th:name="${customer.cotherapistContact.email}"  th:field="*{cotherapistContact.email}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Условия распределения гонорара между котерапевтами</div>
-                        <input class="div222" th:name="${customer.cotherapistPaymentConditions}"  th:field="*{cotherapistPaymentConditions}">
+                        <input class="div222" th:name="${customer.cotherapistPaymentConditions}"  th:field="*{cotherapistPaymentConditions}" disabled>
                     </div>
                     <div class="item113">
                         <div class="div221">Заметки</div>
-                        <input class="div222" th:name="${customer.notes}"  th:field="*{notes}">
+                        <input class="div222" th:name="${customer.notes}"  th:field="*{notes}" disabled>
                     </div>
                 </div>
             </div>
@@ -583,6 +587,19 @@
     </div>
 </div>
 <script>
+    function toggleEdit() {
+        document.querySelectorAll('input').forEach(function(input) {
+            input.removeAttribute('disabled');
+        });
+        document.querySelectorAll('select').forEach(function(input) {
+            input.removeAttribute('disabled');
+        });
+        document.querySelectorAll('textarea').forEach(function(input) {
+            input.removeAttribute('disabled');
+        });
+        document.getElementById('saveButton').style.display = 'block';
+    }
+
     function updateFields() {
         const whoBrings = document.getElementById('who-brings').getAttribute('value');
         document.getElementById('parent-fields').style.display = whoBrings === 'PARENT' ? 'block' : 'none';

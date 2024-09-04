@@ -234,7 +234,11 @@
                       <div class="wrapper14">
                         <b class="b49">Возраст: 20</b>
                       </div>
-                      <b class="client-age-space" th:text="${customer.contact.phone}"></b>
+                      <div th:switch="${customer.typeOfClient}">
+                      <b class="client-age-space" th:case="${customer.typeOfClient.ADULT}" th:text="${customer.contact.phone}"></b>
+                      <b class="client-age-space" th:case="${customer.typeOfClient.COUPLE}" th:text="${customer.firstClientContact.phone}"></b>
+                      <b class="client-age-space" th:case="${customer.typeOfClient.CHILD}" th:text="${customer.childContact.phone}"></b>
+                      </div>
                     </div>
                   </div>
                   <div class="frame-parent26">
@@ -259,7 +263,11 @@
                   </div>
                   <div class="parent2">
                     <b class="b52" th:text="${customer.typeOfClient.translation}"></b>
-                    <b class="helloworldgmailcom3" th:text="${customer.contact.email}"></b>
+                    <div th:switch="${customer.typeOfClient}">
+                      <b class="client-age-space" th:case="${customer.typeOfClient.ADULT}" th:text="${customer.contact.email}"></b>
+                      <b class="client-age-space" th:case="${customer.typeOfClient.COUPLE}" th:text="${customer.firstClientContact.email}"></b>
+                      <b class="client-age-space" th:case="${customer.typeOfClient.CHILD}" th:text="${customer.childContact.email}"></b>
+                    </div>
                   </div>
                 </div>
               </div>

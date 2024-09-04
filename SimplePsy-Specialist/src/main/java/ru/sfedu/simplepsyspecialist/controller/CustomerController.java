@@ -15,7 +15,6 @@ import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,7 +171,7 @@ public class CustomerController {
 
     @PostMapping("/customers/new")
     public String createNewCustomer(@AuthenticationPrincipal UserDetails userDetails,
-                                                    Customer customer) throws IOException {
+                                                    Customer customer) {
 
         customer.cleanAttributes();
         System.out.println(customer.getSurname());
