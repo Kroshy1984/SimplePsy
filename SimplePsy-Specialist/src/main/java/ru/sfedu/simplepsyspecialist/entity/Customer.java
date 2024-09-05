@@ -108,7 +108,7 @@ public class Customer {
     private Contact trusteesContact;
     private Sex trusteesSex;
     private String trusteesCity;
-
+    private List<CompletedScoring> completedScorings;
     public Customer() {
     }
 
@@ -235,6 +235,17 @@ public class Customer {
         this.trusteesContact = trusteesContact;
         this.trusteesSex = trusteesSex;
         this.trusteesCity = trusteesCity;
+    }
+
+
+    public List<CompletedScoring> getCompletedScorings() {
+        return completedScorings;
+    }
+
+    public void addCompletedScoring(CompletedScoring completedScoring) {
+        if (this.completedScorings == null)
+            this.completedScorings = new ArrayList<>();
+        completedScorings.add(completedScoring);
     }
 
     public LocalDate getDateOfFirstRequest() {

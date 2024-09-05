@@ -634,7 +634,7 @@
                 })
                 .catch(error => console.error('Ошибка загрузки:', error));
 
-            fetch('/SimplePsy/V1/customer/findAll')
+            fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
                 .then(response => response.json())
                 .then(clients => {
                     const dataList = document.getElementById('clientsList');

@@ -295,7 +295,7 @@
           sessionsForDay.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
-            sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.client.name} ${session.client.surname}`;
+            sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.name} ${session.customer.surname}`;
             dayElement.appendChild(sessionElement);
           });
         }
@@ -326,7 +326,7 @@
           sessionsForDay.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
-            sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.client.name} ${session.client.surname}`;
+            sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.name} ${session.customer.surname}`;
             dayElement.appendChild(sessionElement);
           });
         }
@@ -349,7 +349,7 @@
           sessionsForHour.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
-            sessionElement.textContent = `${session.client.name} ${session.client.surname} (${session.timeStart} - ${session.timeFinish})`;
+            sessionElement.textContent = `${session.customer.name} ${session.customer.surname} (${session.timeStart} - ${session.timeFinish})`;
             hourElement.appendChild(sessionElement);
           });
         }

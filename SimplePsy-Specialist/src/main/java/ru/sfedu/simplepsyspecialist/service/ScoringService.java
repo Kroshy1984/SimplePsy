@@ -10,17 +10,14 @@ import java.util.List;
 @Service
 public class ScoringService {
     ScoringRepository scoringRepository;
-    ClientService clientService;
     CustomerService customerService;
     ProblemService problemService;
 
     @Autowired
     public ScoringService(ScoringRepository scoringRepository,
-                          ClientService clientService,
                           CustomerService customerService,
                           ProblemService problemService) {
         this.scoringRepository = scoringRepository;
-        this.clientService = clientService;
         this.customerService = customerService;
         this.problemService = problemService;
     }

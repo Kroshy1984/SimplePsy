@@ -116,20 +116,6 @@ public class SpecialistController {
         specialistService.sendRequestToSession(specialist_id, start_date, end_date);
     }*/
 
-    @PostMapping("/calendar")
-    public String sendDates(
-            @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam("start_date") String startDate,
-            @RequestParam("end_date") String endDate
-    ) {
-        System.out.println(startDate);
-        System.out.println(endDate);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        String specialist_id = specialist.getId();
-        specialistService.sendRequestToSession(specialist_id, startDate, endDate);
-        return "redirect:/SimplePsy/V1/specialist/calendar";
-    }
-
     @GetMapping("/customers")
     public String getCustomersList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());

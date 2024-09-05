@@ -7,12 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.Client;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
 import ru.sfedu.simplepsyspecialist.entity.nested.Report;
-import ru.sfedu.simplepsyspecialist.service.ClientService;
+import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
@@ -31,14 +31,14 @@ public class SessionController {
 
     SessionService sessionService;
     SpecialistService specialistService;
-    ClientService clientService;
+    CustomerService customerService;
 
     public SessionController(SessionService sessionService,
                              SpecialistService specialistService,
-                             ClientService clientService) {
+                             CustomerService customerService) {
         this.sessionService = sessionService;
         this.specialistService = specialistService;
-        this.clientService = clientService;
+        this.customerService = customerService;
     }
 
     @GetMapping("/search")
@@ -81,8 +81,8 @@ public class SessionController {
         //System.out.println(session.getClientId());
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
         session.setSpecialistId(specialistId);
-        Client client = clientService.findById(session.getClientId());
-        session.setClient(client);
+        Customer customer = customerService.findById(session.getClientId());
+        session.setCustomer(customer);
         sessionService.createSession(session);
 //        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
 //        System.out.println("Specialist found!");
@@ -209,11 +209,14 @@ public class SessionController {
     }
 
     @GetMapping("report/{sessionId}/projective-method")
-    public String getProjectiveMethod(@PathVariable String sessionId,
+    public String getProjectiveMethod(@AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable String sessionId,
                                       Model model) {
         ProjectiveMethod projectiveMethod = new ProjectiveMethod();
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         model.addAttribute("projectiveMethod", projectiveMethod);
         model.addAttribute("sessionId", sessionId);
+        model.addAttribute("specialist", specialist);
         return "new-front/session/projective-method";
     }
 
@@ -245,10 +248,10 @@ public class SessionController {
 
         session.setClientId(specialistId);
         session.setSpecialistId(specialistId);
-        Client client = new Client();
+        Customer client = new Customer();
         client.setName(session.getTitle());
         client.setSurname(" ");
-        session.setClient(client);
+        session.setCustomer(client);
         LocalDate startDate = session.getDate();
         LocalDate endDate = session.getEndDate();
         int days = endDate.getDayOfYear() - startDate.getDayOfYear();
@@ -257,7 +260,7 @@ public class SessionController {
         for (int i = 1; i < days+1; i++) {
             Session nextSession = new Session();
             nextSession.setSpecialistId(session.getSpecialistId());
-            nextSession.setClient(client);
+            nextSession.setCustomer(client);
             nextSession.setClientId(specialistId);
             nextSession.setTitle(session.getTitle());
             nextSession.setDate(startDate.plusDays(i));

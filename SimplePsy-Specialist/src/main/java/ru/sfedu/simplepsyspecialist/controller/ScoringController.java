@@ -7,11 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.*;
+import ru.sfedu.simplepsyspecialist.entity.CompletedScoring;
+import ru.sfedu.simplepsyspecialist.entity.Customer;
+import ru.sfedu.simplepsyspecialist.entity.Scoring;
+import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.entity.nested.Gender;
 import ru.sfedu.simplepsyspecialist.entity.nested.Sex;
 import ru.sfedu.simplepsyspecialist.entity.nested.TypeOfScoring;
-import ru.sfedu.simplepsyspecialist.service.ClientService;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -27,17 +29,14 @@ public class ScoringController {
 
     public List<String> answers = new ArrayList<>();
     ScoringService scoringService;
-    ClientService clientService;
     CustomerService customerService;
     SpecialistService specialistService;
 
     @Autowired
     public ScoringController(ScoringService scoringService,
                              CustomerService customerService,
-                             ClientService clientService,
                              SpecialistService specialistService) {
         this.scoringService = scoringService;
-        this.clientService = clientService;
         this.customerService = customerService;
         this.specialistService = specialistService;
     }
@@ -91,24 +90,23 @@ public class ScoringController {
         System.out.println("Scoring title: " + completedScoring.getTitle());
         System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
-        Client client = clientService.findById(customer.getId());
-        if (client == null)
-        {
-            System.out.println("creating new client");
-            client = new Client();
-            client.setId(customer.getId());
-            client.setTypeOfClient(customer.getTypeOfClient());
-            client.setName(customer.getName());
-            client.setSurname(customer.getSurname());
-            client.setMiddleName(customer.getLastName()); // Используем lastName как middleName
-            client.setContact(customer.getContact());
-            client.setFinancialConditions(customer.getFinancialConditions());
-            client.setGender(customer.getSex() != null ? convertSexToGender(customer.getSex()) : null);
-            client.setBirthDay(customer.getDateOfBirth());
-            client.setRecommendations(customer.getCollegialRecommendations());
-        }
-        client.addScoring(completedScoring);
-        clientService.save(client);
+//        if (customer == null)
+//        {
+//            System.out.println("creating new client");
+//            customer = new Customer();
+//            customer.setId(customer.getId());
+//            customer.setTypeOfClient(customer.getTypeOfClient());
+//            customer.setName(customer.getName());
+//            customer.setSurname(customer.getSurname());
+//            customer.setLastName(customer.getLastName());
+//            customer.setContact(customer.getContact());
+//            customer.setFinancialConditions(customer.getFinancialConditions());
+//            customer.setSex(customer.getSex() != null ? convertSexToGender(customer.getSex()) : null);
+//            customer.setBirthDay(customer.getDateOfBirth());
+//            customer.setRecommendations(customer.getCollegialRecommendations());
+//        }
+        customer.addCompletedScoring(completedScoring);
+        customerService.saveCustomer(customer);
         return ResponseEntity.ok("Success");
     }
     @GetMapping("test/creation")

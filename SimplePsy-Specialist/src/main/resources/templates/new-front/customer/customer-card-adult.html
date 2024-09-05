@@ -46,7 +46,7 @@
                         alt=""
                         src="/images/icon-1@2x.png"
                 />
-
+                <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
                 <div class="search-wrapper2">
                   <b class="search13">Найти клиента...</b>
                 </div>
@@ -497,7 +497,7 @@
               })
               .catch(error => console.error('Ошибка загрузки:', error));
 
-      fetch('/SimplePsy/V1/customer/findAll')
+      fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
               .then(response => response.json())
               .then(clients => {
                 const dataList = document.getElementById('clientsList');

@@ -28,7 +28,7 @@ public class Session {
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
     private String clientId;
 
-    private Client client;
+    private Customer customer;
     private SessionType sessionType;
     private String title;
     @NotBlank
@@ -60,12 +60,12 @@ public class Session {
         this.endDate = endDate;
     }
 
-    public Client getClient() {
-        return client;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getSpecialistId() {
