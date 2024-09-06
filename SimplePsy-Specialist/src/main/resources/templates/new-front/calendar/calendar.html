@@ -278,18 +278,23 @@
       const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
       const daysInMonth = endOfMonth.getDate();
 
-      // Заполнение сетки для отображения дней
-      for (let i = 0; i < startOfMonth.getDay(); i++) {
+      // Преобразуем день недели так, чтобы неделя начиналась с понедельника
+      let startDay = startOfMonth.getDay();
+      startDay = startDay === 0 ? 6 : startDay - 1; // Если это воскресенье (0), начинаем с понедельника (6), иначе смещаем на 1
+
+      // Добавляем пустые ячейки до первого дня месяца
+      for (let i = 0; i < startDay; i++) {
         const emptyCell = document.createElement('div');
         emptyCell.classList.add('day');
         calendarBody.appendChild(emptyCell);
       }
 
+      // Добавляем ячейки с днями месяца
       for (let i = 1; i <= daysInMonth; i++) {
         const day = new Date(date.getFullYear(), date.getMonth(), i);
         const dayElement = createDayElement(day);
 
-        // Отображение сессий
+        // Отображаем события (сессии) для дня
         const sessionsForDay = sessionsData.filter(session => isSameDay(new Date(session.date), day));
         if (sessionsForDay.length > 0) {
           sessionsForDay.forEach(session => {
@@ -303,6 +308,7 @@
         calendarBody.appendChild(dayElement);
       }
     }
+
     function isSameDay(date1, date2) {
       return date1.getFullYear() === date2.getFullYear() &&
               date1.getMonth() === date2.getMonth() &&
@@ -387,13 +393,17 @@
 
     function getStartOfWeek(date) {
       const startOfWeek = new Date(date);
-      startOfWeek.setDate(date.getDate() - date.getDay());
+      const dayOfWeek = startOfWeek.getDay();
+      const diff = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek; // Смещаем дни так, чтобы понедельник был первым
+      startOfWeek.setDate(date.getDate() + diff);
       return startOfWeek;
     }
 
     function getEndOfWeek(date) {
       const endOfWeek = new Date(date);
-      endOfWeek.setDate(date.getDate() - date.getDay() + 6);
+      const dayOfWeek = endOfWeek.getDay();
+      const diff = (dayOfWeek === 0 ? 0 : 7) - dayOfWeek; // Добавляем дни до конца недели (воскресенье)
+      endOfWeek.setDate(date.getDate() + diff);
       return endOfWeek;
     }
 
