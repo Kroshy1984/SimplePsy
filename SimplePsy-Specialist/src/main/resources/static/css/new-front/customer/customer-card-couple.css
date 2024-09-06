@@ -1,3 +1,7 @@
+textarea {
+  resize: none;
+}
+
 .item113 {
   align-items: center;
   align-self: stretch;
@@ -9,7 +13,7 @@
   var(--padding-5xs);
   min-height: 59px;
   max-width: 100%;
-  gap: 70px;
+  gap: 10px;
 }
 
 .div221,
@@ -1578,7 +1582,6 @@
   align-self: stretch;
   flex-direction: column;
   gap: var(--gap-31xl);
-  text-align: center;
   font-size: var(--bold-16-size);
   color: var(--grey-blue-60);
   font-family: var(--bold-10);

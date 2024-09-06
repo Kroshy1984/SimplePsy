@@ -159,10 +159,9 @@
                 <div class="frame-child58"></div>
                 <b class="b82" th:text="${newSession.date}"></b>
                 <div class="wrapper22"  th:switch="${newSession.customer.typeOfClient}" th:value="${newSession.customer.typeOfClient}">
-<!--                    <b class="b48 customer-name" th:case="${newSession.customer.typeOfClient.ADULT}" th:text="${newSession.customer.surname + ' ' + newSession.customer.name }"></b>-->
-<!--                    <b class="b48 customer-name" th:case="${newSession.customer.typeOfClient.COUPLE}" th:text="${newSession.customer.firstClientSurname + ' ' + newSession.customer.firstClientName}"></b>-->
-<!--                    <b class="b48 customer-name" th:case="${newSession.customer.typeOfClient.CHILD}" th:text="${newSession.customer.childSurname + ' ' + newSession.customer.childName}"></b>-->
-                  <b class="b83" th:text="${newSession.customer.name + ' ' + newSession.customer.surname}"></b>
+                    <b class="b83" th:case="${newSession.customer.typeOfClient.ADULT}" th:text="${newSession.customer.surname + ' ' + newSession.customer.name }"></b>
+                    <b class="b83" th:case="${newSession.customer.typeOfClient.COUPLE}" th:text="${newSession.customer.firstClientSurname + ' ' + newSession.customer.firstClientName}"></b>
+                    <b class="b83" th:case="${newSession.customer.typeOfClient.CHILD}" th:text="${newSession.customer.childSurname + ' ' + newSession.customer.childName}"></b>
                 </div>
               </div>
             </div>
@@ -296,7 +295,7 @@
                 })
                 .catch(error => console.error('Ошибка загрузки:', error));
 
-        fetch('/SimplePsy/V1/customer/findAll')
+        fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
                 .then(response => response.json())
                 .then(clients => {
                   const dataList = document.getElementById('clientsList');
@@ -422,20 +421,34 @@
         fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
                 .then(response => response.json())
                 .then(customers => {
-                  const filteredCustomers = customers.filter(customer =>
-                          customer.name.toLowerCase().includes(query.toLowerCase()) ||
-                          customer.surname.toLowerCase().includes(query.toLowerCase())
+                  const filteredCustomers = customers.filter(customer => {
+                          console.log(customer.typeOfClient);
+                          const option = document.createElement('option');
+                          switch (customer.typeOfClient)
+                          {
+                            case 'ADULT':
+                              customer.name.toLowerCase().includes(query.toLowerCase()) ||
+                              customer.surname.toLowerCase().includes(query.toLowerCase())
+                              option.value = customer.name + ' ' +customer.surname;
+                              break;
+                            case 'CHILD':
+                              customer.childName.toLowerCase().includes(query.toLowerCase()) ||
+                              customer.childSurname.toLowerCase().includes(query.toLowerCase())
+                              option.value = customer.childName + ' ' + customer.childSurname;
+                              break;
+                            case 'COUPLE':
+                              customer.firstClientName.toLowerCase().includes(query.toLowerCase()) ||
+                              customer.firstClientSurname.toLowerCase().includes(query.toLowerCase())
+                              option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                              break;
+                          }
+
+                          const dataList = document.getElementById('customerList');
+                          dataList.innerHTML = ''; // Очищаем предыдущие результаты
+                          option.dataset.id = customer.id;
+                          dataList.appendChild(option);
+                        }
                   );
-
-                  const dataList = document.getElementById('customerList');
-                  dataList.innerHTML = ''; // Очищаем предыдущие результаты
-
-                  filteredCustomers.forEach(customer => {
-                    const option = document.createElement('option');
-                    option.value = `${customer.name} ${customer.surname}`;
-                    option.dataset.id = customer.id;
-                    dataList.appendChild(option);
-                  });
                 });
       }
     });

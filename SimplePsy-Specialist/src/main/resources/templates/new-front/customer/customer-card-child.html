@@ -215,10 +215,6 @@
                 <div class="component19">
                     <div class="item113">
                         <div class="div221">Тип клиента</div>
-                        <div class="div222" th:text="${customer.typeOfClient.translation}"></div>
-                    </div>
-                    <div class="item113">
-                        <div class="div221">Статус клиента</div>
                         <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}">
                             <option value="CHILD">Ребенок</option>
                         </select>
@@ -235,7 +231,6 @@
                     <div class="item113">
                         <div class="div221">Почта ребенка</div>
                         <input class="div222" th:name="${customer.childContact.email}"  th:field="*{childContact.email}" disabled>
-                        </input>
                     </div>
                     <div class="item113">
                         <div class="div221">Пол ребенка</div>
@@ -329,7 +324,6 @@
                         <div class="item113">
                             <div class="div221">Почта второго родителя</div>
                             <input class="div222" th:name="${customer.secondParentsContact.email}"  th:field="*{secondParentsContact.email}" disabled>
-                            </input>
                         </div>
                         <div class="item113">
                             <div class="div221">Пол второго родителя</div>

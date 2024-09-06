@@ -210,13 +210,20 @@
           </div>
         </div>
         <div class="component19">
+        <div class="item113">
           <div class="div221">Тип клиента</div>
-          <div class="div222" th:text="${customer.typeOfClient.translation}"></div>
+          <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
+            <option value="COUPLE">Пара</option>
+          </select>
+<!--          <div class="div222" th:text="${customer.typeOfClient.translation}"></div>-->
         </div>
         <div class="item113">
           <div class="div221">Статус клиента</div>
-          <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
-            <option value="CHILD">Ребенок</option>
+          <select id="client-status" th:name="${customer.clientStatus}"  th:field="*{clientStatus}" disabled>
+            <option value="REGULAR">Регулярный</option>
+            <option value="ON_REQUEST">По запросу</option>
+            <option value="COMPLETED">Завершён</option>
+            <option value="APPLICATION">Заявка</option>
           </select>
         </div>
           <div class="item113">
@@ -227,7 +234,7 @@
           </div>
           <div class="item113">
             <div class="div221">Номер телефона первого клиента</div>
-            <input class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}" required disabled>
+            <input class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Почта первого клиента</div>
@@ -327,7 +334,7 @@
             <div class="div221">
               Первичный/изначальный запрос клиента на терапию
             </div>
-            <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}" th:field="*{clientsFirstRequestForTherapy}"></textarea>
+            <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}" th:field="*{clientsFirstRequestForTherapy}" disabled></textarea>
           </div>
           <div class="item113">
             <div class="div221">

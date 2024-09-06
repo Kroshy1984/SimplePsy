@@ -207,7 +207,10 @@ public class CustomerController {
         List<String> customerIds = specialist.getCustomerIds();
         List<Customer> customers = new ArrayList<>();
         for (String customerId : customerIds) {
-            customers.add(customerService.findById(customerId));
+            Customer customer = customerService.findById(customerId);
+            if (customer != null) {
+                customers.add(customerService.findById(customerId));
+            }
         }
         System.out.println("Customers list:");
         customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));

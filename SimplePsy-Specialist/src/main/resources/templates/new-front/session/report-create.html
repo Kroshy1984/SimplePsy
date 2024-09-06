@@ -203,10 +203,16 @@
                         </b>
                     </div>
                     <div class="frame-wrapper54">
-                        <div class="about-us-parent3">
-                            <b class="about-us14" th:text="${sessionDTO.client.name + ' ' + sessionDTO.client.surname}">Фамилия Имя Отчество</b>
-                            <b class="news8" th:text="${sessionDTO.client.contact.phone}">Номер телефона</b>
-                            <b class="user-policy8" th:text="${sessionDTO.client.contact.email}">E-mail</b>
+                        <div class="about-us-parent3" th:switch="${sessionDTO.customer.typeOfClient}">
+                            <b class="about-us14" th:case="${sessionDTO.customer.typeOfClient.ADULT}" th:text="${sessionDTO.customer.surname + ' ' + sessionDTO.customer.name}"></b>
+                            <b class="about-us14" th:case="${sessionDTO.customer.typeOfClient.COUPLE}" th:text="${sessionDTO.customer.firstClientSurname + ' ' + sessionDTO.customer.firstClientName}"></b>
+                            <b class="about-us14" th:case="${sessionDTO.customer.typeOfClient.CHILD}" th:text="${sessionDTO.customer.childSurname + ' ' + sessionDTO.customer.childName}"></b>
+                            <b class="news8" th:case="${sessionDTO.customer.typeOfClient.ADULT}" th:text="${sessionDTO.customer.contact.phone}">Номер телефона</b>
+                            <b class="news8" th:case="${sessionDTO.customer.typeOfClient.COUPLE}" th:text="${sessionDTO.customer.firstClientContact.phone}">Номер телефона</b>
+                            <b class="news8" th:case="${sessionDTO.customer.typeOfClient.CHILD}" th:text="${sessionDTO.customer.childContact.phone}">Номер телефона</b>
+                            <b class="user-policy8" th:case="${sessionDTO.customer.typeOfClient.ADULT}" th:text="${sessionDTO.customer.contact.email}">E-mail</b>
+                            <b class="user-policy8" th:case="${sessionDTO.customer.typeOfClient.COUPLE}" th:text="${sessionDTO.customer.firstClientContact.email}">E-mail</b>
+                            <b class="user-policy8" th:case="${sessionDTO.customer.typeOfClient.CHILD}" th:text="${sessionDTO.customer.childContact.email}">E-mail</b>
                         </div>
                     </div>
                 </div>
