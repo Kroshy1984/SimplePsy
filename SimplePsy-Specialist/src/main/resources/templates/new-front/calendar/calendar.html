@@ -350,7 +350,19 @@
         hourElement.classList.add('hour');
         hourElement.textContent = `${hour}:00`;
 
-        const sessionsForHour = sessionsData.filter(session => isSameHour(new Date(session.date), date, hour));
+        const sessionsForHour = sessionsData.filter(session => {
+          const sessionStart = new Date(session.date + 'T' + session.timeStart);
+          const sessionEnd = new Date(session.date + 'T' + session.timeFinish);
+
+          // Проверяем, попадает ли час в диапазон времени встречи и соответствует ли дата
+          return (
+                  sessionStart.getFullYear() === date.getFullYear() &&
+                  sessionStart.getMonth() === date.getMonth() &&
+                  sessionStart.getDate() === date.getDate() &&
+                  (hour >= sessionStart.getHours() && hour <= sessionEnd.getHours())
+          );
+        });
+
         if (sessionsForHour.length > 0) {
           sessionsForHour.forEach(session => {
             const sessionElement = document.createElement('div');
@@ -365,6 +377,8 @@
 
       calendarBody.appendChild(dayView);
     }
+
+
 
 
     function createDayElement(date) {
