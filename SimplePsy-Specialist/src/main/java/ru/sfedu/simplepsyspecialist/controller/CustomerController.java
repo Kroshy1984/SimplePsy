@@ -183,6 +183,7 @@ public class CustomerController {
         specialistService.save(specialist);
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
+        System.out.println("Возраст: " + newCustomer.getAge());
         System.out.println(newCustomer.getSex());
 
         return "redirect:/SimplePsy/V1/specialist/customers";
