@@ -245,7 +245,7 @@
                                             </div>
                                             <div class="frame-parent25">
                                                 <div class="wrapper14">
-                                                    <b class="b49">Возраст: 20</b>
+                                                    <b class="b49" th:text="${customer.age != 0} ? ${'Возраст: ' + customer.age} : 'Возраст: '"></b>
                                                 </div>
                                                 <div th:switch="${customer.typeOfClient}">
                                                     <b class="client-age-space" th:case="${customer.typeOfClient.ADULT}"

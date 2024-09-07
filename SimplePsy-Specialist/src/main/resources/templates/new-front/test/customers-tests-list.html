@@ -271,7 +271,7 @@
                                             <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}"
                                                 th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
                                                 <div class="rectangle-parent103">
-                                                    <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers">20.02.2024</b>
+                                                    <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers"></b>
                                                     <div class="frame-child129"></div>
                                                 </div>
                                                 <div class="test-list-names">

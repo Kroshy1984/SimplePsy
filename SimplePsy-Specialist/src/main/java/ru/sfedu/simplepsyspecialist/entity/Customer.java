@@ -3,11 +3,13 @@ package ru.sfedu.simplepsyspecialist.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,9 @@ public class Customer {
     private Sex sex;
     private List<String> problemsId;
     private TypeOfTreatment typeOfTreatment;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfFirstRequest;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfFirstConsultation;
     private PreferredMeetingFormat preferredMeetingFormat;
     private OnlineMeetingPlace onlineMeetingPlace;
@@ -38,7 +42,9 @@ public class Customer {
     private String financialConditions;
 
     // Поля после "Подробнее"
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+    private int age;
     private String residentialAddress;
     private String collegialRecommendations;
     private String specialTermsOfContract;
@@ -56,7 +62,6 @@ public class Customer {
     private Contact cotherapistContact;
     private String cotherapistPaymentConditions;
     private String notes;
-    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
 
     // Поля для пары
     private String firstClientName;
@@ -124,6 +129,7 @@ public class Customer {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
+        this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
         this.sex = sex;
         this.contact = contact;
     }
@@ -159,6 +165,7 @@ public class Customer {
         this.contact = contact;
         this.description = description;
         this.dateOfBirth = dateOfBirth;
+        this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
         this.sex = sex;
         this.problemsId = problemsId;
         this.typeOfTreatment = typeOfTreatment;
@@ -335,6 +342,17 @@ public class Customer {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+        if (dateOfBirth != null) {
+            setAge(Period.between(dateOfBirth, LocalDate.now()).getYears());
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Sex getSex() {
