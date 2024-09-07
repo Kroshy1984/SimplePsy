@@ -511,7 +511,7 @@
                         <div class="div221">
                             Берется ли супервизия на данного клиента
                         </div>
-                        <select id="supervision" th:name="supervised" th:field="*{supervised}" disabled>
+                        <select class="div222" id="is-supervised" th:name="${customer.supervised}" th:field="*{supervised}" disabled>
                             <option value="YES">Да</option>
                             <option value="NO">Нет</option>
                         </select>
@@ -631,6 +631,7 @@
         var closeBtn = document.querySelector('.close-btn');
         var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
         var holidayBtn = document.querySelector('.user-policy10');
+
         // Функция для открытия модального окна
         function openModal() {
             fetch('/SimplePsy/V1/session/session-form')
@@ -755,7 +756,6 @@
 
     customerSearch.addEventListener('input', function () {
         const searchQuery = this.value;
-
         const datalist = document.getElementById('customerList');
 
         if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса

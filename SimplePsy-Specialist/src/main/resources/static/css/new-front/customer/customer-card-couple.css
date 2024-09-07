@@ -1635,6 +1635,7 @@ textarea {
   align-self: stretch;
   flex-direction: column;
   gap: var(--gap-31xl);
+  text-align: center;
   font-size: var(--bold-16-size);
   color: var(--grey-blue-60);
   font-family: var(--bold-10);

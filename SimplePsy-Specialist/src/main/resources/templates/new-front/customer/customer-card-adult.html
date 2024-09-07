@@ -391,7 +391,7 @@
             <div class="div221">
               Берется ли супервизия на данного клиента
             </div>
-            <select id="supervision" th:value="${customer.supervised}" th:name="${customer.supervised}"  th:field="*{supervised}" disabled>
+            <select id="is-supervised" th:value="${customer.supervised}" th:name="${customer.supervised}"  th:field="*{supervised}" disabled>
               <option value="YES">Да</option>
               <option value="NO">Нет</option>
             </select>
@@ -551,7 +551,7 @@
     }
   });`;
                 document.body.appendChild(script);
-                clients.forEach(client => {
+                clients.forEach(customer => {
                   const option = document.createElement('option');
                   switch (customer.typeOfClient) {
                     case 'ADULT':

@@ -196,6 +196,17 @@
               <button id="nextBtn">&gt;</button>
             </div>
           </div>
+
+          <div id="days-of-week">
+            <b>ПН</b>
+            <b>ВТ</b>
+            <b>СР</b>
+            <b>ЧТ</b>
+            <b>ПТ</b>
+            <b>СБ</b>
+            <b>ВС</b>
+          </div>
+
           <div id="calendarBody" class="month-view grid">
 
           </div>
@@ -300,7 +311,21 @@
           sessionsForDay.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
-            sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.name} ${session.customer.surname}`;
+            switch (session.customer.typeOfClient) {
+              case 'ADULT':
+                sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.name} ${session.customer.surname}`;
+                break;
+              case 'CHILD':
+                sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.childName} ${session.customer.childSurname}`;
+                break;
+              case 'COUPLE':
+                sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.firstClientName} ${session.customer.firstClientSurname}`;
+                break;
+              default:
+                // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                console.log('Unknown client type');
+                break;
+            }
             dayElement.appendChild(sessionElement);
           });
         }
@@ -332,7 +357,21 @@
           sessionsForDay.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
-            sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.name} ${session.customer.surname}`;
+            switch (session.customer.typeOfClient) {
+              case 'ADULT':
+                sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.name} ${session.customer.surname}`;
+                break;
+              case 'CHILD':
+                sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.childName} ${session.customer.childSurname}`;
+                break;
+              case 'COUPLE':
+                sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.firstClientName} ${session.customer.firstClientSurname}`;
+                break;
+              default:
+                // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                console.log('Unknown client type');
+                break;
+            }
             dayElement.appendChild(sessionElement);
           });
         }
@@ -367,7 +406,21 @@
           sessionsForHour.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
-            sessionElement.textContent = `${session.customer.name} ${session.customer.surname} (${session.timeStart} - ${session.timeFinish})`;
+            switch (session.customer.typeOfClient) {
+              case 'ADULT':
+                sessionElement.textContent = `${session.customer.name} ${session.customer.surname} (${session.timeStart} - ${session.timeFinish})`;
+                break;
+              case 'CHILD':
+                sessionElement.textContent = `${session.customer.childName} ${session.customer.childSurname} (${session.timeStart} - ${session.timeFinish})`;
+                break;
+              case 'COUPLE':
+                sessionElement.textContent = `${session.customer.firstClientName} ${session.customer.firstClientSurname} (${session.timeStart} - ${session.timeFinish})`;
+                break;
+              default:
+                // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                console.log('Unknown client type');
+                break;
+            }
             hourElement.appendChild(sessionElement);
           });
         }
@@ -485,16 +538,19 @@
 
     dayBtn.addEventListener('click', function() {
       currentViewMode = 'day';
+      document.getElementById('days-of-week').style.display = 'none';
       renderCalendar(currentDate);
     });
 
     weekBtn.addEventListener('click', function() {
       currentViewMode = 'week';
+      document.getElementById('days-of-week').style.display = 'flex';
       renderCalendar(currentDate);
     });
 
     monthBtn.addEventListener('click', function() {
       currentViewMode = 'month';
+      document.getElementById('days-of-week').style.display = 'flex';
       renderCalendar(currentDate);
     });
   });
@@ -560,7 +616,7 @@
                   const option = document.createElement('option');
                   switch (customer.typeOfClient) {
                     case 'ADULT':
-                      option.value = customer.name + ' ' +customer.surname;
+                      option.value = customer.name + ' ' + customer.surname;
                       break;
                     case 'CHILD':
                       option.value = customer.childName + ' ' + customer.childSurname;

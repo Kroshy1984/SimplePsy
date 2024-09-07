@@ -8,6 +8,7 @@
 .menu1 {
   position: relative;
   display: flex;
+  padding-left: 100px;
   gap: 50px;
 }
 

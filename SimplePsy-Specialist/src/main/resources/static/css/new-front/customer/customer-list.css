@@ -207,7 +207,7 @@ h2 {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--gap-xl);
+  gap: var(--gap-34xl);
 }
 .about-us-news-link1 {
   width: 285px;
@@ -2455,6 +2455,7 @@ h2 {
   flex-direction: column;
 }
 .client-info1 {
+  padding-bottom: 169px;
   align-self: stretch;
   gap: var(--gap-mini);
 }
@@ -2756,6 +2757,7 @@ h2 {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  white-space: nowrap;
 }
 .frame-wrapper73 {
   align-self: stretch;

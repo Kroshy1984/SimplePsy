@@ -1,3 +1,9 @@
+#days-of-week {
+  display: flex;
+  justify-content: space-around;
+  gap: 7px;
+}
+
 .line34 {
   width: 1210px;
   height: 2px;
