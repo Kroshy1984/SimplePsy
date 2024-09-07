@@ -32,7 +32,7 @@
                             <img class="icon125" loading="lazy" alt="" src="/images/icon-1@2x.png"/>
                             <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
                             <div class="search-input3">
-                                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+                                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
                                 <datalist id="customerList">
 
                                 </datalist>
@@ -201,9 +201,9 @@
                     <div id="common-fields">
                         <div class="form-section">
                             <label for="full-name">ФИО клиента</label>
-                            <input type="text" id="full-name" th:name="surname" required>
-                            <input type="text" th:name="name" required>
-                            <input type="text" th:name="lastName" required>
+                            <input type="text" id="full-name" th:name="surname">
+                            <input type="text" th:name="name">
+                            <input type="text" th:name="lastName">
                         </div>
 
                         <div class="form-section">

@@ -33,7 +33,7 @@
             alt=""
             src="/images/icon-1@2x.png"
     />
-    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList">
+    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList" autocomplete="off">
     <datalist id="clientsList"></datalist>
     <input type="hidden" th:name="${clientId}" th:field="*{clientId}" id="clientId">
   </div>

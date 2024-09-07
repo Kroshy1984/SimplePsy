@@ -48,7 +48,7 @@
                 />
                 <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
                 <div class="search-wrapper2">
-                  <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+                  <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
                   <datalist id="customerList">
 
                   </datalist>
@@ -621,6 +621,54 @@
     appointLink.addEventListener('click', openModal);
     holidayBtn.addEventListener('click', openHolidayModal);
     closeBtn.addEventListener('click', closeModal);
+  });
+
+  const customerSearch = document.getElementById('customerSearch');
+  const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+  customerSearch.addEventListener('input', function () {
+    const searchQuery = this.value;
+    const datalist = document.getElementById('customerList');
+
+    if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса
+      fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+              .then(response => response.json())
+              .then(data => {
+                // Очищаем предыдущие результаты
+                datalist.innerHTML = '';
+
+                // Фильтруем и сортируем клиентов в зависимости от типа
+                data.forEach(customer => {
+                  let displayName = '';
+                  if (customer.typeOfClient === 'ADULT') {
+                    displayName = `${customer.name} ${customer.surname}`;
+                  } else if (customer.typeOfClient === 'CHILD') {
+                    displayName = `${customer.childName} ${customer.childSurname}`;
+                  } else if (customer.typeOfClient === 'COUPLE') {
+                    displayName = `${customer.firstClientName} ${customer.firstClientSurname}`;
+                  }
+
+                  if (displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    const option = document.createElement('option');
+                    option.value = displayName;
+                    option.dataset.id = customer.id;
+                    datalist.appendChild(option);
+                  }
+                });
+              })
+              .catch(error => {
+                console.error('Ошибка при загрузке данных клиентов:', error);
+              });
+    }
+  });
+
+  customerSearch.addEventListener('change', function () {
+    const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+            .find(option => option.value === customerSearch.value);
+
+    if (selectedOption) {
+      const customerId = selectedOption.dataset.id;
+      window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
+    }
   });
 </script>
 </body>

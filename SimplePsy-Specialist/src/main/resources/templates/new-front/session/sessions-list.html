@@ -36,7 +36,7 @@
               <img class="icon73" alt="" src="/images/icon-1@2x.png" />
               <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
               <div class="search-frame">
-                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
                 <datalist id="customerList">
 
                 </datalist>
@@ -414,40 +414,38 @@
     const currentSpecialistId = document.getElementById('currentSpecialistId').value;
 
     customerSearch.addEventListener('input', function () {
-      const query = customerSearch.value;
+      const searchQuery = this.value;
+      const specialistId = "currentSpecialistId"; // Здесь должно быть реальное значение ID специалиста
+      const datalist = document.getElementById('customerList');
 
-      if (query.length > 2) { // Запрашиваем данные только если введено больше 2 символов
+      if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса
         fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
                 .then(response => response.json())
-                .then(customers => {
-                  const filteredCustomers = customers.filter(customer => {
-                          console.log(customer.typeOfClient);
-                          const option = document.createElement('option');
-                          switch (customer.typeOfClient)
-                          {
-                            case 'ADULT':
-                              customer.name.toLowerCase().includes(query.toLowerCase()) ||
-                              customer.surname.toLowerCase().includes(query.toLowerCase())
-                              option.value = customer.name + ' ' +customer.surname;
-                              break;
-                            case 'CHILD':
-                              customer.childName.toLowerCase().includes(query.toLowerCase()) ||
-                              customer.childSurname.toLowerCase().includes(query.toLowerCase())
-                              option.value = customer.childName + ' ' + customer.childSurname;
-                              break;
-                            case 'COUPLE':
-                              customer.firstClientName.toLowerCase().includes(query.toLowerCase()) ||
-                              customer.firstClientSurname.toLowerCase().includes(query.toLowerCase())
-                              option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
-                              break;
-                          }
+                .then(data => {
+                  // Очищаем предыдущие результаты
+                  datalist.innerHTML = '';
 
-                          const dataList = document.getElementById('customerList');
-                          dataList.innerHTML = ''; // Очищаем предыдущие результаты
-                          option.dataset.id = customer.id;
-                          dataList.appendChild(option);
-                        }
-                  );
+                  // Фильтруем и сортируем клиентов в зависимости от типа
+                  data.forEach(customer => {
+                    let displayName = '';
+                    if (customer.typeOfClient === 'ADULT') {
+                      displayName = `${customer.name} ${customer.surname}`;
+                    } else if (customer.typeOfClient === 'CHILD') {
+                      displayName = `${customer.childName} ${customer.childSurname}`;
+                    } else if (customer.typeOfClient === 'COUPLE') {
+                      displayName = `${customer.firstClientName} ${customer.firstClientSurname}`;
+                    }
+
+                    if (displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                      const option = document.createElement('option');
+                      option.value = displayName;
+                      option.dataset.id = customer.id;
+                      datalist.appendChild(option);
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Ошибка при загрузке данных клиентов:', error);
                 });
       }
     });

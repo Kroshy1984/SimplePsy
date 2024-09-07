@@ -134,7 +134,7 @@
       </div>
       <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
       <div class="search8">
-        <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch">
+        <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
         <datalist id="customerList">
 
         </datalist>
@@ -366,26 +366,37 @@
   const currentSpecialistId = document.getElementById('currentSpecialistId').value;
 
   customerSearch.addEventListener('input', function () {
-    const query = customerSearch.value;
+    const searchQuery = this.value;
+    const datalist = document.getElementById('customerList');
 
-    if (query.length > 2) { // Запрашиваем данные только если введено больше 2 символов
+    if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса
       fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
               .then(response => response.json())
-              .then(customers => {
-                const filteredCustomers = customers.filter(customer =>
-                        customer.name.toLowerCase().includes(query.toLowerCase()) ||
-                        customer.surname.toLowerCase().includes(query.toLowerCase())
-                );
+              .then(data => {
+                // Очищаем предыдущие результаты
+                datalist.innerHTML = '';
 
-                const dataList = document.getElementById('customerList');
-                dataList.innerHTML = ''; // Очищаем предыдущие результаты
+                // Фильтруем и сортируем клиентов в зависимости от типа
+                data.forEach(customer => {
+                  let displayName = '';
+                  if (customer.typeOfClient === 'ADULT') {
+                    displayName = `${customer.name} ${customer.surname}`;
+                  } else if (customer.typeOfClient === 'CHILD') {
+                    displayName = `${customer.childName} ${customer.childSurname}`;
+                  } else if (customer.typeOfClient === 'COUPLE') {
+                    displayName = `${customer.firstClientName} ${customer.firstClientSurname}`;
+                  }
 
-                filteredCustomers.forEach(customer => {
-                  const option = document.createElement('option');
-                  option.value = `${customer.name} ${customer.surname}`;
-                  option.dataset.id = customer.id;
-                  dataList.appendChild(option);
+                  if (displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    const option = document.createElement('option');
+                    option.value = displayName;
+                    option.dataset.id = customer.id;
+                    datalist.appendChild(option);
+                  }
                 });
+              })
+              .catch(error => {
+                console.error('Ошибка при загрузке данных клиентов:', error);
               });
     }
   });
