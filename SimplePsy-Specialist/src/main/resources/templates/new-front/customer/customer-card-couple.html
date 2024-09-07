@@ -17,7 +17,7 @@
 </head>
 <body>
 <form th:action="@{/SimplePsy/V1/customer/new}" th:object="${customer}" method="post">
-<input th:name="${customer.id}" th:field="*{id}" hidden="hidden" disabled>
+<input id="customerId" th:name="${customer.id}" th:field="*{id}" hidden="hidden" disabled>
 <div class="div216">
   <div class="settings6"></div>
   <div class="item112">
@@ -57,8 +57,8 @@
             </div>
             <div class="about-content-wrapper">
               <div class="about-content">
-                <a class="about-us19" onclick="window.location.href = '/SimplePsy/V1/customer/customer-form'">Добавить клиента</a>
                 <div class="news-container">
+                  <a class="about-us19" onclick="window.location.href = '/SimplePsy/V1/customer/customer-form'">Добавить клиента</a>
                   <a class="news10">Назначить встречу</a>
                   <b class="user-policy13">Добавить график нерабочих дней</b>
                 </div>
@@ -107,14 +107,14 @@
               <div class="frame-parent122">
                 <div class="frame-parent123">
                   <div class="client-list-wrapper">
-                    <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                    <button type="button" class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
                     <div class="icon-wrapper33">
                       <img class="icon146" alt="" src="/images/icon-3@2x.png" />
                     </div>
                     <b class="client-list">Список клиентов</b>
                   </div>
                   <div class="base-frame">
-                    <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                    <button type="button" class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
                       <div class="icon-wrapper34">
                         <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
                       </div>
@@ -124,14 +124,14 @@
                 </div>
                 <div class="frame-parent123">
                   <div class="notifications-wrapper">
-                    <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                    <button type="button" class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
                     <div class="icon-wrapper33">
                       <img class="icon146" alt="" src="/images/icon-5.svg" />
                     </div>
                     <b class="notifications">Уведомления</b>
                   </div>
                   <div class="base-frame">
-                    <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                    <button type="button" class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
                       <div class="icon-wrapper34">
                         <img class="icon147" alt="" src="/images/icon-6.svg"/>
                       </div>
@@ -139,7 +139,7 @@
                     </button>
                   </div>
                   <div class="tests-wrapper">
-                    <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                    <button type="button" class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
                     <b class="surveys-tests">Опросники и тесты</b>
                   </div>
                 </div>
@@ -180,11 +180,11 @@
       <div class="client-card-actions">
         <div class="client-card-actions-content">
           <div class="frame-parent148">
-            <button class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
+            <button type="button" class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
               <div class="frame-child172"></div>
               <a class="a">Список клиентов</a>
             </button>
-            <button class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
+            <button type="button" class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
               <div class="frame-child173"></div>
               <a class="a1">Список встреч</a>
             </button>
@@ -194,28 +194,25 @@
             </div>
           </div>
         </div>
-        <div class="client-card-actions-inner">
-          <div class="frame-parent149">
-            <div class="rectangle-parent149">
-              <div class="frame-child175"></div>
-              <div class="div218" onclick="toggleEdit()">Редактировать</div>
-            </div>
-            <button type="submit" class="rectangle-parent150">
-              <div class="div219">Сохранить</div>
+        <div class="save-edit-buttons-wrapper">
+          <div class="save-edit-buttons">
+            <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
+              <div class="div72">Отменить</div>
             </button>
-            <div class="rectangle-parent151">
-              <div class="frame-child177"></div>
-              <div class="div220">Ссылка на анкету</div>
-            </div>
+            <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
+              <div class="div72">Редактировать</div>
+            </button>
+            <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
+              <div class="div72">Сохранить</div>
+            </button>
           </div>
         </div>
         <div class="component19">
         <div class="item113">
           <div class="div221">Тип клиента</div>
-          <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
+          <select class="div222" id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
             <option value="COUPLE">Пара</option>
           </select>
-<!--          <div class="div222" th:text="${customer.typeOfClient.translation}"></div>-->
         </div>
         <div class="item113">
           <div class="div221">Статус клиента</div>
@@ -234,11 +231,11 @@
           </div>
           <div class="item113">
             <div class="div221">Номер телефона первого клиента</div>
-            <input class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}" disabled>
+            <input type="tel" class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Почта первого клиента</div>
-            <input class="div222" th:name="${customer.firstClientContact.email}" th:field="*{firstClientContact.email}" disabled>
+            <input type="email" class="div222" th:name="${customer.firstClientContact.email}" th:field="*{firstClientContact.email}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Пол первого клиента</div>
@@ -263,11 +260,11 @@
           </div>
           <div class="item113">
             <div class="div221">Номер телефона второго клиента</div>
-            <input class="div222" th:name="${customer.secondClientContact.phone}" th:field="*{secondClientContact.phone}" disabled>
+            <input type="tel" class="div222" th:name="${customer.secondClientContact.phone}" th:field="*{secondClientContact.phone}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Почта второго клиента</div>
-            <input class="div222" th:name="${customer.secondClientContact.email}" th:field="*{secondClientContact.email}" disabled>
+            <input type="email" class="div222" th:name="${customer.secondClientContact.email}" th:field="*{secondClientContact.email}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Пол второго клиента</div>
@@ -446,7 +443,7 @@
             </div>
             <div class="item113">
               <div class="div221">Номер телефона супервизора</div>
-              <input class="div222" type="tel" id="supervisor-phone" th:name="${customer.supervisorsContact.phone}" th:field="*{supervisorsContact.phone}" disabled>
+              <input type="tel" class="div222" id="supervisor-phone" th:name="${customer.supervisorsContact.phone}" th:field="*{supervisorsContact.phone}" disabled>
             </div>
             <div class="item113">
               <div class="div221">Электронная почта супервизора</div>
@@ -496,18 +493,38 @@
 </form>
 
 <script>
-  function toggleEdit() {
-    document.querySelectorAll('input').forEach(function(input) {
+  function showInputs() {
+    // Находим элементы, которые нужно изменить
+    var inputsToEnable = document.querySelectorAll('input[disabled]');
+    var inputsFieldSetToEnable = document.querySelectorAll('textarea');
+    var selectFieldsSetToEnable = document.querySelectorAll('select');
+    var saveButton = document.getElementById('save');
+    var editButton = document.getElementById('edit');
+    var cancelButton = document.getElementById('cancel');
+
+    // Убираем атрибут disabled у всех найденных элементов
+    inputsToEnable.forEach(function (input) {
       input.removeAttribute('disabled');
     });
-    document.querySelectorAll('select').forEach(function(input) {
+    inputsFieldSetToEnable.forEach(function (input) {
       input.removeAttribute('disabled');
     });
-    document.querySelectorAll('textarea').forEach(function(input) {
+    selectFieldsSetToEnable.forEach(function (input) {
       input.removeAttribute('disabled');
     });
-    document.getElementById('saveButton').style.display = 'block';
+
+    // Показываем кнопки
+    saveButton.style.display = 'inline-block';
+    editButton.style.display = 'none';
+    cancelButton.style.display = 'inline-block';
   }
+
+  function cancelButton() {
+    let id = document.getElementById('customerId').value;
+    document.getElementById('cancel').style.display = 'none';
+    window.location.href = '/SimplePsy/V1/customer/customer-card/' + id;
+  }
+
   function checkSupervisorFields() {
     const supervised = document.getElementById('is-supervised').getAttribute('value');
     document.getElementById('supervisor-fields').style.display = supervised === 'YES' ? 'block' : 'none';

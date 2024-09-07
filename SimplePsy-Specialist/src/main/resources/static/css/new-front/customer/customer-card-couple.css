@@ -1,5 +1,58 @@
 textarea {
+  width: 520px;
   resize: none;
+}
+
+.save-edit-buttons,
+.save-edit-buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.save-edit-buttons {
+  flex: 1;
+  justify-content: flex-start;
+  gap: 21.8px;
+}
+.save-edit-buttons-wrapper {
+  justify-content: flex-end;
+  padding: 0 var(--padding-25xl);
+  box-sizing: border-box;
+  font-size: var(--bold-18-size);
+  color: var(--color-slategray-500);
+}
+
+.rectangle-parent51 {
+  cursor: pointer;
+  border: 3px solid var(--grey-blue-95);
+  padding: var(--padding-8xs) var(--padding-xs) var(--padding-xs);
+  background-color: var(--color-lightslategray-100);
+  border-radius: var(--br-xl);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 155px;
+}
+
+.div72 {
+  flex: 1;
+  position: relative;
+  font-size: var(--bold-18-size);
+  line-height: 150%;
+  font-weight: 500;
+  font-family: var(--bold-10);
+  color: var(--color-slategray-500);
+  text-align: center;
+  z-index: 1;
+}
+
+.rectangle-parent51:hover {
+  background-color: var(--color-slategray-300);
+  border: 3px solid var(--color-lightgray);
+  box-sizing: border-box;
 }
 
 .item113 {

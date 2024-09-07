@@ -62,7 +62,7 @@ public class CustomerController {
         System.out.println("Got the customer with id:\n" + customer.getId());
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
-        return "redirect:/SimplePsy/V1/specialist/customers";
+        return "redirect:/SimplePsy/V1/customer/customer-card/" + newCustomerId;
     }
     @PostMapping("/update")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer)
