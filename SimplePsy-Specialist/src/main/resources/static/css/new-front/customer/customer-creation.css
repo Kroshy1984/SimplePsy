@@ -49,7 +49,7 @@
 .search-input3,
 .sidebar-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 }
 .search-input3 {
@@ -129,7 +129,7 @@
   align-self: stretch;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   max-width: 100%;
   gap: var(--gap-xl);

@@ -135,16 +135,16 @@
             </div>
             <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
             <div class="search8">
-                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
-                <datalist id="customerList">
-
-                </datalist>
                 <img
                         class="icon121"
                         loading="lazy"
                         alt=""
                         src="/images/icon-1@2x.png"
                 />
+                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
+                <datalist id="customerList">
+
+                </datalist>
             </div>
             <div class="city">
                 <b th:text="${specialist.city}" class="specialist-city"></b>

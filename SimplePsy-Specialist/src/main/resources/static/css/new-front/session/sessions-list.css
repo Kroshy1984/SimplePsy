@@ -988,10 +988,9 @@
   gap: var(--gap-mini);
 }
 .component-19-wrapper {
-  height: 550px;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 0 var(--padding-lgi) 0 0;
+  padding: 0 var(--padding-lgi) 169px 0;
   box-sizing: border-box;
 }
 .frame-parent67 {
@@ -1658,7 +1657,6 @@
   box-shadow: 0 134px 124px rgba(34, 40, 49, 0.04);
   border-radius: var(--br-mini);
   background-color: var(--grey-blue-98);
-  overflow: hidden;
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
