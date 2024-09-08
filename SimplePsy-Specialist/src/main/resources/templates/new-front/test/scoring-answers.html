@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/questionnaire.css}" />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+</head>
+<body>
+<div class="div139">
+    <div class="sidebar1 sidebar1-fix-width">
+        <div class="menu">
+            <div class="frame-wrapper73">
+                <div class="frame-parent122">
+                    <div class="frame-parent123">
+                        <div class="client-list-wrapper">
+                            <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                            <div class="icon-wrapper33">
+                                <img class="icon146" alt="" src="/images/icon-3@2x.png" />
+                            </div>
+                            <b class="client-list">Список клиентов</b>
+                        </div>
+                        <div class="base-frame">
+                            <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                <div class="icon-wrapper34">
+                                    <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
+                                </div>
+                                <b class="calendar">Календарь</b>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="frame-parent123">
+                        <div class="notifications-wrapper">
+                            <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                            <div class="icon-wrapper33">
+                                <img class="icon146" alt="" src="/images/icon-5.svg" />
+                            </div>
+                            <b class="notifications">Уведомления</b>
+                        </div>
+                        <div class="base-frame">
+                            <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                <div class="icon-wrapper34">
+                                    <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                                </div>
+                                <b class="analytics">Аналитика</b>
+                            </button>
+                        </div>
+                        <div class="tests-wrapper">
+                            <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                            <b class="surveys-tests">Опросники и тесты</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="parent26">
+                <b class="b112">Заявки</b>
+                <div class="rectangle-parent87" id="groupContainer">
+                    <div class="frame-child111"></div>
+                    <div class="frame-child112"></div>
+                    <b class="b113">Овсянникова Юля Матвеевна</b>
+                    <b class="b114">20.02.2024</b>
+                </div>
+                <div class="rectangle-parent88" id="groupContainer1">
+                    <div class="frame-child113"></div>
+                    <div class="frame-child114"></div>
+                    <b class="b115">Овсянникова Кирилл Матвеев</b>
+                    <b class="b116">25.02.2024</b>
+                </div>
+            </div>
+        </div>
+        <div class="feedback3">
+            <b class="send-feedback8">Обратная связь</b>
+            <img
+                    class="icon119"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-7@2x.png"
+            />
+
+            <img
+                    class="icon120"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-8.svg"
+            />
+        </div>
+
+        <div class="head">
+            <div class="wrapper-user8">
+                <img
+                        class="user-icon8"
+                        loading="lazy"
+                        alt=""
+                        src="/images/user@2x.png"
+                        id="userImage"
+                        onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
+                />
+            </div>
+            <b class="hello-rosalie8">Привет, Антон!</b>
+            <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+        </div>
+    </div>
+    <header class="head1">
+        <div class="navigate">
+            <a class="constructor8">Понятная практика</a>
+            <div class="menu1">
+                <a class="news10">Назначить встречу</a>
+                <b class="user-policy9" id="userPolicyText"
+                >Добавить график нерабочих дней
+                </b>
+                <b class="about-us15" id="aboutUsText">Добавить клиента</b>
+            </div>
+            <div class="search8">
+                <b class="search9">Найти клиента...</b>
+                <img
+                        class="icon121"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-1@2x.png"
+                />
+            </div>
+            <div class="city">
+                <b class="new-york8">Ростов-на-Дону</b>
+                <img
+                        class="icon122"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-2@2x.png"
+                />
+            </div>
+            <img
+                    class="icon123"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon@2x.png"
+            />
+        </div>
+
+    </header>
+
+    <div class="survey-container">
+        <ul>
+            <li th:each="answer : ${completedScoring.answers.entrySet()}">
+                <strong th:text="${answer.key}"></strong>:
+                <span th:text="${answer.value}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+<script>
+    function submitSurvey() {
+        const form = document.getElementById('survey-form');
+        const formData = new FormData(form);
+        const answers = {};
+        formData.forEach((value, key) => {
+            answers[key] = value;
+        });
+        const title = document.getElementById("surveyTitle").value;
+        const customerId = document.getElementById('customerId').value;
+        const completedScoring = {
+            customerId: customerId,
+            answers: answers,
+            title: title
+        };
+
+        fetch('/SimplePsy/V1/scoring/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(completedScoring)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+        // Получаем элементы
+        var modal = document.getElementById('modal');
+        var modalBody = document.getElementById('modal-body');
+        var closeBtn = document.querySelector('.close-btn');
+        var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+        // Функция для открытия модального окна
+        function openModal() {
+            fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                    modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
+
+            fetch('/SimplePsy/V1/client/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                    const dataList = document.getElementById('clientsList');
+                    dataList.innerHTML = '';
+
+                    clients.forEach(client => {
+                        const option = document.createElement('option');
+                        option.value = client.name;
+                        option.setAttribute('data-id', client.id);
+                        dataList.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка:', error));
+
+            const script = document.createElement('script');
+            script.id = 'dynamic-script';
+            script.textContent = `
+                   document.getElementById('clientInput').addEventListener('change', function() {
+        const selectedOption = Array.from(document.getElementById('clientsList').options)
+                .find(option => option.value === this.value);
+        if (selectedOption) {
+          const clientId = selectedOption.getAttribute('data-id');
+          document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+          document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+        } else {
+          document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+        }
+      });`;
+            document.body.appendChild(script);
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+            const script = document.getElementById('dynamic-script');
+            if (script) {
+                script.remove();
+                console.log('Скрипт удалён');
+            } else {
+                console.log('Скрипт не найден');
+            }
+        }
+
+        // Событие клика для открытия модального окна
+        appointLink.addEventListener('click', openModal);
+
+        // Событие клика для закрытия модального окна
+        closeBtn.addEventListener('click', closeModal);
+    });
+</script>
+</body>
+</html>

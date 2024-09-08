@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Transient;
 import java.util.Map;
 
 public class CompletedScoring {
+    private String id;
     @Transient
     private String customerId; // добавьте поле customerId
     private Map<String, String> answers;
@@ -15,6 +16,14 @@ public class CompletedScoring {
     }
 
     public CompletedScoring() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

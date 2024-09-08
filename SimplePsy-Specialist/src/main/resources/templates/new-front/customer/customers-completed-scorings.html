@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h2>Скоринги</h2>
+<input type="hidden" th:value="${customerId}" id="customerId">
+<div th:each="completedScoring:${completedScorings}">
+    <button class="rectangle-parent104" th:data-card-id="${completedScoring.id}" onclick="goTo(this)">ответы</button>
+<b th:text="${completedScoring.title}"></b>
+</div>
+</body>
+<script>
+    function goTo(obj) {
+        window.location.href = "/SimplePsy/V1/scoring/scoring/" + document.getElementById('customerId').value + "/" + obj.getAttribute("data-card-id");
+    }
+</script>
+</html>

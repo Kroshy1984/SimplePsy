@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -41,18 +40,6 @@ public class SessionController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/search")
-    public List<Object> handleGetRequest(
-            @RequestParam("specialist_id") String specialist_id,
-            @RequestParam("start_date") String start_date,
-            @RequestParam("end_date") String end_date) {
-        System.out.println(specialist_id);
-        System.out.println(start_date);
-        System.out.println(end_date);
-        List<Object> sessions = Collections.singletonList(sessionService.findByDate(start_date, end_date, specialist_id));
-        System.out.println("got the first session: " + sessions.get(0).toString());
-        return sessions;
-    }
     @GetMapping("/searchAll")
     public ResponseEntity<List<LocalDate>> searchAllSessions(
             @RequestParam("specialist_id") String specialist_id) {
@@ -66,7 +53,6 @@ public class SessionController {
     @GetMapping("/session-form")
     public String getSessionForm(Model model) {
         Session session = new Session();
-        //session.setClient(new Client());
         model.addAttribute("session", session);
         return "new-front/session/session-creation";
     }
@@ -74,22 +60,14 @@ public class SessionController {
     @PostMapping("/create-session")
     public String createNewSession(Session session,
                                    @AuthenticationPrincipal UserDetails userDetails) {
-//        System.out.println(session.getClient().getName());
         System.out.println("ClientId in createNewSession: " + session.getClientId());
         System.out.println(session.getPlace());
         System.out.println(session.getDate());
-        //System.out.println(session.getClientId());
         String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
         session.setSpecialistId(specialistId);
         Customer customer = customerService.findById(session.getClientId());
         session.setCustomer(customer);
         sessionService.createSession(session);
-//        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-//        System.out.println("Specialist found!");
-//        String specialist_id = specialist.getId();
-//        System.out.println(specialist_id);
-//        specialistService.createNewSession(email, specialist_id, problem, session.getDate());
-//        System.out.println("Session was created");
         return "redirect:/SimplePsy/V1/session/sessions";
     }
 
@@ -98,51 +76,15 @@ public class SessionController {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
 
-        /*if (specialist.getCustomerIds() == null) {
-            System.out.println("No customers were found for this specialist!");
-            model.addAttribute("customers", specialistCustomers);
-            return "new-front/customer/customer-list";
-        }*/
-
-/*        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
-            for (Session session : sessions) {
-                if (Objects.equals(session.getId(), specialist.getCustomerIds().get(i))) {
-                    sessions.add(session);
-                    System.out.println(sessions.get(i).getDate());
-                    break;
-                }
-            }
-        }*/
         model.addAttribute("sessions", sessions);
         model.addAttribute("specialist", specialist);
 
-        /*String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
-        List<List<Session>> meetingsByDay = specialistService.groupSessionsByDay(sessions);
-        List<Session> meetingsByMonday = meetingsByDay.get(0);
-        System.out.println(meetingsByMonday.size());
-        List<Session> meetingsByDayTuesday = meetingsByDay.get(1);
-        System.out.println(meetingsByDayTuesday.size());
-        List<Session> meetingsByDayWednesday = meetingsByDay.get(2);
-        System.out.println(meetingsByDayWednesday.size());
-        List<Session> meetingsByDayThursday = meetingsByDay.get(3);
-        System.out.println(meetingsByDayThursday.size());
-        List<Session> meetingsByDayFriday = meetingsByDay.get(4);
-        System.out.println(meetingsByDayFriday.size());
-        List<Session> meetingsByDaySaturday = meetingsByDay.get(5);
-        System.out.println(meetingsByDaySaturday.size());
-        List<Session> meetingsByDaySunDay = meetingsByDay.get(6);
-        System.out.println(meetingsByDaySunDay.size());
-        model.addAttribute("meetingsByMonday", meetingsByMonday);
-        model.addAttribute("meetingsByDayTuesday", meetingsByDayTuesday);
-        model.addAttribute("meetingsByDayWednesday", meetingsByDayWednesday);
-        model.addAttribute("meetingsByDayThursday", meetingsByDayThursday);
-        model.addAttribute("meetingsByDayFriday", meetingsByDayFriday);
-        model.addAttribute("meetingsByDaySaturday", meetingsByDaySaturday);
-        model.addAttribute("meetingsByDaySunDay", meetingsByDaySunDay);
-        model.addAttribute("specUrl", specUrl);*/
-
         return "new-front/session/sessions-list";
+    }
+    @DeleteMapping("/delete/{sessionId}")
+    public ResponseEntity<String> deleteSession(@PathVariable String sessionId) {
+        sessionService.deleteById(sessionId);
+        return ResponseEntity.ok("ok");
     }
 
     @GetMapping("/calendar")

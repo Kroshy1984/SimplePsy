@@ -272,7 +272,7 @@ public class SpecialistController {
 //        model.addAttribute("customerId", customerId);
 //        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
 //        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
-//        return "scoring-answers";
+//        return "scoring-answers.html";
 //    }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {

@@ -21,6 +21,7 @@ import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -90,21 +91,9 @@ public class ScoringController {
         System.out.println("Scoring title: " + completedScoring.getTitle());
         System.out.println("Customer id: " + completedScoring.getCustomerId());
         Customer customer = customerService.findById(completedScoring.getCustomerId());
-//        if (customer == null)
-//        {
-//            System.out.println("creating new client");
-//            customer = new Customer();
-//            customer.setId(customer.getId());
-//            customer.setTypeOfClient(customer.getTypeOfClient());
-//            customer.setName(customer.getName());
-//            customer.setSurname(customer.getSurname());
-//            customer.setLastName(customer.getLastName());
-//            customer.setContact(customer.getContact());
-//            customer.setFinancialConditions(customer.getFinancialConditions());
-//            customer.setSex(customer.getSex() != null ? convertSexToGender(customer.getSex()) : null);
-//            customer.setBirthDay(customer.getDateOfBirth());
-//            customer.setRecommendations(customer.getCollegialRecommendations());
-//        }
+        String uuid = UUID.randomUUID().toString();
+        System.out.println("CompletedScoring uuid: " + uuid);
+        completedScoring.setId(uuid);
         customer.addCompletedScoring(completedScoring);
         customerService.saveCustomer(customer);
         return ResponseEntity.ok("Success");
@@ -190,5 +179,18 @@ public class ScoringController {
     @GetMapping("test/copy-link")
     public String getCopyLink() {
         return "new-front/test/copy-link";
+    }
+
+    @GetMapping("/scoring/{customerId}/{completedScoringId}")
+    public String getCompletedScoringPage(@PathVariable String completedScoringId,
+                                          @PathVariable String customerId,
+                                          Model model)
+    {
+        Customer customer = customerService.findById(customerId);
+        System.out.println("Got the customer with name: " + customer.getName());
+        CompletedScoring completedScoring = customer.getCompletedScoringById(completedScoringId);
+        System.out.println("Found completedScoring with title and id: " + completedScoring.getTitle() + " " + completedScoring.getId());
+        model.addAttribute("completedScoring", completedScoring);
+        return "new-front/test/scoring-answers";
     }
 }

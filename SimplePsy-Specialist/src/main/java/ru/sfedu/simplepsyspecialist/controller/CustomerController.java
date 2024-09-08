@@ -7,10 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.Customer;
-import ru.sfedu.simplepsyspecialist.entity.Problem;
-import ru.sfedu.simplepsyspecialist.entity.Scoring;
-import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -216,6 +213,21 @@ public class CustomerController {
         System.out.println("Customers list:");
         customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
         return ResponseEntity.ok(customers);
+    }
+    @GetMapping("/scorings/{customerId}")
+    public String getCustomersCompletedScoring(@PathVariable String customerId,
+                                               Model model)
+    {
+        Customer customer = customerService.findById(customerId);
+        List<CompletedScoring> completedScorings = customer.getCompletedScorings();
+        System.out.println("Completed scorings title:");
+        for (CompletedScoring c : completedScorings)
+        {
+            System.out.println(c.getTitle());
+        }
+        model.addAttribute("completedScorings", completedScorings);
+        model.addAttribute("customerId", customerId);
+        return "new-front/customer/customers-completed-scorings";
     }
     @GetMapping("/findAll")
     public ResponseEntity<List<Customer>> findAllCustomer()

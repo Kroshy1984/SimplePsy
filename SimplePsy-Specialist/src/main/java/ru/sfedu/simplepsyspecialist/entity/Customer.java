@@ -248,7 +248,14 @@ public class Customer {
     public List<CompletedScoring> getCompletedScorings() {
         return completedScorings;
     }
-
+    public CompletedScoring getCompletedScoringById(String id)
+    {
+        for (CompletedScoring c : completedScorings) {
+            if (c.getId().equals(id))
+                return c;
+        }
+        return null;
+    }
     public void addCompletedScoring(CompletedScoring completedScoring) {
         if (this.completedScorings == null)
             this.completedScorings = new ArrayList<>();

@@ -16,6 +16,24 @@
     />
   </head>
   <body>
+  <style>
+    .delete-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .delete-button:hover {
+      background-color: #e43e3e;
+    }
+
+  </style>
   <div class="div73">
     <div class="settings1"></div>
     <header class="frame-parent60">
@@ -163,6 +181,7 @@
                     <b class="b83" th:case="${newSession.customer.typeOfClient.COUPLE}" th:text="${newSession.customer.firstClientSurname + ' ' + newSession.customer.firstClientName}"></b>
                     <b class="b83" th:case="${newSession.customer.typeOfClient.CHILD}" th:text="${newSession.customer.childSurname + ' ' + newSession.customer.childName}"></b>
                 </div>
+                <button class="delete-button" th:data-card-id="${newSession.id}" onclick="deleteSession(this)"> &times;</button>
               </div>
             </div>
           </div>
@@ -410,6 +429,26 @@
         modal.style.display = "none";
       }
     }
+    function deleteSession(obj) {
+      event.stopPropagation(); // Чтобы предотвратить переход по клику на карточку
+
+      if (confirm('Вы уверены, что хотите удалить эту сессию?')) {
+        fetch(`/SimplePsy/V1/session/delete/` + obj.getAttribute("data-card-id"), {
+          method: 'DELETE'
+        })
+                .then(response => {
+                  if (response.ok) {
+                    alert('Сессия успешно удалена');
+                    location.reload(); // Перезагружаем страницу после удаления
+                  } else {
+                    alert('Ошибка при удалении сессии');
+                  }
+                })
+                .catch(error => console.error('Ошибка при удалении сессии:', error));
+      }
+      location.reload();
+    }
+
     const customerSearch = document.getElementById('customerSearch');
     const currentSpecialistId = document.getElementById('currentSpecialistId').value;
 
@@ -459,6 +498,7 @@
         window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
       }
     });
+
   </script>
   </body>
 </html>

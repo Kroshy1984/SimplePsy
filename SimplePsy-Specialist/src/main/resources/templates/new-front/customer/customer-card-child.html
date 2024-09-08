@@ -205,6 +205,9 @@
                         <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
                             <div class="div72">Сохранить</div>
                         </button>
+                        <button type="button" class="rectangle-parent51" onclick="goToScorings(this)" th:data-card-id="${customer.id}">
+                            <div class="div72">Скоринги</div>
+                        </button>
                     </div>
                 </div>
                 <div class="component19">
@@ -575,6 +578,9 @@
     </div>
 </div>
 <script>
+    function goToScorings(obj) {
+        window.location.href = "/SimplePsy/V1/customer/scorings/" + obj.getAttribute("data-card-id");
+    }
     function showInputs() {
         // Находим элементы, которые нужно изменить
         var inputsToEnable = document.querySelectorAll('input[disabled]');

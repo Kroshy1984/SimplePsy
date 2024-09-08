@@ -93,4 +93,8 @@ public class SessionService {
         }
         sessionRepository.save(session);
     }
+
+    public void deleteById(String sessionId) {
+        sessionRepository.deleteById(sessionId);
+    }
 }
