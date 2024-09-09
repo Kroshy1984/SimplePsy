@@ -214,17 +214,19 @@ public class CustomerController {
         customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
         return ResponseEntity.ok(customers);
     }
+
     @GetMapping("/scorings/{customerId}")
-    public String getCustomersCompletedScoring(@PathVariable String customerId,
-                                               Model model)
-    {
+    public String getCustomersCompletedScoring(@AuthenticationPrincipal UserDetails userDetails,
+                                               @PathVariable String customerId,
+                                               Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         Customer customer = customerService.findById(customerId);
         List<CompletedScoring> completedScorings = customer.getCompletedScorings();
         System.out.println("Completed scorings title:");
-        for (CompletedScoring c : completedScorings)
-        {
+        for (CompletedScoring c : completedScorings) {
             System.out.println(c.getTitle());
         }
+        model.addAttribute("specialist", specialist);
         model.addAttribute("completedScorings", completedScorings);
         model.addAttribute("customerId", customerId);
         return "new-front/customer/customers-completed-scorings";

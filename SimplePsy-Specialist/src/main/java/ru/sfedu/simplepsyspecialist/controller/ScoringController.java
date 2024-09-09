@@ -182,14 +182,16 @@ public class ScoringController {
     }
 
     @GetMapping("/scoring/{customerId}/{completedScoringId}")
-    public String getCompletedScoringPage(@PathVariable String completedScoringId,
+    public String getCompletedScoringPage(@AuthenticationPrincipal UserDetails userDetails,
+                                          @PathVariable String completedScoringId,
                                           @PathVariable String customerId,
-                                          Model model)
-    {
+                                          Model model) {
         Customer customer = customerService.findById(customerId);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         System.out.println("Got the customer with name: " + customer.getName());
         CompletedScoring completedScoring = customer.getCompletedScoringById(completedScoringId);
         System.out.println("Found completedScoring with title and id: " + completedScoring.getTitle() + " " + completedScoring.getId());
+        model.addAttribute("specialist", specialist);
         model.addAttribute("completedScoring", completedScoring);
         return "new-front/test/scoring-answers";
     }

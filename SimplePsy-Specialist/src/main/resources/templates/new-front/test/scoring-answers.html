@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/questionnaire.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/calendar/calendar.css}" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -17,6 +18,45 @@
     />
 </head>
 <body>
+<div class="frame-wrapper6">
+    <div class="frame-parent7">
+        <div class="icon-parent2">
+            <img
+                    class="icon23"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon@2x.png"
+            />
+
+            <div class="constructor-wrapper">
+                <a class="constructor1" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
+            </div>
+            <div class="icon-parent3">
+                <img
+                        class="icon24"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-1@2x.png"
+                />
+                <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
+                <div class="search-input">
+                    <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
+                    <datalist id="customerList">
+
+                    </datalist>
+
+                </div>
+            </div>
+        </div>
+        <div class="main-area-inner">
+            <div class="about-us-parent4">
+                <a class="about-us16">Добавить клиента</a>
+                <a class="news10">Назначить встречу</a>
+                <a class="user-policy10">Добавить график нерабочих дней </a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="div139">
     <div class="sidebar1 sidebar1-fix-width">
         <div class="menu">
@@ -164,43 +204,18 @@
     </div>
 </div>
 <script>
-    function submitSurvey() {
-        const form = document.getElementById('survey-form');
-        const formData = new FormData(form);
-        const answers = {};
-        formData.forEach((value, key) => {
-            answers[key] = value;
-        });
-        const title = document.getElementById("surveyTitle").value;
-        const customerId = document.getElementById('customerId').value;
-        const completedScoring = {
-            customerId: customerId,
-            answers: answers,
-            title: title
-        };
 
-        fetch('/SimplePsy/V1/scoring/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(completedScoring)
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-    }
-    // Открытие модального окна создания сессии
     document.addEventListener('DOMContentLoaded', function() {
         // Получаем элементы
         var modal = document.getElementById('modal');
         var modalBody = document.getElementById('modal-body');
         var closeBtn = document.querySelector('.close-btn');
         var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+        var holidayBtn = document.querySelector('.user-policy10');
 
         // Функция для открытия модального окна
         function openModal() {
-            fetch('http://localhost:8081/SimplePsy/V1/session/session-form')
+            fetch('/SimplePsy/V1/session/session-form')
                 .then(response => response.text())
                 .then(data => {
                     modalBody.innerHTML = data;
@@ -208,36 +223,68 @@
                 })
                 .catch(error => console.error('Ошибка загрузки:', error));
 
-            fetch('/SimplePsy/V1/client/findAll')
+            fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
                 .then(response => response.json())
                 .then(clients => {
                     const dataList = document.getElementById('clientsList');
                     dataList.innerHTML = '';
 
-                    clients.forEach(client => {
+                    const script = document.createElement('script');
+                    script.id = 'dynamic-script';
+                    script.textContent = `
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+                    document.body.appendChild(script);
+                    clients.forEach(customer => {
                         const option = document.createElement('option');
-                        option.value = client.name;
-                        option.setAttribute('data-id', client.id);
+                        switch (customer.typeOfClient) {
+                            case 'ADULT':
+                                option.value = customer.name + ' ' + customer.surname;
+                                break;
+                            case 'CHILD':
+                                option.value = customer.childName + ' ' + customer.childSurname;
+                                break;
+                            case 'COUPLE':
+                                option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                                break;
+                            default:
+                                // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                                console.log('Unknown client type');
+                                break;
+                        }
+                        option.setAttribute('data-id', customer.id);
                         dataList.appendChild(option);
                     });
                 })
                 .catch(error => console.error('Ошибка:', error));
 
-            const script = document.createElement('script');
-            script.id = 'dynamic-script';
-            script.textContent = `
-                   document.getElementById('clientInput').addEventListener('change', function() {
-        const selectedOption = Array.from(document.getElementById('clientsList').options)
-                .find(option => option.value === this.value);
-        if (selectedOption) {
-          const clientId = selectedOption.getAttribute('data-id');
-          document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
-          document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
-        } else {
-          document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
-        }
-      });`;
-            document.body.appendChild(script);
+
         }
 
         // Функция для закрытия модального окна
@@ -252,11 +299,85 @@
             }
         }
 
-        // Событие клика для открытия модального окна
         appointLink.addEventListener('click', openModal);
+        holidayBtn.addEventListener('click', openHolidayModal);
 
-        // Событие клика для закрытия модального окна
+        var  addClientBtn = document.querySelector('.about-us16');
+        addClientBtn.addEventListener('click', () =>
+        {
+            window.location.href = '/SimplePsy/V1/customer/customer-form';
+        });
+
         closeBtn.addEventListener('click', closeModal);
+    });
+
+    function openHolidayModal()
+    {
+        const modal = document.getElementById("modal");
+        const modalBody = document.getElementById("modal-body");
+
+        fetch('/SimplePsy/V1/session/holiday')
+            .then(response => response.text())
+            .then(html => {
+                modalBody.innerHTML = html;
+                modal.style.display = "block";
+
+                // Добавляем обработчик закрытия модального окна
+                document.querySelector('.close-modal').onclick = function() {
+                    modal.style.display = "none";
+                };
+            })
+            .catch(error => {
+                console.error('Error loading modal content:', error);
+            });
+    }
+    const customerSearch = document.getElementById('customerSearch');
+    const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
+    customerSearch.addEventListener('input', function () {
+        const searchQuery = this.value;
+        const datalist = document.getElementById('customerList');
+
+        if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса
+            fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Очищаем предыдущие результаты
+                    datalist.innerHTML = '';
+
+                    // Фильтруем и сортируем клиентов в зависимости от типа
+                    data.forEach(customer => {
+                        let displayName = '';
+                        if (customer.typeOfClient === 'ADULT') {
+                            displayName = `${customer.name} ${customer.surname}`;
+                        } else if (customer.typeOfClient === 'CHILD') {
+                            displayName = `${customer.childName} ${customer.childSurname}`;
+                        } else if (customer.typeOfClient === 'COUPLE') {
+                            displayName = `${customer.firstClientName} ${customer.firstClientSurname}`;
+                        }
+
+                        if (displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                            const option = document.createElement('option');
+                            option.value = displayName;
+                            option.dataset.id = customer.id;
+                            datalist.appendChild(option);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке данных клиентов:', error);
+                });
+        }
+    });
+
+    customerSearch.addEventListener('change', function () {
+        const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+            .find(option => option.value === customerSearch.value);
+
+        if (selectedOption) {
+            const customerId = selectedOption.dataset.id;
+            window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
+        }
     });
 </script>
 </body>
