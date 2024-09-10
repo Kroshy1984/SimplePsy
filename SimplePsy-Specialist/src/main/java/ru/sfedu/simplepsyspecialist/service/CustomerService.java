@@ -51,7 +51,9 @@ public class CustomerService {
     }
 
     public Customer saveCustomer(Customer customer) {
-        System.out.println("saving customer " + customer.getName());
+        System.out.println("saving customer...");
+        Customer oldCustomer = findById(customer.getId());
+        customer.setCompletedScorings(oldCustomer.getCompletedScorings());
         return customerRepository.save(customer);
     }
 

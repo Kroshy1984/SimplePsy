@@ -262,6 +262,10 @@ public class Customer {
         completedScorings.add(completedScoring);
     }
 
+    public void setCompletedScorings(List<CompletedScoring> completedScorings) {
+        this.completedScorings = completedScorings;
+    }
+
     public LocalDate getDateOfFirstRequest() {
         return dateOfFirstRequest;
     }
