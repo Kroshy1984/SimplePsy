@@ -223,6 +223,10 @@ public class CustomerController {
         Customer customer = customerService.findById(customerId);
         List<CompletedScoring> completedScorings = customer.getCompletedScorings();
         System.out.println("Completed scorings title:");
+        if (completedScorings == null) {
+            model.addAttribute("specialist", specialist);
+            return "new-front/customer/customers-completed-scorings";
+        }
         for (CompletedScoring c : completedScorings) {
             System.out.println(c.getTitle());
         }
