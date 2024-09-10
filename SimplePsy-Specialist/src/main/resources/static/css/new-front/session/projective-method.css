@@ -1,5 +1,17 @@
+input {
+  border: none;
+  background-color: var(--grey-blue-98);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.div105 {
+  cursor: pointer;
+}
+
 .base70 {
-  width: 100%;
   height: 100%;
   position: absolute;
   margin: 0 !important;
@@ -7,19 +19,16 @@
   right: 0;
   bottom: 0;
   left: 0;
-  box-shadow: var(--shadows-gray-blue-5-120b);
   border-radius: var(--br-mini);
   background-color: var(--white);
 }
 .div101 {
-  margin-left: -43px;
   width: 216px;
   position: relative;
   line-height: 150%;
   font-weight: 500;
   display: flex;
   align-items: center;
-  justify-content: center;
   z-index: 1;
 }
 .drawing-canvas,
@@ -55,8 +64,14 @@
   line-height: 10.6px;
   font-weight: 500;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 3;
+  height: 25px;
+  width: 165px;
+  bottom: -8.4px;
+  border-radius: var(--br-xl);
+  background-color: var(--color-lightslategray-400);
+  border: 2px solid var(--grey-blue-95);
+  box-sizing: border-box;
 }
 .drawing-area {
   display: flex;
@@ -71,7 +86,6 @@
   position: relative;
   object-fit: contain;
   flex-shrink: 0;
-  debug_commit: 69da668;
   z-index: 2;
   margin-left: -4.9px;
 }
@@ -320,16 +334,29 @@
   justify-content: flex-end;
 }
 .add-technique-button {
-  position: absolute;
   top: 4px;
   left: 26.3px;
   border-radius: var(--br-xl);
   background-color: var(--color-lightslategray-100);
   border: 3px solid var(--grey-blue-95);
   box-sizing: border-box;
-  width: 130.4px;
-  height: 23px;
+  width: 183px;
+  height: 27px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  text-align: center;
+  font-size: var(--bold-12-size);
+  color: var(--color-slategray-500);
+  font-family: var(--bold-10);
+
 }
+.add-technique-button:hover {
+  background-color: var(--color-slategray-300);
+  border: 3px solid var(--color-lightgray);
+  box-sizing: border-box;
+}
+
 .div105 {
   position: absolute;
   top: 0;
@@ -376,7 +403,6 @@
 .image-input-wrapper {
   align-self: stretch;
   flex-direction: row;
-  padding: 0 0 0 var(--padding-5xs);
   box-sizing: border-box;
   max-width: 100%;
   text-align: left;
@@ -390,7 +416,7 @@
 .root {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .instructions-parent {
   width: 367px;
@@ -404,10 +430,8 @@
   box-sizing: border-box;
 }
 .methodology {
-  flex: 1;
   flex-direction: column;
   padding: var(--padding-sm) var(--padding-lgi) var(--padding-5xl);
-  gap: var(--gap-mini);
   max-width: 100%;
   text-align: center;
   font-size: var(--bold-12-size);
@@ -417,7 +441,6 @@
 .root {
   width: 100%;
   flex-direction: row;
-  padding: 0 0 0 var(--padding-5xl);
   line-height: normal;
   letter-spacing: normal;
 }

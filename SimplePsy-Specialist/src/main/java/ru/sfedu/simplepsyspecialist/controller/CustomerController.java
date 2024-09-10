@@ -2,17 +2,18 @@ package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sfedu.simplepsyspecialist.entity.Customer;
-import ru.sfedu.simplepsyspecialist.entity.Problem;
+import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
+import ru.sfedu.simplepsyspecialist.service.ScoringService;
+import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -20,10 +21,14 @@ import java.util.NoSuchElementException;
 public class CustomerController {
 
     private CustomerService customerService;
+    private ScoringService scoringService;
+    private SpecialistService specialistService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, ScoringService scoringService, SpecialistService specialistService) {
         this.customerService = customerService;
+        this.scoringService = scoringService;
+        this.specialistService = specialistService;
     }
 
 //    @GetMapping("/search")
@@ -49,15 +54,12 @@ public class CustomerController {
 //    }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newCustomer(@RequestBody Customer customer)
+    public String newCustomer(@ModelAttribute("customer") Customer customer)
     {
-        System.out.println("Got the new customer:\n" + customer.getName());
-        System.out.println(customer.getContact().getEmail());
-        System.out.println(customer.getName());
-        System.out.println(customer.getProblemsId());
+        System.out.println("Got the customer with id:\n" + customer.getId());
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
-        return ResponseEntity.ok(newCustomerId);
+        return "redirect:/SimplePsy/V1/customer/customer-card/" + newCustomerId;
     }
     @PostMapping("/update")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer)
@@ -112,23 +114,6 @@ public class CustomerController {
         customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer successfully deleted");
     }
-
-    @GetMapping("/update-status")
-    public void createCustomers(@RequestParam String customerId) {
-        customerService.updateStatus(customerId);
-    }
-
-    @GetMapping("/findCustomerByContactData")
-    public ResponseEntity<String> findCustomerByContactData(@RequestParam("data") String data)
-    {
-        try {
-            Customer customer = customerService.findByContactData(data);
-            return ResponseEntity.ok(customer.getId());
-        } catch (NullPointerException | NoSuchElementException e) {
-            return ResponseEntity.ok("Customer not found");
-        }
-
-    }
     @PostMapping("/problem/new")
     public ResponseEntity<String> customerNewProblem(@RequestParam("customerId") String customerId,
                                                      @RequestParam("problemId") String problemId)
@@ -150,17 +135,23 @@ public class CustomerController {
         }
     }
     @GetMapping("/customer-form")
-    public String getClientForm(Model model) {
+    public String getClientForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         model.addAttribute("customerDTO", new Customer());
+        model.addAttribute("specialist", specialist);
         return "new-front/customer/customer-creation";
     }
 
     @GetMapping("/customer-card/{customerId}")
-    public String getCustomerCard(@PathVariable String customerId, Model model) {
+    public String getCustomerCard(@AuthenticationPrincipal UserDetails userDetails,
+                                  @PathVariable String customerId,
+                                  Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         System.out.println("In method getCustomerCard got the customerId: " + customerId);
         Customer customer = customerService.findById(customerId);
         customer.setId(customerId);
         model.addAttribute("customer", customer);
+        model.addAttribute("specialist", specialist);
         switch (customer.getTypeOfClient()) {
             case ADULT -> {
                 return "new-front/customer/customer-card-adult";
@@ -176,16 +167,80 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/new")
-    public ResponseEntity<String> createNewCustomer(Customer customer) throws IOException {
-        //System.out.println("Got the new customer:\n" + name);
+    public String createNewCustomer(@AuthenticationPrincipal UserDetails userDetails,
+                                                    Customer customer) {
+
         customer.cleanAttributes();
         System.out.println(customer.getSurname());
         System.out.println(customer.getDateOfBirth());
         System.out.println(customer.getSex());
         Customer newCustomer = customerService.saveCustomer(customer);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        specialist.addCustomerId(customer.getId());
+        specialistService.save(specialist);
         System.out.println(newCustomer.getSurname());
         System.out.println(newCustomer.getDateOfBirth());
+        System.out.println("Возраст: " + newCustomer.getAge());
         System.out.println(newCustomer.getSex());
-        return ResponseEntity.ok("Customer " + customer.getName() + " successfully created");
+
+        return "redirect:/SimplePsy/V1/specialist/customers";
+    }
+    @GetMapping("/customers-test")
+    public String getCustomersTestsList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        List<Scoring> scorings = scoringService.findAll();
+        scorings.stream().forEach(scoring -> {
+            System.out.println(scoring.getTitle());
+            System.out.println(scoring.getType().toString());
+        });
+        model.addAttribute("specialist", specialist);
+        model.addAttribute("scorings", scorings);
+        return "new-front/test/customers-tests-list";
+    }
+    @GetMapping("/findAll/{specialistId}")
+    public ResponseEntity<List<Customer>> findAllCustomer(@PathVariable String specialistId)
+    {
+        System.out.println("currentSpecialistId: " + specialistId);
+        Specialist specialist = specialistService.findById(specialistId);
+        List<String> customerIds = specialist.getCustomerIds();
+        List<Customer> customers = new ArrayList<>();
+        for (String customerId : customerIds) {
+            Customer customer = customerService.findById(customerId);
+            if (customer != null) {
+                customers.add(customerService.findById(customerId));
+            }
+        }
+        System.out.println("Customers list:");
+        customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
+        return ResponseEntity.ok(customers);
+    }
+
+    @GetMapping("/scorings/{customerId}")
+    public String getCustomersCompletedScoring(@AuthenticationPrincipal UserDetails userDetails,
+                                               @PathVariable String customerId,
+                                               Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        Customer customer = customerService.findById(customerId);
+        List<CompletedScoring> completedScorings = customer.getCompletedScorings();
+        System.out.println("Completed scorings title:");
+        if (completedScorings == null) {
+            model.addAttribute("specialist", specialist);
+            return "new-front/customer/customers-completed-scorings";
+        }
+        for (CompletedScoring c : completedScorings) {
+            System.out.println(c.getTitle());
+        }
+        model.addAttribute("specialist", specialist);
+        model.addAttribute("completedScorings", completedScorings);
+        model.addAttribute("customerId", customerId);
+        return "new-front/customer/customers-completed-scorings";
+    }
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Customer>> findAllCustomer()
+    {
+        List<Customer> customers = customerService.findAll();
+        System.out.println("Clients list:");
+        customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
+        return ResponseEntity.ok(customers);
     }
 }

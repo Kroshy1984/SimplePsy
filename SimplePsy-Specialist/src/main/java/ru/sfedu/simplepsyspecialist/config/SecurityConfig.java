@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -40,28 +41,33 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.authorizeHttpRequests((request) -> request
-//                        .requestMatchers("/SimplePsy/V1/specialist/signup").permitAll()
-//                        .requestMatchers("/SimplePsy/V1/specialist/find-customer").permitAll()
-//                        .requestMatchers("/SimplePsy/V1/specialist/find-customer/byProblemId").permitAll()
-//                        .requestMatchers("/SimplePsy/V1/specialist/changePass**").permitAll()
-//                        .requestMatchers("/SimplePsy/V1/specialist/setNewPassword/**").permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/**/*.css")).permitAll()
-//                        .requestMatchers("/SimplePsy/V1/client/findAll").permitAll() // Разрешить доступ к этому URL
-//                        .anyRequest().authenticated())
-//                .formLogin((form) -> form.loginPage("/SimplePsy/V1/specialist/login").permitAll()
-//                        .defaultSuccessUrl("/SimplePsy/V1/specialist/sessions")
-//                        .permitAll())
-//                .logout((logout) -> logout.logoutUrl("/logout").permitAll())
-//                .csrf(csrf -> csrf.disable());
-        httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().permitAll()).csrf(csrf -> csrf.disable());
+        httpSecurity.authorizeHttpRequests((request) -> request
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/SimplePsy/V1/scoring/test/{testId}/{customerId}").permitAll()
+                        .requestMatchers("/SimplePsy/V1/scoring/done").permitAll()
+                        .requestMatchers("/SimplePsy/V1/scoring/submit").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/signup").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/find-customer").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/find-customer/byProblemId").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/changePass**").permitAll()
+                        .requestMatchers("/SimplePsy/V1/specialist/setNewPassword/**").permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/**/*.css")).permitAll()
+                        .requestMatchers("/SimplePsy/V1/client/findAll").permitAll() // Разрешить доступ к этому URL
+                        .anyRequest().authenticated())
+                .formLogin((form) -> form.loginPage("/SimplePsy/V1/specialist/login").permitAll()
+                        .defaultSuccessUrl("/SimplePsy/V1/session/calendar")
+                        .permitAll())
+                .logout((logout) -> logout.logoutUrl("/logout").permitAll())
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable());
+//        httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().permitAll()).csrf(csrf -> csrf.disable());
         return httpSecurity.build();
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Замените на ваш домен
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081")); // Замените на ваш домен
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

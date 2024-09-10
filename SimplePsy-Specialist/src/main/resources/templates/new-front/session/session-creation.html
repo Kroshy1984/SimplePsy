@@ -16,14 +16,7 @@
   />
 </head>
 <body>
-<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}" method="post">
-  <img
-          class="cross-sign"
-          loading="lazy"
-          alt=""
-          src="/images/group-282@2x.png"
-          id="groupIcon"
-  />
+<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}"  onsubmit="return validateForm()" method="post" >
   <div class="component10">
     <b class="add-place10">Тип встречи</b>
     <label for="session-type"></label>
@@ -40,9 +33,9 @@
             alt=""
             src="/images/icon-1@2x.png"
     />
-    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList">
+    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList" autocomplete="off">
     <datalist id="clientsList"></datalist>
-    <input type="hidden" th:field="*{clientId}" id="clientId">
+    <input type="hidden" th:name="${clientId}" th:field="*{clientId}" id="clientId">
   </div>
 
   <div class="div106">
@@ -99,7 +92,7 @@
 
   <div>
     <label for="session-isrepeatable" class="add-place9">Повторять</label>
-    <input id="session-isrepeatable" class="appointment-fields1" type="checkbox" th:name="isRepeatable">
+      <input id="session-isrepeatable" class="appointment-fields1" type="checkbox" th:name="isRepeatable">
   </div>
 
   <div>
@@ -129,7 +122,7 @@
   </div>
   <button type="submit">Создать встречу</button>
 </form>
-
+<div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
 <script>
   var groupContainer = document.getElementById("groupContainer");
   if (groupContainer) {
@@ -145,16 +138,47 @@
     });
   }
 
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
   document.getElementById('clientInput').addEventListener('input', function() {
-    fetch('/SimplePsy/V1/client/findAll')
+    fetch('/SimplePsy/V1/customer/findAll')
             .then(response => response.json())
             .then(clients => {
               const dataList = document.getElementById('clientsList');
               dataList.innerHTML = ''; // очистить текущий список
 
-              clients.forEach(client => {
+              clients.forEach(customer => {
                 const option = document.createElement('option');
-                option.value = client.name; // или другой атрибут, который вы хотите отображать
+                switch (customer.typeOfClient) {
+                  case 'ADULT':
+                    option.value = customer.name + ' ' +customer.surname;
+                    break;
+                  case 'CHILD':
+                    option.value = customer.childName + ' ' + customer.childSurname;
+                    break;
+                  case 'COUPLE':
+                    option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                    break;
+                  default:
+                    // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                    console.log('Unknown client type');
+                    break;
+                }
                 option.setAttribute('data-id', client.id); // добавить атрибут data-id
                 dataList.appendChild(option);
               });
@@ -163,12 +187,17 @@
   });
 
   document.getElementById('clientInput').addEventListener('change', function() {
-    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
     if (selectedOption) {
       const clientId = selectedOption.getAttribute('data-id');
       document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
     }
   });
+
 </script>
 </body>
 </html>

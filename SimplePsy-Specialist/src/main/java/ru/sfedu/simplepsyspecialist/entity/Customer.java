@@ -3,11 +3,13 @@ package ru.sfedu.simplepsyspecialist.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.sfedu.simplepsyspecialist.entity.nested.*;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,9 @@ public class Customer {
     private Sex sex;
     private List<String> problemsId;
     private TypeOfTreatment typeOfTreatment;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfFirstRequest;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfFirstConsultation;
     private PreferredMeetingFormat preferredMeetingFormat;
     private OnlineMeetingPlace onlineMeetingPlace;
@@ -38,13 +42,15 @@ public class Customer {
     private String financialConditions;
 
     // Поля после "Подробнее"
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+    private int age;
     private String residentialAddress;
     private String collegialRecommendations;
     private String specialTermsOfContract;
     private FamilyStatus familyStatus;
     private PriorityCommunicationChannel priorityCommunicationChannel;
-    private boolean isSupervision;
+    private Supervised supervised;
     private String supervisorsName;
     private String supervisorsSurname;
     private String supervisorsLastName;
@@ -56,7 +62,6 @@ public class Customer {
     private Contact cotherapistContact;
     private String cotherapistPaymentConditions;
     private String notes;
-    // private LocalDate dateOfRegistration = LocalDate.of(1000, 1 , 1);
 
     // Поля для пары
     private String firstClientName;
@@ -108,7 +113,7 @@ public class Customer {
     private Contact trusteesContact;
     private Sex trusteesSex;
     private String trusteesCity;
-
+    private List<CompletedScoring> completedScorings;
     public Customer() {
     }
 
@@ -124,6 +129,7 @@ public class Customer {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
+        this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
         this.sex = sex;
         this.contact = contact;
     }
@@ -135,7 +141,7 @@ public class Customer {
                     String offlineMeetingPlace, ClientStatus clientStatus, String clientsFirstRequestForTherapy,
                     String fixedTimeForMeeting, String financialConditions, String residentialAddress,
                     String collegialRecommendations, String specialTermsOfContract, FamilyStatus familyStatus,
-                    PriorityCommunicationChannel priorityCommunicationChannel, boolean isSupervision,
+                    PriorityCommunicationChannel priorityCommunicationChannel, Supervised supervised,
                     String supervisorsName, String supervisorsSurname, String supervisorsLastName,
                     Contact supervisorsContact, String materialForNextSessionsFromSupervision,
                     String cotherapistName, String cotherapistSurname, String cotherapistLastName, Contact cotherapistContact, String cotherapistPaymentConditions, String notes,
@@ -159,6 +165,7 @@ public class Customer {
         this.contact = contact;
         this.description = description;
         this.dateOfBirth = dateOfBirth;
+        this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
         this.sex = sex;
         this.problemsId = problemsId;
         this.typeOfTreatment = typeOfTreatment;
@@ -176,7 +183,7 @@ public class Customer {
         this.specialTermsOfContract = specialTermsOfContract;
         this.familyStatus = familyStatus;
         this.priorityCommunicationChannel = priorityCommunicationChannel;
-        this.isSupervision = isSupervision;
+        this.supervised = supervised;
         this.supervisorsName = supervisorsName;
         this.supervisorsSurname = supervisorsSurname;
         this.supervisorsLastName = supervisorsLastName;
@@ -235,6 +242,28 @@ public class Customer {
         this.trusteesContact = trusteesContact;
         this.trusteesSex = trusteesSex;
         this.trusteesCity = trusteesCity;
+    }
+
+
+    public List<CompletedScoring> getCompletedScorings() {
+        return completedScorings;
+    }
+    public CompletedScoring getCompletedScoringById(String id)
+    {
+        for (CompletedScoring c : completedScorings) {
+            if (c.getId().equals(id))
+                return c;
+        }
+        return null;
+    }
+    public void addCompletedScoring(CompletedScoring completedScoring) {
+        if (this.completedScorings == null)
+            this.completedScorings = new ArrayList<>();
+        completedScorings.add(completedScoring);
+    }
+
+    public void setCompletedScorings(List<CompletedScoring> completedScorings) {
+        this.completedScorings = completedScorings;
     }
 
     public LocalDate getDateOfFirstRequest() {
@@ -324,6 +353,17 @@ public class Customer {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+        if (dateOfBirth != null) {
+            setAge(Period.between(dateOfBirth, LocalDate.now()).getYears());
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Sex getSex() {
@@ -446,12 +486,12 @@ public class Customer {
         this.priorityCommunicationChannel = priorityCommunicationChannel;
     }
 
-    public boolean isSupervision() {
-        return isSupervision;
+    public Supervised getSupervised() {
+        return supervised;
     }
 
-    public void setSupervision(boolean supervision) {
-        isSupervision = supervision;
+    public void setSupervised(Supervised supervised) {
+        this.supervised = supervised;
     }
 
     public String getSupervisorsName() {

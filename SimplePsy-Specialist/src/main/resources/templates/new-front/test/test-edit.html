@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/default-page.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/test-edit.css}" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -17,26 +18,12 @@
 </head>
 <body>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
     label {
         display: block;
         margin-bottom: 5px;
     }
 
-    input, textarea, select {
+    .container input, .container textarea, .container select {
         width: 100%;
         padding: 8px;
         box-sizing: border-box;
@@ -53,54 +40,132 @@
     button:hover {
         background-color: #0056b3;
     }
+    .container {
+        position: relative;
+        top: 20%;
+        left: 30%;
+        width: 50%;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form heading */
+    .container h2 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Form styling */
+    #surveyForm {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Individual form groups */
+    #surveyForm > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Labels */
+    #surveyForm label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    /* Textareas */
+    #surveyForm textarea {
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+        background-color: #fff;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Textarea focus effect */
+    #surveyForm textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Submit button */
+    #surveyForm button[type="submit"] {
+        align-self: center;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Submit button hover effect */
+    #surveyForm button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
 </style>
 <div class="div139">
-    <div class="sidebar1">
+    <div class="sidebar1 sidebar1-fix-width">
         <div class="menu">
-            <div class="dashboard23" id="dashboardContainer">
-                <div class="base75"></div>
-                <b class="dashboard24">Список клинетов</b>
-                <img
-                        class="icon115"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-3@2x.png"
-                />
-            </div>
-            <div class="invoice15" id="invoiceContainer">
-                <div class="base76"></div>
-                <b class="invoice16">Уведомления</b>
-                <img
-                        class="icon116"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-5.svg"
-                />
-            </div>
-            <div class="files8">
-                <div class="base77"></div>
-                <b class="files9">Аналитика</b>
-                <img
-                        class="icon117"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-6.svg"
-                />
-            </div>
-            <div class="email3">
-                <div class="base78"></div>
-                <b class="calendars8">Календарь</b>
-                <img
-                        class="icon118"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-4@2x.png"
-                />
-            </div>
-
-            <div class="div140" id="container">
-                <div class="base79"></div>
-                <b class="dashboard25">Опросники и тесты</b>
+            <div class="frame-wrapper73">
+                <div class="frame-parent122">
+                    <div class="frame-parent123">
+                        <div class="client-list-wrapper">
+                            <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                            <div class="icon-wrapper33">
+                                <img class="icon146" alt="" src="/images/icon-3@2x.png" />
+                            </div>
+                            <b class="client-list">Список клиентов</b>
+                        </div>
+                        <div class="base-frame">
+                            <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                <div class="icon-wrapper34">
+                                    <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
+                                </div>
+                                <b class="calendar">Календарь</b>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="frame-parent123">
+                        <div class="notifications-wrapper">
+                            <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                            <div class="icon-wrapper33">
+                                <img class="icon146" alt="" src="/images/icon-5.svg" />
+                            </div>
+                            <b class="notifications">Уведомления</b>
+                        </div>
+                        <div class="base-frame">
+                            <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                <div class="icon-wrapper34">
+                                    <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                                </div>
+                                <b class="analytics">Аналитика</b>
+                            </button>
+                        </div>
+                        <div class="tests-wrapper">
+                            <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                            <b class="surveys-tests">Опросники и тесты</b>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="parent26">
                 <b class="b112">Заявки</b>
@@ -118,64 +183,81 @@
                 </div>
             </div>
         </div>
-        <div class="feedback3">
-            <b class="send-feedback8">Обратная связь</b>
-            <img
-                    class="icon119"
-                    loading="lazy"
-                    alt=""
-                    src="/images/icon-7@2x.png"
-            />
+        <div class="feedback-item">
+            <div class="feedback-button">
+                <img
+                        class="icon30"
+                        loading="lazy"
+                        alt=""
+                        src="/images/icon-7@2x.png"
+                />
 
-            <img
-                    class="icon120"
-                    loading="lazy"
-                    alt=""
-                    src="/images/icon-8.svg"
-            />
+                <div class="frame-parent13" onclick="alert('Эта кнопка находится в разработке')">
+                    <div class="send-feedback-container">
+                        <b class="send-feedback1">Обратная связь</b>
+                    </div>
+                    <img
+                            class="icon31"
+                            loading="lazy"
+                            alt=""
+                            src="/images/icon-8.svg"
+                    />
+                </div>
+            </div>
         </div>
 
         <div class="head">
             <div class="wrapper-user8">
                 <img
-                        class="user-icon8"
+                        class="user-icon"
                         loading="lazy"
                         alt=""
-                        src="/images/user@2x.png"
+                        th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
                         id="userImage"
+                        onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
                 />
             </div>
-            <b class="hello-rosalie8">Привет, Антон!</b>
-            <b class="rosaliericegmailc8">rosalie.rice@gmail.com</b>
+            <div class="frame-parent50">
+                <div class="hello-wrapper">
+                    <b class="hello">Привет, </b>
+                    <b th:text="${specialist.name}" class="hello" ></b>
+                    <b class="hello">!</b>
+                </div>
+                <b class="specialist-email">
+                    <p th:text="${specialist.username}" class="specialist-email-content"></p>
+                </b>
+            </div>
         </div>
     </div>
     <header class="head1">
         <div class="navigate">
-            <a class="constructor8">Понятная практика</a>
+            <a class="constructor8" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
             <div class="menu1">
-                <b class="news9" id="newsText">Назначить встречу</b>
-                <b class="user-policy9" id="userPolicyText"
-                >Добавить график нерабочих дней
-                </b>
                 <b class="about-us15" id="aboutUsText">Добавить клиента</b>
+                <b class="news10">Назначить встречу</b>
+                <b class="user-policy9" id="userPolicyText">Добавить график нерабочих дней</b>
             </div>
+            <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
             <div class="search8">
-                <b class="search9">Найти клиента...</b>
                 <img
                         class="icon121"
                         loading="lazy"
                         alt=""
                         src="/images/icon-1@2x.png"
                 />
+                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
+                <datalist id="customerList">
+
+                </datalist>
             </div>
             <div class="city">
-                <b class="new-york8">Ростов-на-Дону</b>
                 <img
                         class="icon122"
                         loading="lazy"
                         alt=""
                         src="/images/icon-2@2x.png"
                 />
+                <b th:text="${specialist.city}" class="specialist-city"></b>
             </div>
             <img
                     class="icon123"
@@ -185,35 +267,41 @@
             />
         </div>
     </header>
-        <!-- Sidebar and Header code remains unchanged -->
+    <!-- Sidebar and Header code remains unchanged -->
 
-        <div class="survey-container">
-            <h2>Редактировать опрос</h2>
-            <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/{id}/update}" method="post">
-                <input type="hidden" id="surveyId" name="id" th:value="${scoring.id}">
-                <input type="text" id="surveyTitle" name="title" th:value="${scoring.title}" placeholder="Введите название опроса" required>
-                <div id="questionsContainer">
-                    <div th:each="question, qStat : ${scoring.questions}">
-                        <div class="survey-question" th:id="'question-' + ${qStat.index}">
-                            <label th:for="'question-' + ${qStat.index}">Вопрос:</label>
-                            <input type="text" th:id="'question-' + ${qStat.index}" name="questionText" th:value="${question.questionText}" required>
-                            <div th:id="'optionsContainer-question-' + ${qStat.index}">
-                                <div th:each="option, oStat : ${question.options}">
-                                    <div class="survey-option">
-                                        <input type="radio" th:name="'option-question-' + ${qStat.index}" disabled>
-                                        <input type="text" th:name="'optionText-question-' + ${qStat.index}" th:value="${option}" placeholder="Вариант ответа" required>
-                                    </div>
+    <div class="container">
+        <h2>Редактировать опрос</h2>
+        <form id="surveyForm" th:action="@{/SimplePsy/V1/scoring/{id}/update}" method="post">
+            <input type="hidden" id="surveyId" name="id" th:value="${scoring.id}">
+            <input type="text" id="surveyTitle" name="title" th:value="${scoring.title}" placeholder="Введите название опроса" required>
+            <div id="questionsContainer">
+                <div th:each="question, qStat : ${scoring.questions}">
+                    <div class="survey-question" th:id="'question-' + ${qStat.index}">
+                        <label th:for="'question-' + ${qStat.index}">Вопрос:</label>
+                        <input type="text" th:id="'question-' + ${qStat.index}" name="questionText" th:value="${question.questionText}" required>
+                        <div th:id="'optionsContainer-question-' + ${qStat.index}">
+                            <div th:each="option, oStat : ${question.options}">
+                                <div class="survey-option">
+                                    <input th:name="'option-question-' + ${qStat.index}" disabled>
+                                    <input type="text" th:name="'optionText-question-' + ${qStat.index}" th:value="${option}" placeholder="Вариант ответа" required>
                                 </div>
                             </div>
-                            <button type="button" class="add-option-button" th:data-question-id="'question-' + ${qStat.index}">Добавить вариант ответа</button>
                         </div>
+                        <button type="button" class="add-option-button" th:data-question-id="'question-' + ${qStat.index}">Добавить вариант ответа</button>
                     </div>
                 </div>
-                <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
-                <button type="submit">Сохранить изменения</button>
-            </form>
+            </div>
+            <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body"></div>
         </div>
     </div>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.add-option-button').forEach(button => {
@@ -230,7 +318,7 @@
                 const newOption = document.createElement("div");
                 newOption.className = "survey-option";
                 newOption.innerHTML = `
-        <input type="radio" name="option-${questionId}" disabled>
+        <input name="option-${questionId}" disabled>
         <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
       `;
                 optionsContainer.appendChild(newOption);
@@ -250,7 +338,7 @@
       <input type="text" id="${questionId}" name="questionText" required>
       <div id="optionsContainer-${questionId}">
         <div class="survey-option">
-          <input type="radio" name="option-${questionId}" disabled>
+          <input name="option-${questionId}" disabled>
           <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
         </div>
       </div>
@@ -283,12 +371,178 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Survey updated:', data);
-                    // Redirect or show success message
+                    window.location.href="/SimplePsy/V1/scoring/list";
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         });
-</script>
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+      // Получаем элементы
+      var modal = document.getElementById('modal');
+      var modalBody = document.getElementById('modal-body');
+      var closeBtn = document.querySelector('.close-btn');
+      var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+      var holidayBtn = document.querySelector('.user-policy9');
+
+      // Функция для открытия модального окна
+      function openModal() {
+        fetch('/SimplePsy/V1/session/session-form')
+          .then(response => response.text())
+          .then(data => {
+            modalBody.innerHTML = data;
+            modal.style.display = 'block';
+          })
+          .catch(error => console.error('Ошибка загрузки:', error));
+          fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+              .then(response => response.json())
+              .then(clients => {
+                  const dataList = document.getElementById('clientsList');
+                  dataList.innerHTML = '';
+
+                  const script = document.createElement('script');
+                  script.id = 'dynamic-script';
+                  script.textContent = `
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+                  document.body.appendChild(script);
+                  clients.forEach(customer => {
+                      const option = document.createElement('option');
+                      switch (customer.typeOfClient) {
+                          case 'ADULT':
+                              option.value = customer.name + ' ' +customer.surname;
+                              break;
+                          case 'CHILD':
+                              option.value = customer.childName + ' ' + customer.childSurname;
+                              break;
+                          case 'COUPLE':
+                              option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                              break;
+                          default:
+                              // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                              console.log('Unknown client type');
+                              break;
+                      }
+                      option.setAttribute('data-id', customer.id);
+                      dataList.appendChild(option);
+                  });
+              })
+              .catch(error => console.error('Ошибка:', error));
+
+      }
+
+        function openHolidayModal() {
+            const modal = document.getElementById("modal");
+            const modalBody = document.getElementById("modal-body");
+
+            fetch('/SimplePsy/V1/session/holiday')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
+
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
+
+      // Функция для закрытия модального окна
+      function closeModal() {
+        modal.style.display = 'none';
+      }
+
+      // Событие клика для открытия модального окна
+      appointLink.addEventListener('click', openModal);
+      holidayBtn.addEventListener('click', openHolidayModal);
+      // Событие клика для закрытия модального окна
+      closeBtn.addEventListener('click', closeModal);
+      });
+
+        var  addClientBtn = document.querySelector('.about-us15');
+        addClientBtn.addEventListener('click', () =>
+        {
+            window.location.href = '/SimplePsy/V1/customer/customer-form';
+        });
+        const customerSearch = document.getElementById('customerSearch');
+        const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
+        customerSearch.addEventListener('input', function () {
+            const searchQuery = this.value;
+            const datalist = document.getElementById('customerList');
+
+            if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса
+                fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Очищаем предыдущие результаты
+                        datalist.innerHTML = '';
+
+                        // Фильтруем и сортируем клиентов в зависимости от типа
+                        data.forEach(customer => {
+                            let displayName = '';
+                            if (customer.typeOfClient === 'ADULT') {
+                                displayName = `${customer.name} ${customer.surname}`;
+                            } else if (customer.typeOfClient === 'CHILD') {
+                                displayName = `${customer.childName} ${customer.childSurname}`;
+                            } else if (customer.typeOfClient === 'COUPLE') {
+                                displayName = `${customer.firstClientName} ${customer.firstClientSurname}`;
+                            }
+
+                            if (displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                                const option = document.createElement('option');
+                                option.value = displayName;
+                                option.dataset.id = customer.id;
+                                datalist.appendChild(option);
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при загрузке данных клиентов:', error);
+                    });
+            }
+        });
+
+        customerSearch.addEventListener('change', function () {
+            const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+                .find(option => option.value === customerSearch.value);
+
+            if (selectedOption) {
+                const customerId = selectedOption.dataset.id;
+                window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
+            }
+        });
+    </script>
 </body>
 </html>

@@ -16,317 +16,470 @@
     />
   </head>
   <body>
-    <div class="div73">
-      <div class="settings1"></div>
-      <header class="frame-parent60">
-        <div class="frame-wrapper40">
-          <div class="frame-parent61">
-            <div class="icon-parent14">
-              <img
-                class="icon72"
-                loading="lazy"
-                alt=""
-                src="/images/icon@2x.png"
-              />
+  <div class="div73">
+    <div class="settings1"></div>
+    <header class="frame-parent60">
+      <div class="frame-wrapper40">
+        <div class="frame-parent61">
+          <div class="icon-parent14">
+            <img
+                    class="icon72"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon@2x.png"
+            />
 
-              <div class="constructor-wrapper1">
-                <a class="constructor6">Понятная практика</a>
-              </div>
-              <div class="icon-parent15">
-                <img class="icon73" alt="" src="/images/icon-1@2x.png" />
+            <div class="constructor-wrapper1">
+              <a class="constructor6" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
+            </div>
+            <div class="icon-parent15">
+              <img class="icon73" alt="" src="/images/icon-1@2x.png" />
+              <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
+              <div class="search-frame">
+                <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
+                <datalist id="customerList">
 
-                <div class="search-frame">
-                  <b class="search6">Найти клиента...</b>
-                </div>
+                </datalist>
               </div>
             </div>
-            <div class="frame-wrapper41">
-              <div class="about-us-group">
-                <a class="about-us6">Добавить клиента</a>
-                <div class="news-parent">
-                  <a class="news6">Назначить встречу</a>
-                  <b class="user-policy6">Добавить график нерабочих дней </b>
-                </div>
+          </div>
+          <div class="frame-wrapper41">
+            <div class="about-us-group">
+              <a class="about-us6">Добавить клиента</a>
+              <div class="news-parent">
+                <a class="news10">Назначить встречу</a>
+                <b class="user-policy6">Добавить график нерабочих дней </b>
               </div>
             </div>
           </div>
         </div>
-        <div class="icon-parent16">
-          <img class="icon74" alt="" src="/images/icon-2@2x.png" />
-
-          <div class="new-york-wrapper1">
-            <b class="new-york6">Ростов-на-Дону</b>
-          </div>
-        </div>
-      </header>
-      <div class="item35">
-        <img class="feather-icon-chevron-up5" alt="" />
       </div>
-      <section class="frame-parent62">
-        <div class="frame-wrapper42">
-          <div class="frame-parent63">
-            <div class="wrapper-user-frame">
-              <div class="wrapper-user6">
-                <img
-                  class="user-icon6"
-                  loading="lazy"
-                  alt=""
-                  src="/images/user@2x.png"
-                  id="userImage"
-                />
-              </div>
+      <div class="icon-parent16">
+        <img class="icon74" alt="" src="/images/icon-2@2x.png" />
+
+        <div class="new-york-wrapper1">
+          <b th:text="${specialist.city}" class="specialist-city"></b>
+        </div>
+      </div>
+    </header>
+    <div class="item35">
+      <img class="feather-icon-chevron-up5" alt="" />
+    </div>
+    <section class="frame-parent62">
+      <div class="frame-wrapper42">
+        <div class="frame-parent63">
+          <div class="wrapper-user-frame">
+            <div class="wrapper-user6">
+              <img
+                      class="user-icon"
+                      loading="lazy"
+                      alt=""
+                      th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                      id="userImage"
+                      onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
+              />
             </div>
-            <div class="frame-wrapper43">
-              <div class="frame-parent64">
-                <div class="hello-rosalie-wrapper2">
-                  <b class="hello-rosalie6">Привет, Антон!</b>
-                </div>
-                <b class="rosaliericegmailc6">
-                  <p class="ponyatpractikagmailcom3">
-                    ponyatpractika@gmail.com
-                  </p>
-                </b>
+          </div>
+          <div class="frame-wrapper43">
+            <div class="frame-parent64">
+              <div class="hello-wrapper">
+                <b class="hello">Привет, </b>
+                <b th:text="${specialist.name}" class="hello" ></b>
+                <b class="hello">!</b>
               </div>
+              <b class="specialist-email">
+                <p th:text="${specialist.username}" class="specialist-email-content"></p>
+              </b>
             </div>
-            <div class="frame-wrapper44">
-              <div class="dashboard-group">
-                <div class="dashboard17" id="dashboardContainer">
-                  <div class="base59"></div>
-                  <div class="icon-wrapper17">
-                    <img class="icon75" alt="" src="/images/icon-34@2x.png" />
+          </div>
+          <div class="frame-wrapper73">
+            <div class="frame-parent122">
+              <div class="frame-parent123">
+                <div class="client-list-wrapper">
+                  <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                  <div class="icon-wrapper33">
+                    <img class="icon146" alt="" src="/images/icon-3@2x.png" />
                   </div>
-                  <b class="dashboard18">Список клинетов</b>
+                  <b class="client-list">Список клиентов</b>
                 </div>
-                <div class="base-wrapper">
-                  <div class="base60">
-                    <div class="icon-wrapper18">
-                      <img
-                        class="icon76"
-                        alt=""
-                        src="/images/icon-41@2x.png"
-                      />
+                <div class="base-frame">
+                  <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                    <div class="icon-wrapper34">
+                      <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
                     </div>
-                    <b class="calendars6">Календарь</b>
-                  </div>
+                    <b class="calendar">Календарь</b>
+                  </button>
                 </div>
               </div>
-            </div>
-            <div class="frame-parent65">
-              <div class="frame-wrapper45">
-                <div class="invoice-parent">
-                  <div class="invoice11" id="invoiceContainer">
-                    <div class="base61"></div>
-                    <div class="icon-wrapper19">
-                      <img class="icon77" alt="" src="/images/icon-5.svg" />
-                    </div>
-                    <b class="invoice12">Уведомления</b>
+              <div class="frame-parent123">
+                <div class="notifications-wrapper">
+                  <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                  <div class="icon-wrapper33">
+                    <img class="icon146" alt="" src="/images/icon-5.svg" />
                   </div>
-                  <div class="base-parent8">
-                    <div class="base62"></div>
-                    <div class="icon-wrapper20">
-                      <img class="icon78" alt="" src="/images/icon-6.svg" />
-                    </div>
-                    <b class="files6">Аналитика</b>
-                  </div>
+                  <b class="notifications">Уведомления</b>
                 </div>
-              </div>
-              <div class="base-parent9">
-                <div class="base63"></div>
-                <b class="dashboard19">Опросники и тесты</b>
+                <div class="base-frame">
+                  <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                    <div class="icon-wrapper34">
+                      <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                    </div>
+                    <b class="analytics">Аналитика</b>
+                  </button>
+                </div>
+                <div class="tests-wrapper">
+                  <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                  <b class="surveys-tests">Опросники и тесты</b>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="frame-parent66">
-          <div class="frame-parent67">
-            <div class="frame-parent68">
-              <button class="rectangle-parent52" id="groupButton">
-                <div class="frame-child55"></div>
-                <div class="div74">Карта клиента</div>
-              </button>
-              <button class="rectangle-parent53">
-                <div class="frame-child56"></div>
-                <div class="div75">Список встреч</div>
-              </button>
-            </div>
-            <div class="component-19-wrapper">
-              <div class="component-19">
-                <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.getId()}" id="groupContainer">
-                  <div class="frame-child57"></div>
-                  <div class="frame-child58"></div>
-                  <b class="b82" th:text="${newSession.getDate()}"></b>
-                  <div class="wrapper22">
-                    <b class="b83" th:text="${newSession.getClient().getName()}"></b>
-                  </div>
+      </div>
+      <div class="frame-parent66">
+        <div class="frame-parent67">
+          <div class="frame-parent68">
+            <button class="rectangle-parent52" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
+              <div class="frame-child69"></div>
+              <div class="div74">Список клиентов</div>
+            </button>
+            <button class="rectangle-parent53" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
+              <div class="frame-child56"></div>
+              <div class="div75">Список встреч</div>
+            </button>
+            <button class="rectangle-parent52" id="groupButton" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
+              <div class="frame-child55"></div>
+              <div class="div74">Опросники и тесты</div>
+            </button>
+          </div>
+          <div class="component-19-wrapper">
+            <div class="component-19">
+              <div class="rectangle-parent54" th:each="newSession:${sessions}" th:data-card-id="${newSession.id}" onclick="goTo(this)">
+                <div class="frame-child57"></div>
+                <div class="frame-child58"></div>
+                <b class="b82" th:text="${newSession.date}"></b>
+                <div class="wrapper22"  th:switch="${newSession.customer.typeOfClient}" th:value="${newSession.customer.typeOfClient}">
+                    <b class="b83" th:case="${newSession.customer.typeOfClient.ADULT}" th:text="${newSession.customer.surname + ' ' + newSession.customer.name }"></b>
+                    <b class="b83" th:case="${newSession.customer.typeOfClient.COUPLE}" th:text="${newSession.customer.firstClientSurname + ' ' + newSession.customer.firstClientName}"></b>
+                    <b class="b83" th:case="${newSession.customer.typeOfClient.CHILD}" th:text="${newSession.customer.childSurname + ' ' + newSession.customer.childName}"></b>
                 </div>
+                <button class="delete-button" th:data-card-id="${newSession.id}" onclick="deleteSession(this)">x</button>
               </div>
             </div>
           </div>
-          <div class="frame-parent69">
-            <div class="frame-parent70">
-              <div class="rectangle-parent60" id="groupContainer">
-                <div class="frame-child69"></div>
-                <h3 class="h3">Опросники и тесты</h3>
-              </div>
-              <div class="frame-wrapper46">
-                <div class="rectangle-parent61">
-                  <div class="frame-child70"></div>
-                  <input
-                    class="input7"
-                    placeholder=" Контракт и подробные условия оказания психологической помощи Дата согласия: "
-                    type="text"
-                  />
-                  <span>
+        </div>
+        <div class="frame-parent69">
+          <div class="frame-parent70">
+            <div class="frame-wrapper46">
+              <div class="rectangle-parent61">
+                <div class="frame-child70"></div>
+                <span>
                     <p class="p31">
                       Контракт и подробные условия оказания психологической
                       помощи
                     </p>
                     <p class="p32">Дата согласия:</p>
                   </span>
-                </div>
-              </div>
-              <div class="frame-wrapper47">
-                <div class="frame-parent71">
-                  <div class="wrapper28">
-                    <h2 class="h21">Проективные методики</h2>
-                  </div>
-                  <div class="frame-parent72" id="groupContainer">
-                    <div class="rectangle-parent62">
-                      <div class="frame-child71"></div>
-                      <b class="b94">20.02.2024</b>
-                    </div>
-                    <div class="rectangle-parent63">
-                      <div class="frame-child72"></div>
-                      <div class="div76">Дом, дерево, река</div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
-            <div class="frame-wrapper48">
-              <div class="frame-parent73">
-                <div class="wrapper29">
-                  <h3 class="h31">Основные терапевтические гипотезы</h3>
+            <div class="frame-wrapper47">
+              <div class="frame-parent71">
+                <div class="wrapper28">
+                  <h2 class="h21">Проективные методики</h2>
                 </div>
-                <div class="rectangle-parent64">
-                  <div class="frame-child73"></div>
-                  <div class="rectangle-parent65">
-                    <div class="frame-child74"></div>
-                    <div class="div77">Редактировать</div>
+                <div class="frame-parent72">
+                  <div class="rectangle-parent62">
+                    <div class="frame-child71"></div>
+                    <b class="b94">20.02.2024</b>
                   </div>
-                  <div class="rectangle-parent66">
-                    <div class="frame-child75"></div>
-                    <div class="div78">Сохранить</div>
+                  <div class="rectangle-parent63">
+                    <div class="frame-child72"></div>
+                    <div class="div76">Дом, дерево, река</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <div class="image-9"></div>
-      <div class="frame-parent74">
-        <div class="frame-wrapper49">
-          <div class="frame-parent75">
-            <div class="wrapper30">
-              <b class="b95">Заявки</b>
-            </div>
-            <div class="frame-parent76">
-              <div class="frame-parent77" id="groupContainer">
-                <div class="rectangle-parent67">
-                  <div class="frame-child76"></div>
-                  <b class="b96">20.02.2024</b>
+          <div class="frame-wrapper48">
+            <div class="frame-parent73">
+              <div class="wrapper29">
+                <h3 class="h31">Основные терапевтические гипотезы</h3>
+              </div>
+              <div class="rectangle-parent64">
+                <div class="frame-child73"></div>
+                <div class="rectangle-parent65">
+                  <div class="frame-child74"></div>
+                  <div class="div77">Редактировать</div>
                 </div>
-                <div class="rectangle-parent68">
-                  <div class="frame-child77"></div>
-                  <b class="b97">Овсянникова Юля Матвеевна</b>
+                <div class="rectangle-parent66">
+                  <div class="frame-child75"></div>
+                  <div class="div78">Сохранить</div>
                 </div>
               </div>
-              <div class="frame-parent78">
-                <div class="frame-parent79" id="groupContainer">
-                  <div class="rectangle-parent69">
-                    <div class="frame-child78"></div>
-                    <b class="b98">25.02.2024</b>
-                  </div>
-                  <div class="rectangle-parent70">
-                    <div class="frame-child79"></div>
-                    <b class="b99">Овсянникова Юля Матвеевна</b>
-                  </div>
-                </div>
-                <div class="div79">1 2 ....... 23</div>
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="icon-parent17">
-          <img class="icon79" alt="" src="/images/icon-7@2x.png" />
-
-          <div class="frame-parent80">
-            <div class="send-feedback-wrapper4">
-              <b class="send-feedback6">Обратная связь</b>
-            </div>
-            <img class="icon80" alt="" src="/images/icon-8.svg" />
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <div class="image-9"></div>
+    <div class="frame-parent74">
+      <div class="frame-wrapper49">
+        <div class="frame-parent75">
+          <div class="wrapper30">
+            <b class="b95">Заявки</b>
+          </div>
+          <div class="frame-parent76">
+            <div class="frame-parent77">
+              <div class="rectangle-parent67">
+                <div class="frame-child76"></div>
+                <b class="b96">20.02.2024</b>
+              </div>
+              <div class="rectangle-parent68">
+                <div class="frame-child77"></div>
+                <b class="b97">Овсянникова Юля Матвеевна</b>
+              </div>
+            </div>
+            <div class="frame-parent78">
+              <div class="frame-parent79">
+                <div class="rectangle-parent69">
+                  <div class="frame-child78"></div>
+                  <b class="b98">25.02.2024</b>
+                </div>
+                <div class="rectangle-parent70">
+                  <div class="frame-child79"></div>
+                  <b class="b99">Овсянникова Юля Матвеевна</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="icon-parent17">
+        <img class="icon79" alt="" src="/images/icon-7@2x.png" />
 
-    <script>
-      var userImage = document.getElementById("userImage");
-      if (userImage) {
-        userImage.addEventListener("click", function (e) {
-          window.location.href = "./component4.html";
-        });
+        <div class="frame-parent80" onclick="alert('Эта кнопка находится в разработке')">
+          <div class="send-feedback-wrapper4">
+            <b class="send-feedback6">Обратная связь</b>
+          </div>
+          <img class="icon80" alt="" src="/images/icon-8.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  <script>
+    function goTo(obj) {
+      window.location.href = "./report/" + obj.getAttribute("data-card-id");
+    }
+
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+    var holidayBtn = document.querySelector('.user-policy6');
+    // Функция для открытия модального окна
+      function openModal() {
+        fetch('/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                  modalBody.innerHTML = data;
+                  modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
+
+        fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+                .then(response => response.json())
+                .then(clients => {
+                  const dataList = document.getElementById('clientsList');
+                  dataList.innerHTML = '';
+
+                  const script = document.createElement('script');
+                  script.id = 'dynamic-script';
+                  script.textContent = `
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });`;
+                  document.body.appendChild(script);
+                  clients.forEach(customer => {
+                    const option = document.createElement('option');
+                    switch (customer.typeOfClient) {
+                      case 'ADULT':
+                        option.value = customer.name + ' ' +customer.surname;
+                        break;
+                      case 'CHILD':
+                        option.value = customer.childName + ' ' + customer.childSurname;
+                        break;
+                      case 'COUPLE':
+                        option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                        break;
+                      default:
+                        // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                        console.log('Unknown client type');
+                        break;
+                    }
+                    option.setAttribute('data-id', customer.id);
+                    dataList.appendChild(option);
+                  });
+                })
+                .catch(error => console.error('Ошибка:', error));
+
+
       }
-      
-      var dashboardContainer = document.getElementById("dashboardContainer");
-      if (dashboardContainer) {
-        dashboardContainer.addEventListener("click", function (e) {
-          window.location.href = "./component2.html";
-        });
+
+      // Функция для закрытия модального окна
+      function closeModal() {
+        modal.style.display = 'none';
+        const script = document.getElementById('dynamic-script');
+        if (script) {
+          script.remove();
+          console.log('Скрипт удалён');
+        } else {
+          console.log('Скрипт не найден');
+        }
       }
-      
-      var invoiceContainer = document.getElementById("invoiceContainer");
-      if (invoiceContainer) {
-        invoiceContainer.addEventListener("click", function (e) {
-          window.location.href = "./component3.html";
-        });
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+    holidayBtn.addEventListener('click', openHolidayModal);
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
+
+    var  addClientBtn = document.querySelector('.about-us6');
+    addClientBtn.addEventListener('click', () =>
+    {
+      window.location.href = '/SimplePsy/V1/customer/customer-form';
+    });
+    function openHolidayModal()
+    {
+      const modal = document.getElementById("modal");
+      const modalBody = document.getElementById("modal-body");
+
+      fetch('/SimplePsy/V1/session/holiday')
+              .then(response => response.text())
+              .then(html => {
+                modalBody.innerHTML = html;
+                modal.style.display = "block";
+
+                // Добавляем обработчик закрытия модального окна
+                document.querySelector('.close-modal').onclick = function() {
+                  modal.style.display = "none";
+                };
+              })
+              .catch(error => {
+                console.error('Error loading modal content:', error);
+              });
+    }
+
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("holidayModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
       }
-      
-      var groupButton = document.getElementById("groupButton");
-      if (groupButton) {
-        groupButton.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
+    }
+    function deleteSession(obj) {
+      event.stopPropagation(); // Чтобы предотвратить переход по клику на карточку
+
+      if (confirm('Вы уверены, что хотите удалить эту сессию?')) {
+        fetch(`/SimplePsy/V1/session/delete/` + obj.getAttribute("data-card-id"), {
+          method: 'DELETE'
+        })
+                .then(response => {
+                  if (response.ok) {
+                    alert('Сессия успешно удалена');
+                    window.location.reload(); // Перезагружаем страницу после удаления
+                  } else {
+                    alert('Ошибка при удалении сессии');
+                  }
+                })
+                .catch(error => console.error('Ошибка при удалении сессии:', error));
       }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component6.html";
-        });
+    }
+
+    const customerSearch = document.getElementById('customerSearch');
+    const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
+    customerSearch.addEventListener('input', function () {
+      const searchQuery = this.value;
+      const specialistId = "currentSpecialistId"; // Здесь должно быть реальное значение ID специалиста
+      const datalist = document.getElementById('customerList');
+
+      if (searchQuery.length > 1) { // Минимум 2 символа для отправки запроса
+        fetch(`/SimplePsy/V1/customer/findAll/${currentSpecialistId}`)
+                .then(response => response.json())
+                .then(data => {
+                  // Очищаем предыдущие результаты
+                  datalist.innerHTML = '';
+
+                  // Фильтруем и сортируем клиентов в зависимости от типа
+                  data.forEach(customer => {
+                    let displayName = '';
+                    if (customer.typeOfClient === 'ADULT') {
+                      displayName = `${customer.name} ${customer.surname}`;
+                    } else if (customer.typeOfClient === 'CHILD') {
+                      displayName = `${customer.childName} ${customer.childSurname}`;
+                    } else if (customer.typeOfClient === 'COUPLE') {
+                      displayName = `${customer.firstClientName} ${customer.firstClientSurname}`;
+                    }
+
+                    if (displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                      const option = document.createElement('option');
+                      option.value = displayName;
+                      option.dataset.id = customer.id;
+                      datalist.appendChild(option);
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Ошибка при загрузке данных клиентов:', error);
+                });
       }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component13.html";
-        });
+    });
+
+    customerSearch.addEventListener('change', function () {
+      const selectedOption = Array.from(document.querySelectorAll('#customerList option'))
+              .find(option => option.value === customerSearch.value);
+
+      if (selectedOption) {
+        const customerId = selectedOption.dataset.id;
+        window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
       }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          // Please sync "Модальное окно "Проективные методики"" to the project
-        });
-      }
-      
-      var groupContainer = document.getElementById("groupContainer");
-      if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-          window.location.href = "./component12.html";
-        });
-      }
-      </script>
+    });
+
+  </script>
   </body>
 </html>

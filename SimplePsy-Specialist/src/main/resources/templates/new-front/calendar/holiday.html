@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить график</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #eee;
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            width: 50px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: grey;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/SimplePsy/V1/session/holiday}" th:object="${session}" method="post">
+        <div class="input-group">
+            <label for="title">Название:</label>
+            <input type="text" id="title" th:field="*{title}">
+        </div>
+        <div class="input-group">
+            <label for="start-date">С:</label>
+            <input type="date" id="start-date" th:field="*{date}">
+            <input type="time" id="start-time" th:field="*{timeStart}">
+        </div>
+        <div class="input-group">
+            <label for="end-date">До:</label>
+            <input type="date" id="end-date" th:field="*{endDate}">
+            <input type="time" id="end-time" th:field="*{timeFinish}">
+        </div>
+        <button type="submit">Добавить график</button>
+    </form>
+</div>
+<script>
+    const closeBtn = document.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+        document.body.removeChild(document.querySelector('.container'));
+    });
+</script>
+</body>
+</html>

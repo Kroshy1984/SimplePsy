@@ -63,6 +63,13 @@ public class Scoring {
         this.type = type;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 //    public List<String> getAnswers() {
 //        return answers;
 //    }

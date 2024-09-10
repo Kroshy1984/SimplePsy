@@ -3,7 +3,10 @@ package ru.sfedu.simplepsyspecialist.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,15 +16,15 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.io.InputStream;
+import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -55,7 +58,7 @@ public class SpecialistController {
         System.out.println(specialist.getUsername());
         System.out.println(specialist.getPassword());
         specialistService.registerNewSpecialist(specialist);
-        return "redirect:/SimplePsy/V1/specialist/sessions";
+        return "redirect:/SimplePsy/V1/session/calendar";
     }
 
     @GetMapping("/login")
@@ -104,10 +107,6 @@ public class SpecialistController {
 //    return "redirect:/SimplePsy/V1/specialist/calendar";
 //}
 
-    @GetMapping("/calendar")
-    public String getCalendar() {
-        return "calendar";
-    }
 
     /*@PostMapping("/search")
     public void handleGetRequest(
@@ -117,25 +116,12 @@ public class SpecialistController {
         specialistService.sendRequestToSession(specialist_id, start_date, end_date);
     }*/
 
-    @PostMapping("/calendar")
-    public String sendDates(
-            @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam("start_date") String startDate,
-            @RequestParam("end_date") String endDate
-    ) {
-        System.out.println(startDate);
-        System.out.println(endDate);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        String specialist_id = specialist.getId();
-        specialistService.sendRequestToSession(specialist_id, startDate, endDate);
-        return "redirect:/SimplePsy/V1/specialist/calendar";
-    }
-
     @GetMapping("/customers")
     public String getCustomersList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
         List<Customer> customers = specialistService.getAllCustomers();
         List<Customer> specialistCustomers = new ArrayList<>();
+        model.addAttribute("specialist", specialist);
 
         if (specialist.getCustomerIds() == null) {
             System.out.println("No customers were found for this specialist!");
@@ -152,8 +138,6 @@ public class SpecialistController {
                 }
             }
         }
-        String specUrl = System.getenv().getOrDefault("SPECIALIST_SERVICE_URL", "http://localhost:8081");
-        model.addAttribute("specUrl", specUrl);
         model.addAttribute("customers", specialistCustomers);
         return "new-front/customer/customer-list";
     }
@@ -235,37 +219,6 @@ public class SpecialistController {
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/find-customer-form")
-    public String getFindCustomerForm() {
-        return "find-customer";
-    }
-
-    @PostMapping("/find-customer-form")
-    public String getCustomerByContactData(@AuthenticationPrincipal UserDetails userDetails,
-                                           @RequestParam("data") String data) {
-        String customerId = specialistService.findCustomerByContactData(data);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-
-        if (Objects.equals(customerId, "Customer not found")) {
-            return "redirect:/SimplePsy/V1/specialist/customer-form";
-        }
-
-        for (int i = 0; i < specialist.getCustomerIds().size(); i++) {
-            if (Objects.equals(customerId, specialist.getCustomerIds().get(i))) {
-                return "redirect:/SimplePsy/V1/specialist/customer-card/" + customerId;
-            }
-        }
-        return "redirect:/SimplePsy/V1/specialist/customer-form";
-    }
-
-    @GetMapping("customer/problem/new/{customerId}")
-    public String customerNewProblem(@PathVariable String customerId,
-                                     Model model)
-    {
-        System.out.println("In method customerNewProblem providing customerId " + customerId + " to the model");
-        model.addAttribute("customerId", customerId);
-        return "problem-form";
-    }
 
     @PostMapping("customer/problem/new")
     public String customerNewProblem(@RequestParam("customerId") String customerId,
@@ -319,7 +272,7 @@ public class SpecialistController {
 //        model.addAttribute("customerId", customerId);
 //        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
 //        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
-//        return "scoring-answers";
+//        return "scoring-answers.html";
 //    }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -345,5 +298,96 @@ public class SpecialistController {
         String customerId = specialistService.findCustomerByProblemId(problemId).getId();
         return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
+
+    @GetMapping("/personal-info")
+    public String getPersonalInfo(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        // Debug: Выводим в консоль информацию о специалисте
+        if (specialist.getAvatar() != null) {
+            System.out.println("Аватарка загружена, размер: " + specialist.getAvatar().length + " байт");
+        } else {
+            System.out.println("Аватарка не найдена");
+        }
+
+        model.addAttribute("specialist", specialist);
+        return "new-front/specialist/specialist-home-page";
+    }
+
+
+    @PostMapping("/personal-info/update")
+    public String updatePersonalInfo(@AuthenticationPrincipal UserDetails userDetails,
+                                     @ModelAttribute("specialist") Specialist specialist,
+                                     @RequestParam(value = "diploma", required = false)  List<MultipartFile> multipartFiles) throws IOException {
+        String specialistId = specialistService.findByUsername(userDetails.getUsername()).getId();
+        specialist.setId(specialistId);
+        System.out.println(multipartFiles.size());
+        specialistService.updateSpecialist(specialist, multipartFiles);
+        return "redirect:/SimplePsy/V1/specialist/personal-info";
+    }
+    @PostMapping(value = "/personal-info/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateAvatar(@AuthenticationPrincipal UserDetails userDetails,
+                                                            @RequestParam("avatar") MultipartFile avatarFile) {
+        Map<String, Object> response = new HashMap<>();
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+
+        try {
+            byte[] avatarBytes = avatarFile.getBytes();
+            specialist.setAvatar(avatarBytes);
+            specialistService.save(specialist);
+
+            // Предположим, что вы генерируете новый URL для аватарки, который будет возвращен на фронтенд
+            String avatarUrl = "/path/to/avatar/" + specialist.getId() + "/avatar.jpg";
+
+            response.put("success", true);
+            response.put("avatarUrl", avatarUrl);
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            response.put("success", false);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    @GetMapping("/avatar/{id}")
+    public ResponseEntity<byte[]> getAvatar(@PathVariable String id) throws IOException {
+        Specialist specialist = specialistService.findById(id);
+        byte[] avatar = specialist.getAvatar();
+
+        if (avatar == null) {
+            InputStream is = new ClassPathResource("static/images/user-logo.jpg").getInputStream();
+            avatar = is.readAllBytes();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(avatar, headers, HttpStatus.OK);
+    }
+    @GetMapping("/diploma/{specialistId}/{diplomaIndex}")
+    public ResponseEntity<byte[]> getDiplomaImage(@PathVariable String specialistId, @PathVariable int diplomaIndex) {
+        System.out.println("Specialist id and img index: " + specialistId + " " + diplomaIndex);
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("Specialist id in method getDiplomaImage: " + specialist);
+        System.out.println("name: " + specialist.getName());
+        byte[] image = specialist.getDiplomas().get(diplomaIndex);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+    @DeleteMapping("/diploma/{specialistId}/{diplomaIndex}")
+    public ResponseEntity<Void> deleteDiploma(@PathVariable String specialistId, @PathVariable int diplomaIndex) {
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("Specialist id and img index: " + specialistId + " " + diplomaIndex);
+        System.out.println("Specialist id in method getDiplomaImage: " + specialist);
+        if (specialist != null && diplomaIndex >= 0 && diplomaIndex < specialist.getDiplomas().size()) {
+            // Удаление диплома по индексу
+            specialist.getDiplomas().remove(diplomaIndex);
+            specialistService.save(specialist); // Сохранение изменений
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 }

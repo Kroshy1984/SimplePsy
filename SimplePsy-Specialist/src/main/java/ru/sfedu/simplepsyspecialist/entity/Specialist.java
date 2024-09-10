@@ -1,18 +1,15 @@
 package ru.sfedu.simplepsyspecialist.entity;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder
+
 @Document("Specialist")
 public class Specialist {
 
@@ -37,27 +34,37 @@ public class Specialist {
     @Pattern(regexp = "^[А-Я]+^[а-я]$")
     private String middleName;
 
+    private List<byte[]> diplomas;
+    private byte[] avatar;
     private String email;
+    private String phone;
 
     private SpecialistRole specialistRole = SpecialistRole.USER_ROLE;
-
-    @DBRef
-    @Valid
-    private List<Calendar> calendar;
 
     private String notification;
     private String password;
 
     private List<String> customerIds;
 
+    private String specialization;
+    private String description;
+    private String education;
+    private String city;
+
 //    @Valid
 //    private List<ClientEntry> clients;
 
-    public Specialist(String name, String surname, String username, String password) {
+    public Specialist(String name, String surname, String username, String phone, String password,
+                      String specialization, String description, String education, String city) {
         this.name = name;
         this.surname = surname;
         this.username = username;
+        this.phone = phone;
         this.password = password;
+        this.specialization = specialization;
+        this.description = description;
+        this.education = education;
+        this.city = city;
     }
 
     public Specialist(String username, String password) {
@@ -108,14 +115,6 @@ public class Specialist {
         this.email = email;
     }
 
-    public List<Calendar> getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(List<Calendar> calendar) {
-        this.calendar = calendar;
-    }
-
     public String getNotification() {
         return notification;
     }
@@ -148,8 +147,52 @@ public class Specialist {
         this.username = username;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public List<String> getCustomerIds() {
         return customerIds;
+    }
+
+    public void setCustomerIds(List<String> customerIds) {
+        this.customerIds = customerIds;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void addCustomerId(String customerId) {
@@ -161,5 +204,27 @@ public class Specialist {
     public void deleteCustomerById(String customerId)
     {
         customerIds.remove(customerId);
+    }
+
+    public List<byte[]> getDiplomas() {
+        return diplomas;
+    }
+
+    public void addDiplomas(byte[] diploma) {
+        if (diplomas == null)
+            diplomas = new ArrayList<>();
+        diplomas.add(diploma);
+    }
+
+    public void setDiplomas(List<byte[]> diplomas) {
+        this.diplomas = diplomas;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
     }
 }

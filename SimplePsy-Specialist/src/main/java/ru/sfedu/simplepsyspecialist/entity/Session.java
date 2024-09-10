@@ -5,10 +5,14 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
+import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
+import ru.sfedu.simplepsyspecialist.entity.nested.Report;
 import ru.sfedu.simplepsyspecialist.entity.nested.SessionType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+
 
 @Document("Session")
 public class Session {
@@ -24,10 +28,12 @@ public class Session {
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
     private String clientId;
 
-    private Client client;
+    private Customer customer;
     private SessionType sessionType;
+    private String title;
     @NotBlank
     private LocalDate date;
+    private LocalDate endDate;
     private String place;
     private LocalTime timeStart;
     private LocalTime timeFinish;
@@ -36,7 +42,8 @@ public class Session {
     private String timesToRepeat;
     private boolean isNotifiable;
     private String notificationTime;
-
+    private Report report;
+    private List<ProjectiveMethod> projectiveMethods;
 
     public Session() {
     }
@@ -47,12 +54,18 @@ public class Session {
         this.clientId = clientId;
     }
 
-    public Client getClient() {
-        return client;
+    public Session(String title, LocalDate date, LocalDate endDate) {
+        this.title = title;
+        this.date = date;
+        this.endDate = endDate;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getSpecialistId() {
@@ -85,6 +98,14 @@ public class Session {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getProblem() {
@@ -165,5 +186,37 @@ public class Session {
 
     public void setNotificationTime(String notificationTime) {
         this.notificationTime = notificationTime;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public List<ProjectiveMethod> getProjectiveMethods() {
+        return projectiveMethods;
+    }
+
+    public void setProjectiveMethods(List<ProjectiveMethod> projectiveMethods) {
+        this.projectiveMethods = projectiveMethods;
+    }
+
+    public void addProjectiveMethod(ProjectiveMethod projectiveMethod) {
+        this.projectiveMethods.add(projectiveMethod);
+    }
+
+    public void addProjectiveMethods(List<ProjectiveMethod> projectiveMethods) {
+        this.projectiveMethods.addAll(projectiveMethods);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

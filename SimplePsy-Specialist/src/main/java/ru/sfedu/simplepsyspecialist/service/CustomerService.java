@@ -42,20 +42,18 @@ public class CustomerService {
     }
 
     public Customer findById(String id) {
-        Customer customer = customerRepository.findById(id).get();
-        if (customer == null) {
-            throw new NotFoundException(String.format("Customer not found with id %s", id));
-        }
-        else
-        {
-            System.out.println(String.format("Found the customer with id and name:\n%s: %s",
-                    customer.getId(), customer.getName()));
-        }
-        return customer;
+        return customerRepository.findById(id)
+                .map(client -> {
+                    System.out.println("found the Client name: " + client.getName());
+                    return client;
+                })
+                .orElse(null);
     }
 
     public Customer saveCustomer(Customer customer) {
-        System.out.println("saving customer " + customer.getName());
+        System.out.println("saving customer...");
+        Customer oldCustomer = findById(customer.getId());
+        customer.setCompletedScorings(oldCustomer.getCompletedScorings());
         return customerRepository.save(customer);
     }
 
@@ -198,5 +196,9 @@ public class CustomerService {
             }
         }
         return customers;
+    }
+
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
     }
 }

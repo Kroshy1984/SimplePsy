@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/test/specialists-tests-list.css}" />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
+    />
+</head>
+<body>
+<div class="div201">
+    <div class="settings5"></div>
+    <main class="frame-parent119">
+        <div class="frame-wrapper71">
+            <div class="frame-parent120">
+                <div class="icon-parent27">
+                    <img
+                            class="icon145"
+                            loading="lazy"
+                            alt=""
+                            src="./public/icon@2x.png"
+                    />
+
+                    <a class="constructor11" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
+                </div>
+                <div class="frame-wrapper72">
+                    <div class="wrapper-user-parent2">
+                        <div class="wrapper-user11">
+                            <img
+                                    class="user-icon"
+                                    loading="lazy"
+                                    alt=""
+                                    th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                                    id="userImage"
+                                    onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
+                            />
+                        </div>
+                        <div class="frame-parent121">
+                            <div class="hello-wrapper">
+                                <b class="hello">Привет, </b>
+                                <b th:text="${specialist.name}" class="hello" ></b>
+                                <b class="hello">!</b>
+                            </div>
+                            <b class="specialist-email">
+                                <p th:text="${specialist.username}" class="specialist-email-content"></p>
+                            </b>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame-wrapper73">
+                    <div class="frame-parent122">
+                        <div class="frame-parent123">
+                            <div class="client-list-wrapper">
+                                <button class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
+                                <div class="icon-wrapper33">
+                                    <img class="icon146" alt="" src="/images/icon-3@2x.png" />
+                                </div>
+                                <b class="client-list">Список клиентов</b>
+                            </div>
+                            <div class="base-frame">
+                                <button class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
+                                    <div class="icon-wrapper34">
+                                        <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
+                                    </div>
+                                    <b class="calendar">Календарь</b>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="frame-parent123">
+                            <div class="notifications-wrapper">
+                                <button class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
+                                <div class="icon-wrapper33">
+                                    <img class="icon146" alt="" src="/images/icon-5.svg" />
+                                </div>
+                                <b class="notifications">Уведомления</b>
+                            </div>
+                            <div class="base-frame">
+                                <button class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
+                                    <div class="icon-wrapper34">
+                                        <img class="icon147" alt="" src="/images/icon-6.svg"/>
+                                    </div>
+                                    <b class="analytics">Аналитика</b>
+                                </button>
+                            </div>
+                            <div class="tests-wrapper">
+                                <button class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
+                                <b class="surveys-tests">Опросники и тесты</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame-wrapper74">
+                    <div class="frame-parent124">
+                        <div class="wrapper47">
+                            <b class="b133">Заявки</b>
+                        </div>
+                        <div class="frame-parent125" id="groupContainer">
+                            <div class="rectangle-parent121">
+                                <div class="frame-child147"></div>
+                                <b class="b134">20.02.2024</b>
+                            </div>
+                            <div class="rectangle-parent122">
+                                <div class="frame-child148"></div>
+                                <b class="b135">Овсянникова Юля Матвеевна</b>
+                            </div>
+                        </div>
+                        <div class="frame-parent126" id="groupContainer1">
+                            <div class="rectangle-parent123">
+                                <div class="frame-child149"></div>
+                                <b class="b136">25.02.2024</b>
+                            </div>
+                            <div class="rectangle-parent124">
+                                <div class="frame-child150"></div>
+                                <b class="b137">Овсянникова Юля Матвеевна</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="icon-wrapper37">
+            <img class="icon150" alt="" src="./public/icon-1@2x.png" />
+        </div>
+        <div class="frame-wrapper75">
+            <div class="frame-parent127">
+                <div class="search-parent">
+                    <b class="search12">Найти клиента...</b>
+                    <div class="about-us-parent5">
+                        <a class="about-us18">Добавить клиента</a>
+                        <a class="news10">Назначить встречу</a>
+                    </div>
+                </div>
+                <div class="frame-parent128">
+                    <div class="frame-wrapper76">
+                        <div class="image-4-group">
+                            <img
+                                    class="image-4-icon3"
+                                    loading="lazy"
+                                    alt=""
+                                    src="./public/image-4@2x.png"
+                            />
+
+                            <div class="rectangle-parent125">
+                                <div class="frame-child151"></div>
+                                <div class="div202">А/Я</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="component-192">
+                        <div class="frame-parent129">
+                            <div class="rectangle-parent126">
+                                <div class="frame-child152"></div>
+                                <b class="therapy-test-separator">20.02.2024</b>
+                            </div>
+                            <div class="rectangle-parent127">
+                                <div class="frame-child153"></div>
+                                <h2 class="h28">Тест по завершению терапии</h2>
+                                <div class="frame-parent130">
+                                    <div class="frame-wrapper77">
+                                        <button class="rectangle-parent128">
+                                            <div class="frame-child154"></div>
+                                            <b class="b138">Тест</b>
+                                        </button>
+                                    </div>
+                                    <div class="frame-parent131">
+                                        <div class="adult-reasoning-survey-link-bu-parent">
+                                            <div class="adult-reasoning-survey-link-bu"></div>
+                                            <button class="div203">Скопировать ссылку</button>
+                                        </div>
+                                        <div class="frame-wrapper78">
+                                            <div class="rectangle-parent129" id="groupContainer">
+                                                <div class="frame-child155"></div>
+                                                <div class="div204">Редактировать</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="frame-parent132">
+                            <div class="rectangle-parent130">
+                                <div class="frame-child156"></div>
+                                <b class="therapy-test-separator">20.02.2024</b>
+                            </div>
+                            <div class="rectangle-parent131">
+                                <div class="frame-child157"></div>
+                                <div class="wrapper48">
+                                    <h2 class="h29">Опрос по завершению терапии</h2>
+                                </div>
+                                <div class="frame-wrapper79">
+                                    <button class="rectangle-parent132">
+                                        <div class="frame-child158"></div>
+                                        <b class="b140">Опрос</b>
+                                    </button>
+                                </div>
+                                <div class="frame-parent133">
+                                    <div class="adult-reasoning-survey-link-bu-parent">
+                                        <div class="adult-reasoning-survey-link-bu"></div>
+                                        <button class="div203">Скопировать ссылку</button>
+                                    </div>
+                                    <div class="frame-wrapper80">
+                                        <div class="rectangle-parent133" id="groupContainer">
+                                            <div class="frame-child159"></div>
+                                            <div class="div206">Редактировать</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="frame-parent134">
+                            <div class="rectangle-parent134">
+                                <div class="frame-child160"></div>
+                                <b class="therapy-test-separator">20.02.2024</b>
+                            </div>
+                            <div class="rectangle-parent135">
+                                <div class="frame-child161"></div>
+                                <div class="frame-parent135">
+                                    <button class="rectangle-parent136">
+                                        <div class="frame-child162"></div>
+                                        <b class="b142">Опрос</b>
+                                    </button>
+                                    <h2 class="h210">
+                                        Опрос о причинах обращения для взрослого
+                                    </h2>
+                                </div>
+                                <div class="frame-wrapper81">
+                                    <div class="frame-parent136">
+                                        <div class="adult-reasoning-survey-link-bu-parent">
+                                            <div class="adult-reasoning-survey-link-bu"></div>
+                                            <button class="div203">Скопировать ссылку</button>
+                                        </div>
+                                        <div class="frame-wrapper82">
+                                            <div class="rectangle-parent138" id="groupContainer">
+                                                <div class="frame-child164"></div>
+                                                <div class="div208">Редактировать</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="frame-parent137">
+            <div class="frame-parent138">
+                <div class="frame-parent139">
+                    <div class="user-policy-wrapper1">
+                        <b class="user-policy12">Добавить график нерабочих дней </b>
+                    </div>
+                    <div class="icon-parent28">
+                        <img class="icon151" alt="" src="./public/icon-2@2x.png" />
+
+                        <div class="new-york-wrapper3">
+                            <b th:text="${specialist.city}" class="specialist-city"></b>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame-wrapper83">
+                    <div class="frame-parent140">
+                        <div class="frame-wrapper84">
+                            <div class="filter-panel-parent">
+                                <div class="filter-panel">
+                                    <h3 class="h35">Панель фильтрации</h3>
+                                </div>
+                                <div class="filter-search">
+                                    <div class="filter-search-child"></div>
+                                    <div class="search-input5">
+                                        <div class="rectangle-parent139">
+                                            <div class="frame-child165"></div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon152">
+                                                <path d="M 10 2 C 5.589844 2 2 5.589844 2 10 C 2 14.410156 5.589844 18 10 18 C 11.785156 18 13.433594 17.40625 14.734375 16.40625 L 19.292969 20.96875 L 20.707031 19.554688 L 16.144531 14.996094 C 17.144531 13.695312 17.738281 12.046875 17.738281 10.261719 C 17.738281 5.589844 14.410156 2 10 2 Z M 10 4 C 13.300781 4 16 6.699219 16 10 C 16 13.300781 13.300781 16 10 16 C 6.699219 16 4 13.300781 4 10 C 4 6.699219 6.699219 4 10 4 Z" fill="silver"/>
+                                            </svg>
+
+                                            <input
+                                                    class="search-box"
+                                                    placeholder="Поиск "
+                                                    type="text"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="filter-options1">
+                                        <div class="filter-dropdown">
+                                            <div class="component17">
+                                                <button class="item103">
+                                                    <div class="filter-dropdown-values">
+                                                        <div class="div194">Анкета</div>
+                                                    </div>
+                                                </button>
+                                                <button class="item104">
+                                                    <div class="div195">Опрос</div>
+                                                </button>
+                                                <button class="item105">
+                                                    <div class="div196">Тест</div>
+                                                </button>
+                                            </div>
+                                            <div class="filter-count">
+                                                <div class="count-input">
+                                                    <div class="count-field">
+                                                        <div class="count-value">
+                                                            <div class="count-prefix">
+                                                                <div class="div212">с</div>
+                                                            </div>
+                                                            <div class="rectangle-parent118">
+                                                                <div class="frame-child144"></div>
+                                                                <input type="text" class="xxxxxxxx" placeholder="xx.xx.xxxx">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="count-range">
+                                                        <div class="count-label">
+                                                            <div class="div213">по</div>
+                                                        </div>
+                                                        <div class="preposition-background">
+                                                            <div class="preposition-background-child"></div>
+                                                            <input type="text" class="xxxxxxxx1" placeholder="xx.xx.xxxx">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="search-button-container">
+                                            <div class="rectangle-parent119">
+                                                <div class="frame-child145"></div>
+                                                <button class="div199">Найти</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="rectangle-parent141">
+                            <div class="frame-child167"></div>
+                            <div class="div215">Создать новый материал</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="item111">
+        <img class="feather-icon-chevron-up20" alt="" />
+    </div>
+    <div class="footer">
+        <div class="footer-left">
+            <img class="icon154" alt="" src="./public/icon-7@2x.png" />
+
+            <div class="feedback-button2" onclick="alert('Эта кнопка находится в разработке')">
+                <div class="feedback-label2">
+                    <b class="send-feedback11">Обратная связь</b>
+                </div>
+                <img class="icon155" alt="" src="./public/icon-8.svg" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+<div id="modal1" class="modal1">
+    <div class="modal-content1">
+        <span class="close-btn1">&times;</span>
+        <div id="modal-body1"></div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.item103, .item104, .item105');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', function(event) {
+          // Удаляем класс active у всех кнопок
+          buttons.forEach(btn => btn.classList.remove('active'));
+
+          // Добавляем класс active к нажатой кнопке
+          this.classList.add('active');
+
+          // Предотвращаем потерю фокуса после клика
+          event.preventDefault();
+          this.blur(); // Сбрасываем фокус
+      });
+    });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.querySelector('.xxxxxxxx');
+
+    dateInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+
+      // Ограничиваем ввод до 8 цифр
+      if (value.length > 8) {
+          value = value.slice(0, 8);
+      }
+
+      if (e.inputType === 'deleteContentBackward') {
+          // Если это действие удаления, то не вставляем точки
+          return;
+      }
+
+      // Форматируем значение в формат dd.mm.yyyy
+      if (value.length >= 2 && value.length <= 4) {
+          value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
+      } else if (value.length > 4) {
+          value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
+      }
+
+      e.target.value = value;
+    });
+
+    dateInput.addEventListener('keydown', function(e) {
+      // Разрешаем удаление точек при нажатии Backspace
+      if (e.key === 'Backspace' && this.value.endsWith('.')) {
+          this.value = this.value.slice(0, -1);
+      }
+    });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.querySelector('.xxxxxxxx1');
+
+    dateInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+
+      // Ограничиваем ввод до 8 цифр
+      if (value.length > 8) {
+          value = value.slice(0, 8);
+      }
+
+      if (e.inputType === 'deleteContentBackward') {
+          // Если это действие удаления, то не вставляем точки
+          return;
+      }
+
+      // Форматируем значение в формат dd.mm.yyyy
+      if (value.length >= 2 && value.length <= 4) {
+          value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
+      } else if (value.length > 4) {
+          value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
+      }
+
+      e.target.value = value;
+    });
+
+    dateInput.addEventListener('keydown', function(e) {
+      // Разрешаем удаление точек при нажатии Backspace
+      if (e.key === 'Backspace' && this.value.endsWith('.')) {
+          this.value = this.value.slice(0, -1);
+      }
+    });
+    });
+
+    // Открытие модального окна создания сессии
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal');
+    var modalBody = document.getElementById('modal-body');
+    var closeBtn = document.querySelector('.close-btn');
+    var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
+
+    // Функция для открытия модального окна
+    function openModal() {
+      fetch('/SimplePsy/V1/session/session-form')
+        .then(response => response.text())
+        .then(data => {
+          modalBody.innerHTML = data;
+          modal.style.display = 'block';
+        })
+        .catch(error => console.error('Ошибка загрузки:', error));
+    }
+
+    // Функция для закрытия модального окна
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
+
+    // Открытие модального окна создания ссылки
+    document.addEventListener('DOMContentLoaded', function() {
+    // Получаем элементы
+    var modal = document.getElementById('modal1');
+    var modalBody = document.getElementById('modal-body1');
+    var closeBtn = document.querySelector('.close-btn1');
+    var appointLink = document.querySelector('.div203'); // Элемент "Скопировать ссылку"
+
+    // Функция для открытия модального окна
+        function openModal() {
+            fetch('/SimplePsy/V1/session/session-form')
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                    modal.style.display = 'block';
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
+
+            fetch('/SimplePsy/V1/customer/findAll')
+                .then(response => response.json())
+                .then(clients => {
+                    const dataList = document.getElementById('clientsList');
+                    dataList.innerHTML = '';
+
+                    clients.forEach(customer => {
+                        const option = document.createElement('option');
+                        switch (customer.typeOfClient) {
+                            case 'ADULT':
+                                option.value = customer.name + ' ' +customer.surname;
+                                break;
+                            case 'CHILD':
+                                option.value = customer.childName + ' ' + customer.childSurname;
+                                break;
+                            case 'COUPLE':
+                                option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                                break;
+                            default:
+                                // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                                console.log('Unknown client type');
+                                break;
+                        }
+                        option.setAttribute('data-id', customer.id);
+                        dataList.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка:', error));
+
+            const script = document.createElement('script');
+            script.id = 'dynamic-script';
+            script.textContent = `
+                   document.getElementById('clientInput').addEventListener('change', function() {
+        const selectedOption = Array.from(document.getElementById('clientsList').options)
+                .find(option => option.value === this.value);
+        if (selectedOption) {
+          const clientId = selectedOption.getAttribute('data-id');
+          document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+          document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+        } else {
+          document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+        }
+      });`;
+            document.body.appendChild(script);
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+            const script = document.getElementById('dynamic-script');
+            if (script) {
+                script.remove();
+                console.log('Скрипт удалён');
+            } else {
+                console.log('Скрипт не найден');
+            }
+        }
+
+    // Событие клика для открытия модального окна
+    appointLink.addEventListener('click', openModal);
+
+    // Событие клика для закрытия модального окна
+    closeBtn.addEventListener('click', closeModal);
+    });
+</script>
+</body>
+</html>

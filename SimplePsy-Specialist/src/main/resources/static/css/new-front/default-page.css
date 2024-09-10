@@ -348,7 +348,6 @@
 }
 .user-icon8,
 .wrapper-user8 {
-  position: absolute;
   cursor: pointer;
 }
 .user-icon8 {
@@ -389,6 +388,11 @@
   position: absolute;
 }
 .head {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-21xl);
   top: 0;
   left: 0;
   width: 233px;
@@ -423,6 +427,12 @@
   line-height: 30px;
   color: var(--grey-blue-50);
 }
+
+.constructor8:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .news9 {
   left: calc(50% + 79px);
 }
@@ -433,10 +443,19 @@
   line-height: 25px;
   cursor: pointer;
 }
+
+.about-us15:hover,
+.news9:hover,
+.news10:hover,
+.user-policy9:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .user-policy9 {
   position: absolute;
   left: calc(50% + 250px);
-  white-space: pre-wrap;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 .about-us15 {
@@ -463,25 +482,27 @@
   white-space: nowrap;
 }
 .icon121 {
-  position: absolute;
+  /*position: absolute;*/
   height: 100%;
   width: 30%;
   top: 0;
-  right: 70%;
+  /*right: 70%;*/
   bottom: 0;
   left: 0;
   max-width: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
   max-height: 100%;
   object-fit: cover;
 }
 .search8 {
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 10px;
   left: calc(50% - 458.5px);
-  width: 100px;
   height: 30px;
   color: var(--grey-blue-80);
+  gap: 15px;
 }
 .new-york8 {
   position: absolute;
@@ -491,13 +512,8 @@
   font-weight: 700;
 }
 .icon122 {
-  position: absolute;
   height: 100%;
   width: 20.69%;
-  top: 0;
-  right: 84.83%;
-  bottom: 0;
-  left: -5.52%;
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
@@ -509,6 +525,10 @@
   height: 30px;
 }
 .city {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-mini);
   top: 8px;
   right: 40px;
   width: 145px;
@@ -533,7 +553,7 @@
   font-family: var(--bold-10);
 }
 .head1 {
-  position: absolute;
+  position: relative;
   width: calc(100% - 101px);
   top: 35px;
   right: 29px;
@@ -555,4 +575,7 @@
   text-align: center;
   font-size: var(--bold-12-size);
   color: var(--grey-blue-80);
+}
+.sidebar1-fix-width{
+  width: 240px;
 }

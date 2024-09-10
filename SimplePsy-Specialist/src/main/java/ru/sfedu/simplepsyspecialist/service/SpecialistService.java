@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
@@ -12,6 +13,7 @@ import ru.sfedu.simplepsyspecialist.exception.NotFoundException;
 import ru.sfedu.simplepsyspecialist.exception.SpecialistNotFoundException;
 import ru.sfedu.simplepsyspecialist.repo.SpecialistRepository;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,16 +23,14 @@ import java.util.Optional;
 @Service
 public class SpecialistService {
 
-    ClientService clientService;
     CustomerService customerService;
     ProblemService problemService;
     SpecialistRepository specialistRepository;
     BCryptPasswordEncoder passwordEncoder;
 
-    public SpecialistService(SpecialistRepository specialistRepository, ClientService clientService,
+    public SpecialistService(SpecialistRepository specialistRepository,
                              CustomerService customerService, ProblemService problemService) {
         this.specialistRepository = specialistRepository;
-        this.clientService = clientService;
         this.customerService = customerService;
         this.problemService = problemService;
         this.passwordEncoder = new BCryptPasswordEncoder();
@@ -76,51 +76,9 @@ public class SpecialistService {
         return specialistRepository.findByUsername(username).orElseThrow(() -> new SpecialistNotFoundException("User with username " + username + " not found"));
     }
 
-    public void sendRequestToSession(String specialistId, String startDate, String endDate) {
-        String baseUrl = System.getenv().getOrDefault("SESSION_SERVICE_URL", "http://localhost:8083");
-        String url = "/SimplePsySession/V1/session/search";
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
 
-        Object result =  webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("specialist_id", specialistId)
-                        .queryParam("start_date", startDate)
-                        .queryParam("end_date", endDate)
-                        .build())
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
-        System.out.println("got the result: " + result.toString());
-    }
-    public void createNewSession(String clientEmail, String specialistId, String problem, LocalDateTime date)
-    {
-        String clientId = findClientByEmail(clientEmail);
-        System.out.println("Client was found");
-        if(clientId.isEmpty())
-        {
-            throw new NotFoundException("Client with email " + clientEmail + "not found\n can not create new session");
-        }
-        String baseUrl = System.getenv().getOrDefault("SESSION_SERVICE_URL", "http://localhost:8083");
-        String url = "/SimplePsySession/V1/session/new";
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-
-        Object result =  webClient.post()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("clientId", clientId)
-                        .queryParam("specialistId", specialistId)
-                        .queryParam("problem", problem)
-                        .queryParam("date", date)
-                        .build())
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
-
-        System.out.println("got the result: " + result.toString());
-    }
     public String findClientByEmail(String clientEmail) {
-        Client client = clientService.findByEmail(clientEmail);
+        Customer client = customerService.findByEmail(clientEmail);
         return client.getId();
     }
 
@@ -287,6 +245,25 @@ public class SpecialistService {
         Specialist specialist = specialistRepository.findById(specialistId).get();
         String password = passwordEncoder.encode(newPassword);
         specialist.setPassword(password);
+        specialistRepository.save(specialist);
+    }
+
+    public void updateSpecialist(Specialist specialist, List<MultipartFile> multipartFiles) throws IOException {
+        String id = specialist.getId();
+        Specialist oldSpecialist = specialistRepository.findById(id).get();
+        specialist.setPassword(oldSpecialist.getPassword());
+        specialist.setUsername(oldSpecialist.getUsername());
+        System.out.println(multipartFiles.size());
+        specialist.setSpecialistRole(oldSpecialist.getSpecialistRole());
+        for (MultipartFile file : multipartFiles) {
+            // Логика сохранения файла
+            if (!file.isEmpty()) {
+                oldSpecialist.addDiplomas(file.getBytes());
+            }
+        }
+        specialist.setDiplomas(oldSpecialist.getDiplomas());
+        specialist.setCustomerIds(oldSpecialist.getCustomerIds());
+        specialist.setAvatar(oldSpecialist.getAvatar());
         specialistRepository.save(specialist);
     }
 }
