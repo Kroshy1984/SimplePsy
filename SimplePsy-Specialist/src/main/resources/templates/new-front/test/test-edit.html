@@ -288,13 +288,16 @@
                             </div>
                         </div>
                         <button type="button" class="add-option-button" th:data-question-id="'question-' + ${qStat.index}">Добавить вариант ответа</button>
+                        <button type="button" class="delete-option-button" th:data-question-id="'question-' + ${qStat.index}">Удалить последний вариант ответа</button>
                     </div>
                 </div>
             </div>
             <button type="button" class="add-question-button" onclick="addQuestion()">Добавить вопрос</button>
+            <button type="button" class="delete-question-button" onclick="removeLastQuestion()">Удалить последний вопрос</button>
             <button type="submit">Сохранить изменения</button>
         </form>
     </div>
+
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -327,30 +330,79 @@
             }
         }
 
-        function addQuestion() {
-            const questionsContainer = document.getElementById("questionsContainer");
-            const questionId = `question-${questionsContainer.children.length + 1}`;
-            const newQuestion = document.createElement("div");
-            newQuestion.className = "survey-question";
-            newQuestion.id = questionId;
-            newQuestion.innerHTML = `
-      <label for="${questionId}">Вопрос:</label>
-      <input type="text" id="${questionId}" name="questionText" required>
-      <div id="optionsContainer-${questionId}">
-        <div class="survey-option">
-          <input name="option-${questionId}" disabled>
-          <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
-        </div>
-      </div>
-      <button type="button" class="add-option-button" data-question-id="${questionId}">Добавить вариант ответа</button>
-    `;
-            questionsContainer.appendChild(newQuestion);
+// Функция для удаления последнего вопроса
+function removeLastQuestion() {
+    const questionsContainer = document.getElementById("questionsContainer");
+    const lastQuestion = questionsContainer.lastElementChild;
+    if (lastQuestion) {
+        lastQuestion.remove(); // Удаляем только последний вопрос
+    }
+}
 
-            newQuestion.querySelector('.add-option-button').addEventListener('click', function () {
-                const questionId = this.getAttribute('data-question-id');
-                addOption(questionId);
-            });
-        }
+// Функция для удаления последнего варианта ответа
+function removeLastOption(questionId) {
+    const optionsContainer = document.getElementById(`optionsContainer-${questionId}`);
+    const lastOption = optionsContainer.lastElementChild;
+    if (lastOption) {
+        lastOption.remove(); // Удаляем только последний вариант ответа
+    }
+}
+
+// Привязать обработчики к уже существующим элементам
+document.addEventListener('DOMContentLoaded', function () {
+    attachDeleteHandlers();
+});
+
+// Функция для привязки обработчиков
+function attachDeleteHandlers() {
+    // Привязка кнопок удаления вариантов ответа
+    document.querySelectorAll('.delete-option-button').forEach(button => {
+        button.onclick = function () {
+            const questionId = this.getAttribute('data-question-id');
+            removeLastOption(questionId); // Удаляем последний вариант для указанного вопроса
+        };
+    });
+
+    // Привязка кнопки удаления последнего вопроса
+    const deleteQuestionButton = document.querySelector('.delete-question-button');
+    if (deleteQuestionButton) {
+        deleteQuestionButton.onclick = removeLastQuestion; // Используем .onclick для предотвращения повторного добавления обработчиков
+    }
+}
+
+// Функция для добавления нового вопроса
+function addQuestion() {
+    const questionsContainer = document.getElementById("questionsContainer");
+    const questionId = `question-${questionsContainer.children.length + 1}`;
+    const newQuestion = document.createElement("div");
+    newQuestion.className = "survey-question";
+    newQuestion.id = questionId;
+    newQuestion.innerHTML = `
+        <label for="${questionId}">Вопрос:</label>
+        <input type="text" id="${questionId}" name="questionText" required>
+        <div id="optionsContainer-${questionId}">
+            <div class="survey-option">
+                <input name="option-${questionId}" disabled>
+                <input type="text" name="optionText-${questionId}" placeholder="Вариант ответа" required>
+            </div>
+        </div>
+        <button type="button" class="add-option-button" data-question-id="${questionId}">Добавить вариант ответа</button>
+        <button type="button" class="delete-option-button" data-question-id="${questionId}">Удалить последний вариант ответа</button>
+    `;
+    questionsContainer.appendChild(newQuestion);
+
+    // Привязать добавление варианта к новому вопросу
+    newQuestion.querySelector('.add-option-button').addEventListener('click', function () {
+        const questionId = this.getAttribute('data-question-id');
+        addOption(questionId);
+    });
+
+    // Привязать удаление последнего варианта к новому вопросу
+    newQuestion.querySelector('.delete-option-button').addEventListener('click', function () {
+        const questionId = this.getAttribute('data-question-id');
+        removeLastOption(questionId);
+    });
+}
 
         document.getElementById("surveyForm").addEventListener("submit", function(event) {
             event.preventDefault();
