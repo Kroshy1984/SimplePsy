@@ -1746,6 +1746,7 @@
 .search-bar-container-inner {
   display: flex;
   flex-direction: row;
+  gap: 10px;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -1762,6 +1763,7 @@
 }
 .search-bar-container-inner {
   width: 276px;
+  flex-direction: column;
   padding: 0 var(--padding-5xs);
   box-sizing: border-box;
 }

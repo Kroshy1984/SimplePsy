@@ -81,6 +81,19 @@
     .button:hover {
         background-color: #3e8e41;
     }
+
+    /* Стили для полей ввода (поиск, даты, select) */
+    #startDateFilter,
+    #endDateFilter,
+    #typeFilter {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
 </style>
 <div class="div189">
     <div class="settings4"></div>
@@ -268,7 +281,9 @@
                                     </div>
                                     <div class="component-19-parent">
                                         <ul class="component-191" id="testList">
-                                            <li class="frame-parent112" th:data-card-id="${scoring.id}" th:each="scoring : ${scorings}"
+                                            <li class="frame-parent112"
+                                                th:data-card-id="${scoring.id}"
+                                                th:each="scoring : ${scorings}"
                                                 th:attr="data-title=${scoring.title}, data-type=${scoring.type}, data-date=${#dates.format(scoring.getDate(), 'yyyy-MM-dd')}">
                                                 <div class="rectangle-parent103">
                                                     <b th:text="${#dates.format(scoring.getDate(), 'dd.MM.yyyy')}" class="test-list-dividers"></b>
@@ -304,6 +319,17 @@
                                                         </svg>
                                                         <input class="search-input-area" placeholder="Поиск" type="text" />
                                                     </div>
+                                                    <select id="typeFilter">
+                                                        <option value="">Все типы</option>
+                                                        <option value="QUESTIONER">Опросник</option>
+                                                        <option value="TEST">Тест</option>
+                                                    </select>
+
+                                                    <input  class="div200" type="date" id="startDateFilter" placeholder="Начальная дата" />
+                                                    <input class="div200" type="date" id="endDateFilter" placeholder="Конечная дата" />
+
+                                                    <button class="rectangle-parent120" id="applyFilters"><div class="div200">Применить фильтры</div></button>
+                                                    <button class="rectangle-parent120" id="resetFilters"><div class="div200">Сбросить фильтры</div></button>
                                                 </div>
                                             </div>
                                             <div class="my-materials-container">
@@ -340,6 +366,32 @@
     </div>
 </div>
 <script defer>
+    document.getElementById('applyFilters').addEventListener('click', function () {
+        const searchQuery = document.querySelector('.search-input-area').value.toLowerCase();
+        const selectedType = document.getElementById('typeFilter').value.toLowerCase();
+        const startDate = document.getElementById('startDateFilter').value;
+        const endDate = document.getElementById('endDateFilter').value;
+        const listItems = document.querySelectorAll('#testList li');
+
+        listItems.forEach(item => {
+            const title = item.getAttribute('data-title').toLowerCase();
+            const type = item.getAttribute('data-type').toLowerCase();
+            const date = item.getAttribute('data-date');
+
+            let matchesSearch = title.includes(searchQuery);
+            let matchesType = !selectedType || type === selectedType;
+            let matchesDate = (!startDate || date >= startDate) && (!endDate || date <= endDate);
+
+            if (matchesSearch && matchesType && matchesDate) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+    document.getElementById('resetFilters').addEventListener('click', function () {
+        window.location.reload();
+    });
     var copyLinkBtn = document.querySelector('.copy-button');
 
     copyLinkBtn.addEventListener('click', openCopyLinkModal);
