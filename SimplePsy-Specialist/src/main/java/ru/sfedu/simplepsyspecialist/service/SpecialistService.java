@@ -1,11 +1,11 @@
 package ru.sfedu.simplepsyspecialist.service;
 
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.reactive.function.client.WebClient;
 import ru.sfedu.simplepsyspecialist.entity.*;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProblemStatus;
 import ru.sfedu.simplepsyspecialist.entity.nested.Status;
@@ -22,17 +22,22 @@ import java.util.Optional;
 
 @Service
 public class SpecialistService {
-
+    JavaMailSender javaMailSender;
     CustomerService customerService;
     ProblemService problemService;
     SpecialistRepository specialistRepository;
     BCryptPasswordEncoder passwordEncoder;
+    @Value("{spring.mail.sender.email}")
+    private String senderEmail;
 
     public SpecialistService(SpecialistRepository specialistRepository,
-                             CustomerService customerService, ProblemService problemService) {
+                             CustomerService customerService,
+                             ProblemService problemService,
+                             JavaMailSender javaMailSender) {
         this.specialistRepository = specialistRepository;
         this.customerService = customerService;
         this.problemService = problemService;
+        this.javaMailSender = javaMailSender;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -223,22 +228,15 @@ public class SpecialistService {
     }
 
     public void changePassword(String email) {
+        System.out.println("Got the email: " + email);
         Specialist specialist = specialistRepository.findByUsername(email).get();
-        String baseUrl = System.getenv().getOrDefault("NOTIFICATIONS_SERVICE_URL", "http://localhost:8085");
-        String url = "/emails/changePass";
-
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
-        ResponseEntity<String> response = webClient.post()
-                .uri(uriBuilder -> uriBuilder
-                        .path(url)
-                        .queryParam("email", email)
-                        .queryParam("specialistId", specialist.getId())
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .toEntity(String.class).block();
-
-        System.out.println("The result in method changePassword: " + response.getBody());
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(senderEmail);
+        message.setTo(email);
+        message.setSubject("Ссылка для смены пароля");
+        message.setText("http://localhost:8081/SimplePsy/V1/specialist/setNewPassword/" + specialist.getId());
+        System.out.println("Sending email to " + specialist.getId());
+        javaMailSender.send(message);
     }
 
     public void setNewPassword(String specialistId, String newPassword) {

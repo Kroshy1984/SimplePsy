@@ -80,10 +80,11 @@ public class SpecialistController {
         return "change-pass";
     }
     @PostMapping("/changePass")
-    public void changePass(@RequestParam("email") String email)
+    public String changePass(@RequestParam("email") String email)
     {
         System.out.println("In method changePass got the email " + email);
         specialistService.changePassword(email);
+        return "redirect:/SimplePsy/V1/specialist/login";
     }
     @GetMapping("/setNewPassword/{specialistId}")
     public String setNewPassword(@PathVariable String specialistId, Model model)
@@ -95,6 +96,7 @@ public class SpecialistController {
     public String setNewPassword(@RequestParam("specialistId") String specialistId,
                                  @RequestParam("password") String password)
     {
+        System.out.println("Spec id and pass: " + specialistId + " " + password);
         specialistService.setNewPassword(specialistId, password);
         return "redirect:/SimplePsy/V1/specialist/login";
     }
