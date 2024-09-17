@@ -2502,3 +2502,24 @@ button:hover {
   width: 196.8px;
   z-index: 11;
 }
+.search1 {
+  position: relative;
+  line-height: 25px;
+  padding: var(--padding-10xs) 2px 0 !important;
+  font-weight: 700;
+  white-space: nowrap;
+  border: none !important;
+  border-radius: 1px !important;
+  background-color: transparent;
+  color: #6B7A99;
+}
+.search1::placeholder {
+  color:#ADB8CC;
+}
+.search-input {
+  flex-direction: column;
+  padding: var(--padding-10xs) 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

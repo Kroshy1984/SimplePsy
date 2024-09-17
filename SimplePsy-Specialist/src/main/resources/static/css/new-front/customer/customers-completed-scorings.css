@@ -106,3 +106,15 @@
     font-weight: 700;
     font-size: var(--bold-12-size);
 }
+.search1 {
+  position: relative;
+  line-height: 25px;
+  font-weight: 700;
+  white-space: nowrap;
+  border: none;
+  background-color: transparent;
+  color: #6B7A99;
+}
+.search1::placeholder {
+  color:#ADB8CC;
+}

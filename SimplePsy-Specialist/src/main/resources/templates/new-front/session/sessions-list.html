@@ -35,7 +35,7 @@
             <div class="icon-parent15">
               <img class="icon73" alt="" src="/images/icon-1@2x.png" />
               <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-              <div class="search-frame">
+              <div class="search-input">
                 <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
                 <datalist id="customerList">
 
@@ -159,9 +159,9 @@
                 <div class="frame-child58"></div>
                 <b class="b82" th:text="${newSession.date}"></b>
                 <div class="wrapper22"  th:switch="${newSession.customer.typeOfClient}" th:value="${newSession.customer.typeOfClient}">
-                    <b class="b83" th:case="${newSession.customer.typeOfClient.ADULT}" th:text="${newSession.customer.surname + ' ' + newSession.customer.name }"></b>
-                    <b class="b83" th:case="${newSession.customer.typeOfClient.COUPLE}" th:text="${newSession.customer.firstClientSurname + ' ' + newSession.customer.firstClientName}"></b>
-                    <b class="b83" th:case="${newSession.customer.typeOfClient.CHILD}" th:text="${newSession.customer.childSurname + ' ' + newSession.customer.childName}"></b>
+                  <b class="b83" th:case="${newSession.customer.typeOfClient.ADULT}" th:text="${newSession.customer.surname + ' ' + newSession.customer.name }"></b>
+                  <b class="b83" th:case="${newSession.customer.typeOfClient.COUPLE}" th:text="${newSession.customer.firstClientSurname + ' ' + newSession.customer.firstClientName}"></b>
+                  <b class="b83" th:case="${newSession.customer.typeOfClient.CHILD}" th:text="${newSession.customer.childSurname + ' ' + newSession.customer.childName}"></b>
                 </div>
                 <button class="delete-button" th:data-card-id="${newSession.id}" onclick="deleteSession(this)">x</button>
               </div>

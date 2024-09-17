@@ -31,11 +31,12 @@
                         <div class="icon-parent23">
                             <img class="icon125" loading="lazy" alt="" src="/images/icon-1@2x.png"/>
                             <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-                            <div class="search-input3">
+                            <div class="search-input">
                                 <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
                                 <datalist id="customerList">
 
                                 </datalist>
+
                             </div>
                         </div>
                     </div>
@@ -68,11 +69,11 @@
                 <div class="wrapper-user-wrapper1">
                     <div class="wrapper-user9">
                         <img
-                             class="user-icon"
-                             loading="lazy" alt=""
-                             th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
-                             id="userImage"
-                             onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"/>
+                                class="user-icon"
+                                loading="lazy" alt=""
+                                th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
+                                id="userImage"
+                                onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"/>
                     </div>
                 </div>
                 <div class="profile-info">
