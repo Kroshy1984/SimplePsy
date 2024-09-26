@@ -27,5 +27,4 @@ bot:
   owner: 505701273
 
 server:
-  address: 0.0.0.0
-  port: 8081
+  port: 80

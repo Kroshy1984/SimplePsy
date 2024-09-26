@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/create-customer-modal.css}" />
+</head>
+<body>
+<div class="form-container">
+    <div class="form-header">
+        <input type="text" placeholder="Введите ФИО" class="input-fio">
+        <button class="close-btn">×</button>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dob"><img src="calendar-icon.png" alt="calendar icon"> Дата рождения</label>
+            <input type="date" id="dob">
+        </div>
+        <div class="form-group">
+            <label for="client-type">Тип клиента</label>
+            <select id="client-type">
+                <option value="" disabled selected>Выберите тип</option>
+                <option value="adult">Взрослый</option>
+                <option value="child">Ребенок</option>
+                <option value="family">Пара/семья</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gender">Пол</label>
+            <select id="gender">
+                <option value="" disabled selected>Выберите пол</option>
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="meeting-format">Формат встречи</label>
+            <select id="meeting-format">
+                <option value="" disabled selected>Выберите формат</option>
+                <option value="online">Онлайн</option>
+                <option value="offline">Офлайн</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <input type="text" placeholder="Номер телефона">
+        </div>
+        <div class="form-group">
+            <input type="email" placeholder="Почта">
+        </div>
+    </div>
+    <div class="button-group">
+        <button class="gender-btn">Мужской</button>
+        <button class="gender-btn">Женский</button>
+        <button class="meeting-btn">Онлайн</button>
+        <button class="meeting-btn">Офлайн</button>
+        <button class="client-type-btn">Взрослый</button>
+        <button class="client-type-btn">Ребенок</button>
+        <button class="client-type-btn">Пара/семья</button>
+    </div>
+    <div class="submit-btn-container">
+        <button class="submit-btn" disabled>Создать клиента</button>
+    </div>
+</div>
+</body>
+</html>

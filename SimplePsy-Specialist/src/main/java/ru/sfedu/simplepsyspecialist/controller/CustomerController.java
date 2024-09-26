@@ -243,4 +243,9 @@ public class CustomerController {
         customers.stream().forEach(customer -> System.out.println(customer.getTypeOfClient()));
         return ResponseEntity.ok(customers);
     }
+    @GetMapping("customer/create/modal")
+    public String createCustomerModal(Model model)
+    {
+        return "new-front/customer/create-customer-modal";
+    }
 }
