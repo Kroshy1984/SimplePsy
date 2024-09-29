@@ -496,61 +496,6 @@
       });
     });
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    // const dateInput = document.querySelector('.xxxxxxxx');
-    //
-    // dateInput.addEventListener('input', function(e) {
-    //   let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
-    //
-    //   if (e.inputType === 'deleteContentBackward') {
-    //       // Если это действие удаления, то не вставляем точки
-    //       return;
-    //   }
-    //
-    //   // Форматируем значение в формат dd.mm.yyyy
-    //   if (value.length >= 2 && value.length <= 4) {
-    //       value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
-    //   } else if (value.length > 4) {
-    //       value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
-    //   }
-    //
-    //   e.target.value = value;
-    // });
-    //
-    // dateInput.addEventListener('keydown', function(e) {
-    //   // Разрешаем удаление точек при нажатии Backspace
-    //   if (e.key === 'Backspace' && this.value.endsWith('.')) {
-    //       this.value = this.value.slice(0, -1);
-    //   }
-    // });
-    // });
-        // const dateInput = document.querySelector('.xxxxxxxx1');
-        //
-        // dateInput.addEventListener('input', function(e) {
-        //   let value = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
-        //
-        //   if (e.inputType === 'deleteContentBackward') {
-        //       // Если это действие удаления, то не вставляем точки
-        //       return;
-        //   }
-        //
-        //   // Форматируем значение в формат dd.mm.yyyy
-        //   if (value.length >= 2 && value.length <= 4) {
-        //       value = value.replace(/^(\d{2})(\d{0,2})/, '$1.$2');
-        //   } else if (value.length > 4) {
-        //       value = value.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1.$2.$3');
-        //   }
-        //
-        //   e.target.value = value;
-        // });
-        //
-        // dateInput.addEventListener('keydown', function(e) {
-        //   // Разрешаем удаление точек при нажатии Backspace
-        //   if (e.key === 'Backspace' && this.value.endsWith('.')) {
-        //       this.value = this.value.slice(0, -1);
-        //   }
-        // });
-
         document.getElementById('searchForm').addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -674,6 +619,7 @@
         var closeBtn = document.querySelector('.close-btn');
         var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
         var holidayBtn = document.querySelector('.user-policy11');
+        var addCustomer = document.querySelector('.about-us17');
         // Функция для открытия модального окна
         function openModal() {
             fetch('/SimplePsy/V1/session/session-form')
@@ -744,10 +690,25 @@
                     });
                 })
                 .catch(error => console.error('Ошибка:', error));
-
-
         }
+        function openAddClientModal()
+        {
+            document.body.style.overflow = 'hidden';
+            fetch('/SimplePsy/V1/customer/customer/create/modal')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
 
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
         // Функция для закрытия модального окна
         function closeModal() {
             modal.style.display = 'none';
@@ -781,14 +742,11 @@
         // Событие клика для открытия модального окна
         appointLink.addEventListener('click', openModal);
         holidayBtn.addEventListener('click', openHolidayModal);
+        addCustomer.addEventListener('click', openAddClientModal);
         // Событие клика для закрытия модального окна
         closeBtn.addEventListener('click', closeModal);
     });
 
-        var addClientBtn = document.querySelector('.about-us17');
-        addClientBtn.addEventListener('click', () => {
-            window.location.href = '/SimplePsy/V1/customer/customer-form';
-        });
 
         // Закрытие модального окна
         document.querySelector('.close-btn').onclick = function () {

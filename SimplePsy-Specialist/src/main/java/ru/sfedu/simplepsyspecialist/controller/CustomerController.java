@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.*;
+import ru.sfedu.simplepsyspecialist.entity.nested.ClientStatus;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.ScoringService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -244,8 +245,36 @@ public class CustomerController {
         return ResponseEntity.ok(customers);
     }
     @GetMapping("customer/create/modal")
-    public String createCustomerModal(Model model)
+    public String createCustomerModal(Model model,
+                                      @AuthenticationPrincipal UserDetails userDetails)
     {
+        Customer customer = new Customer();
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        model.addAttribute("specialistId", specialist.getId());
+        model.addAttribute("customer", customer);
         return "new-front/customer/create-customer-modal";
+    }
+    @PostMapping("/customers/modal/new")
+    public String createNewCustomerModal(@AuthenticationPrincipal UserDetails userDetails,
+                                    Customer customer) {
+
+        customer.cleanAttributes();
+        List<String> customerFio = List.of(customer.getName().split(" "));
+        customer.setSurname(customerFio.get(0));
+        if (customerFio.size() > 1)
+            customer.setName(customerFio.get(1));
+        if(customerFio.size() > 2)
+            customer.setLastName(customerFio.get(2));
+        customer.setClientStatus(ClientStatus.REGULAR);
+        Customer newCustomer = customerService.saveCustomer(customer);
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        specialist.addCustomerId(customer.getId());
+        specialistService.save(specialist);
+        System.out.println(newCustomer.getSurname());
+        System.out.println(newCustomer.getDateOfBirth());
+        System.out.println("Возраст: " + newCustomer.getAge());
+        System.out.println(newCustomer.getSex());
+
+        return "redirect:/SimplePsy/V1/specialist/customers";
     }
 }

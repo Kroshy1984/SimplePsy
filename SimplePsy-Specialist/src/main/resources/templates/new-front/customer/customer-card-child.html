@@ -58,7 +58,7 @@
                         <div class="about-content-wrapper">
                             <div class="about-content">
                                 <div class="news-container">
-                                    <a class="about-us19" onclick="window.location.href = '/SimplePsy/V1/customer/customer-form'">Добавить клиента</a>
+                                    <a class="about-us19">Добавить клиента</a>
                                     <a class="news10">Назначить встречу</a>
                                     <b class="user-policy10">Добавить график нерабочих дней</b>
                                 </div>
@@ -637,7 +637,7 @@
         var closeBtn = document.querySelector('.close-btn');
         var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
         var holidayBtn = document.querySelector('.user-policy10');
-
+        var addCustomer = document.querySelector('.about-us19');
         // Функция для открытия модального окна
         function openModal() {
             fetch('/SimplePsy/V1/session/session-form')
@@ -708,10 +708,25 @@
                     });
                 })
                 .catch(error => console.error('Ошибка:', error));
-
-
         }
+        function openAddClientModal()
+        {
+            document.body.style.overflow = 'hidden';
+            fetch('/SimplePsy/V1/customer/customer/create/modal')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
 
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
         // Функция для закрытия модального окна
         function closeModal() {
             modal.style.display = 'none';
@@ -755,6 +770,7 @@
 
         appointLink.addEventListener('click', openModal);
         holidayBtn.addEventListener('click', openHolidayModal);
+        addCustomer.addEventListener('click', openAddClientModal);
         closeBtn.addEventListener('click', closeModal);
     })
     const customerSearch = document.getElementById('customerSearch');

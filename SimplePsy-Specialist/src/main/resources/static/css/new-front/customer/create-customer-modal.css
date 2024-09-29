@@ -4,38 +4,39 @@
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 
-.form-container {
+
+.form-container-modal {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
+    width: 100%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+    border: none;
 }
 
-.form-header {
+.form-header-modal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-direction: row;
 }
 
 .input-fio {
     width: 80%;
-    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
 }
-
+.input-fio::placeholder{
+    color: #7D8FB3;
+}
 .close-btn {
     background: none;
     border: none;
@@ -46,13 +47,21 @@ body {
 .form-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    flex-direction: row;
 }
-
+.form-row:last-child {
+    border-bottom: none; /* Убираем линию под последней строкой */
+}
 .form-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 48%;
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+    border-right: 1px solid #ccc;
 }
 
 .form-group label {
@@ -63,24 +72,18 @@ body {
 .form-group input,
 .form-group select {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     font-size: 14px;
 }
-
+.form-group input::placeholder{
+    color: #7D8FB3;
+}
 .button-group {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 10px 0;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px 0;
 }
 
 .gender-btn, .meeting-btn, .client-type-btn {
@@ -95,16 +98,27 @@ button {
 
 .submit-btn {
     padding: 10px;
-    width: 100%;
-    background-color: #e0e0e0;
-    color: #999;
-    border-radius: 5px;
+    width: 40%;
+    background-color: #EDEFF2;
+    color: #6B7A99;
+    border-radius: 40px;
     border: none;
-    cursor: not-allowed;
+    font-size: 17px;
 }
 
-.submit-btn.active {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
+select {
+    color: #7D8FB3;
+    font-size: 16px; /* Опционально, для изменения размера текста */
+}
+
+select option {
+    color: #000; /* Это цвет для опций, когда они отображаются в выпадающем списке */
+}
+
+select:disabled,
+select option:disabled {
+    color: #7D8FB3; /* Цвет для плейсхолдера, если он заблокирован */
+}
+.icon93 {
+    width: 40px;
 }

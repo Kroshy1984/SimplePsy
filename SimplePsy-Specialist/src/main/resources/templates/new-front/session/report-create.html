@@ -351,7 +351,7 @@
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.add-method'); // Элемент "Добавить методику"
     var sessionId = document.getElementById('sessionId').value;
-
+    var addCustomer = document.querySelector('.about-us15');
     // Функция для открытия модального окна
     function openModal() {
         fetch('/SimplePsy/V1/session/report/' + sessionId + '/projective-method')
@@ -362,7 +362,25 @@
             })
             .catch(error => console.error('Ошибка загрузки:', error));
     }
+        function openAddClientModal()
+        {
+            document.body.style.overflow = 'hidden';
+            fetch('/SimplePsy/V1/customer/customer/create/modal')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
 
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
+        addCustomer.addEventListener('click', openAddClientModal);
     // Функция для закрытия модального окна
     function closeModal() {
         modal.style.display = 'none';
@@ -503,11 +521,6 @@
     closeBtn.addEventListener('click', closeModal);
     });
 
-    var  addClientBtn = document.querySelector('.about-us15');
-    addClientBtn.addEventListener('click', () =>
-    {
-        window.location.href = '/SimplePsy/V1/customer/customer-form';
-    });
     holidayBtn.addEventListener('click', openHolidayModal)
     function openHolidayModal()
     {

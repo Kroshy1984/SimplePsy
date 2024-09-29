@@ -7,64 +7,64 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/create-customer-modal.css}" />
 </head>
 <body>
-<div class="form-container">
-    <div class="form-header">
-        <input type="text" placeholder="Введите ФИО" class="input-fio">
-        <button class="close-btn">×</button>
+<div class="form-container-modal">
+    <input type="hidden" id="currentSpecialistId" th:value="${specialistId}">
+    <form id="client-form1" th:object="${customer}" th:action="@{/SimplePsy/V1/customer/customers/modal/new}" method="post">
+    <div class="form-header-modal">
+        <img
+                class="icon93"
+                loading="lazy"
+                alt=""
+                src="/images/icon-3@2x.png"
+        />
+        <input th:name="name" type="text" placeholder="Введите ФИО" class="input-fio">
     </div>
     <div class="form-row">
         <div class="form-group">
-            <label for="dob"><img src="calendar-icon.png" alt="calendar icon"> Дата рождения</label>
-            <input type="date" id="dob">
+            <img
+                    class="icon93"
+                    loading="lazy"
+                    alt=""
+                    src="/images/icon-11@2x.png"
+            />
+            <input type="date" id="dob" th:name="dateOfBirth" placeholder="Дата рождения">
         </div>
         <div class="form-group">
-            <label for="client-type">Тип клиента</label>
-            <select id="client-type">
-                <option value="" disabled selected>Выберите тип</option>
-                <option value="adult">Взрослый</option>
-                <option value="child">Ребенок</option>
-                <option value="family">Пара/семья</option>
+            <select id="client-type" th:name="typeOfClient">
+                <option value="ADULT">Взрослый</option>
+                <option value="CHILD">Ребёнок</option>
+                <option value="COUPLE">Пара</option>
             </select>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group">
-            <label for="gender">Пол</label>
-            <select id="gender">
-                <option value="" disabled selected>Выберите пол</option>
-                <option value="male">Мужской</option>
-                <option value="female">Женский</option>
+            <select id="gender" th:name="sex">
+                <option value="" disabled selected>Пол</option>
+                <option value="MALE">Мужской</option>
+                <option value="FEMALE">Женский</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="meeting-format">Формат встречи</label>
-            <select id="meeting-format">
+            <select th:name="preferredMeetingFormat" id="meeting-format">
                 <option value="" disabled selected>Выберите формат</option>
-                <option value="online">Онлайн</option>
-                <option value="offline">Офлайн</option>
+                <option value="ONLINE" selected>Онлайн</option>
+                <option value="OFFLINE">Офлайн</option>
             </select>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group">
-            <input type="text" placeholder="Номер телефона">
+            <input type="text" placeholder="Номер телефона" th:name="contact.phone">
         </div>
         <div class="form-group">
-            <input type="email" placeholder="Почта">
+            <input type="email" placeholder="Почта" th:name="contact.email">
         </div>
-    </div>
-    <div class="button-group">
-        <button class="gender-btn">Мужской</button>
-        <button class="gender-btn">Женский</button>
-        <button class="meeting-btn">Онлайн</button>
-        <button class="meeting-btn">Офлайн</button>
-        <button class="client-type-btn">Взрослый</button>
-        <button class="client-type-btn">Ребенок</button>
-        <button class="client-type-btn">Пара/семья</button>
     </div>
     <div class="submit-btn-container">
-        <button class="submit-btn" disabled>Создать клиента</button>
+        <button type="submit" class="submit-btn">Создать клиента</button>
     </div>
+    </form>
 </div>
 </body>
 </html>

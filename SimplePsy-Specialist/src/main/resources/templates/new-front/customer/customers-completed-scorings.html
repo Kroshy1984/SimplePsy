@@ -63,21 +63,6 @@
                     </div>
                 </div>
             </div>
-            <div class="parent26">
-                <b class="b112">Заявки</b>
-                <div class="rectangle-parent87" id="groupContainer">
-                    <div class="frame-child111"></div>
-                    <div class="frame-child112"></div>
-                    <b class="b113">Овсянникова Юля Матвеевна</b>
-                    <b class="b114">20.02.2024</b>
-                </div>
-                <div class="rectangle-parent88" id="groupContainer1">
-                    <div class="frame-child113"></div>
-                    <div class="frame-child114"></div>
-                    <b class="b115">Овсянникова Кирилл Матвеев</b>
-                    <b class="b116">25.02.2024</b>
-                </div>
-            </div>
         </div>
         <div class="feedback-item">
             <div class="feedback-button">
@@ -192,7 +177,7 @@
         var closeBtn = document.querySelector('.close-btn');
         var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
         var holidayBtn = document.querySelector('.user-policy9');
-
+        var addCustomer = document.querySelector('.about-us15');
         // Функция для открытия модального окна
         function openModal() {
             fetch('/SimplePsy/V1/session/session-form')
@@ -266,7 +251,24 @@
 
 
         }
+        function openAddClientModal()
+        {
+            document.body.style.overflow = 'hidden';
+            fetch('/SimplePsy/V1/customer/customer/create/modal')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
 
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
         // Функция для закрытия модального окна
         function closeModal() {
             modal.style.display = 'none';
@@ -281,13 +283,7 @@
 
         appointLink.addEventListener('click', openModal);
         holidayBtn.addEventListener('click', openHolidayModal);
-
-        var  addClientBtn = document.querySelector('.about-us15');
-        addClientBtn.addEventListener('click', () =>
-        {
-            window.location.href = '/SimplePsy/V1/customer/customer-form';
-        });
-
+        addCustomer.addEventListener('click', openAddClientModal);
         closeBtn.addEventListener('click', closeModal);
     });
 
