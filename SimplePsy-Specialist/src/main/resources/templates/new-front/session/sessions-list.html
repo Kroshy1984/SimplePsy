@@ -200,24 +200,29 @@
               </div>
             </div>
           </div>
-          <div class="frame-wrapper48">
-            <div class="frame-parent73">
-              <div class="wrapper29">
-                <h3 class="h31">Основные терапевтические гипотезы</h3>
-              </div>
-              <div class="rectangle-parent64">
-                <div class="frame-child73"></div>
-                <div class="rectangle-parent65">
-                  <div class="frame-child74"></div>
-                  <div class="div77">Редактировать</div>
+          <form method="post" th:action="@{/SimplePsy/V1/specialist/personal-info/update-hypotheses}" th:object="${specialist}">
+            <div class="frame-wrapper48">
+              <div class="frame-parent73">
+                <div class="wrapper29">
+                  <h3 class="h31">Основные терапевтические гипотезы</h3>
                 </div>
-                <div class="rectangle-parent66">
-                  <div class="frame-child75"></div>
-                  <div class="div78">Сохранить</div>
+                <div class="rectangle-parent64">
+                  <textarea th:text="${specialist.hypotheses}" name="hypotheses" class="frame-child73" disabled></textarea>
+                  <div class="save-edit-buttons">
+                    <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
+                      <div class="div72">Отменить</div>
+                    </button>
+                    <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
+                      <div class="div72">Редактировать</div>
+                    </button>
+                    <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
+                      <div class="div72">Сохранить</div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>
@@ -273,6 +278,29 @@
     </div>
   </div>
   <script>
+    function showInputs() {
+      // Находим элементы, которые нужно изменить
+      var inputsFieldSetToEnable = document.querySelectorAll('textarea');
+      var saveButton = document.getElementById('save');
+      var editButton = document.getElementById('edit');
+      var cancelButton = document.getElementById('cancel');
+
+      // Убираем атрибут disabled у всех найденных элементов
+      inputsFieldSetToEnable.forEach(function (input) {
+        input.removeAttribute('disabled');
+      });
+
+      // Показываем кнопки
+      saveButton.style.display = 'inline-block';
+      editButton.style.display = 'none';
+      cancelButton.style.display = 'inline-block';
+    }
+
+    function cancelButton() {
+      document.getElementById('cancel').style.display = 'none';
+      window.location.href = '/SimplePsy/V1/session/sessions';
+    }
+
     function goTo(obj) {
       window.location.href = "./report/" + obj.getAttribute("data-card-id");
     }

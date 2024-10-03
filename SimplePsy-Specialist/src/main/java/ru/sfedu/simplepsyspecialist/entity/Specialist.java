@@ -51,11 +51,13 @@ public class Specialist {
     private String education;
     private String city;
 
+    private String hypotheses;
+
 //    @Valid
 //    private List<ClientEntry> clients;
 
     public Specialist(String name, String surname, String username, String phone, String password,
-                      String specialization, String description, String education, String city) {
+                      String specialization, String description, String education, String city, String hypotheses) {
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -65,6 +67,7 @@ public class Specialist {
         this.description = description;
         this.education = education;
         this.city = city;
+        this.hypotheses = hypotheses;
     }
 
     public Specialist(String username, String password) {
@@ -226,5 +229,13 @@ public class Specialist {
 
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public String getHypotheses() {
+        return hypotheses;
+    }
+
+    public void setHypotheses(String hypotheses) {
+        this.hypotheses = hypotheses;
     }
 }

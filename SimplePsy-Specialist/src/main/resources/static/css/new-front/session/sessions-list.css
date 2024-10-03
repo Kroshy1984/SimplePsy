@@ -1,3 +1,73 @@
+.save-edit-buttons,
+.save-edit-buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.save-edit-buttons {
+  flex: 1;
+  justify-content: flex-start;
+  gap: 21.8px;
+}
+.save-edit-buttons-wrapper {
+  width: 589px;
+  justify-content: flex-end;
+  padding: 0 var(--padding-25xl);
+  box-sizing: border-box;
+  font-size: var(--bold-18-size);
+  color: var(--color-slategray-500);
+}
+
+.frame-parent51 {
+  flex: 1;
+  gap: var(--gap-11xl);
+  min-width: 688px;
+  font-size: var(--font-size-7xl);
+  color: var(--grey-blue-50);
+}
+.frame-parent49,
+.frame-parent51,
+.frame-wrapper31 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+
+.rectangle-parent51:hover {
+  background-color: var(--color-slategray-300);
+  border: 3px solid var(--color-lightgray);
+  box-sizing: border-box;
+}
+
+.rectangle-parent51 {
+  cursor: pointer;
+  border: 3px solid var(--grey-blue-95);
+  padding: 3px;
+  background-color: var(--color-lightslategray-100);
+  border-radius: var(--br-xl);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 155px;
+}
+
+.div72 {
+  flex: 1;
+  position: relative;
+  font-size: var(--bold-18-size);
+  line-height: 150%;
+  font-weight: 500;
+  font-family: var(--bold-10);
+  color: var(--color-slategray-500);
+  text-align: center;
+  z-index: 1;
+}
+
 .delete-button {
   position: absolute;
   top: 0;
@@ -1257,18 +1327,13 @@
   box-sizing: border-box;
 }
 .frame-child73 {
-  height: calc(100% + 342.2px);
-  width: calc(100% - 342.2px);
-  position: absolute;
+  padding: 10px;
+  width: 420px;
+  height: 100px;
   margin: 0 !important;
-  top: 0;
-  right: -99.8px;
-  bottom: -342.2px;
-  left: 442px;
   border-radius: var(--br-3xs);
   background-color: var(--grey-blue-95);
-  transform: rotate(90deg);
-  transform-origin: 0 0;
+  resize: none;
 }
 .frame-child74 {
   height: 26px;
@@ -1319,8 +1384,8 @@
 .rectangle-parent64,
 .rectangle-parent66 {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .rectangle-parent66 {
   width: 102.3px;
@@ -1334,11 +1399,10 @@
   margin-left: -0.3px;
 }
 .rectangle-parent64 {
-  align-self: stretch;
+  margin: auto;
   justify-content: flex-end;
-  padding: 71px var(--padding-4xs) var(--padding-10xs-8);
   position: relative;
-  row-gap: 20px;
+  row-gap: 10px;
   font-size: var(--bold-10-size);
   color: var(--color-slategray-500);
 }
