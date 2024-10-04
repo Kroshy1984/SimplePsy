@@ -32,28 +32,6 @@ public class CustomerController {
         this.specialistService = specialistService;
     }
 
-//    @GetMapping("/search")
-//    @ResponseStatus(HttpStatus.FOUND)
-//    public List<Customer> getResource(@RequestParam(name = "name", required = false) String name,
-//                                      @RequestParam(name = "contact", required = false) String contact) {
-//        return customerService.getCustomers(name, contact);
-//    }
-
-//    @PostMapping("/new-customer")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Customer createCustomer(@RequestParam("name") String name,
-//                                   @RequestParam("surname") String surname,
-//                                   @RequestParam("status") Status status,
-//                                   @RequestParam("contactPhone") String contactPhone,
-//                                   @RequestParam("contactEmail") String contactEmail,
-//                                   @RequestParam("contactTg") String contactTg,
-//                                   @RequestParam("dateOfFirstCall") String dateOfFirstCall,
-//                                   @RequestParam("avatar") MultipartFile avatar) throws IOException {
-//        Contact contact = new Contact(contactPhone, contactEmail, contactTg);
-//        Customer customer = new Customer(name, status, contact, dateOfFirstCall, avatar);
-//        return customerService.saveCustomer(customer);
-//    }
-
     @PostMapping("/new")
     public String newCustomer(@ModelAttribute("customer") Customer customer)
     {
@@ -61,6 +39,19 @@ public class CustomerController {
         String newCustomerId = customerService.saveCustomer(customer).getId();
         System.out.println("CustomerController: " + newCustomerId);
         return "redirect:/SimplePsy/V1/customer/customer-card/" + newCustomerId;
+    }
+    @PostMapping("customer/new")
+    public String newOrUpdatedCustomer(@ModelAttribute("customer") Customer customer)
+    {
+        System.out.println("Got the customer with id:\n" + customer.getId());
+        String newCustomerId = customerService.saveCustomer(customer).getId();
+        System.out.println("CustomerController: " + newCustomerId);
+        return "redirect:/SimplePsy/V1/customer/customer/saved";
+    }
+    @GetMapping("/customer/saved")
+    public String customerSaved()
+    {
+        return "new-front/customer/edit/customer-saved";
     }
     @PostMapping("/update")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer)
@@ -166,25 +157,28 @@ public class CustomerController {
         }
         return "new-front/customer/customer-card-adult";
     }
-
-    @PostMapping("/customers/new")
-    public String createNewCustomer(@AuthenticationPrincipal UserDetails userDetails,
-                                                    Customer customer) {
-
-        customer.cleanAttributes();
-        System.out.println(customer.getSurname());
-        System.out.println(customer.getDateOfBirth());
-        System.out.println(customer.getSex());
-        Customer newCustomer = customerService.saveCustomer(customer);
-        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        specialist.addCustomerId(customer.getId());
-        specialistService.save(specialist);
-        System.out.println(newCustomer.getSurname());
-        System.out.println(newCustomer.getDateOfBirth());
-        System.out.println("Возраст: " + newCustomer.getAge());
-        System.out.println(newCustomer.getSex());
-
-        return "redirect:/SimplePsy/V1/specialist/customers";
+    @GetMapping("/customer-card/edit/{specialistId}/{customerId}")
+    public String getCustomerCardEdit(@PathVariable String specialistId,
+            @PathVariable String customerId,
+                                  Model model) {
+        Specialist specialist = specialistService.findById(specialistId);
+        System.out.println("In method getCustomerCard got the customerId: " + customerId);
+        Customer customer = customerService.findById(customerId);
+        customer.setId(customerId);
+        model.addAttribute("customer", customer);
+        model.addAttribute("specialist", specialist);
+        switch (customer.getTypeOfClient()) {
+            case ADULT -> {
+                return "new-front/customer/edit/customer-card-adult-customer";
+            }
+            case COUPLE -> {
+                return "new-front/customer/customer-card-couple";
+            }
+            case CHILD -> {
+                return "new-front/customer/customer-card-child";
+            }
+        }
+        return "new-front/customer/customer-card-adult";
     }
     @GetMapping("/customers-test")
     public String getCustomersTestsList(@AuthenticationPrincipal UserDetails userDetails, Model model) {

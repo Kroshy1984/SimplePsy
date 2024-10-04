@@ -47,10 +47,10 @@ public class SecurityConfig {
                         .requestMatchers("/SimplePsy/V1/scoring/done").permitAll()
                         .requestMatchers("/SimplePsy/V1/scoring/submit").permitAll()
                         .requestMatchers("/SimplePsy/V1/specialist/signup").permitAll()
-                        .requestMatchers("/SimplePsy/V1/specialist/find-customer").permitAll()
-                        .requestMatchers("/SimplePsy/V1/specialist/find-customer/byProblemId").permitAll()
                         .requestMatchers("/SimplePsy/V1/specialist/changePass**").permitAll()
                         .requestMatchers("/SimplePsy/V1/specialist/setNewPassword/**").permitAll()
+                        .requestMatchers("/SimplePsy/V1/customer/customer-card/edit/**").permitAll()
+                        .requestMatchers("/SimplePsy/V1/customer/customer/**").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/**/*.css")).permitAll()
                         .requestMatchers("/SimplePsy/V1/client/findAll").permitAll() // Разрешить доступ к этому URL
                         .anyRequest().authenticated())

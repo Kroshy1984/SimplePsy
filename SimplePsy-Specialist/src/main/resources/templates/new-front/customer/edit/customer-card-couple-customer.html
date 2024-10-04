@@ -5,7 +5,7 @@
   <meta name="viewport" content="initial-scale=1, width=device-width" />
 
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-adult.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-couple.css}" />
   <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -16,184 +16,9 @@
   />
 </head>
 <body>
-<form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post">
-  <input id="customerId" class="div222" th:name="${customer.id}"  th:field="*{id}" type="hidden" disabled>
-<div class="div216">
-  <div class="settings6"></div>
-  <div class="item112">
-    <img class="feather-icon-chevron-up21" alt="" />
-  </div>
-  <section class="frame-parent141">
-    <header class="frame-wrapper85">
-      <div class="frame-parent142">
-        <div class="frame-wrapper86">
-          <div class="frame-parent143">
-            <div class="icon-parent29">
-              <img
-                      class="icon156"
-                      loading="lazy"
-                      alt=""
-                      src="/images/icon@2x.png"
-              />
-
-              <div class="constructor-wrapper4">
-                <a class="constructor12" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
-              </div>
-              <div class="icon-parent30">
-                <img
-                        class="icon157"
-                        loading="lazy"
-                        alt=""
-                        src="/images/icon-1@2x.png"
-                />
-                <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-                <div class="search-wrapper2">
-                  <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
-                  <datalist id="customerList">
-
-                  </datalist>
-                </div>
-              </div>
-            </div>
-            <div class="about-content-wrapper">
-              <div class="about-content">
-                <div class="news-container">
-                  <a class="about-us19">Добавить клиента</a>
-                  <a class="news10">Назначить встречу</a>
-                  <b class="user-policy10">Добавить график нерабочих дней</b>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-            <div class="icon-parent31">
-              <img class="icon158" alt="" src="/images/icon-2@2x.png" />
-
-              <div class="new-york-wrapper4">
-                <b th:text="${specialist.city}" class="specialist-city"></b>
-              </div>
-            </div>
-      </div>
-    </header>
-    <div class="user-panel-content-parent">
-      <div class="user-panel-content">
-        <div class="frame-parent144">
-          <div class="wrapper-user-wrapper2">
-            <div class="wrapper-user12">
-              <img
-                      class="user-icon"
-                      loading="lazy"
-                      alt=""
-                      th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
-                      id="userImage"
-                      onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
-              />
-            </div>
-          </div>
-          <div class="user-names-content-wrapper">
-            <div class="user-names-content">
-              <div class="hello-wrapper">
-                <b class="hello">Привет, </b>
-                <b th:text="${specialist.name}" class="hello"></b>
-                <b class="hello">!</b>
-              </div>
-              <b class="specialist-email">
-                <p th:text="${specialist.username}" class="specialist-email-content"></p>
-              </b>
-            </div>
-          </div>
-          <div class="navigation-content-parent">
-            <div class="frame-wrapper73">
-              <div class="frame-parent122">
-                <div class="frame-parent123">
-                  <div class="client-list-wrapper">
-                    <button type="button" class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
-                    <div class="icon-wrapper33">
-                      <img class="icon146" alt="" src="/images/icon-3@2x.png" />
-                    </div>
-                    <b class="client-list">Список клиентов</b>
-                  </div>
-                  <div class="base-frame">
-                    <button type="button" class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
-                      <div class="icon-wrapper34">
-                        <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
-                      </div>
-                      <b class="calendar">Календарь</b>
-                    </button>
-                  </div>
-                </div>
-                <div class="frame-parent123">
-                  <div class="notifications-wrapper">
-                    <button type="button" class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
-                    <div class="icon-wrapper33">
-                      <img class="icon146" alt="" src="/images/icon-5.svg" />
-                    </div>
-                    <b class="notifications">Уведомления</b>
-                  </div>
-                  <div class="base-frame">
-                    <button type="button" class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
-                      <div class="icon-wrapper34">
-                        <img class="icon147" alt="" src="/images/icon-6.svg"/>
-                      </div>
-                      <b class="analytics">Аналитика</b>
-                    </button>
-                  </div>
-                  <div class="tests-wrapper">
-                    <button type="button" class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
-                    <b class="surveys-tests">Опросники и тесты</b>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="applications-content-wrapper">
-              <div class="applications-content">
-                <div class="wrapper49">
-                  <b class="b143">Заявки</b>
-                </div>
-                <div class="frame-parent145">
-                  <div class="frame-parent146" id="groupContainer">
-                    <div class="rectangle-parent142">
-                      <div class="frame-child168"></div>
-                      <b class="application-item-icon">20.02.2024</b>
-                    </div>
-                    <div class="rectangle-parent143">
-                      <div class="frame-child169"></div>
-                      <b class="b144">Овсянникова Юля Матвеевна</b>
-                    </div>
-                  </div>
-                  <div class="frame-parent147" id="groupContainer1">
-                    <div class="rectangle-parent144">
-                      <div class="frame-child170"></div>
-                      <b class="b145">25.02.2024</b>
-                    </div>
-                    <div class="rectangle-parent145">
-                      <div class="frame-child171"></div>
-                      <b class="b146">Овсянникова Юля Матвеевна</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="client-card-actions">
-        <div class="client-card-actions-content">
-          <div class="frame-parent148">
-            <button type="button" class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
-              <div class="frame-child172"></div>
-              <a class="a">Список клиентов</a>
-            </button>
-            <button type="button" class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
-              <div class="frame-child173"></div>
-              <a class="a1">Список встреч</a>
-            </button>
-            <div class="rectangle-parent148" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
-              <div class="frame-child174"></div>
-              <div class="div217">Опросники и тесты</div>
-            </div>
-          </div>
-        </div>
+<form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post" style="width: 1200px; margin: 0 auto">
+<input id="customerId" th:name="${customer.id}" th:field="*{id}" hidden="hidden" disabled>
+  <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
         <div class="save-edit-buttons-wrapper">
           <div class="save-edit-buttons">
             <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
@@ -205,56 +30,87 @@
             <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
               <div class="div72">Сохранить</div>
             </button>
-            <button type="button" class="rectangle-parent51" onclick="goToScorings(this)" th:data-card-id="${customer.id}">
-              <div class="div72">Скоринги</div>
-            </button>
-            <button id="profile" type="button" class="rectangle-parent51" onclick="copyProfileLink(event)">
-              <div class="div72">Ссылка на анкету</div>
-            </button>
           </div>
         </div>
         <div class="component19">
+        <div class="item113">
+          <div class="div221">Тип клиента</div>
+          <select class="div222" id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
+            <option value="COUPLE">Пара</option>
+          </select>
+        </div>
+        <div class="item113">
+          <div class="div221">Статус клиента</div>
+          <select id="client-status" th:name="${customer.clientStatus}"  th:field="*{clientStatus}" disabled>
+            <option value="REGULAR">Регулярный</option>
+            <option value="ON_REQUEST">По запросу</option>
+            <option value="COMPLETED">Завершён</option>
+            <option value="APPLICATION">Заявка</option>
+          </select>
+        </div>
           <div class="item113">
-            <div class="div221">Тип клиента</div>
-            <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
-              <option value="ADULT">Взрослый</option>
-            </select>
+            <div class="div221">ФИО первого клиента</div>
+            <input class="div222" th:name="${customer.firstClientSurname}" th:field="*{firstClientSurname}" disabled>
+            <input class="div222" th:name="${customer.firstClientName}" th:field="*{firstClientName}" disabled>
+            <input class="div222" th:name="${customer.firstClientLastName}" th:field="*{firstClientLastName}" disabled>
           </div>
           <div class="item113">
-            <div class="div221">ФИО клиента</div>
-            <input class="div222" th:name="${customer.surname}" th:field="*{surname}" disabled>
-            <input class="div222" th:name="${customer.name}" th:field="*{name}" disabled>
-            <input class="div222" th:name="${customer.lastName}" th:field="*{lastName}" disabled>
+            <div class="div221">Номер телефона первого клиента</div>
+            <input type="tel" class="div222" th:name="${customer.firstClientContact.phone}" th:field="*{firstClientContact.phone}" disabled>
           </div>
           <div class="item113">
-            <div class="div221">Номер телефона</div>
-            <input type="tel" class="div222" th:name="${customer.contact.phone}"  th:field="*{contact.phone}" disabled>
+            <div class="div221">Почта первого клиента</div>
+            <input type="email" class="div222" th:name="${customer.firstClientContact.email}" th:field="*{firstClientContact.email}" disabled>
           </div>
           <div class="item113">
-            <div class="div221">Почта</div>
-            <input type="email" class="div222" th:name="${customer.contact.email}"  th:field="*{contact.email}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Пол</div>
-            <select id="gender" th:name="${customer.sex}" th:field="*{sex}" disabled>
+            <div class="div221">Пол первого клиента</div>
+            <select class="div222" id="gender-1" th:name="${customer.firstClientSex}" th:field="*{firstClientSex}" disabled>
               <option value="MALE">Мужской</option>
               <option value="FEMALE">Женский</option>
             </select>
           </div>
           <div class="item113">
-            <div class="div221">Статус клиента</div>
-            <select id="client-status" th:name="${customer.clientStatus}"  th:field="*{clientStatus}" disabled>
-              <option value="REGULAR">Регулярный</option>
-              <option value="ON_REQUEST">По запросу</option>
-              <option value="COMPLETED">Завершён</option>
-              <option value="APPLICATION">Заявка</option>
+            <div class="div221">Запрос первого клиента на терапию: причина обращения</div>
+            <textarea class="div222" th:name="${customer.firstClientRequestReason}" th:field="*{firstClientRequestReason}" disabled></textarea>
+          </div>
+          <div class="item113">
+            <div class="div221">Запрос первого клиента на терапию: желаемый результат от прохождения терапии</div>
+            <textarea class="div222" th:name="${customer.firstClientDesiredResult}" th:field="*{firstClientDesiredResult}" disabled></textarea>
+          </div>
+          <div class="item113">
+            <div class="div221">ФИО второго клиента</div>
+            <input class="div222" th:name="${customer.secondClientSurname}" th:field="*{secondClientSurname}" disabled>
+            <input class="div222" th:name="${customer.secondClientName}" th:field="*{secondClientName}" disabled>
+            <input class="div222" th:name="${customer.secondClientLastName}" th:field="*{secondClientLastName}" disabled>
+          </div>
+          <div class="item113">
+            <div class="div221">Номер телефона второго клиента</div>
+            <input type="tel" class="div222" th:name="${customer.secondClientContact.phone}" th:field="*{secondClientContact.phone}" disabled>
+          </div>
+          <div class="item113">
+            <div class="div221">Почта второго клиента</div>
+            <input type="email" class="div222" th:name="${customer.secondClientContact.email}" th:field="*{secondClientContact.email}" disabled>
+          </div>
+          <div class="item113">
+            <div class="div221">Пол второго клиента</div>
+            <select class="div222" id="gender-2" th:name="${customer.secondClientSex}" th:field="*{secondClientSex}" disabled>
+              <option value="MALE">Мужской</option>
+              <option value="FEMALE">Женский</option>
             </select>
+          </div>
+          <div class="item113">
+            <div class="div221">Запрос второго клиента на терапию: причина обращения</div>
+            <textarea class="div222" th:name="${customer.secondClientRequestReason}" th:field="*{secondClientRequestReason}" disabled></textarea>
+          </div>
+          <div class="item113">
+            <div class="div221">Запрос второго клиента на терапию: желаемый результат от прохождения терапии</div>
+            <textarea class="div222" th:name="${customer.secondClientDesiredResult}" th:field="*{secondClientDesiredResult}" disabled></textarea>
           </div>
           <div class="item113">
             <div class="div221">
               Каким способом обратился клиент/попечитель
             </div>
-            <select id="contact-method" th:name="${customer.typeOfTreatment}"  th:field="*{typeOfTreatment}" disabled>
+            <select class="div222" id="contact-method" th:name="${customer.typeOfTreatment}" th:field="*{typeOfTreatment}" disabled>
               <option value="MESSENGER">Мессенджер</option>
               <option value="SOCIAL_NETWORK">Социальная сеть</option>
               <option value="AGGREGATOR">Агрегатор</option>
@@ -272,7 +128,7 @@
           </div>
           <div class="item113">
             <div class="div221">Предпочтительный формат встречи</div>
-            <select id="meeting-format" th:name="${customer.preferredMeetingFormat}"  th:field="*{preferredMeetingFormat}" disabled>
+            <select class="div222" id="meeting-format" th:name="${customer.preferredMeetingFormat}" th:field="*{preferredMeetingFormat}" disabled>
               <option value="ONLINE" selected>Онлайн</option>
               <option value="OFFLINE">Оффлайн</option>
             </select>
@@ -281,7 +137,7 @@
             <div class="div221">
               Для онлайн выбрать/указать площадку взаимодействия
             </div>
-            <select id="online-platform" th:name="${customer.onlineMeetingPlace}"  th:field="*{onlineMeetingPlace}" disabled>
+            <select class="div222" id="online-platform" th:name="${customer.onlineMeetingPlace}" th:field="*{onlineMeetingPlace}" disabled>
               <option value="ZOOM">Zoom</option>
               <option value="TELEMOST">Телемост</option>
               <option value="GOOGLE_MEET">Google Meet</option>
@@ -294,53 +150,32 @@
             <div class="div221">
               Для оффлайн выбрать адрес проведения встречи
             </div>
-            <input class="div222" th:name="${customer.offlineMeetingPlace}"  th:field="*{offlineMeetingPlace}" disabled>
+            <input class="div222" th:name="${customer.offlineMeetingPlace}" th:field="*{offlineMeetingPlace}" disabled>
           </div>
           <div class="item113">
             <div class="div221">
               Первичный/изначальный запрос клиента на терапию
             </div>
-            <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}"  th:field="*{clientsFirstRequestForTherapy}" disabled></textarea>
+            <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}" th:field="*{clientsFirstRequestForTherapy}" disabled></textarea>
           </div>
           <div class="item113">
             <div class="div221">
               Фиксированное время/день недели для встречи (если да, то
               указать)
             </div>
-            <input class="div222" th:name="${customer.fixedTimeForMeeting}"  th:field="*{fixedTimeForMeeting}" disabled>
+            <input class="div222" th:name="${customer.fixedTimeForMeeting}" th:field="*{fixedTimeForMeeting}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Финансовые условия</div>
-            <textarea class="div222" th:name="${customer.financialConditions}"  th:field="*{financialConditions}" disabled></textarea>
+            <textarea class="div222" th:name="${customer.financialConditions}" th:field="*{financialConditions}" disabled></textarea>
           </div>
-        </div>
+        </input>
       </div>
+    </div>
     </div>
   </section>
   <section class="footer-content-wrapper">
     <div class="footer-content">
-      <div class="feedback-content-wrapper">
-        <div class="feedback-content">
-          <img
-                  class="icon164"
-                  loading="lazy"
-                  alt=""
-                  src="/images/icon-7@2x.png"
-          />
-
-          <div class="frame-parent150">
-            <div class="send-feedback-wrapper6">
-              <b class="send-feedback12">Обратная связь</b>
-            </div>
-            <img
-                    class="icon165"
-                    loading="lazy"
-                    alt=""
-                    src="/images/icon-8.svg"
-            />
-          </div>
-        </div>
-      </div>
       <div class="client-details-content-parent">
         <div class="client-details-content">
           <div class="div244">Подробнее....</div>
@@ -359,22 +194,21 @@
               Коллегиальные рекомендации (поле для заполнения кто вас
               порекомендовал клиенту)
             </div>
-            <textarea class="div222" th:name="${customer.collegialRecommendations}"  th:field="*{collegialRecommendations}" disabled></textarea>
+            <textarea class="div222" th:name="${customer.collegialRecommendations}" th:field="*{collegialRecommendations}" disabled></textarea>
           </div>
           <div class="item113">
             <div class="div221">Особые условия контракта</div>
-            <textarea class="div222" th:name="${customer.specialTermsOfContract}"  th:field="*{specialTermsOfContract}" disabled></textarea>
+            <textarea class="div222" th:name="${customer.specialTermsOfContract}" th:field="*{specialTermsOfContract}" disabled></textarea>
           </div>
           <div class="item113">
             <div class="div221">Семейное положение</div>
-            <select id="marital-status" th:name="${customer.familyStatus}"  th:field="*{familyStatus}" disabled>
+            <select class="div222" id="marital-status" th:name="${customer.familyStatus}" th:field="*{familyStatus}" disabled>
               <option value="MARRIED">Женат/Замужем</option>
               <option value="SINGLE">Холост/Незамужем</option>
               <option value="DIVORCED">В разводе</option>
               <option value="WIDOWED">Вдовец/Вдова</option>
               <option value="COHABITATION">Сожительство/Несостоявшийся брак</option>
-              <option value="MARRIAGE_WITH_SEPARATE_HOUSING">Официальный брак с раздельным проживанием
-              </option>
+              <option value="MARRIAGE_WITH_SEPARATE_HOUSING">Официальный брак с раздельным проживанием</option>
               <option value="LONELY">Одиночество/Не в постоянных отношениях</option>
               <option value="FAMILY_WITH_CHILDREN">Семьи с детьми</option>
             </select>
@@ -384,7 +218,7 @@
               Приоритетный канал коммуникации (выпадающий список куда
               писать)
             </div>
-            <select id="preferred-communication-channel" th:name="${customer.priorityCommunicationChannel}"  th:field="*{priorityCommunicationChannel}" disabled>
+            <select class="div222" id="preferred-communication-channel" th:name="${customer.priorityCommunicationChannel}" th:field="*{priorityCommunicationChannel}" disabled>
               <option value="TELEGRAM">Telegram</option>
               <option value="WHATSAPP">WhatsApp</option>
               <option value="VIBER">Viber</option>
@@ -397,7 +231,7 @@
             <div class="div221">
               Берется ли супервизия на данного клиента
             </div>
-            <select id="is-supervised" th:value="${customer.supervised}" th:name="${customer.supervised}"  th:field="*{supervised}" disabled>
+            <select class="div222" id="is-supervised" th:name="${customer.supervised}" th:field="*{supervised}" disabled>
               <option value="YES">Да</option>
               <option value="NO">Нет</option>
             </select>
@@ -406,13 +240,13 @@
           <div id="supervisor-fields">
             <div class="item113">
               <div class="div221">ФИО супервизора</div>
-              <input class="div222" th:name="${customer.supervisorsSurname}" th:field="*{supervisorsSurname}" disabled>
-              <input class="div222" th:name="${customer.supervisorsName}" th:field="*{supervisorsName}" disabled>
-              <input class="div222" th:name="${customer.supervisorsLastName}" th:field="*{supervisorsLastName}" disabled>
+              <input class="div222" type="text" id="supervisor-info" th:name="${customer.supervisorsSurname}" th:field="*{supervisorsSurname}" disabled>
+              <input class="div222" type="text" th:name="${customer.supervisorsName}" th:field="*{supervisorsName}" disabled>
+              <input class="div222" type="text" th:name="${customer.supervisorsLastName}" th:field="*{supervisorsLastName}" disabled>
             </div>
             <div class="item113">
               <div class="div221">Номер телефона супервизора</div>
-              <input type="tel" class="div222" th:name="${customer.supervisorsContact.phone}"  th:field="*{supervisorsContact.phone}" disabled>
+              <input type="tel" class="div222" id="supervisor-phone" th:name="${customer.supervisorsContact.phone}" th:field="*{supervisorsContact.phone}" disabled>
             </div>
             <div class="item113">
               <div class="div221">Электронная почта супервизора</div>
@@ -422,44 +256,45 @@
               <div class="div221">
                 Материал для следующих сеансов из супервизии
               </div>
-              <input class="div222" th:name="${customer.materialForNextSessionsFromSupervision}"  th:field="*{materialForNextSessionsFromSupervision}" disabled>
+              <textarea class="div222" th:name="${customer.materialForNextSessionsFromSupervision}" th:field="*{materialForNextSessionsFromSupervision}" disabled></textarea>
             </div>
           </div>
 
           <div class="item113">
             <div class="div221">ФИО котерапевта</div>
-            <input class="div222" th:name="${customer.cotherapistSurname}" th:field="*{cotherapistSurname}" disabled>
-            <input class="div222" th:name="${customer.cotherapistName}" th:field="*{cotherapistName}" disabled>
-            <input class="div222" th:name="${customer.cotherapistLastName}" th:field="*{cotherapistLastName}" disabled>
+            <input class="div222" type="text" id="cotherapist-info" th:name="${customer.cotherapistSurname}" th:field="*{cotherapistSurname}" disabled>
+            <input class="div222" type="text" th:name="${customer.cotherapistName}" th:field="*{cotherapistName}" disabled>
+            <input class="div222" type="text" th:name="${customer.cotherapistLastName}" th:field="*{cotherapistLastName}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Номер телефона котерапевта</div>
-            <input type="tel" class="div222" th:name="${customer.cotherapistContact.phone}"  th:field="*{cotherapistContact.phone}" disabled>
+            <input type="tel" class="div222" th:name="${customer.cotherapistContact.phone}" th:field="*{cotherapistContact.phone}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Электронная почта котерапевта</div>
-            <input type="email" class="div222" th:name="${customer.cotherapistContact.email}"  th:field="*{cotherapistContact.email}" disabled>
+            <input type="email" class="div222" th:name="${customer.cotherapistContact.email}" th:field="*{cotherapistContact.email}" disabled>
           </div>
           <div class="item113">
             <div class="div221">Условия распределения гонорара между котерапевтами</div>
-            <textarea class="div222" th:name="${customer.cotherapistPaymentConditions}"  th:field="*{cotherapistPaymentConditions}" disabled></textarea>
+            <textarea class="div222" th:name="${customer.cotherapistPaymentConditions}" th:field="*{cotherapistPaymentConditions}" disabled></textarea>
           </div>
           <div class="item113">
             <div class="div221">Заметки</div>
-            <textarea class="div222" th:name="${customer.notes}"  th:field="*{notes}" disabled></textarea>
+            <textarea class="div222" th:name="${customer.notes}" th:field="*{notes}" disabled></textarea>
           </div>
         </div>
       </div>
     </div>
   </section>
-</div>
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <div id="modal-body"></div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body"></div>
+    </div>
   </div>
 </div>
 </form>
+
 <script>
   function goToScorings(obj) {
     window.location.href = "/SimplePsy/V1/customer/scorings/" + obj.getAttribute("data-card-id");
@@ -507,11 +342,11 @@
   // Открытие модального окна создания сессии
   document.addEventListener('DOMContentLoaded', function() {
     // Получаем элементы
-    var modal = document.getElementById('modal');
     var modalBody = document.getElementById('modal-body');
+    var modal = document.getElementById('modal');
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
-    var holidayBtn = document.querySelector('.user-policy10');
+    var holidayBtn = document.querySelector('.user-policy13');
     var addCustomer = document.querySelector('.about-us19');
     // Функция для открытия модального окна
     function openModal() {
@@ -584,7 +419,6 @@
               })
               .catch(error => console.error('Ошибка:', error));
     }
-
     function openAddClientModal()
     {
       document.body.style.overflow = 'hidden';
@@ -603,7 +437,6 @@
                 console.error('Error loading modal content:', error);
               });
     }
-
     // Функция для закрытия модального окна
     function closeModal() {
       modal.style.display = 'none';
@@ -649,10 +482,10 @@
     holidayBtn.addEventListener('click', openHolidayModal);
     addCustomer.addEventListener('click', openAddClientModal);
     closeBtn.addEventListener('click', closeModal);
-  });
-
+  })
   const customerSearch = document.getElementById('customerSearch');
   const currentSpecialistId = document.getElementById('currentSpecialistId').value;
+
   customerSearch.addEventListener('input', function () {
     const searchQuery = this.value;
     const datalist = document.getElementById('customerList');

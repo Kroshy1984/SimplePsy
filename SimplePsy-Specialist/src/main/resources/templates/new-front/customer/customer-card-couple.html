@@ -208,6 +208,9 @@
             <button type="button" class="rectangle-parent51" onclick="goToScorings(this)" th:data-card-id="${customer.id}">
               <div class="div72">Скоринги</div>
             </button>
+            <button id="profile" type="button" class="rectangle-parent51" onclick="copyProfileLink(event)">
+              <div class="div72">Ссылка на анкету</div>
+            </button>
           </div>
         </div>
         <div class="component19">
@@ -542,8 +545,8 @@
   // Открытие модального окна создания сессии
   document.addEventListener('DOMContentLoaded', function() {
     // Получаем элементы
-    var modal = document.getElementById('modal');
     var modalBody = document.getElementById('modal-body');
+    var modal = document.getElementById('modal');
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
     var holidayBtn = document.querySelector('.user-policy13');
@@ -731,6 +734,17 @@
       window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
     }
   });
+  function copyProfileLink(event)
+  {
+    event.preventDefault();
+    let customerId = document.getElementById('customerId').value;
+    let specialistId = document.getElementById('currentSpecialistId').value;
+    var link = 'http://psy.simplepsy.ru/SimplePsy/V1/customer/customer-card/edit/' + specialistId + '/' + customerId;
+    navigator.clipboard.writeText(link)
+            .then(() => {
+              alert('Ссылка скопирована в буфер обмена!');
+            });
+  }
 </script>
 </body>
 </html>

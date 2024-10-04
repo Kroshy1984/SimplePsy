@@ -1,0 +1,30 @@
+.save-edit-buttons-wrapper-customer {
+    justify-content: flex-end;
+    padding: 0 var(--padding-25xl);
+    box-sizing: border-box;
+    font-size: var(--bold-18-size);
+    color: var(--color-slategray-500);
+    margin-left: 100%;
+    margin-top: 5%;
+}
+.save-edit-buttons-customer,
+.save-edit-buttons-wrapper-customer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 100%;
+}
+.rectangle-parent51-customer {
+    cursor: pointer;
+    border: 3px solid var(--grey-blue-95);
+    padding: var(--padding-8xs) var(--padding-xs) var(--padding-xs);
+    background-color: var(--color-lightslategray-100);
+    border-radius: var(--br-xl);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-width: 155px;
+    position: fixed;
+}

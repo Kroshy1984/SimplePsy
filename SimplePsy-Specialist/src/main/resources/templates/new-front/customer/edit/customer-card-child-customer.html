@@ -16,184 +16,10 @@
     />
 </head>
 <body>
-<form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post">
+<form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post" style="width: 1200px; margin: 0 auto">
     <input id="customerId" class="div222" th:name="${customer.id}"  th:field="*{id}" type="hidden">
-<div class="div216">
-    <div class="settings6"></div>
-    <div class="item112">
-        <img class="feather-icon-chevron-up21" alt="" />
-    </div>
-    <section class="frame-parent141">
-        <header class="frame-wrapper85">
-            <div class="frame-parent142">
-                <div class="frame-wrapper86">
-                    <div class="frame-parent143">
-                        <div class="icon-parent29">
-                            <img
-                                    class="icon156"
-                                    loading="lazy"
-                                    alt=""
-                                    src="/images/icon@2x.png"
-                            />
-
-                            <div class="constructor-wrapper4">
-                                <a class="constructor12" href="/SimplePsy/V1/session/calendar">Понятная практика</a>
-                            </div>
-                            <div class="icon-parent30">
-                                <img
-                                        class="icon157"
-                                        loading="lazy"
-                                        alt=""
-                                        src="/images/icon-1@2x.png"
-                                />
+    <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
                                 <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-                                <div class="search-wrapper2">
-                                    <input type="text" class="search1" placeholder="Найти клиента..." list="customerList" id="customerSearch" autocomplete="off">
-                                    <datalist id="customerList">
-
-                                    </datalist>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="about-content-wrapper">
-                            <div class="about-content">
-                                <div class="news-container">
-                                    <a class="about-us19">Добавить клиента</a>
-                                    <a class="news10">Назначить встречу</a>
-                                    <b class="user-policy10">Добавить график нерабочих дней</b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="icon-parent31">
-                    <img class="icon158" alt="" src="/images/icon-2@2x.png" />
-
-                    <div class="new-york-wrapper4">
-                        <b th:text="${specialist.city}" class="specialist-city"></b >
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="user-panel-content-parent">
-            <div class="user-panel-content">
-                <div class="frame-parent144">
-                    <div class="wrapper-user-wrapper2">
-                        <div class="wrapper-user12">
-                            <img
-                                    class="user-icon"
-                                    loading="lazy"
-                                    alt=""
-                                    th:src="@{'/SimplePsy/V1/specialist/avatar/' + ${specialist.id}}"
-                                    id="userImage"
-                                    onclick="window.location.href='/SimplePsy/V1/specialist/personal-info'"
-                            />
-                        </div>
-                    </div>
-                    <div class="user-names-content-wrapper">
-                        <div class="user-names-content">
-                            <div class="hello-wrapper">
-                                <b class="hello">Привет, </b>
-                                <b th:text="${specialist.name}" class="hello" ></b >
-                                <b class="hello">!</b>
-                            </div>
-                            <b class="specialist-email">
-                                <p th:text="${specialist.username}" class="specialist-email-content"></p >
-                            </b>
-                        </div>
-                    </div>
-                    <div class="navigation-content-parent">
-                        <div class="frame-wrapper73">
-                            <div class="frame-parent122">
-                                <div class="frame-parent123">
-                                    <div class="client-list-wrapper">
-                                        <button type="button" class="base90" onclick="window.location.href='/SimplePsy/V1/specialist/customers';"></button>
-                                        <div class="icon-wrapper33">
-                                            <img class="icon146" alt="" src="/images/icon-3@2x.png" />
-                                        </div>
-                                        <b class="client-list">Список клиентов</b>
-                                    </div>
-                                    <div class="base-frame">
-                                        <button type="button" class="calendar-wrapper" id="baseContainer" onclick="window.location.href='/SimplePsy/V1/session/calendar';">
-                                            <div class="icon-wrapper34">
-                                                <img class="icon147" alt="" src="/images/icon-41@2x.png"/>
-                                            </div>
-                                            <b class="calendar">Календарь</b>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="frame-parent123">
-                                    <div class="notifications-wrapper">
-                                        <button type="button" class="base90 fix-angle-base90" onclick="alert('Эта кнопка находится в разработке')"></button>
-                                        <div class="icon-wrapper33">
-                                            <img class="icon146" alt="" src="/images/icon-5.svg" />
-                                        </div>
-                                        <b class="notifications">Уведомления</b>
-                                    </div>
-                                    <div class="base-frame">
-                                        <button type="button" class="calendar-wrapper" id="baseContainer" onclick="alert('Эта кнопка находится в разработке')">
-                                            <div class="icon-wrapper34">
-                                                <img class="icon147" alt="" src="/images/icon-6.svg"/>
-                                            </div>
-                                            <b class="analytics">Аналитика</b>
-                                        </button>
-                                    </div>
-                                    <div class="tests-wrapper">
-                                        <button type="button" class="base94" onclick="window.location.href='/SimplePsy/V1/scoring/list';"></button>
-                                        <b class="surveys-tests">Опросники и тесты</b>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="applications-content-wrapper">
-                            <div class="applications-content">
-                                <div class="wrapper49">
-                                    <b class="b143">Заявки</b>
-                                </div>
-                                <div class="frame-parent145">
-                                    <div class="frame-parent146" id="groupContainer">
-                                        <div class="rectangle-parent142">
-                                            <div class="frame-child168"></div>
-                                            <b class="application-item-icon">20.02.2024</b>
-                                        </div>
-                                        <div class="rectangle-parent143">
-                                            <div class="frame-child169"></div>
-                                            <b class="b144">Овсянникова Юля Матвеевна</b>
-                                        </div>
-                                    </div>
-                                    <div class="frame-parent147" id="groupContainer1">
-                                        <div class="rectangle-parent144">
-                                            <div class="frame-child170"></div>
-                                            <b class="b145">25.02.2024</b>
-                                        </div>
-                                        <div class="rectangle-parent145">
-                                            <div class="frame-child171"></div>
-                                            <b class="b146">Овсянникова Юля Матвеевна</b>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="client-card-actions">
-                <div class="client-card-actions-content">
-                    <div class="frame-parent148">
-                        <button type="button" class="rectangle-parent146" onclick="window.location.href='/SimplePsy/V1/specialist/customers';">
-                            <div class="frame-child172"></div>
-                            <a class="a">Список клиентов</a>
-                        </button>
-                        <button type="button" class="rectangle-parent147" onclick="window.location.href='/SimplePsy/V1/session/sessions';">
-                            <div class="frame-child173"></div>
-                            <a class="a1">Список встреч</a>
-                        </button>
-                        <div class="rectangle-parent148" id="groupContainer" onclick="window.location.href='/SimplePsy/V1/scoring/list';">
-                            <div class="frame-child174"></div>
-                            <div class="div217">Опросники и тесты</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="save-edit-buttons-wrapper">
                     <div class="save-edit-buttons">
                         <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
@@ -205,11 +31,6 @@
                         <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
                             <div class="div72">Сохранить</div>
                         </button>
-                        <button type="button" class="rectangle-parent51" onclick="goToScorings(this)" th:data-card-id="${customer.id}">
-                            <div class="div72">Скоринги</div>
-                        </button>
-                        <button id="profile" type="button" class="rectangle-parent51" onclick="copyProfileLink(event)">
-                            <div class="div72">Ссылка на анкету</div>
                         </button>
                     </div>
                 </div>
@@ -439,28 +260,6 @@
     </section>
     <section class="footer-content-wrapper">
         <div class="footer-content">
-            <div class="feedback-content-wrapper">
-                <div class="feedback-content">
-                    <img
-                            class="icon164"
-                            loading="lazy"
-                            alt=""
-                            src="/images/icon-7@2x.png"
-                    />
-
-                    <div class="frame-parent150" onclick="alert('Эта кнопка находится в разработке')">
-                        <div class="send-feedback-wrapper6">
-                            <b class="send-feedback12">Обратная связь</b>
-                        </div>
-                        <img
-                                class="icon165"
-                                loading="lazy"
-                                alt=""
-                                src="/images/icon-8.svg"
-                        />
-                    </div>
-                </div>
-            </div>
             <div class="client-details-content-parent">
                 <div class="client-details-content">
                     <div class="div244">Подробнее....</div>
