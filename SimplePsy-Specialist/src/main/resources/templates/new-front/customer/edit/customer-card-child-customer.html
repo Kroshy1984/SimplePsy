@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card-child.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/customer/customer-card.css}" />
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -19,22 +20,21 @@
 <form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/new}" method="post" style="width: 1200px; margin: 0 auto">
     <input id="customerId" class="div222" th:name="${customer.id}"  th:field="*{id}" type="hidden">
     <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-                                <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-                <div class="save-edit-buttons-wrapper">
+                <div class="component19">
+                <div class="save-edit-buttons-wrapper-customer">
                     <div class="save-edit-buttons">
-                        <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51" style="display: none;">
+                        <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51-customer" style="display: none;">
                             <div class="div72">Отменить</div>
                         </button>
-                        <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51">
+                        <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51-customer">
                             <div class="div72">Редактировать</div>
                         </button>
-                        <button id="save" type="submit" class="rectangle-parent51" style="display: none;">
+                        <button id="save" type="submit" class="rectangle-parent51-customer" style="display: none;">
                             <div class="div72">Сохранить</div>
                         </button>
                         </button>
                     </div>
                 </div>
-                <div class="component19">
                     <div class="item113">
                         <div class="div221">Тип клиента</div>
                         <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
