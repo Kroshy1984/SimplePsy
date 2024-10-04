@@ -327,6 +327,16 @@ public class SpecialistController {
         specialistService.updateSpecialist(specialist, multipartFiles);
         return "redirect:/SimplePsy/V1/specialist/personal-info";
     }
+
+    @PostMapping("/personal-info/update-hypotheses")
+    public String updateHypotheses(@AuthenticationPrincipal UserDetails userDetails,
+                                   @RequestParam("hypotheses") String hypotheses) {
+        Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
+        specialist.setHypotheses(hypotheses);
+        specialistService.save(specialist);
+        return "redirect:/SimplePsy/V1/session/sessions";
+    }
+
     @PostMapping(value = "/personal-info/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> updateAvatar(@AuthenticationPrincipal UserDetails userDetails,

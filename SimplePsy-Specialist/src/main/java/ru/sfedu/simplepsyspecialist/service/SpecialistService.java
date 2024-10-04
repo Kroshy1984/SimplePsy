@@ -262,6 +262,7 @@ public class SpecialistService {
         specialist.setDiplomas(oldSpecialist.getDiplomas());
         specialist.setCustomerIds(oldSpecialist.getCustomerIds());
         specialist.setAvatar(oldSpecialist.getAvatar());
+        specialist.setHypotheses(oldSpecialist.getHypotheses());
         specialistRepository.save(specialist);
     }
 }
