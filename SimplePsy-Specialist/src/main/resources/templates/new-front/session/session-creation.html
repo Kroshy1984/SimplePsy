@@ -1,203 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1, width=device-width" />
-
-  <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/session-creation.css}" />
-  <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-  />
-  <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
-  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"/>
+  <title>Создание встречи</title>
 </head>
 <body>
-<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}"  onsubmit="return validateForm()" method="post" >
-  <div class="component10">
-    <b class="add-place10">Тип встречи</b>
-    <label for="session-type"></label>
-    <select id="session-type" th:name="sessionType">
+<div class="container">
+  <!-- Первая строчка -->
+  <div class="row row-compact fix-session">
+    <label for="session-type">Тип встречи</label>
+    <select id="session-type" name="sessionType">
       <option value="CLIENT" selected>Встреча с клиентом</option>
       <option value="ANOTHER">Иное</option>
     </select>
   </div>
 
-  <div>
-    <img
-            class="appointment-base-child"
-            loading="lazy"
-            alt=""
-            src="/images/icon-1@2x.png"
-    />
-    <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList" autocomplete="off">
-    <datalist id="clientsList"></datalist>
-    <input type="hidden" th:name="${clientId}" th:field="*{clientId}" id="clientId">
+  <!-- Разделительная горизонтальная линия -->
+  <div class="separator-horizontal"></div>
+
+  <!-- Вторая строчка с названием и форматом встречи -->
+  <div class="row">
+    <div class="half">
+      <input type="text" id="session-name" name="sessionName" placeholder="Название встречи">
+    </div>
+    <div class="fix-margin-for-format row-compact half">
+      <label for="session-format">Формат</label>
+      <select id="session-format" name="sessionFormat">
+        <option value="ONLINE" selected>Онлайн</option>
+        <option value="OFFLINE">Оффлайн</option>
+      </select>
+    </div>
   </div>
 
-  <div class="div106">
-    <div class="base71"></div>
-    <label for="session-format" class="add-place6">Формат встречи</label>
-    <select id="session-format" th:name="sessionFormat">
-      <option value="ONLINE" selected>Онлайн</option>
-      <option value="OFFLINE">Оффлайн</option>
-    </select>
+  <!-- Разделительная горизонтальная линия -->
+  <div class="separator-horizontal"></div>
+
+  <!-- Третья строчка с датой, местом и временем встречи -->
+  <div class="row">
+    <div class="row-compact half">
+      <label for="session-date"><img src="https://img.icons8.com/material-outlined/24/000000/calendar--v1.png" class="icon"/>Дата встречи</label>
+      <input type="date" id="session-date" name="date">
+    </div>
+    <div class="separator-vertical"></div>
+    <div class="row-compact half">
+      <img src="https://img.icons8.com/material-outlined/24/000000/marker.png" class="icon icon-fix"/>
+      <input class = "fix-widht" type="text" id="session-place" name="place" placeholder="Место проведения встречи">
+    </div>
   </div>
 
-  <div>
-    <img
-            class="icon93"
-            loading="lazy"
-            alt=""
-            src="/images/icon-11@2x.png"
-    />
-    <label for="session-date" class="add-date2"></label>
-    <input type="date" id="session-date" th:name="date" placeholder="Дата встречи">
+  <!-- Разделительная горизонтальная линия -->
+  <div class="separator-horizontal"></div>
+
+  <!-- Заметки и время встречи -->
+  <div class="row">
+    <div class="time-fields">
+      <div class="half">
+        <label for="session-timestart"><img src="https://img.icons8.com/material-outlined/24/000000/clock.png" class="icon"/>С ...</label>
+        <input type="time" id="session-timestart" name="timeStart">
+      </div>
+      <div class="half">
+        <label for="session-timefinish">ПО ...</label>
+        <input type="time" id="session-timefinish" name="timeFinish">
+      </div>
+    </div>
+    <div class="notes">
+      <textarea id="session-notes" name="notes" placeholder="Заметки"></textarea>
+    </div>
   </div>
 
-  <div>
-    <img
-            class="icon94"
-            loading="lazy"
-            alt=""
-            src="/images/icon-2@2x.png"
-    />
-    <label for="session-place" class="b108"></label>
-    <input type="text" id="session-place" th:name="place" placeholder="Место проведения встречи">
-  </div>
+  <!-- Разделительная горизонтальная линия перед кнопкой -->
+  <div class="separator-horizontal"></div>
 
-  <div>
-    <img
-            class="icon95"
-            loading="lazy"
-            alt=""
-            src="/images/icon-31@2x.png"
-    />
-    <label for="session-timestart" class="add-time6">С ...</label>
-    <input type="time" id="session-timestart" th:name="timeStart">
-    <label for="session-timefinish" class="add-time6">ПО ...</label>
-    <input type="time" id="session-timefinish" th:name="timeFinish">
-  </div>
-
-  <div>
-    <label for="payment-type" class="add-time7">Тип оплаты</label>
-    <select id="payment-type" th:name="paymentType">
-      <option value="CASH" selected>Наличная</option>
-      <option value="CASHLESS">Безналичная</option>
-    </select>
-  </div>
-
-  <div>
-    <label for="session-isrepeatable" class="add-place9">Повторять</label>
-      <input id="session-isrepeatable" class="appointment-fields1" type="checkbox" th:name="isRepeatable">
-  </div>
-
-  <div>
-    <label for="session-timesToRepeat" class="add-place8">Повтор</label>
-    <input type="text" id="session-timesToRepeat" th:name="timesToRepeat">
-  </div>
-
-  <div>
-    <label for="session-isnotifiable" class="add-place7">Уведомлять</label>
-    <input type="checkbox" id="session-isnotifiable" th:name="isNotifiable">
-  </div>
-
-  <div>
-    <img
-            class="icon101"
-            loading="lazy"
-            alt=""
-            src="/images/icon-9@2x.png"
-    />
-    <label for="session-notificationtime" class="add-time8">Уведомить за</label>
-    <select id="session-notificationtime" th:name="notificationTime">
-      <option value="24">24</option>
-      <option value="48" selected>48</option>
-      <option value="72">72</option>
-    </select>
-    <b class="add-time9">часа</b>
-  </div>
+  <!-- Кнопка создания встречи -->
   <button type="submit">Создать встречу</button>
-</form>
-<div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
-<script>
-  var groupContainer = document.getElementById("groupContainer");
-  if (groupContainer) {
-    groupContainer.addEventListener("click", function () {
-      window.location.href = "./frame.html";
-    });
-  }
-
-  var groupIcon = document.getElementById("groupIcon");
-  if (groupIcon) {
-    groupIcon.addEventListener("click", function () {
-      window.location.href = "./frame.html";
-    });
-  }
-
-  document.getElementById('clientInput').addEventListener('change', function() {
-    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
-    if (selectedOption) {
-      const clientId = selectedOption.getAttribute('data-id');
-      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
-    }
-  });
-  // Функция для валидации формы
-  function validateForm() {
-    const clientId = document.getElementById('clientId').value;
-    if (!clientId) {
-      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
-      return false; // Отменяем отправку формы
-    }
-    return true; // Разрешаем отправку формы, если значение есть
-  }
-
-  document.getElementById('clientInput').addEventListener('input', function() {
-    fetch('/SimplePsy/V1/customer/findAll')
-            .then(response => response.json())
-            .then(clients => {
-              const dataList = document.getElementById('clientsList');
-              dataList.innerHTML = ''; // очистить текущий список
-
-              clients.forEach(customer => {
-                const option = document.createElement('option');
-                switch (customer.typeOfClient) {
-                  case 'ADULT':
-                    option.value = customer.name + ' ' +customer.surname;
-                    break;
-                  case 'CHILD':
-                    option.value = customer.childName + ' ' + customer.childSurname;
-                    break;
-                  case 'COUPLE':
-                    option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
-                    break;
-                  default:
-                    // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
-                    console.log('Unknown client type');
-                    break;
-                }
-                option.setAttribute('data-id', client.id); // добавить атрибут data-id
-                dataList.appendChild(option);
-              });
-            })
-            .catch(error => console.error('Ошибка:', error));
-  });
-
-  document.getElementById('clientInput').addEventListener('change', function() {
-    const selectedOption = Array.from(document.getElementById('clientsList').options)
-            .find(option => option.value === this.value);
-    if (selectedOption) {
-      const clientId = selectedOption.getAttribute('data-id');
-      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
-      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
-    } else {
-      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
-    }
-  });
-
-</script>
+</div>
 </body>
 </html>

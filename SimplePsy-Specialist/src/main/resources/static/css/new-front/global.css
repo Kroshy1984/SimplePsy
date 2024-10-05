@@ -262,7 +262,6 @@ body {
   text-align: left;
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
   border: 1px solid #888;
   width: 80%;
   max-width: 600px;
@@ -273,6 +272,7 @@ body {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-right: 10px;
 }
 .close-btn:hover,
 .close-btn:focus {
