@@ -172,10 +172,10 @@ public class CustomerController {
                 return "new-front/customer/edit/customer-card-adult-customer";
             }
             case COUPLE -> {
-                return "new-front/customer/customer-card-couple";
+                return "new-front/customer/edit/customer-card-couple-customer";
             }
             case CHILD -> {
-                return "new-front/customer/customer-card-child";
+                return "new-front/customer/edit/customer-card-child-customer";
             }
         }
         return "new-front/customer/customer-card-adult";
