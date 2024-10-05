@@ -78,5 +78,82 @@
   <!-- Кнопка создания встречи -->
   <button type="submit">Создать встречу</button>
 </div>
+<div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
+<script>
+  var groupContainer = document.getElementById("groupContainer");
+  if (groupContainer) {
+    groupContainer.addEventListener("click", function () {
+      window.location.href = "./frame.html";
+    });
+  }
+
+  var groupIcon = document.getElementById("groupIcon");
+  if (groupIcon) {
+    groupIcon.addEventListener("click", function () {
+      window.location.href = "./frame.html";
+    });
+  }
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options).find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+    }
+  });
+  // Функция для валидации формы
+  function validateForm() {
+    const clientId = document.getElementById('clientId').value;
+    if (!clientId) {
+      document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+      return false; // Отменяем отправку формы
+    }
+    return true; // Разрешаем отправку формы, если значение есть
+  }
+
+  document.getElementById('clientInput').addEventListener('input', function() {
+    fetch('/SimplePsy/V1/customer/findAll')
+            .then(response => response.json())
+            .then(clients => {
+              const dataList = document.getElementById('clientsList');
+              dataList.innerHTML = ''; // очистить текущий список
+
+              clients.forEach(customer => {
+                const option = document.createElement('option');
+                switch (customer.typeOfClient) {
+                  case 'ADULT':
+                    option.value = customer.name + ' ' +customer.surname;
+                    break;
+                  case 'CHILD':
+                    option.value = customer.childName + ' ' + customer.childSurname;
+                    break;
+                  case 'COUPLE':
+                    option.value = customer.firstClientName + ' ' + customer.firstClientSurname;
+                    break;
+                  default:
+                    // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
+                    console.log('Unknown client type');
+                    break;
+                }
+                option.setAttribute('data-id', client.id); // добавить атрибут data-id
+                dataList.appendChild(option);
+              });
+            })
+            .catch(error => console.error('Ошибка:', error));
+  });
+
+  document.getElementById('clientInput').addEventListener('change', function() {
+    const selectedOption = Array.from(document.getElementById('clientsList').options)
+            .find(option => option.value === this.value);
+    if (selectedOption) {
+      const clientId = selectedOption.getAttribute('data-id');
+      document.getElementById('clientId').value = clientId; // устанавливаем значение скрытого поля
+      document.getElementById('error-message').style.display = 'none'; // Скрываем сообщение об ошибке при успешном выборе клиента
+    } else {
+      document.getElementById('clientId').value = ''; // Очищаем скрытое поле, если выбранного клиента нет в списке
+    }
+  });
+
+</script>
 </body>
 </html>
