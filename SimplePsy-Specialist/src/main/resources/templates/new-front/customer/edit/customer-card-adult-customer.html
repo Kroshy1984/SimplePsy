@@ -17,134 +17,131 @@
   />
 </head>
 <body>
-<form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/customer/new}" method="post" style="width: 1200px; margin: 0 auto">
+<form th:object="${customer}" th:action="@{/SimplePsy/V1/customer/customer/new}" method="post">
   <input id="customerId" class="div222" th:name="${customer.id}"  th:field="*{id}" type="hidden" disabled>
   <input type="hidden" id="currentSpecialistId" th:value="${specialist.id}">
-        <div class="component19">
-          <div class="save-edit-buttons-wrapper-customer">
-            <div class="save-edit-buttons-csutomer">
-              <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51-customer" style="display: none;">
-                <div class="div72">Отменить</div>
-              </button>
-              <br><br><br>
-              <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51-customer">
-                <div class="div72">Редактировать</div>
-              </button>
-              <button id="save" type="submit" class="rectangle-parent51-customer" style="display: none;">
-                <div class="div72">Сохранить</div>
-              </button>
-            </div>
-          </div>
-          <div class="item113">
-            <div class="div221">Тип клиента</div>
-            <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
-              <option value="ADULT">Взрослый</option>
-            </select>
-          </div>
-          <div class="item113">
-            <div class="div221">ФИО клиента</div>
-            <input class="div222" th:name="${customer.surname}" th:field="*{surname}" disabled>
-            <input class="div222" th:name="${customer.name}" th:field="*{name}" disabled>
-            <input class="div222" th:name="${customer.lastName}" th:field="*{lastName}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Номер телефона</div>
-            <input type="tel" class="div222" th:name="${customer.contact.phone}"  th:field="*{contact.phone}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Почта</div>
-            <input type="email" class="div222" th:name="${customer.contact.email}"  th:field="*{contact.email}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Пол</div>
-            <select id="gender" th:name="${customer.sex}" th:field="*{sex}" disabled>
-              <option value="MALE">Мужской</option>
-              <option value="FEMALE">Женский</option>
-            </select>
-          </div>
-          <div class="item113">
-            <div class="div221">Статус клиента</div>
-            <select id="client-status" th:name="${customer.clientStatus}"  th:field="*{clientStatus}" disabled>
-              <option value="REGULAR">Регулярный</option>
-              <option value="ON_REQUEST">По запросу</option>
-              <option value="COMPLETED">Завершён</option>
-              <option value="APPLICATION">Заявка</option>
-            </select>
-          </div>
-          <div class="item113">
-            <div class="div221">
-              Каким способом обратился клиент/попечитель
-            </div>
-            <select id="contact-method" th:name="${customer.typeOfTreatment}"  th:field="*{typeOfTreatment}" disabled>
-              <option value="MESSENGER">Мессенджер</option>
-              <option value="SOCIAL_NETWORK">Социальная сеть</option>
-              <option value="AGGREGATOR">Агрегатор</option>
-            </select>
-          </div>
-          <div class="item113">
-            <div class="div221">
-              Дата первого обращения (запрос на консультацию)
-            </div>
-            <input type="date" class="div222" th:name="${customer.dateOfFirstRequest}" th:field="*{dateOfFirstRequest}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Дата первой консультации</div>
-            <input type="date" class="div222" th:name="${customer.dateOfFirstConsultation}" th:field="*{dateOfFirstConsultation}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Предпочтительный формат встречи</div>
-            <select id="meeting-format" th:name="${customer.preferredMeetingFormat}"  th:field="*{preferredMeetingFormat}" disabled>
-              <option value="ONLINE" selected>Онлайн</option>
-              <option value="OFFLINE">Оффлайн</option>
-            </select>
-          </div>
-          <div class="item113">
-            <div class="div221">
-              Для онлайн выбрать/указать площадку взаимодействия
-            </div>
-            <select id="online-platform" th:name="${customer.onlineMeetingPlace}"  th:field="*{onlineMeetingPlace}" disabled>
-              <option value="ZOOM">Zoom</option>
-              <option value="TELEMOST">Телемост</option>
-              <option value="GOOGLE_MEET">Google Meet</option>
-              <option value="TELEGRAM">Telegram</option>
-              <option value="WHATSAPP">WhatsApp</option>
-              <option value="SKYPE">Skype</option>
-            </select>
-          </div>
-          <div class="item113">
-            <div class="div221">
-              Для оффлайн выбрать адрес проведения встречи
-            </div>
-            <input class="div222" th:name="${customer.offlineMeetingPlace}"  th:field="*{offlineMeetingPlace}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">
-              Первичный/изначальный запрос клиента на терапию
-            </div>
-            <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}"  th:field="*{clientsFirstRequestForTherapy}" disabled></textarea>
-          </div>
-          <div class="item113">
-            <div class="div221">
-              Фиксированное время/день недели для встречи (если да, то
-              указать)
-            </div>
-            <input class="div222" th:name="${customer.fixedTimeForMeeting}"  th:field="*{fixedTimeForMeeting}" disabled>
-          </div>
-          <div class="item113">
-            <div class="div221">Финансовые условия</div>
-            <textarea class="div222" th:name="${customer.financialConditions}"  th:field="*{financialConditions}" disabled></textarea>
-          </div>
-        </div>
+  <div class="component19">
+    <h2>Анкета клиента</h2>
+    <div class="save-edit-buttons-wrapper-customer">
+      <div class="save-edit-buttons-customer">
+        <button id="cancel" type="button" onclick="cancelButton()" class="rectangle-parent51-customer" style="display: none;">
+          <div class="div72">Отменить</div>
+        </button>
+        <button id="edit" type="button" onclick="showInputs()" class="rectangle-parent51-customer">
+          <div class="div72">Редактировать</div>
+        </button>
+        <button id="save" type="submit" class="rectangle-parent51-customer" style="display: none; margin-top: 60px">
+          <div class="div72">Сохранить</div>
+        </button>
       </div>
     </div>
-  </section>
+    <div class="item113">
+      <div class="div221">Тип клиента</div>
+      <select id="client-type" th:name="${customer.typeOfClient}" th:field="*{typeOfClient}" disabled>
+        <option value="ADULT">Взрослый</option>
+      </select>
+    </div>
+    <div class="item113">
+      <div class="div221">ФИО клиента</div>
+      <input class="div222" th:name="${customer.surname}" th:field="*{surname}" disabled>
+      <input class="div222" th:name="${customer.name}" th:field="*{name}" disabled>
+      <input class="div222" th:name="${customer.lastName}" th:field="*{lastName}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">Номер телефона</div>
+      <input type="tel" class="div222" th:name="${customer.contact.phone}"  th:field="*{contact.phone}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">Почта</div>
+      <input type="email" class="div222" th:name="${customer.contact.email}"  th:field="*{contact.email}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">Пол</div>
+      <select id="gender" th:name="${customer.sex}" th:field="*{sex}" disabled>
+        <option value="MALE">Мужской</option>
+        <option value="FEMALE">Женский</option>
+      </select>
+    </div>
+    <div class="item113">
+      <div class="div221">Статус клиента</div>
+      <select id="client-status" th:name="${customer.clientStatus}"  th:field="*{clientStatus}" disabled>
+        <option value="REGULAR">Регулярный</option>
+        <option value="ON_REQUEST">По запросу</option>
+        <option value="COMPLETED">Завершён</option>
+        <option value="APPLICATION">Заявка</option>
+      </select>
+    </div>
+    <div class="item113">
+      <div class="div221">
+        Каким способом обратился клиент/попечитель
+      </div>
+      <select id="contact-method" th:name="${customer.typeOfTreatment}"  th:field="*{typeOfTreatment}" disabled>
+        <option value="MESSENGER">Мессенджер</option>
+        <option value="SOCIAL_NETWORK">Социальная сеть</option>
+        <option value="AGGREGATOR">Агрегатор</option>
+      </select>
+    </div>
+    <div class="item113">
+      <div class="div221">
+        Дата первого обращения (запрос на консультацию)
+      </div>
+      <input type="date" class="div222" th:name="${customer.dateOfFirstRequest}" th:field="*{dateOfFirstRequest}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">Дата первой консультации</div>
+      <input type="date" class="div222" th:name="${customer.dateOfFirstConsultation}" th:field="*{dateOfFirstConsultation}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">Предпочтительный формат встречи</div>
+      <select id="meeting-format" th:name="${customer.preferredMeetingFormat}"  th:field="*{preferredMeetingFormat}" disabled>
+        <option value="ONLINE" selected>Онлайн</option>
+        <option value="OFFLINE">Оффлайн</option>
+      </select>
+    </div>
+    <div class="item113">
+      <div class="div221">
+        Для онлайн выбрать/указать площадку взаимодействия
+      </div>
+      <select id="online-platform" th:name="${customer.onlineMeetingPlace}"  th:field="*{onlineMeetingPlace}" disabled>
+        <option value="ZOOM">Zoom</option>
+        <option value="TELEMOST">Телемост</option>
+        <option value="GOOGLE_MEET">Google Meet</option>
+        <option value="TELEGRAM">Telegram</option>
+        <option value="WHATSAPP">WhatsApp</option>
+        <option value="SKYPE">Skype</option>
+      </select>
+    </div>
+    <div class="item113">
+      <div class="div221">
+        Для оффлайн выбрать адрес проведения встречи
+      </div>
+      <input class="div222" th:name="${customer.offlineMeetingPlace}"  th:field="*{offlineMeetingPlace}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">
+        Первичный/изначальный запрос клиента на терапию
+      </div>
+      <textarea class="div222" th:name="${customer.clientsFirstRequestForTherapy}"  th:field="*{clientsFirstRequestForTherapy}" disabled></textarea>
+    </div>
+    <div class="item113">
+      <div class="div221">
+        Фиксированное время/день недели для встречи (если да, то
+        указать)
+      </div>
+      <input class="div222" th:name="${customer.fixedTimeForMeeting}"  th:field="*{fixedTimeForMeeting}" disabled>
+    </div>
+    <div class="item113">
+      <div class="div221">Финансовые условия</div>
+      <textarea class="div222" th:name="${customer.financialConditions}"  th:field="*{financialConditions}" disabled></textarea>
+    </div>
+  </div>
   <section class="footer-content-wrapper">
     <div class="footer-content">
       <div class="client-details-content-parent">
         <div class="client-details-content">
-          <div class="div244">Подробнее....</div>
+          <div class="div244" onclick="showFooter()">Подробнее....</div>
         </div>
-        <div class="client-details-form">
+        <div class="client-details-form" style="display: none;">
           <div class="item113">
             <div class="div221">Дата рождения</div>
             <input type="date" class="div222" th:name="${customer.dateOfBirth}" th:field="*{dateOfBirth}" disabled>
@@ -251,7 +248,6 @@
       </div>
     </div>
   </section>
-</div>
 <div id="modal" class="modal">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
@@ -260,6 +256,15 @@
 </div>
 </form>
 <script>
+  function showFooter() {
+    let footer = document.querySelector('.client-details-form');
+    if (footer.style.display === 'none') {
+      footer.style.display = 'flex';
+    } else {
+      footer.style.display = 'none';
+    }
+  }
+
   function goToScorings(obj) {
     window.location.href = "/SimplePsy/V1/customer/scorings/" + obj.getAttribute("data-card-id");
   }

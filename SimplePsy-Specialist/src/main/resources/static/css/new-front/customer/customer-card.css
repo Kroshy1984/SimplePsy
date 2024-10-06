@@ -5,7 +5,6 @@
     font-size: var(--bold-18-size);
     color: var(--color-slategray-500);
     margin-left: 100%;
-    margin-top: 5%;
 }
 .save-edit-buttons-customer,
 .save-edit-buttons-wrapper-customer {
@@ -27,4 +26,41 @@
     justify-content: flex-start;
     min-width: 155px;
     position: fixed;
+}
+
+.div244:hover {
+    cursor: pointer;
+    color: black;
+}
+
+form {
+    width: 1200px;
+    margin: 0 auto 100px auto;
+}
+
+.rectangle-parent51-customer {
+    cursor: pointer;
+    border: 3px solid var(--grey-blue-95);
+    padding: var(--padding-8xs) var(--padding-xs) var(--padding-xs);
+    background-color: var(--color-lightslategray-100);
+    border-radius: var(--br-xl);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-width: 155px;
+}
+
+.rectangle-parent51-customer:hover {
+    background-color: var(--color-slategray-300);
+    border: 3px solid var(--color-lightgray);
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin: 20px auto;
 }

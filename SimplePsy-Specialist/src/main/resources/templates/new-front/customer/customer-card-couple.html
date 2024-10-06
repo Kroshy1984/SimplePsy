@@ -381,9 +381,9 @@
       </div>
       <div class="client-details-content-parent">
         <div class="client-details-content">
-          <div class="div244">Подробнее....</div>
+          <div class="div244" onclick="showFooter()">Подробнее....</div>
         </div>
-        <div class="client-details-form">
+        <div class="client-details-form" style="display: none;">
           <div class="item113">
             <div class="div221">Дата рождения</div>
             <input type="date" class="div222" th:name="${customer.dateOfBirth}" th:field="*{dateOfBirth}" disabled>
@@ -497,8 +497,16 @@
   </div>
 </div>
 </form>
-
 <script>
+  function showFooter() {
+    let footer = document.querySelector('.client-details-form');
+    if (footer.style.display === 'none') {
+      footer.style.display = 'flex';
+    } else {
+      footer.style.display = 'none';
+    }
+  }
+
   function goToScorings(obj) {
     window.location.href = "/SimplePsy/V1/customer/scorings/" + obj.getAttribute("data-card-id");
   }

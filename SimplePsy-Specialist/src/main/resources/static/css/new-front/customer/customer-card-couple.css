@@ -1,3 +1,9 @@
+body {
+  font-family: var(--bold-10);
+  font-size: var(--bold-16-size);
+  color: var(--grey-blue-60);
+}
+
 textarea {
   width: 520px;
   resize: none;
@@ -838,7 +844,6 @@ textarea {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  min-width: 129px;
   white-space: nowrap;
 }
 .frame-child173,
@@ -903,6 +908,7 @@ textarea {
   display: none;
 }
 .div217 {
+  padding: 0 18px;
   height: 45px;
   flex: 1;
   position: relative;
@@ -924,7 +930,6 @@ textarea {
   align-items: flex-start;
   justify-content: flex-start;
   padding: var(--padding-11xs) var(--padding-11xs) var(--padding-7xs);
-  min-width: 123px;
   white-space: nowrap;
   cursor: pointer;
 }
@@ -1606,6 +1611,7 @@ textarea {
   justify-content: flex-start;
 }
 .component19 {
+  width: 1100px;
   align-self: stretch;
   align-items: flex-start;
   max-width: 100%;
@@ -1695,11 +1701,14 @@ textarea {
   box-sizing: border-box;
 }
 .div244 {
-  width: 215px;
   position: relative;
   line-height: 150%;
   display: inline-block;
   flex-shrink: 0;
+}
+.div244:hover {
+  cursor: pointer;
+  color: black;
 }
 .client-details-content {
   align-self: stretch;
@@ -2259,7 +2268,7 @@ textarea {
   flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 121px;
+  gap: 137px;
   max-width: 100%;
 }
 .div216,
@@ -2269,7 +2278,6 @@ textarea {
 .footer-content-wrapper {
   align-self: stretch;
   flex-direction: row;
-  padding: 0 var(--padding-xl) 0 var(--padding-mid);
   max-width: 100%;
   text-align: left;
   font-size: var(--bold-12-size);
@@ -2285,7 +2293,6 @@ textarea {
   overflow: hidden;
   flex-direction: column;
   padding: var(--padding-24xl) var(--padding-7xl) 169px var(--padding-46xl);
-  gap: 100px;
   line-height: normal;
   letter-spacing: normal;
 }
