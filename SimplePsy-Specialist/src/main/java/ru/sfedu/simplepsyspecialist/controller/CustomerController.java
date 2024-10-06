@@ -1,6 +1,7 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -231,6 +232,7 @@ public class CustomerController {
         return "new-front/customer/customers-completed-scorings";
     }
     @GetMapping("/findAll")
+    @Cacheable
     public ResponseEntity<List<Customer>> findAllCustomer()
     {
         List<Customer> customers = customerService.findAll();

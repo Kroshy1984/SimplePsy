@@ -9,9 +9,11 @@
   <title>Создание встречи</title>
 </head>
 <body>
-<div class="container">
+<form id="sessionForm" th:object="${session}" th:action="@{/SimplePsy/V1/session/create-session}"  onsubmit="return validateForm()" method="post" >
+<div class="modal-creating-session">
+<div class="container-meeting">
   <!-- Первая строчка -->
-  <div class="row row-compact fix-session">
+  <div class="row-meeting row-compact-meeting fix-session">
     <label for="session-type">Тип встречи</label>
     <select id="session-type" name="sessionType">
       <option value="CLIENT" selected>Встреча с клиентом</option>
@@ -23,13 +25,15 @@
   <div class="separator-horizontal"></div>
 
   <!-- Вторая строчка с названием и форматом встречи -->
-  <div class="row">
+  <div class="row-meeting">
     <div class="half">
-      <input type="text" id="session-name" name="sessionName" placeholder="Название встречи">
+      <input type="text" id="clientInput" th:name="client" class="p43" placeholder="Найти клиента" list="clientsList" autocomplete="off">
+      <datalist id="clientsList"></datalist>
+      <input type="hidden" th:name="${clientId}" th:field="*{clientId}" id="clientId">
     </div>
-    <div class="fix-margin-for-format row-compact half">
-      <label for="session-format">Формат</label>
-      <select id="session-format" name="sessionFormat">
+    <div class="fix-margin-for-format row-compact-meeting half">
+      <label class="label-creating-session" for="session-format">Формат</label>
+      <select id="session-format" th:name="sessionFormat">
         <option value="ONLINE" selected>Онлайн</option>
         <option value="OFFLINE">Оффлайн</option>
       </select>
@@ -40,15 +44,15 @@
   <div class="separator-horizontal"></div>
 
   <!-- Третья строчка с датой, местом и временем встречи -->
-  <div class="row">
-    <div class="row-compact half">
-      <label for="session-date"><img src="https://img.icons8.com/material-outlined/24/000000/calendar--v1.png" class="icon"/>Дата встречи</label>
-      <input type="date" id="session-date" name="date">
+  <div class="row-meeting">
+    <div class="row-compact-meeting half">
+      <label class="label-creating-session" for="session-date"><img src="https://img.icons8.com/material-outlined/24/000000/calendar--v1.png" class="icon-meeting"/>Дата встречи</label>
+      <input type="date" id="session-date" th:name="date">
     </div>
     <div class="separator-vertical"></div>
-    <div class="row-compact half">
-      <img src="https://img.icons8.com/material-outlined/24/000000/marker.png" class="icon icon-fix"/>
-      <input class = "fix-widht" type="text" id="session-place" name="place" placeholder="Место проведения встречи">
+    <div class="row-compact-meeting half">
+      <img src="https://img.icons8.com/material-outlined/24/000000/marker.png" class="icon-meeting icon-fix"/>
+      <input class = "fix-widht-meeting" type="text" id="session-place" th:name="place" placeholder="Место проведения встречи">
     </div>
   </div>
 
@@ -56,19 +60,19 @@
   <div class="separator-horizontal"></div>
 
   <!-- Заметки и время встречи -->
-  <div class="row">
+  <div class="row-meeting">
     <div class="time-fields">
       <div class="half">
-        <label for="session-timestart"><img src="https://img.icons8.com/material-outlined/24/000000/clock.png" class="icon"/>С ...</label>
-        <input type="time" id="session-timestart" name="timeStart">
+        <label class="label-creating-session" for="session-timestart"><img src="https://img.icons8.com/material-outlined/24/000000/clock.png" class="icon-meeting"/>С ...</label>
+        <input type="time" id="session-timestart" th:name="timeStart">
       </div>
       <div class="half">
-        <label for="session-timefinish">ПО ...</label>
-        <input type="time" id="session-timefinish" name="timeFinish">
+        <label class="label-creating-session" for="session-timefinish">ПО ...</label>
+        <input type="time" id="session-timefinish" th:name="timeFinish">
       </div>
     </div>
-    <div class="notes">
-      <textarea id="session-notes" name="notes" placeholder="Заметки"></textarea>
+    <div class="notes-meeting">
+      <textarea id="session-notes" name="notes" placeholder="Заметки" th:name="notification"></textarea>
     </div>
   </div>
 
@@ -76,8 +80,10 @@
   <div class="separator-horizontal"></div>
 
   <!-- Кнопка создания встречи -->
-  <button type="submit">Создать встречу</button>
+  <button class="button-creating-meeting" type="submit">Создать встречу</button>
 </div>
+</div>
+</form>
 <div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
 <script>
   var groupContainer = document.getElementById("groupContainer");

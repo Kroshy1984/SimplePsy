@@ -42,6 +42,7 @@ public class Session {
     private String timesToRepeat;
     private boolean isNotifiable;
     private String notificationTime;
+    private String notification;
     private Report report;
     private List<ProjectiveMethod> projectiveMethods;
 
@@ -74,6 +75,14 @@ public class Session {
 
     public void setSpecialistId(String specialistId) {
         this.specialistId = specialistId;
+    }
+
+    public String getNotification() {
+        return notification;
+    }
+
+    public void setNotification(String notification) {
+        this.notification = notification;
     }
 
     public String getClientId() {

@@ -1,6 +1,5 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
 import ru.sfedu.simplepsyspecialist.entity.nested.Report;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
@@ -40,16 +40,6 @@ public class SessionController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/searchAll")
-    public ResponseEntity<List<LocalDate>> searchAllSessions(
-            @RequestParam("specialist_id") String specialist_id) {
-        System.out.println(specialist_id);
-        List<LocalDate> sessions  = sessionService.findAllBySpecialistId(specialist_id);
-        System.out.println("Sending JsonArray sessions back to the notification from" +
-                "SessionController in method searchAllSessions: " + sessions);
-        return new ResponseEntity<>(sessions, HttpStatus.OK);
-    }
-
     @GetMapping("/session-form")
     public String getSessionForm(Model model) {
         Session session = new Session();
@@ -67,6 +57,7 @@ public class SessionController {
         session.setSpecialistId(specialistId);
         Customer customer = customerService.findById(session.getClientId());
         session.setCustomer(customer);
+        session.setPaymentType(PaymentType.CASHLESS);
         sessionService.createSession(session);
         return "redirect:/SimplePsy/V1/session/sessions";
     }

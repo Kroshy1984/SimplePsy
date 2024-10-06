@@ -1,181 +1,182 @@
-* {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', 'Rubik', sans-serif;
-    }
+modal-creating-session {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-    body {
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+.container-meeting {
+    background-color: #ffffff;
+    max-width: 700px;
+    width: 100%;
+    margin: 0px 0px 0px 0px !important;
+    border-radius: 12px;
+    color: #7D8FB3; /* Изменение цвета всех слов */
+}
 
-    .container {
-      background-color: #ffffff;
-      max-width: 700px;
-      width: 100%;
-      margin: 0px 0px 0px 0px !important;
-      border-radius: 12px;
-      color: #7D8FB3; /* Изменение цвета всех слов */
-    }
+.separator-horizontal {
+    height: 2px;
+    width: 100%;
+    background-color: #F5F6F7;
+    margin: 20px 0;
+}
 
-    .separator-horizontal {
-      height: 2px;
-      width: 100%;
-      background-color: #F5F6F7;
-      margin: 20px 0;
-    }
+.row-meeting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: #7D8FB3;
+}
 
-    .row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      color: #7D8FB3;
-    }
+.label-creating-session {
+    color: #7D8FB3; /* Цвет текста */
+    font-size: 14px;
+    margin-bottom: 0px !important;
+}
 
-    label {
-      color: #7D8FB3; /* Цвет текста */
-      font-size: 14px;
-      margin-bottom: 0px !important;
-    }
+.modal-creating-session input, select, textarea {
+    width: 100%;
+    padding: 14px;
+    background-color: #ffffff;
+    border: none !important;
+    font-size: 14px;
+    color: #7D8FB3; /* Цвет текста */
+    outline: none;
+    transition: all 0.2s ease;
+}
 
-    input, select, textarea {
-      width: 100%;
-      padding: 14px;
-      background-color: #ffffff;
-      border: none !important;
-      font-size: 14px;
-      color: #7D8FB3; /* Цвет текста */
-      outline: none;
-      transition: all 0.2s ease;
-    }
-    textarea{
-      height: 100%;
-    }
+.modal-creating-session textarea {
+    height: 100%;
+    width: 90%;
+    resize: none;
+}
 
-    input:focus, select:focus, textarea:focus {
-      background-color: #fff;
-      box-shadow: none;
-    }
+.modal-creating-session input:focus, select:focus, textarea:focus {
+    background-color: #fff;
+    box-shadow: none;
+}
 
-    .half {
-      width: 48%;
-      padding-right: 10px;
-    }
+.half {
+    width: 48%;
+    padding-right: 10px;
+}
 
-    .half:last-child {
-      padding-right: 0;
-    }
+.half:last-child {
+    padding-right: 0;
+}
 
-    .time-fields {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      width: 48%;
-    }
+.time-fields {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 48%;
+}
 
-    .time-fields .half {
-      width: 45%;
-      margin-left: 10px;
-    }
+.time-fields .half {
+    width: 45%;
+    margin-left: 10px;
+}
 
-    .notes {
-      width: 48%;
-    }
+.notes-meeting {
+    width: 48%;
+}
 
-    .icon {
-      margin-right: 10px;
-      vertical-align: middle;
-    }
+.icon-meeting {
+    margin-right: 10px;
+    vertical-align: middle;
+}
 
-    button {
-      display: block;
-      width: 40%;
-      background-color: #EDEFF2;
-      color: #979fa9;
-      padding: 12px;
-      border: 2px solid #c5c7ca;
-      border-radius: 16px;
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      margin-left: 30%;
-      cursor: pointer;
-      transition: background-color 0.3s, border-color 0.3s;
-    }
+.button-creating-meeting {
+    display: block;
+    width: 40%;
+    background-color: #EDEFF2;
+    color: #979fa9;
+    padding: 12px;
+    border: 2px solid #c5c7ca;
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 30%;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
 
-    button:hover {
-      background-color: #3e60d5;
-    }
+button:hover {
+    background-color: #3e60d5;
+}
 
-    .separator-vertical {
-      width: 2px;
-      background-color: #F5F6F7;
-      margin: 0 10px;
-      margin-top: 116px;
-      height: 200px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+.separator-vertical {
+    width: 2px;
+    background-color: #F5F6F7;
+    margin: 0 10px;
+    margin-top: 116px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-    /* Новые стили для компактного select и его label */
-    .row-compact {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
+/* Новые стили для компактного select и его label */
+.row-compact-meeting {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
 
-    .row-compact label {
-      margin-right: 10px;
-    }
+.row-compact-meeting label {
+    margin-right: 10px;
+}
 
-    .row-compact select,
-    .row-compact input {
-      width: auto;
-      padding: 10px;
-      color: #7D8FB3; /* Цвет текста */
-    }
-    .fix-widht {
-      width: 250px !important;
-    }
-    .fix-margin-for-format{
-      margin-left: 50px;
-    }
-    .icon-fix{
-      margin-left: 10px;
-    }
-    /* Для Webkit-браузеров (Chrome, Safari, Opera) */
+.row-compact-meeting select,
+.row-compact-meeting input {
+    width: auto;
+    padding: 10px;
+    color: #7D8FB3; /* Цвет текста */
+}
+
+.fix-widht-meeting {
+    width: 250px !important;
+}
+
+.fix-margin-for-format {
+    margin-left: 50px;
+}
+
+.icon-fix {
+    margin-left: 10px;
+}
+
+/* Для Webkit-браузеров (Chrome, Safari, Opera) */
 input::placeholder,
 textarea::placeholder {
-  color: #7D8FB3; /* Установить нужный цвет */
+    color: #7D8FB3; /* Установить нужный цвет */
 }
 
 /* Для Mozilla Firefox */
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-  color: #7D8FB3;
+    color: #7D8FB3;
 }
 
 /* Для Microsoft Edge и Internet Explorer */
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: #7D8FB3;
+    color: #7D8FB3;
 }
 
 /* Для более старых версий Microsoft Edge */
 input::-ms-input-placeholder,
 textarea::-ms-input-placeholder {
-  color: #7D8FB3;
-}
-.fix-session{
-  margin-left: 30% !important;
+    color: #7D8FB3;
 }
 
-.row-compact input {
-  width: auto; /* Чтобы инпут занимал только нужное место */
+.fix-session {
+    margin-left: 30% !important;
+}
+
+.row-compact-meeting input {
+    width: auto; /* Чтобы инпут занимал только нужное место */
 }
