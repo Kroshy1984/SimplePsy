@@ -180,13 +180,23 @@
                                 <div class="client-actions">
                                     <div class="action-button">
                                         <div class="button-content">
+                                            <div class="image-container-filter">
                                             <img
                                                     class="image-2-icon3"
                                                     loading="lazy"
                                                     alt=""
                                                     src="/images/image-2@2x.png"
                                             />
-
+                                                <div class="dropdown-menu" style="display: none">
+                                                    <ul id="filter-list">
+                                                        <li data-filter="ONLINE">Онлайн</li>
+                                                        <li data-filter="OFFLINE">Офлайн</li>
+                                                        <li data-filter="ADULT">Взрослый</li>
+                                                        <li data-filter="COUPLE">Пара</li>
+                                                        <li data-filter="CHILD">Ребенок</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                             <div class="button-label">
                                                 <div class="button30">
                                                     <input
@@ -203,13 +213,6 @@
                                                                 alt=""
                                                                 src="/images/image-4@2x.png"
                                                         />
-
-                                                        <div class="last-session-date-label">
-                                                            <div class="div45">Дата последней встречи</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="total-sessions">
-                                                        <div class="div46">Кол-во проведённых сеансов</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,16 +223,9 @@
                             <h2>Список клиентов</h2>
                             <div class="client-info1">
                                 <div class="frame-parent24" th:each="customer:${customers}"
-                                     th:data-card-id="${customer.id}" id="groupContainer1" onclick="goTo(this)">
-                                    <!--                <div class="rectangle-parent21">-->
-                                    <!--                  <div class="frame-child24"></div>-->
-                                    <!--                  <b class="b47">-->
-                                    <!--                    <p class="p12">Последняя встреча:</p>-->
-                                    <!--                    <p class="p13">20.02.2024</p>-->
-                                    <!--                    <p class="p14">Всего встреч:</p>-->
-                                    <!--                    <p class="p15">9</p>-->
-                                    <!--                  </b>-->
-                                    <!--                </div>-->
+                                     th:data-card-id="${customer.id}" th:data-client-type="${customer.typeOfClient}"
+                                     th:data-meeting-format="${customer.preferredMeetingFormat}"
+                                     id="groupContainer1" onclick="goTo(this)">
                                     <div class="rectangle-parent22">
                                         <div class="frame-child25"></div>
                                         <div class="parent1">
@@ -328,6 +324,45 @@
     </div>
 </div>
 <script>
+    // Показать/скрыть выпадающий список фильтров
+    document.querySelector('.image-container-filter').addEventListener('click', function() {
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Обработка клика на элемент фильтра
+    document.querySelectorAll('#filter-list li').forEach(function(item) {
+        item.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+
+            // Получаем всех клиентов
+            const clients = document.querySelectorAll('.frame-parent24');
+
+            // Перебираем клиентов и скрываем/показываем их в зависимости от фильтра
+            clients.forEach(function(client) {
+                const clientType = client.getAttribute('data-client-type');
+                const meetingFormat = client.getAttribute('data-meeting-format');
+
+                // Условия фильтрации
+                if (filterValue === 'ONLINE' && meetingFormat === 'ONLINE') {
+                    client.style.display = 'block'; // Показать клиента
+                } else if (filterValue === 'OFFLINE' && meetingFormat === 'OFFLINE') {
+                    client.style.display = 'block';
+                } else if (filterValue === 'ADULT' && clientType === 'ADULT') {
+                    client.style.display = 'block';
+                } else if (filterValue === 'COUPLE' && clientType === 'COUPLE') {
+                    client.style.display = 'block';
+                } else if (filterValue === 'CHILD' && clientType === 'CHILD') {
+                    client.style.display = 'block';
+                } else {
+                    client.style.display = 'none'; // Скрыть клиента
+                }
+            });
+
+            // Скрыть выпадающий список после выбора
+            document.querySelector('.dropdown-menu').style.display = 'none';
+        });
+    });
     function goTo(obj) {
         window.location.href = "/SimplePsy/V1/customer/customer-card/" + obj.getAttribute("data-card-id");
     }
@@ -341,6 +376,16 @@
         var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
         var holidayBtn = document.querySelector('.user-policy3');
         var addCustomer = document.querySelector('.about-us3');
+        const imageContainer = document.querySelector('.image-container-filter');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        imageContainer.addEventListener('click', () => {
+            if(dropdownMenu.style.display === 'none')
+            {
+                dropdownMenu.style.display == 'block'
+            }
+            else dropdownMenu.style.display == 'none'
+        });
         // Функция для открытия модального окна
         function openModal() {
             fetch('/SimplePsy/V1/session/session-form')
