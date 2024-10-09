@@ -1,3 +1,8 @@
+.session-day:hover {
+  cursor: pointer;
+  color: black;
+}
+
 #days-of-week {
   display: flex;
   justify-content: space-around;

@@ -259,6 +259,14 @@
         case 'day':
           calendarBody.classList.remove('grid');
           renderDayView(date);
+          let sessions = document.querySelectorAll('.session');
+          if (sessions) {
+            sessions.forEach((session) => session.addEventListener("click", function (e) {
+              let sessionId = e.target.id;
+              window.location.href = "/SimplePsy/V1/session/report/" + sessionId;
+            }))
+
+          }
           break;
         default:
           renderMonthView(date);
@@ -406,6 +414,8 @@
           sessionsForHour.forEach(session => {
             const sessionElement = document.createElement('div');
             sessionElement.classList.add('session');
+            sessionElement.classList.add('session-day');
+            sessionElement.setAttribute('id', session.id);
             switch (session.customer.typeOfClient) {
               case 'ADULT':
                 sessionElement.textContent = `${session.customer.name} ${session.customer.surname} (${session.timeStart} - ${session.timeFinish})`;
