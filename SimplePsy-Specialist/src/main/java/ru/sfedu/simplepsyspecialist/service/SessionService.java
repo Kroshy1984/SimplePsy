@@ -1,10 +1,14 @@
 package ru.sfedu.simplepsyspecialist.service;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.stereotype.Service;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.repo.SessionRepository;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,5 +100,18 @@ public class SessionService {
 
     public void deleteById(String sessionId) {
         sessionRepository.deleteById(sessionId);
+    }
+
+    public byte[] convertToWebP(byte[] originalImage) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            Thumbnails.of(new ByteArrayInputStream(originalImage))
+                    .size(600, 400) // Установите нужный размер, если необходимо
+                    .outputFormat("webp")
+                    .toOutputStream(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outputStream.toByteArray();
     }
 }

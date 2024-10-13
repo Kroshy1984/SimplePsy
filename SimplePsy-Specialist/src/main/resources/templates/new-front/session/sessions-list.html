@@ -187,15 +187,17 @@
                 <div class="wrapper28">
                   <h2 class="h21">Проективные методики</h2>
                 </div>
-                <div class="frame-parent72">
+                <div th:each="meet:${sessions}">
+                <div class="frame-parent72" th:each="method:${meet.projectiveMethods}">
                   <div class="rectangle-parent62">
                     <div class="frame-child71"></div>
-                    <b class="b94">20.02.2024</b>
+                    <b class="b94" th:text="${method.date}"></b>
                   </div>
                   <div class="rectangle-parent63">
                     <div class="frame-child72"></div>
-                    <div class="div76">Дом, дерево, река</div>
+                    <b class="div76" th:text="${method.name}"></b>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

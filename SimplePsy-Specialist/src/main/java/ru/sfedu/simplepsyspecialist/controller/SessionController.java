@@ -1,11 +1,14 @@
 package ru.sfedu.simplepsyspecialist.controller;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
@@ -16,11 +19,13 @@ import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -153,15 +158,72 @@ public class SessionController {
         return "new-front/session/projective-method";
     }
 
-    @PostMapping("report/projective-method")
-    public String createProjectiveMethod(@RequestParam("sessionId") String sessionId, @ModelAttribute ProjectiveMethod projectiveMethod) {
+    @PostMapping(value = "report/projective-method", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String createProjectiveMethod(@RequestParam("sessionId") String sessionId,
+                                         @ModelAttribute ProjectiveMethod projectiveMethod,
+                                         @RequestParam("image") MultipartFile photo) {
         Session session = sessionService.findById(sessionId);
+        String id = UUID.randomUUID().toString();
         session.setProjectiveMethods(new ArrayList<>());
+       projectiveMethod.setId(id);
         session.addProjectiveMethod(projectiveMethod);
+
+            try {
+                byte[] photoBytes = photo.getBytes();
+                projectiveMethod.addImage(photoBytes);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+
         sessionService.updateSession(session);
         return "redirect:/SimplePsy/V1/session/report/" + sessionId;
     }
+    @Cacheable
+    @GetMapping("/getProjectiveMethod/{sessionId}/{projectId}")
+    public ResponseEntity<ProjectiveMethod> getProjectiveMethod(@PathVariable String sessionId,
+                                                                @PathVariable String projectId) {
+        Session session = sessionService.findById(sessionId);
+        ProjectiveMethod projectiveMethod = session.getProjectiveMethodById(projectId);
+        return ResponseEntity.ok(projectiveMethod);
+    }
 
+    @GetMapping("/images/{sessionId}/{projectId}")
+    public ResponseEntity<List<byte[]>> getProjectiveMethodImages(@PathVariable String sessionId,
+                                                                  @PathVariable String projectId)
+    {
+        Session session = sessionService.findById(sessionId);
+        List<byte[]> images = session.getProjectiveMethodById(projectId).getImages();
+        return ResponseEntity.ok(images);
+    }
+
+    @PostMapping("/projective/image/add/{sessionId}/{projectId}")
+    public String addProjectiveMethodImage(@PathVariable String sessionId,
+                                           @PathVariable String projectId,
+                                           @RequestParam("image") MultipartFile photo)
+    {
+        Session session = sessionService.findById(sessionId);
+        try {
+            ProjectiveMethod projectiveMethod = session.getProjectiveMethodById(projectId);
+            byte[] photoBytes = photo.getBytes();
+            System.out.println("adding new image to the projective method " + projectiveMethod.getName());
+            projectiveMethod.addImage(photoBytes);
+            int index = 0;
+            for (int i = 0; i < session.getProjectiveMethods().size(); i++)
+            {
+                if (session.getProjectiveMethods().get(i).getId().equals(projectiveMethod.getId())) {
+                    index = i;
+                    break;
+                }
+            }
+            session.getProjectiveMethods().set(index, projectiveMethod);
+            sessionService.createSession(session);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return "redirect:/SimplePsy/V1/session/report/" + sessionId;
+    }
     @GetMapping("/holiday")
     public String getHolidayForm(Model model)
     {

@@ -228,4 +228,12 @@ public class Session {
     public void setTitle(String title) {
         this.title = title;
     }
+    public ProjectiveMethod getProjectiveMethodById(String id)
+    {
+        for (ProjectiveMethod p : this.getProjectiveMethods()) {
+            if (p.getId().equals(id))
+                return p;
+        }
+        return null;
+    }
 }

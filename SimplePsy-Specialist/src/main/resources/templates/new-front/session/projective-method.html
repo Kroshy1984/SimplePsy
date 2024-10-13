@@ -18,7 +18,7 @@
 <body>
 <div class="root">
     <section class="methodology">
-        <form id="sessionForm" th:object="${projectiveMethod}" th:action="@{/SimplePsy/V1/session/report/projective-method}" method="post">
+        <form id="sessionForm" th:object="${projectiveMethod}" th:action="@{/SimplePsy/V1/session/report/projective-method}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:value="${sessionId}" name="sessionId">
             <div class="base70"></div>
             <div class="div101">Название методики</div>
@@ -26,21 +26,24 @@
             <div class="instructions-parent">
                 <div class="instructions">
                     <div class="drawing-area">
-                        <input type="text" name="name" class="div102" required>
+                        <input type="text" th:field="*{name}" class="div102" required>
                     </div>
                 </div>
 
-                <!-- TODO: Сделать загрузку изображений -->
                 <div class="method-container">
+                    <div class="image-preview-container">
+                        <div class="image-preview" th:each="image : ${projectiveMethod.images}">
+                            <img th:src="@{${image}}" alt="Image preview" />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="image-input-wrapper">
                     <div class="image-input">
-                        <div class="image-preview"></div>
                         <div class="input-fields">
                             <div class="add-technique-button">
-                                <label for="file-upload" class="div105">Добавить фото</label>
-                                <input id="file-upload" name="image" type="file" accept="image/*">
+                                <label for="images" class="div105">Добавить фото</label>
+                                <input type="file" id="images" accept="image/*" name="image" class="form-input" enctype="multipart/form-data">
                             </div>
                             <button type="submit" class="add-technique-button">
                                 <div class="div105">Добавить методику</div>
@@ -54,6 +57,22 @@
 </div>
 
 <script>
+    document.getElementById('images').addEventListener('change', function(event) {
+        const previewContainer = document.getElementById('imagePreview');
+        previewContainer.innerHTML = ''; // Очистить предыдущие превью
+
+        Array.from(event.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '100px';
+                img.style.margin = '5px';
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
     var groupIcon = document.getElementById("groupIcon");
     if (groupIcon) {
         groupIcon.addEventListener("click", function (e) {

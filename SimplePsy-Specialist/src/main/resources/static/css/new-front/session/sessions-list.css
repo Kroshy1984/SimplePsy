@@ -1254,6 +1254,8 @@
 }
 .rectangle-parent63 {
   flex: 1;
+  width: 200px;
+  margin-top: 5px;
   border-radius: 0 var(--br-3xs) var(--br-3xs) 0;
   background-color: var(--grey-blue-95);
   align-items: flex-start;
