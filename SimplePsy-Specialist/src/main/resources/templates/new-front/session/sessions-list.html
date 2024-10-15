@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/global.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/sessions-list.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new-front/session/projective-modal.css}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
@@ -188,7 +189,7 @@
                   <h2 class="h21">Проективные методики</h2>
                 </div>
                 <div th:each="meet:${sessions}">
-                <div class="frame-parent72" th:each="method:${meet.projectiveMethods}">
+                <div class="frame-parent72" th:each="method:${meet.projectiveMethods}" th:data-card-id="${method.id}" th:data-card="${meet.id}" onclick="openModalProjective(this)">
                   <div class="rectangle-parent62">
                     <div class="frame-child71"></div>
                     <b class="b94" th:text="${method.date}"></b>
@@ -230,37 +231,6 @@
     </section>
     <div class="image-9"></div>
     <div class="frame-parent74">
-      <div class="frame-wrapper49">
-        <div class="frame-parent75">
-          <div class="wrapper30">
-            <b class="b95">Заявки</b>
-          </div>
-          <div class="frame-parent76">
-            <div class="frame-parent77">
-              <div class="rectangle-parent67">
-                <div class="frame-child76"></div>
-                <b class="b96">20.02.2024</b>
-              </div>
-              <div class="rectangle-parent68">
-                <div class="frame-child77"></div>
-                <b class="b97">Овсянникова Юля Матвеевна</b>
-              </div>
-            </div>
-            <div class="frame-parent78">
-              <div class="frame-parent79">
-                <div class="rectangle-parent69">
-                  <div class="frame-child78"></div>
-                  <b class="b98">25.02.2024</b>
-                </div>
-                <div class="rectangle-parent70">
-                  <div class="frame-child79"></div>
-                  <b class="b99">Овсянникова Юля Матвеевна</b>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="icon-parent17">
         <img class="icon79" alt="" src="/images/icon-7@2x.png" />
 
@@ -271,6 +241,14 @@
           <img class="icon80" alt="" src="/images/icon-8.svg" />
         </div>
       </div>
+    </div>
+  </div>
+  <div id="modal-projective" class="modal-projective">
+    <div class="modal-content-projective">
+      <span class="close" onclick="closeModalProjective()">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-date" class="modal-date"></p>
+      <div id="modal-images" class="image-container"></div>
     </div>
   </div>
   <div id="modal" class="modal">
@@ -521,7 +499,81 @@
         window.location.href = `/SimplePsy/V1/customer/customer-card/${customerId}`; // Передача username через GET-параметр
       }
     });
+    function openModalProjective(obj) {
+      document.getElementById('modal-title').textContent = null;
+      document.getElementById('modal-date').textContent = null;
+      document.getElementById('modal-images').innerHTML = null;
+      document.getElementById('modal-projective').style.display = 'block';
+      const projectId = obj.getAttribute("data-card-id");
+      const sessionId = obj.getAttribute("data-card");
 
+      fetch(`/SimplePsy/V1/session/getProjectiveMethod/${sessionId}/${projectId}`)
+              .then(response => response.json())
+              .then(data => {
+
+                document.getElementById('modal-title').textContent = data.name;
+
+                const imagesContainer = document.getElementById('modal-images');
+
+                // Добавление новых изображений
+                data.images.forEach(image => {
+                  const imgElement = document.createElement('img');
+                  const dateElement = document.createElement('p');
+                  dateElement.textContent = image.date;
+                  dateElement.classList.add('modal-date');
+                  imgElement.src = `data:image/webp;base64,${image.image}`;
+                  imgElement.classList.add('modal-image');
+                  imgElement.setAttribute('loading', 'lazy');
+                  imagesContainer.appendChild(dateElement);
+                  imagesContainer.appendChild(imgElement);
+                });
+
+                // Открытие модального окна
+                const modal = document.getElementById('modal-projective');
+                modal.style.display = 'block';
+              })
+              .catch(error => {
+                console.error('Ошибка загрузки данных методики:', error);
+              });
+    }
+    function closeModalProjective() {
+      const projective = document.getElementById("modal-projective");
+      projective.style.display = "none";
+    }
+    function uploadImages(event) {
+event.preventDefault();
+      const sessionId = document.querySelector('[data-card]').getAttribute('data-card');
+      const projectId = document.querySelector('[data-card-id]').getAttribute('data-card-id');
+      console.log(document.querySelector('[data-card]').getAttribute('data-card'))
+      console.log(document.querySelector('[data-card-id]').getAttribute('data-card-id'))
+      const formData = new FormData(document.getElementById('uploadForm'));
+
+      fetch(`/SimplePsy/V1/session/projective/image/add/${sessionId}/${projectId}`, {
+        method: 'POST',
+        body: formData
+      })
+              .then(response => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw new Error('Ошибка при загрузке изображений');
+                }
+              })
+              .then(data => {
+                // Обновляем список изображений
+                const imageContainer = document.getElementById('modal-images');
+                imageContainer.innerHTML = ''; // Очищаем контейнер
+
+                data.images.forEach((image, index) => {
+                  const imgElement = document.createElement('img');
+                  imgElement.src = `data:image/jpeg;base64,${image}`;
+                  imgElement.alt = `Image ${index + 1}`;
+                  imgElement.classList.add('modal-image');
+                  imageContainer.appendChild(imgElement);
+                });
+              })
+              .catch(error => console.error('Ошибка при загрузке изображений:', error));
+    }
   </script>
   </body>
 </html>

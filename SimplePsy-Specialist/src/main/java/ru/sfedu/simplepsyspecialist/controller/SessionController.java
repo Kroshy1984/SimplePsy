@@ -187,6 +187,7 @@ public class SessionController {
     @GetMapping("/getProjectiveMethod/{sessionId}/{projectId}")
     public ResponseEntity<ProjectiveMethod> getProjectiveMethod(@PathVariable String sessionId,
                                                                 @PathVariable String projectId) {
+        System.out.println("In method getProjectiveMethod got the sessionId: " + sessionId + "\nthe projectId: " + projectId);
         Session session = sessionService.findById(sessionId);
         ProjectiveMethod projectiveMethod = session.getProjectiveMethodById(projectId);
         return ResponseEntity.ok(projectiveMethod);
@@ -206,6 +207,7 @@ public class SessionController {
                                            @PathVariable String projectId,
                                            @RequestParam("image") MultipartFile photo)
     {
+        System.out.println("In method addProjectiveMethodImage got the sessionId: " + sessionId + "\nthe projectId: " + projectId);
         Session session = sessionService.findById(sessionId);
         try {
             ProjectiveMethod projectiveMethod = session.getProjectiveMethodById(projectId);

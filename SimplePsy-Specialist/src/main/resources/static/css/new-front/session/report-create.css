@@ -498,6 +498,9 @@ z-index: 1;
 .b94 {
   flex: 1;
   position: relative;
+  background-color: #5D7583;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
   line-height: 18.1px;
   font-weight: 700;
   transform: rotate(-0.1deg);
