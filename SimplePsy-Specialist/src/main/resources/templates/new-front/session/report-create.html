@@ -323,7 +323,7 @@
         <div class="modal-content-projective">
             <span class="close" onclick="closeModalProjective()">&times;</span>
             <h2 id="modal-title"></h2>
-            <p id="modal-date"></p>
+            <p id="modal-date" class="modal-date"></p>
             <div id="modal-images" class="image-container"></div>
             <form id="uploadForm" enctype="multipart/form-data" onsubmit="uploadImages()">
                 <input type="file" id="imageUpload" name="image" accept="image/*">
@@ -607,16 +607,19 @@
                 }
 
                 document.getElementById('modal-title').textContent = data.name;
-                document.getElementById('modal-date').textContent = data.date;
 
                 const imagesContainer = document.getElementById('modal-images');
 
                 // Добавление новых изображений
                 data.images.forEach(image => {
                     const imgElement = document.createElement('img');
-                    imgElement.src = `data:image/webp;base64,${image}`;
+                    const dateElement = document.createElement('p');
+                    dateElement.textContent = image.date;
+                    dateElement.classList.add('modal-date');
+                    imgElement.src = `data:image/webp;base64,${image.image}`;
                     imgElement.classList.add('modal-image');
                     imgElement.setAttribute('loading', 'lazy');
+                    imagesContainer.appendChild(dateElement);
                     imagesContainer.appendChild(imgElement);
                 });
 

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
+import ru.sfedu.simplepsyspecialist.entity.nested.Image;
 import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
 import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
 import ru.sfedu.simplepsyspecialist.entity.nested.Report;
@@ -170,7 +171,10 @@ public class SessionController {
 
             try {
                 byte[] photoBytes = photo.getBytes();
-                projectiveMethod.addImage(photoBytes);
+                Image image = new Image();
+                image.setImage(photoBytes);
+                image.setDate(LocalDate.now());
+                projectiveMethod.addImage(image);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -188,14 +192,14 @@ public class SessionController {
         return ResponseEntity.ok(projectiveMethod);
     }
 
-    @GetMapping("/images/{sessionId}/{projectId}")
-    public ResponseEntity<List<byte[]>> getProjectiveMethodImages(@PathVariable String sessionId,
-                                                                  @PathVariable String projectId)
-    {
-        Session session = sessionService.findById(sessionId);
-        List<byte[]> images = session.getProjectiveMethodById(projectId).getImages();
-        return ResponseEntity.ok(images);
-    }
+//    @GetMapping("/images/{sessionId}/{projectId}")
+//    public ResponseEntity<List<byte[]>> getProjectiveMethodImages(@PathVariable String sessionId,
+//                                                                  @PathVariable String projectId)
+//    {
+//        Session session = sessionService.findById(sessionId);
+//        List<byte[]> images = session.getProjectiveMethodById(projectId).getImages();
+//        return ResponseEntity.ok(images);
+//    }
 
     @PostMapping("/projective/image/add/{sessionId}/{projectId}")
     public String addProjectiveMethodImage(@PathVariable String sessionId,
@@ -206,8 +210,11 @@ public class SessionController {
         try {
             ProjectiveMethod projectiveMethod = session.getProjectiveMethodById(projectId);
             byte[] photoBytes = photo.getBytes();
+            Image image = new Image();
+            image.setImage(photoBytes);
+            image.setDate(LocalDate.now());
             System.out.println("adding new image to the projective method " + projectiveMethod.getName());
-            projectiveMethod.addImage(photoBytes);
+            projectiveMethod.addImage(image);
             int index = 0;
             for (int i = 0; i < session.getProjectiveMethods().size(); i++)
             {

@@ -31,8 +31,12 @@
     text-decoration: none;
     cursor: pointer;
 }
+
 .image-container img{
     width: 100px;
     height: auto;
     margin: 5px;
+}
+.image-container {
+    flex-direction: row;
 }

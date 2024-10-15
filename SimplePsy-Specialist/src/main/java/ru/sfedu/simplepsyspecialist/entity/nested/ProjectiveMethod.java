@@ -12,7 +12,7 @@ public class ProjectiveMethod {
     private String id;
     private String name;
     private LocalDate date;
-    private List<byte[]> images;
+    private List<Image> images;
 
     public ProjectiveMethod() {
         this.date = LocalDate.now();
@@ -26,7 +26,6 @@ public class ProjectiveMethod {
     public ProjectiveMethod(String name, List<byte[]> images) {
         this.name = name;
         this.date = LocalDate.now();
-        this.images = images;
     }
 
     public String getId() {
@@ -53,15 +52,15 @@ public class ProjectiveMethod {
         this.date = date;
     }
 
-    public List<byte[]> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<byte[]> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
-    public void addImage(byte[] image) {
+    public void addImage(Image image) {
         if (images == null)
             images = new ArrayList<>();
         images.add(image);
