@@ -325,9 +325,10 @@
             <h2 id="modal-title"></h2>
             <p id="modal-date" class="modal-date"></p>
             <div id="modal-images" class="image-container"></div>
-            <form id="uploadForm" enctype="multipart/form-data" onsubmit="uploadImages()">
+            <form id="uploadForm" enctype="multipart/form-data">
                 <input type="file" id="imageUpload" name="image" accept="image/*">
-                <button type="submit">Добавить фотографии</button>
+                <div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
+                <button type="button" onclick="uploadImages()">Добавить фотографии</button>
             </form>
         </div>
     </div>
@@ -357,6 +358,35 @@
             .then(data => {
                 modalBody.innerHTML = data;
                 modal.style.display = 'block';
+                const script = document.createElement('script');
+                script.id = 'dynamic-script';
+                script.textContent = `
+      document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.getElementById('images');
+        if (imageInput) {
+            imageInput.addEventListener('change', function(event) {
+                const previewContainer = document.getElementById('imagePreview');
+                previewContainer.innerHTML = ''; // Очистить предыдущие превью
+
+                // Проверяем, есть ли файлы для отображения
+                if (event.target.files && event.target.files.length > 0) {
+                    Array.from(event.target.files).forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '100px';
+                            img.style.margin = '5px';
+                            previewContainer.appendChild(img); // Добавить изображение в контейнер
+                        };
+                        reader.readAsDataURL(file); // Прочитать содержимое файла как Data URL
+                    });
+                }
+            });
+        } else {
+            console.error('Input element with id "images" not found.');
+        }
+    });`
             })
             .catch(error => console.error('Ошибка загрузки:', error));
     }
@@ -637,6 +667,17 @@
         projective.style.display = "none";
     }
     function uploadImages() {
+        const imageInput = document.getElementById('imageUpload');
+        const errorMessage = document.getElementById('error-message');
+
+        // Проверяем, выбран ли файл
+        if (!imageInput.files || imageInput.files.length === 0) {
+            errorMessage.textContent = 'Пожалуйста, добавьте фотографию.';
+            errorMessage.style.display = 'block';
+            return; // Прерываем выполнение функции
+        } else {
+            errorMessage.style.display = 'none'; // Скрываем сообщение об ошибке, если файл выбран
+        }
 
         const projectId = document.querySelector('[data-card-id]').getAttribute('data-card-id');
         const sessionId = document.getElementById("sessionId").value;
@@ -667,7 +708,9 @@
                 });
             })
             .catch(error => console.error('Ошибка при загрузке изображений:', error));
+        location.reload();
     }
+
 </script>
 </body>
 </html>

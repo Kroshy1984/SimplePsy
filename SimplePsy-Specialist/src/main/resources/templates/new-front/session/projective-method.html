@@ -31,11 +31,8 @@
                 </div>
 
                 <div class="method-container">
-                    <div class="image-preview-container">
-                        <div class="image-preview" th:each="image : ${projectiveMethod.images}">
-                            <img th:src="@{${image}}" alt="Image preview" />
-                        </div>
-                    </div>
+                    <!-- Контейнер для превью изображений -->
+                    <div class="image-preview-container" id="imagePreview"></div>
                 </div>
 
                 <div class="image-input-wrapper">
@@ -43,7 +40,7 @@
                         <div class="input-fields">
                             <div class="add-technique-button">
                                 <label for="images" class="div105">Добавить фото</label>
-                                <input type="file" id="images" accept="image/*" name="image" class="form-input" enctype="multipart/form-data">
+                                <input type="file" id="images" accept="image/*" name="image" class="form-input" multiple>
                             </div>
                             <button type="submit" class="add-technique-button">
                                 <div class="div105">Добавить методику</div>
@@ -57,35 +54,33 @@
 </div>
 
 <script>
-    document.getElementById('images').addEventListener('change', function(event) {
-        const previewContainer = document.getElementById('imagePreview');
-        previewContainer.innerHTML = ''; // Очистить предыдущие превью
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.getElementById('images');
+        if (imageInput) {
+            imageInput.addEventListener('change', function(event) {
+                const previewContainer = document.getElementById('imagePreview');
+                previewContainer.innerHTML = ''; // Очистить предыдущие превью
 
-        Array.from(event.target.files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.width = '100px';
-                img.style.margin = '5px';
-                previewContainer.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        });
+                // Проверяем, есть ли файлы для отображения
+                if (event.target.files && event.target.files.length > 0) {
+                    Array.from(event.target.files).forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '100px';
+                            img.style.margin = '5px';
+                            previewContainer.appendChild(img); // Добавить изображение в контейнер
+                        };
+                        reader.readAsDataURL(file); // Прочитать содержимое файла как Data URL
+                    });
+                }
+            });
+        } else {
+            console.error('Input element with id "images" not found.');
+        }
     });
-    var groupIcon = document.getElementById("groupIcon");
-    if (groupIcon) {
-        groupIcon.addEventListener("click", function (e) {
-            window.location.href = "./frame.html";
-        });
-    }
-
-    var groupContainer = document.getElementById("groupContainer");
-    if (groupContainer) {
-        groupContainer.addEventListener("click", function (e) {
-            window.location.href = "./component6.html";
-        });
-    }
 </script>
+
 </body>
 </html>
