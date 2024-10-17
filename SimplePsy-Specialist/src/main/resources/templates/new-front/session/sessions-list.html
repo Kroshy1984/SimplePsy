@@ -517,16 +517,24 @@
 
                 // Добавление новых изображений
                 data.images.forEach(image => {
-                  const imgElement = document.createElement('img');
-                  const dateElement = document.createElement('p');
-                  dateElement.textContent = image.date;
-                  dateElement.classList.add('modal-date');
-                  imgElement.src = `data:image/webp;base64,${image.image}`;
-                  imgElement.classList.add('modal-image');
-                  imgElement.setAttribute('loading', 'lazy');
-                  imagesContainer.appendChild(dateElement);
-                  imagesContainer.appendChild(imgElement);
-                });
+    const imgContainer = document.createElement('div'); // Новый контейнер для изображения и даты
+    const imgElement = document.createElement('img');
+    const dateElement = document.createElement('p');
+
+    imgElement.src = `data:image/webp;base64,${image.image}`;
+    imgElement.classList.add('modal-image');
+    imgElement.setAttribute('loading', 'lazy');
+
+    dateElement.textContent = image.date;
+    dateElement.classList.add('modal-date');
+
+    // Добавляем изображение и дату в контейнер
+    imgContainer.appendChild(imgElement);
+    imgContainer.appendChild(dateElement);
+
+    // Добавляем контейнер в основной контейнер изображений
+    imagesContainer.appendChild(imgContainer);
+});
 
                 // Открытие модального окна
                 const modal = document.getElementById('modal-projective');
