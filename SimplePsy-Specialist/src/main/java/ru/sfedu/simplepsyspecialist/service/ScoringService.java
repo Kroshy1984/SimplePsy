@@ -28,7 +28,6 @@ public class ScoringService {
 
     public Scoring update(Scoring scoring) {
         Scoring oldScoring = scoringRepository.findById(scoring.getId()).orElseThrow();
-        scoring.setType(oldScoring.getType());
         scoring.setDate(oldScoring.getDate());
         return scoringRepository.save(scoring);
     }

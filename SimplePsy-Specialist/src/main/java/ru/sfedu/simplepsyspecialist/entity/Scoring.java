@@ -17,9 +17,7 @@ public class Scoring {
     private List<Question> questions;
     private TypeOfScoring type;
     private Date date;
-//    @Transient
-//    private static List<String> userData;
-//    public List<String> answers = new ArrayList<>();
+
     @Transient
     public String customerId;
 
@@ -69,5 +67,17 @@ public class Scoring {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void changeType() {
+        for (Question q: this.questions) {
+            if(q.getOptions().size() > 2) {
+                this.setType(TypeOfScoring.QUESTIONER);
+                System.out.println("set scoring type questioner");
+                return;
+            }
+        }
+        this.setType(TypeOfScoring.TEST);
+        System.out.println("set scoring type test");
     }
 }
