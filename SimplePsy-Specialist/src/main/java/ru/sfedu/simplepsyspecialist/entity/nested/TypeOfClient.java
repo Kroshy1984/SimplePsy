@@ -3,8 +3,8 @@ package ru.sfedu.simplepsyspecialist.entity.nested;
 public enum TypeOfClient {
     ADULT("Взрослый"),
     CHILD("Ребенок"),
-    COUPLE("Пара");
-
+    COUPLE("Пара"),
+    HOLIDAY("Отпуск");
     private String translation;
 
     TypeOfClient(String translation) {

@@ -329,6 +329,8 @@
               case 'COUPLE':
                 sessionElement.textContent = `${session.timeStart} - ${session.timeFinish}: ${session.customer.firstClientName} ${session.customer.firstClientSurname}`;
                 break;
+              case 'HOLIDAY':
+                sessionElement.textContent = `${session.title}`;
               default:
                 // Здесь можно добавить код для обработки случая, если ни одно из значений не совпало
                 console.log('Unknown client type');

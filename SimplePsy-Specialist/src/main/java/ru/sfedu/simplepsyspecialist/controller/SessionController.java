@@ -12,10 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
 import ru.sfedu.simplepsyspecialist.entity.Session;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
-import ru.sfedu.simplepsyspecialist.entity.nested.Image;
-import ru.sfedu.simplepsyspecialist.entity.nested.PaymentType;
-import ru.sfedu.simplepsyspecialist.entity.nested.ProjectiveMethod;
-import ru.sfedu.simplepsyspecialist.entity.nested.Report;
+import ru.sfedu.simplepsyspecialist.entity.nested.*;
 import ru.sfedu.simplepsyspecialist.service.CustomerService;
 import ru.sfedu.simplepsyspecialist.service.SessionService;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
@@ -71,7 +68,10 @@ public class SessionController {
     @GetMapping("/sessions")
     public String getSessionList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Specialist specialist = specialistService.findByUsername(userDetails.getUsername());
-        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId());
+        List<Session> sessions = sessionService.getAllBySpecialistId(specialist.getId()).stream()
+                .filter(session -> session.getCustomer() != null &&
+                        session.getCustomer().getTypeOfClient() != TypeOfClient.HOLIDAY)
+                .collect(Collectors.toList());;
 
         model.addAttribute("sessions", sessions);
         model.addAttribute("specialist", specialist);
@@ -99,7 +99,7 @@ public class SessionController {
         List<LocalDate> daysInMonth = IntStream.rangeClosed(1, lastDayOfMonth.getDayOfMonth())
                 .mapToObj(day -> yearMonth.atDay(day))
                 .collect(Collectors.toList());
-
+        sessions.stream().forEach(s -> System.out.println("session title " + s.getTitle()));
         model.addAttribute("specialist", specialist);
         model.addAttribute("daysInMonth", daysInMonth);
         model.addAttribute("meetings", sessions);
@@ -255,6 +255,7 @@ public class SessionController {
         Customer client = new Customer();
         client.setName(session.getTitle());
         client.setSurname(" ");
+        client.setTypeOfClient(TypeOfClient.HOLIDAY);
         session.setCustomer(client);
         LocalDate startDate = session.getDate();
         LocalDate endDate = session.getEndDate();
@@ -268,10 +269,10 @@ public class SessionController {
             nextSession.setClientId(specialistId);
             nextSession.setTitle(session.getTitle());
             nextSession.setDate(startDate.plusDays(i));
-            nextSession.setTimeStart(session.getTimeStart());
-            nextSession.setTimeFinish(session.getTimeFinish());
+//            nextSession.setTimeStart(session.getTimeStart());
+//            nextSession.setTimeFinish(session.getTimeFinish());
 
-            System.out.println(nextSession.getDate());
+            System.out.println("creating new session on" + nextSession.getDate());
             sessionService.createSession(nextSession);
         }
         return "redirect:/SimplePsy/V1/session/calendar";

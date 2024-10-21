@@ -18,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.sfedu.simplepsyspecialist.entity.Customer;
-import ru.sfedu.simplepsyspecialist.entity.Problem;
 import ru.sfedu.simplepsyspecialist.entity.Specialist;
 import ru.sfedu.simplepsyspecialist.service.SpecialistService;
 
@@ -231,51 +230,7 @@ public class SpecialistController {
         return "redirect:/SimplePsy/V1/specialist/customer/problems/" + customerId;
     }
 
-    @GetMapping("customer/problems/{customerId}")
-    public String customersProblems(@PathVariable String customerId,
-                                    Model model)
-    {
-        System.out.println("In Get mappping method customersProblems \ngot customerId: " + customerId);
-        List<Problem> problems = specialistService.getAllCustomersProblems(customerId);
-        if (problems.isEmpty()) {
-            return "problems-list";
-        }
-        String scoringUrl = System.getenv().getOrDefault("SCORING_SERVICE_URL", "http://localhost:8084");
-        model.addAttribute("scoringUrl", scoringUrl);
-        model.addAttribute("problems", problems);
-        return "problems-list";
-    }
 
-//    @GetMapping("/customer/scoring/{problemId}")
-//    public String scoringAnswers(@PathVariable String problemId,
-//                                 Model model)
-//    {
-//        System.out.println("In method scoringAnswers");
-//        List<String> textQuestions = Scoring.getTextQuestions();
-//        List<String> checkboxQuestions = Scoring.getCheckboxQuestions();
-//        List<String> answers = specialistService.getScoringAnswersByProblemId(problemId);
-//        if (answers == null) {
-//            return "scoring-error";
-//        }
-//
-//        LinkedHashMap<String, String> textQuestionsAnswers = new LinkedHashMap<>();
-//        for (int i = 0; i < textQuestions.size(); i++) {
-//            textQuestionsAnswers.put(textQuestions.get(i), answers.get(i+1));
-//        }
-//
-//        LinkedHashMap<String, String> checkboxQuestionsAnswers = new LinkedHashMap<>();
-//        for (int i = 0; i < checkboxQuestions.size(); i++) {
-//            checkboxQuestionsAnswers.put(checkboxQuestions.get(i), answers.get(i+15));
-//        }
-//
-//        String customerId = specialistService.findCustomerByProblemId(problemId).getId();
-//
-//        model.addAttribute("problemId", problemId);
-//        model.addAttribute("customerId", customerId);
-//        model.addAttribute("textQuestionsAnswers", textQuestionsAnswers);
-//        model.addAttribute("checkboxQuestionsAnswers", checkboxQuestionsAnswers);
-//        return "scoring-answers.html";
-//    }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
