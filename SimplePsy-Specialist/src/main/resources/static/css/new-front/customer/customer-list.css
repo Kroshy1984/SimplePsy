@@ -405,6 +405,7 @@ h2 {
   right: 8px;
   object-fit: cover;
   z-index: 1;
+  cursor: pointer;
 }
 .button30,
 .input5 {

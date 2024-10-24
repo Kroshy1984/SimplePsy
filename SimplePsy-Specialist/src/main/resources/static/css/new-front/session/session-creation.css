@@ -7,9 +7,9 @@ modal-creating-session {
 }
 
 .container-meeting {
+    padding: 20px;
     background-color: #ffffff;
     max-width: 700px;
-    width: 100%;
     margin: 0px 0px 0px 0px !important;
     border-radius: 12px;
     color: #7D8FB3; /* Изменение цвета всех слов */
@@ -94,18 +94,19 @@ modal-creating-session {
     background-color: #EDEFF2;
     color: #979fa9;
     padding: 12px;
-    border: 2px solid #c5c7ca;
+    border: 3px solid var(--grey-blue-95);
     border-radius: 16px;
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
     margin-left: 30%;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
 }
 
 button:hover {
-    background-color: #3e60d5;
+    background-color: var(--color-gainsboro-100);
+    border: 3px solid var(--color-lightgray);
+    box-sizing: border-box;
 }
 
 .separator-vertical {

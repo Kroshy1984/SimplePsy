@@ -10,6 +10,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 .image-container {
+    padding-bottom: 20px;
     display: flex;
     flex-direction: row; /* Позволяет изображениям располагаться в строку */
     flex-wrap: wrap; /* Перенос на новую строку, если не помещаются */
@@ -41,7 +42,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 600px;
+    max-width: 500px;
     color: var(--grey-blue-80);
     font-family: var(--bold-10);
     font-size: 14px !important;
@@ -60,6 +61,7 @@
 }
 
 .image-container img{
-    height: auto;
+    height: 150px;
+    width: 150px;
     margin: 5px;
 }

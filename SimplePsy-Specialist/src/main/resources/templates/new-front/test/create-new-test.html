@@ -335,6 +335,7 @@
     var closeBtn = document.querySelector('.close-btn');
     var appointLink = document.querySelector('.news10'); // Элемент "Назначить встречу"
     var holidayBtn = document.querySelector('.user-policy16');
+    var addCustomer = document.querySelector('.about-us23');
 
     // Функция для открытия модального окна
         function openModal() {
@@ -424,18 +425,33 @@
                 });
         }
 
+        function openAddClientModal()
+        {
+            document.body.style.overflow = 'hidden';
+            fetch('/SimplePsy/V1/customer/customer/create/modal')
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.style.display = "block";
+
+                    // Добавляем обработчик закрытия модального окна
+                    document.querySelector('.close-modal').onclick = function() {
+                        modal.style.display = "none";
+                    };
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
+
     // Событие клика для открытия модального окна
     appointLink.addEventListener('click', openModal);
     holidayBtn.addEventListener('click', openHolidayModal);
+    addCustomer.addEventListener('click', openAddClientModal);
     // Событие клика для закрытия модального окна
     closeBtn.addEventListener('click', closeModal);
     });
 
-    var  addClientBtn = document.querySelector('.about-us23');
-    addClientBtn.addEventListener('click', () =>
-    {
-        window.location.href = '/SimplePsy/V1/customer/customer-form';
-    });
     const customerSearch = document.getElementById('customerSearch');
     const currentSpecialistId = document.getElementById('currentSpecialistId').value;
 

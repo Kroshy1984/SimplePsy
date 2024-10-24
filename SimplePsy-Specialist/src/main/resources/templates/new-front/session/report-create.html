@@ -326,9 +326,12 @@
             <p id="modal-date" class="modal-date"></p>
             <div id="modal-images" class="image-container"></div>
             <form id="uploadForm" enctype="multipart/form-data">
+                <label for="imageUpload" class="rectangle-parent49">Выбрать фото</label>
                 <input type="file" id="imageUpload" name="image" accept="image/*">
                 <div id="error-message" style="color:red; display:none;">Пожалуйста, выберите клиента из списка.</div>
-                <button type="button" onclick="uploadImages()">Добавить фотографии</button>
+                <button type="button" class="rectangle-parent49" onclick="uploadImages()">
+                    <div class="div72">Загрузить фото</div>
+                </button>
             </form>
         </div>
     </div>
